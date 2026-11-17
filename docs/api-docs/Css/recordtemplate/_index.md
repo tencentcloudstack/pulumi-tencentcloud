@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Css.RecordTemplate"
 meta_desc: "Documentation for the tencentcloud.Css.RecordTemplate resource with examples, input properties, output properties, lookup functions, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,70 +18,85 @@ no_edit_this_page: true
 
 
 ## Create RecordTemplate Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">RecordTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">RecordTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">RecordTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">RecordTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">RecordTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                   <span class="nx">aac_param</span><span class="p">:</span> <span class="nx">Optional[_css.RecordTemplateAacParamArgs]</span> = None<span class="p">,</span>
-                   <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">flv_param</span><span class="p">:</span> <span class="nx">Optional[_css.RecordTemplateFlvParamArgs]</span> = None<span class="p">,</span>
-                   <span class="nx">flv_special_param</span><span class="p">:</span> <span class="nx">Optional[_css.RecordTemplateFlvSpecialParamArgs]</span> = None<span class="p">,</span>
-                   <span class="nx">hls_param</span><span class="p">:</span> <span class="nx">Optional[_css.RecordTemplateHlsParamArgs]</span> = None<span class="p">,</span>
-                   <span class="nx">hls_special_param</span><span class="p">:</span> <span class="nx">Optional[_css.RecordTemplateHlsSpecialParamArgs]</span> = None<span class="p">,</span>
-                   <span class="nx">is_delay_live</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                   <span class="nx">mp3_param</span><span class="p">:</span> <span class="nx">Optional[_css.RecordTemplateMp3ParamArgs]</span> = None<span class="p">,</span>
-                   <span class="nx">mp4_param</span><span class="p">:</span> <span class="nx">Optional[_css.RecordTemplateMp4ParamArgs]</span> = None<span class="p">,</span>
-                   <span class="nx">remove_watermark</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-                   <span class="nx">template_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">RecordTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">RecordTemplateArgs</a></span><span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">RecordTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                   <span class="nx">template_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">aac_param</span><span class="p">:</span> <span class="nx">Optional[RecordTemplateAacParamArgs]</span> = None<span class="p">,</span>
+                   <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">flv_param</span><span class="p">:</span> <span class="nx">Optional[RecordTemplateFlvParamArgs]</span> = None<span class="p">,</span>
+                   <span class="nx">flv_special_param</span><span class="p">:</span> <span class="nx">Optional[RecordTemplateFlvSpecialParamArgs]</span> = None<span class="p">,</span>
+                   <span class="nx">hls_param</span><span class="p">:</span> <span class="nx">Optional[RecordTemplateHlsParamArgs]</span> = None<span class="p">,</span>
+                   <span class="nx">hls_special_param</span><span class="p">:</span> <span class="nx">Optional[RecordTemplateHlsSpecialParamArgs]</span> = None<span class="p">,</span>
+                   <span class="nx">is_delay_live</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                   <span class="nx">mp3_param</span><span class="p">:</span> <span class="nx">Optional[RecordTemplateMp3ParamArgs]</span> = None<span class="p">,</span>
+                   <span class="nx">mp4_param</span><span class="p">:</span> <span class="nx">Optional[RecordTemplateMp4ParamArgs]</span> = None<span class="p">,</span>
+                   <span class="nx">remove_watermark</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewRecordTemplate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">RecordTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">RecordTemplate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewRecordTemplate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">RecordTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">RecordTemplate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">RecordTemplate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">RecordTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">RecordTemplate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">RecordTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">RecordTemplate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">RecordTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">RecordTemplate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">RecordTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Css:RecordTemplate</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Css:RecordTemplate</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_css_record_template&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -100,7 +117,7 @@ no_edit_this_page: true
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -217,11 +234,19 @@ no_edit_this_page: true
 </pulumi-choosable>
 </div>
 
+
+
 ## RecordTemplate Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The RecordTemplate resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -237,17 +262,15 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="aacparam_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aacparam_csharp" style="color: inherit; text-decoration: inherit;">Aac<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplateaacparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Aac<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplateaacparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Aac<wbr>Param</a></span>
     </dt>
-    <dd><p>Aac recording parameters are set when Aac recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Aac recording parameters are set when Aac recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -255,44 +278,39 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="flvparam_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flvparam_csharp" style="color: inherit; text-decoration: inherit;">Flv<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplateflvparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Flv<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplateflvparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Flv<wbr>Param</a></span>
     </dt>
-    <dd><p>Flv recording parameters are set when Flv recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Flv recording parameters are set when Flv recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="flvspecialparam_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flvspecialparam_csharp" style="color: inherit; text-decoration: inherit;">Flv<wbr>Special<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplateflvspecialparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplateflvspecialparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param</a></span>
     </dt>
-    <dd><p>FLV records special parameters.</p>
-</dd><dt class="property-optional"
+    <dd>FLV records special parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="hlsparam_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hlsparam_csharp" style="color: inherit; text-decoration: inherit;">Hls<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatehlsparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Hls<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatehlsparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Hls<wbr>Param</a></span>
     </dt>
-    <dd><p>Hls recording parameters, which are set when hls recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Hls recording parameters, which are set when hls recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="hlsspecialparam_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hlsspecialparam_csharp" style="color: inherit; text-decoration: inherit;">Hls<wbr>Special<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatehlsspecialparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatehlsspecialparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param</a></span>
     </dt>
-    <dd><p>HLS specific recording parameters.</p>
-</dd><dt class="property-optional"
+    <dd>HLS specific recording parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdelaylive_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdelaylive_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Delay<wbr>Live</a>
@@ -300,26 +318,23 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="mp3param_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mp3param_csharp" style="color: inherit; text-decoration: inherit;">Mp3Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatemp3param">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Mp3Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatemp3param">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Mp3Param</a></span>
     </dt>
-    <dd><p>Mp3 recording parameters are set when Mp3 recording is turned on.</p>
-</dd><dt class="property-optional"
+    <dd>Mp3 recording parameters are set when Mp3 recording is turned on.</dd><dt class="property-optional"
             title="Optional">
         <span id="mp4param_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mp4param_csharp" style="color: inherit; text-decoration: inherit;">Mp4Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatemp4param">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Mp4Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatemp4param">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Mp4Param</a></span>
     </dt>
-    <dd><p>Mp4 recording parameters are set when Mp4 recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Mp4 recording parameters are set when Mp4 recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="removewatermark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removewatermark_csharp" style="color: inherit; text-decoration: inherit;">Remove<wbr>Watermark</a>
@@ -327,8 +342,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</p>
-</dd></dl>
+    <dd>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -342,8 +356,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="aacparam_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aacparam_go" style="color: inherit; text-decoration: inherit;">Aac<wbr>Param</a>
@@ -351,8 +364,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplateaacparam">Record<wbr>Template<wbr>Aac<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Aac recording parameters are set when Aac recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Aac recording parameters are set when Aac recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -360,8 +372,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="flvparam_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flvparam_go" style="color: inherit; text-decoration: inherit;">Flv<wbr>Param</a>
@@ -369,8 +380,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplateflvparam">Record<wbr>Template<wbr>Flv<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Flv recording parameters are set when Flv recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Flv recording parameters are set when Flv recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="flvspecialparam_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flvspecialparam_go" style="color: inherit; text-decoration: inherit;">Flv<wbr>Special<wbr>Param</a>
@@ -378,8 +388,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplateflvspecialparam">Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>FLV records special parameters.</p>
-</dd><dt class="property-optional"
+    <dd>FLV records special parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="hlsparam_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hlsparam_go" style="color: inherit; text-decoration: inherit;">Hls<wbr>Param</a>
@@ -387,8 +396,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatehlsparam">Record<wbr>Template<wbr>Hls<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Hls recording parameters, which are set when hls recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Hls recording parameters, which are set when hls recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="hlsspecialparam_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hlsspecialparam_go" style="color: inherit; text-decoration: inherit;">Hls<wbr>Special<wbr>Param</a>
@@ -396,8 +404,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatehlsspecialparam">Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>HLS specific recording parameters.</p>
-</dd><dt class="property-optional"
+    <dd>HLS specific recording parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdelaylive_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdelaylive_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Delay<wbr>Live</a>
@@ -405,8 +412,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="mp3param_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mp3param_go" style="color: inherit; text-decoration: inherit;">Mp3Param</a>
@@ -414,8 +420,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatemp3param">Record<wbr>Template<wbr>Mp3Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Mp3 recording parameters are set when Mp3 recording is turned on.</p>
-</dd><dt class="property-optional"
+    <dd>Mp3 recording parameters are set when Mp3 recording is turned on.</dd><dt class="property-optional"
             title="Optional">
         <span id="mp4param_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mp4param_go" style="color: inherit; text-decoration: inherit;">Mp4Param</a>
@@ -423,8 +428,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatemp4param">Record<wbr>Template<wbr>Mp4Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Mp4 recording parameters are set when Mp4 recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Mp4 recording parameters are set when Mp4 recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="removewatermark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removewatermark_go" style="color: inherit; text-decoration: inherit;">Remove<wbr>Watermark</a>
@@ -432,8 +436,101 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</p>
-</dd></dl>
+    <dd>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="template_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_name_hcl" style="color: inherit; text-decoration: inherit;">template_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="aac_param_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aac_param_hcl" style="color: inherit; text-decoration: inherit;">aac_<wbr>param</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#recordtemplateaacparam">object</a></span>
+    </dt>
+    <dd>Aac recording parameters are set when Aac recording is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="flv_param_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flv_param_hcl" style="color: inherit; text-decoration: inherit;">flv_<wbr>param</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#recordtemplateflvparam">object</a></span>
+    </dt>
+    <dd>Flv recording parameters are set when Flv recording is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="flv_special_param_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flv_special_param_hcl" style="color: inherit; text-decoration: inherit;">flv_<wbr>special_<wbr>param</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#recordtemplateflvspecialparam">object</a></span>
+    </dt>
+    <dd>FLV records special parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hls_param_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hls_param_hcl" style="color: inherit; text-decoration: inherit;">hls_<wbr>param</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#recordtemplatehlsparam">object</a></span>
+    </dt>
+    <dd>Hls recording parameters, which are set when hls recording is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hls_special_param_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hls_special_param_hcl" style="color: inherit; text-decoration: inherit;">hls_<wbr>special_<wbr>param</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#recordtemplatehlsspecialparam">object</a></span>
+    </dt>
+    <dd>HLS specific recording parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_delay_live_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_delay_live_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>delay_<wbr>live</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mp3_param_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mp3_param_hcl" style="color: inherit; text-decoration: inherit;">mp3_<wbr>param</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#recordtemplatemp3param">object</a></span>
+    </dt>
+    <dd>Mp3 recording parameters are set when Mp3 recording is turned on.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mp4_param_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mp4_param_hcl" style="color: inherit; text-decoration: inherit;">mp4_<wbr>param</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#recordtemplatemp4param">object</a></span>
+    </dt>
+    <dd>Mp4 recording parameters are set when Mp4 recording is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="remove_watermark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remove_watermark_hcl" style="color: inherit; text-decoration: inherit;">remove_<wbr>watermark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -447,17 +544,15 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="aacparam_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aacparam_java" style="color: inherit; text-decoration: inherit;">aac<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplateaacparam">Record<wbr>Template<wbr>Aac<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplateaacparam">Record<wbr>Template<wbr>Aac<wbr>Param</a></span>
     </dt>
-    <dd><p>Aac recording parameters are set when Aac recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Aac recording parameters are set when Aac recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -465,44 +560,39 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="flvparam_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flvparam_java" style="color: inherit; text-decoration: inherit;">flv<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplateflvparam">Record<wbr>Template<wbr>Flv<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplateflvparam">Record<wbr>Template<wbr>Flv<wbr>Param</a></span>
     </dt>
-    <dd><p>Flv recording parameters are set when Flv recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Flv recording parameters are set when Flv recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="flvspecialparam_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flvspecialparam_java" style="color: inherit; text-decoration: inherit;">flv<wbr>Special<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplateflvspecialparam">Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplateflvspecialparam">Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param</a></span>
     </dt>
-    <dd><p>FLV records special parameters.</p>
-</dd><dt class="property-optional"
+    <dd>FLV records special parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="hlsparam_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hlsparam_java" style="color: inherit; text-decoration: inherit;">hls<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatehlsparam">Record<wbr>Template<wbr>Hls<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatehlsparam">Record<wbr>Template<wbr>Hls<wbr>Param</a></span>
     </dt>
-    <dd><p>Hls recording parameters, which are set when hls recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Hls recording parameters, which are set when hls recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="hlsspecialparam_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hlsspecialparam_java" style="color: inherit; text-decoration: inherit;">hls<wbr>Special<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatehlsspecialparam">Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatehlsspecialparam">Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param</a></span>
     </dt>
-    <dd><p>HLS specific recording parameters.</p>
-</dd><dt class="property-optional"
+    <dd>HLS specific recording parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdelaylive_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdelaylive_java" style="color: inherit; text-decoration: inherit;">is<wbr>Delay<wbr>Live</a>
@@ -510,26 +600,23 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="mp3param_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mp3param_java" style="color: inherit; text-decoration: inherit;">mp3Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatemp3param">Record<wbr>Template<wbr>Mp3Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatemp3param">Record<wbr>Template<wbr>Mp3Param</a></span>
     </dt>
-    <dd><p>Mp3 recording parameters are set when Mp3 recording is turned on.</p>
-</dd><dt class="property-optional"
+    <dd>Mp3 recording parameters are set when Mp3 recording is turned on.</dd><dt class="property-optional"
             title="Optional">
         <span id="mp4param_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mp4param_java" style="color: inherit; text-decoration: inherit;">mp4Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatemp4param">Record<wbr>Template<wbr>Mp4Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatemp4param">Record<wbr>Template<wbr>Mp4Param</a></span>
     </dt>
-    <dd><p>Mp4 recording parameters are set when Mp4 recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Mp4 recording parameters are set when Mp4 recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="removewatermark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removewatermark_java" style="color: inherit; text-decoration: inherit;">remove<wbr>Watermark</a>
@@ -537,8 +624,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</p>
-</dd></dl>
+    <dd>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -552,17 +638,15 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="aacparam_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aacparam_nodejs" style="color: inherit; text-decoration: inherit;">aac<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplateaacparam">Record<wbr>Template<wbr>Aac<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplateaacparam">Record<wbr>Template<wbr>Aac<wbr>Param</a></span>
     </dt>
-    <dd><p>Aac recording parameters are set when Aac recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Aac recording parameters are set when Aac recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -570,44 +654,39 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="flvparam_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flvparam_nodejs" style="color: inherit; text-decoration: inherit;">flv<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplateflvparam">Record<wbr>Template<wbr>Flv<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplateflvparam">Record<wbr>Template<wbr>Flv<wbr>Param</a></span>
     </dt>
-    <dd><p>Flv recording parameters are set when Flv recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Flv recording parameters are set when Flv recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="flvspecialparam_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flvspecialparam_nodejs" style="color: inherit; text-decoration: inherit;">flv<wbr>Special<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplateflvspecialparam">Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplateflvspecialparam">Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param</a></span>
     </dt>
-    <dd><p>FLV records special parameters.</p>
-</dd><dt class="property-optional"
+    <dd>FLV records special parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="hlsparam_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hlsparam_nodejs" style="color: inherit; text-decoration: inherit;">hls<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatehlsparam">Record<wbr>Template<wbr>Hls<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatehlsparam">Record<wbr>Template<wbr>Hls<wbr>Param</a></span>
     </dt>
-    <dd><p>Hls recording parameters, which are set when hls recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Hls recording parameters, which are set when hls recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="hlsspecialparam_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hlsspecialparam_nodejs" style="color: inherit; text-decoration: inherit;">hls<wbr>Special<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatehlsspecialparam">Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatehlsspecialparam">Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param</a></span>
     </dt>
-    <dd><p>HLS specific recording parameters.</p>
-</dd><dt class="property-optional"
+    <dd>HLS specific recording parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdelaylive_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdelaylive_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Delay<wbr>Live</a>
@@ -615,26 +694,23 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="mp3param_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mp3param_nodejs" style="color: inherit; text-decoration: inherit;">mp3Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatemp3param">Record<wbr>Template<wbr>Mp3Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatemp3param">Record<wbr>Template<wbr>Mp3Param</a></span>
     </dt>
-    <dd><p>Mp3 recording parameters are set when Mp3 recording is turned on.</p>
-</dd><dt class="property-optional"
+    <dd>Mp3 recording parameters are set when Mp3 recording is turned on.</dd><dt class="property-optional"
             title="Optional">
         <span id="mp4param_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mp4param_nodejs" style="color: inherit; text-decoration: inherit;">mp4Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatemp4param">Record<wbr>Template<wbr>Mp4Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatemp4param">Record<wbr>Template<wbr>Mp4Param</a></span>
     </dt>
-    <dd><p>Mp4 recording parameters are set when Mp4 recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Mp4 recording parameters are set when Mp4 recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="removewatermark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removewatermark_nodejs" style="color: inherit; text-decoration: inherit;">remove<wbr>Watermark</a>
@@ -642,8 +718,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</p>
-</dd></dl>
+    <dd>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -657,8 +732,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="aac_param_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aac_param_python" style="color: inherit; text-decoration: inherit;">aac_<wbr>param</a>
@@ -666,8 +740,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplateaacparam">Record<wbr>Template<wbr>Aac<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Aac recording parameters are set when Aac recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Aac recording parameters are set when Aac recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -675,8 +748,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="flv_param_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flv_param_python" style="color: inherit; text-decoration: inherit;">flv_<wbr>param</a>
@@ -684,8 +756,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplateflvparam">Record<wbr>Template<wbr>Flv<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Flv recording parameters are set when Flv recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Flv recording parameters are set when Flv recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="flv_special_param_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flv_special_param_python" style="color: inherit; text-decoration: inherit;">flv_<wbr>special_<wbr>param</a>
@@ -693,8 +764,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplateflvspecialparam">Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>FLV records special parameters.</p>
-</dd><dt class="property-optional"
+    <dd>FLV records special parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="hls_param_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hls_param_python" style="color: inherit; text-decoration: inherit;">hls_<wbr>param</a>
@@ -702,8 +772,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatehlsparam">Record<wbr>Template<wbr>Hls<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Hls recording parameters, which are set when hls recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Hls recording parameters, which are set when hls recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="hls_special_param_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hls_special_param_python" style="color: inherit; text-decoration: inherit;">hls_<wbr>special_<wbr>param</a>
@@ -711,8 +780,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatehlsspecialparam">Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>HLS specific recording parameters.</p>
-</dd><dt class="property-optional"
+    <dd>HLS specific recording parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_delay_live_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_delay_live_python" style="color: inherit; text-decoration: inherit;">is_<wbr>delay_<wbr>live</a>
@@ -720,8 +788,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="mp3_param_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mp3_param_python" style="color: inherit; text-decoration: inherit;">mp3_<wbr>param</a>
@@ -729,8 +796,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatemp3param">Record<wbr>Template<wbr>Mp3Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Mp3 recording parameters are set when Mp3 recording is turned on.</p>
-</dd><dt class="property-optional"
+    <dd>Mp3 recording parameters are set when Mp3 recording is turned on.</dd><dt class="property-optional"
             title="Optional">
         <span id="mp4_param_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mp4_param_python" style="color: inherit; text-decoration: inherit;">mp4_<wbr>param</a>
@@ -738,8 +804,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatemp4param">Record<wbr>Template<wbr>Mp4Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Mp4 recording parameters are set when Mp4 recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Mp4 recording parameters are set when Mp4 recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="remove_watermark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remove_watermark_python" style="color: inherit; text-decoration: inherit;">remove_<wbr>watermark</a>
@@ -747,8 +812,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</p>
-</dd></dl>
+    <dd>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -762,8 +826,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</p>
-</dd><dt class="property-optional"
+    <dd>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="aacparam_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aacparam_yaml" style="color: inherit; text-decoration: inherit;">aac<wbr>Param</a>
@@ -771,8 +834,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplateaacparam">Property Map</a></span>
     </dt>
-    <dd><p>Aac recording parameters are set when Aac recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Aac recording parameters are set when Aac recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -780,8 +842,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="flvparam_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flvparam_yaml" style="color: inherit; text-decoration: inherit;">flv<wbr>Param</a>
@@ -789,8 +850,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplateflvparam">Property Map</a></span>
     </dt>
-    <dd><p>Flv recording parameters are set when Flv recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Flv recording parameters are set when Flv recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="flvspecialparam_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flvspecialparam_yaml" style="color: inherit; text-decoration: inherit;">flv<wbr>Special<wbr>Param</a>
@@ -798,8 +858,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplateflvspecialparam">Property Map</a></span>
     </dt>
-    <dd><p>FLV records special parameters.</p>
-</dd><dt class="property-optional"
+    <dd>FLV records special parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="hlsparam_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hlsparam_yaml" style="color: inherit; text-decoration: inherit;">hls<wbr>Param</a>
@@ -807,8 +866,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatehlsparam">Property Map</a></span>
     </dt>
-    <dd><p>Hls recording parameters, which are set when hls recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Hls recording parameters, which are set when hls recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="hlsspecialparam_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hlsspecialparam_yaml" style="color: inherit; text-decoration: inherit;">hls<wbr>Special<wbr>Param</a>
@@ -816,8 +874,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatehlsspecialparam">Property Map</a></span>
     </dt>
-    <dd><p>HLS specific recording parameters.</p>
-</dd><dt class="property-optional"
+    <dd>HLS specific recording parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="isdelaylive_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdelaylive_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Delay<wbr>Live</a>
@@ -825,8 +882,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="mp3param_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mp3param_yaml" style="color: inherit; text-decoration: inherit;">mp3Param</a>
@@ -834,8 +890,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatemp3param">Property Map</a></span>
     </dt>
-    <dd><p>Mp3 recording parameters are set when Mp3 recording is turned on.</p>
-</dd><dt class="property-optional"
+    <dd>Mp3 recording parameters are set when Mp3 recording is turned on.</dd><dt class="property-optional"
             title="Optional">
         <span id="mp4param_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mp4param_yaml" style="color: inherit; text-decoration: inherit;">mp4Param</a>
@@ -843,8 +898,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatemp4param">Property Map</a></span>
     </dt>
-    <dd><p>Mp4 recording parameters are set when Mp4 recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Mp4 recording parameters are set when Mp4 recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="removewatermark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removewatermark_yaml" style="color: inherit; text-decoration: inherit;">remove<wbr>Watermark</a>
@@ -852,8 +906,7 @@ The RecordTemplate resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</p>
-</dd></dl>
+    <dd>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -874,8 +927,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -889,8 +941,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -904,8 +969,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -919,8 +983,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -934,8 +997,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -949,8 +1011,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -960,130 +1021,169 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing RecordTemplate resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">RecordTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">RecordTemplate</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">RecordTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">RecordTemplate</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">aac_param</span><span class="p">:</span> <span class="nx">Optional[_css.RecordTemplateAacParamArgs]</span> = None<span class="p">,</span>
+        <span class="nx">aac_param</span><span class="p">:</span> <span class="nx">Optional[RecordTemplateAacParamArgs]</span> = None<span class="p">,</span>
         <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">flv_param</span><span class="p">:</span> <span class="nx">Optional[_css.RecordTemplateFlvParamArgs]</span> = None<span class="p">,</span>
-        <span class="nx">flv_special_param</span><span class="p">:</span> <span class="nx">Optional[_css.RecordTemplateFlvSpecialParamArgs]</span> = None<span class="p">,</span>
-        <span class="nx">hls_param</span><span class="p">:</span> <span class="nx">Optional[_css.RecordTemplateHlsParamArgs]</span> = None<span class="p">,</span>
-        <span class="nx">hls_special_param</span><span class="p">:</span> <span class="nx">Optional[_css.RecordTemplateHlsSpecialParamArgs]</span> = None<span class="p">,</span>
+        <span class="nx">flv_param</span><span class="p">:</span> <span class="nx">Optional[RecordTemplateFlvParamArgs]</span> = None<span class="p">,</span>
+        <span class="nx">flv_special_param</span><span class="p">:</span> <span class="nx">Optional[RecordTemplateFlvSpecialParamArgs]</span> = None<span class="p">,</span>
+        <span class="nx">hls_param</span><span class="p">:</span> <span class="nx">Optional[RecordTemplateHlsParamArgs]</span> = None<span class="p">,</span>
+        <span class="nx">hls_special_param</span><span class="p">:</span> <span class="nx">Optional[RecordTemplateHlsSpecialParamArgs]</span> = None<span class="p">,</span>
         <span class="nx">is_delay_live</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">mp3_param</span><span class="p">:</span> <span class="nx">Optional[_css.RecordTemplateMp3ParamArgs]</span> = None<span class="p">,</span>
-        <span class="nx">mp4_param</span><span class="p">:</span> <span class="nx">Optional[_css.RecordTemplateMp4ParamArgs]</span> = None<span class="p">,</span>
+        <span class="nx">mp3_param</span><span class="p">:</span> <span class="nx">Optional[RecordTemplateMp3ParamArgs]</span> = None<span class="p">,</span>
+        <span class="nx">mp4_param</span><span class="p">:</span> <span class="nx">Optional[RecordTemplateMp4ParamArgs]</span> = None<span class="p">,</span>
         <span class="nx">remove_watermark</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">template_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> RecordTemplate</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetRecordTemplate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">RecordTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">RecordTemplate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetRecordTemplate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">RecordTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">RecordTemplate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">RecordTemplate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">RecordTemplateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">RecordTemplate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">RecordTemplateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">RecordTemplate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">RecordTemplateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">RecordTemplate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">RecordTemplateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingRecordTemplate</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Css:RecordTemplate</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_css_record_template</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">RecordTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">RecordTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1091,28 +1191,31 @@ Get an existing RecordTemplate resource's state with the given name, ID, and opt
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">RecordTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1120,28 +1223,31 @@ Get an existing RecordTemplate resource's state with the given name, ID, and opt
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">RecordTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1159,10 +1265,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_aacparam_csharp" style="color: inherit; text-decoration: inherit;">Aac<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplateaacparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Aac<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplateaacparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Aac<wbr>Param</a></span>
     </dt>
-    <dd><p>Aac recording parameters are set when Aac recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Aac recording parameters are set when Aac recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1170,44 +1275,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_flvparam_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flvparam_csharp" style="color: inherit; text-decoration: inherit;">Flv<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplateflvparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Flv<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplateflvparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Flv<wbr>Param</a></span>
     </dt>
-    <dd><p>Flv recording parameters are set when Flv recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Flv recording parameters are set when Flv recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_flvspecialparam_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flvspecialparam_csharp" style="color: inherit; text-decoration: inherit;">Flv<wbr>Special<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplateflvspecialparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplateflvspecialparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param</a></span>
     </dt>
-    <dd><p>FLV records special parameters.</p>
-</dd><dt class="property-optional"
+    <dd>FLV records special parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hlsparam_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hlsparam_csharp" style="color: inherit; text-decoration: inherit;">Hls<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatehlsparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Hls<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatehlsparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Hls<wbr>Param</a></span>
     </dt>
-    <dd><p>Hls recording parameters, which are set when hls recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Hls recording parameters, which are set when hls recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hlsspecialparam_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hlsspecialparam_csharp" style="color: inherit; text-decoration: inherit;">Hls<wbr>Special<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatehlsspecialparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatehlsspecialparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param</a></span>
     </dt>
-    <dd><p>HLS specific recording parameters.</p>
-</dd><dt class="property-optional"
+    <dd>HLS specific recording parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdelaylive_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdelaylive_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Delay<wbr>Live</a>
@@ -1215,26 +1315,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mp3param_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mp3param_csharp" style="color: inherit; text-decoration: inherit;">Mp3Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatemp3param">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Mp3Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatemp3param">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Mp3Param</a></span>
     </dt>
-    <dd><p>Mp3 recording parameters are set when Mp3 recording is turned on.</p>
-</dd><dt class="property-optional"
+    <dd>Mp3 recording parameters are set when Mp3 recording is turned on.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mp4param_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mp4param_csharp" style="color: inherit; text-decoration: inherit;">Mp4Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatemp4param">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Mp4Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatemp4param">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Record<wbr>Template<wbr>Mp4Param</a></span>
     </dt>
-    <dd><p>Mp4 recording parameters are set when Mp4 recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Mp4 recording parameters are set when Mp4 recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_removewatermark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_removewatermark_csharp" style="color: inherit; text-decoration: inherit;">Remove<wbr>Watermark</a>
@@ -1242,8 +1339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templatename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templatename_csharp" style="color: inherit; text-decoration: inherit;">Template<wbr>Name</a>
@@ -1251,8 +1347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</p>
-</dd></dl>
+    <dd>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1266,8 +1361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplateaacparam">Record<wbr>Template<wbr>Aac<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Aac recording parameters are set when Aac recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Aac recording parameters are set when Aac recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1275,8 +1369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_flvparam_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flvparam_go" style="color: inherit; text-decoration: inherit;">Flv<wbr>Param</a>
@@ -1284,8 +1377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplateflvparam">Record<wbr>Template<wbr>Flv<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Flv recording parameters are set when Flv recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Flv recording parameters are set when Flv recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_flvspecialparam_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flvspecialparam_go" style="color: inherit; text-decoration: inherit;">Flv<wbr>Special<wbr>Param</a>
@@ -1293,8 +1385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplateflvspecialparam">Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>FLV records special parameters.</p>
-</dd><dt class="property-optional"
+    <dd>FLV records special parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hlsparam_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hlsparam_go" style="color: inherit; text-decoration: inherit;">Hls<wbr>Param</a>
@@ -1302,8 +1393,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatehlsparam">Record<wbr>Template<wbr>Hls<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Hls recording parameters, which are set when hls recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Hls recording parameters, which are set when hls recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hlsspecialparam_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hlsspecialparam_go" style="color: inherit; text-decoration: inherit;">Hls<wbr>Special<wbr>Param</a>
@@ -1311,8 +1401,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatehlsspecialparam">Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>HLS specific recording parameters.</p>
-</dd><dt class="property-optional"
+    <dd>HLS specific recording parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdelaylive_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdelaylive_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Delay<wbr>Live</a>
@@ -1320,8 +1409,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mp3param_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mp3param_go" style="color: inherit; text-decoration: inherit;">Mp3Param</a>
@@ -1329,8 +1417,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatemp3param">Record<wbr>Template<wbr>Mp3Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Mp3 recording parameters are set when Mp3 recording is turned on.</p>
-</dd><dt class="property-optional"
+    <dd>Mp3 recording parameters are set when Mp3 recording is turned on.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mp4param_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mp4param_go" style="color: inherit; text-decoration: inherit;">Mp4Param</a>
@@ -1338,8 +1425,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatemp4param">Record<wbr>Template<wbr>Mp4Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Mp4 recording parameters are set when Mp4 recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Mp4 recording parameters are set when Mp4 recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_removewatermark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_removewatermark_go" style="color: inherit; text-decoration: inherit;">Remove<wbr>Watermark</a>
@@ -1347,8 +1433,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templatename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templatename_go" style="color: inherit; text-decoration: inherit;">Template<wbr>Name</a>
@@ -1356,8 +1441,101 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</p>
-</dd></dl>
+    <dd>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_aac_param_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_aac_param_hcl" style="color: inherit; text-decoration: inherit;">aac_<wbr>param</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#recordtemplateaacparam">object</a></span>
+    </dt>
+    <dd>Aac recording parameters are set when Aac recording is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_flv_param_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flv_param_hcl" style="color: inherit; text-decoration: inherit;">flv_<wbr>param</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#recordtemplateflvparam">object</a></span>
+    </dt>
+    <dd>Flv recording parameters are set when Flv recording is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_flv_special_param_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flv_special_param_hcl" style="color: inherit; text-decoration: inherit;">flv_<wbr>special_<wbr>param</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#recordtemplateflvspecialparam">object</a></span>
+    </dt>
+    <dd>FLV records special parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hls_param_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hls_param_hcl" style="color: inherit; text-decoration: inherit;">hls_<wbr>param</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#recordtemplatehlsparam">object</a></span>
+    </dt>
+    <dd>Hls recording parameters, which are set when hls recording is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hls_special_param_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hls_special_param_hcl" style="color: inherit; text-decoration: inherit;">hls_<wbr>special_<wbr>param</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#recordtemplatehlsspecialparam">object</a></span>
+    </dt>
+    <dd>HLS specific recording parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_delay_live_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_delay_live_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>delay_<wbr>live</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_mp3_param_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mp3_param_hcl" style="color: inherit; text-decoration: inherit;">mp3_<wbr>param</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#recordtemplatemp3param">object</a></span>
+    </dt>
+    <dd>Mp3 recording parameters are set when Mp3 recording is turned on.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_mp4_param_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mp4_param_hcl" style="color: inherit; text-decoration: inherit;">mp4_<wbr>param</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#recordtemplatemp4param">object</a></span>
+    </dt>
+    <dd>Mp4 recording parameters are set when Mp4 recording is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_remove_watermark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remove_watermark_hcl" style="color: inherit; text-decoration: inherit;">remove_<wbr>watermark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_template_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_template_name_hcl" style="color: inherit; text-decoration: inherit;">template_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1369,10 +1547,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_aacparam_java" style="color: inherit; text-decoration: inherit;">aac<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplateaacparam">Record<wbr>Template<wbr>Aac<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplateaacparam">Record<wbr>Template<wbr>Aac<wbr>Param</a></span>
     </dt>
-    <dd><p>Aac recording parameters are set when Aac recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Aac recording parameters are set when Aac recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1380,44 +1557,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_flvparam_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flvparam_java" style="color: inherit; text-decoration: inherit;">flv<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplateflvparam">Record<wbr>Template<wbr>Flv<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplateflvparam">Record<wbr>Template<wbr>Flv<wbr>Param</a></span>
     </dt>
-    <dd><p>Flv recording parameters are set when Flv recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Flv recording parameters are set when Flv recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_flvspecialparam_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flvspecialparam_java" style="color: inherit; text-decoration: inherit;">flv<wbr>Special<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplateflvspecialparam">Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplateflvspecialparam">Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param</a></span>
     </dt>
-    <dd><p>FLV records special parameters.</p>
-</dd><dt class="property-optional"
+    <dd>FLV records special parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hlsparam_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hlsparam_java" style="color: inherit; text-decoration: inherit;">hls<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatehlsparam">Record<wbr>Template<wbr>Hls<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatehlsparam">Record<wbr>Template<wbr>Hls<wbr>Param</a></span>
     </dt>
-    <dd><p>Hls recording parameters, which are set when hls recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Hls recording parameters, which are set when hls recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hlsspecialparam_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hlsspecialparam_java" style="color: inherit; text-decoration: inherit;">hls<wbr>Special<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatehlsspecialparam">Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatehlsspecialparam">Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param</a></span>
     </dt>
-    <dd><p>HLS specific recording parameters.</p>
-</dd><dt class="property-optional"
+    <dd>HLS specific recording parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdelaylive_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdelaylive_java" style="color: inherit; text-decoration: inherit;">is<wbr>Delay<wbr>Live</a>
@@ -1425,26 +1597,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mp3param_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mp3param_java" style="color: inherit; text-decoration: inherit;">mp3Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatemp3param">Record<wbr>Template<wbr>Mp3Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatemp3param">Record<wbr>Template<wbr>Mp3Param</a></span>
     </dt>
-    <dd><p>Mp3 recording parameters are set when Mp3 recording is turned on.</p>
-</dd><dt class="property-optional"
+    <dd>Mp3 recording parameters are set when Mp3 recording is turned on.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mp4param_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mp4param_java" style="color: inherit; text-decoration: inherit;">mp4Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatemp4param">Record<wbr>Template<wbr>Mp4Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatemp4param">Record<wbr>Template<wbr>Mp4Param</a></span>
     </dt>
-    <dd><p>Mp4 recording parameters are set when Mp4 recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Mp4 recording parameters are set when Mp4 recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_removewatermark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_removewatermark_java" style="color: inherit; text-decoration: inherit;">remove<wbr>Watermark</a>
@@ -1452,8 +1621,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templatename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templatename_java" style="color: inherit; text-decoration: inherit;">template<wbr>Name</a>
@@ -1461,8 +1629,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</p>
-</dd></dl>
+    <dd>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1474,10 +1641,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_aacparam_nodejs" style="color: inherit; text-decoration: inherit;">aac<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplateaacparam">Record<wbr>Template<wbr>Aac<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplateaacparam">Record<wbr>Template<wbr>Aac<wbr>Param</a></span>
     </dt>
-    <dd><p>Aac recording parameters are set when Aac recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Aac recording parameters are set when Aac recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1485,44 +1651,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_flvparam_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flvparam_nodejs" style="color: inherit; text-decoration: inherit;">flv<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplateflvparam">Record<wbr>Template<wbr>Flv<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplateflvparam">Record<wbr>Template<wbr>Flv<wbr>Param</a></span>
     </dt>
-    <dd><p>Flv recording parameters are set when Flv recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Flv recording parameters are set when Flv recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_flvspecialparam_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flvspecialparam_nodejs" style="color: inherit; text-decoration: inherit;">flv<wbr>Special<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplateflvspecialparam">Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplateflvspecialparam">Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param</a></span>
     </dt>
-    <dd><p>FLV records special parameters.</p>
-</dd><dt class="property-optional"
+    <dd>FLV records special parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hlsparam_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hlsparam_nodejs" style="color: inherit; text-decoration: inherit;">hls<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatehlsparam">Record<wbr>Template<wbr>Hls<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatehlsparam">Record<wbr>Template<wbr>Hls<wbr>Param</a></span>
     </dt>
-    <dd><p>Hls recording parameters, which are set when hls recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Hls recording parameters, which are set when hls recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hlsspecialparam_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hlsspecialparam_nodejs" style="color: inherit; text-decoration: inherit;">hls<wbr>Special<wbr>Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatehlsspecialparam">Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatehlsspecialparam">Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param</a></span>
     </dt>
-    <dd><p>HLS specific recording parameters.</p>
-</dd><dt class="property-optional"
+    <dd>HLS specific recording parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdelaylive_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdelaylive_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Delay<wbr>Live</a>
@@ -1530,26 +1691,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mp3param_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mp3param_nodejs" style="color: inherit; text-decoration: inherit;">mp3Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatemp3param">Record<wbr>Template<wbr>Mp3Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatemp3param">Record<wbr>Template<wbr>Mp3Param</a></span>
     </dt>
-    <dd><p>Mp3 recording parameters are set when Mp3 recording is turned on.</p>
-</dd><dt class="property-optional"
+    <dd>Mp3 recording parameters are set when Mp3 recording is turned on.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mp4param_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mp4param_nodejs" style="color: inherit; text-decoration: inherit;">mp4Param</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#recordtemplatemp4param">Record<wbr>Template<wbr>Mp4Param<wbr>Args</a></span>
+        <span class="property-type"><a href="#recordtemplatemp4param">Record<wbr>Template<wbr>Mp4Param</a></span>
     </dt>
-    <dd><p>Mp4 recording parameters are set when Mp4 recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Mp4 recording parameters are set when Mp4 recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_removewatermark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_removewatermark_nodejs" style="color: inherit; text-decoration: inherit;">remove<wbr>Watermark</a>
@@ -1557,8 +1715,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templatename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templatename_nodejs" style="color: inherit; text-decoration: inherit;">template<wbr>Name</a>
@@ -1566,8 +1723,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</p>
-</dd></dl>
+    <dd>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1581,8 +1737,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplateaacparam">Record<wbr>Template<wbr>Aac<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Aac recording parameters are set when Aac recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Aac recording parameters are set when Aac recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1590,8 +1745,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_flv_param_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flv_param_python" style="color: inherit; text-decoration: inherit;">flv_<wbr>param</a>
@@ -1599,8 +1753,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplateflvparam">Record<wbr>Template<wbr>Flv<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Flv recording parameters are set when Flv recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Flv recording parameters are set when Flv recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_flv_special_param_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flv_special_param_python" style="color: inherit; text-decoration: inherit;">flv_<wbr>special_<wbr>param</a>
@@ -1608,8 +1761,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplateflvspecialparam">Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>FLV records special parameters.</p>
-</dd><dt class="property-optional"
+    <dd>FLV records special parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hls_param_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hls_param_python" style="color: inherit; text-decoration: inherit;">hls_<wbr>param</a>
@@ -1617,8 +1769,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatehlsparam">Record<wbr>Template<wbr>Hls<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Hls recording parameters, which are set when hls recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Hls recording parameters, which are set when hls recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hls_special_param_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hls_special_param_python" style="color: inherit; text-decoration: inherit;">hls_<wbr>special_<wbr>param</a>
@@ -1626,8 +1777,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatehlsspecialparam">Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param<wbr>Args</a></span>
     </dt>
-    <dd><p>HLS specific recording parameters.</p>
-</dd><dt class="property-optional"
+    <dd>HLS specific recording parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_delay_live_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_delay_live_python" style="color: inherit; text-decoration: inherit;">is_<wbr>delay_<wbr>live</a>
@@ -1635,8 +1785,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mp3_param_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mp3_param_python" style="color: inherit; text-decoration: inherit;">mp3_<wbr>param</a>
@@ -1644,8 +1793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatemp3param">Record<wbr>Template<wbr>Mp3Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Mp3 recording parameters are set when Mp3 recording is turned on.</p>
-</dd><dt class="property-optional"
+    <dd>Mp3 recording parameters are set when Mp3 recording is turned on.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mp4_param_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mp4_param_python" style="color: inherit; text-decoration: inherit;">mp4_<wbr>param</a>
@@ -1653,8 +1801,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatemp4param">Record<wbr>Template<wbr>Mp4Param<wbr>Args</a></span>
     </dt>
-    <dd><p>Mp4 recording parameters are set when Mp4 recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Mp4 recording parameters are set when Mp4 recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remove_watermark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remove_watermark_python" style="color: inherit; text-decoration: inherit;">remove_<wbr>watermark</a>
@@ -1662,8 +1809,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_template_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_template_name_python" style="color: inherit; text-decoration: inherit;">template_<wbr>name</a>
@@ -1671,8 +1817,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</p>
-</dd></dl>
+    <dd>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1686,8 +1831,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplateaacparam">Property Map</a></span>
     </dt>
-    <dd><p>Aac recording parameters are set when Aac recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Aac recording parameters are set when Aac recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1695,8 +1839,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_flvparam_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flvparam_yaml" style="color: inherit; text-decoration: inherit;">flv<wbr>Param</a>
@@ -1704,8 +1847,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplateflvparam">Property Map</a></span>
     </dt>
-    <dd><p>Flv recording parameters are set when Flv recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Flv recording parameters are set when Flv recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_flvspecialparam_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flvspecialparam_yaml" style="color: inherit; text-decoration: inherit;">flv<wbr>Special<wbr>Param</a>
@@ -1713,8 +1855,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplateflvspecialparam">Property Map</a></span>
     </dt>
-    <dd><p>FLV records special parameters.</p>
-</dd><dt class="property-optional"
+    <dd>FLV records special parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hlsparam_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hlsparam_yaml" style="color: inherit; text-decoration: inherit;">hls<wbr>Param</a>
@@ -1722,8 +1863,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatehlsparam">Property Map</a></span>
     </dt>
-    <dd><p>Hls recording parameters, which are set when hls recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Hls recording parameters, which are set when hls recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hlsspecialparam_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hlsspecialparam_yaml" style="color: inherit; text-decoration: inherit;">hls<wbr>Special<wbr>Param</a>
@@ -1731,8 +1871,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatehlsspecialparam">Property Map</a></span>
     </dt>
-    <dd><p>HLS specific recording parameters.</p>
-</dd><dt class="property-optional"
+    <dd>HLS specific recording parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isdelaylive_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isdelaylive_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Delay<wbr>Live</a>
@@ -1740,8 +1879,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mp3param_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mp3param_yaml" style="color: inherit; text-decoration: inherit;">mp3Param</a>
@@ -1749,8 +1887,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatemp3param">Property Map</a></span>
     </dt>
-    <dd><p>Mp3 recording parameters are set when Mp3 recording is turned on.</p>
-</dd><dt class="property-optional"
+    <dd>Mp3 recording parameters are set when Mp3 recording is turned on.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mp4param_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mp4param_yaml" style="color: inherit; text-decoration: inherit;">mp4Param</a>
@@ -1758,8 +1895,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#recordtemplatemp4param">Property Map</a></span>
     </dt>
-    <dd><p>Mp4 recording parameters are set when Mp4 recording is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Mp4 recording parameters are set when Mp4 recording is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_removewatermark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_removewatermark_yaml" style="color: inherit; text-decoration: inherit;">remove<wbr>Watermark</a>
@@ -1767,8 +1903,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templatename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templatename_yaml" style="color: inherit; text-decoration: inherit;">template<wbr>Name</a>
@@ -1776,8 +1911,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</p>
-</dd></dl>
+    <dd>Template name. Only <code>Chinese</code>, <code>English</code>, <code>numbers</code>, <code>_</code>, <code>-</code> are supported.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1792,7 +1926,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="recordtemplateaacparam">Record<wbr>Template<wbr>Aac<wbr>Param</h4>
+<h4 id="recordtemplateaacparam">
+Record<wbr>Template<wbr>Aac<wbr>Param<pulumi-choosable type="language" values="python,go" class="inline">, Record<wbr>Template<wbr>Aac<wbr>Param<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1804,8 +1940,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_csharp" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -1813,8 +1948,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_csharp" style="color: inherit; text-decoration: inherit;">Procedure</a>
@@ -1822,8 +1956,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_csharp" style="color: inherit; text-decoration: inherit;">Record<wbr>Interval</a>
@@ -1831,8 +1964,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Mode</a>
@@ -1840,8 +1972,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Time</a>
@@ -1849,8 +1980,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_csharp" style="color: inherit; text-decoration: inherit;">Vod<wbr>File<wbr>Name</a>
@@ -1858,8 +1988,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_csharp" style="color: inherit; text-decoration: inherit;">Vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -1867,8 +1996,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the on-demand sub app.</p>
-</dd></dl>
+    <dd>The ID of the on-demand sub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1882,8 +2010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_go" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -1891,8 +2018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_go" style="color: inherit; text-decoration: inherit;">Procedure</a>
@@ -1900,8 +2026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_go" style="color: inherit; text-decoration: inherit;">Record<wbr>Interval</a>
@@ -1909,8 +2034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Mode</a>
@@ -1918,8 +2042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Time</a>
@@ -1927,8 +2050,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_go" style="color: inherit; text-decoration: inherit;">Vod<wbr>File<wbr>Name</a>
@@ -1936,8 +2058,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_go" style="color: inherit; text-decoration: inherit;">Vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -1945,8 +2066,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the on-demand sub app.</p>
-</dd></dl>
+    <dd>The ID of the on-demand sub app.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="class_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#class_id_hcl" style="color: inherit; text-decoration: inherit;">class_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="procedure_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_hcl" style="color: inherit; text-decoration: inherit;">procedure</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="record_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_interval_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_mode_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_time_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vod_file_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_file_name_hcl" style="color: inherit; text-decoration: inherit;">vod_<wbr>file_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vod_sub_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_sub_app_id_hcl" style="color: inherit; text-decoration: inherit;">vod_<wbr>sub_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The ID of the on-demand sub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1960,8 +2150,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_java" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -1969,8 +2158,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_java" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -1978,8 +2166,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_java" style="color: inherit; text-decoration: inherit;">record<wbr>Interval</a>
@@ -1987,8 +2174,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Mode</a>
@@ -1996,8 +2182,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Time</a>
@@ -2005,8 +2190,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_java" style="color: inherit; text-decoration: inherit;">vod<wbr>File<wbr>Name</a>
@@ -2014,8 +2198,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_java" style="color: inherit; text-decoration: inherit;">vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -2023,8 +2206,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The ID of the on-demand sub app.</p>
-</dd></dl>
+    <dd>The ID of the on-demand sub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2038,8 +2220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_nodejs" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -2047,8 +2228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_nodejs" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -2056,8 +2236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_nodejs" style="color: inherit; text-decoration: inherit;">record<wbr>Interval</a>
@@ -2065,8 +2244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Mode</a>
@@ -2074,8 +2252,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Time</a>
@@ -2083,8 +2260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_nodejs" style="color: inherit; text-decoration: inherit;">vod<wbr>File<wbr>Name</a>
@@ -2092,8 +2268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_nodejs" style="color: inherit; text-decoration: inherit;">vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -2101,8 +2276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The ID of the on-demand sub app.</p>
-</dd></dl>
+    <dd>The ID of the on-demand sub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2116,8 +2290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_python" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -2125,8 +2298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_python" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -2134,8 +2306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="record_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_interval_python" style="color: inherit; text-decoration: inherit;">record_<wbr>interval</a>
@@ -2143,8 +2314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_mode_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>mode</a>
@@ -2152,8 +2322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_time_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>time</a>
@@ -2161,8 +2330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vod_file_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_file_name_python" style="color: inherit; text-decoration: inherit;">vod_<wbr>file_<wbr>name</a>
@@ -2170,8 +2338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vod_sub_app_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_sub_app_id_python" style="color: inherit; text-decoration: inherit;">vod_<wbr>sub_<wbr>app_<wbr>id</a>
@@ -2179,8 +2346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the on-demand sub app.</p>
-</dd></dl>
+    <dd>The ID of the on-demand sub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2194,8 +2360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_yaml" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -2203,8 +2368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_yaml" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -2212,8 +2376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_yaml" style="color: inherit; text-decoration: inherit;">record<wbr>Interval</a>
@@ -2221,8 +2384,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Mode</a>
@@ -2230,8 +2392,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Time</a>
@@ -2239,8 +2400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_yaml" style="color: inherit; text-decoration: inherit;">vod<wbr>File<wbr>Name</a>
@@ -2248,8 +2408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_yaml" style="color: inherit; text-decoration: inherit;">vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -2257,12 +2416,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The ID of the on-demand sub app.</p>
-</dd></dl>
+    <dd>The ID of the on-demand sub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="recordtemplateflvparam">Record<wbr>Template<wbr>Flv<wbr>Param</h4>
+<h4 id="recordtemplateflvparam">
+Record<wbr>Template<wbr>Flv<wbr>Param<pulumi-choosable type="language" values="python,go" class="inline">, Record<wbr>Template<wbr>Flv<wbr>Param<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2274,8 +2434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_csharp" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -2283,8 +2442,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_csharp" style="color: inherit; text-decoration: inherit;">Procedure</a>
@@ -2292,8 +2450,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow. This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_csharp" style="color: inherit; text-decoration: inherit;">Record<wbr>Interval</a>
@@ -2301,8 +2458,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Mode</a>
@@ -2310,8 +2466,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Time</a>
@@ -2319,8 +2474,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_csharp" style="color: inherit; text-decoration: inherit;">Vod<wbr>File<wbr>Name</a>
@@ -2328,8 +2482,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>_ ,<code>StartYear</code>-,<code>StartMonth</code>-,<code>StartDay</code>-,<code>StartHour</code>-,<code>StartMinute</code>-,<code>StartSecond</code>_ ,<code>EndYear</code>-,<code>EndMonth</code>-,<code>EndDay</code>-,<code>EndHour</code>-,<code>EndMinute</code>-,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>_ ,<code>StartYear</code>-,<code>StartMonth</code>-,<code>StartDay</code>-,<code>StartHour</code>-,<code>StartMinute</code>-,<code>StartSecond</code>_ ,<code>EndYear</code>-,<code>EndMonth</code>-,<code>EndDay</code>-,<code>EndHour</code>-,<code>EndMinute</code>-,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_csharp" style="color: inherit; text-decoration: inherit;">Vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -2337,8 +2490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the vodSub app.</p>
-</dd></dl>
+    <dd>The ID of the vodSub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2352,8 +2504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_go" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -2361,8 +2512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_go" style="color: inherit; text-decoration: inherit;">Procedure</a>
@@ -2370,8 +2520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow. This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_go" style="color: inherit; text-decoration: inherit;">Record<wbr>Interval</a>
@@ -2379,8 +2528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Mode</a>
@@ -2388,8 +2536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Time</a>
@@ -2397,8 +2544,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_go" style="color: inherit; text-decoration: inherit;">Vod<wbr>File<wbr>Name</a>
@@ -2406,8 +2552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>_ ,<code>StartYear</code>-,<code>StartMonth</code>-,<code>StartDay</code>-,<code>StartHour</code>-,<code>StartMinute</code>-,<code>StartSecond</code>_ ,<code>EndYear</code>-,<code>EndMonth</code>-,<code>EndDay</code>-,<code>EndHour</code>-,<code>EndMinute</code>-,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>_ ,<code>StartYear</code>-,<code>StartMonth</code>-,<code>StartDay</code>-,<code>StartHour</code>-,<code>StartMinute</code>-,<code>StartSecond</code>_ ,<code>EndYear</code>-,<code>EndMonth</code>-,<code>EndDay</code>-,<code>EndHour</code>-,<code>EndMinute</code>-,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_go" style="color: inherit; text-decoration: inherit;">Vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -2415,8 +2560,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the vodSub app.</p>
-</dd></dl>
+    <dd>The ID of the vodSub app.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="class_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#class_id_hcl" style="color: inherit; text-decoration: inherit;">class_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="procedure_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_hcl" style="color: inherit; text-decoration: inherit;">procedure</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Task flow. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="record_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_interval_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_mode_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_time_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vod_file_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_file_name_hcl" style="color: inherit; text-decoration: inherit;">vod_<wbr>file_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>_ ,<code>StartYear</code>-,<code>StartMonth</code>-,<code>StartDay</code>-,<code>StartHour</code>-,<code>StartMinute</code>-,<code>StartSecond</code>_ ,<code>EndYear</code>-,<code>EndMonth</code>-,<code>EndDay</code>-,<code>EndHour</code>-,<code>EndMinute</code>-,<code>EndSecond</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vod_sub_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_sub_app_id_hcl" style="color: inherit; text-decoration: inherit;">vod_<wbr>sub_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The ID of the vodSub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2430,8 +2644,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_java" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -2439,8 +2652,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_java" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -2448,8 +2660,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task flow. This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_java" style="color: inherit; text-decoration: inherit;">record<wbr>Interval</a>
@@ -2457,8 +2668,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Mode</a>
@@ -2466,8 +2676,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Time</a>
@@ -2475,8 +2684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_java" style="color: inherit; text-decoration: inherit;">vod<wbr>File<wbr>Name</a>
@@ -2484,8 +2692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>_ ,<code>StartYear</code>-,<code>StartMonth</code>-,<code>StartDay</code>-,<code>StartHour</code>-,<code>StartMinute</code>-,<code>StartSecond</code>_ ,<code>EndYear</code>-,<code>EndMonth</code>-,<code>EndDay</code>-,<code>EndHour</code>-,<code>EndMinute</code>-,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>_ ,<code>StartYear</code>-,<code>StartMonth</code>-,<code>StartDay</code>-,<code>StartHour</code>-,<code>StartMinute</code>-,<code>StartSecond</code>_ ,<code>EndYear</code>-,<code>EndMonth</code>-,<code>EndDay</code>-,<code>EndHour</code>-,<code>EndMinute</code>-,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_java" style="color: inherit; text-decoration: inherit;">vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -2493,8 +2700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The ID of the vodSub app.</p>
-</dd></dl>
+    <dd>The ID of the vodSub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2508,8 +2714,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_nodejs" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -2517,8 +2722,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_nodejs" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -2526,8 +2730,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow. This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_nodejs" style="color: inherit; text-decoration: inherit;">record<wbr>Interval</a>
@@ -2535,8 +2738,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Mode</a>
@@ -2544,8 +2746,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Time</a>
@@ -2553,8 +2754,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_nodejs" style="color: inherit; text-decoration: inherit;">vod<wbr>File<wbr>Name</a>
@@ -2562,8 +2762,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>_ ,<code>StartYear</code>-,<code>StartMonth</code>-,<code>StartDay</code>-,<code>StartHour</code>-,<code>StartMinute</code>-,<code>StartSecond</code>_ ,<code>EndYear</code>-,<code>EndMonth</code>-,<code>EndDay</code>-,<code>EndHour</code>-,<code>EndMinute</code>-,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>_ ,<code>StartYear</code>-,<code>StartMonth</code>-,<code>StartDay</code>-,<code>StartHour</code>-,<code>StartMinute</code>-,<code>StartSecond</code>_ ,<code>EndYear</code>-,<code>EndMonth</code>-,<code>EndDay</code>-,<code>EndHour</code>-,<code>EndMinute</code>-,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_nodejs" style="color: inherit; text-decoration: inherit;">vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -2571,8 +2770,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The ID of the vodSub app.</p>
-</dd></dl>
+    <dd>The ID of the vodSub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2586,8 +2784,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_python" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -2595,8 +2792,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_python" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -2604,8 +2800,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Task flow. This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="record_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_interval_python" style="color: inherit; text-decoration: inherit;">record_<wbr>interval</a>
@@ -2613,8 +2808,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_mode_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>mode</a>
@@ -2622,8 +2816,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_time_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>time</a>
@@ -2631,8 +2824,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vod_file_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_file_name_python" style="color: inherit; text-decoration: inherit;">vod_<wbr>file_<wbr>name</a>
@@ -2640,8 +2832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>_ ,<code>StartYear</code>-,<code>StartMonth</code>-,<code>StartDay</code>-,<code>StartHour</code>-,<code>StartMinute</code>-,<code>StartSecond</code>_ ,<code>EndYear</code>-,<code>EndMonth</code>-,<code>EndDay</code>-,<code>EndHour</code>-,<code>EndMinute</code>-,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>_ ,<code>StartYear</code>-,<code>StartMonth</code>-,<code>StartDay</code>-,<code>StartHour</code>-,<code>StartMinute</code>-,<code>StartSecond</code>_ ,<code>EndYear</code>-,<code>EndMonth</code>-,<code>EndDay</code>-,<code>EndHour</code>-,<code>EndMinute</code>-,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vod_sub_app_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_sub_app_id_python" style="color: inherit; text-decoration: inherit;">vod_<wbr>sub_<wbr>app_<wbr>id</a>
@@ -2649,8 +2840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the vodSub app.</p>
-</dd></dl>
+    <dd>The ID of the vodSub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2664,8 +2854,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_yaml" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -2673,8 +2862,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_yaml" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -2682,8 +2870,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task flow. This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_yaml" style="color: inherit; text-decoration: inherit;">record<wbr>Interval</a>
@@ -2691,8 +2878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Mode</a>
@@ -2700,8 +2886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Time</a>
@@ -2709,8 +2894,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_yaml" style="color: inherit; text-decoration: inherit;">vod<wbr>File<wbr>Name</a>
@@ -2718,8 +2902,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>_ ,<code>StartYear</code>-,<code>StartMonth</code>-,<code>StartDay</code>-,<code>StartHour</code>-,<code>StartMinute</code>-,<code>StartSecond</code>_ ,<code>EndYear</code>-,<code>EndMonth</code>-,<code>EndDay</code>-,<code>EndHour</code>-,<code>EndMinute</code>-,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>_ ,<code>StartYear</code>-,<code>StartMonth</code>-,<code>StartDay</code>-,<code>StartHour</code>-,<code>StartMinute</code>-,<code>StartSecond</code>_ ,<code>EndYear</code>-,<code>EndMonth</code>-,<code>EndDay</code>-,<code>EndHour</code>-,<code>EndMinute</code>-,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_yaml" style="color: inherit; text-decoration: inherit;">vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -2727,12 +2910,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The ID of the vodSub app.</p>
-</dd></dl>
+    <dd>The ID of the vodSub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="recordtemplateflvspecialparam">Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param</h4>
+<h4 id="recordtemplateflvspecialparam">
+Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param<pulumi-choosable type="language" values="python,go" class="inline">, Record<wbr>Template<wbr>Flv<wbr>Special<wbr>Param<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2744,8 +2928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable the transfer while recording is valid only in the flv format.</p>
-</dd></dl>
+    <dd>Whether to enable the transfer while recording is valid only in the flv format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2759,8 +2942,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable the transfer while recording is valid only in the flv format.</p>
-</dd></dl>
+    <dd>Whether to enable the transfer while recording is valid only in the flv format.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="upload_in_recording_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upload_in_recording_hcl" style="color: inherit; text-decoration: inherit;">upload_<wbr>in_<wbr>recording</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable the transfer while recording is valid only in the flv format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2774,8 +2970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable the transfer while recording is valid only in the flv format.</p>
-</dd></dl>
+    <dd>Whether to enable the transfer while recording is valid only in the flv format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2789,8 +2984,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable the transfer while recording is valid only in the flv format.</p>
-</dd></dl>
+    <dd>Whether to enable the transfer while recording is valid only in the flv format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2804,8 +2998,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable the transfer while recording is valid only in the flv format.</p>
-</dd></dl>
+    <dd>Whether to enable the transfer while recording is valid only in the flv format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2819,12 +3012,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable the transfer while recording is valid only in the flv format.</p>
-</dd></dl>
+    <dd>Whether to enable the transfer while recording is valid only in the flv format.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="recordtemplatehlsparam">Record<wbr>Template<wbr>Hls<wbr>Param</h4>
+<h4 id="recordtemplatehlsparam">
+Record<wbr>Template<wbr>Hls<wbr>Param<pulumi-choosable type="language" values="python,go" class="inline">, Record<wbr>Template<wbr>Hls<wbr>Param<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2836,8 +3030,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_csharp" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -2845,8 +3038,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_csharp" style="color: inherit; text-decoration: inherit;">Procedure</a>
@@ -2854,8 +3046,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_csharp" style="color: inherit; text-decoration: inherit;">Record<wbr>Interval</a>
@@ -2863,8 +3054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Mode</a>
@@ -2872,8 +3062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Time</a>
@@ -2881,8 +3070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_csharp" style="color: inherit; text-decoration: inherit;">Vod<wbr>File<wbr>Name</a>
@@ -2890,8 +3078,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_csharp" style="color: inherit; text-decoration: inherit;">Vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -2899,8 +3086,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the vodSub app.</p>
-</dd></dl>
+    <dd>The ID of the vodSub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2914,8 +3100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_go" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -2923,8 +3108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_go" style="color: inherit; text-decoration: inherit;">Procedure</a>
@@ -2932,8 +3116,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_go" style="color: inherit; text-decoration: inherit;">Record<wbr>Interval</a>
@@ -2941,8 +3124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Mode</a>
@@ -2950,8 +3132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Time</a>
@@ -2959,8 +3140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_go" style="color: inherit; text-decoration: inherit;">Vod<wbr>File<wbr>Name</a>
@@ -2968,8 +3148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_go" style="color: inherit; text-decoration: inherit;">Vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -2977,8 +3156,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the vodSub app.</p>
-</dd></dl>
+    <dd>The ID of the vodSub app.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="class_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#class_id_hcl" style="color: inherit; text-decoration: inherit;">class_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="procedure_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_hcl" style="color: inherit; text-decoration: inherit;">procedure</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="record_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_interval_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_mode_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_time_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vod_file_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_file_name_hcl" style="color: inherit; text-decoration: inherit;">vod_<wbr>file_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vod_sub_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_sub_app_id_hcl" style="color: inherit; text-decoration: inherit;">vod_<wbr>sub_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The ID of the vodSub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2992,8 +3240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_java" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -3001,8 +3248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_java" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -3010,8 +3256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_java" style="color: inherit; text-decoration: inherit;">record<wbr>Interval</a>
@@ -3019,8 +3264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Mode</a>
@@ -3028,8 +3272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Time</a>
@@ -3037,8 +3280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_java" style="color: inherit; text-decoration: inherit;">vod<wbr>File<wbr>Name</a>
@@ -3046,8 +3288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_java" style="color: inherit; text-decoration: inherit;">vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -3055,8 +3296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The ID of the vodSub app.</p>
-</dd></dl>
+    <dd>The ID of the vodSub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3070,8 +3310,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_nodejs" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -3079,8 +3318,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_nodejs" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -3088,8 +3326,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_nodejs" style="color: inherit; text-decoration: inherit;">record<wbr>Interval</a>
@@ -3097,8 +3334,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Mode</a>
@@ -3106,8 +3342,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Time</a>
@@ -3115,8 +3350,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_nodejs" style="color: inherit; text-decoration: inherit;">vod<wbr>File<wbr>Name</a>
@@ -3124,8 +3358,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_nodejs" style="color: inherit; text-decoration: inherit;">vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -3133,8 +3366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The ID of the vodSub app.</p>
-</dd></dl>
+    <dd>The ID of the vodSub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3148,8 +3380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_python" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -3157,8 +3388,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_python" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -3166,8 +3396,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="record_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_interval_python" style="color: inherit; text-decoration: inherit;">record_<wbr>interval</a>
@@ -3175,8 +3404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_mode_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>mode</a>
@@ -3184,8 +3412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_time_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>time</a>
@@ -3193,8 +3420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vod_file_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_file_name_python" style="color: inherit; text-decoration: inherit;">vod_<wbr>file_<wbr>name</a>
@@ -3202,8 +3428,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vod_sub_app_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_sub_app_id_python" style="color: inherit; text-decoration: inherit;">vod_<wbr>sub_<wbr>app_<wbr>id</a>
@@ -3211,8 +3436,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the vodSub app.</p>
-</dd></dl>
+    <dd>The ID of the vodSub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3226,8 +3450,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_yaml" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -3235,8 +3458,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_yaml" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -3244,8 +3466,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_yaml" style="color: inherit; text-decoration: inherit;">record<wbr>Interval</a>
@@ -3253,8 +3474,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Mode</a>
@@ -3262,8 +3482,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Time</a>
@@ -3271,8 +3490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_yaml" style="color: inherit; text-decoration: inherit;">vod<wbr>File<wbr>Name</a>
@@ -3280,8 +3498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_yaml" style="color: inherit; text-decoration: inherit;">vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -3289,12 +3506,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The ID of the vodSub app.</p>
-</dd></dl>
+    <dd>The ID of the vodSub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="recordtemplatehlsspecialparam">Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param</h4>
+<h4 id="recordtemplatehlsspecialparam">
+Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param<pulumi-choosable type="language" values="python,go" class="inline">, Record<wbr>Template<wbr>Hls<wbr>Special<wbr>Param<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3306,8 +3524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HLS freewheeling timeout. Value range [0, 1800].</p>
-</dd></dl>
+    <dd>HLS freewheeling timeout. Value range [0, 1800].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3321,8 +3538,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HLS freewheeling timeout. Value range [0, 1800].</p>
-</dd></dl>
+    <dd>HLS freewheeling timeout. Value range [0, 1800].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="flow_continue_duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flow_continue_duration_hcl" style="color: inherit; text-decoration: inherit;">flow_<wbr>continue_<wbr>duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>HLS freewheeling timeout. Value range [0, 1800].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3336,8 +3566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>HLS freewheeling timeout. Value range [0, 1800].</p>
-</dd></dl>
+    <dd>HLS freewheeling timeout. Value range [0, 1800].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3351,8 +3580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>HLS freewheeling timeout. Value range [0, 1800].</p>
-</dd></dl>
+    <dd>HLS freewheeling timeout. Value range [0, 1800].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3366,8 +3594,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HLS freewheeling timeout. Value range [0, 1800].</p>
-</dd></dl>
+    <dd>HLS freewheeling timeout. Value range [0, 1800].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3381,12 +3608,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>HLS freewheeling timeout. Value range [0, 1800].</p>
-</dd></dl>
+    <dd>HLS freewheeling timeout. Value range [0, 1800].</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="recordtemplatemp3param">Record<wbr>Template<wbr>Mp3Param</h4>
+<h4 id="recordtemplatemp3param">
+Record<wbr>Template<wbr>Mp3Param<pulumi-choosable type="language" values="python,go" class="inline">, Record<wbr>Template<wbr>Mp3Param<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3398,8 +3626,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_csharp" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -3407,8 +3634,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_csharp" style="color: inherit; text-decoration: inherit;">Procedure</a>
@@ -3416,8 +3642,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_csharp" style="color: inherit; text-decoration: inherit;">Record<wbr>Interval</a>
@@ -3425,8 +3650,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Mode</a>
@@ -3434,8 +3658,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Time</a>
@@ -3443,8 +3666,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_csharp" style="color: inherit; text-decoration: inherit;">Vod<wbr>File<wbr>Name</a>
@@ -3452,8 +3674,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>, <code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>, <code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_csharp" style="color: inherit; text-decoration: inherit;">Vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -3461,8 +3682,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the on-demand sub app.</p>
-</dd></dl>
+    <dd>The ID of the on-demand sub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3476,8 +3696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_go" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -3485,8 +3704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_go" style="color: inherit; text-decoration: inherit;">Procedure</a>
@@ -3494,8 +3712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_go" style="color: inherit; text-decoration: inherit;">Record<wbr>Interval</a>
@@ -3503,8 +3720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Mode</a>
@@ -3512,8 +3728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Time</a>
@@ -3521,8 +3736,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_go" style="color: inherit; text-decoration: inherit;">Vod<wbr>File<wbr>Name</a>
@@ -3530,8 +3744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>, <code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>, <code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_go" style="color: inherit; text-decoration: inherit;">Vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -3539,8 +3752,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the on-demand sub app.</p>
-</dd></dl>
+    <dd>The ID of the on-demand sub app.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="class_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#class_id_hcl" style="color: inherit; text-decoration: inherit;">class_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="procedure_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_hcl" style="color: inherit; text-decoration: inherit;">procedure</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="record_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_interval_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_mode_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_time_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vod_file_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_file_name_hcl" style="color: inherit; text-decoration: inherit;">vod_<wbr>file_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>, <code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vod_sub_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_sub_app_id_hcl" style="color: inherit; text-decoration: inherit;">vod_<wbr>sub_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The ID of the on-demand sub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3554,8 +3836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_java" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -3563,8 +3844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_java" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -3572,8 +3852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_java" style="color: inherit; text-decoration: inherit;">record<wbr>Interval</a>
@@ -3581,8 +3860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Mode</a>
@@ -3590,8 +3868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Time</a>
@@ -3599,8 +3876,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_java" style="color: inherit; text-decoration: inherit;">vod<wbr>File<wbr>Name</a>
@@ -3608,8 +3884,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>, <code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>, <code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_java" style="color: inherit; text-decoration: inherit;">vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -3617,8 +3892,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The ID of the on-demand sub app.</p>
-</dd></dl>
+    <dd>The ID of the on-demand sub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3632,8 +3906,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_nodejs" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -3641,8 +3914,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_nodejs" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -3650,8 +3922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_nodejs" style="color: inherit; text-decoration: inherit;">record<wbr>Interval</a>
@@ -3659,8 +3930,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Mode</a>
@@ -3668,8 +3938,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Time</a>
@@ -3677,8 +3946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_nodejs" style="color: inherit; text-decoration: inherit;">vod<wbr>File<wbr>Name</a>
@@ -3686,8 +3954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>, <code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>, <code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_nodejs" style="color: inherit; text-decoration: inherit;">vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -3695,8 +3962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The ID of the on-demand sub app.</p>
-</dd></dl>
+    <dd>The ID of the on-demand sub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3710,8 +3976,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_python" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -3719,8 +3984,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_python" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -3728,8 +3992,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="record_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_interval_python" style="color: inherit; text-decoration: inherit;">record_<wbr>interval</a>
@@ -3737,8 +4000,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_mode_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>mode</a>
@@ -3746,8 +4008,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_time_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>time</a>
@@ -3755,8 +4016,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vod_file_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_file_name_python" style="color: inherit; text-decoration: inherit;">vod_<wbr>file_<wbr>name</a>
@@ -3764,8 +4024,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>, <code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>, <code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vod_sub_app_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_sub_app_id_python" style="color: inherit; text-decoration: inherit;">vod_<wbr>sub_<wbr>app_<wbr>id</a>
@@ -3773,8 +4032,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the on-demand sub app.</p>
-</dd></dl>
+    <dd>The ID of the on-demand sub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3788,8 +4046,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_yaml" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -3797,8 +4054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_yaml" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -3806,8 +4062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_yaml" style="color: inherit; text-decoration: inherit;">record<wbr>Interval</a>
@@ -3815,8 +4070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Mode</a>
@@ -3824,8 +4078,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Time</a>
@@ -3833,8 +4086,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_yaml" style="color: inherit; text-decoration: inherit;">vod<wbr>File<wbr>Name</a>
@@ -3842,8 +4094,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>, <code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>, <code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_yaml" style="color: inherit; text-decoration: inherit;">vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -3851,12 +4102,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The ID of the on-demand sub app.</p>
-</dd></dl>
+    <dd>The ID of the on-demand sub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="recordtemplatemp4param">Record<wbr>Template<wbr>Mp4Param</h4>
+<h4 id="recordtemplatemp4param">
+Record<wbr>Template<wbr>Mp4Param<pulumi-choosable type="language" values="python,go" class="inline">, Record<wbr>Template<wbr>Mp4Param<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3868,8 +4120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_csharp" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -3877,8 +4128,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_csharp" style="color: inherit; text-decoration: inherit;">Procedure</a>
@@ -3886,8 +4136,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_csharp" style="color: inherit; text-decoration: inherit;">Record<wbr>Interval</a>
@@ -3895,8 +4144,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Mode</a>
@@ -3904,8 +4152,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Time</a>
@@ -3913,8 +4160,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_csharp" style="color: inherit; text-decoration: inherit;">Vod<wbr>File<wbr>Name</a>
@@ -3922,8 +4168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_csharp" style="color: inherit; text-decoration: inherit;">Vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -3931,8 +4176,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the on-demand sub app.</p>
-</dd></dl>
+    <dd>The ID of the on-demand sub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3946,8 +4190,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_go" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -3955,8 +4198,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_go" style="color: inherit; text-decoration: inherit;">Procedure</a>
@@ -3964,8 +4206,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_go" style="color: inherit; text-decoration: inherit;">Record<wbr>Interval</a>
@@ -3973,8 +4214,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Mode</a>
@@ -3982,8 +4222,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Time</a>
@@ -3991,8 +4230,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_go" style="color: inherit; text-decoration: inherit;">Vod<wbr>File<wbr>Name</a>
@@ -4000,8 +4238,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_go" style="color: inherit; text-decoration: inherit;">Vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -4009,8 +4246,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the on-demand sub app.</p>
-</dd></dl>
+    <dd>The ID of the on-demand sub app.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="class_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#class_id_hcl" style="color: inherit; text-decoration: inherit;">class_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="procedure_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_hcl" style="color: inherit; text-decoration: inherit;">procedure</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="record_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_interval_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_mode_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_time_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vod_file_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_file_name_hcl" style="color: inherit; text-decoration: inherit;">vod_<wbr>file_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vod_sub_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_sub_app_id_hcl" style="color: inherit; text-decoration: inherit;">vod_<wbr>sub_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The ID of the on-demand sub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4024,8 +4330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_java" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -4033,8 +4338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_java" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -4042,8 +4346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_java" style="color: inherit; text-decoration: inherit;">record<wbr>Interval</a>
@@ -4051,8 +4354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Mode</a>
@@ -4060,8 +4362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Time</a>
@@ -4069,8 +4370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_java" style="color: inherit; text-decoration: inherit;">vod<wbr>File<wbr>Name</a>
@@ -4078,8 +4378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_java" style="color: inherit; text-decoration: inherit;">vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -4087,8 +4386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The ID of the on-demand sub app.</p>
-</dd></dl>
+    <dd>The ID of the on-demand sub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4102,8 +4400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_nodejs" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -4111,8 +4408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_nodejs" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -4120,8 +4416,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_nodejs" style="color: inherit; text-decoration: inherit;">record<wbr>Interval</a>
@@ -4129,8 +4424,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Mode</a>
@@ -4138,8 +4432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Time</a>
@@ -4147,8 +4440,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_nodejs" style="color: inherit; text-decoration: inherit;">vod<wbr>File<wbr>Name</a>
@@ -4156,8 +4448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_nodejs" style="color: inherit; text-decoration: inherit;">vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -4165,8 +4456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The ID of the on-demand sub app.</p>
-</dd></dl>
+    <dd>The ID of the on-demand sub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4180,8 +4470,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_python" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -4189,8 +4478,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_python" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -4198,8 +4486,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="record_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_interval_python" style="color: inherit; text-decoration: inherit;">record_<wbr>interval</a>
@@ -4207,8 +4494,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_mode_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>mode</a>
@@ -4216,8 +4502,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_time_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>time</a>
@@ -4225,8 +4510,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vod_file_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_file_name_python" style="color: inherit; text-decoration: inherit;">vod_<wbr>file_<wbr>name</a>
@@ -4234,8 +4518,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vod_sub_app_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vod_sub_app_id_python" style="color: inherit; text-decoration: inherit;">vod_<wbr>sub_<wbr>app_<wbr>id</a>
@@ -4243,8 +4526,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the on-demand sub app.</p>
-</dd></dl>
+    <dd>The ID of the on-demand sub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4258,8 +4540,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_yaml" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -4267,8 +4548,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="procedure_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#procedure_yaml" style="color: inherit; text-decoration: inherit;">procedure</a>
@@ -4276,8 +4556,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Task flow. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordinterval_yaml" style="color: inherit; text-decoration: inherit;">record<wbr>Interval</a>
@@ -4285,8 +4564,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</p>
-</dd><dt class="property-optional"
+    <dd>Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemode_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Mode</a>
@@ -4294,8 +4572,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetime_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Time</a>
@@ -4303,8 +4580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</p>
-</dd><dt class="property-optional"
+    <dd>Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodfilename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodfilename_yaml" style="color: inherit; text-decoration: inherit;">vod<wbr>File<wbr>Name</a>
@@ -4312,8 +4588,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Record file name.Special placeholders supported are: <code>StreamID</code>: Stream ID,<code>StartYear</code>: Start time - year,<code>StartMonth</code>: Start time - month,<code>StartDay</code>: Start time - day,<code>StartHour</code>: Start time - hour,<code>StartMinute</code>: Start time - minutes,<code>StartSecond</code>: Start time - seconds,<code>StartMillisecond</code>: Start time - milliseconds,<code>EndYear</code>: End time - year,<code>EndMonth</code>: End time - month,<code>EndDay</code>: End time - day,<code>EndHour</code>: End time - hour,<code>EndMinute</code>: End time - minutes,<code>EndSecond</code>: End time - seconds,<code>EndMillisecond</code>: End time - millisecondsIf the default recording file name is not set as ,<code>StreamID</code>,<code>StartYear</code>,<code>StartMonth</code>,<code>StartDay</code>,<code>StartHour</code>,<code>StartMinute</code>,<code>StartSecond</code>,<code>EndYear</code>,<code>EndMonth</code>,<code>EndDay</code>,<code>EndHour</code>,<code>EndMinute</code>,<code>EndSecond</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="vodsubappid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vodsubappid_yaml" style="color: inherit; text-decoration: inherit;">vod<wbr>Sub<wbr>App<wbr>Id</a>
@@ -4321,8 +4596,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The ID of the on-demand sub app.</p>
-</dd></dl>
+    <dd>The ID of the on-demand sub app.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4334,7 +4608,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getZone"
 title_tag: "tencentcloud.Lighthouse.getZone"
-meta_desc: "Documentation for the tencentcloud.Lighthouse.getZone function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of lighthouse zone"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,52 +18,51 @@ Use this data source to query detailed information of lighthouse zone
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zone = tencentcloud.Lighthouse.getZone({
-    order: "ASC",
+const zone = tencentcloud.lighthouse.getZone({
     orderField: "ZONE",
+    order: "ASC",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-zone = tencentcloud.Lighthouse.get_zone(order="ASC",
-    order_field="ZONE")
+zone = tencentcloud.lighthouse.get_zone(order_field="ZONE",
+    order="ASC")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var zone = Tencentcloud.Lighthouse.GetZone.Invoke(new()
-    {
-        Order = "ASC",
-        OrderField = "ZONE",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/lighthouse"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Lighthouse.GetZone(ctx, &lighthouse.GetZoneArgs{
-			Order:      pulumi.StringRef("ASC"),
+		_, err := lighthouse.GetZone(ctx, &lighthouse.GetZoneArgs{
 			OrderField: pulumi.StringRef("ZONE"),
+			Order:      pulumi.StringRef("ASC"),
 		}, nil)
 		if err != nil {
 			return err
@@ -70,6 +71,32 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var zone = Tencentcloud.Lighthouse.GetZone.Invoke(new()
+    {
+        OrderField = "ZONE",
+        Order = "ASC",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Lighthouse.LighthouseFunctions;
 import com.pulumi.tencentcloud.Lighthouse.inputs.GetZoneArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,24 +119,55 @@ public class App {
 
     public static void stack(Context ctx) {
         final var zone = LighthouseFunctions.getZone(GetZoneArgs.builder()
-            .order("ASC")
             .orderField("ZONE")
+            .order("ASC")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   zone:
     fn::invoke:
-      Function: tencentcloud:Lighthouse:getZone
-      Arguments:
-        order: ASC
+      function: tencentcloud:Lighthouse:getZone
+      arguments:
         orderField: ZONE
+        order: ASC
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_lighthouse_getzone" "zone" {
+  order_field = "ZONE"
+  order       = "ASC"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeZones](https://www.tencentcloud.com/document/api/1103/42467)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getZone<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>></span
+><span class="k">function </span>getZone<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>></span
 ><span class="k">
-function </span>getZoneOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>></span
+function </span>getZoneOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -145,10 +203,10 @@ function </span>getZoneOutput<span class="p">(</span><span class="nx">args</span
              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetZoneResult</span
 ><span class="k">
-def </span>get_zone_output<span class="p">(</span><span class="nx">order</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">order_field</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetZoneResult]</span
+def </span>get_zone_output<span class="p">(</span><span class="nx">order</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">order_field</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetZoneResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,7 +231,8 @@ func </span>GetZoneOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetZone </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetZoneArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -182,7 +241,8 @@ func </span>GetZoneOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> </span>getZone<span class="p">(</span><span class="nx">GetZoneArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> </span>getZone<span class="p">(</span><span class="nx">GetZoneArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> </span>getZone<span class="p">(</span><span class="nx">GetZoneArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,6 +254,15 @@ func </span>GetZoneOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Lighthouse/getZone:getZone
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_lighthouse_get_zone&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -212,13 +281,12 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies how availability zones are listed. Valid values:</p>
+    <dd>Specifies how availability zones are listed. Valid values:</p>
 <ul>
 <li>ASC: Ascending sort.</li>
 <li>DESC: Descending sort.
 The default value is ASC.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="orderfield_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderfield_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>Field</a>
@@ -226,13 +294,12 @@ The default value is ASC.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sorting field. Valid values:</p>
+    <dd>Sorting field. Valid values:</p>
 <ul>
 <li>ZONE: Sort by the availability zone.</li>
 <li>INSTANCE_DISPLAY_LABEL: Sort by visibility labels (HIDDEN, NORMAL and SELECTED). Default: [HIDDEN, NORMAL, SELECTED].
 Sort by availability zone by default.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -240,8 +307,7 @@ Sort by availability zone by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -255,13 +321,12 @@ Sort by availability zone by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies how availability zones are listed. Valid values:</p>
+    <dd>Specifies how availability zones are listed. Valid values:</p>
 <ul>
 <li>ASC: Ascending sort.</li>
 <li>DESC: Descending sort.
 The default value is ASC.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="orderfield_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderfield_go" style="color: inherit; text-decoration: inherit;">Order<wbr>Field</a>
@@ -269,13 +334,12 @@ The default value is ASC.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sorting field. Valid values:</p>
+    <dd>Sorting field. Valid values:</p>
 <ul>
 <li>ZONE: Sort by the availability zone.</li>
 <li>INSTANCE_DISPLAY_LABEL: Sort by visibility labels (HIDDEN, NORMAL and SELECTED). Default: [HIDDEN, NORMAL, SELECTED].
 Sort by availability zone by default.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -283,8 +347,47 @@ Sort by availability zone by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="order_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_hcl" style="color: inherit; text-decoration: inherit;">order</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies how availability zones are listed. Valid values:</p>
+<ul>
+<li>ASC: Ascending sort.</li>
+<li>DESC: Descending sort.
+The default value is ASC.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_field_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_field_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>field</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sorting field. Valid values:</p>
+<ul>
+<li>ZONE: Sort by the availability zone.</li>
+<li>INSTANCE_DISPLAY_LABEL: Sort by visibility labels (HIDDEN, NORMAL and SELECTED). Default: [HIDDEN, NORMAL, SELECTED].
+Sort by availability zone by default.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -298,13 +401,12 @@ Sort by availability zone by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies how availability zones are listed. Valid values:</p>
+    <dd>Specifies how availability zones are listed. Valid values:</p>
 <ul>
 <li>ASC: Ascending sort.</li>
 <li>DESC: Descending sort.
 The default value is ASC.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="orderfield_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderfield_java" style="color: inherit; text-decoration: inherit;">order<wbr>Field</a>
@@ -312,13 +414,12 @@ The default value is ASC.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sorting field. Valid values:</p>
+    <dd>Sorting field. Valid values:</p>
 <ul>
 <li>ZONE: Sort by the availability zone.</li>
 <li>INSTANCE_DISPLAY_LABEL: Sort by visibility labels (HIDDEN, NORMAL and SELECTED). Default: [HIDDEN, NORMAL, SELECTED].
 Sort by availability zone by default.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -326,8 +427,7 @@ Sort by availability zone by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -341,13 +441,12 @@ Sort by availability zone by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies how availability zones are listed. Valid values:</p>
+    <dd>Specifies how availability zones are listed. Valid values:</p>
 <ul>
 <li>ASC: Ascending sort.</li>
 <li>DESC: Descending sort.
 The default value is ASC.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="orderfield_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderfield_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>Field</a>
@@ -355,13 +454,12 @@ The default value is ASC.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sorting field. Valid values:</p>
+    <dd>Sorting field. Valid values:</p>
 <ul>
 <li>ZONE: Sort by the availability zone.</li>
 <li>INSTANCE_DISPLAY_LABEL: Sort by visibility labels (HIDDEN, NORMAL and SELECTED). Default: [HIDDEN, NORMAL, SELECTED].
 Sort by availability zone by default.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -369,8 +467,7 @@ Sort by availability zone by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -384,13 +481,12 @@ Sort by availability zone by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies how availability zones are listed. Valid values:</p>
+    <dd>Specifies how availability zones are listed. Valid values:</p>
 <ul>
 <li>ASC: Ascending sort.</li>
 <li>DESC: Descending sort.
 The default value is ASC.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="order_field_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_field_python" style="color: inherit; text-decoration: inherit;">order_<wbr>field</a>
@@ -398,13 +494,12 @@ The default value is ASC.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Sorting field. Valid values:</p>
+    <dd>Sorting field. Valid values:</p>
 <ul>
 <li>ZONE: Sort by the availability zone.</li>
 <li>INSTANCE_DISPLAY_LABEL: Sort by visibility labels (HIDDEN, NORMAL and SELECTED). Default: [HIDDEN, NORMAL, SELECTED].
 Sort by availability zone by default.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -412,8 +507,7 @@ Sort by availability zone by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -427,13 +521,12 @@ Sort by availability zone by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies how availability zones are listed. Valid values:</p>
+    <dd>Specifies how availability zones are listed. Valid values:</p>
 <ul>
 <li>ASC: Ascending sort.</li>
 <li>DESC: Descending sort.
 The default value is ASC.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="orderfield_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderfield_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>Field</a>
@@ -441,13 +534,12 @@ The default value is ASC.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sorting field. Valid values:</p>
+    <dd>Sorting field. Valid values:</p>
 <ul>
 <li>ZONE: Sort by the availability zone.</li>
 <li>INSTANCE_DISPLAY_LABEL: Sort by visibility labels (HIDDEN, NORMAL and SELECTED). Default: [HIDDEN, NORMAL, SELECTED].
 Sort by availability zone by default.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -455,8 +547,7 @@ Sort by availability zone by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -479,8 +570,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="zoneinfosets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneinfosets_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Info<wbr>Sets</a>
@@ -488,8 +578,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzonezoneinfoset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Outputs.<wbr>Get<wbr>Zone<wbr>Zone<wbr>Info<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of zone info.</p>
-</dd><dt class="property-"
+    <dd>List of zone info.</dd><dt class="property-"
             title="">
         <span id="order_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_csharp" style="color: inherit; text-decoration: inherit;">Order</a>
@@ -527,8 +616,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="zoneinfosets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneinfosets_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Info<wbr>Sets</a>
@@ -536,8 +624,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzonezoneinfoset">[]Get<wbr>Zone<wbr>Zone<wbr>Info<wbr>Set</a></span>
     </dt>
-    <dd><p>List of zone info.</p>
-</dd><dt class="property-"
+    <dd>List of zone info.</dd><dt class="property-"
             title="">
         <span id="order_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_go" style="color: inherit; text-decoration: inherit;">Order</a>
@@ -566,6 +653,52 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="zone_info_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_info_sets_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>info_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getzonezoneinfoset">list(object)</a></span>
+    </dt>
+    <dd>List of zone info.</dd><dt class="property-"
+            title="">
+        <span id="order_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_hcl" style="color: inherit; text-decoration: inherit;">order</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="order_field_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_field_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>field</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -575,8 +708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="zoneinfosets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneinfosets_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Info<wbr>Sets</a>
@@ -584,8 +716,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzonezoneinfoset">List&lt;Get<wbr>Zone<wbr>Zone<wbr>Info<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of zone info.</p>
-</dd><dt class="property-"
+    <dd>List of zone info.</dd><dt class="property-"
             title="">
         <span id="order_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_java" style="color: inherit; text-decoration: inherit;">order</a>
@@ -623,8 +754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="zoneinfosets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneinfosets_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Info<wbr>Sets</a>
@@ -632,8 +762,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzonezoneinfoset">Get<wbr>Zone<wbr>Zone<wbr>Info<wbr>Set[]</a></span>
     </dt>
-    <dd><p>List of zone info.</p>
-</dd><dt class="property-"
+    <dd>List of zone info.</dd><dt class="property-"
             title="">
         <span id="order_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_nodejs" style="color: inherit; text-decoration: inherit;">order</a>
@@ -671,17 +800,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="zone_info_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_info_sets_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>info_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getzonezoneinfoset">Get<wbr>Zone<wbr>Zone<wbr>Info<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getzonezoneinfoset">Sequence[Get<wbr>Zone<wbr>Zone<wbr>Info<wbr>Set]</a></span>
     </dt>
-    <dd><p>List of zone info.</p>
-</dd><dt class="property-"
+    <dd>List of zone info.</dd><dt class="property-"
             title="">
         <span id="order_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_python" style="color: inherit; text-decoration: inherit;">order</a>
@@ -719,8 +846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="zoneinfosets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneinfosets_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Info<wbr>Sets</a>
@@ -728,8 +854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzonezoneinfoset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of zone info.</p>
-</dd><dt class="property-"
+    <dd>List of zone info.</dd><dt class="property-"
             title="">
         <span id="order_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_yaml" style="color: inherit; text-decoration: inherit;">order</a>
@@ -777,8 +902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance purchase page availability zone display label.</p>
-</dd><dt class="property-required"
+    <dd>Instance purchase page availability zone display label.</dd><dt class="property-required"
             title="Required">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -786,8 +910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Name</a>
@@ -795,8 +918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Chinese name of availability zone.</p>
-</dd></dl>
+    <dd>Chinese name of availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -810,8 +932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance purchase page availability zone display label.</p>
-</dd><dt class="property-required"
+    <dd>Instance purchase page availability zone display label.</dd><dt class="property-required"
             title="Required">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -819,8 +940,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Name</a>
@@ -828,8 +948,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Chinese name of availability zone.</p>
-</dd></dl>
+    <dd>Chinese name of availability zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_display_label_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_display_label_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>display_<wbr>label</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance purchase page availability zone display label.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_name_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Chinese name of availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -843,8 +992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance purchase page availability zone display label.</p>
-</dd><dt class="property-required"
+    <dd>Instance purchase page availability zone display label.</dd><dt class="property-required"
             title="Required">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -852,8 +1000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
@@ -861,8 +1008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Chinese name of availability zone.</p>
-</dd></dl>
+    <dd>Chinese name of availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -876,8 +1022,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance purchase page availability zone display label.</p>
-</dd><dt class="property-required"
+    <dd>Instance purchase page availability zone display label.</dd><dt class="property-required"
             title="Required">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -885,8 +1030,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
@@ -894,8 +1038,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Chinese name of availability zone.</p>
-</dd></dl>
+    <dd>Chinese name of availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -909,8 +1052,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance purchase page availability zone display label.</p>
-</dd><dt class="property-required"
+    <dd>Instance purchase page availability zone display label.</dd><dt class="property-required"
             title="Required">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -918,8 +1060,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone.</dd><dt class="property-required"
             title="Required">
         <span id="zone_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_name_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>name</a>
@@ -927,8 +1068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Chinese name of availability zone.</p>
-</dd></dl>
+    <dd>Chinese name of availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -942,8 +1082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance purchase page availability zone display label.</p>
-</dd><dt class="property-required"
+    <dd>Instance purchase page availability zone display label.</dd><dt class="property-required"
             title="Required">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -951,8 +1090,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-required"
+    <dd>Availability zone.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
@@ -960,8 +1098,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Chinese name of availability zone.</p>
-</dd></dl>
+    <dd>Chinese name of availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -976,7 +1113,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

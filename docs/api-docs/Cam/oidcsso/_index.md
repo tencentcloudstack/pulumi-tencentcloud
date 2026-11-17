@@ -2,9 +2,11 @@
 ---
 title: "OidcSso"
 title_tag: "tencentcloud.Cam.OidcSso"
-meta_desc: "Documentation for the tencentcloud.Cam.OidcSso resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a CAM-OIDC-SSO."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,7 +18,12 @@ Provides a resource to create a CAM-OIDC-SSO.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -35,6 +42,11 @@ const foo = new tencentcloud.cam.OidcSso("foo", {
     ],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -52,6 +64,46 @@ foo = tencentcloud.cam.OidcSso("foo",
         "email",
     ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cam"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cam.NewOidcSso(ctx, "foo", &cam.OidcSsoArgs{
+			AuthorizationEndpoint: pulumi.String("https://login.microsoftonline.com/.../oauth2/v2.0/authorize"),
+			ClientId:              pulumi.String("..."),
+			IdentityKey:           pulumi.String("..."),
+			IdentityUrl:           pulumi.String("https://login.microsoftonline.com/.../v2.0"),
+			MappingFiled:          pulumi.String("name"),
+			ResponseMode:          pulumi.String("form_post"),
+			ResponseType:          pulumi.String("id_token"),
+			Scopes: pulumi.StringArray{
+				pulumi.String("openid"),
+				pulumi.String("email"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -78,36 +130,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cam.NewOidcSso(ctx, "foo", &Cam.OidcSsoArgs{
-			AuthorizationEndpoint: pulumi.String("https://login.microsoftonline.com/.../oauth2/v2.0/authorize"),
-			ClientId:              pulumi.String("..."),
-			IdentityKey:           pulumi.String("..."),
-			IdentityUrl:           pulumi.String("https://login.microsoftonline.com/.../v2.0"),
-			MappingFiled:          pulumi.String("name"),
-			ResponseMode:          pulumi.String("form_post"),
-			ResponseType:          pulumi.String("id_token"),
-			Scopes: pulumi.StringArray{
-				pulumi.String("openid"),
-				pulumi.String("email"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -116,8 +143,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cam.OidcSso;
 import com.pulumi.tencentcloud.Cam.OidcSsoArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -129,7 +156,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new OidcSso("foo", OidcSsoArgs.builder()        
+        var foo = new OidcSso("foo", OidcSsoArgs.builder()
             .authorizationEndpoint("https://login.microsoftonline.com/.../oauth2/v2.0/authorize")
             .clientId("...")
             .identityKey("...")
@@ -145,6 +172,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   foo:
@@ -161,25 +193,73 @@ resources:
         - openid
         - email
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cam_oidcsso" "foo" {
+  authorization_endpoint = "https://login.microsoftonline.com/.../oauth2/v2.0/authorize"
+  client_id              = "..."
+  identity_key           = "..."
+  identity_url           = "https://login.microsoftonline.com/.../v2.0"
+  mapping_filed          = "name"
+  response_mode          = "form_post"
+  response_type          = "id_token"
+  scopes                 = ["openid", "email"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateUserOIDCConfig](https://www.tencentcloud.com/document/api/598/46303)
+  - [DescribeUserOIDCConfig](https://www.tencentcloud.com/document/api/598/46302)
+* Read: [DescribeUserOIDCConfig](https://www.tencentcloud.com/document/api/598/46302)
+* Update:
+  - [DescribeUserOIDCConfig](https://www.tencentcloud.com/document/api/598/46302)
+  - [UpdateUserOIDCConfig](https://www.tencentcloud.com/document/api/598/46300)
+* Delete: [DisableUserSSO](https://www.tencentcloud.com/document/api/598/46301)
 
 
 ## Create OidcSso Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">OidcSso</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">OidcSsoArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">OidcSso</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">OidcSsoArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">OidcSso</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">OidcSsoArgs</a></span><span class="p">,</span>
+            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">OidcSso</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
             <span class="nx">authorization_endpoint</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -189,44 +269,50 @@ resources:
             <span class="nx">mapping_filed</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">response_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">response_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">scopes</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">OidcSso</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">OidcSsoArgs</a></span><span class="p">,</span>
-            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+            <span class="nx">scopes</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewOidcSso</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">OidcSsoArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">OidcSso</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewOidcSso</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">OidcSsoArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">OidcSso</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">OidcSso</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">OidcSsoArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">OidcSso</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">OidcSsoArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">OidcSso</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">OidcSsoArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">OidcSso</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">OidcSsoArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cam:OidcSso</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cam:OidcSso</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cam_oidc_sso&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -247,7 +333,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -364,11 +450,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## OidcSso Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -384,8 +478,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorization_endpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-required"
+    <dd>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorizationEndpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-required"
             title="Required">
         <span id="clientid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientid_csharp" style="color: inherit; text-decoration: inherit;">Client<wbr>Id</a>
@@ -393,8 +486,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Client ID, the client ID registered with the OpenID Connect identity provider.</p>
-</dd><dt class="property-required"
+    <dd>Client ID, the client ID registered with the OpenID Connect identity provider.</dd><dt class="property-required"
             title="Required">
         <span id="identitykey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identitykey_csharp" style="color: inherit; text-decoration: inherit;">Identity<wbr>Key</a>
@@ -402,8 +494,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</p>
-</dd><dt class="property-required"
+    <dd>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</dd><dt class="property-required"
             title="Required">
         <span id="identityurl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identityurl_csharp" style="color: inherit; text-decoration: inherit;">Identity<wbr>Url</a>
@@ -411,8 +502,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-required"
+    <dd>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-required"
             title="Required">
         <span id="mappingfiled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mappingfiled_csharp" style="color: inherit; text-decoration: inherit;">Mapping<wbr>Filed</a>
@@ -420,8 +510,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.</p>
-</dd><dt class="property-required"
+    <dd>Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.</dd><dt class="property-required"
             title="Required">
         <span id="responsemode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsemode_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Mode</a>
@@ -429,8 +518,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes, recommended to select form_post mode.</p>
-</dd><dt class="property-required"
+    <dd>Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.</dd><dt class="property-required"
             title="Required">
         <span id="responsetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetype_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Type</a>
@@ -438,8 +526,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorization requests The Response type, with a fixed value id_token.</p>
-</dd><dt class="property-optional"
+    <dd>Authorization requests The Response type, with a fixed value id_token.</dd><dt class="property-optional"
             title="Optional">
         <span id="scopes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scopes_csharp" style="color: inherit; text-decoration: inherit;">Scopes</a>
@@ -447,8 +534,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</p>
-</dd></dl>
+    <dd>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -462,8 +548,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorization_endpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-required"
+    <dd>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorizationEndpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-required"
             title="Required">
         <span id="clientid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientid_go" style="color: inherit; text-decoration: inherit;">Client<wbr>Id</a>
@@ -471,8 +556,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Client ID, the client ID registered with the OpenID Connect identity provider.</p>
-</dd><dt class="property-required"
+    <dd>Client ID, the client ID registered with the OpenID Connect identity provider.</dd><dt class="property-required"
             title="Required">
         <span id="identitykey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identitykey_go" style="color: inherit; text-decoration: inherit;">Identity<wbr>Key</a>
@@ -480,8 +564,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</p>
-</dd><dt class="property-required"
+    <dd>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</dd><dt class="property-required"
             title="Required">
         <span id="identityurl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identityurl_go" style="color: inherit; text-decoration: inherit;">Identity<wbr>Url</a>
@@ -489,8 +572,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-required"
+    <dd>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-required"
             title="Required">
         <span id="mappingfiled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mappingfiled_go" style="color: inherit; text-decoration: inherit;">Mapping<wbr>Filed</a>
@@ -498,8 +580,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.</p>
-</dd><dt class="property-required"
+    <dd>Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.</dd><dt class="property-required"
             title="Required">
         <span id="responsemode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsemode_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Mode</a>
@@ -507,8 +588,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes, recommended to select form_post mode.</p>
-</dd><dt class="property-required"
+    <dd>Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.</dd><dt class="property-required"
             title="Required">
         <span id="responsetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetype_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Type</a>
@@ -516,8 +596,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorization requests The Response type, with a fixed value id_token.</p>
-</dd><dt class="property-optional"
+    <dd>Authorization requests The Response type, with a fixed value id_token.</dd><dt class="property-optional"
             title="Optional">
         <span id="scopes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scopes_go" style="color: inherit; text-decoration: inherit;">Scopes</a>
@@ -525,8 +604,77 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</p>
-</dd></dl>
+    <dd>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="authorization_endpoint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authorization_endpoint_hcl" style="color: inherit; text-decoration: inherit;">authorization_<wbr>endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorizationEndpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-required"
+            title="Required">
+        <span id="client_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_id_hcl" style="color: inherit; text-decoration: inherit;">client_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Client ID, the client ID registered with the OpenID Connect identity provider.</dd><dt class="property-required"
+            title="Required">
+        <span id="identity_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identity_key_hcl" style="color: inherit; text-decoration: inherit;">identity_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</dd><dt class="property-required"
+            title="Required">
+        <span id="identity_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identity_url_hcl" style="color: inherit; text-decoration: inherit;">identity_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-required"
+            title="Required">
+        <span id="mapping_filed_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mapping_filed_hcl" style="color: inherit; text-decoration: inherit;">mapping_<wbr>filed</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.</dd><dt class="property-required"
+            title="Required">
+        <span id="response_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_mode_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.</dd><dt class="property-required"
+            title="Required">
+        <span id="response_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_type_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Authorization requests The Response type, with a fixed value id_token.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scopes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scopes_hcl" style="color: inherit; text-decoration: inherit;">scopes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -540,8 +688,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorization_endpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-required"
+    <dd>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorizationEndpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-required"
             title="Required">
         <span id="clientid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientid_java" style="color: inherit; text-decoration: inherit;">client<wbr>Id</a>
@@ -549,8 +696,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Client ID, the client ID registered with the OpenID Connect identity provider.</p>
-</dd><dt class="property-required"
+    <dd>Client ID, the client ID registered with the OpenID Connect identity provider.</dd><dt class="property-required"
             title="Required">
         <span id="identitykey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identitykey_java" style="color: inherit; text-decoration: inherit;">identity<wbr>Key</a>
@@ -558,8 +704,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</p>
-</dd><dt class="property-required"
+    <dd>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</dd><dt class="property-required"
             title="Required">
         <span id="identityurl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identityurl_java" style="color: inherit; text-decoration: inherit;">identity<wbr>Url</a>
@@ -567,8 +712,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-required"
+    <dd>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-required"
             title="Required">
         <span id="mappingfiled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mappingfiled_java" style="color: inherit; text-decoration: inherit;">mapping<wbr>Filed</a>
@@ -576,8 +720,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.</p>
-</dd><dt class="property-required"
+    <dd>Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.</dd><dt class="property-required"
             title="Required">
         <span id="responsemode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsemode_java" style="color: inherit; text-decoration: inherit;">response<wbr>Mode</a>
@@ -585,8 +728,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes, recommended to select form_post mode.</p>
-</dd><dt class="property-required"
+    <dd>Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.</dd><dt class="property-required"
             title="Required">
         <span id="responsetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetype_java" style="color: inherit; text-decoration: inherit;">response<wbr>Type</a>
@@ -594,8 +736,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authorization requests The Response type, with a fixed value id_token.</p>
-</dd><dt class="property-optional"
+    <dd>Authorization requests The Response type, with a fixed value id_token.</dd><dt class="property-optional"
             title="Optional">
         <span id="scopes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scopes_java" style="color: inherit; text-decoration: inherit;">scopes</a>
@@ -603,8 +744,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</p>
-</dd></dl>
+    <dd>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -618,8 +758,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorization_endpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-required"
+    <dd>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorizationEndpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-required"
             title="Required">
         <span id="clientid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientid_nodejs" style="color: inherit; text-decoration: inherit;">client<wbr>Id</a>
@@ -627,8 +766,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Client ID, the client ID registered with the OpenID Connect identity provider.</p>
-</dd><dt class="property-required"
+    <dd>Client ID, the client ID registered with the OpenID Connect identity provider.</dd><dt class="property-required"
             title="Required">
         <span id="identitykey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identitykey_nodejs" style="color: inherit; text-decoration: inherit;">identity<wbr>Key</a>
@@ -636,8 +774,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</p>
-</dd><dt class="property-required"
+    <dd>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</dd><dt class="property-required"
             title="Required">
         <span id="identityurl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identityurl_nodejs" style="color: inherit; text-decoration: inherit;">identity<wbr>Url</a>
@@ -645,8 +782,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-required"
+    <dd>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-required"
             title="Required">
         <span id="mappingfiled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mappingfiled_nodejs" style="color: inherit; text-decoration: inherit;">mapping<wbr>Filed</a>
@@ -654,8 +790,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.</p>
-</dd><dt class="property-required"
+    <dd>Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.</dd><dt class="property-required"
             title="Required">
         <span id="responsemode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsemode_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Mode</a>
@@ -663,8 +798,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes, recommended to select form_post mode.</p>
-</dd><dt class="property-required"
+    <dd>Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.</dd><dt class="property-required"
             title="Required">
         <span id="responsetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetype_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Type</a>
@@ -672,8 +806,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorization requests The Response type, with a fixed value id_token.</p>
-</dd><dt class="property-optional"
+    <dd>Authorization requests The Response type, with a fixed value id_token.</dd><dt class="property-optional"
             title="Optional">
         <span id="scopes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scopes_nodejs" style="color: inherit; text-decoration: inherit;">scopes</a>
@@ -681,8 +814,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</p>
-</dd></dl>
+    <dd>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -696,8 +828,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorization_endpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-required"
+    <dd>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorizationEndpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-required"
             title="Required">
         <span id="client_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_id_python" style="color: inherit; text-decoration: inherit;">client_<wbr>id</a>
@@ -705,8 +836,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Client ID, the client ID registered with the OpenID Connect identity provider.</p>
-</dd><dt class="property-required"
+    <dd>Client ID, the client ID registered with the OpenID Connect identity provider.</dd><dt class="property-required"
             title="Required">
         <span id="identity_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identity_key_python" style="color: inherit; text-decoration: inherit;">identity_<wbr>key</a>
@@ -714,8 +844,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</p>
-</dd><dt class="property-required"
+    <dd>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</dd><dt class="property-required"
             title="Required">
         <span id="identity_url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identity_url_python" style="color: inherit; text-decoration: inherit;">identity_<wbr>url</a>
@@ -723,8 +852,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-required"
+    <dd>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-required"
             title="Required">
         <span id="mapping_filed_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mapping_filed_python" style="color: inherit; text-decoration: inherit;">mapping_<wbr>filed</a>
@@ -732,8 +860,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.</p>
-</dd><dt class="property-required"
+    <dd>Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.</dd><dt class="property-required"
             title="Required">
         <span id="response_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_mode_python" style="color: inherit; text-decoration: inherit;">response_<wbr>mode</a>
@@ -741,8 +868,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes, recommended to select form_post mode.</p>
-</dd><dt class="property-required"
+    <dd>Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.</dd><dt class="property-required"
             title="Required">
         <span id="response_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_type_python" style="color: inherit; text-decoration: inherit;">response_<wbr>type</a>
@@ -750,8 +876,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Authorization requests The Response type, with a fixed value id_token.</p>
-</dd><dt class="property-optional"
+    <dd>Authorization requests The Response type, with a fixed value id_token.</dd><dt class="property-optional"
             title="Optional">
         <span id="scopes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scopes_python" style="color: inherit; text-decoration: inherit;">scopes</a>
@@ -759,8 +884,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</p>
-</dd></dl>
+    <dd>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -774,8 +898,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorization_endpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-required"
+    <dd>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorizationEndpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-required"
             title="Required">
         <span id="clientid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientid_yaml" style="color: inherit; text-decoration: inherit;">client<wbr>Id</a>
@@ -783,8 +906,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Client ID, the client ID registered with the OpenID Connect identity provider.</p>
-</dd><dt class="property-required"
+    <dd>Client ID, the client ID registered with the OpenID Connect identity provider.</dd><dt class="property-required"
             title="Required">
         <span id="identitykey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identitykey_yaml" style="color: inherit; text-decoration: inherit;">identity<wbr>Key</a>
@@ -792,8 +914,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</p>
-</dd><dt class="property-required"
+    <dd>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</dd><dt class="property-required"
             title="Required">
         <span id="identityurl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identityurl_yaml" style="color: inherit; text-decoration: inherit;">identity<wbr>Url</a>
@@ -801,8 +922,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-required"
+    <dd>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-required"
             title="Required">
         <span id="mappingfiled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mappingfiled_yaml" style="color: inherit; text-decoration: inherit;">mapping<wbr>Filed</a>
@@ -810,8 +930,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.</p>
-</dd><dt class="property-required"
+    <dd>Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.</dd><dt class="property-required"
             title="Required">
         <span id="responsemode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsemode_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Mode</a>
@@ -819,8 +938,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes, recommended to select form_post mode.</p>
-</dd><dt class="property-required"
+    <dd>Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.</dd><dt class="property-required"
             title="Required">
         <span id="responsetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetype_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Type</a>
@@ -828,8 +946,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authorization requests The Response type, with a fixed value id_token.</p>
-</dd><dt class="property-optional"
+    <dd>Authorization requests The Response type, with a fixed value id_token.</dd><dt class="property-optional"
             title="Optional">
         <span id="scopes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scopes_yaml" style="color: inherit; text-decoration: inherit;">scopes</a>
@@ -837,8 +954,7 @@ The OidcSso resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</p>
-</dd></dl>
+    <dd>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -859,8 +975,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -874,8 +989,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -889,8 +1017,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -904,8 +1031,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -919,8 +1045,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -934,8 +1059,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -945,18 +1069,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing OidcSso resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">OidcSsoState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">OidcSso</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">OidcSsoState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">OidcSso</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -968,104 +1092,143 @@ Get an existing OidcSso resource's state with the given name, ID, and optional e
         <span class="nx">response_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">response_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">scopes</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">) -&gt;</span> OidcSso</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetOidcSso<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">OidcSsoState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">OidcSso</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetOidcSso<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">OidcSsoState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">OidcSso</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">OidcSso</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">OidcSsoState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">OidcSso</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">OidcSsoState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">OidcSso</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">OidcSsoState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">OidcSso</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">OidcSsoState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingOidcSso</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cam:OidcSso</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cam_oidc_sso</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">OidcSsoState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">OidcSsoState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1073,28 +1236,31 @@ Get an existing OidcSso resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">OidcSsoState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1102,28 +1268,31 @@ Get an existing OidcSso resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">OidcSsoState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1143,8 +1312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorization_endpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-optional"
+    <dd>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorizationEndpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clientid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientid_csharp" style="color: inherit; text-decoration: inherit;">Client<wbr>Id</a>
@@ -1152,8 +1320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Client ID, the client ID registered with the OpenID Connect identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Client ID, the client ID registered with the OpenID Connect identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_identitykey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_identitykey_csharp" style="color: inherit; text-decoration: inherit;">Identity<wbr>Key</a>
@@ -1161,8 +1328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</p>
-</dd><dt class="property-optional"
+    <dd>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_identityurl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_identityurl_csharp" style="color: inherit; text-decoration: inherit;">Identity<wbr>Url</a>
@@ -1170,8 +1336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-optional"
+    <dd>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mappingfiled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mappingfiled_csharp" style="color: inherit; text-decoration: inherit;">Mapping<wbr>Filed</a>
@@ -1179,8 +1344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.</p>
-</dd><dt class="property-optional"
+    <dd>Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsemode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsemode_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Mode</a>
@@ -1188,8 +1352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes, recommended to select form_post mode.</p>
-</dd><dt class="property-optional"
+    <dd>Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetype_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Type</a>
@@ -1197,8 +1360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorization requests The Response type, with a fixed value id_token.</p>
-</dd><dt class="property-optional"
+    <dd>Authorization requests The Response type, with a fixed value id_token.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scopes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scopes_csharp" style="color: inherit; text-decoration: inherit;">Scopes</a>
@@ -1206,8 +1368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</p>
-</dd></dl>
+    <dd>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1221,8 +1382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorization_endpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-optional"
+    <dd>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorizationEndpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clientid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientid_go" style="color: inherit; text-decoration: inherit;">Client<wbr>Id</a>
@@ -1230,8 +1390,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Client ID, the client ID registered with the OpenID Connect identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Client ID, the client ID registered with the OpenID Connect identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_identitykey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_identitykey_go" style="color: inherit; text-decoration: inherit;">Identity<wbr>Key</a>
@@ -1239,8 +1398,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</p>
-</dd><dt class="property-optional"
+    <dd>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_identityurl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_identityurl_go" style="color: inherit; text-decoration: inherit;">Identity<wbr>Url</a>
@@ -1248,8 +1406,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-optional"
+    <dd>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mappingfiled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mappingfiled_go" style="color: inherit; text-decoration: inherit;">Mapping<wbr>Filed</a>
@@ -1257,8 +1414,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.</p>
-</dd><dt class="property-optional"
+    <dd>Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsemode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsemode_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Mode</a>
@@ -1266,8 +1422,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes, recommended to select form_post mode.</p>
-</dd><dt class="property-optional"
+    <dd>Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetype_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Type</a>
@@ -1275,8 +1430,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorization requests The Response type, with a fixed value id_token.</p>
-</dd><dt class="property-optional"
+    <dd>Authorization requests The Response type, with a fixed value id_token.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scopes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scopes_go" style="color: inherit; text-decoration: inherit;">Scopes</a>
@@ -1284,8 +1438,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</p>
-</dd></dl>
+    <dd>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_authorization_endpoint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_authorization_endpoint_hcl" style="color: inherit; text-decoration: inherit;">authorization_<wbr>endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorizationEndpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_client_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_client_id_hcl" style="color: inherit; text-decoration: inherit;">client_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Client ID, the client ID registered with the OpenID Connect identity provider.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_identity_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_identity_key_hcl" style="color: inherit; text-decoration: inherit;">identity_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_identity_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_identity_url_hcl" style="color: inherit; text-decoration: inherit;">identity_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_mapping_filed_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mapping_filed_hcl" style="color: inherit; text-decoration: inherit;">mapping_<wbr>filed</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_response_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_response_mode_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_response_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_response_type_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Authorization requests The Response type, with a fixed value id_token.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scopes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scopes_hcl" style="color: inherit; text-decoration: inherit;">scopes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1299,8 +1522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorization_endpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-optional"
+    <dd>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorizationEndpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clientid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientid_java" style="color: inherit; text-decoration: inherit;">client<wbr>Id</a>
@@ -1308,8 +1530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Client ID, the client ID registered with the OpenID Connect identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Client ID, the client ID registered with the OpenID Connect identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_identitykey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_identitykey_java" style="color: inherit; text-decoration: inherit;">identity<wbr>Key</a>
@@ -1317,8 +1538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</p>
-</dd><dt class="property-optional"
+    <dd>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_identityurl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_identityurl_java" style="color: inherit; text-decoration: inherit;">identity<wbr>Url</a>
@@ -1326,8 +1546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-optional"
+    <dd>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mappingfiled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mappingfiled_java" style="color: inherit; text-decoration: inherit;">mapping<wbr>Filed</a>
@@ -1335,8 +1554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.</p>
-</dd><dt class="property-optional"
+    <dd>Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsemode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsemode_java" style="color: inherit; text-decoration: inherit;">response<wbr>Mode</a>
@@ -1344,8 +1562,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes, recommended to select form_post mode.</p>
-</dd><dt class="property-optional"
+    <dd>Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetype_java" style="color: inherit; text-decoration: inherit;">response<wbr>Type</a>
@@ -1353,8 +1570,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authorization requests The Response type, with a fixed value id_token.</p>
-</dd><dt class="property-optional"
+    <dd>Authorization requests The Response type, with a fixed value id_token.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scopes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scopes_java" style="color: inherit; text-decoration: inherit;">scopes</a>
@@ -1362,8 +1578,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</p>
-</dd></dl>
+    <dd>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1377,8 +1592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorization_endpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-optional"
+    <dd>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorizationEndpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clientid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientid_nodejs" style="color: inherit; text-decoration: inherit;">client<wbr>Id</a>
@@ -1386,8 +1600,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Client ID, the client ID registered with the OpenID Connect identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Client ID, the client ID registered with the OpenID Connect identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_identitykey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_identitykey_nodejs" style="color: inherit; text-decoration: inherit;">identity<wbr>Key</a>
@@ -1395,8 +1608,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</p>
-</dd><dt class="property-optional"
+    <dd>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_identityurl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_identityurl_nodejs" style="color: inherit; text-decoration: inherit;">identity<wbr>Url</a>
@@ -1404,8 +1616,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-optional"
+    <dd>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mappingfiled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mappingfiled_nodejs" style="color: inherit; text-decoration: inherit;">mapping<wbr>Filed</a>
@@ -1413,8 +1624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.</p>
-</dd><dt class="property-optional"
+    <dd>Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsemode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsemode_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Mode</a>
@@ -1422,8 +1632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes, recommended to select form_post mode.</p>
-</dd><dt class="property-optional"
+    <dd>Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetype_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Type</a>
@@ -1431,8 +1640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Authorization requests The Response type, with a fixed value id_token.</p>
-</dd><dt class="property-optional"
+    <dd>Authorization requests The Response type, with a fixed value id_token.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scopes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scopes_nodejs" style="color: inherit; text-decoration: inherit;">scopes</a>
@@ -1440,8 +1648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</p>
-</dd></dl>
+    <dd>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1455,8 +1662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorization_endpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-optional"
+    <dd>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorizationEndpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_client_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_client_id_python" style="color: inherit; text-decoration: inherit;">client_<wbr>id</a>
@@ -1464,8 +1670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Client ID, the client ID registered with the OpenID Connect identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Client ID, the client ID registered with the OpenID Connect identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_identity_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_identity_key_python" style="color: inherit; text-decoration: inherit;">identity_<wbr>key</a>
@@ -1473,8 +1678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</p>
-</dd><dt class="property-optional"
+    <dd>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_identity_url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_identity_url_python" style="color: inherit; text-decoration: inherit;">identity_<wbr>url</a>
@@ -1482,8 +1686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-optional"
+    <dd>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mapping_filed_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mapping_filed_python" style="color: inherit; text-decoration: inherit;">mapping_<wbr>filed</a>
@@ -1491,8 +1694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.</p>
-</dd><dt class="property-optional"
+    <dd>Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_response_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_response_mode_python" style="color: inherit; text-decoration: inherit;">response_<wbr>mode</a>
@@ -1500,8 +1702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes, recommended to select form_post mode.</p>
-</dd><dt class="property-optional"
+    <dd>Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_response_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_response_type_python" style="color: inherit; text-decoration: inherit;">response_<wbr>type</a>
@@ -1509,8 +1710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Authorization requests The Response type, with a fixed value id_token.</p>
-</dd><dt class="property-optional"
+    <dd>Authorization requests The Response type, with a fixed value id_token.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scopes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scopes_python" style="color: inherit; text-decoration: inherit;">scopes</a>
@@ -1518,8 +1718,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</p>
-</dd></dl>
+    <dd>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1533,8 +1732,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorization_endpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-optional"
+    <dd>Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the <code>authorizationEndpoint</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clientid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientid_yaml" style="color: inherit; text-decoration: inherit;">client<wbr>Id</a>
@@ -1542,8 +1740,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Client ID, the client ID registered with the OpenID Connect identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Client ID, the client ID registered with the OpenID Connect identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_identitykey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_identitykey_yaml" style="color: inherit; text-decoration: inherit;">identity<wbr>Key</a>
@@ -1551,8 +1748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</p>
-</dd><dt class="property-optional"
+    <dd>The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_identityurl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_identityurl_yaml" style="color: inherit; text-decoration: inherit;">identity<wbr>Url</a>
@@ -1560,8 +1756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</p>
-</dd><dt class="property-optional"
+    <dd>Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the <code>issuer</code> field in the Openid-configuration provided by the Enterprise IdP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mappingfiled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mappingfiled_yaml" style="color: inherit; text-decoration: inherit;">mapping<wbr>Filed</a>
@@ -1569,8 +1764,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Map field names. Which field in the IdP's id_token maps to the user name of the subuser, usually the sub or name field.</p>
-</dd><dt class="property-optional"
+    <dd>Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsemode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsemode_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Mode</a>
@@ -1578,8 +1772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authorize the request Forsonse mode. Authorization request return mode, form_post and frogment two optional modes, recommended to select form_post mode.</p>
-</dd><dt class="property-optional"
+    <dd>Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetype_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Type</a>
@@ -1587,8 +1780,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Authorization requests The Response type, with a fixed value id_token.</p>
-</dd><dt class="property-optional"
+    <dd>Authorization requests The Response type, with a fixed value id_token.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scopes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scopes_yaml" style="color: inherit; text-decoration: inherit;">scopes</a>
@@ -1596,8 +1788,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</p>
-</dd></dl>
+    <dd>Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1612,12 +1803,15 @@ The following state arguments are supported:
 
 
 
-CAM-OIDC-SSO can be imported using the client_id or any string which can identifier resource, e.g.
+CAM-OIDC-SSO can be imported using the clientId or any string which can identifier resource, e.g.
 
 ```sh
 $ pulumi import tencentcloud:Cam/oidcSso:OidcSso foo xxxxxxxxxxx
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1629,7 +1823,6 @@ $ pulumi import tencentcloud:Cam/oidcSso:OidcSso foo xxxxxxxxxxx
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

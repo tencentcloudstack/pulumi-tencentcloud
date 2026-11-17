@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Mysql.getProxyCustom"
 meta_desc: "Documentation for the tencentcloud.Mysql.getProxyCustom function with examples, input properties, output properties, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -23,7 +25,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -31,9 +33,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getProxyCustom<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxyCustomArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetProxyCustomResult</a></span>></span
+><span class="k">function </span>getProxyCustom<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxyCustomArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetProxyCustomResult</a></span>></span
 ><span class="k">
-function </span>getProxyCustomOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxyCustomOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetProxyCustomResult</a></span>></span
+function </span>getProxyCustomOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxyCustomOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetProxyCustomResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -46,9 +48,9 @@ function </span>getProxyCustomOutput<span class="p">(</span><span class="nx">arg
                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetProxyCustomResult</span
 ><span class="k">
-def </span>get_proxy_custom_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetProxyCustomResult]</span
+def </span>get_proxy_custom_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetProxyCustomResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -73,7 +75,8 @@ func </span>GetProxyCustomOutput<span class="p">(</span><span class="nx">ctx</sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetProxyCustom </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetProxyCustomResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetProxyCustomArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetProxyCustomResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProxyCustomInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetProxyCustomResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProxyCustomInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetProxyCustomResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProxyCustomInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -82,7 +85,8 @@ func </span>GetProxyCustomOutput<span class="p">(</span><span class="nx">ctx</sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetProxyCustomResult</a></span>> </span>getProxyCustom<span class="p">(</span><span class="nx">GetProxyCustomArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetProxyCustomResult</a></span>> </span>getProxyCustom<span class="p">(</span><span class="nx">GetProxyCustomArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetProxyCustomResult</a></span>> </span>getProxyCustom<span class="p">(</span><span class="nx">GetProxyCustomArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -94,6 +98,15 @@ func </span>GetProxyCustomOutput<span class="p">(</span><span class="nx">ctx</sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Mysql/getProxyCustom:getProxyCustom
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_mysql_get_proxy_custom&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -138,6 +151,28 @@ The following arguments are supported:
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -261,8 +296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -308,8 +342,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -338,6 +371,52 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="custom_confs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_confs_hcl" style="color: inherit; text-decoration: inherit;">custom_<wbr>confs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproxycustomcustomconf">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="weight_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_rules_hcl" style="color: inherit; text-decoration: inherit;">weight_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproxycustomweightrule">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -355,8 +434,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -402,8 +480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -439,7 +516,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_confs_python" style="color: inherit; text-decoration: inherit;">custom_<wbr>confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproxycustomcustomconf">Get<wbr>Proxy<wbr>Custom<wbr>Custom<wbr>Conf]</a></span>
+        <span class="property-type"><a href="#getproxycustomcustomconf">Sequence[Get<wbr>Proxy<wbr>Custom<wbr>Custom<wbr>Conf]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -449,8 +526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -464,7 +540,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_rules_python" style="color: inherit; text-decoration: inherit;">weight_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproxycustomweightrule">Get<wbr>Proxy<wbr>Custom<wbr>Weight<wbr>Rule]</a></span>
+        <span class="property-type"><a href="#getproxycustomweightrule">Sequence[Get<wbr>Proxy<wbr>Custom<wbr>Weight<wbr>Rule]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -496,8 +572,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -545,8 +620,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>number of cores.</p>
-</dd><dt class="property-required"
+    <dd>number of cores.</dd><dt class="property-required"
             title="Required">
         <span id="device_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_csharp" style="color: inherit; text-decoration: inherit;">Device</a>
@@ -554,8 +628,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>equipment.</p>
-</dd><dt class="property-required"
+    <dd>equipment.</dd><dt class="property-required"
             title="Required">
         <span id="devicetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_csharp" style="color: inherit; text-decoration: inherit;">Device<wbr>Type</a>
@@ -563,8 +636,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Equipment type.</p>
-</dd><dt class="property-required"
+    <dd>Equipment type.</dd><dt class="property-required"
             title="Required">
         <span id="memory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_csharp" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -572,8 +644,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory.</p>
-</dd><dt class="property-required"
+    <dd>Memory.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -581,8 +652,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>type.</p>
-</dd></dl>
+    <dd>type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -596,8 +666,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>number of cores.</p>
-</dd><dt class="property-required"
+    <dd>number of cores.</dd><dt class="property-required"
             title="Required">
         <span id="device_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_go" style="color: inherit; text-decoration: inherit;">Device</a>
@@ -605,8 +674,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>equipment.</p>
-</dd><dt class="property-required"
+    <dd>equipment.</dd><dt class="property-required"
             title="Required">
         <span id="devicetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_go" style="color: inherit; text-decoration: inherit;">Device<wbr>Type</a>
@@ -614,8 +682,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Equipment type.</p>
-</dd><dt class="property-required"
+    <dd>Equipment type.</dd><dt class="property-required"
             title="Required">
         <span id="memory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_go" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -623,8 +690,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory.</p>
-</dd><dt class="property-required"
+    <dd>Memory.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -632,8 +698,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>type.</p>
-</dd></dl>
+    <dd>type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_hcl" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>number of cores.</dd><dt class="property-required"
+            title="Required">
+        <span id="device_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_hcl" style="color: inherit; text-decoration: inherit;">device</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>equipment.</dd><dt class="property-required"
+            title="Required">
+        <span id="device_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_type_hcl" style="color: inherit; text-decoration: inherit;">device_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Equipment type.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_hcl" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -647,8 +758,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>number of cores.</p>
-</dd><dt class="property-required"
+    <dd>number of cores.</dd><dt class="property-required"
             title="Required">
         <span id="device_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_java" style="color: inherit; text-decoration: inherit;">device</a>
@@ -656,8 +766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>equipment.</p>
-</dd><dt class="property-required"
+    <dd>equipment.</dd><dt class="property-required"
             title="Required">
         <span id="devicetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_java" style="color: inherit; text-decoration: inherit;">device<wbr>Type</a>
@@ -665,8 +774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Equipment type.</p>
-</dd><dt class="property-required"
+    <dd>Equipment type.</dd><dt class="property-required"
             title="Required">
         <span id="memory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_java" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -674,8 +782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory.</p>
-</dd><dt class="property-required"
+    <dd>Memory.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -683,8 +790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>type.</p>
-</dd></dl>
+    <dd>type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -698,8 +804,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>number of cores.</p>
-</dd><dt class="property-required"
+    <dd>number of cores.</dd><dt class="property-required"
             title="Required">
         <span id="device_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_nodejs" style="color: inherit; text-decoration: inherit;">device</a>
@@ -707,8 +812,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>equipment.</p>
-</dd><dt class="property-required"
+    <dd>equipment.</dd><dt class="property-required"
             title="Required">
         <span id="devicetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_nodejs" style="color: inherit; text-decoration: inherit;">device<wbr>Type</a>
@@ -716,8 +820,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Equipment type.</p>
-</dd><dt class="property-required"
+    <dd>Equipment type.</dd><dt class="property-required"
             title="Required">
         <span id="memory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_nodejs" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -725,8 +828,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory.</p>
-</dd><dt class="property-required"
+    <dd>Memory.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -734,8 +836,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>type.</p>
-</dd></dl>
+    <dd>type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -749,8 +850,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>number of cores.</p>
-</dd><dt class="property-required"
+    <dd>number of cores.</dd><dt class="property-required"
             title="Required">
         <span id="device_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_python" style="color: inherit; text-decoration: inherit;">device</a>
@@ -758,8 +858,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>equipment.</p>
-</dd><dt class="property-required"
+    <dd>equipment.</dd><dt class="property-required"
             title="Required">
         <span id="device_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_type_python" style="color: inherit; text-decoration: inherit;">device_<wbr>type</a>
@@ -767,8 +866,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Equipment type.</p>
-</dd><dt class="property-required"
+    <dd>Equipment type.</dd><dt class="property-required"
             title="Required">
         <span id="memory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_python" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -776,8 +874,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory.</p>
-</dd><dt class="property-required"
+    <dd>Memory.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -785,8 +882,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>type.</p>
-</dd></dl>
+    <dd>type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -800,8 +896,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>number of cores.</p>
-</dd><dt class="property-required"
+    <dd>number of cores.</dd><dt class="property-required"
             title="Required">
         <span id="device_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_yaml" style="color: inherit; text-decoration: inherit;">device</a>
@@ -809,8 +904,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>equipment.</p>
-</dd><dt class="property-required"
+    <dd>equipment.</dd><dt class="property-required"
             title="Required">
         <span id="devicetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_yaml" style="color: inherit; text-decoration: inherit;">device<wbr>Type</a>
@@ -818,8 +912,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Equipment type.</p>
-</dd><dt class="property-required"
+    <dd>Equipment type.</dd><dt class="property-required"
             title="Required">
         <span id="memory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_yaml" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -827,8 +920,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory.</p>
-</dd><dt class="property-required"
+    <dd>Memory.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -836,8 +928,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>type.</p>
-</dd></dl>
+    <dd>type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -855,8 +946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>division ceiling.</p>
-</dd><dt class="property-required"
+    <dd>division ceiling.</dd><dt class="property-required"
             title="Required">
         <span id="weight_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_csharp" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -864,8 +954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>weight limit.</p>
-</dd></dl>
+    <dd>weight limit.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -879,8 +968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>division ceiling.</p>
-</dd><dt class="property-required"
+    <dd>division ceiling.</dd><dt class="property-required"
             title="Required">
         <span id="weight_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_go" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -888,8 +976,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>weight limit.</p>
-</dd></dl>
+    <dd>weight limit.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="less_than_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#less_than_hcl" style="color: inherit; text-decoration: inherit;">less_<wbr>than</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>division ceiling.</dd><dt class="property-required"
+            title="Required">
+        <span id="weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_hcl" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>weight limit.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -903,8 +1012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>division ceiling.</p>
-</dd><dt class="property-required"
+    <dd>division ceiling.</dd><dt class="property-required"
             title="Required">
         <span id="weight_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_java" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -912,8 +1020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>weight limit.</p>
-</dd></dl>
+    <dd>weight limit.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -927,8 +1034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>division ceiling.</p>
-</dd><dt class="property-required"
+    <dd>division ceiling.</dd><dt class="property-required"
             title="Required">
         <span id="weight_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_nodejs" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -936,8 +1042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>weight limit.</p>
-</dd></dl>
+    <dd>weight limit.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -951,8 +1056,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>division ceiling.</p>
-</dd><dt class="property-required"
+    <dd>division ceiling.</dd><dt class="property-required"
             title="Required">
         <span id="weight_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_python" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -960,8 +1064,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>weight limit.</p>
-</dd></dl>
+    <dd>weight limit.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -975,8 +1078,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>division ceiling.</p>
-</dd><dt class="property-required"
+    <dd>division ceiling.</dd><dt class="property-required"
             title="Required">
         <span id="weight_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_yaml" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -984,8 +1086,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>weight limit.</p>
-</dd></dl>
+    <dd>weight limit.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1000,7 +1101,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

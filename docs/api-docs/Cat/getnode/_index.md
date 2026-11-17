@@ -2,9 +2,11 @@
 ---
 title: "getNode"
 title_tag: "tencentcloud.Cat.getNode"
-meta_desc: "Documentation for the tencentcloud.Cat.getNode function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of cat node"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,56 +18,54 @@ Use this data source to query detailed information of cat node
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const node = tencentcloud.Cat.getNode({
-    isIpv6: false,
-    location: 2,
+const node = tencentcloud.cat.getNode({
     nodeType: 1,
+    location: 2,
+    isIpv6: false,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-node = tencentcloud.Cat.get_node(is_ipv6=False,
+node = tencentcloud.cat.get_node(node_type=1,
     location=2,
-    node_type=1)
+    is_ipv6=False)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var node = Tencentcloud.Cat.GetNode.Invoke(new()
-    {
-        IsIpv6 = false,
-        Location = 2,
-        NodeType = 1,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cat"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cat.GetNode(ctx, &cat.GetNodeArgs{
-			IsIpv6:   pulumi.BoolRef(false),
-			Location: pulumi.IntRef(2),
+		_, err := cat.GetNode(ctx, &cat.GetNodeArgs{
 			NodeType: pulumi.IntRef(1),
+			Location: pulumi.IntRef(2),
+			IsIpv6:   pulumi.BoolRef(false),
 		}, nil)
 		if err != nil {
 			return err
@@ -74,6 +74,33 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var node = Tencentcloud.Cat.GetNode.Invoke(new()
+    {
+        NodeType = 1,
+        Location = 2,
+        IsIpv6 = false,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -82,8 +109,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cat.CatFunctions;
 import com.pulumi.tencentcloud.Cat.inputs.GetNodeArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -96,26 +123,60 @@ public class App {
 
     public static void stack(Context ctx) {
         final var node = CatFunctions.getNode(GetNodeArgs.builder()
-            .isIpv6(false)
-            .location(2)
             .nodeType(1)
+            .location(2)
+            .isIpv6(false)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   node:
     fn::invoke:
-      Function: tencentcloud:Cat:getNode
-      Arguments:
-        isIpv6: false
-        location: 2
+      function: tencentcloud:Cat:getNode
+      arguments:
         nodeType: 1
+        location: 2
+        isIpv6: false
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cat_getnode" "node" {
+  node_type = 1
+  location  = 2
+  is_ipv6   = false
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeNodes](https://www.tencentcloud.com/search/?wd=DescribeNodes&type=document&lang=en)
+  - [DescribeProbeNodes](https://www.tencentcloud.com/search/?wd=DescribeProbeNodes&type=document&lang=en)
 
 
 
@@ -127,7 +188,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -135,9 +196,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getNode<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetNodeArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetNodeResult</a></span>></span
+><span class="k">function </span>getNode<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetNodeArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetNodeResult</a></span>></span
 ><span class="k">
-function </span>getNodeOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetNodeOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetNodeResult</a></span>></span
+function </span>getNodeOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetNodeOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetNodeResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -154,13 +215,13 @@ function </span>getNodeOutput<span class="p">(</span><span class="nx">args</span
              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetNodeResult</span
 ><span class="k">
-def </span>get_node_output<span class="p">(</span><span class="nx">is_ipv6</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[bool]]</span> = None<span class="p">,</span>
-             <span class="nx">location</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-             <span class="nx">node_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">node_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-             <span class="nx">pay_mode</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetNodeResult]</span
+def </span>get_node_output<span class="p">(</span><span class="nx">is_ipv6</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[bool]]</span> = None<span class="p">,</span>
+             <span class="nx">location</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+             <span class="nx">node_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">node_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+             <span class="nx">pay_mode</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetNodeResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -185,7 +246,8 @@ func </span>GetNodeOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetNode </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetNodeResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetNodeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetNodeResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetNodeInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetNodeResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetNodeInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetNodeResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetNodeInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,7 +256,8 @@ func </span>GetNodeOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetNodeResult</a></span>> </span>getNode<span class="p">(</span><span class="nx">GetNodeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetNodeResult</a></span>> </span>getNode<span class="p">(</span><span class="nx">GetNodeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetNodeResult</a></span>> </span>getNode<span class="p">(</span><span class="nx">GetNodeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -206,6 +269,15 @@ func </span>GetNodeOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cat/getNode:getNode
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cat_get_node&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -224,8 +296,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>is IPv6.</p>
-</dd><dt class="property-optional"
+    <dd>is IPv6.</dd><dt class="property-optional"
             title="Optional">
         <span id="location_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_csharp" style="color: inherit; text-decoration: inherit;">Location</a>
@@ -233,8 +304,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</p>
-</dd><dt class="property-optional"
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Name</a>
@@ -242,8 +312,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node name.</p>
-</dd><dt class="property-optional"
+    <dd>Node name.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Type</a>
@@ -251,8 +320,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node type 1:IDC,2:LastMile,3:Mobile.</p>
-</dd><dt class="property-optional"
+    <dd>Node type 1:IDC,2:LastMile,3:Mobile.</dd><dt class="property-optional"
             title="Optional">
         <span id="paymode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_csharp" style="color: inherit; text-decoration: inherit;">Pay<wbr>Mode</a>
@@ -260,8 +328,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Payment mode:1=Trial version,2=Paid version.</p>
-</dd><dt class="property-optional"
+    <dd>Payment mode:1=Trial version,2=Paid version.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -269,8 +336,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -284,8 +350,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>is IPv6.</p>
-</dd><dt class="property-optional"
+    <dd>is IPv6.</dd><dt class="property-optional"
             title="Optional">
         <span id="location_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_go" style="color: inherit; text-decoration: inherit;">Location</a>
@@ -293,8 +358,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</p>
-</dd><dt class="property-optional"
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Name</a>
@@ -302,8 +366,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node name.</p>
-</dd><dt class="property-optional"
+    <dd>Node name.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Type</a>
@@ -311,8 +374,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node type 1:IDC,2:LastMile,3:Mobile.</p>
-</dd><dt class="property-optional"
+    <dd>Node type 1:IDC,2:LastMile,3:Mobile.</dd><dt class="property-optional"
             title="Optional">
         <span id="paymode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_go" style="color: inherit; text-decoration: inherit;">Pay<wbr>Mode</a>
@@ -320,8 +382,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Payment mode:1=Trial version,2=Paid version.</p>
-</dd><dt class="property-optional"
+    <dd>Payment mode:1=Trial version,2=Paid version.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -329,8 +390,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="is_ipv6_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_ipv6_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>is IPv6.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="location_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_hcl" style="color: inherit; text-decoration: inherit;">location</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="node_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_name_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Node name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="node_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_type_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Node type 1:IDC,2:LastMile,3:Mobile.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="pay_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_mode_hcl" style="color: inherit; text-decoration: inherit;">pay_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Payment mode:1=Trial version,2=Paid version.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -344,8 +458,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>is IPv6.</p>
-</dd><dt class="property-optional"
+    <dd>is IPv6.</dd><dt class="property-optional"
             title="Optional">
         <span id="location_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_java" style="color: inherit; text-decoration: inherit;">location</a>
@@ -353,8 +466,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</p>
-</dd><dt class="property-optional"
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_java" style="color: inherit; text-decoration: inherit;">node<wbr>Name</a>
@@ -362,8 +474,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node name.</p>
-</dd><dt class="property-optional"
+    <dd>Node name.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_java" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -371,8 +482,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Node type 1:IDC,2:LastMile,3:Mobile.</p>
-</dd><dt class="property-optional"
+    <dd>Node type 1:IDC,2:LastMile,3:Mobile.</dd><dt class="property-optional"
             title="Optional">
         <span id="paymode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_java" style="color: inherit; text-decoration: inherit;">pay<wbr>Mode</a>
@@ -380,8 +490,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Payment mode:1=Trial version,2=Paid version.</p>
-</dd><dt class="property-optional"
+    <dd>Payment mode:1=Trial version,2=Paid version.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -389,8 +498,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -404,8 +512,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>is IPv6.</p>
-</dd><dt class="property-optional"
+    <dd>is IPv6.</dd><dt class="property-optional"
             title="Optional">
         <span id="location_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_nodejs" style="color: inherit; text-decoration: inherit;">location</a>
@@ -413,8 +520,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</p>
-</dd><dt class="property-optional"
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Name</a>
@@ -422,8 +528,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node name.</p>
-</dd><dt class="property-optional"
+    <dd>Node name.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -431,8 +536,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Node type 1:IDC,2:LastMile,3:Mobile.</p>
-</dd><dt class="property-optional"
+    <dd>Node type 1:IDC,2:LastMile,3:Mobile.</dd><dt class="property-optional"
             title="Optional">
         <span id="paymode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_nodejs" style="color: inherit; text-decoration: inherit;">pay<wbr>Mode</a>
@@ -440,8 +544,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Payment mode:1=Trial version,2=Paid version.</p>
-</dd><dt class="property-optional"
+    <dd>Payment mode:1=Trial version,2=Paid version.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -449,8 +552,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -464,8 +566,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>is IPv6.</p>
-</dd><dt class="property-optional"
+    <dd>is IPv6.</dd><dt class="property-optional"
             title="Optional">
         <span id="location_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_python" style="color: inherit; text-decoration: inherit;">location</a>
@@ -473,8 +574,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</p>
-</dd><dt class="property-optional"
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-optional"
             title="Optional">
         <span id="node_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_name_python" style="color: inherit; text-decoration: inherit;">node_<wbr>name</a>
@@ -482,8 +582,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Node name.</p>
-</dd><dt class="property-optional"
+    <dd>Node name.</dd><dt class="property-optional"
             title="Optional">
         <span id="node_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_type_python" style="color: inherit; text-decoration: inherit;">node_<wbr>type</a>
@@ -491,8 +590,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node type 1:IDC,2:LastMile,3:Mobile.</p>
-</dd><dt class="property-optional"
+    <dd>Node type 1:IDC,2:LastMile,3:Mobile.</dd><dt class="property-optional"
             title="Optional">
         <span id="pay_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_mode_python" style="color: inherit; text-decoration: inherit;">pay_<wbr>mode</a>
@@ -500,8 +598,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Payment mode:1=Trial version,2=Paid version.</p>
-</dd><dt class="property-optional"
+    <dd>Payment mode:1=Trial version,2=Paid version.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -509,8 +606,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -524,8 +620,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>is IPv6.</p>
-</dd><dt class="property-optional"
+    <dd>is IPv6.</dd><dt class="property-optional"
             title="Optional">
         <span id="location_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_yaml" style="color: inherit; text-decoration: inherit;">location</a>
@@ -533,8 +628,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</p>
-</dd><dt class="property-optional"
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Name</a>
@@ -542,8 +636,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node name.</p>
-</dd><dt class="property-optional"
+    <dd>Node name.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodetype_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Type</a>
@@ -551,8 +644,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Node type 1:IDC,2:LastMile,3:Mobile.</p>
-</dd><dt class="property-optional"
+    <dd>Node type 1:IDC,2:LastMile,3:Mobile.</dd><dt class="property-optional"
             title="Optional">
         <span id="paymode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_yaml" style="color: inherit; text-decoration: inherit;">pay<wbr>Mode</a>
@@ -560,8 +652,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Payment mode:1=Trial version,2=Paid version.</p>
-</dd><dt class="property-optional"
+    <dd>Payment mode:1=Trial version,2=Paid version.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -569,8 +660,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -593,8 +683,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="nodedefines_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodedefines_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Defines</a>
@@ -602,8 +691,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getnodenodedefine">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cat.<wbr>Outputs.<wbr>Get<wbr>Node<wbr>Node<wbr>Define&gt;</a></span>
     </dt>
-    <dd><p>Probe node list.</p>
-</dd><dt class="property-"
+    <dd>Probe node list.</dd><dt class="property-"
             title="">
         <span id="isipv6_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isipv6_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Ipv6</a>
@@ -619,8 +707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</p>
-</dd><dt class="property-"
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-"
             title="">
         <span id="nodename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Name</a>
@@ -666,8 +753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="nodedefines_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodedefines_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Defines</a>
@@ -675,8 +761,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getnodenodedefine">[]Get<wbr>Node<wbr>Node<wbr>Define</a></span>
     </dt>
-    <dd><p>Probe node list.</p>
-</dd><dt class="property-"
+    <dd>Probe node list.</dd><dt class="property-"
             title="">
         <span id="isipv6_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isipv6_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Ipv6</a>
@@ -692,8 +777,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</p>
-</dd><dt class="property-"
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-"
             title="">
         <span id="nodename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Name</a>
@@ -730,6 +814,76 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="node_defines_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_defines_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>defines</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getnodenodedefine">list(object)</a></span>
+    </dt>
+    <dd>Probe node list.</dd><dt class="property-"
+            title="">
+        <span id="is_ipv6_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_ipv6_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="location_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_hcl" style="color: inherit; text-decoration: inherit;">location</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-"
+            title="">
+        <span id="node_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_name_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="node_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_type_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="pay_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_mode_hcl" style="color: inherit; text-decoration: inherit;">pay_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -739,8 +893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="nodedefines_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodedefines_java" style="color: inherit; text-decoration: inherit;">node<wbr>Defines</a>
@@ -748,8 +901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getnodenodedefine">List&lt;Get<wbr>Node<wbr>Node<wbr>Define&gt;</a></span>
     </dt>
-    <dd><p>Probe node list.</p>
-</dd><dt class="property-"
+    <dd>Probe node list.</dd><dt class="property-"
             title="">
         <span id="isipv6_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isipv6_java" style="color: inherit; text-decoration: inherit;">is<wbr>Ipv6</a>
@@ -765,8 +917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</p>
-</dd><dt class="property-"
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-"
             title="">
         <span id="nodename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_java" style="color: inherit; text-decoration: inherit;">node<wbr>Name</a>
@@ -812,8 +963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="nodedefines_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodedefines_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Defines</a>
@@ -821,8 +971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getnodenodedefine">Get<wbr>Node<wbr>Node<wbr>Define[]</a></span>
     </dt>
-    <dd><p>Probe node list.</p>
-</dd><dt class="property-"
+    <dd>Probe node list.</dd><dt class="property-"
             title="">
         <span id="isipv6_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isipv6_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Ipv6</a>
@@ -838,8 +987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</p>
-</dd><dt class="property-"
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-"
             title="">
         <span id="nodename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Name</a>
@@ -885,17 +1033,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="node_defines_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_defines_python" style="color: inherit; text-decoration: inherit;">node_<wbr>defines</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getnodenodedefine">Get<wbr>Node<wbr>Node<wbr>Define]</a></span>
+        <span class="property-type"><a href="#getnodenodedefine">Sequence[Get<wbr>Node<wbr>Node<wbr>Define]</a></span>
     </dt>
-    <dd><p>Probe node list.</p>
-</dd><dt class="property-"
+    <dd>Probe node list.</dd><dt class="property-"
             title="">
         <span id="is_ipv6_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_ipv6_python" style="color: inherit; text-decoration: inherit;">is_<wbr>ipv6</a>
@@ -911,8 +1057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</p>
-</dd><dt class="property-"
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-"
             title="">
         <span id="node_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_name_python" style="color: inherit; text-decoration: inherit;">node_<wbr>name</a>
@@ -958,8 +1103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="nodedefines_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodedefines_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Defines</a>
@@ -967,8 +1111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getnodenodedefine">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Probe node list.</p>
-</dd><dt class="property-"
+    <dd>Probe node list.</dd><dt class="property-"
             title="">
         <span id="isipv6_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isipv6_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Ipv6</a>
@@ -984,8 +1127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</p>
-</dd><dt class="property-"
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-"
             title="">
         <span id="nodename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodename_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Name</a>
@@ -1041,8 +1183,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>City.</p>
-</dd><dt class="property-required"
+    <dd>City.</dd><dt class="property-required"
             title="Required">
         <span id="code_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#code_csharp" style="color: inherit; text-decoration: inherit;">Code</a>
@@ -1050,8 +1191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node ID.</p>
-</dd><dt class="property-required"
+    <dd>Node ID.</dd><dt class="property-required"
             title="Required">
         <span id="codetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codetype_csharp" style="color: inherit; text-decoration: inherit;">Code<wbr>Type</a>
@@ -1059,8 +1199,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If the node type is base, it is an availability dial test point; if it is blank, it is an advanced dial test point.</p>
-</dd><dt class="property-required"
+    <dd>If the node type is base, it is an availability dial test point; if it is blank, it is an advanced dial test point.</dd><dt class="property-required"
             title="Required">
         <span id="district_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#district_csharp" style="color: inherit; text-decoration: inherit;">District</a>
@@ -1068,8 +1207,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>District.</p>
-</dd><dt class="property-required"
+    <dd>District.</dd><dt class="property-required"
             title="Required">
         <span id="iptype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iptype_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Type</a>
@@ -1077,8 +1215,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>IP type:1 = IPv4,2 = IPv6.</p>
-</dd><dt class="property-required"
+    <dd>IP type:1 = IPv4,2 = IPv6.</dd><dt class="property-required"
             title="Required">
         <span id="location_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_csharp" style="color: inherit; text-decoration: inherit;">Location</a>
@@ -1086,8 +1223,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</p>
-</dd><dt class="property-required"
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1095,8 +1231,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node name.</p>
-</dd><dt class="property-required"
+    <dd>Node name.</dd><dt class="property-required"
             title="Required">
         <span id="netservice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netservice_csharp" style="color: inherit; text-decoration: inherit;">Net<wbr>Service</a>
@@ -1104,8 +1239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network service provider.</p>
-</dd><dt class="property-required"
+    <dd>Network service provider.</dd><dt class="property-required"
             title="Required">
         <span id="nodedefinestatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodedefinestatus_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Define<wbr>Status</a>
@@ -1113,8 +1247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node status: 1=running, 2=offline.</p>
-</dd><dt class="property-required"
+    <dd>Node status: 1=running, 2=offline.</dd><dt class="property-required"
             title="Required">
         <span id="tasktypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktypes_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Types</a>
@@ -1122,8 +1255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>The task types supported by the node. <code>1</code>: page performance, <code>2</code>: file upload, <code>3</code>: file download, <code>4</code>: port performance, <code>5</code>: network quality, <code>6</code>: audio and video experience.</p>
-</dd><dt class="property-required"
+    <dd>The task types supported by the node. <code>1</code>: page performance, <code>2</code>: file upload, <code>3</code>: file download, <code>4</code>: port performance, <code>5</code>: network quality, <code>6</code>: audio and video experience.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1131,8 +1263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node Type;1 = IDC,2 = LastMile,3 = Mobile.</p>
-</dd></dl>
+    <dd>Node Type;1 = IDC,2 = LastMile,3 = Mobile.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1146,8 +1277,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>City.</p>
-</dd><dt class="property-required"
+    <dd>City.</dd><dt class="property-required"
             title="Required">
         <span id="code_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#code_go" style="color: inherit; text-decoration: inherit;">Code</a>
@@ -1155,8 +1285,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node ID.</p>
-</dd><dt class="property-required"
+    <dd>Node ID.</dd><dt class="property-required"
             title="Required">
         <span id="codetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codetype_go" style="color: inherit; text-decoration: inherit;">Code<wbr>Type</a>
@@ -1164,8 +1293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If the node type is base, it is an availability dial test point; if it is blank, it is an advanced dial test point.</p>
-</dd><dt class="property-required"
+    <dd>If the node type is base, it is an availability dial test point; if it is blank, it is an advanced dial test point.</dd><dt class="property-required"
             title="Required">
         <span id="district_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#district_go" style="color: inherit; text-decoration: inherit;">District</a>
@@ -1173,8 +1301,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>District.</p>
-</dd><dt class="property-required"
+    <dd>District.</dd><dt class="property-required"
             title="Required">
         <span id="iptype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iptype_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Type</a>
@@ -1182,8 +1309,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>IP type:1 = IPv4,2 = IPv6.</p>
-</dd><dt class="property-required"
+    <dd>IP type:1 = IPv4,2 = IPv6.</dd><dt class="property-required"
             title="Required">
         <span id="location_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_go" style="color: inherit; text-decoration: inherit;">Location</a>
@@ -1191,8 +1317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</p>
-</dd><dt class="property-required"
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1200,8 +1325,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node name.</p>
-</dd><dt class="property-required"
+    <dd>Node name.</dd><dt class="property-required"
             title="Required">
         <span id="netservice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netservice_go" style="color: inherit; text-decoration: inherit;">Net<wbr>Service</a>
@@ -1209,8 +1333,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network service provider.</p>
-</dd><dt class="property-required"
+    <dd>Network service provider.</dd><dt class="property-required"
             title="Required">
         <span id="nodedefinestatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodedefinestatus_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Define<wbr>Status</a>
@@ -1218,8 +1341,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node status: 1=running, 2=offline.</p>
-</dd><dt class="property-required"
+    <dd>Node status: 1=running, 2=offline.</dd><dt class="property-required"
             title="Required">
         <span id="tasktypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktypes_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Types</a>
@@ -1227,8 +1349,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>The task types supported by the node. <code>1</code>: page performance, <code>2</code>: file upload, <code>3</code>: file download, <code>4</code>: port performance, <code>5</code>: network quality, <code>6</code>: audio and video experience.</p>
-</dd><dt class="property-required"
+    <dd>The task types supported by the node. <code>1</code>: page performance, <code>2</code>: file upload, <code>3</code>: file download, <code>4</code>: port performance, <code>5</code>: network quality, <code>6</code>: audio and video experience.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1236,8 +1357,101 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node Type;1 = IDC,2 = LastMile,3 = Mobile.</p>
-</dd></dl>
+    <dd>Node Type;1 = IDC,2 = LastMile,3 = Mobile.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="city_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#city_hcl" style="color: inherit; text-decoration: inherit;">city</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>City.</dd><dt class="property-required"
+            title="Required">
+        <span id="code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#code_hcl" style="color: inherit; text-decoration: inherit;">code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Node ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="code_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#code_type_hcl" style="color: inherit; text-decoration: inherit;">code_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>If the node type is base, it is an availability dial test point; if it is blank, it is an advanced dial test point.</dd><dt class="property-required"
+            title="Required">
+        <span id="district_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#district_hcl" style="color: inherit; text-decoration: inherit;">district</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>District.</dd><dt class="property-required"
+            title="Required">
+        <span id="ip_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_type_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>IP type:1 = IPv4,2 = IPv6.</dd><dt class="property-required"
+            title="Required">
+        <span id="location_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_hcl" style="color: inherit; text-decoration: inherit;">location</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Node name.</dd><dt class="property-required"
+            title="Required">
+        <span id="net_service_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#net_service_hcl" style="color: inherit; text-decoration: inherit;">net_<wbr>service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network service provider.</dd><dt class="property-required"
+            title="Required">
+        <span id="node_define_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_define_status_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>define_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Node status: 1=running, 2=offline.</dd><dt class="property-required"
+            title="Required">
+        <span id="task_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_types_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>The task types supported by the node. <code>1</code>: page performance, <code>2</code>: file upload, <code>3</code>: file download, <code>4</code>: port performance, <code>5</code>: network quality, <code>6</code>: audio and video experience.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Node Type;1 = IDC,2 = LastMile,3 = Mobile.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1251,8 +1465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>City.</p>
-</dd><dt class="property-required"
+    <dd>City.</dd><dt class="property-required"
             title="Required">
         <span id="code_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#code_java" style="color: inherit; text-decoration: inherit;">code</a>
@@ -1260,8 +1473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node ID.</p>
-</dd><dt class="property-required"
+    <dd>Node ID.</dd><dt class="property-required"
             title="Required">
         <span id="codetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codetype_java" style="color: inherit; text-decoration: inherit;">code<wbr>Type</a>
@@ -1269,8 +1481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>If the node type is base, it is an availability dial test point; if it is blank, it is an advanced dial test point.</p>
-</dd><dt class="property-required"
+    <dd>If the node type is base, it is an availability dial test point; if it is blank, it is an advanced dial test point.</dd><dt class="property-required"
             title="Required">
         <span id="district_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#district_java" style="color: inherit; text-decoration: inherit;">district</a>
@@ -1278,8 +1489,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>District.</p>
-</dd><dt class="property-required"
+    <dd>District.</dd><dt class="property-required"
             title="Required">
         <span id="iptype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iptype_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Type</a>
@@ -1287,8 +1497,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>IP type:1 = IPv4,2 = IPv6.</p>
-</dd><dt class="property-required"
+    <dd>IP type:1 = IPv4,2 = IPv6.</dd><dt class="property-required"
             title="Required">
         <span id="location_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_java" style="color: inherit; text-decoration: inherit;">location</a>
@@ -1296,8 +1505,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</p>
-</dd><dt class="property-required"
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1305,8 +1513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node name.</p>
-</dd><dt class="property-required"
+    <dd>Node name.</dd><dt class="property-required"
             title="Required">
         <span id="netservice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netservice_java" style="color: inherit; text-decoration: inherit;">net<wbr>Service</a>
@@ -1314,8 +1521,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network service provider.</p>
-</dd><dt class="property-required"
+    <dd>Network service provider.</dd><dt class="property-required"
             title="Required">
         <span id="nodedefinestatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodedefinestatus_java" style="color: inherit; text-decoration: inherit;">node<wbr>Define<wbr>Status</a>
@@ -1323,8 +1529,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Node status: 1=running, 2=offline.</p>
-</dd><dt class="property-required"
+    <dd>Node status: 1=running, 2=offline.</dd><dt class="property-required"
             title="Required">
         <span id="tasktypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktypes_java" style="color: inherit; text-decoration: inherit;">task<wbr>Types</a>
@@ -1332,8 +1537,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>The task types supported by the node. <code>1</code>: page performance, <code>2</code>: file upload, <code>3</code>: file download, <code>4</code>: port performance, <code>5</code>: network quality, <code>6</code>: audio and video experience.</p>
-</dd><dt class="property-required"
+    <dd>The task types supported by the node. <code>1</code>: page performance, <code>2</code>: file upload, <code>3</code>: file download, <code>4</code>: port performance, <code>5</code>: network quality, <code>6</code>: audio and video experience.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1341,8 +1545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Node Type;1 = IDC,2 = LastMile,3 = Mobile.</p>
-</dd></dl>
+    <dd>Node Type;1 = IDC,2 = LastMile,3 = Mobile.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1356,8 +1559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>City.</p>
-</dd><dt class="property-required"
+    <dd>City.</dd><dt class="property-required"
             title="Required">
         <span id="code_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#code_nodejs" style="color: inherit; text-decoration: inherit;">code</a>
@@ -1365,8 +1567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node ID.</p>
-</dd><dt class="property-required"
+    <dd>Node ID.</dd><dt class="property-required"
             title="Required">
         <span id="codetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codetype_nodejs" style="color: inherit; text-decoration: inherit;">code<wbr>Type</a>
@@ -1374,8 +1575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If the node type is base, it is an availability dial test point; if it is blank, it is an advanced dial test point.</p>
-</dd><dt class="property-required"
+    <dd>If the node type is base, it is an availability dial test point; if it is blank, it is an advanced dial test point.</dd><dt class="property-required"
             title="Required">
         <span id="district_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#district_nodejs" style="color: inherit; text-decoration: inherit;">district</a>
@@ -1383,8 +1583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>District.</p>
-</dd><dt class="property-required"
+    <dd>District.</dd><dt class="property-required"
             title="Required">
         <span id="iptype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iptype_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Type</a>
@@ -1392,8 +1591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>IP type:1 = IPv4,2 = IPv6.</p>
-</dd><dt class="property-required"
+    <dd>IP type:1 = IPv4,2 = IPv6.</dd><dt class="property-required"
             title="Required">
         <span id="location_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_nodejs" style="color: inherit; text-decoration: inherit;">location</a>
@@ -1401,8 +1599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</p>
-</dd><dt class="property-required"
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1410,8 +1607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Node name.</p>
-</dd><dt class="property-required"
+    <dd>Node name.</dd><dt class="property-required"
             title="Required">
         <span id="netservice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netservice_nodejs" style="color: inherit; text-decoration: inherit;">net<wbr>Service</a>
@@ -1419,8 +1615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network service provider.</p>
-</dd><dt class="property-required"
+    <dd>Network service provider.</dd><dt class="property-required"
             title="Required">
         <span id="nodedefinestatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodedefinestatus_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Define<wbr>Status</a>
@@ -1428,8 +1623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Node status: 1=running, 2=offline.</p>
-</dd><dt class="property-required"
+    <dd>Node status: 1=running, 2=offline.</dd><dt class="property-required"
             title="Required">
         <span id="tasktypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktypes_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Types</a>
@@ -1437,8 +1631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>The task types supported by the node. <code>1</code>: page performance, <code>2</code>: file upload, <code>3</code>: file download, <code>4</code>: port performance, <code>5</code>: network quality, <code>6</code>: audio and video experience.</p>
-</dd><dt class="property-required"
+    <dd>The task types supported by the node. <code>1</code>: page performance, <code>2</code>: file upload, <code>3</code>: file download, <code>4</code>: port performance, <code>5</code>: network quality, <code>6</code>: audio and video experience.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1446,8 +1639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Node Type;1 = IDC,2 = LastMile,3 = Mobile.</p>
-</dd></dl>
+    <dd>Node Type;1 = IDC,2 = LastMile,3 = Mobile.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1461,8 +1653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>City.</p>
-</dd><dt class="property-required"
+    <dd>City.</dd><dt class="property-required"
             title="Required">
         <span id="code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#code_python" style="color: inherit; text-decoration: inherit;">code</a>
@@ -1470,8 +1661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Node ID.</p>
-</dd><dt class="property-required"
+    <dd>Node ID.</dd><dt class="property-required"
             title="Required">
         <span id="code_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#code_type_python" style="color: inherit; text-decoration: inherit;">code_<wbr>type</a>
@@ -1479,8 +1669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>If the node type is base, it is an availability dial test point; if it is blank, it is an advanced dial test point.</p>
-</dd><dt class="property-required"
+    <dd>If the node type is base, it is an availability dial test point; if it is blank, it is an advanced dial test point.</dd><dt class="property-required"
             title="Required">
         <span id="district_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#district_python" style="color: inherit; text-decoration: inherit;">district</a>
@@ -1488,8 +1677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>District.</p>
-</dd><dt class="property-required"
+    <dd>District.</dd><dt class="property-required"
             title="Required">
         <span id="ip_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_type_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>type</a>
@@ -1497,8 +1685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>IP type:1 = IPv4,2 = IPv6.</p>
-</dd><dt class="property-required"
+    <dd>IP type:1 = IPv4,2 = IPv6.</dd><dt class="property-required"
             title="Required">
         <span id="location_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_python" style="color: inherit; text-decoration: inherit;">location</a>
@@ -1506,8 +1693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</p>
-</dd><dt class="property-required"
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1515,8 +1701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Node name.</p>
-</dd><dt class="property-required"
+    <dd>Node name.</dd><dt class="property-required"
             title="Required">
         <span id="net_service_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#net_service_python" style="color: inherit; text-decoration: inherit;">net_<wbr>service</a>
@@ -1524,8 +1709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network service provider.</p>
-</dd><dt class="property-required"
+    <dd>Network service provider.</dd><dt class="property-required"
             title="Required">
         <span id="node_define_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_define_status_python" style="color: inherit; text-decoration: inherit;">node_<wbr>define_<wbr>status</a>
@@ -1533,8 +1717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node status: 1=running, 2=offline.</p>
-</dd><dt class="property-required"
+    <dd>Node status: 1=running, 2=offline.</dd><dt class="property-required"
             title="Required">
         <span id="task_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_types_python" style="color: inherit; text-decoration: inherit;">task_<wbr>types</a>
@@ -1542,8 +1725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>The task types supported by the node. <code>1</code>: page performance, <code>2</code>: file upload, <code>3</code>: file download, <code>4</code>: port performance, <code>5</code>: network quality, <code>6</code>: audio and video experience.</p>
-</dd><dt class="property-required"
+    <dd>The task types supported by the node. <code>1</code>: page performance, <code>2</code>: file upload, <code>3</code>: file download, <code>4</code>: port performance, <code>5</code>: network quality, <code>6</code>: audio and video experience.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1551,8 +1733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Node Type;1 = IDC,2 = LastMile,3 = Mobile.</p>
-</dd></dl>
+    <dd>Node Type;1 = IDC,2 = LastMile,3 = Mobile.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1566,8 +1747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>City.</p>
-</dd><dt class="property-required"
+    <dd>City.</dd><dt class="property-required"
             title="Required">
         <span id="code_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#code_yaml" style="color: inherit; text-decoration: inherit;">code</a>
@@ -1575,8 +1755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node ID.</p>
-</dd><dt class="property-required"
+    <dd>Node ID.</dd><dt class="property-required"
             title="Required">
         <span id="codetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codetype_yaml" style="color: inherit; text-decoration: inherit;">code<wbr>Type</a>
@@ -1584,8 +1763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>If the node type is base, it is an availability dial test point; if it is blank, it is an advanced dial test point.</p>
-</dd><dt class="property-required"
+    <dd>If the node type is base, it is an availability dial test point; if it is blank, it is an advanced dial test point.</dd><dt class="property-required"
             title="Required">
         <span id="district_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#district_yaml" style="color: inherit; text-decoration: inherit;">district</a>
@@ -1593,8 +1771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>District.</p>
-</dd><dt class="property-required"
+    <dd>District.</dd><dt class="property-required"
             title="Required">
         <span id="iptype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iptype_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Type</a>
@@ -1602,8 +1779,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>IP type:1 = IPv4,2 = IPv6.</p>
-</dd><dt class="property-required"
+    <dd>IP type:1 = IPv4,2 = IPv6.</dd><dt class="property-required"
             title="Required">
         <span id="location_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_yaml" style="color: inherit; text-decoration: inherit;">location</a>
@@ -1611,8 +1787,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</p>
-</dd><dt class="property-required"
+    <dd>Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1620,8 +1795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Node name.</p>
-</dd><dt class="property-required"
+    <dd>Node name.</dd><dt class="property-required"
             title="Required">
         <span id="netservice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#netservice_yaml" style="color: inherit; text-decoration: inherit;">net<wbr>Service</a>
@@ -1629,8 +1803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network service provider.</p>
-</dd><dt class="property-required"
+    <dd>Network service provider.</dd><dt class="property-required"
             title="Required">
         <span id="nodedefinestatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodedefinestatus_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Define<wbr>Status</a>
@@ -1638,8 +1811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Node status: 1=running, 2=offline.</p>
-</dd><dt class="property-required"
+    <dd>Node status: 1=running, 2=offline.</dd><dt class="property-required"
             title="Required">
         <span id="tasktypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktypes_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Types</a>
@@ -1647,8 +1819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>The task types supported by the node. <code>1</code>: page performance, <code>2</code>: file upload, <code>3</code>: file download, <code>4</code>: port performance, <code>5</code>: network quality, <code>6</code>: audio and video experience.</p>
-</dd><dt class="property-required"
+    <dd>The task types supported by the node. <code>1</code>: page performance, <code>2</code>: file upload, <code>3</code>: file download, <code>4</code>: port performance, <code>5</code>: network quality, <code>6</code>: audio and video experience.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1656,8 +1827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Node Type;1 = IDC,2 = LastMile,3 = Mobile.</p>
-</dd></dl>
+    <dd>Node Type;1 = IDC,2 = LastMile,3 = Mobile.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1672,7 +1842,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

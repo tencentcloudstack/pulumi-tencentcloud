@@ -2,9 +2,11 @@
 ---
 title: "getAccountDbAttachments"
 title_tag: "tencentcloud.Sqlserver.getAccountDbAttachments"
-meta_desc: "Documentation for the tencentcloud.Sqlserver.getAccountDbAttachments function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query the list of SQL Server account DB privileges."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -25,7 +27,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -33,9 +35,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getAccountDbAttachments<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccountDbAttachmentsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetAccountDbAttachmentsResult</a></span>></span
+><span class="k">function </span>getAccountDbAttachments<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccountDbAttachmentsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetAccountDbAttachmentsResult</a></span>></span
 ><span class="k">
-function </span>getAccountDbAttachmentsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccountDbAttachmentsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetAccountDbAttachmentsResult</a></span>></span
+function </span>getAccountDbAttachmentsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccountDbAttachmentsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetAccountDbAttachmentsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -50,11 +52,11 @@ function </span>getAccountDbAttachmentsOutput<span class="p">(</span><span class
                                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetAccountDbAttachmentsResult</span
 ><span class="k">
-def </span>get_account_db_attachments_output<span class="p">(</span><span class="nx">account_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                               <span class="nx">db_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                               <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetAccountDbAttachmentsResult]</span
+def </span>get_account_db_attachments_output<span class="p">(</span><span class="nx">account_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                               <span class="nx">db_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                               <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetAccountDbAttachmentsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -79,7 +81,8 @@ func </span>GetAccountDbAttachmentsOutput<span class="p">(</span><span class="nx
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetAccountDbAttachments </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetAccountDbAttachmentsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetAccountDbAttachmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetAccountDbAttachmentsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAccountDbAttachmentsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetAccountDbAttachmentsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAccountDbAttachmentsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetAccountDbAttachmentsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAccountDbAttachmentsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -88,7 +91,8 @@ func </span>GetAccountDbAttachmentsOutput<span class="p">(</span><span class="nx
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetAccountDbAttachmentsResult</a></span>> </span>getAccountDbAttachments<span class="p">(</span><span class="nx">GetAccountDbAttachmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetAccountDbAttachmentsResult</a></span>> </span>getAccountDbAttachments<span class="p">(</span><span class="nx">GetAccountDbAttachmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetAccountDbAttachmentsResult</a></span>> </span>getAccountDbAttachments<span class="p">(</span><span class="nx">GetAccountDbAttachmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -100,6 +104,15 @@ func </span>GetAccountDbAttachmentsOutput<span class="p">(</span><span class="nx
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Sqlserver/getAccountDbAttachments:getAccountDbAttachments
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_sqlserver_get_account_db_attachments&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -118,8 +131,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server instance ID that the account belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Name</a>
@@ -127,8 +139,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SQL Server account to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SQL Server account to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -136,8 +147,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DB to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DB to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -145,8 +155,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -160,8 +169,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server instance ID that the account belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Name</a>
@@ -169,8 +177,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SQL Server account to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SQL Server account to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -178,8 +185,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DB to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DB to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -187,8 +193,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="account_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_name_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SQL Server account to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="db_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_name_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the DB to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -202,8 +245,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SQL Server instance ID that the account belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_java" style="color: inherit; text-decoration: inherit;">account<wbr>Name</a>
@@ -211,8 +253,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SQL Server account to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SQL Server account to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_java" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -220,8 +261,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DB to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DB to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -229,8 +269,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -244,8 +283,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server instance ID that the account belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Name</a>
@@ -253,8 +291,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SQL Server account to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SQL Server account to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -262,8 +299,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DB to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DB to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -271,8 +307,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -286,8 +321,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SQL Server instance ID that the account belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="account_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_name_python" style="color: inherit; text-decoration: inherit;">account_<wbr>name</a>
@@ -295,8 +329,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SQL Server account to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SQL Server account to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="db_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_name_python" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
@@ -304,8 +337,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the DB to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DB to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -313,8 +345,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -328,8 +359,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SQL Server instance ID that the account belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Name</a>
@@ -337,8 +367,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SQL Server account to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SQL Server account to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -346,8 +375,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DB to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the DB to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -355,8 +383,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -379,8 +406,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -388,8 +414,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server instance ID that the account belongs to.</p>
-</dd><dt class="property-"
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -397,8 +422,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccountdbattachmentslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Outputs.<wbr>Get<wbr>Account<wbr>Db<wbr>Attachments<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of SQL Server account. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of SQL Server account. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="accountname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Name</a>
@@ -406,8 +430,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server account name.</p>
-</dd><dt class="property-"
+    <dd>SQL Server account name.</dd><dt class="property-"
             title="">
         <span id="dbname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -415,8 +438,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server DB name.</p>
-</dd><dt class="property-"
+    <dd>SQL Server DB name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -438,8 +460,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -447,8 +468,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server instance ID that the account belongs to.</p>
-</dd><dt class="property-"
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -456,8 +476,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccountdbattachmentslist">[]Get<wbr>Account<wbr>Db<wbr>Attachments<wbr>List</a></span>
     </dt>
-    <dd><p>A list of SQL Server account. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of SQL Server account. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="accountname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Name</a>
@@ -465,8 +484,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server account name.</p>
-</dd><dt class="property-"
+    <dd>SQL Server account name.</dd><dt class="property-"
             title="">
         <span id="dbname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -474,11 +492,64 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server DB name.</p>
-</dd><dt class="property-"
+    <dd>SQL Server DB name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getaccountdbattachmentslist">list(object)</a></span>
+    </dt>
+    <dd>A list of SQL Server account. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="account_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_name_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SQL Server account name.</dd><dt class="property-"
+            title="">
+        <span id="db_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_name_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SQL Server DB name.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -497,8 +568,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -506,8 +576,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SQL Server instance ID that the account belongs to.</p>
-</dd><dt class="property-"
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -515,8 +584,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccountdbattachmentslist">List&lt;Get<wbr>Account<wbr>Db<wbr>Attachments<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of SQL Server account. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of SQL Server account. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="accountname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_java" style="color: inherit; text-decoration: inherit;">account<wbr>Name</a>
@@ -524,8 +592,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SQL Server account name.</p>
-</dd><dt class="property-"
+    <dd>SQL Server account name.</dd><dt class="property-"
             title="">
         <span id="dbname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_java" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -533,8 +600,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SQL Server DB name.</p>
-</dd><dt class="property-"
+    <dd>SQL Server DB name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -556,8 +622,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -565,8 +630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server instance ID that the account belongs to.</p>
-</dd><dt class="property-"
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -574,8 +638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccountdbattachmentslist">Get<wbr>Account<wbr>Db<wbr>Attachments<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of SQL Server account. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of SQL Server account. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="accountname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Name</a>
@@ -583,8 +646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server account name.</p>
-</dd><dt class="property-"
+    <dd>SQL Server account name.</dd><dt class="property-"
             title="">
         <span id="dbname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -592,8 +654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server DB name.</p>
-</dd><dt class="property-"
+    <dd>SQL Server DB name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -615,8 +676,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -624,17 +684,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SQL Server instance ID that the account belongs to.</p>
-</dd><dt class="property-"
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getaccountdbattachmentslist">Get<wbr>Account<wbr>Db<wbr>Attachments<wbr>List]</a></span>
+        <span class="property-type"><a href="#getaccountdbattachmentslist">Sequence[Get<wbr>Account<wbr>Db<wbr>Attachments<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of SQL Server account. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of SQL Server account. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="account_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_name_python" style="color: inherit; text-decoration: inherit;">account_<wbr>name</a>
@@ -642,8 +700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SQL Server account name.</p>
-</dd><dt class="property-"
+    <dd>SQL Server account name.</dd><dt class="property-"
             title="">
         <span id="db_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_name_python" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
@@ -651,8 +708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SQL Server DB name.</p>
-</dd><dt class="property-"
+    <dd>SQL Server DB name.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -674,8 +730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -683,8 +738,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SQL Server instance ID that the account belongs to.</p>
-</dd><dt class="property-"
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -692,8 +746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccountdbattachmentslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of SQL Server account. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of SQL Server account. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="accountname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountname_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Name</a>
@@ -701,8 +754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SQL Server account name.</p>
-</dd><dt class="property-"
+    <dd>SQL Server account name.</dd><dt class="property-"
             title="">
         <span id="dbname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -710,8 +762,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SQL Server DB name.</p>
-</dd><dt class="property-"
+    <dd>SQL Server DB name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -743,8 +794,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SQL Server account to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SQL Server account to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="dbname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -752,8 +802,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -761,8 +810,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server instance ID that the account belongs to.</p>
-</dd><dt class="property-required"
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="privilege_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privilege_csharp" style="color: inherit; text-decoration: inherit;">Privilege</a>
@@ -770,8 +818,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Privilege of the account on DB. Valid value are <code>ReadOnly</code>, <code>ReadWrite</code>.</p>
-</dd></dl>
+    <dd>Privilege of the account on DB. Valid value are <code>ReadOnly</code>, <code>ReadWrite</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -785,8 +832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SQL Server account to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SQL Server account to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="dbname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -794,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -803,8 +848,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server instance ID that the account belongs to.</p>
-</dd><dt class="property-required"
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="privilege_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privilege_go" style="color: inherit; text-decoration: inherit;">Privilege</a>
@@ -812,8 +856,45 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Privilege of the account on DB. Valid value are <code>ReadOnly</code>, <code>ReadWrite</code>.</p>
-</dd></dl>
+    <dd>Privilege of the account on DB. Valid value are <code>ReadOnly</code>, <code>ReadWrite</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="account_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_name_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SQL Server account to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="db_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_name_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the DB to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-required"
+            title="Required">
+        <span id="privilege_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privilege_hcl" style="color: inherit; text-decoration: inherit;">privilege</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Privilege of the account on DB. Valid value are <code>ReadOnly</code>, <code>ReadWrite</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -827,8 +908,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SQL Server account to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SQL Server account to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="dbname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_java" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -836,8 +916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -845,8 +924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SQL Server instance ID that the account belongs to.</p>
-</dd><dt class="property-required"
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="privilege_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privilege_java" style="color: inherit; text-decoration: inherit;">privilege</a>
@@ -854,8 +932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Privilege of the account on DB. Valid value are <code>ReadOnly</code>, <code>ReadWrite</code>.</p>
-</dd></dl>
+    <dd>Privilege of the account on DB. Valid value are <code>ReadOnly</code>, <code>ReadWrite</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -869,8 +946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SQL Server account to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SQL Server account to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="dbname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -878,8 +954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -887,8 +962,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SQL Server instance ID that the account belongs to.</p>
-</dd><dt class="property-required"
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="privilege_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privilege_nodejs" style="color: inherit; text-decoration: inherit;">privilege</a>
@@ -896,8 +970,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Privilege of the account on DB. Valid value are <code>ReadOnly</code>, <code>ReadWrite</code>.</p>
-</dd></dl>
+    <dd>Privilege of the account on DB. Valid value are <code>ReadOnly</code>, <code>ReadWrite</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -911,8 +984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SQL Server account to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SQL Server account to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="db_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_name_python" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
@@ -920,8 +992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the DB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -929,8 +1000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SQL Server instance ID that the account belongs to.</p>
-</dd><dt class="property-required"
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="privilege_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privilege_python" style="color: inherit; text-decoration: inherit;">privilege</a>
@@ -938,8 +1008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Privilege of the account on DB. Valid value are <code>ReadOnly</code>, <code>ReadWrite</code>.</p>
-</dd></dl>
+    <dd>Privilege of the account on DB. Valid value are <code>ReadOnly</code>, <code>ReadWrite</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -953,8 +1022,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SQL Server account to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SQL Server account to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="dbname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -962,8 +1030,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -971,8 +1038,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SQL Server instance ID that the account belongs to.</p>
-</dd><dt class="property-required"
+    <dd>SQL Server instance ID that the account belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="privilege_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privilege_yaml" style="color: inherit; text-decoration: inherit;">privilege</a>
@@ -980,8 +1046,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Privilege of the account on DB. Valid value are <code>ReadOnly</code>, <code>ReadWrite</code>.</p>
-</dd></dl>
+    <dd>Privilege of the account on DB. Valid value are <code>ReadOnly</code>, <code>ReadWrite</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -996,7 +1061,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

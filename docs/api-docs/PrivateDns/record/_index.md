@@ -2,9 +2,11 @@
 ---
 title: "Record"
 title_tag: "tencentcloud.PrivateDns.Record"
-meta_desc: "Documentation for the tencentcloud.PrivateDns.Record resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a Private Dns Record."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,13 +18,23 @@ Provide a resource to create a Private Dns Record.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
-const exampleZone = new tencentcloud.privatedns.Zone("exampleZone", {
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-example",
+    cidrBlock: "10.0.0.0/16",
+});
+// create private dns zone
+const example = new tencentcloud.privatedns.Zone("example", {
     domain: "domain.com",
     remark: "remark.",
     vpcSets: [{
@@ -32,45 +44,124 @@ const exampleZone = new tencentcloud.privatedns.Zone("exampleZone", {
     dnsForwardStatus: "DISABLED",
     cnameSpeedupStatus: "ENABLED",
     tags: {
-        createdBy: "terraform",
+        createdBy: "Terraform",
     },
 });
-const exampleRecord = new tencentcloud.privatedns.Record("exampleRecord", {
-    zoneId: exampleZone.id,
+// create private dns record
+const exampleRecord = new tencentcloud.privatedns.Record("example", {
+    zoneId: example.id,
     recordType: "A",
     recordValue: "192.168.1.2",
     subDomain: "www",
     ttl: 300,
-    weight: 1,
+    weight: 20,
     mx: 0,
+    status: "disabled",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
-example_zone = tencentcloud.private_dns.Zone("exampleZone",
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-example",
+    cidr_block="10.0.0.0/16")
+# create private dns zone
+example = tencentcloud.privatedns.Zone("example",
     domain="domain.com",
     remark="remark.",
-    vpc_sets=[tencentcloud.private_dns.ZoneVpcSetArgs(
-        region="ap-guangzhou",
-        uniq_vpc_id=vpc.id,
-    )],
+    vpc_sets=[{
+        "region": "ap-guangzhou",
+        "uniq_vpc_id": vpc.id,
+    }],
     dns_forward_status="DISABLED",
     cname_speedup_status="ENABLED",
     tags={
-        "createdBy": "terraform",
+        "createdBy": "Terraform",
     })
-example_record = tencentcloud.private_dns.Record("exampleRecord",
-    zone_id=example_zone.id,
+# create private dns record
+example_record = tencentcloud.privatedns.Record("example",
+    zone_id=example.id,
     record_type="A",
     record_value="192.168.1.2",
     sub_domain="www",
     ttl=300,
-    weight=1,
-    mx=0)
+    weight=20,
+    mx=0,
+    status="disabled")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/privatedns"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-example"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		// create private dns zone
+		example, err := privatedns.NewZone(ctx, "example", &privatedns.ZoneArgs{
+			Domain: pulumi.String("domain.com"),
+			Remark: pulumi.String("remark."),
+			VpcSets: privatedns.ZoneVpcSetArray{
+				&privatedns.ZoneVpcSetArgs{
+					Region:    pulumi.String("ap-guangzhou"),
+					UniqVpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
+				},
+			},
+			DnsForwardStatus:   pulumi.String("DISABLED"),
+			CnameSpeedupStatus: pulumi.String("ENABLED"),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		// create private dns record
+		_, err = privatedns.NewRecord(ctx, "example", &privatedns.RecordArgs{
+			ZoneId:      example.ID().ToIDOutput().ToStringOutput(),
+			RecordType:  pulumi.String("A"),
+			RecordValue: pulumi.String("192.168.1.2"),
+			SubDomain:   pulumi.String("www"),
+			Ttl:         pulumi.Int(300),
+			Weight:      pulumi.Int(20),
+			Mx:          pulumi.Int(0),
+			Status:      pulumi.String("disabled"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -79,12 +170,15 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
+    // create vpc
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc-example",
         CidrBlock = "10.0.0.0/16",
     });
 
-    var exampleZone = new Tencentcloud.PrivateDns.Zone("exampleZone", new()
+    // create private dns zone
+    var example = new Tencentcloud.PrivateDns.Zone("example", new()
     {
         Domain = "domain.com",
         Remark = "remark.",
@@ -100,74 +194,30 @@ return await Deployment.RunAsync(() =>
         CnameSpeedupStatus = "ENABLED",
         Tags = 
         {
-            { "createdBy", "terraform" },
+            { "createdBy", "Terraform" },
         },
     });
 
-    var exampleRecord = new Tencentcloud.PrivateDns.Record("exampleRecord", new()
+    // create private dns record
+    var exampleRecord = new Tencentcloud.PrivateDns.Record("example", new()
     {
-        ZoneId = exampleZone.Id,
+        ZoneId = example.Id,
         RecordType = "A",
         RecordValue = "192.168.1.2",
         SubDomain = "www",
         Ttl = 300,
-        Weight = 1,
+        Weight = 20,
         Mx = 0,
+        Status = "disabled",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		exampleZone, err := PrivateDns.NewZone(ctx, "exampleZone", &PrivateDns.ZoneArgs{
-			Domain: pulumi.String("domain.com"),
-			Remark: pulumi.String("remark."),
-			VpcSets: privatedns.ZoneVpcSetArray{
-				&privatedns.ZoneVpcSetArgs{
-					Region:    pulumi.String("ap-guangzhou"),
-					UniqVpcId: vpc.ID(),
-				},
-			},
-			DnsForwardStatus:   pulumi.String("DISABLED"),
-			CnameSpeedupStatus: pulumi.String("ENABLED"),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = PrivateDns.NewRecord(ctx, "exampleRecord", &PrivateDns.RecordArgs{
-			ZoneId:      exampleZone.ID(),
-			RecordType:  pulumi.String("A"),
-			RecordValue: pulumi.String("192.168.1.2"),
-			SubDomain:   pulumi.String("www"),
-			Ttl:         pulumi.Int(300),
-			Weight:      pulumi.Int(1),
-			Mx:          pulumi.Int(0),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -181,8 +231,8 @@ import com.pulumi.tencentcloud.PrivateDns.ZoneArgs;
 import com.pulumi.tencentcloud.PrivateDns.inputs.ZoneVpcSetArgs;
 import com.pulumi.tencentcloud.PrivateDns.Record;
 import com.pulumi.tencentcloud.PrivateDns.RecordArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -194,11 +244,14 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        // create vpc
+        var vpc = new Instance("vpc", InstanceArgs.builder()
+            .name("vpc-example")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var exampleZone = new Zone("exampleZone", ZoneArgs.builder()        
+        // create private dns zone
+        var example = new Zone("example", ZoneArgs.builder()
             .domain("domain.com")
             .remark("remark.")
             .vpcSets(ZoneVpcSetArgs.builder()
@@ -207,29 +260,39 @@ public class App {
                 .build())
             .dnsForwardStatus("DISABLED")
             .cnameSpeedupStatus("ENABLED")
-            .tags(Map.of("createdBy", "terraform"))
+            .tags(Map.of("createdBy", "Terraform"))
             .build());
 
-        var exampleRecord = new Record("exampleRecord", RecordArgs.builder()        
-            .zoneId(exampleZone.id())
+        // create private dns record
+        var exampleRecord = new Record("exampleRecord", RecordArgs.builder()
+            .zoneId(example.id())
             .recordType("A")
             .recordValue("192.168.1.2")
             .subDomain("www")
             .ttl(300)
-            .weight(1)
+            .weight(20)
             .mx(0)
+            .status("disabled")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
+  # create vpc
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-example
       cidrBlock: 10.0.0.0/16
-  exampleZone:
+  # create private dns zone
+  example:
     type: tencentcloud:PrivateDns:Zone
     properties:
       domain: domain.com
@@ -240,83 +303,162 @@ resources:
       dnsForwardStatus: DISABLED
       cnameSpeedupStatus: ENABLED
       tags:
-        createdBy: terraform
+        createdBy: Terraform
+  # create private dns record
   exampleRecord:
     type: tencentcloud:PrivateDns:Record
+    name: example
     properties:
-      zoneId: ${exampleZone.id}
+      zoneId: ${example.id}
       recordType: A
       recordValue: 192.168.1.2
       subDomain: www
       ttl: 300
-      weight: 1
+      weight: 20
       mx: 0
+      status: disabled
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+# create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-example"
+  cidr_block = "10.0.0.0/16"
+}
+# create private dns zone
+resource "tencentcloud_privatedns_zone" "example" {
+  domain = "domain.com"
+  remark = "remark."
+  vpc_sets {
+    region      = "ap-guangzhou"
+    uniq_vpc_id = tencentcloud_vpc_instance.vpc.id
+  }
+  dns_forward_status   = "DISABLED"
+  cname_speedup_status = "ENABLED"
+  tags = {
+    "createdBy" = "Terraform"
+  }
+}
+# create private dns record
+resource "tencentcloud_privatedns_record" "example" {
+  zone_id      = tencentcloud_privatedns_zone.example.id
+  record_type  = "A"
+  record_value = "192.168.1.2"
+  sub_domain   = "www"
+  ttl          = 300
+  weight       = 20
+  mx           = 0
+  status       = "disabled"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreatePrivateZoneRecord](https://www.tencentcloud.com/document/api/1097/42122)
+  - [DescribeRecord](https://www.tencentcloud.com/document/api/1097/70303)
+  - [ModifyRecordsStatus](https://www.tencentcloud.com/document/api/1097/51230)
+* Read: [DescribeRecord](https://www.tencentcloud.com/document/api/1097/70303)
+* Update:
+  - [ModifyPrivateZoneRecord](https://www.tencentcloud.com/document/api/1097/42111)
+  - [ModifyRecordsStatus](https://www.tencentcloud.com/document/api/1097/51230)
+* Delete: [DeletePrivateZoneRecord](https://www.tencentcloud.com/document/api/1097/42120)
 
 
 ## Create Record Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Record</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">RecordArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Record</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">RecordArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Record</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">RecordArgs</a></span><span class="p">,</span>
+           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Record</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-           <span class="nx">mx</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
            <span class="nx">record_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">record_value</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">sub_domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+           <span class="nx">zone_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+           <span class="nx">mx</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+           <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
            <span class="nx">ttl</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-           <span class="nx">weight</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-           <span class="nx">zone_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Record</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">RecordArgs</a></span><span class="p">,</span>
-           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+           <span class="nx">weight</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewRecord</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">RecordArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Record</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewRecord</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">RecordArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Record</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Record</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">RecordArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Record</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">RecordArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Record</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">RecordArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Record</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">RecordArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:PrivateDns:Record</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:PrivateDns:Record</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_private_dns_record&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -337,7 +479,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -454,11 +596,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Record Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Record resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -474,8 +624,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record type. Valid values: &quot;A&quot;, &quot;AAAA&quot;, &quot;CNAME&quot;, &quot;MX&quot;, &quot;TXT&quot;, &quot;PTR&quot;.</p>
-</dd><dt class="property-required"
+    <dd>Record type. Valid values: <code>A</code>, <code>AAAA</code>, <code>CNAME</code>, <code>MX</code>, <code>TXT</code>, <code>PTR</code>.</dd><dt class="property-required"
             title="Required">
         <span id="recordvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordvalue_csharp" style="color: inherit; text-decoration: inherit;">Record<wbr>Value</a>
@@ -483,8 +632,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</p>
-</dd><dt class="property-required"
+    <dd>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</dd><dt class="property-required"
             title="Required">
         <span id="subdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_csharp" style="color: inherit; text-decoration: inherit;">Sub<wbr>Domain</a>
@@ -492,8 +640,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subdomain, such as &quot;www&quot;, &quot;m&quot;, and &quot;@&quot;.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Subdomain, such as <code>www</code>, <code>m</code>, and <code>@</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="zoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -501,8 +648,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private domain ID.</p>
-</dd><dt class="property-optional"
+    <dd>Private domain ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="mx_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mx_csharp" style="color: inherit; text-decoration: inherit;">Mx</a>
@@ -510,8 +656,15 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</p>
-</dd><dt class="property-optional"
+    <dd>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record status. Valid values: <code>enabled</code>, <code>disabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ttl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_csharp" style="color: inherit; text-decoration: inherit;">Ttl</a>
@@ -519,8 +672,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</p>
-</dd><dt class="property-optional"
+    <dd>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_csharp" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -528,8 +680,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Record weight. Value range: 1~100.</p>
-</dd></dl>
+    <dd>Record weight. Value range: 1~100.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -543,8 +694,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record type. Valid values: &quot;A&quot;, &quot;AAAA&quot;, &quot;CNAME&quot;, &quot;MX&quot;, &quot;TXT&quot;, &quot;PTR&quot;.</p>
-</dd><dt class="property-required"
+    <dd>Record type. Valid values: <code>A</code>, <code>AAAA</code>, <code>CNAME</code>, <code>MX</code>, <code>TXT</code>, <code>PTR</code>.</dd><dt class="property-required"
             title="Required">
         <span id="recordvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordvalue_go" style="color: inherit; text-decoration: inherit;">Record<wbr>Value</a>
@@ -552,8 +702,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</p>
-</dd><dt class="property-required"
+    <dd>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</dd><dt class="property-required"
             title="Required">
         <span id="subdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_go" style="color: inherit; text-decoration: inherit;">Sub<wbr>Domain</a>
@@ -561,8 +710,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subdomain, such as &quot;www&quot;, &quot;m&quot;, and &quot;@&quot;.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Subdomain, such as <code>www</code>, <code>m</code>, and <code>@</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="zoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -570,8 +718,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private domain ID.</p>
-</dd><dt class="property-optional"
+    <dd>Private domain ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="mx_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mx_go" style="color: inherit; text-decoration: inherit;">Mx</a>
@@ -579,8 +726,15 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</p>
-</dd><dt class="property-optional"
+    <dd>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record status. Valid values: <code>enabled</code>, <code>disabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ttl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_go" style="color: inherit; text-decoration: inherit;">Ttl</a>
@@ -588,8 +742,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</p>
-</dd><dt class="property-optional"
+    <dd>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_go" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -597,8 +750,77 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Record weight. Value range: 1~100.</p>
-</dd></dl>
+    <dd>Record weight. Value range: 1~100.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="record_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_type_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record type. Valid values: <code>A</code>, <code>AAAA</code>, <code>CNAME</code>, <code>MX</code>, <code>TXT</code>, <code>PTR</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="record_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_value_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</dd><dt class="property-required"
+            title="Required">
+        <span id="sub_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_domain_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subdomain, such as <code>www</code>, <code>m</code>, and <code>@</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Private domain ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mx_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mx_hcl" style="color: inherit; text-decoration: inherit;">mx</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record status. Valid values: <code>enabled</code>, <code>disabled</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ttl_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_hcl" style="color: inherit; text-decoration: inherit;">ttl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_hcl" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Record weight. Value range: 1~100.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -612,8 +834,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record type. Valid values: &quot;A&quot;, &quot;AAAA&quot;, &quot;CNAME&quot;, &quot;MX&quot;, &quot;TXT&quot;, &quot;PTR&quot;.</p>
-</dd><dt class="property-required"
+    <dd>Record type. Valid values: <code>A</code>, <code>AAAA</code>, <code>CNAME</code>, <code>MX</code>, <code>TXT</code>, <code>PTR</code>.</dd><dt class="property-required"
             title="Required">
         <span id="recordvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordvalue_java" style="color: inherit; text-decoration: inherit;">record<wbr>Value</a>
@@ -621,8 +842,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</p>
-</dd><dt class="property-required"
+    <dd>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</dd><dt class="property-required"
             title="Required">
         <span id="subdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_java" style="color: inherit; text-decoration: inherit;">sub<wbr>Domain</a>
@@ -630,8 +850,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subdomain, such as &quot;www&quot;, &quot;m&quot;, and &quot;@&quot;.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Subdomain, such as <code>www</code>, <code>m</code>, and <code>@</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="zoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -639,8 +858,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private domain ID.</p>
-</dd><dt class="property-optional"
+    <dd>Private domain ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="mx_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mx_java" style="color: inherit; text-decoration: inherit;">mx</a>
@@ -648,8 +866,15 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</p>
-</dd><dt class="property-optional"
+    <dd>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Record status. Valid values: <code>enabled</code>, <code>disabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ttl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_java" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -657,8 +882,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</p>
-</dd><dt class="property-optional"
+    <dd>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_java" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -666,8 +890,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Record weight. Value range: 1~100.</p>
-</dd></dl>
+    <dd>Record weight. Value range: 1~100.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -681,8 +904,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record type. Valid values: &quot;A&quot;, &quot;AAAA&quot;, &quot;CNAME&quot;, &quot;MX&quot;, &quot;TXT&quot;, &quot;PTR&quot;.</p>
-</dd><dt class="property-required"
+    <dd>Record type. Valid values: <code>A</code>, <code>AAAA</code>, <code>CNAME</code>, <code>MX</code>, <code>TXT</code>, <code>PTR</code>.</dd><dt class="property-required"
             title="Required">
         <span id="recordvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordvalue_nodejs" style="color: inherit; text-decoration: inherit;">record<wbr>Value</a>
@@ -690,8 +912,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</p>
-</dd><dt class="property-required"
+    <dd>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</dd><dt class="property-required"
             title="Required">
         <span id="subdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_nodejs" style="color: inherit; text-decoration: inherit;">sub<wbr>Domain</a>
@@ -699,8 +920,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subdomain, such as &quot;www&quot;, &quot;m&quot;, and &quot;@&quot;.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Subdomain, such as <code>www</code>, <code>m</code>, and <code>@</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="zoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -708,8 +928,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private domain ID.</p>
-</dd><dt class="property-optional"
+    <dd>Private domain ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="mx_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mx_nodejs" style="color: inherit; text-decoration: inherit;">mx</a>
@@ -717,8 +936,15 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</p>
-</dd><dt class="property-optional"
+    <dd>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record status. Valid values: <code>enabled</code>, <code>disabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ttl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_nodejs" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -726,8 +952,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</p>
-</dd><dt class="property-optional"
+    <dd>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_nodejs" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -735,8 +960,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Record weight. Value range: 1~100.</p>
-</dd></dl>
+    <dd>Record weight. Value range: 1~100.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -750,8 +974,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Record type. Valid values: &quot;A&quot;, &quot;AAAA&quot;, &quot;CNAME&quot;, &quot;MX&quot;, &quot;TXT&quot;, &quot;PTR&quot;.</p>
-</dd><dt class="property-required"
+    <dd>Record type. Valid values: <code>A</code>, <code>AAAA</code>, <code>CNAME</code>, <code>MX</code>, <code>TXT</code>, <code>PTR</code>.</dd><dt class="property-required"
             title="Required">
         <span id="record_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_value_python" style="color: inherit; text-decoration: inherit;">record_<wbr>value</a>
@@ -759,8 +982,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</p>
-</dd><dt class="property-required"
+    <dd>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</dd><dt class="property-required"
             title="Required">
         <span id="sub_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_domain_python" style="color: inherit; text-decoration: inherit;">sub_<wbr>domain</a>
@@ -768,8 +990,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subdomain, such as &quot;www&quot;, &quot;m&quot;, and &quot;@&quot;.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Subdomain, such as <code>www</code>, <code>m</code>, and <code>@</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
@@ -777,8 +998,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Private domain ID.</p>
-</dd><dt class="property-optional"
+    <dd>Private domain ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="mx_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mx_python" style="color: inherit; text-decoration: inherit;">mx</a>
@@ -786,8 +1006,15 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</p>
-</dd><dt class="property-optional"
+    <dd>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Record status. Valid values: <code>enabled</code>, <code>disabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ttl_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_python" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -795,8 +1022,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</p>
-</dd><dt class="property-optional"
+    <dd>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_python" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -804,8 +1030,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Record weight. Value range: 1~100.</p>
-</dd></dl>
+    <dd>Record weight. Value range: 1~100.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -819,8 +1044,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record type. Valid values: &quot;A&quot;, &quot;AAAA&quot;, &quot;CNAME&quot;, &quot;MX&quot;, &quot;TXT&quot;, &quot;PTR&quot;.</p>
-</dd><dt class="property-required"
+    <dd>Record type. Valid values: <code>A</code>, <code>AAAA</code>, <code>CNAME</code>, <code>MX</code>, <code>TXT</code>, <code>PTR</code>.</dd><dt class="property-required"
             title="Required">
         <span id="recordvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordvalue_yaml" style="color: inherit; text-decoration: inherit;">record<wbr>Value</a>
@@ -828,8 +1052,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</p>
-</dd><dt class="property-required"
+    <dd>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</dd><dt class="property-required"
             title="Required">
         <span id="subdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_yaml" style="color: inherit; text-decoration: inherit;">sub<wbr>Domain</a>
@@ -837,8 +1060,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subdomain, such as &quot;www&quot;, &quot;m&quot;, and &quot;@&quot;.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Subdomain, such as <code>www</code>, <code>m</code>, and <code>@</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="zoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -846,8 +1068,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private domain ID.</p>
-</dd><dt class="property-optional"
+    <dd>Private domain ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="mx_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mx_yaml" style="color: inherit; text-decoration: inherit;">mx</a>
@@ -855,8 +1076,15 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</p>
-</dd><dt class="property-optional"
+    <dd>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Record status. Valid values: <code>enabled</code>, <code>disabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ttl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_yaml" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -864,8 +1092,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</p>
-</dd><dt class="property-optional"
+    <dd>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_yaml" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -873,8 +1100,7 @@ The Record resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Record weight. Value range: 1~100.</p>
-</dd></dl>
+    <dd>Record weight. Value range: 1~100.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -895,8 +1121,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -910,8 +1135,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -925,8 +1163,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -940,8 +1177,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -955,8 +1191,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -970,8 +1205,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -981,126 +1215,166 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Record resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">RecordState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Record</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">RecordState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Record</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">mx</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">record_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">record_value</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">sub_domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">ttl</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">weight</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">zone_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Record</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetRecord<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">RecordState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Record</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetRecord<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">RecordState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Record</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Record</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">RecordState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Record</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">RecordState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Record</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">RecordState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Record</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">RecordState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingRecord</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:PrivateDns:Record</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_private_dns_record</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">RecordState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">RecordState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1108,28 +1382,31 @@ Get an existing Record resource's state with the given name, ID, and optional ex
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">RecordState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1137,28 +1414,31 @@ Get an existing Record resource's state with the given name, ID, and optional ex
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">RecordState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1178,8 +1458,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</p>
-</dd><dt class="property-optional"
+    <dd>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recordtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recordtype_csharp" style="color: inherit; text-decoration: inherit;">Record<wbr>Type</a>
@@ -1187,8 +1466,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record type. Valid values: &quot;A&quot;, &quot;AAAA&quot;, &quot;CNAME&quot;, &quot;MX&quot;, &quot;TXT&quot;, &quot;PTR&quot;.</p>
-</dd><dt class="property-optional"
+    <dd>Record type. Valid values: <code>A</code>, <code>AAAA</code>, <code>CNAME</code>, <code>MX</code>, <code>TXT</code>, <code>PTR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recordvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recordvalue_csharp" style="color: inherit; text-decoration: inherit;">Record<wbr>Value</a>
@@ -1196,8 +1474,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</p>
-</dd><dt class="property-optional"
+    <dd>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record status. Valid values: <code>enabled</code>, <code>disabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subdomain_csharp" style="color: inherit; text-decoration: inherit;">Sub<wbr>Domain</a>
@@ -1205,8 +1490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subdomain, such as &quot;www&quot;, &quot;m&quot;, and &quot;@&quot;.</p>
-</dd><dt class="property-optional"
+    <dd>Subdomain, such as <code>www</code>, <code>m</code>, and <code>@</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ttl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ttl_csharp" style="color: inherit; text-decoration: inherit;">Ttl</a>
@@ -1214,8 +1498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</p>
-</dd><dt class="property-optional"
+    <dd>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_weight_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_weight_csharp" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -1223,8 +1506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Record weight. Value range: 1~100.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Record weight. Value range: 1~100.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_zoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -1232,8 +1514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private domain ID.</p>
-</dd></dl>
+    <dd>Private domain ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1247,8 +1528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</p>
-</dd><dt class="property-optional"
+    <dd>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recordtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recordtype_go" style="color: inherit; text-decoration: inherit;">Record<wbr>Type</a>
@@ -1256,8 +1536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record type. Valid values: &quot;A&quot;, &quot;AAAA&quot;, &quot;CNAME&quot;, &quot;MX&quot;, &quot;TXT&quot;, &quot;PTR&quot;.</p>
-</dd><dt class="property-optional"
+    <dd>Record type. Valid values: <code>A</code>, <code>AAAA</code>, <code>CNAME</code>, <code>MX</code>, <code>TXT</code>, <code>PTR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recordvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recordvalue_go" style="color: inherit; text-decoration: inherit;">Record<wbr>Value</a>
@@ -1265,8 +1544,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</p>
-</dd><dt class="property-optional"
+    <dd>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record status. Valid values: <code>enabled</code>, <code>disabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subdomain_go" style="color: inherit; text-decoration: inherit;">Sub<wbr>Domain</a>
@@ -1274,8 +1560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subdomain, such as &quot;www&quot;, &quot;m&quot;, and &quot;@&quot;.</p>
-</dd><dt class="property-optional"
+    <dd>Subdomain, such as <code>www</code>, <code>m</code>, and <code>@</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ttl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ttl_go" style="color: inherit; text-decoration: inherit;">Ttl</a>
@@ -1283,8 +1568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</p>
-</dd><dt class="property-optional"
+    <dd>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_weight_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_weight_go" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -1292,8 +1576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Record weight. Value range: 1~100.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Record weight. Value range: 1~100.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_zoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -1301,8 +1584,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private domain ID.</p>
-</dd></dl>
+    <dd>Private domain ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_mx_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mx_hcl" style="color: inherit; text-decoration: inherit;">mx</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_record_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_record_type_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record type. Valid values: <code>A</code>, <code>AAAA</code>, <code>CNAME</code>, <code>MX</code>, <code>TXT</code>, <code>PTR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_record_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_record_value_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record status. Valid values: <code>enabled</code>, <code>disabled</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sub_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sub_domain_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subdomain, such as <code>www</code>, <code>m</code>, and <code>@</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ttl_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ttl_hcl" style="color: inherit; text-decoration: inherit;">ttl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_weight_hcl" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Record weight. Value range: 1~100.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_id_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Private domain ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1316,8 +1668,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</p>
-</dd><dt class="property-optional"
+    <dd>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recordtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recordtype_java" style="color: inherit; text-decoration: inherit;">record<wbr>Type</a>
@@ -1325,8 +1676,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record type. Valid values: &quot;A&quot;, &quot;AAAA&quot;, &quot;CNAME&quot;, &quot;MX&quot;, &quot;TXT&quot;, &quot;PTR&quot;.</p>
-</dd><dt class="property-optional"
+    <dd>Record type. Valid values: <code>A</code>, <code>AAAA</code>, <code>CNAME</code>, <code>MX</code>, <code>TXT</code>, <code>PTR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recordvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recordvalue_java" style="color: inherit; text-decoration: inherit;">record<wbr>Value</a>
@@ -1334,8 +1684,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</p>
-</dd><dt class="property-optional"
+    <dd>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Record status. Valid values: <code>enabled</code>, <code>disabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subdomain_java" style="color: inherit; text-decoration: inherit;">sub<wbr>Domain</a>
@@ -1343,8 +1700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subdomain, such as &quot;www&quot;, &quot;m&quot;, and &quot;@&quot;.</p>
-</dd><dt class="property-optional"
+    <dd>Subdomain, such as <code>www</code>, <code>m</code>, and <code>@</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ttl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ttl_java" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -1352,8 +1708,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</p>
-</dd><dt class="property-optional"
+    <dd>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_weight_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_weight_java" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1361,8 +1716,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Record weight. Value range: 1~100.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Record weight. Value range: 1~100.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_zoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -1370,8 +1724,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private domain ID.</p>
-</dd></dl>
+    <dd>Private domain ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1385,8 +1738,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</p>
-</dd><dt class="property-optional"
+    <dd>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recordtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recordtype_nodejs" style="color: inherit; text-decoration: inherit;">record<wbr>Type</a>
@@ -1394,8 +1746,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record type. Valid values: &quot;A&quot;, &quot;AAAA&quot;, &quot;CNAME&quot;, &quot;MX&quot;, &quot;TXT&quot;, &quot;PTR&quot;.</p>
-</dd><dt class="property-optional"
+    <dd>Record type. Valid values: <code>A</code>, <code>AAAA</code>, <code>CNAME</code>, <code>MX</code>, <code>TXT</code>, <code>PTR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recordvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recordvalue_nodejs" style="color: inherit; text-decoration: inherit;">record<wbr>Value</a>
@@ -1403,8 +1754,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</p>
-</dd><dt class="property-optional"
+    <dd>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Record status. Valid values: <code>enabled</code>, <code>disabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subdomain_nodejs" style="color: inherit; text-decoration: inherit;">sub<wbr>Domain</a>
@@ -1412,8 +1770,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subdomain, such as &quot;www&quot;, &quot;m&quot;, and &quot;@&quot;.</p>
-</dd><dt class="property-optional"
+    <dd>Subdomain, such as <code>www</code>, <code>m</code>, and <code>@</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ttl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ttl_nodejs" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -1421,8 +1778,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</p>
-</dd><dt class="property-optional"
+    <dd>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_weight_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_weight_nodejs" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1430,8 +1786,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Record weight. Value range: 1~100.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Record weight. Value range: 1~100.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_zoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -1439,8 +1794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private domain ID.</p>
-</dd></dl>
+    <dd>Private domain ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1454,8 +1808,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</p>
-</dd><dt class="property-optional"
+    <dd>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_record_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_record_type_python" style="color: inherit; text-decoration: inherit;">record_<wbr>type</a>
@@ -1463,8 +1816,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Record type. Valid values: &quot;A&quot;, &quot;AAAA&quot;, &quot;CNAME&quot;, &quot;MX&quot;, &quot;TXT&quot;, &quot;PTR&quot;.</p>
-</dd><dt class="property-optional"
+    <dd>Record type. Valid values: <code>A</code>, <code>AAAA</code>, <code>CNAME</code>, <code>MX</code>, <code>TXT</code>, <code>PTR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_record_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_record_value_python" style="color: inherit; text-decoration: inherit;">record_<wbr>value</a>
@@ -1472,8 +1824,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</p>
-</dd><dt class="property-optional"
+    <dd>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Record status. Valid values: <code>enabled</code>, <code>disabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sub_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sub_domain_python" style="color: inherit; text-decoration: inherit;">sub_<wbr>domain</a>
@@ -1481,8 +1840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subdomain, such as &quot;www&quot;, &quot;m&quot;, and &quot;@&quot;.</p>
-</dd><dt class="property-optional"
+    <dd>Subdomain, such as <code>www</code>, <code>m</code>, and <code>@</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ttl_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ttl_python" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -1490,8 +1848,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</p>
-</dd><dt class="property-optional"
+    <dd>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_weight_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_weight_python" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1499,8 +1856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Record weight. Value range: 1~100.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Record weight. Value range: 1~100.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_id_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
@@ -1508,8 +1864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Private domain ID.</p>
-</dd></dl>
+    <dd>Private domain ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1523,8 +1878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</p>
-</dd><dt class="property-optional"
+    <dd>MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recordtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recordtype_yaml" style="color: inherit; text-decoration: inherit;">record<wbr>Type</a>
@@ -1532,8 +1886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record type. Valid values: &quot;A&quot;, &quot;AAAA&quot;, &quot;CNAME&quot;, &quot;MX&quot;, &quot;TXT&quot;, &quot;PTR&quot;.</p>
-</dd><dt class="property-optional"
+    <dd>Record type. Valid values: <code>A</code>, <code>AAAA</code>, <code>CNAME</code>, <code>MX</code>, <code>TXT</code>, <code>PTR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recordvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recordvalue_yaml" style="color: inherit; text-decoration: inherit;">record<wbr>Value</a>
@@ -1541,8 +1894,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</p>
-</dd><dt class="property-optional"
+    <dd>Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Record status. Valid values: <code>enabled</code>, <code>disabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subdomain_yaml" style="color: inherit; text-decoration: inherit;">sub<wbr>Domain</a>
@@ -1550,8 +1910,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subdomain, such as &quot;www&quot;, &quot;m&quot;, and &quot;@&quot;.</p>
-</dd><dt class="property-optional"
+    <dd>Subdomain, such as <code>www</code>, <code>m</code>, and <code>@</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ttl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ttl_yaml" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -1559,8 +1918,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</p>
-</dd><dt class="property-optional"
+    <dd>Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_weight_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_weight_yaml" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1568,8 +1926,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Record weight. Value range: 1~100.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Record weight. Value range: 1~100.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_zoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -1577,8 +1934,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private domain ID.</p>
-</dd></dl>
+    <dd>Private domain ID.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1601,6 +1957,9 @@ $ pulumi import tencentcloud:PrivateDns/record:Record example zone-iza3a33s#1983
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1610,7 +1969,6 @@ $ pulumi import tencentcloud:PrivateDns/record:Record example zone-iza3a33s#1983
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

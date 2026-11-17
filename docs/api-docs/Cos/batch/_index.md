@@ -2,9 +2,11 @@
 ---
 title: "Batch"
 title_tag: "tencentcloud.Cos.Batch"
-meta_desc: "Documentation for the tencentcloud.Cos.Batch resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a cos bucket batch. NOTE: The current resource does not support cosDomain."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,17 +16,28 @@ no_edit_this_page: true
 
 Provides a resource to create a cos bucket batch.
 
+> **NOTE:** The current resource does not support `cosDomain`.
+
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const cosBatch = new tencentcloud.cos.Batch("cosBatch", {
+const cosBatch = new tencentcloud.cos.Batch("cos_batch", {
+    uin: "100022975249",
     appid: 1308919341,
     confirmationRequired: true,
     description: "cos_batch",
+    priority: 1,
+    status: "Cancelled",
+    roleArn: "qcs::cam::uin/100022975249:roleName/COSBatch_QCSRole",
     manifest: {
         location: {
             etag: "64357de8fd75a3abae2200135a2c9627",
@@ -44,56 +57,118 @@ const cosBatch = new tencentcloud.cos.Batch("cosBatch", {
             targetResource: "qcs::cos:ap-guangzhou:uid/1308919341:cos-lock-1308919341",
         },
     },
-    priority: 1,
     report: {
         bucket: "qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341",
         enabled: "true",
         format: "Report_CSV_V1",
         reportScope: "AllTasks",
     },
-    roleArn: "qcs::cam::uin/100022975249:roleName/COSBatch_QCSRole",
-    status: "Cancelled",
-    uin: "100022975249",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-cos_batch = tencentcloud.cos.Batch("cosBatch",
+cos_batch = tencentcloud.cos.Batch("cos_batch",
+    uin="100022975249",
     appid=1308919341,
     confirmation_required=True,
     description="cos_batch",
-    manifest=tencentcloud.cos.BatchManifestArgs(
-        location=tencentcloud.cos.BatchManifestLocationArgs(
-            etag="64357de8fd75a3abae2200135a2c9627",
-            object_arn="qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341/cos_bucket_inventory/1308919341/keep-test/test/20230621/manifest.json",
-        ),
-        spec=tencentcloud.cos.BatchManifestSpecArgs(
-            format="COSInventoryReport_CSV_V1",
-        ),
-    ),
-    operation=tencentcloud.cos.BatchOperationArgs(
-        cos_put_object_copy=tencentcloud.cos.BatchOperationCosPutObjectCopyArgs(
-            access_control_directive="Copy",
-            metadata_directive="Copy",
-            prefix_replace=False,
-            storage_class="STANDARD",
-            tagging_directive="Copy",
-            target_resource="qcs::cos:ap-guangzhou:uid/1308919341:cos-lock-1308919341",
-        ),
-    ),
     priority=1,
-    report=tencentcloud.cos.BatchReportArgs(
-        bucket="qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341",
-        enabled="true",
-        format="Report_CSV_V1",
-        report_scope="AllTasks",
-    ),
-    role_arn="qcs::cam::uin/100022975249:roleName/COSBatch_QCSRole",
     status="Cancelled",
-    uin="100022975249")
+    role_arn="qcs::cam::uin/100022975249:roleName/COSBatch_QCSRole",
+    manifest={
+        "location": {
+            "etag": "64357de8fd75a3abae2200135a2c9627",
+            "object_arn": "qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341/cos_bucket_inventory/1308919341/keep-test/test/20230621/manifest.json",
+        },
+        "spec": {
+            "format": "COSInventoryReport_CSV_V1",
+        },
+    },
+    operation={
+        "cos_put_object_copy": {
+            "access_control_directive": "Copy",
+            "metadata_directive": "Copy",
+            "prefix_replace": False,
+            "storage_class": "STANDARD",
+            "tagging_directive": "Copy",
+            "target_resource": "qcs::cos:ap-guangzhou:uid/1308919341:cos-lock-1308919341",
+        },
+    },
+    report={
+        "bucket": "qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341",
+        "enabled": "true",
+        "format": "Report_CSV_V1",
+        "report_scope": "AllTasks",
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cos.NewBatch(ctx, "cos_batch", &cos.BatchArgs{
+			Uin:                  pulumi.String("100022975249"),
+			Appid:                pulumi.Int(1308919341),
+			ConfirmationRequired: pulumi.Bool(true),
+			Description:          pulumi.String("cos_batch"),
+			Priority:             pulumi.Int(1),
+			Status:               pulumi.String("Cancelled"),
+			RoleArn:              pulumi.String("qcs::cam::uin/100022975249:roleName/COSBatch_QCSRole"),
+			Manifest: &cos.BatchManifestArgs{
+				Location: &cos.BatchManifestLocationArgs{
+					Etag:      pulumi.String("64357de8fd75a3abae2200135a2c9627"),
+					ObjectArn: pulumi.String("qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341/cos_bucket_inventory/1308919341/keep-test/test/20230621/manifest.json"),
+				},
+				Spec: &cos.BatchManifestSpecArgs{
+					Format: pulumi.String("COSInventoryReport_CSV_V1"),
+				},
+			},
+			Operation: &cos.BatchOperationArgs{
+				CosPutObjectCopy: &cos.BatchOperationCosPutObjectCopyArgs{
+					AccessControlDirective: pulumi.String("Copy"),
+					MetadataDirective:      pulumi.String("Copy"),
+					PrefixReplace:          pulumi.Bool(false),
+					StorageClass:           pulumi.String("STANDARD"),
+					TaggingDirective:       pulumi.String("Copy"),
+					TargetResource:         pulumi.String("qcs::cos:ap-guangzhou:uid/1308919341:cos-lock-1308919341"),
+				},
+			},
+			Report: &cos.BatchReportArgs{
+				Bucket:      pulumi.String("qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341"),
+				Enabled:     pulumi.String("true"),
+				Format:      pulumi.String("Report_CSV_V1"),
+				ReportScope: pulumi.String("AllTasks"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -102,11 +177,15 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var cosBatch = new Tencentcloud.Cos.Batch("cosBatch", new()
+    var cosBatch = new Tencentcloud.Cos.Batch("cos_batch", new()
     {
+        Uin = "100022975249",
         Appid = 1308919341,
         ConfirmationRequired = true,
         Description = "cos_batch",
+        Priority = 1,
+        Status = "Cancelled",
+        RoleArn = "qcs::cam::uin/100022975249:roleName/COSBatch_QCSRole",
         Manifest = new Tencentcloud.Cos.Inputs.BatchManifestArgs
         {
             Location = new Tencentcloud.Cos.Inputs.BatchManifestLocationArgs
@@ -131,7 +210,6 @@ return await Deployment.RunAsync(() =>
                 TargetResource = "qcs::cos:ap-guangzhou:uid/1308919341:cos-lock-1308919341",
             },
         },
-        Priority = 1,
         Report = new Tencentcloud.Cos.Inputs.BatchReportArgs
         {
             Bucket = "qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341",
@@ -139,64 +217,15 @@ return await Deployment.RunAsync(() =>
             Format = "Report_CSV_V1",
             ReportScope = "AllTasks",
         },
-        RoleArn = "qcs::cam::uin/100022975249:roleName/COSBatch_QCSRole",
-        Status = "Cancelled",
-        Uin = "100022975249",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cos.NewBatch(ctx, "cosBatch", &Cos.BatchArgs{
-			Appid:                pulumi.Int(1308919341),
-			ConfirmationRequired: pulumi.Bool(true),
-			Description:          pulumi.String("cos_batch"),
-			Manifest: &cos.BatchManifestArgs{
-				Location: &cos.BatchManifestLocationArgs{
-					Etag:      pulumi.String("64357de8fd75a3abae2200135a2c9627"),
-					ObjectArn: pulumi.String("qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341/cos_bucket_inventory/1308919341/keep-test/test/20230621/manifest.json"),
-				},
-				Spec: &cos.BatchManifestSpecArgs{
-					Format: pulumi.String("COSInventoryReport_CSV_V1"),
-				},
-			},
-			Operation: &cos.BatchOperationArgs{
-				CosPutObjectCopy: &cos.BatchOperationCosPutObjectCopyArgs{
-					AccessControlDirective: pulumi.String("Copy"),
-					MetadataDirective:      pulumi.String("Copy"),
-					PrefixReplace:          pulumi.Bool(false),
-					StorageClass:           pulumi.String("STANDARD"),
-					TaggingDirective:       pulumi.String("Copy"),
-					TargetResource:         pulumi.String("qcs::cos:ap-guangzhou:uid/1308919341:cos-lock-1308919341"),
-				},
-			},
-			Priority: pulumi.Int(1),
-			Report: &cos.BatchReportArgs{
-				Bucket:      pulumi.String("qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341"),
-				Enabled:     pulumi.String("true"),
-				Format:      pulumi.String("Report_CSV_V1"),
-				ReportScope: pulumi.String("AllTasks"),
-			},
-			RoleArn: pulumi.String("qcs::cam::uin/100022975249:roleName/COSBatch_QCSRole"),
-			Status:  pulumi.String("Cancelled"),
-			Uin:     pulumi.String("100022975249"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -211,8 +240,8 @@ import com.pulumi.tencentcloud.Cos.inputs.BatchManifestSpecArgs;
 import com.pulumi.tencentcloud.Cos.inputs.BatchOperationArgs;
 import com.pulumi.tencentcloud.Cos.inputs.BatchOperationCosPutObjectCopyArgs;
 import com.pulumi.tencentcloud.Cos.inputs.BatchReportArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -224,10 +253,14 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var cosBatch = new Batch("cosBatch", BatchArgs.builder()        
-            .appid("1308919341")
+        var cosBatch = new Batch("cosBatch", BatchArgs.builder()
+            .uin("100022975249")
+            .appid(1308919341)
             .confirmationRequired(true)
             .description("cos_batch")
+            .priority(1)
+            .status("Cancelled")
+            .roleArn("qcs::cam::uin/100022975249:roleName/COSBatch_QCSRole")
             .manifest(BatchManifestArgs.builder()
                 .location(BatchManifestLocationArgs.builder()
                     .etag("64357de8fd75a3abae2200135a2c9627")
@@ -247,29 +280,35 @@ public class App {
                     .targetResource("qcs::cos:ap-guangzhou:uid/1308919341:cos-lock-1308919341")
                     .build())
                 .build())
-            .priority(1)
             .report(BatchReportArgs.builder()
                 .bucket("qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341")
                 .enabled("true")
                 .format("Report_CSV_V1")
                 .reportScope("AllTasks")
                 .build())
-            .roleArn("qcs::cam::uin/100022975249:roleName/COSBatch_QCSRole")
-            .status("Cancelled")
-            .uin("100022975249")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   cosBatch:
     type: tencentcloud:Cos:Batch
+    name: cos_batch
     properties:
+      uin: '100022975249'
       appid: '1308919341'
       confirmationRequired: true
       description: cos_batch
+      priority: 1
+      status: Cancelled
+      roleArn: qcs::cam::uin/100022975249:roleName/COSBatch_QCSRole
       manifest:
         location:
           etag: 64357de8fd75a3abae2200135a2c9627
@@ -284,84 +323,145 @@ resources:
           storageClass: STANDARD
           taggingDirective: Copy
           targetResource: qcs::cos:ap-guangzhou:uid/1308919341:cos-lock-1308919341
-      priority: 1
       report:
         bucket: qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341
         enabled: 'true'
         format: Report_CSV_V1
         reportScope: AllTasks
-      roleArn: qcs::cam::uin/100022975249:roleName/COSBatch_QCSRole
-      status: Cancelled
-      uin: '100022975249'
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cos_batch" "cos_batch" {
+  uin                   = "100022975249"
+  appid                 = "1308919341"
+  confirmation_required = true
+  description           = "cos_batch"
+  priority              = 1
+  status                = "Cancelled"
+  role_arn              = "qcs::cam::uin/100022975249:roleName/COSBatch_QCSRole"
+  manifest = {
+    location = {
+      etag       = "64357de8fd75a3abae2200135a2c9627"
+      object_arn = "qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341/cos_bucket_inventory/1308919341/keep-test/test/20230621/manifest.json"
+    }
+    spec = {
+      format = "COSInventoryReport_CSV_V1"
+    }
+  }
+  operation = {
+    cos_put_object_copy = {
+      access_control_directive = "Copy"
+      metadata_directive       = "Copy"
+      prefix_replace           = false
+      storage_class            = "STANDARD"
+      tagging_directive        = "Copy"
+      target_resource          = "qcs::cos:ap-guangzhou:uid/1308919341:cos-lock-1308919341"
+    }
+  }
+  report = {
+    bucket       = "qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341"
+    enabled      = "true"
+    format       = "Report_CSV_V1"
+    report_scope = "AllTasks"
+  }
+}
+```
+</pulumi-choosable>
+</div>
 
 
 
 ## Create Batch Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Batch</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BatchArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Batch</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BatchArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Batch</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BatchArgs</a></span><span class="p">,</span>
+          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Batch</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
           <span class="nx">appid</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">manifest</span><span class="p">:</span> <span class="nx">Optional[BatchManifestArgs]</span> = None<span class="p">,</span>
+          <span class="nx">operation</span><span class="p">:</span> <span class="nx">Optional[BatchOperationArgs]</span> = None<span class="p">,</span>
+          <span class="nx">priority</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">report</span><span class="p">:</span> <span class="nx">Optional[BatchReportArgs]</span> = None<span class="p">,</span>
+          <span class="nx">role_arn</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">uin</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">confirmation_required</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
           <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">manifest</span><span class="p">:</span> <span class="nx">Optional[_cos.BatchManifestArgs]</span> = None<span class="p">,</span>
-          <span class="nx">operation</span><span class="p">:</span> <span class="nx">Optional[_cos.BatchOperationArgs]</span> = None<span class="p">,</span>
-          <span class="nx">priority</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-          <span class="nx">report</span><span class="p">:</span> <span class="nx">Optional[_cos.BatchReportArgs]</span> = None<span class="p">,</span>
-          <span class="nx">role_arn</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">uin</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Batch</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BatchArgs</a></span><span class="p">,</span>
-          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+          <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewBatch</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">BatchArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Batch</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewBatch</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">BatchArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Batch</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Batch</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BatchArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Batch</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BatchArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Batch</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BatchArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Batch</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BatchArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cos:Batch</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cos:Batch</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cos_batch&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -382,7 +482,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -499,11 +599,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Batch Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Batch resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -519,26 +627,23 @@ The Batch resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Appid.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Appid.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="manifest_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#manifest_csharp" style="color: inherit; text-decoration: inherit;">Manifest</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchmanifest">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Manifest<wbr>Args</a></span>
+        <span class="property-type"><a href="#batchmanifest">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Manifest</a></span>
     </dt>
-    <dd><p>List of objects to be processed.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>List of objects to be processed.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="operation_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_csharp" style="color: inherit; text-decoration: inherit;">Operation</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchoperation">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Operation<wbr>Args</a></span>
+        <span class="property-type"><a href="#batchoperation">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Operation</a></span>
     </dt>
-    <dd><p>Select the action to be performed on the objects in the manifest file.</p>
-</dd><dt class="property-required"
+    <dd>Select the action to be performed on the objects in the manifest file.</dd><dt class="property-required"
             title="Required">
         <span id="priority_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_csharp" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -546,17 +651,15 @@ The Batch resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="report_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#report_csharp" style="color: inherit; text-decoration: inherit;">Report</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchreport">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Report<wbr>Args</a></span>
+        <span class="property-type"><a href="#batchreport">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Report</a></span>
     </dt>
-    <dd><p>Task completion report.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Task completion report.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="rolearn_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearn_csharp" style="color: inherit; text-decoration: inherit;">Role<wbr>Arn</a>
@@ -564,8 +667,7 @@ The Batch resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="uin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_csharp" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -573,8 +675,7 @@ The Batch resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Uin.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Uin.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="confirmationrequired_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#confirmationrequired_csharp" style="color: inherit; text-decoration: inherit;">Confirmation<wbr>Required</a>
@@ -582,8 +683,7 @@ The Batch resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to confirm before performing the task. The default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to confirm before performing the task. The default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -591,8 +691,7 @@ The Batch resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -600,10 +699,9 @@ The Batch resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of the task.
+    <dd>Current status of the task.
 Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
-For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</p>
-</dd></dl>
+For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -617,8 +715,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Appid.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Appid.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="manifest_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#manifest_go" style="color: inherit; text-decoration: inherit;">Manifest</a>
@@ -626,8 +723,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchmanifest">Batch<wbr>Manifest<wbr>Args</a></span>
     </dt>
-    <dd><p>List of objects to be processed.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>List of objects to be processed.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="operation_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_go" style="color: inherit; text-decoration: inherit;">Operation</a>
@@ -635,8 +731,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperation">Batch<wbr>Operation<wbr>Args</a></span>
     </dt>
-    <dd><p>Select the action to be performed on the objects in the manifest file.</p>
-</dd><dt class="property-required"
+    <dd>Select the action to be performed on the objects in the manifest file.</dd><dt class="property-required"
             title="Required">
         <span id="priority_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_go" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -644,8 +739,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="report_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#report_go" style="color: inherit; text-decoration: inherit;">Report</a>
@@ -653,8 +747,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchreport">Batch<wbr>Report<wbr>Args</a></span>
     </dt>
-    <dd><p>Task completion report.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Task completion report.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="rolearn_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearn_go" style="color: inherit; text-decoration: inherit;">Role<wbr>Arn</a>
@@ -662,8 +755,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="uin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_go" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -671,8 +763,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Uin.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Uin.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="confirmationrequired_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#confirmationrequired_go" style="color: inherit; text-decoration: inherit;">Confirmation<wbr>Required</a>
@@ -680,8 +771,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to confirm before performing the task. The default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to confirm before performing the task. The default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -689,8 +779,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -698,10 +787,97 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of the task.
+    <dd>Current status of the task.
 Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
-For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</p>
-</dd></dl>
+For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="appid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#appid_hcl" style="color: inherit; text-decoration: inherit;">appid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Appid.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="manifest_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#manifest_hcl" style="color: inherit; text-decoration: inherit;">manifest</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#batchmanifest">object</a></span>
+    </dt>
+    <dd>List of objects to be processed.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="operation_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_hcl" style="color: inherit; text-decoration: inherit;">operation</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#batchoperation">object</a></span>
+    </dt>
+    <dd>Select the action to be performed on the objects in the manifest file.</dd><dt class="property-required"
+            title="Required">
+        <span id="priority_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_hcl" style="color: inherit; text-decoration: inherit;">priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="report_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#report_hcl" style="color: inherit; text-decoration: inherit;">report</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#batchreport">object</a></span>
+    </dt>
+    <dd>Task completion report.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="role_arn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_arn_hcl" style="color: inherit; text-decoration: inherit;">role_<wbr>arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_hcl" style="color: inherit; text-decoration: inherit;">uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Uin.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="confirmation_required_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#confirmation_required_hcl" style="color: inherit; text-decoration: inherit;">confirmation_<wbr>required</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to confirm before performing the task. The default is false.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Current status of the task.
+Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
+For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -715,26 +891,23 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Appid.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Appid.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="manifest_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#manifest_java" style="color: inherit; text-decoration: inherit;">manifest</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchmanifest">Batch<wbr>Manifest<wbr>Args</a></span>
+        <span class="property-type"><a href="#batchmanifest">Batch<wbr>Manifest</a></span>
     </dt>
-    <dd><p>List of objects to be processed.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>List of objects to be processed.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="operation_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_java" style="color: inherit; text-decoration: inherit;">operation</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchoperation">Batch<wbr>Operation<wbr>Args</a></span>
+        <span class="property-type"><a href="#batchoperation">Batch<wbr>Operation</a></span>
     </dt>
-    <dd><p>Select the action to be performed on the objects in the manifest file.</p>
-</dd><dt class="property-required"
+    <dd>Select the action to be performed on the objects in the manifest file.</dd><dt class="property-required"
             title="Required">
         <span id="priority_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_java" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -742,17 +915,15 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="report_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#report_java" style="color: inherit; text-decoration: inherit;">report</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchreport">Batch<wbr>Report<wbr>Args</a></span>
+        <span class="property-type"><a href="#batchreport">Batch<wbr>Report</a></span>
     </dt>
-    <dd><p>Task completion report.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Task completion report.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="rolearn_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearn_java" style="color: inherit; text-decoration: inherit;">role<wbr>Arn</a>
@@ -760,8 +931,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="uin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_java" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -769,8 +939,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Uin.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Uin.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="confirmationrequired_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#confirmationrequired_java" style="color: inherit; text-decoration: inherit;">confirmation<wbr>Required</a>
@@ -778,8 +947,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to confirm before performing the task. The default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to confirm before performing the task. The default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -787,8 +955,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -796,10 +963,9 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of the task.
+    <dd>Current status of the task.
 Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
-For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</p>
-</dd></dl>
+For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -813,26 +979,23 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Appid.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Appid.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="manifest_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#manifest_nodejs" style="color: inherit; text-decoration: inherit;">manifest</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchmanifest">Batch<wbr>Manifest<wbr>Args</a></span>
+        <span class="property-type"><a href="#batchmanifest">Batch<wbr>Manifest</a></span>
     </dt>
-    <dd><p>List of objects to be processed.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>List of objects to be processed.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="operation_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_nodejs" style="color: inherit; text-decoration: inherit;">operation</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchoperation">Batch<wbr>Operation<wbr>Args</a></span>
+        <span class="property-type"><a href="#batchoperation">Batch<wbr>Operation</a></span>
     </dt>
-    <dd><p>Select the action to be performed on the objects in the manifest file.</p>
-</dd><dt class="property-required"
+    <dd>Select the action to be performed on the objects in the manifest file.</dd><dt class="property-required"
             title="Required">
         <span id="priority_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_nodejs" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -840,17 +1003,15 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="report_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#report_nodejs" style="color: inherit; text-decoration: inherit;">report</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchreport">Batch<wbr>Report<wbr>Args</a></span>
+        <span class="property-type"><a href="#batchreport">Batch<wbr>Report</a></span>
     </dt>
-    <dd><p>Task completion report.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Task completion report.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="rolearn_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearn_nodejs" style="color: inherit; text-decoration: inherit;">role<wbr>Arn</a>
@@ -858,8 +1019,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="uin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_nodejs" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -867,8 +1027,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Uin.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Uin.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="confirmationrequired_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#confirmationrequired_nodejs" style="color: inherit; text-decoration: inherit;">confirmation<wbr>Required</a>
@@ -876,8 +1035,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to confirm before performing the task. The default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to confirm before performing the task. The default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -885,8 +1043,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -894,10 +1051,9 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of the task.
+    <dd>Current status of the task.
 Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
-For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</p>
-</dd></dl>
+For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -911,8 +1067,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Appid.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Appid.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="manifest_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#manifest_python" style="color: inherit; text-decoration: inherit;">manifest</a>
@@ -920,8 +1075,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchmanifest">Batch<wbr>Manifest<wbr>Args</a></span>
     </dt>
-    <dd><p>List of objects to be processed.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>List of objects to be processed.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="operation_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_python" style="color: inherit; text-decoration: inherit;">operation</a>
@@ -929,8 +1083,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperation">Batch<wbr>Operation<wbr>Args</a></span>
     </dt>
-    <dd><p>Select the action to be performed on the objects in the manifest file.</p>
-</dd><dt class="property-required"
+    <dd>Select the action to be performed on the objects in the manifest file.</dd><dt class="property-required"
             title="Required">
         <span id="priority_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_python" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -938,8 +1091,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="report_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#report_python" style="color: inherit; text-decoration: inherit;">report</a>
@@ -947,8 +1099,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchreport">Batch<wbr>Report<wbr>Args</a></span>
     </dt>
-    <dd><p>Task completion report.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Task completion report.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="role_arn_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_arn_python" style="color: inherit; text-decoration: inherit;">role_<wbr>arn</a>
@@ -956,8 +1107,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_python" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -965,8 +1115,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Uin.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Uin.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="confirmation_required_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#confirmation_required_python" style="color: inherit; text-decoration: inherit;">confirmation_<wbr>required</a>
@@ -974,8 +1123,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to confirm before performing the task. The default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to confirm before performing the task. The default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -983,8 +1131,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -992,10 +1139,9 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Current status of the task.
+    <dd>Current status of the task.
 Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
-For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</p>
-</dd></dl>
+For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1009,8 +1155,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Appid.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Appid.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="manifest_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#manifest_yaml" style="color: inherit; text-decoration: inherit;">manifest</a>
@@ -1018,8 +1163,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchmanifest">Property Map</a></span>
     </dt>
-    <dd><p>List of objects to be processed.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>List of objects to be processed.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="operation_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_yaml" style="color: inherit; text-decoration: inherit;">operation</a>
@@ -1027,8 +1171,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperation">Property Map</a></span>
     </dt>
-    <dd><p>Select the action to be performed on the objects in the manifest file.</p>
-</dd><dt class="property-required"
+    <dd>Select the action to be performed on the objects in the manifest file.</dd><dt class="property-required"
             title="Required">
         <span id="priority_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_yaml" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1036,8 +1179,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="report_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#report_yaml" style="color: inherit; text-decoration: inherit;">report</a>
@@ -1045,8 +1187,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchreport">Property Map</a></span>
     </dt>
-    <dd><p>Task completion report.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Task completion report.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="rolearn_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolearn_yaml" style="color: inherit; text-decoration: inherit;">role<wbr>Arn</a>
@@ -1054,8 +1195,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="uin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_yaml" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1063,8 +1203,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Uin.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Uin.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="confirmationrequired_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#confirmationrequired_yaml" style="color: inherit; text-decoration: inherit;">confirmation<wbr>Required</a>
@@ -1072,8 +1211,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to confirm before performing the task. The default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to confirm before performing the task. The default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1081,8 +1219,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1090,10 +1227,9 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of the task.
+    <dd>Current status of the task.
 Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
-For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</p>
-</dd></dl>
+For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1114,8 +1250,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -1123,8 +1258,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job id.</p>
-</dd></dl>
+    <dd>Job id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1138,8 +1272,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -1147,8 +1280,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job id.</p>
-</dd></dl>
+    <dd>Job id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="job_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_id_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Job id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1162,8 +1316,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_java" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -1171,8 +1324,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Job id.</p>
-</dd></dl>
+    <dd>Job id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1186,8 +1338,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -1195,8 +1346,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job id.</p>
-</dd></dl>
+    <dd>Job id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1210,8 +1360,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="job_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_id_python" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
@@ -1219,8 +1368,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Job id.</p>
-</dd></dl>
+    <dd>Job id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1234,8 +1382,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -1243,8 +1390,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Job id.</p>
-</dd></dl>
+    <dd>Job id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1254,18 +1400,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Batch resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">BatchState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Batch</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">BatchState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Batch</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1273,111 +1419,150 @@ Get an existing Batch resource's state with the given name, ID, and optional ext
         <span class="nx">confirmation_required</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">job_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">manifest</span><span class="p">:</span> <span class="nx">Optional[_cos.BatchManifestArgs]</span> = None<span class="p">,</span>
-        <span class="nx">operation</span><span class="p">:</span> <span class="nx">Optional[_cos.BatchOperationArgs]</span> = None<span class="p">,</span>
+        <span class="nx">manifest</span><span class="p">:</span> <span class="nx">Optional[BatchManifestArgs]</span> = None<span class="p">,</span>
+        <span class="nx">operation</span><span class="p">:</span> <span class="nx">Optional[BatchOperationArgs]</span> = None<span class="p">,</span>
         <span class="nx">priority</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">report</span><span class="p">:</span> <span class="nx">Optional[_cos.BatchReportArgs]</span> = None<span class="p">,</span>
+        <span class="nx">report</span><span class="p">:</span> <span class="nx">Optional[BatchReportArgs]</span> = None<span class="p">,</span>
         <span class="nx">role_arn</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">uin</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Batch</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetBatch<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">BatchState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Batch</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetBatch<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">BatchState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Batch</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Batch</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BatchState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Batch</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BatchState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Batch</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BatchState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Batch</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BatchState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingBatch</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cos:Batch</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cos_batch</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BatchState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BatchState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1385,28 +1570,31 @@ Get an existing Batch resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BatchState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1414,28 +1602,31 @@ Get an existing Batch resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BatchState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1455,8 +1646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Appid.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Appid.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_confirmationrequired_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_confirmationrequired_csharp" style="color: inherit; text-decoration: inherit;">Confirmation<wbr>Required</a>
@@ -1464,8 +1654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to confirm before performing the task. The default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to confirm before performing the task. The default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1473,8 +1662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobid_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -1482,26 +1670,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Job id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_manifest_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_manifest_csharp" style="color: inherit; text-decoration: inherit;">Manifest</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchmanifest">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Manifest<wbr>Args</a></span>
+        <span class="property-type"><a href="#batchmanifest">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Manifest</a></span>
     </dt>
-    <dd><p>List of objects to be processed.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of objects to be processed.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_operation_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operation_csharp" style="color: inherit; text-decoration: inherit;">Operation</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchoperation">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Operation<wbr>Args</a></span>
+        <span class="property-type"><a href="#batchoperation">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Operation</a></span>
     </dt>
-    <dd><p>Select the action to be performed on the objects in the manifest file.</p>
-</dd><dt class="property-optional"
+    <dd>Select the action to be performed on the objects in the manifest file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_priority_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priority_csharp" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -1509,17 +1694,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_report_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_report_csharp" style="color: inherit; text-decoration: inherit;">Report</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchreport">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Report<wbr>Args</a></span>
+        <span class="property-type"><a href="#batchreport">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Report</a></span>
     </dt>
-    <dd><p>Task completion report.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Task completion report.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_rolearn_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rolearn_csharp" style="color: inherit; text-decoration: inherit;">Role<wbr>Arn</a>
@@ -1527,8 +1710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</p>
-</dd><dt class="property-optional"
+    <dd>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1536,10 +1718,9 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of the task.
+    <dd>Current status of the task.
 Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
-For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</p>
-</dd><dt class="property-optional property-replacement"
+For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_uin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uin_csharp" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -1547,8 +1728,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Uin.</p>
-</dd></dl>
+    <dd>Uin.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1562,8 +1742,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Appid.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Appid.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_confirmationrequired_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_confirmationrequired_go" style="color: inherit; text-decoration: inherit;">Confirmation<wbr>Required</a>
@@ -1571,8 +1750,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to confirm before performing the task. The default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to confirm before performing the task. The default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1580,8 +1758,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobid_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -1589,8 +1766,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Job id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_manifest_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_manifest_go" style="color: inherit; text-decoration: inherit;">Manifest</a>
@@ -1598,8 +1774,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchmanifest">Batch<wbr>Manifest<wbr>Args</a></span>
     </dt>
-    <dd><p>List of objects to be processed.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of objects to be processed.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_operation_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operation_go" style="color: inherit; text-decoration: inherit;">Operation</a>
@@ -1607,8 +1782,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperation">Batch<wbr>Operation<wbr>Args</a></span>
     </dt>
-    <dd><p>Select the action to be performed on the objects in the manifest file.</p>
-</dd><dt class="property-optional"
+    <dd>Select the action to be performed on the objects in the manifest file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_priority_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priority_go" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -1616,8 +1790,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_report_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_report_go" style="color: inherit; text-decoration: inherit;">Report</a>
@@ -1625,8 +1798,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchreport">Batch<wbr>Report<wbr>Args</a></span>
     </dt>
-    <dd><p>Task completion report.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Task completion report.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_rolearn_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rolearn_go" style="color: inherit; text-decoration: inherit;">Role<wbr>Arn</a>
@@ -1634,8 +1806,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</p>
-</dd><dt class="property-optional"
+    <dd>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1643,10 +1814,9 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of the task.
+    <dd>Current status of the task.
 Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
-For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</p>
-</dd><dt class="property-optional property-replacement"
+For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_uin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uin_go" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -1654,8 +1824,103 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Uin.</p>
-</dd></dl>
+    <dd>Uin.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_appid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_appid_hcl" style="color: inherit; text-decoration: inherit;">appid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Appid.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_confirmation_required_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_confirmation_required_hcl" style="color: inherit; text-decoration: inherit;">confirmation_<wbr>required</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to confirm before performing the task. The default is false.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_job_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_job_id_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Job id.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_manifest_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_manifest_hcl" style="color: inherit; text-decoration: inherit;">manifest</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#batchmanifest">object</a></span>
+    </dt>
+    <dd>List of objects to be processed.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_operation_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operation_hcl" style="color: inherit; text-decoration: inherit;">operation</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#batchoperation">object</a></span>
+    </dt>
+    <dd>Select the action to be performed on the objects in the manifest file.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_priority_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priority_hcl" style="color: inherit; text-decoration: inherit;">priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_report_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_report_hcl" style="color: inherit; text-decoration: inherit;">report</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#batchreport">object</a></span>
+    </dt>
+    <dd>Task completion report.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_role_arn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_role_arn_hcl" style="color: inherit; text-decoration: inherit;">role_<wbr>arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Current status of the task.
+Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
+For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uin_hcl" style="color: inherit; text-decoration: inherit;">uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Uin.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1669,8 +1934,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Appid.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Appid.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_confirmationrequired_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_confirmationrequired_java" style="color: inherit; text-decoration: inherit;">confirmation<wbr>Required</a>
@@ -1678,8 +1942,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to confirm before performing the task. The default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to confirm before performing the task. The default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1687,8 +1950,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobid_java" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -1696,26 +1958,23 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Job id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Job id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_manifest_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_manifest_java" style="color: inherit; text-decoration: inherit;">manifest</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchmanifest">Batch<wbr>Manifest<wbr>Args</a></span>
+        <span class="property-type"><a href="#batchmanifest">Batch<wbr>Manifest</a></span>
     </dt>
-    <dd><p>List of objects to be processed.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of objects to be processed.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_operation_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operation_java" style="color: inherit; text-decoration: inherit;">operation</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchoperation">Batch<wbr>Operation<wbr>Args</a></span>
+        <span class="property-type"><a href="#batchoperation">Batch<wbr>Operation</a></span>
     </dt>
-    <dd><p>Select the action to be performed on the objects in the manifest file.</p>
-</dd><dt class="property-optional"
+    <dd>Select the action to be performed on the objects in the manifest file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_priority_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priority_java" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1723,17 +1982,15 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_report_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_report_java" style="color: inherit; text-decoration: inherit;">report</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchreport">Batch<wbr>Report<wbr>Args</a></span>
+        <span class="property-type"><a href="#batchreport">Batch<wbr>Report</a></span>
     </dt>
-    <dd><p>Task completion report.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Task completion report.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_rolearn_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rolearn_java" style="color: inherit; text-decoration: inherit;">role<wbr>Arn</a>
@@ -1741,8 +1998,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</p>
-</dd><dt class="property-optional"
+    <dd>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1750,10 +2006,9 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of the task.
+    <dd>Current status of the task.
 Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
-For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</p>
-</dd><dt class="property-optional property-replacement"
+For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_uin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uin_java" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1761,8 +2016,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Uin.</p>
-</dd></dl>
+    <dd>Uin.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1776,8 +2030,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Appid.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Appid.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_confirmationrequired_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_confirmationrequired_nodejs" style="color: inherit; text-decoration: inherit;">confirmation<wbr>Required</a>
@@ -1785,8 +2038,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to confirm before performing the task. The default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to confirm before performing the task. The default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1794,8 +2046,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobid_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -1803,26 +2054,23 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Job id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_manifest_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_manifest_nodejs" style="color: inherit; text-decoration: inherit;">manifest</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchmanifest">Batch<wbr>Manifest<wbr>Args</a></span>
+        <span class="property-type"><a href="#batchmanifest">Batch<wbr>Manifest</a></span>
     </dt>
-    <dd><p>List of objects to be processed.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of objects to be processed.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_operation_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operation_nodejs" style="color: inherit; text-decoration: inherit;">operation</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchoperation">Batch<wbr>Operation<wbr>Args</a></span>
+        <span class="property-type"><a href="#batchoperation">Batch<wbr>Operation</a></span>
     </dt>
-    <dd><p>Select the action to be performed on the objects in the manifest file.</p>
-</dd><dt class="property-optional"
+    <dd>Select the action to be performed on the objects in the manifest file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_priority_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priority_nodejs" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1830,17 +2078,15 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_report_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_report_nodejs" style="color: inherit; text-decoration: inherit;">report</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchreport">Batch<wbr>Report<wbr>Args</a></span>
+        <span class="property-type"><a href="#batchreport">Batch<wbr>Report</a></span>
     </dt>
-    <dd><p>Task completion report.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Task completion report.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_rolearn_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rolearn_nodejs" style="color: inherit; text-decoration: inherit;">role<wbr>Arn</a>
@@ -1848,8 +2094,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</p>
-</dd><dt class="property-optional"
+    <dd>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1857,10 +2102,9 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of the task.
+    <dd>Current status of the task.
 Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
-For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</p>
-</dd><dt class="property-optional property-replacement"
+For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_uin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uin_nodejs" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1868,8 +2112,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Uin.</p>
-</dd></dl>
+    <dd>Uin.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1883,8 +2126,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Appid.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Appid.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_confirmation_required_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_confirmation_required_python" style="color: inherit; text-decoration: inherit;">confirmation_<wbr>required</a>
@@ -1892,8 +2134,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to confirm before performing the task. The default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to confirm before performing the task. The default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1901,8 +2142,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_job_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_job_id_python" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
@@ -1910,8 +2150,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Job id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Job id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_manifest_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_manifest_python" style="color: inherit; text-decoration: inherit;">manifest</a>
@@ -1919,8 +2158,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchmanifest">Batch<wbr>Manifest<wbr>Args</a></span>
     </dt>
-    <dd><p>List of objects to be processed.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of objects to be processed.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_operation_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operation_python" style="color: inherit; text-decoration: inherit;">operation</a>
@@ -1928,8 +2166,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperation">Batch<wbr>Operation<wbr>Args</a></span>
     </dt>
-    <dd><p>Select the action to be performed on the objects in the manifest file.</p>
-</dd><dt class="property-optional"
+    <dd>Select the action to be performed on the objects in the manifest file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_priority_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priority_python" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1937,8 +2174,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_report_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_report_python" style="color: inherit; text-decoration: inherit;">report</a>
@@ -1946,8 +2182,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchreport">Batch<wbr>Report<wbr>Args</a></span>
     </dt>
-    <dd><p>Task completion report.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Task completion report.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_role_arn_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_role_arn_python" style="color: inherit; text-decoration: inherit;">role_<wbr>arn</a>
@@ -1955,8 +2190,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</p>
-</dd><dt class="property-optional"
+    <dd>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1964,10 +2198,9 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Current status of the task.
+    <dd>Current status of the task.
 Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
-For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</p>
-</dd><dt class="property-optional property-replacement"
+For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uin_python" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1975,8 +2208,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Uin.</p>
-</dd></dl>
+    <dd>Uin.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1990,8 +2222,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Appid.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Appid.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_confirmationrequired_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_confirmationrequired_yaml" style="color: inherit; text-decoration: inherit;">confirmation<wbr>Required</a>
@@ -1999,8 +2230,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to confirm before performing the task. The default is false.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to confirm before performing the task. The default is false.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2008,8 +2238,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobid_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -2017,8 +2246,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Job id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Job id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_manifest_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_manifest_yaml" style="color: inherit; text-decoration: inherit;">manifest</a>
@@ -2026,8 +2254,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchmanifest">Property Map</a></span>
     </dt>
-    <dd><p>List of objects to be processed.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of objects to be processed.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_operation_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operation_yaml" style="color: inherit; text-decoration: inherit;">operation</a>
@@ -2035,8 +2262,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperation">Property Map</a></span>
     </dt>
-    <dd><p>Select the action to be performed on the objects in the manifest file.</p>
-</dd><dt class="property-optional"
+    <dd>Select the action to be performed on the objects in the manifest file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_priority_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priority_yaml" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -2044,8 +2270,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_report_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_report_yaml" style="color: inherit; text-decoration: inherit;">report</a>
@@ -2053,8 +2278,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchreport">Property Map</a></span>
     </dt>
-    <dd><p>Task completion report.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Task completion report.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_rolearn_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rolearn_yaml" style="color: inherit; text-decoration: inherit;">role<wbr>Arn</a>
@@ -2062,8 +2286,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</p>
-</dd><dt class="property-optional"
+    <dd>COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2071,10 +2294,9 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of the task.
+    <dd>Current status of the task.
 Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
-For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</p>
-</dd><dt class="property-optional property-replacement"
+For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_uin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uin_yaml" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -2082,8 +2304,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Uin.</p>
-</dd></dl>
+    <dd>Uin.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2098,7 +2319,9 @@ For Update status, when you move a task to the Ready state, COS will assume that
 
 
 
-<h4 id="batchmanifest">Batch<wbr>Manifest</h4>
+<h4 id="batchmanifest">
+Batch<wbr>Manifest<pulumi-choosable type="language" values="python,go" class="inline">, Batch<wbr>Manifest<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2110,8 +2333,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchmanifestlocation">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Manifest<wbr>Location</a></span>
     </dt>
-    <dd><p>The location information of the list of objects.</p>
-</dd><dt class="property-required"
+    <dd>The location information of the list of objects.</dd><dt class="property-required"
             title="Required">
         <span id="spec_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spec_csharp" style="color: inherit; text-decoration: inherit;">Spec</a>
@@ -2119,8 +2341,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchmanifestspec">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Manifest<wbr>Spec</a></span>
     </dt>
-    <dd><p>Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.</p>
-</dd></dl>
+    <dd>Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2134,8 +2355,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchmanifestlocation">Batch<wbr>Manifest<wbr>Location</a></span>
     </dt>
-    <dd><p>The location information of the list of objects.</p>
-</dd><dt class="property-required"
+    <dd>The location information of the list of objects.</dd><dt class="property-required"
             title="Required">
         <span id="spec_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spec_go" style="color: inherit; text-decoration: inherit;">Spec</a>
@@ -2143,8 +2363,29 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchmanifestspec">Batch<wbr>Manifest<wbr>Spec</a></span>
     </dt>
-    <dd><p>Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.</p>
-</dd></dl>
+    <dd>Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="location_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_hcl" style="color: inherit; text-decoration: inherit;">location</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#batchmanifestlocation">object</a></span>
+    </dt>
+    <dd>The location information of the list of objects.</dd><dt class="property-required"
+            title="Required">
+        <span id="spec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spec_hcl" style="color: inherit; text-decoration: inherit;">spec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#batchmanifestspec">object</a></span>
+    </dt>
+    <dd>Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2158,8 +2399,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchmanifestlocation">Batch<wbr>Manifest<wbr>Location</a></span>
     </dt>
-    <dd><p>The location information of the list of objects.</p>
-</dd><dt class="property-required"
+    <dd>The location information of the list of objects.</dd><dt class="property-required"
             title="Required">
         <span id="spec_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spec_java" style="color: inherit; text-decoration: inherit;">spec</a>
@@ -2167,8 +2407,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchmanifestspec">Batch<wbr>Manifest<wbr>Spec</a></span>
     </dt>
-    <dd><p>Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.</p>
-</dd></dl>
+    <dd>Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2182,8 +2421,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchmanifestlocation">Batch<wbr>Manifest<wbr>Location</a></span>
     </dt>
-    <dd><p>The location information of the list of objects.</p>
-</dd><dt class="property-required"
+    <dd>The location information of the list of objects.</dd><dt class="property-required"
             title="Required">
         <span id="spec_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spec_nodejs" style="color: inherit; text-decoration: inherit;">spec</a>
@@ -2191,8 +2429,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchmanifestspec">Batch<wbr>Manifest<wbr>Spec</a></span>
     </dt>
-    <dd><p>Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.</p>
-</dd></dl>
+    <dd>Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2206,8 +2443,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchmanifestlocation">Batch<wbr>Manifest<wbr>Location</a></span>
     </dt>
-    <dd><p>The location information of the list of objects.</p>
-</dd><dt class="property-required"
+    <dd>The location information of the list of objects.</dd><dt class="property-required"
             title="Required">
         <span id="spec_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spec_python" style="color: inherit; text-decoration: inherit;">spec</a>
@@ -2215,8 +2451,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchmanifestspec">Batch<wbr>Manifest<wbr>Spec</a></span>
     </dt>
-    <dd><p>Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.</p>
-</dd></dl>
+    <dd>Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2230,8 +2465,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchmanifestlocation">Property Map</a></span>
     </dt>
-    <dd><p>The location information of the list of objects.</p>
-</dd><dt class="property-required"
+    <dd>The location information of the list of objects.</dd><dt class="property-required"
             title="Required">
         <span id="spec_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spec_yaml" style="color: inherit; text-decoration: inherit;">spec</a>
@@ -2239,12 +2473,13 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchmanifestspec">Property Map</a></span>
     </dt>
-    <dd><p>Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.</p>
-</dd></dl>
+    <dd>Format information that describes the list of objects. If it is a CSV file, this element describes the fields contained in the manifest.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="batchmanifestlocation">Batch<wbr>Manifest<wbr>Location</h4>
+<h4 id="batchmanifestlocation">
+Batch<wbr>Manifest<wbr>Location<pulumi-choosable type="language" values="python,go" class="inline">, Batch<wbr>Manifest<wbr>Location<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2256,8 +2491,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the etag of the object list. Length 1-1024 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the etag of the object list. Length 1-1024 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="objectarn_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectarn_csharp" style="color: inherit; text-decoration: inherit;">Object<wbr>Arn</a>
@@ -2265,8 +2499,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.</dd><dt class="property-optional"
             title="Optional">
         <span id="objectversionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectversionid_csharp" style="color: inherit; text-decoration: inherit;">Object<wbr>Version<wbr>Id</a>
@@ -2274,8 +2507,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the version of the object manifest ID, which is 1-1024 bytes long.</p>
-</dd></dl>
+    <dd>Specifies the version of the object manifest ID, which is 1-1024 bytes long.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2289,8 +2521,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the etag of the object list. Length 1-1024 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the etag of the object list. Length 1-1024 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="objectarn_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectarn_go" style="color: inherit; text-decoration: inherit;">Object<wbr>Arn</a>
@@ -2298,8 +2529,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.</dd><dt class="property-optional"
             title="Optional">
         <span id="objectversionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectversionid_go" style="color: inherit; text-decoration: inherit;">Object<wbr>Version<wbr>Id</a>
@@ -2307,8 +2537,37 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the version of the object manifest ID, which is 1-1024 bytes long.</p>
-</dd></dl>
+    <dd>Specifies the version of the object manifest ID, which is 1-1024 bytes long.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="etag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#etag_hcl" style="color: inherit; text-decoration: inherit;">etag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the etag of the object list. Length 1-1024 bytes.</dd><dt class="property-required"
+            title="Required">
+        <span id="object_arn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#object_arn_hcl" style="color: inherit; text-decoration: inherit;">object_<wbr>arn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="object_version_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#object_version_id_hcl" style="color: inherit; text-decoration: inherit;">object_<wbr>version_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the version of the object manifest ID, which is 1-1024 bytes long.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2322,8 +2581,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the etag of the object list. Length 1-1024 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the etag of the object list. Length 1-1024 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="objectarn_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectarn_java" style="color: inherit; text-decoration: inherit;">object<wbr>Arn</a>
@@ -2331,8 +2589,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.</dd><dt class="property-optional"
             title="Optional">
         <span id="objectversionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectversionid_java" style="color: inherit; text-decoration: inherit;">object<wbr>Version<wbr>Id</a>
@@ -2340,8 +2597,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the version of the object manifest ID, which is 1-1024 bytes long.</p>
-</dd></dl>
+    <dd>Specifies the version of the object manifest ID, which is 1-1024 bytes long.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2355,8 +2611,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the etag of the object list. Length 1-1024 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the etag of the object list. Length 1-1024 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="objectarn_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectarn_nodejs" style="color: inherit; text-decoration: inherit;">object<wbr>Arn</a>
@@ -2364,8 +2619,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.</dd><dt class="property-optional"
             title="Optional">
         <span id="objectversionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectversionid_nodejs" style="color: inherit; text-decoration: inherit;">object<wbr>Version<wbr>Id</a>
@@ -2373,8 +2627,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the version of the object manifest ID, which is 1-1024 bytes long.</p>
-</dd></dl>
+    <dd>Specifies the version of the object manifest ID, which is 1-1024 bytes long.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2388,8 +2641,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies the etag of the object list. Length 1-1024 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the etag of the object list. Length 1-1024 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="object_arn_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#object_arn_python" style="color: inherit; text-decoration: inherit;">object_<wbr>arn</a>
@@ -2397,8 +2649,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.</dd><dt class="property-optional"
             title="Optional">
         <span id="object_version_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#object_version_id_python" style="color: inherit; text-decoration: inherit;">object_<wbr>version_<wbr>id</a>
@@ -2406,8 +2657,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies the version of the object manifest ID, which is 1-1024 bytes long.</p>
-</dd></dl>
+    <dd>Specifies the version of the object manifest ID, which is 1-1024 bytes long.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2421,8 +2671,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the etag of the object list. Length 1-1024 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Specifies the etag of the object list. Length 1-1024 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="objectarn_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectarn_yaml" style="color: inherit; text-decoration: inherit;">object<wbr>Arn</a>
@@ -2430,8 +2679,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the unique resource identifier of the object manifest, which is 1-1024 bytes long.</dd><dt class="property-optional"
             title="Optional">
         <span id="objectversionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectversionid_yaml" style="color: inherit; text-decoration: inherit;">object<wbr>Version<wbr>Id</a>
@@ -2439,12 +2687,13 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the version of the object manifest ID, which is 1-1024 bytes long.</p>
-</dd></dl>
+    <dd>Specifies the version of the object manifest ID, which is 1-1024 bytes long.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="batchmanifestspec">Batch<wbr>Manifest<wbr>Spec</h4>
+<h4 id="batchmanifestspec">
+Batch<wbr>Manifest<wbr>Spec<pulumi-choosable type="language" values="python,go" class="inline">, Batch<wbr>Manifest<wbr>Spec<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2456,8 +2705,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.</dd><dt class="property-optional"
             title="Optional">
         <span id="fields_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fields_csharp" style="color: inherit; text-decoration: inherit;">Fields</a>
@@ -2465,8 +2713,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.</p>
-</dd></dl>
+    <dd>Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2480,8 +2727,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.</dd><dt class="property-optional"
             title="Optional">
         <span id="fields_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fields_go" style="color: inherit; text-decoration: inherit;">Fields</a>
@@ -2489,8 +2735,29 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.</p>
-</dd></dl>
+    <dd>Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="format_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_hcl" style="color: inherit; text-decoration: inherit;">format</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="fields_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fields_hcl" style="color: inherit; text-decoration: inherit;">fields</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2504,8 +2771,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.</dd><dt class="property-optional"
             title="Optional">
         <span id="fields_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fields_java" style="color: inherit; text-decoration: inherit;">fields</a>
@@ -2513,8 +2779,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.</p>
-</dd></dl>
+    <dd>Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2528,8 +2793,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.</dd><dt class="property-optional"
             title="Optional">
         <span id="fields_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fields_nodejs" style="color: inherit; text-decoration: inherit;">fields</a>
@@ -2537,8 +2801,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.</p>
-</dd></dl>
+    <dd>Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2552,8 +2815,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.</dd><dt class="property-optional"
             title="Optional">
         <span id="fields_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fields_python" style="color: inherit; text-decoration: inherit;">fields</a>
@@ -2561,8 +2823,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.</p>
-</dd></dl>
+    <dd>Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2576,8 +2837,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the format information for the list of objects. Legal fields are: COSBatchOperations_CSV_V1, COSInventoryReport_CSV_V1.</dd><dt class="property-optional"
             title="Optional">
         <span id="fields_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fields_yaml" style="color: inherit; text-decoration: inherit;">fields</a>
@@ -2585,12 +2845,13 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.</p>
-</dd></dl>
+    <dd>Describes the fields contained in the listing, which you need to use to specify CSV file fields when Format is COSBatchOperations_CSV_V1. Legal fields are: Ignore, Bucket, Key, VersionId.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="batchoperation">Batch<wbr>Operation</h4>
+<h4 id="batchoperation">
+Batch<wbr>Operation<pulumi-choosable type="language" values="python,go" class="inline">, Batch<wbr>Operation<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2602,8 +2863,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosinitiaterestoreobject">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Operation<wbr>Cos<wbr>Initiate<wbr>Restore<wbr>Object</a></span>
     </dt>
-    <dd><p>Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosputobjectcopy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosputobjectcopy_csharp" style="color: inherit; text-decoration: inherit;">Cos<wbr>Put<wbr>Object<wbr>Copy</a>
@@ -2611,8 +2871,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopy">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy</a></span>
     </dt>
-    <dd><p>Specifies the specific parameters for the batch copy operation on the objects in the list.</p>
-</dd></dl>
+    <dd>Specifies the specific parameters for the batch copy operation on the objects in the list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2626,8 +2885,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosinitiaterestoreobject">Batch<wbr>Operation<wbr>Cos<wbr>Initiate<wbr>Restore<wbr>Object</a></span>
     </dt>
-    <dd><p>Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosputobjectcopy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosputobjectcopy_go" style="color: inherit; text-decoration: inherit;">Cos<wbr>Put<wbr>Object<wbr>Copy</a>
@@ -2635,8 +2893,29 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopy">Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy</a></span>
     </dt>
-    <dd><p>Specifies the specific parameters for the batch copy operation on the objects in the list.</p>
-</dd></dl>
+    <dd>Specifies the specific parameters for the batch copy operation on the objects in the list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="cos_initiate_restore_object_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_initiate_restore_object_hcl" style="color: inherit; text-decoration: inherit;">cos_<wbr>initiate_<wbr>restore_<wbr>object</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#batchoperationcosinitiaterestoreobject">object</a></span>
+    </dt>
+    <dd>Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cos_put_object_copy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_put_object_copy_hcl" style="color: inherit; text-decoration: inherit;">cos_<wbr>put_<wbr>object_<wbr>copy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#batchoperationcosputobjectcopy">object</a></span>
+    </dt>
+    <dd>Specifies the specific parameters for the batch copy operation on the objects in the list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2650,8 +2929,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosinitiaterestoreobject">Batch<wbr>Operation<wbr>Initiate<wbr>Restore<wbr>Object</a></span>
     </dt>
-    <dd><p>Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosputobjectcopy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosputobjectcopy_java" style="color: inherit; text-decoration: inherit;">cos<wbr>Put<wbr>Object<wbr>Copy</a>
@@ -2659,8 +2937,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopy">Batch<wbr>Operation<wbr>Put<wbr>Object<wbr>Copy</a></span>
     </dt>
-    <dd><p>Specifies the specific parameters for the batch copy operation on the objects in the list.</p>
-</dd></dl>
+    <dd>Specifies the specific parameters for the batch copy operation on the objects in the list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2674,8 +2951,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosinitiaterestoreobject">Batch<wbr>Operation<wbr>Cos<wbr>Initiate<wbr>Restore<wbr>Object</a></span>
     </dt>
-    <dd><p>Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosputobjectcopy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosputobjectcopy_nodejs" style="color: inherit; text-decoration: inherit;">cos<wbr>Put<wbr>Object<wbr>Copy</a>
@@ -2683,8 +2959,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopy">Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy</a></span>
     </dt>
-    <dd><p>Specifies the specific parameters for the batch copy operation on the objects in the list.</p>
-</dd></dl>
+    <dd>Specifies the specific parameters for the batch copy operation on the objects in the list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2698,8 +2973,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosinitiaterestoreobject">Batch<wbr>Operation<wbr>Cos<wbr>Initiate<wbr>Restore<wbr>Object</a></span>
     </dt>
-    <dd><p>Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.</dd><dt class="property-optional"
             title="Optional">
         <span id="cos_put_object_copy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_put_object_copy_python" style="color: inherit; text-decoration: inherit;">cos_<wbr>put_<wbr>object_<wbr>copy</a>
@@ -2707,8 +2981,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopy">Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy</a></span>
     </dt>
-    <dd><p>Specifies the specific parameters for the batch copy operation on the objects in the list.</p>
-</dd></dl>
+    <dd>Specifies the specific parameters for the batch copy operation on the objects in the list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2722,8 +2995,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosinitiaterestoreobject">Property Map</a></span>
     </dt>
-    <dd><p>Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the specific parameters for the batch restore operation for archive storage type objects in the inventory.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosputobjectcopy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosputobjectcopy_yaml" style="color: inherit; text-decoration: inherit;">cos<wbr>Put<wbr>Object<wbr>Copy</a>
@@ -2731,12 +3003,13 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopy">Property Map</a></span>
     </dt>
-    <dd><p>Specifies the specific parameters for the batch copy operation on the objects in the list.</p>
-</dd></dl>
+    <dd>Specifies the specific parameters for the batch copy operation on the objects in the list.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="batchoperationcosinitiaterestoreobject">Batch<wbr>Operation<wbr>Cos<wbr>Initiate<wbr>Restore<wbr>Object</h4>
+<h4 id="batchoperationcosinitiaterestoreobject">
+Batch<wbr>Operation<wbr>Cos<wbr>Initiate<wbr>Restore<wbr>Object<pulumi-choosable type="language" values="python,go" class="inline">, Batch<wbr>Operation<wbr>Cos<wbr>Initiate<wbr>Restore<wbr>Object<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2748,8 +3021,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.</p>
-</dd><dt class="property-required"
+    <dd>Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.</dd><dt class="property-required"
             title="Required">
         <span id="jobtier_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobtier_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Tier</a>
@@ -2757,8 +3029,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Select archive recovery model. Available values: Bulk, Standard.</p>
-</dd></dl>
+    <dd>Select archive recovery model. Available values: Bulk, Standard.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2772,8 +3043,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.</p>
-</dd><dt class="property-required"
+    <dd>Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.</dd><dt class="property-required"
             title="Required">
         <span id="jobtier_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobtier_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Tier</a>
@@ -2781,8 +3051,29 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Select archive recovery model. Available values: Bulk, Standard.</p>
-</dd></dl>
+    <dd>Select archive recovery model. Available values: Bulk, Standard.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="expiration_in_days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiration_in_days_hcl" style="color: inherit; text-decoration: inherit;">expiration_<wbr>in_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.</dd><dt class="property-required"
+            title="Required">
+        <span id="job_tier_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_tier_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>tier</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Select archive recovery model. Available values: Bulk, Standard.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2796,8 +3087,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.</p>
-</dd><dt class="property-required"
+    <dd>Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.</dd><dt class="property-required"
             title="Required">
         <span id="jobtier_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobtier_java" style="color: inherit; text-decoration: inherit;">job<wbr>Tier</a>
@@ -2805,8 +3095,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Select archive recovery model. Available values: Bulk, Standard.</p>
-</dd></dl>
+    <dd>Select archive recovery model. Available values: Bulk, Standard.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2820,8 +3109,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.</p>
-</dd><dt class="property-required"
+    <dd>Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.</dd><dt class="property-required"
             title="Required">
         <span id="jobtier_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobtier_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Tier</a>
@@ -2829,8 +3117,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Select archive recovery model. Available values: Bulk, Standard.</p>
-</dd></dl>
+    <dd>Select archive recovery model. Available values: Bulk, Standard.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2844,8 +3131,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.</p>
-</dd><dt class="property-required"
+    <dd>Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.</dd><dt class="property-required"
             title="Required">
         <span id="job_tier_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_tier_python" style="color: inherit; text-decoration: inherit;">job_<wbr>tier</a>
@@ -2853,8 +3139,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Select archive recovery model. Available values: Bulk, Standard.</p>
-</dd></dl>
+    <dd>Select archive recovery model. Available values: Bulk, Standard.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2868,8 +3153,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.</p>
-</dd><dt class="property-required"
+    <dd>Sets the number of days after which the copy will be automatically expired and deleted, an integer in the range of 1-365.</dd><dt class="property-required"
             title="Required">
         <span id="jobtier_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobtier_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Tier</a>
@@ -2877,12 +3161,13 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Select archive recovery model. Available values: Bulk, Standard.</p>
-</dd></dl>
+    <dd>Select archive recovery model. Available values: Bulk, Standard.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="batchoperationcosputobjectcopy">Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy</h4>
+<h4 id="batchoperationcosputobjectcopy">
+Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<pulumi-choosable type="language" values="python,go" class="inline">, Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2894,8 +3179,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.</p>
-</dd><dt class="property-optional"
+    <dd>Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesscontroldirective_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesscontroldirective_csharp" style="color: inherit; text-decoration: inherit;">Access<wbr>Control<wbr>Directive</a>
@@ -2903,13 +3187,12 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This element specifies how ACL is copied. Valid values:</p>
+    <dd>This element specifies how ACL is copied. Valid values:</p>
 <ul>
 <li>Copy: inherits the source object ACL</li>
 <li>Replaced: replace source ACL</li>
 <li>Add: add a new ACL based on the source ACL.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="accesscontrolgrants_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesscontrolgrants_csharp" style="color: inherit; text-decoration: inherit;">Access<wbr>Control<wbr>Grants</a>
@@ -2917,8 +3200,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopyaccesscontrolgrants">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>Access<wbr>Control<wbr>Grants</a></span>
     </dt>
-    <dd><p>Controls the specific access to the object.</p>
-</dd><dt class="property-optional"
+    <dd>Controls the specific access to the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="cannedaccesscontrollist_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cannedaccesscontrollist_csharp" style="color: inherit; text-decoration: inherit;">Canned<wbr>Access<wbr>Control<wbr>List</a>
@@ -2926,8 +3208,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Defines the ACL property of the object. Valid values: private, public-read.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the ACL property of the object. Valid values: private, public-read.</dd><dt class="property-optional"
             title="Optional">
         <span id="metadatadirective_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metadatadirective_csharp" style="color: inherit; text-decoration: inherit;">Metadata<wbr>Directive</a>
@@ -2935,8 +3216,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This element specifies whether to copy object metadata from the source object or replace it with metadata in the &lt; NewObjectMetadata &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.</p>
-</dd><dt class="property-optional"
+    <dd>This element specifies whether to copy object metadata from the source object or replace it with metadata in the &lt; NewObjectMetadata &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifiedsinceconstraint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifiedsinceconstraint_csharp" style="color: inherit; text-decoration: inherit;">Modified<wbr>Since<wbr>Constraint</a>
@@ -2944,8 +3224,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.</p>
-</dd><dt class="property-optional"
+    <dd>When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.</dd><dt class="property-optional"
             title="Optional">
         <span id="newobjectmetadata_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newobjectmetadata_csharp" style="color: inherit; text-decoration: inherit;">New<wbr>Object<wbr>Metadata</a>
@@ -2953,8 +3232,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjectmetadata">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Metadata</a></span>
     </dt>
-    <dd><p>Configure the metadata for the object.</p>
-</dd><dt class="property-optional"
+    <dd>Configure the metadata for the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="newobjecttaggings_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newobjecttaggings_csharp" style="color: inherit; text-decoration: inherit;">New<wbr>Object<wbr>Taggings</a>
@@ -2962,8 +3240,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjecttagging">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Tagging&gt;</a></span>
     </dt>
-    <dd><p>The label of the configuration object, which must be specified when the &lt; TaggingDirective &gt; value is Replace or Add.</p>
-</dd><dt class="property-optional"
+    <dd>The label of the configuration object, which must be specified when the &lt; TaggingDirective &gt; value is Replace or Add.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefixreplace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefixreplace_csharp" style="color: inherit; text-decoration: inherit;">Prefix<wbr>Replace</a>
@@ -2971,8 +3248,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <!-- raw HTML omitted --> and <!-- raw HTML omitted -->. Default value: false.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <!-- raw HTML omitted --> and <!-- raw HTML omitted -->. Default value: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourcesprefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcesprefix_csharp" style="color: inherit; text-decoration: inherit;">Resources<wbr>Prefix</a>
@@ -2980,8 +3256,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This field is valid only when the &lt; PrefixReplace &gt; value is true. Specify the source object prefix to be replaced, and the replacement directory should end with <code>/</code>. Can be empty with a maximum length of 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>This field is valid only when the &lt; PrefixReplace &gt; value is true. Specify the source object prefix to be replaced, and the replacement directory should end with <code>/</code>. Can be empty with a maximum length of 1024 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageclass_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Class</a>
@@ -2989,8 +3264,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.</p>
-</dd><dt class="property-optional"
+    <dd>Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.</dd><dt class="property-optional"
             title="Optional">
         <span id="taggingdirective_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taggingdirective_csharp" style="color: inherit; text-decoration: inherit;">Tagging<wbr>Directive</a>
@@ -2998,8 +3272,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This element specifies whether to copy the object tag from the source object or replace it with the tag in the &lt; NewObjectTagging &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.</p>
-</dd><dt class="property-optional"
+    <dd>This element specifies whether to copy the object tag from the source object or replace it with the tag in the &lt; NewObjectTagging &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetkeyprefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetkeyprefix_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Key<wbr>Prefix</a>
@@ -3007,8 +3280,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This field is valid only when the <!-- raw HTML omitted --> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>This field is valid only when the <!-- raw HTML omitted --> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="unmodifiedsinceconstraint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unmodifiedsinceconstraint_csharp" style="color: inherit; text-decoration: inherit;">Unmodified<wbr>Since<wbr>Constraint</a>
@@ -3016,8 +3288,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.</p>
-</dd></dl>
+    <dd>When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3031,8 +3302,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.</p>
-</dd><dt class="property-optional"
+    <dd>Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesscontroldirective_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesscontroldirective_go" style="color: inherit; text-decoration: inherit;">Access<wbr>Control<wbr>Directive</a>
@@ -3040,13 +3310,12 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This element specifies how ACL is copied. Valid values:</p>
+    <dd>This element specifies how ACL is copied. Valid values:</p>
 <ul>
 <li>Copy: inherits the source object ACL</li>
 <li>Replaced: replace source ACL</li>
 <li>Add: add a new ACL based on the source ACL.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="accesscontrolgrants_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesscontrolgrants_go" style="color: inherit; text-decoration: inherit;">Access<wbr>Control<wbr>Grants</a>
@@ -3054,8 +3323,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopyaccesscontrolgrants">Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>Access<wbr>Control<wbr>Grants</a></span>
     </dt>
-    <dd><p>Controls the specific access to the object.</p>
-</dd><dt class="property-optional"
+    <dd>Controls the specific access to the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="cannedaccesscontrollist_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cannedaccesscontrollist_go" style="color: inherit; text-decoration: inherit;">Canned<wbr>Access<wbr>Control<wbr>List</a>
@@ -3063,8 +3331,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Defines the ACL property of the object. Valid values: private, public-read.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the ACL property of the object. Valid values: private, public-read.</dd><dt class="property-optional"
             title="Optional">
         <span id="metadatadirective_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metadatadirective_go" style="color: inherit; text-decoration: inherit;">Metadata<wbr>Directive</a>
@@ -3072,8 +3339,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This element specifies whether to copy object metadata from the source object or replace it with metadata in the &lt; NewObjectMetadata &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.</p>
-</dd><dt class="property-optional"
+    <dd>This element specifies whether to copy object metadata from the source object or replace it with metadata in the &lt; NewObjectMetadata &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifiedsinceconstraint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifiedsinceconstraint_go" style="color: inherit; text-decoration: inherit;">Modified<wbr>Since<wbr>Constraint</a>
@@ -3081,8 +3347,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.</p>
-</dd><dt class="property-optional"
+    <dd>When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.</dd><dt class="property-optional"
             title="Optional">
         <span id="newobjectmetadata_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newobjectmetadata_go" style="color: inherit; text-decoration: inherit;">New<wbr>Object<wbr>Metadata</a>
@@ -3090,8 +3355,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjectmetadata">Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Metadata</a></span>
     </dt>
-    <dd><p>Configure the metadata for the object.</p>
-</dd><dt class="property-optional"
+    <dd>Configure the metadata for the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="newobjecttaggings_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newobjecttaggings_go" style="color: inherit; text-decoration: inherit;">New<wbr>Object<wbr>Taggings</a>
@@ -3099,8 +3363,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjecttagging">[]Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Tagging</a></span>
     </dt>
-    <dd><p>The label of the configuration object, which must be specified when the &lt; TaggingDirective &gt; value is Replace or Add.</p>
-</dd><dt class="property-optional"
+    <dd>The label of the configuration object, which must be specified when the &lt; TaggingDirective &gt; value is Replace or Add.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefixreplace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefixreplace_go" style="color: inherit; text-decoration: inherit;">Prefix<wbr>Replace</a>
@@ -3108,8 +3371,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <!-- raw HTML omitted --> and <!-- raw HTML omitted -->. Default value: false.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <!-- raw HTML omitted --> and <!-- raw HTML omitted -->. Default value: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourcesprefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcesprefix_go" style="color: inherit; text-decoration: inherit;">Resources<wbr>Prefix</a>
@@ -3117,8 +3379,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This field is valid only when the &lt; PrefixReplace &gt; value is true. Specify the source object prefix to be replaced, and the replacement directory should end with <code>/</code>. Can be empty with a maximum length of 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>This field is valid only when the &lt; PrefixReplace &gt; value is true. Specify the source object prefix to be replaced, and the replacement directory should end with <code>/</code>. Can be empty with a maximum length of 1024 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageclass_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Class</a>
@@ -3126,8 +3387,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.</p>
-</dd><dt class="property-optional"
+    <dd>Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.</dd><dt class="property-optional"
             title="Optional">
         <span id="taggingdirective_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taggingdirective_go" style="color: inherit; text-decoration: inherit;">Tagging<wbr>Directive</a>
@@ -3135,8 +3395,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This element specifies whether to copy the object tag from the source object or replace it with the tag in the &lt; NewObjectTagging &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.</p>
-</dd><dt class="property-optional"
+    <dd>This element specifies whether to copy the object tag from the source object or replace it with the tag in the &lt; NewObjectTagging &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetkeyprefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetkeyprefix_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Key<wbr>Prefix</a>
@@ -3144,8 +3403,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This field is valid only when the <!-- raw HTML omitted --> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>This field is valid only when the <!-- raw HTML omitted --> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="unmodifiedsinceconstraint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unmodifiedsinceconstraint_go" style="color: inherit; text-decoration: inherit;">Unmodified<wbr>Since<wbr>Constraint</a>
@@ -3153,8 +3411,130 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.</p>
-</dd></dl>
+    <dd>When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="target_resource_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_resource_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>resource</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="access_control_directive_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_control_directive_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>control_<wbr>directive</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>This element specifies how ACL is copied. Valid values:</p>
+<ul>
+<li>Copy: inherits the source object ACL</li>
+<li>Replaced: replace source ACL</li>
+<li>Add: add a new ACL based on the source ACL.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="access_control_grants_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_control_grants_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>control_<wbr>grants</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#batchoperationcosputobjectcopyaccesscontrolgrants">object</a></span>
+    </dt>
+    <dd>Controls the specific access to the object.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="canned_access_control_list_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#canned_access_control_list_hcl" style="color: inherit; text-decoration: inherit;">canned_<wbr>access_<wbr>control_<wbr>list</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Defines the ACL property of the object. Valid values: private, public-read.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="metadata_directive_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metadata_directive_hcl" style="color: inherit; text-decoration: inherit;">metadata_<wbr>directive</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>This element specifies whether to copy object metadata from the source object or replace it with metadata in the &lt; NewObjectMetadata &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="modified_since_constraint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modified_since_constraint_hcl" style="color: inherit; text-decoration: inherit;">modified_<wbr>since_<wbr>constraint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="new_object_metadata_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_object_metadata_hcl" style="color: inherit; text-decoration: inherit;">new_<wbr>object_<wbr>metadata</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjectmetadata">object</a></span>
+    </dt>
+    <dd>Configure the metadata for the object.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="new_object_taggings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_object_taggings_hcl" style="color: inherit; text-decoration: inherit;">new_<wbr>object_<wbr>taggings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjecttagging">list(object)</a></span>
+    </dt>
+    <dd>The label of the configuration object, which must be specified when the &lt; TaggingDirective &gt; value is Replace or Add.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_replace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_replace_hcl" style="color: inherit; text-decoration: inherit;">prefix_<wbr>replace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <!-- raw HTML omitted --> and <!-- raw HTML omitted -->. Default value: false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="resources_prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resources_prefix_hcl" style="color: inherit; text-decoration: inherit;">resources_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>This field is valid only when the &lt; PrefixReplace &gt; value is true. Specify the source object prefix to be replaced, and the replacement directory should end with <code>/</code>. Can be empty with a maximum length of 1024 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_class_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_class_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>class</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tagging_directive_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagging_directive_hcl" style="color: inherit; text-decoration: inherit;">tagging_<wbr>directive</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>This element specifies whether to copy the object tag from the source object or replace it with the tag in the &lt; NewObjectTagging &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="target_key_prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_key_prefix_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>key_<wbr>prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>This field is valid only when the <!-- raw HTML omitted --> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="unmodified_since_constraint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unmodified_since_constraint_hcl" style="color: inherit; text-decoration: inherit;">unmodified_<wbr>since_<wbr>constraint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3168,8 +3548,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.</p>
-</dd><dt class="property-optional"
+    <dd>Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesscontroldirective_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesscontroldirective_java" style="color: inherit; text-decoration: inherit;">access<wbr>Control<wbr>Directive</a>
@@ -3177,13 +3556,12 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This element specifies how ACL is copied. Valid values:</p>
+    <dd>This element specifies how ACL is copied. Valid values:</p>
 <ul>
 <li>Copy: inherits the source object ACL</li>
 <li>Replaced: replace source ACL</li>
 <li>Add: add a new ACL based on the source ACL.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="accesscontrolgrants_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesscontrolgrants_java" style="color: inherit; text-decoration: inherit;">access<wbr>Control<wbr>Grants</a>
@@ -3191,8 +3569,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopyaccesscontrolgrants">Batch<wbr>Operation<wbr>Put<wbr>Object<wbr>Copy<wbr>Access<wbr>Control<wbr>Grants</a></span>
     </dt>
-    <dd><p>Controls the specific access to the object.</p>
-</dd><dt class="property-optional"
+    <dd>Controls the specific access to the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="cannedaccesscontrollist_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cannedaccesscontrollist_java" style="color: inherit; text-decoration: inherit;">canned<wbr>Access<wbr>Control<wbr>List</a>
@@ -3200,8 +3577,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Defines the ACL property of the object. Valid values: private, public-read.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the ACL property of the object. Valid values: private, public-read.</dd><dt class="property-optional"
             title="Optional">
         <span id="metadatadirective_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metadatadirective_java" style="color: inherit; text-decoration: inherit;">metadata<wbr>Directive</a>
@@ -3209,8 +3585,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This element specifies whether to copy object metadata from the source object or replace it with metadata in the &lt; NewObjectMetadata &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.</p>
-</dd><dt class="property-optional"
+    <dd>This element specifies whether to copy object metadata from the source object or replace it with metadata in the &lt; NewObjectMetadata &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifiedsinceconstraint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifiedsinceconstraint_java" style="color: inherit; text-decoration: inherit;">modified<wbr>Since<wbr>Constraint</a>
@@ -3218,8 +3593,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.</p>
-</dd><dt class="property-optional"
+    <dd>When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.</dd><dt class="property-optional"
             title="Optional">
         <span id="newobjectmetadata_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newobjectmetadata_java" style="color: inherit; text-decoration: inherit;">new<wbr>Object<wbr>Metadata</a>
@@ -3227,8 +3601,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjectmetadata">Batch<wbr>Operation<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Metadata</a></span>
     </dt>
-    <dd><p>Configure the metadata for the object.</p>
-</dd><dt class="property-optional"
+    <dd>Configure the metadata for the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="newobjecttaggings_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newobjecttaggings_java" style="color: inherit; text-decoration: inherit;">new<wbr>Object<wbr>Taggings</a>
@@ -3236,8 +3609,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjecttagging">List&lt;Batch<wbr>Operation<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Tagging&gt;</a></span>
     </dt>
-    <dd><p>The label of the configuration object, which must be specified when the &lt; TaggingDirective &gt; value is Replace or Add.</p>
-</dd><dt class="property-optional"
+    <dd>The label of the configuration object, which must be specified when the &lt; TaggingDirective &gt; value is Replace or Add.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefixreplace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefixreplace_java" style="color: inherit; text-decoration: inherit;">prefix<wbr>Replace</a>
@@ -3245,8 +3617,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <!-- raw HTML omitted --> and <!-- raw HTML omitted -->. Default value: false.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <!-- raw HTML omitted --> and <!-- raw HTML omitted -->. Default value: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourcesprefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcesprefix_java" style="color: inherit; text-decoration: inherit;">resources<wbr>Prefix</a>
@@ -3254,8 +3625,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This field is valid only when the &lt; PrefixReplace &gt; value is true. Specify the source object prefix to be replaced, and the replacement directory should end with <code>/</code>. Can be empty with a maximum length of 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>This field is valid only when the &lt; PrefixReplace &gt; value is true. Specify the source object prefix to be replaced, and the replacement directory should end with <code>/</code>. Can be empty with a maximum length of 1024 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageclass_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -3263,8 +3633,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.</p>
-</dd><dt class="property-optional"
+    <dd>Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.</dd><dt class="property-optional"
             title="Optional">
         <span id="taggingdirective_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taggingdirective_java" style="color: inherit; text-decoration: inherit;">tagging<wbr>Directive</a>
@@ -3272,8 +3641,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This element specifies whether to copy the object tag from the source object or replace it with the tag in the &lt; NewObjectTagging &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.</p>
-</dd><dt class="property-optional"
+    <dd>This element specifies whether to copy the object tag from the source object or replace it with the tag in the &lt; NewObjectTagging &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetkeyprefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetkeyprefix_java" style="color: inherit; text-decoration: inherit;">target<wbr>Key<wbr>Prefix</a>
@@ -3281,8 +3649,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This field is valid only when the <!-- raw HTML omitted --> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>This field is valid only when the <!-- raw HTML omitted --> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="unmodifiedsinceconstraint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unmodifiedsinceconstraint_java" style="color: inherit; text-decoration: inherit;">unmodified<wbr>Since<wbr>Constraint</a>
@@ -3290,8 +3657,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.</p>
-</dd></dl>
+    <dd>When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3305,8 +3671,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.</p>
-</dd><dt class="property-optional"
+    <dd>Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesscontroldirective_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesscontroldirective_nodejs" style="color: inherit; text-decoration: inherit;">access<wbr>Control<wbr>Directive</a>
@@ -3314,13 +3679,12 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This element specifies how ACL is copied. Valid values:</p>
+    <dd>This element specifies how ACL is copied. Valid values:</p>
 <ul>
 <li>Copy: inherits the source object ACL</li>
 <li>Replaced: replace source ACL</li>
 <li>Add: add a new ACL based on the source ACL.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="accesscontrolgrants_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesscontrolgrants_nodejs" style="color: inherit; text-decoration: inherit;">access<wbr>Control<wbr>Grants</a>
@@ -3328,8 +3692,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopyaccesscontrolgrants">Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>Access<wbr>Control<wbr>Grants</a></span>
     </dt>
-    <dd><p>Controls the specific access to the object.</p>
-</dd><dt class="property-optional"
+    <dd>Controls the specific access to the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="cannedaccesscontrollist_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cannedaccesscontrollist_nodejs" style="color: inherit; text-decoration: inherit;">canned<wbr>Access<wbr>Control<wbr>List</a>
@@ -3337,8 +3700,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Defines the ACL property of the object. Valid values: private, public-read.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the ACL property of the object. Valid values: private, public-read.</dd><dt class="property-optional"
             title="Optional">
         <span id="metadatadirective_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metadatadirective_nodejs" style="color: inherit; text-decoration: inherit;">metadata<wbr>Directive</a>
@@ -3346,8 +3708,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This element specifies whether to copy object metadata from the source object or replace it with metadata in the &lt; NewObjectMetadata &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.</p>
-</dd><dt class="property-optional"
+    <dd>This element specifies whether to copy object metadata from the source object or replace it with metadata in the &lt; NewObjectMetadata &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifiedsinceconstraint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifiedsinceconstraint_nodejs" style="color: inherit; text-decoration: inherit;">modified<wbr>Since<wbr>Constraint</a>
@@ -3355,8 +3716,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.</p>
-</dd><dt class="property-optional"
+    <dd>When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.</dd><dt class="property-optional"
             title="Optional">
         <span id="newobjectmetadata_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newobjectmetadata_nodejs" style="color: inherit; text-decoration: inherit;">new<wbr>Object<wbr>Metadata</a>
@@ -3364,8 +3724,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjectmetadata">Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Metadata</a></span>
     </dt>
-    <dd><p>Configure the metadata for the object.</p>
-</dd><dt class="property-optional"
+    <dd>Configure the metadata for the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="newobjecttaggings_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newobjecttaggings_nodejs" style="color: inherit; text-decoration: inherit;">new<wbr>Object<wbr>Taggings</a>
@@ -3373,8 +3732,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjecttagging">Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Tagging[]</a></span>
     </dt>
-    <dd><p>The label of the configuration object, which must be specified when the &lt; TaggingDirective &gt; value is Replace or Add.</p>
-</dd><dt class="property-optional"
+    <dd>The label of the configuration object, which must be specified when the &lt; TaggingDirective &gt; value is Replace or Add.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefixreplace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefixreplace_nodejs" style="color: inherit; text-decoration: inherit;">prefix<wbr>Replace</a>
@@ -3382,8 +3740,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <!-- raw HTML omitted --> and <!-- raw HTML omitted -->. Default value: false.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <!-- raw HTML omitted --> and <!-- raw HTML omitted -->. Default value: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourcesprefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcesprefix_nodejs" style="color: inherit; text-decoration: inherit;">resources<wbr>Prefix</a>
@@ -3391,8 +3748,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This field is valid only when the &lt; PrefixReplace &gt; value is true. Specify the source object prefix to be replaced, and the replacement directory should end with <code>/</code>. Can be empty with a maximum length of 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>This field is valid only when the &lt; PrefixReplace &gt; value is true. Specify the source object prefix to be replaced, and the replacement directory should end with <code>/</code>. Can be empty with a maximum length of 1024 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageclass_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -3400,8 +3756,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.</p>
-</dd><dt class="property-optional"
+    <dd>Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.</dd><dt class="property-optional"
             title="Optional">
         <span id="taggingdirective_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taggingdirective_nodejs" style="color: inherit; text-decoration: inherit;">tagging<wbr>Directive</a>
@@ -3409,8 +3764,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This element specifies whether to copy the object tag from the source object or replace it with the tag in the &lt; NewObjectTagging &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.</p>
-</dd><dt class="property-optional"
+    <dd>This element specifies whether to copy the object tag from the source object or replace it with the tag in the &lt; NewObjectTagging &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetkeyprefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetkeyprefix_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Key<wbr>Prefix</a>
@@ -3418,8 +3772,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>This field is valid only when the <!-- raw HTML omitted --> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>This field is valid only when the <!-- raw HTML omitted --> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="unmodifiedsinceconstraint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unmodifiedsinceconstraint_nodejs" style="color: inherit; text-decoration: inherit;">unmodified<wbr>Since<wbr>Constraint</a>
@@ -3427,8 +3780,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.</p>
-</dd></dl>
+    <dd>When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3442,8 +3794,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.</p>
-</dd><dt class="property-optional"
+    <dd>Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.</dd><dt class="property-optional"
             title="Optional">
         <span id="access_control_directive_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_control_directive_python" style="color: inherit; text-decoration: inherit;">access_<wbr>control_<wbr>directive</a>
@@ -3451,13 +3802,12 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>This element specifies how ACL is copied. Valid values:</p>
+    <dd>This element specifies how ACL is copied. Valid values:</p>
 <ul>
 <li>Copy: inherits the source object ACL</li>
 <li>Replaced: replace source ACL</li>
 <li>Add: add a new ACL based on the source ACL.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="access_control_grants_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_control_grants_python" style="color: inherit; text-decoration: inherit;">access_<wbr>control_<wbr>grants</a>
@@ -3465,8 +3815,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopyaccesscontrolgrants">Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>Access<wbr>Control<wbr>Grants</a></span>
     </dt>
-    <dd><p>Controls the specific access to the object.</p>
-</dd><dt class="property-optional"
+    <dd>Controls the specific access to the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="canned_access_control_list_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#canned_access_control_list_python" style="color: inherit; text-decoration: inherit;">canned_<wbr>access_<wbr>control_<wbr>list</a>
@@ -3474,8 +3823,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Defines the ACL property of the object. Valid values: private, public-read.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the ACL property of the object. Valid values: private, public-read.</dd><dt class="property-optional"
             title="Optional">
         <span id="metadata_directive_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metadata_directive_python" style="color: inherit; text-decoration: inherit;">metadata_<wbr>directive</a>
@@ -3483,8 +3831,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>This element specifies whether to copy object metadata from the source object or replace it with metadata in the &lt; NewObjectMetadata &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.</p>
-</dd><dt class="property-optional"
+    <dd>This element specifies whether to copy object metadata from the source object or replace it with metadata in the &lt; NewObjectMetadata &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="modified_since_constraint_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modified_since_constraint_python" style="color: inherit; text-decoration: inherit;">modified_<wbr>since_<wbr>constraint</a>
@@ -3492,8 +3839,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.</p>
-</dd><dt class="property-optional"
+    <dd>When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.</dd><dt class="property-optional"
             title="Optional">
         <span id="new_object_metadata_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_object_metadata_python" style="color: inherit; text-decoration: inherit;">new_<wbr>object_<wbr>metadata</a>
@@ -3501,17 +3847,15 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjectmetadata">Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Metadata</a></span>
     </dt>
-    <dd><p>Configure the metadata for the object.</p>
-</dd><dt class="property-optional"
+    <dd>Configure the metadata for the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="new_object_taggings_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_object_taggings_python" style="color: inherit; text-decoration: inherit;">new_<wbr>object_<wbr>taggings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjecttagging">Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Tagging]</a></span>
+        <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjecttagging">Sequence[Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Tagging]</a></span>
     </dt>
-    <dd><p>The label of the configuration object, which must be specified when the &lt; TaggingDirective &gt; value is Replace or Add.</p>
-</dd><dt class="property-optional"
+    <dd>The label of the configuration object, which must be specified when the &lt; TaggingDirective &gt; value is Replace or Add.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_replace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_replace_python" style="color: inherit; text-decoration: inherit;">prefix_<wbr>replace</a>
@@ -3519,8 +3863,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <!-- raw HTML omitted --> and <!-- raw HTML omitted -->. Default value: false.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <!-- raw HTML omitted --> and <!-- raw HTML omitted -->. Default value: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="resources_prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resources_prefix_python" style="color: inherit; text-decoration: inherit;">resources_<wbr>prefix</a>
@@ -3528,8 +3871,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>This field is valid only when the &lt; PrefixReplace &gt; value is true. Specify the source object prefix to be replaced, and the replacement directory should end with <code>/</code>. Can be empty with a maximum length of 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>This field is valid only when the &lt; PrefixReplace &gt; value is true. Specify the source object prefix to be replaced, and the replacement directory should end with <code>/</code>. Can be empty with a maximum length of 1024 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_class_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_class_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>class</a>
@@ -3537,8 +3879,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.</p>
-</dd><dt class="property-optional"
+    <dd>Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagging_directive_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagging_directive_python" style="color: inherit; text-decoration: inherit;">tagging_<wbr>directive</a>
@@ -3546,8 +3887,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>This element specifies whether to copy the object tag from the source object or replace it with the tag in the &lt; NewObjectTagging &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.</p>
-</dd><dt class="property-optional"
+    <dd>This element specifies whether to copy the object tag from the source object or replace it with the tag in the &lt; NewObjectTagging &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.</dd><dt class="property-optional"
             title="Optional">
         <span id="target_key_prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_key_prefix_python" style="color: inherit; text-decoration: inherit;">target_<wbr>key_<wbr>prefix</a>
@@ -3555,8 +3895,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>This field is valid only when the <!-- raw HTML omitted --> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>This field is valid only when the <!-- raw HTML omitted --> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="unmodified_since_constraint_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unmodified_since_constraint_python" style="color: inherit; text-decoration: inherit;">unmodified_<wbr>since_<wbr>constraint</a>
@@ -3564,8 +3903,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.</p>
-</dd></dl>
+    <dd>When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3579,8 +3917,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.</p>
-</dd><dt class="property-optional"
+    <dd>Sets the target bucket for the Copy. Use qcs to specify, for example, qcs::cos:ap-chengdu:uid/1250000000:examplebucket-1250000000.</dd><dt class="property-optional"
             title="Optional">
         <span id="accesscontroldirective_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesscontroldirective_yaml" style="color: inherit; text-decoration: inherit;">access<wbr>Control<wbr>Directive</a>
@@ -3588,13 +3925,12 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This element specifies how ACL is copied. Valid values:</p>
+    <dd>This element specifies how ACL is copied. Valid values:</p>
 <ul>
 <li>Copy: inherits the source object ACL</li>
 <li>Replaced: replace source ACL</li>
 <li>Add: add a new ACL based on the source ACL.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="accesscontrolgrants_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesscontrolgrants_yaml" style="color: inherit; text-decoration: inherit;">access<wbr>Control<wbr>Grants</a>
@@ -3602,8 +3938,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopyaccesscontrolgrants">Property Map</a></span>
     </dt>
-    <dd><p>Controls the specific access to the object.</p>
-</dd><dt class="property-optional"
+    <dd>Controls the specific access to the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="cannedaccesscontrollist_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cannedaccesscontrollist_yaml" style="color: inherit; text-decoration: inherit;">canned<wbr>Access<wbr>Control<wbr>List</a>
@@ -3611,8 +3946,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Defines the ACL property of the object. Valid values: private, public-read.</p>
-</dd><dt class="property-optional"
+    <dd>Defines the ACL property of the object. Valid values: private, public-read.</dd><dt class="property-optional"
             title="Optional">
         <span id="metadatadirective_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metadatadirective_yaml" style="color: inherit; text-decoration: inherit;">metadata<wbr>Directive</a>
@@ -3620,8 +3954,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This element specifies whether to copy object metadata from the source object or replace it with metadata in the &lt; NewObjectMetadata &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.</p>
-</dd><dt class="property-optional"
+    <dd>This element specifies whether to copy object metadata from the source object or replace it with metadata in the &lt; NewObjectMetadata &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherit source object metadata; Replaced: replace source metadata; Add: add new metadata based on source metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifiedsinceconstraint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifiedsinceconstraint_yaml" style="color: inherit; text-decoration: inherit;">modified<wbr>Since<wbr>Constraint</a>
@@ -3629,8 +3962,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.</p>
-</dd><dt class="property-optional"
+    <dd>When the object is modified after the specified time, the operation is performed, otherwise 412 is returned.</dd><dt class="property-optional"
             title="Optional">
         <span id="newobjectmetadata_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newobjectmetadata_yaml" style="color: inherit; text-decoration: inherit;">new<wbr>Object<wbr>Metadata</a>
@@ -3638,8 +3970,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjectmetadata">Property Map</a></span>
     </dt>
-    <dd><p>Configure the metadata for the object.</p>
-</dd><dt class="property-optional"
+    <dd>Configure the metadata for the object.</dd><dt class="property-optional"
             title="Optional">
         <span id="newobjecttaggings_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newobjecttaggings_yaml" style="color: inherit; text-decoration: inherit;">new<wbr>Object<wbr>Taggings</a>
@@ -3647,8 +3978,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjecttagging">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>The label of the configuration object, which must be specified when the &lt; TaggingDirective &gt; value is Replace or Add.</p>
-</dd><dt class="property-optional"
+    <dd>The label of the configuration object, which must be specified when the &lt; TaggingDirective &gt; value is Replace or Add.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefixreplace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefixreplace_yaml" style="color: inherit; text-decoration: inherit;">prefix<wbr>Replace</a>
@@ -3656,8 +3986,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <!-- raw HTML omitted --> and <!-- raw HTML omitted -->. Default value: false.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether the prefix of the source object needs to be replaced. A value of true indicates the replacement object prefix, which needs to be used with <!-- raw HTML omitted --> and <!-- raw HTML omitted -->. Default value: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourcesprefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcesprefix_yaml" style="color: inherit; text-decoration: inherit;">resources<wbr>Prefix</a>
@@ -3665,8 +3994,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This field is valid only when the &lt; PrefixReplace &gt; value is true. Specify the source object prefix to be replaced, and the replacement directory should end with <code>/</code>. Can be empty with a maximum length of 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>This field is valid only when the &lt; PrefixReplace &gt; value is true. Specify the source object prefix to be replaced, and the replacement directory should end with <code>/</code>. Can be empty with a maximum length of 1024 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageclass_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageclass_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Class</a>
@@ -3674,8 +4002,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.</p>
-</dd><dt class="property-optional"
+    <dd>Sets the storage level of the object. Enumerated value: STANDARD,STANDARD_IA. Default value: STANDARD.</dd><dt class="property-optional"
             title="Optional">
         <span id="taggingdirective_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taggingdirective_yaml" style="color: inherit; text-decoration: inherit;">tagging<wbr>Directive</a>
@@ -3683,8 +4010,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This element specifies whether to copy the object tag from the source object or replace it with the tag in the &lt; NewObjectTagging &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.</p>
-</dd><dt class="property-optional"
+    <dd>This element specifies whether to copy the object tag from the source object or replace it with the tag in the &lt; NewObjectTagging &gt; element. Valid values are: Copy, Replaced, Add. Copy: inherits the source object tag; Replaced: replaces the source tag; Add: adds a new tag based on the source tag.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetkeyprefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetkeyprefix_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Key<wbr>Prefix</a>
@@ -3692,8 +4018,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>This field is valid only when the <!-- raw HTML omitted --> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>This field is valid only when the <!-- raw HTML omitted --> value is true. This value represents the replaced prefix, and the replacement directory should end with /. Can be empty with a maximum length of 1024 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="unmodifiedsinceconstraint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unmodifiedsinceconstraint_yaml" style="color: inherit; text-decoration: inherit;">unmodified<wbr>Since<wbr>Constraint</a>
@@ -3701,12 +4026,13 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.</p>
-</dd></dl>
+    <dd>When the object has not been modified after the specified time, the operation is performed, otherwise 412 is returned.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="batchoperationcosputobjectcopyaccesscontrolgrants">Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>Access<wbr>Control<wbr>Grants</h4>
+<h4 id="batchoperationcosputobjectcopyaccesscontrolgrants">
+Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>Access<wbr>Control<wbr>Grants<pulumi-choosable type="language" values="python,go" class="inline">, Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>Access<wbr>Control<wbr>Grants<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3718,8 +4044,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.</p>
-</dd><dt class="property-required"
+    <dd>User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.</dd><dt class="property-required"
             title="Required">
         <span id="permission_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permission_csharp" style="color: inherit; text-decoration: inherit;">Permission</a>
@@ -3727,8 +4052,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.</p>
-</dd><dt class="property-required"
+    <dd>Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.</dd><dt class="property-required"
             title="Required">
         <span id="typeidentifier_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeidentifier_csharp" style="color: inherit; text-decoration: inherit;">Type<wbr>Identifier</a>
@@ -3736,8 +4060,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="displayname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_csharp" style="color: inherit; text-decoration: inherit;">Display<wbr>Name</a>
@@ -3745,8 +4068,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User name.</p>
-</dd></dl>
+    <dd>User name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3760,8 +4082,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.</p>
-</dd><dt class="property-required"
+    <dd>User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.</dd><dt class="property-required"
             title="Required">
         <span id="permission_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permission_go" style="color: inherit; text-decoration: inherit;">Permission</a>
@@ -3769,8 +4090,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.</p>
-</dd><dt class="property-required"
+    <dd>Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.</dd><dt class="property-required"
             title="Required">
         <span id="typeidentifier_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeidentifier_go" style="color: inherit; text-decoration: inherit;">Type<wbr>Identifier</a>
@@ -3778,8 +4098,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="displayname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_go" style="color: inherit; text-decoration: inherit;">Display<wbr>Name</a>
@@ -3787,8 +4106,45 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User name.</p>
-</dd></dl>
+    <dd>User name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="identifier_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#identifier_hcl" style="color: inherit; text-decoration: inherit;">identifier</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.</dd><dt class="property-required"
+            title="Required">
+        <span id="permission_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permission_hcl" style="color: inherit; text-decoration: inherit;">permission</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_identifier_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_identifier_hcl" style="color: inherit; text-decoration: inherit;">type_<wbr>identifier</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="display_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#display_name_hcl" style="color: inherit; text-decoration: inherit;">display_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3802,8 +4158,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.</p>
-</dd><dt class="property-required"
+    <dd>User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.</dd><dt class="property-required"
             title="Required">
         <span id="permission_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permission_java" style="color: inherit; text-decoration: inherit;">permission</a>
@@ -3811,8 +4166,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.</p>
-</dd><dt class="property-required"
+    <dd>Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.</dd><dt class="property-required"
             title="Required">
         <span id="typeidentifier_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeidentifier_java" style="color: inherit; text-decoration: inherit;">type<wbr>Identifier</a>
@@ -3820,8 +4174,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="displayname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_java" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -3829,8 +4182,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User name.</p>
-</dd></dl>
+    <dd>User name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3844,8 +4196,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.</p>
-</dd><dt class="property-required"
+    <dd>User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.</dd><dt class="property-required"
             title="Required">
         <span id="permission_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permission_nodejs" style="color: inherit; text-decoration: inherit;">permission</a>
@@ -3853,8 +4204,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.</p>
-</dd><dt class="property-required"
+    <dd>Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.</dd><dt class="property-required"
             title="Required">
         <span id="typeidentifier_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeidentifier_nodejs" style="color: inherit; text-decoration: inherit;">type<wbr>Identifier</a>
@@ -3862,8 +4212,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="displayname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_nodejs" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -3871,8 +4220,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User name.</p>
-</dd></dl>
+    <dd>User name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3886,8 +4234,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.</p>
-</dd><dt class="property-required"
+    <dd>User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.</dd><dt class="property-required"
             title="Required">
         <span id="permission_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permission_python" style="color: inherit; text-decoration: inherit;">permission</a>
@@ -3895,8 +4242,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.</p>
-</dd><dt class="property-required"
+    <dd>Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.</dd><dt class="property-required"
             title="Required">
         <span id="type_identifier_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_identifier_python" style="color: inherit; text-decoration: inherit;">type_<wbr>identifier</a>
@@ -3904,8 +4250,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="display_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#display_name_python" style="color: inherit; text-decoration: inherit;">display_<wbr>name</a>
@@ -3913,8 +4258,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User name.</p>
-</dd></dl>
+    <dd>User name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3928,8 +4272,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.</p>
-</dd><dt class="property-required"
+    <dd>User ID (UIN) in qcs format. For example: qcs::cam::uin/100000000001:uin/100000000001.</dd><dt class="property-required"
             title="Required">
         <span id="permission_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permission_yaml" style="color: inherit; text-decoration: inherit;">permission</a>
@@ -3937,8 +4280,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.</p>
-</dd><dt class="property-required"
+    <dd>Specify a permission to be granted. Enumerated value: READ,WRITE,FULL_CONTROL.</dd><dt class="property-required"
             title="Required">
         <span id="typeidentifier_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeidentifier_yaml" style="color: inherit; text-decoration: inherit;">type<wbr>Identifier</a>
@@ -3946,8 +4288,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the type of Identifier. Currently, only user ID is supported. Enumerated value: ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="displayname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_yaml" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -3955,12 +4296,13 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User name.</p>
-</dd></dl>
+    <dd>User name.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="batchoperationcosputobjectcopynewobjectmetadata">Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Metadata</h4>
+<h4 id="batchoperationcosputobjectcopynewobjectmetadata">
+Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Metadata<pulumi-choosable type="language" values="python,go" class="inline">, Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Metadata<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3972,8 +4314,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The caching instructions defined in RFC 2616 are saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The caching instructions defined in RFC 2616 are saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentdisposition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentdisposition_csharp" style="color: inherit; text-decoration: inherit;">Content<wbr>Disposition</a>
@@ -3981,8 +4322,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The file name defined in RFC 2616 is saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The file name defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentencoding_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentencoding_csharp" style="color: inherit; text-decoration: inherit;">Content<wbr>Encoding</a>
@@ -3990,8 +4330,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The encoding format defined in RFC 2616 is saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The encoding format defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="contenttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttype_csharp" style="color: inherit; text-decoration: inherit;">Content<wbr>Type</a>
@@ -3999,8 +4338,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The content types defined in RFC 2616 are saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The content types defined in RFC 2616 are saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="httpexpiresdate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpexpiresdate_csharp" style="color: inherit; text-decoration: inherit;">Http<wbr>Expires<wbr>Date</a>
@@ -4008,8 +4346,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The cache expiration time defined in RFC 2616 is saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The cache expiration time defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="ssealgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssealgorithm_csharp" style="color: inherit; text-decoration: inherit;">Sse<wbr>Algorithm</a>
@@ -4017,8 +4354,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Server encryption algorithm. Currently, only AES256 is supported.</p>
-</dd><dt class="property-optional"
+    <dd>Server encryption algorithm. Currently, only AES256 is supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="usermetadatas_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usermetadatas_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Metadatas</a>
@@ -4026,8 +4362,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjectmetadatausermetadata">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Metadata<wbr>User<wbr>Metadata&gt;</a></span>
     </dt>
-    <dd><p>Includes user-defined metadata.</p>
-</dd></dl>
+    <dd>Includes user-defined metadata.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4041,8 +4376,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The caching instructions defined in RFC 2616 are saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The caching instructions defined in RFC 2616 are saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentdisposition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentdisposition_go" style="color: inherit; text-decoration: inherit;">Content<wbr>Disposition</a>
@@ -4050,8 +4384,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The file name defined in RFC 2616 is saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The file name defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentencoding_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentencoding_go" style="color: inherit; text-decoration: inherit;">Content<wbr>Encoding</a>
@@ -4059,8 +4392,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The encoding format defined in RFC 2616 is saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The encoding format defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="contenttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttype_go" style="color: inherit; text-decoration: inherit;">Content<wbr>Type</a>
@@ -4068,8 +4400,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The content types defined in RFC 2616 are saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The content types defined in RFC 2616 are saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="httpexpiresdate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpexpiresdate_go" style="color: inherit; text-decoration: inherit;">Http<wbr>Expires<wbr>Date</a>
@@ -4077,8 +4408,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The cache expiration time defined in RFC 2616 is saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The cache expiration time defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="ssealgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssealgorithm_go" style="color: inherit; text-decoration: inherit;">Sse<wbr>Algorithm</a>
@@ -4086,8 +4416,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Server encryption algorithm. Currently, only AES256 is supported.</p>
-</dd><dt class="property-optional"
+    <dd>Server encryption algorithm. Currently, only AES256 is supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="usermetadatas_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usermetadatas_go" style="color: inherit; text-decoration: inherit;">User<wbr>Metadatas</a>
@@ -4095,8 +4424,69 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjectmetadatausermetadata">[]Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Metadata<wbr>User<wbr>Metadata</a></span>
     </dt>
-    <dd><p>Includes user-defined metadata.</p>
-</dd></dl>
+    <dd>Includes user-defined metadata.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="cache_control_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cache_control_hcl" style="color: inherit; text-decoration: inherit;">cache_<wbr>control</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The caching instructions defined in RFC 2616 are saved as object metadata.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="content_disposition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_disposition_hcl" style="color: inherit; text-decoration: inherit;">content_<wbr>disposition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The file name defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="content_encoding_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_encoding_hcl" style="color: inherit; text-decoration: inherit;">content_<wbr>encoding</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The encoding format defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="content_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_type_hcl" style="color: inherit; text-decoration: inherit;">content_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The content types defined in RFC 2616 are saved as object metadata.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="http_expires_date_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_expires_date_hcl" style="color: inherit; text-decoration: inherit;">http_<wbr>expires_<wbr>date</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The cache expiration time defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sse_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sse_algorithm_hcl" style="color: inherit; text-decoration: inherit;">sse_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Server encryption algorithm. Currently, only AES256 is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="user_metadatas_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_metadatas_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>metadatas</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjectmetadatausermetadata">list(object)</a></span>
+    </dt>
+    <dd>Includes user-defined metadata.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4110,8 +4500,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The caching instructions defined in RFC 2616 are saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The caching instructions defined in RFC 2616 are saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentdisposition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentdisposition_java" style="color: inherit; text-decoration: inherit;">content<wbr>Disposition</a>
@@ -4119,8 +4508,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The file name defined in RFC 2616 is saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The file name defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentencoding_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentencoding_java" style="color: inherit; text-decoration: inherit;">content<wbr>Encoding</a>
@@ -4128,8 +4516,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The encoding format defined in RFC 2616 is saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The encoding format defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="contenttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttype_java" style="color: inherit; text-decoration: inherit;">content<wbr>Type</a>
@@ -4137,8 +4524,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The content types defined in RFC 2616 are saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The content types defined in RFC 2616 are saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="httpexpiresdate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpexpiresdate_java" style="color: inherit; text-decoration: inherit;">http<wbr>Expires<wbr>Date</a>
@@ -4146,8 +4532,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The cache expiration time defined in RFC 2616 is saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The cache expiration time defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="ssealgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssealgorithm_java" style="color: inherit; text-decoration: inherit;">sse<wbr>Algorithm</a>
@@ -4155,8 +4540,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Server encryption algorithm. Currently, only AES256 is supported.</p>
-</dd><dt class="property-optional"
+    <dd>Server encryption algorithm. Currently, only AES256 is supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="usermetadatas_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usermetadatas_java" style="color: inherit; text-decoration: inherit;">user<wbr>Metadatas</a>
@@ -4164,8 +4548,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjectmetadatausermetadata">List&lt;Batch<wbr>Operation<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Metadata<wbr>User<wbr>Metadata&gt;</a></span>
     </dt>
-    <dd><p>Includes user-defined metadata.</p>
-</dd></dl>
+    <dd>Includes user-defined metadata.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4179,8 +4562,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The caching instructions defined in RFC 2616 are saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The caching instructions defined in RFC 2616 are saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentdisposition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentdisposition_nodejs" style="color: inherit; text-decoration: inherit;">content<wbr>Disposition</a>
@@ -4188,8 +4570,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The file name defined in RFC 2616 is saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The file name defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentencoding_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentencoding_nodejs" style="color: inherit; text-decoration: inherit;">content<wbr>Encoding</a>
@@ -4197,8 +4578,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The encoding format defined in RFC 2616 is saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The encoding format defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="contenttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttype_nodejs" style="color: inherit; text-decoration: inherit;">content<wbr>Type</a>
@@ -4206,8 +4586,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The content types defined in RFC 2616 are saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The content types defined in RFC 2616 are saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="httpexpiresdate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpexpiresdate_nodejs" style="color: inherit; text-decoration: inherit;">http<wbr>Expires<wbr>Date</a>
@@ -4215,8 +4594,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The cache expiration time defined in RFC 2616 is saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The cache expiration time defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="ssealgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssealgorithm_nodejs" style="color: inherit; text-decoration: inherit;">sse<wbr>Algorithm</a>
@@ -4224,8 +4602,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Server encryption algorithm. Currently, only AES256 is supported.</p>
-</dd><dt class="property-optional"
+    <dd>Server encryption algorithm. Currently, only AES256 is supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="usermetadatas_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usermetadatas_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Metadatas</a>
@@ -4233,8 +4610,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjectmetadatausermetadata">Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Metadata<wbr>User<wbr>Metadata[]</a></span>
     </dt>
-    <dd><p>Includes user-defined metadata.</p>
-</dd></dl>
+    <dd>Includes user-defined metadata.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4248,8 +4624,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The caching instructions defined in RFC 2616 are saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The caching instructions defined in RFC 2616 are saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="content_disposition_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_disposition_python" style="color: inherit; text-decoration: inherit;">content_<wbr>disposition</a>
@@ -4257,8 +4632,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The file name defined in RFC 2616 is saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The file name defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="content_encoding_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_encoding_python" style="color: inherit; text-decoration: inherit;">content_<wbr>encoding</a>
@@ -4266,8 +4640,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The encoding format defined in RFC 2616 is saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The encoding format defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="content_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_type_python" style="color: inherit; text-decoration: inherit;">content_<wbr>type</a>
@@ -4275,8 +4648,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The content types defined in RFC 2616 are saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The content types defined in RFC 2616 are saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="http_expires_date_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_expires_date_python" style="color: inherit; text-decoration: inherit;">http_<wbr>expires_<wbr>date</a>
@@ -4284,8 +4656,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The cache expiration time defined in RFC 2616 is saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The cache expiration time defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="sse_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sse_algorithm_python" style="color: inherit; text-decoration: inherit;">sse_<wbr>algorithm</a>
@@ -4293,17 +4664,15 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Server encryption algorithm. Currently, only AES256 is supported.</p>
-</dd><dt class="property-optional"
+    <dd>Server encryption algorithm. Currently, only AES256 is supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="user_metadatas_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_metadatas_python" style="color: inherit; text-decoration: inherit;">user_<wbr>metadatas</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjectmetadatausermetadata">Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Metadata<wbr>User<wbr>Metadata]</a></span>
+        <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjectmetadatausermetadata">Sequence[Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Metadata<wbr>User<wbr>Metadata]</a></span>
     </dt>
-    <dd><p>Includes user-defined metadata.</p>
-</dd></dl>
+    <dd>Includes user-defined metadata.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4317,8 +4686,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The caching instructions defined in RFC 2616 are saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The caching instructions defined in RFC 2616 are saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentdisposition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentdisposition_yaml" style="color: inherit; text-decoration: inherit;">content<wbr>Disposition</a>
@@ -4326,8 +4694,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The file name defined in RFC 2616 is saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The file name defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="contentencoding_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contentencoding_yaml" style="color: inherit; text-decoration: inherit;">content<wbr>Encoding</a>
@@ -4335,8 +4702,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The encoding format defined in RFC 2616 is saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The encoding format defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="contenttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttype_yaml" style="color: inherit; text-decoration: inherit;">content<wbr>Type</a>
@@ -4344,8 +4710,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The content types defined in RFC 2616 are saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The content types defined in RFC 2616 are saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="httpexpiresdate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpexpiresdate_yaml" style="color: inherit; text-decoration: inherit;">http<wbr>Expires<wbr>Date</a>
@@ -4353,8 +4718,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The cache expiration time defined in RFC 2616 is saved as object metadata.</p>
-</dd><dt class="property-optional"
+    <dd>The cache expiration time defined in RFC 2616 is saved as object metadata.</dd><dt class="property-optional"
             title="Optional">
         <span id="ssealgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssealgorithm_yaml" style="color: inherit; text-decoration: inherit;">sse<wbr>Algorithm</a>
@@ -4362,8 +4726,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Server encryption algorithm. Currently, only AES256 is supported.</p>
-</dd><dt class="property-optional"
+    <dd>Server encryption algorithm. Currently, only AES256 is supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="usermetadatas_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usermetadatas_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Metadatas</a>
@@ -4371,12 +4734,13 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#batchoperationcosputobjectcopynewobjectmetadatausermetadata">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Includes user-defined metadata.</p>
-</dd></dl>
+    <dd>Includes user-defined metadata.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="batchoperationcosputobjectcopynewobjectmetadatausermetadata">Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Metadata<wbr>User<wbr>Metadata</h4>
+<h4 id="batchoperationcosputobjectcopynewobjectmetadatausermetadata">
+Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Metadata<wbr>User<wbr>Metadata<pulumi-choosable type="language" values="python,go" class="inline">, Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Metadata<wbr>User<wbr>Metadata<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4388,8 +4752,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -4397,8 +4760,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4412,8 +4774,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -4421,8 +4782,29 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4436,8 +4818,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -4445,8 +4826,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4460,8 +4840,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -4469,8 +4848,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4484,8 +4862,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -4493,8 +4870,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4508,8 +4884,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -4517,12 +4892,13 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="batchoperationcosputobjectcopynewobjecttagging">Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Tagging</h4>
+<h4 id="batchoperationcosputobjectcopynewobjecttagging">
+Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Tagging<pulumi-choosable type="language" values="python,go" class="inline">, Batch<wbr>Operation<wbr>Cos<wbr>Put<wbr>Object<wbr>Copy<wbr>New<wbr>Object<wbr>Tagging<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4534,8 +4910,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -4543,8 +4918,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4558,8 +4932,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -4567,8 +4940,29 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4582,8 +4976,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -4591,8 +4984,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4606,8 +4998,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -4615,8 +5006,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4630,8 +5020,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -4639,8 +5028,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4654,8 +5042,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -4663,12 +5050,13 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="batchreport">Batch<wbr>Report</h4>
+<h4 id="batchreport">
+Batch<wbr>Report<pulumi-choosable type="language" values="python,go" class="inline">, Batch<wbr>Report<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4680,8 +5068,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Delivery bucket for task completion reports.</p>
-</dd><dt class="property-required"
+    <dd>Delivery bucket for task completion reports.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_csharp" style="color: inherit; text-decoration: inherit;">Enabled</a>
@@ -4689,8 +5076,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to output the task completion report.</p>
-</dd><dt class="property-required"
+    <dd>Whether to output the task completion report.</dd><dt class="property-required"
             title="Required">
         <span id="format_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_csharp" style="color: inherit; text-decoration: inherit;">Format</a>
@@ -4698,8 +5084,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task completion report format information. Legal value: Report_CSV_V1.</p>
-</dd><dt class="property-required"
+    <dd>Task completion report format information. Legal value: Report_CSV_V1.</dd><dt class="property-required"
             title="Required">
         <span id="reportscope_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reportscope_csharp" style="color: inherit; text-decoration: inherit;">Report<wbr>Scope</a>
@@ -4707,8 +5092,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.</p>
-</dd><dt class="property-optional"
+    <dd>Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_csharp" style="color: inherit; text-decoration: inherit;">Prefix</a>
@@ -4716,8 +5100,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prefix information for the task completion report. Length 0-256 bytes.</p>
-</dd></dl>
+    <dd>Prefix information for the task completion report. Length 0-256 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4731,8 +5114,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Delivery bucket for task completion reports.</p>
-</dd><dt class="property-required"
+    <dd>Delivery bucket for task completion reports.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_go" style="color: inherit; text-decoration: inherit;">Enabled</a>
@@ -4740,8 +5122,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to output the task completion report.</p>
-</dd><dt class="property-required"
+    <dd>Whether to output the task completion report.</dd><dt class="property-required"
             title="Required">
         <span id="format_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_go" style="color: inherit; text-decoration: inherit;">Format</a>
@@ -4749,8 +5130,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task completion report format information. Legal value: Report_CSV_V1.</p>
-</dd><dt class="property-required"
+    <dd>Task completion report format information. Legal value: Report_CSV_V1.</dd><dt class="property-required"
             title="Required">
         <span id="reportscope_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reportscope_go" style="color: inherit; text-decoration: inherit;">Report<wbr>Scope</a>
@@ -4758,8 +5138,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.</p>
-</dd><dt class="property-optional"
+    <dd>Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_go" style="color: inherit; text-decoration: inherit;">Prefix</a>
@@ -4767,8 +5146,53 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prefix information for the task completion report. Length 0-256 bytes.</p>
-</dd></dl>
+    <dd>Prefix information for the task completion report. Length 0-256 bytes.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_hcl" style="color: inherit; text-decoration: inherit;">bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Delivery bucket for task completion reports.</dd><dt class="property-required"
+            title="Required">
+        <span id="enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_hcl" style="color: inherit; text-decoration: inherit;">enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to output the task completion report.</dd><dt class="property-required"
+            title="Required">
+        <span id="format_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_hcl" style="color: inherit; text-decoration: inherit;">format</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Task completion report format information. Legal value: Report_CSV_V1.</dd><dt class="property-required"
+            title="Required">
+        <span id="report_scope_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#report_scope_hcl" style="color: inherit; text-decoration: inherit;">report_<wbr>scope</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_hcl" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Prefix information for the task completion report. Length 0-256 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4782,8 +5206,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Delivery bucket for task completion reports.</p>
-</dd><dt class="property-required"
+    <dd>Delivery bucket for task completion reports.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_java" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -4791,8 +5214,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to output the task completion report.</p>
-</dd><dt class="property-required"
+    <dd>Whether to output the task completion report.</dd><dt class="property-required"
             title="Required">
         <span id="format_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_java" style="color: inherit; text-decoration: inherit;">format</a>
@@ -4800,8 +5222,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task completion report format information. Legal value: Report_CSV_V1.</p>
-</dd><dt class="property-required"
+    <dd>Task completion report format information. Legal value: Report_CSV_V1.</dd><dt class="property-required"
             title="Required">
         <span id="reportscope_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reportscope_java" style="color: inherit; text-decoration: inherit;">report<wbr>Scope</a>
@@ -4809,8 +5230,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.</p>
-</dd><dt class="property-optional"
+    <dd>Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_java" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -4818,8 +5238,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Prefix information for the task completion report. Length 0-256 bytes.</p>
-</dd></dl>
+    <dd>Prefix information for the task completion report. Length 0-256 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4833,8 +5252,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Delivery bucket for task completion reports.</p>
-</dd><dt class="property-required"
+    <dd>Delivery bucket for task completion reports.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_nodejs" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -4842,8 +5260,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to output the task completion report.</p>
-</dd><dt class="property-required"
+    <dd>Whether to output the task completion report.</dd><dt class="property-required"
             title="Required">
         <span id="format_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_nodejs" style="color: inherit; text-decoration: inherit;">format</a>
@@ -4851,8 +5268,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task completion report format information. Legal value: Report_CSV_V1.</p>
-</dd><dt class="property-required"
+    <dd>Task completion report format information. Legal value: Report_CSV_V1.</dd><dt class="property-required"
             title="Required">
         <span id="reportscope_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reportscope_nodejs" style="color: inherit; text-decoration: inherit;">report<wbr>Scope</a>
@@ -4860,8 +5276,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.</p>
-</dd><dt class="property-optional"
+    <dd>Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_nodejs" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -4869,8 +5284,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prefix information for the task completion report. Length 0-256 bytes.</p>
-</dd></dl>
+    <dd>Prefix information for the task completion report. Length 0-256 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4884,8 +5298,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Delivery bucket for task completion reports.</p>
-</dd><dt class="property-required"
+    <dd>Delivery bucket for task completion reports.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_python" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -4893,8 +5306,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to output the task completion report.</p>
-</dd><dt class="property-required"
+    <dd>Whether to output the task completion report.</dd><dt class="property-required"
             title="Required">
         <span id="format_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_python" style="color: inherit; text-decoration: inherit;">format</a>
@@ -4902,8 +5314,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Task completion report format information. Legal value: Report_CSV_V1.</p>
-</dd><dt class="property-required"
+    <dd>Task completion report format information. Legal value: Report_CSV_V1.</dd><dt class="property-required"
             title="Required">
         <span id="report_scope_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#report_scope_python" style="color: inherit; text-decoration: inherit;">report_<wbr>scope</a>
@@ -4911,8 +5322,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.</p>
-</dd><dt class="property-optional"
+    <dd>Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_python" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -4920,8 +5330,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Prefix information for the task completion report. Length 0-256 bytes.</p>
-</dd></dl>
+    <dd>Prefix information for the task completion report. Length 0-256 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4935,8 +5344,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Delivery bucket for task completion reports.</p>
-</dd><dt class="property-required"
+    <dd>Delivery bucket for task completion reports.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_yaml" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -4944,8 +5352,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to output the task completion report.</p>
-</dd><dt class="property-required"
+    <dd>Whether to output the task completion report.</dd><dt class="property-required"
             title="Required">
         <span id="format_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_yaml" style="color: inherit; text-decoration: inherit;">format</a>
@@ -4953,8 +5360,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task completion report format information. Legal value: Report_CSV_V1.</p>
-</dd><dt class="property-required"
+    <dd>Task completion report format information. Legal value: Report_CSV_V1.</dd><dt class="property-required"
             title="Required">
         <span id="reportscope_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reportscope_yaml" style="color: inherit; text-decoration: inherit;">report<wbr>Scope</a>
@@ -4962,8 +5368,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.</p>
-</dd><dt class="property-optional"
+    <dd>Task completion report the task information that needs to be recorded to determine whether to record the execution information of all operations or the information of failed operations. Legal values: AllTasks, FailedTasksOnly.</dd><dt class="property-optional"
             title="Optional">
         <span id="prefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_yaml" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -4971,8 +5376,7 @@ For Update status, when you move a task to the Ready state, COS will assume that
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Prefix information for the task completion report. Length 0-256 bytes.</p>
-</dd></dl>
+    <dd>Prefix information for the task completion report. Length 0-256 bytes.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4988,6 +5392,9 @@ $ pulumi import tencentcloud:Cos/batch:Batch cos_batch ${uin}#${appid}#{job_id}
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -4997,7 +5404,6 @@ $ pulumi import tencentcloud:Cos/batch:Batch cos_batch ${uin}#${appid}#{job_id}
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

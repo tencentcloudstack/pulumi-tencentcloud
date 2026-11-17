@@ -2,9 +2,11 @@
 ---
 title: "NodePool"
 title_tag: "tencentcloud.Kubernetes.NodePool"
-meta_desc: "Documentation for the tencentcloud.Kubernetes.NodePool resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create an auto scaling group for kubernetes cluster. NOTE: We recommend the usage of one cluster with essential worker config + node."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,30 +16,36 @@ no_edit_this_page: true
 
 Provide a resource to create an auto scaling group for kubernetes cluster.
 
-> **NOTE:**  We recommend the usage of one cluster with essential worker config + node pool to manage cluster and nodes. Its a more flexible way than manage worker config with tencentcloud_kubernetes_cluster, tencentcloud.Kubernetes.ScaleWorker or exist node management of `tencentcloud_kubernetes_attachment`. Cause some unchangeable parameters of `worker_config` may cause the whole cluster resource `force new`.
+> **NOTE:**  We recommend the usage of one cluster with essential worker config + node pool to manage cluster and nodes. Its a more flexible way than manage worker config with tencentcloud_kubernetes_cluster, tencentcloud.Kubernetes.ScaleWorker or exist node management of `tencentcloudKubernetesAttachment`. Cause some unchangeable parameters of `workerConfig` may cause the whole cluster resource `force new`.
 
-> **NOTE:**  In order to ensure the integrity of customer data, if you destroy nodepool instance, it will keep the cvm instance associate with nodepool by default. If you want to destroy together, please set `delete_keep_instance` to `false`.
+> **NOTE:**  In order to ensure the integrity of customer data, if you destroy nodepool instance, it will keep the cvm instance associate with nodepool by default. If you want to destroy together, please set `deleteKeepInstance` to `false`.
 
-> **NOTE:**  In order to ensure the integrity of customer data, if the cvm instance was destroyed due to shrinking, it will keep the cbs associate with cvm by default. If you want to destroy together, please set `delete_with_instance` to `true`.
+> **NOTE:**  In order to ensure the integrity of customer data, if the cvm instance was destroyed due to shrinking, it will keep the cbs associate with cvm by default. If you want to destroy together, please set `deleteWithInstance` to `true`.
+
+> **NOTE:**  There are two parameters `waitNodeReady` and `scaleTolerance` to ensure better management of node pool scaling operations. If this parameter is set when creating a resource, the resource will be marked as `tainted` if the set conditions are not met.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const config = new pulumi.Config();
 const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
 const clusterCidr = config.get("clusterCidr") || "172.31.0.0/16";
-const vpc = tencentcloud.Vpc.getSubnets({
+const vpc = tencentcloud.vpc.getSubnets({
     isDefault: true,
     availabilityZone: availabilityZone,
 });
 const defaultInstanceType = config.get("defaultInstanceType") || "S1.SMALL1";
 //this is the cluster with empty worker config
-const managedCluster = new tencentcloud.kubernetes.Cluster("managedCluster", {
+const example = new tencentcloud.kubernetes.Cluster("example", {
     vpcId: vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId),
     clusterCidr: clusterCidr,
     clusterMaxPodNum: 32,
@@ -48,8 +56,9 @@ const managedCluster = new tencentcloud.kubernetes.Cluster("managedCluster", {
     clusterDeployType: "MANAGED_CLUSTER",
 });
 //this is one example of managing node using node pool
-const mynodepool = new tencentcloud.kubernetes.NodePool("mynodepool", {
-    clusterId: managedCluster.id,
+const exampleNodePool = new tencentcloud.kubernetes.NodePool("example", {
+    name: "tf-example",
+    clusterId: example.id,
     maxSize: 6,
     minSize: 1,
     vpcId: vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId),
@@ -58,6 +67,7 @@ const mynodepool = new tencentcloud.kubernetes.NodePool("mynodepool", {
     desiredCapacity: 4,
     enableAutoScale: true,
     multiZoneSubnetPolicy: "EQUALITY",
+    nodeOs: "img-9qrfy1xt",
     autoScalingConfig: {
         instanceType: defaultInstanceType,
         systemDiskType: "CLOUD_PREMIUM",
@@ -66,6 +76,1508 @@ const mynodepool = new tencentcloud.kubernetes.NodePool("mynodepool", {
         dataDisks: [{
             diskType: "CLOUD_PREMIUM",
             diskSize: 50,
+        }],
+        internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+        internetMaxBandwidthOut: 10,
+        publicIpAssigned: true,
+        password: "Password@123",
+        enhancedSecurityService: false,
+        enhancedMonitorService: false,
+        hostName: "12.123.0.0",
+        hostNameStyle: "ORIGINAL",
+    },
+    labels: {
+        test1: "test1",
+        test2: "test2",
+    },
+    taints: [
+        {
+            key: "test_taint",
+            value: "taint_value",
+            effect: "PreferNoSchedule",
+        },
+        {
+            key: "test_taint2",
+            value: "taint_value2",
+            effect: "PreferNoSchedule",
+        },
+    ],
+    nodeConfig: {
+        dockerGraphPath: "/var/lib/docker",
+        extraArgs: ["root-dir=/var/lib/kubelet"],
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+config = pulumi.Config()
+availability_zone = config.get("availabilityZone")
+if availability_zone is None:
+    availability_zone = "ap-guangzhou-3"
+cluster_cidr = config.get("clusterCidr")
+if cluster_cidr is None:
+    cluster_cidr = "172.31.0.0/16"
+vpc = tencentcloud.vpc.get_subnets(is_default=True,
+    availability_zone=availability_zone)
+default_instance_type = config.get("defaultInstanceType")
+if default_instance_type is None:
+    default_instance_type = "S1.SMALL1"
+#this is the cluster with empty worker config
+example = tencentcloud.kubernetes.Cluster("example",
+    vpc_id=vpc.instance_lists[0].vpc_id,
+    cluster_cidr=cluster_cidr,
+    cluster_max_pod_num=32,
+    cluster_name="tf-tke-unit-test",
+    cluster_desc="test cluster desc",
+    cluster_max_service_num=32,
+    cluster_version="1.18.4",
+    cluster_deploy_type="MANAGED_CLUSTER")
+#this is one example of managing node using node pool
+example_node_pool = tencentcloud.kubernetes.NodePool("example",
+    name="tf-example",
+    cluster_id=example.id,
+    max_size=6,
+    min_size=1,
+    vpc_id=vpc.instance_lists[0].vpc_id,
+    subnet_ids=[vpc.instance_lists[0].subnet_id],
+    retry_policy="INCREMENTAL_INTERVALS",
+    desired_capacity=4,
+    enable_auto_scale=True,
+    multi_zone_subnet_policy="EQUALITY",
+    node_os="img-9qrfy1xt",
+    auto_scaling_config={
+        "instance_type": default_instance_type,
+        "system_disk_type": "CLOUD_PREMIUM",
+        "system_disk_size": 50,
+        "orderly_security_group_ids": ["sg-24vswocp"],
+        "data_disks": [{
+            "disk_type": "CLOUD_PREMIUM",
+            "disk_size": 50,
+        }],
+        "internet_charge_type": "TRAFFIC_POSTPAID_BY_HOUR",
+        "internet_max_bandwidth_out": 10,
+        "public_ip_assigned": True,
+        "password": "Password@123",
+        "enhanced_security_service": False,
+        "enhanced_monitor_service": False,
+        "host_name": "12.123.0.0",
+        "host_name_style": "ORIGINAL",
+    },
+    labels={
+        "test1": "test1",
+        "test2": "test2",
+    },
+    taints=[
+        {
+            "key": "test_taint",
+            "value": "taint_value",
+            "effect": "PreferNoSchedule",
+        },
+        {
+            "key": "test_taint2",
+            "value": "taint_value2",
+            "effect": "PreferNoSchedule",
+        },
+    ],
+    node_config={
+        "docker_graph_path": "/var/lib/docker",
+        "extra_args": ["root-dir=/var/lib/kubelet"],
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-3"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		clusterCidr := "172.31.0.0/16"
+		if param := cfg.Get("clusterCidr"); param != "" {
+			clusterCidr = param
+		}
+		vpc2, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+			IsDefault:        pulumi.BoolRef(true),
+			AvailabilityZone: pulumi.StringRef(availabilityZone),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		defaultInstanceType := "S1.SMALL1"
+		if param := cfg.Get("defaultInstanceType"); param != "" {
+			defaultInstanceType = param
+		}
+		// this is the cluster with empty worker config
+		example, err := kubernetes.NewCluster(ctx, "example", &kubernetes.ClusterArgs{
+			VpcId:                pulumi.String(vpc2.InstanceLists[0].VpcId),
+			ClusterCidr:          pulumi.String(clusterCidr),
+			ClusterMaxPodNum:     pulumi.Int(32),
+			ClusterName:          pulumi.String("tf-tke-unit-test"),
+			ClusterDesc:          pulumi.String("test cluster desc"),
+			ClusterMaxServiceNum: pulumi.Int(32),
+			ClusterVersion:       pulumi.String("1.18.4"),
+			ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
+		})
+		if err != nil {
+			return err
+		}
+		// this is one example of managing node using node pool
+		_, err = kubernetes.NewNodePool(ctx, "example", &kubernetes.NodePoolArgs{
+			Name:      pulumi.String("tf-example"),
+			ClusterId: example.ID().ToIDOutput().ToStringOutput(),
+			MaxSize:   pulumi.Int(6),
+			MinSize:   pulumi.Int(1),
+			VpcId:     pulumi.String(vpc2.InstanceLists[0].VpcId),
+			SubnetIds: pulumi.StringArray{
+				pulumi.String(vpc2.InstanceLists[0].SubnetId),
+			},
+			RetryPolicy:           pulumi.String("INCREMENTAL_INTERVALS"),
+			DesiredCapacity:       pulumi.Int(4),
+			EnableAutoScale:       pulumi.Bool(true),
+			MultiZoneSubnetPolicy: pulumi.String("EQUALITY"),
+			NodeOs:                pulumi.String("img-9qrfy1xt"),
+			AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
+				InstanceType:   pulumi.String(defaultInstanceType),
+				SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
+				SystemDiskSize: pulumi.Int(50),
+				OrderlySecurityGroupIds: pulumi.StringArray{
+					pulumi.String("sg-24vswocp"),
+				},
+				DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
+					&kubernetes.NodePoolAutoScalingConfigDataDiskArgs{
+						DiskType: pulumi.String("CLOUD_PREMIUM"),
+						DiskSize: pulumi.Int(50),
+					},
+				},
+				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+				InternetMaxBandwidthOut: pulumi.Int(10),
+				PublicIpAssigned:        pulumi.Bool(true),
+				Password:                pulumi.String("Password@123"),
+				EnhancedSecurityService: pulumi.Bool(false),
+				EnhancedMonitorService:  pulumi.Bool(false),
+				HostName:                pulumi.String("12.123.0.0"),
+				HostNameStyle:           pulumi.String("ORIGINAL"),
+			},
+			Labels: pulumi.StringMap{
+				"test1": pulumi.String("test1"),
+				"test2": pulumi.String("test2"),
+			},
+			Taints: kubernetes.NodePoolTaintArray{
+				&kubernetes.NodePoolTaintArgs{
+					Key:    pulumi.String("test_taint"),
+					Value:  pulumi.String("taint_value"),
+					Effect: pulumi.String("PreferNoSchedule"),
+				},
+				&kubernetes.NodePoolTaintArgs{
+					Key:    pulumi.String("test_taint2"),
+					Value:  pulumi.String("taint_value2"),
+					Effect: pulumi.String("PreferNoSchedule"),
+				},
+			},
+			NodeConfig: &kubernetes.NodePoolNodeConfigArgs{
+				DockerGraphPath: pulumi.String("/var/lib/docker"),
+				ExtraArgs: pulumi.StringArray{
+					pulumi.String("root-dir=/var/lib/kubelet"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    var clusterCidr = config.Get("clusterCidr") ?? "172.31.0.0/16";
+    var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+    {
+        IsDefault = true,
+        AvailabilityZone = availabilityZone,
+    });
+
+    var defaultInstanceType = config.Get("defaultInstanceType") ?? "S1.SMALL1";
+    //this is the cluster with empty worker config
+    var example = new Tencentcloud.Kubernetes.Cluster("example", new()
+    {
+        VpcId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.VpcId),
+        ClusterCidr = clusterCidr,
+        ClusterMaxPodNum = 32,
+        ClusterName = "tf-tke-unit-test",
+        ClusterDesc = "test cluster desc",
+        ClusterMaxServiceNum = 32,
+        ClusterVersion = "1.18.4",
+        ClusterDeployType = "MANAGED_CLUSTER",
+    });
+
+    //this is one example of managing node using node pool
+    var exampleNodePool = new Tencentcloud.Kubernetes.NodePool("example", new()
+    {
+        Name = "tf-example",
+        ClusterId = example.Id,
+        MaxSize = 6,
+        MinSize = 1,
+        VpcId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.VpcId),
+        SubnetIds = new[]
+        {
+            vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.SubnetId),
+        },
+        RetryPolicy = "INCREMENTAL_INTERVALS",
+        DesiredCapacity = 4,
+        EnableAutoScale = true,
+        MultiZoneSubnetPolicy = "EQUALITY",
+        NodeOs = "img-9qrfy1xt",
+        AutoScalingConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigArgs
+        {
+            InstanceType = defaultInstanceType,
+            SystemDiskType = "CLOUD_PREMIUM",
+            SystemDiskSize = 50,
+            OrderlySecurityGroupIds = new[]
+            {
+                "sg-24vswocp",
+            },
+            DataDisks = new[]
+            {
+                new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigDataDiskArgs
+                {
+                    DiskType = "CLOUD_PREMIUM",
+                    DiskSize = 50,
+                },
+            },
+            InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+            InternetMaxBandwidthOut = 10,
+            PublicIpAssigned = true,
+            Password = "Password@123",
+            EnhancedSecurityService = false,
+            EnhancedMonitorService = false,
+            HostName = "12.123.0.0",
+            HostNameStyle = "ORIGINAL",
+        },
+        Labels = 
+        {
+            { "test1", "test1" },
+            { "test2", "test2" },
+        },
+        Taints = new[]
+        {
+            new Tencentcloud.Kubernetes.Inputs.NodePoolTaintArgs
+            {
+                Key = "test_taint",
+                Value = "taint_value",
+                Effect = "PreferNoSchedule",
+            },
+            new Tencentcloud.Kubernetes.Inputs.NodePoolTaintArgs
+            {
+                Key = "test_taint2",
+                Value = "taint_value2",
+                Effect = "PreferNoSchedule",
+            },
+        },
+        NodeConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolNodeConfigArgs
+        {
+            DockerGraphPath = "/var/lib/docker",
+            ExtraArgs = new[]
+            {
+                "root-dir=/var/lib/kubelet",
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Vpc.VpcFunctions;
+import com.pulumi.tencentcloud.Vpc.inputs.GetSubnetsArgs;
+import com.pulumi.tencentcloud.Kubernetes.Cluster;
+import com.pulumi.tencentcloud.Kubernetes.ClusterArgs;
+import com.pulumi.tencentcloud.Kubernetes.NodePool;
+import com.pulumi.tencentcloud.Kubernetes.NodePoolArgs;
+import com.pulumi.tencentcloud.Kubernetes.inputs.NodePoolAutoScalingConfigArgs;
+import com.pulumi.tencentcloud.Kubernetes.inputs.NodePoolAutoScalingConfigDataDiskArgs;
+import com.pulumi.tencentcloud.Kubernetes.inputs.NodePoolTaintArgs;
+import com.pulumi.tencentcloud.Kubernetes.inputs.NodePoolNodeConfigArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var config = ctx.config();
+        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-3");
+        final var clusterCidr = config.get("clusterCidr").orElse("172.31.0.0/16");
+        final var vpc = VpcFunctions.getSubnets(GetSubnetsArgs.builder()
+            .isDefault(true)
+            .availabilityZone(availabilityZone)
+            .build());
+
+        final var defaultInstanceType = config.get("defaultInstanceType").orElse("S1.SMALL1");
+        //this is the cluster with empty worker config
+        var example = new Cluster("example", ClusterArgs.builder()
+            .vpcId(vpc.instanceLists()[0].vpcId())
+            .clusterCidr(clusterCidr)
+            .clusterMaxPodNum(32)
+            .clusterName("tf-tke-unit-test")
+            .clusterDesc("test cluster desc")
+            .clusterMaxServiceNum(32)
+            .clusterVersion("1.18.4")
+            .clusterDeployType("MANAGED_CLUSTER")
+            .build());
+
+        //this is one example of managing node using node pool
+        var exampleNodePool = new NodePool("exampleNodePool", NodePoolArgs.builder()
+            .name("tf-example")
+            .clusterId(example.id())
+            .maxSize(6)
+            .minSize(1)
+            .vpcId(vpc.instanceLists()[0].vpcId())
+            .subnetIds(vpc.instanceLists()[0].subnetId())
+            .retryPolicy("INCREMENTAL_INTERVALS")
+            .desiredCapacity(4)
+            .enableAutoScale(true)
+            .multiZoneSubnetPolicy("EQUALITY")
+            .nodeOs("img-9qrfy1xt")
+            .autoScalingConfig(NodePoolAutoScalingConfigArgs.builder()
+                .instanceType(defaultInstanceType)
+                .systemDiskType("CLOUD_PREMIUM")
+                .systemDiskSize(50)
+                .orderlySecurityGroupIds("sg-24vswocp")
+                .dataDisks(NodePoolAutoScalingConfigDataDiskArgs.builder()
+                    .diskType("CLOUD_PREMIUM")
+                    .diskSize(50)
+                    .build())
+                .internetChargeType("TRAFFIC_POSTPAID_BY_HOUR")
+                .internetMaxBandwidthOut(10)
+                .publicIpAssigned(true)
+                .password("Password@123")
+                .enhancedSecurityService(false)
+                .enhancedMonitorService(false)
+                .hostName("12.123.0.0")
+                .hostNameStyle("ORIGINAL")
+                .build())
+            .labels(Map.ofEntries(
+                Map.entry("test1", "test1"),
+                Map.entry("test2", "test2")
+            ))
+            .taints(            
+                NodePoolTaintArgs.builder()
+                    .key("test_taint")
+                    .value("taint_value")
+                    .effect("PreferNoSchedule")
+                    .build(),
+                NodePoolTaintArgs.builder()
+                    .key("test_taint2")
+                    .value("taint_value2")
+                    .effect("PreferNoSchedule")
+                    .build())
+            .nodeConfig(NodePoolNodeConfigArgs.builder()
+                .dockerGraphPath("/var/lib/docker")
+                .extraArgs("root-dir=/var/lib/kubelet")
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+configuration:
+  availabilityZone:
+    type: string
+    default: ap-guangzhou-3
+  clusterCidr:
+    type: string
+    default: 172.31.0.0/16
+  defaultInstanceType:
+    type: string
+    default: S1.SMALL1
+resources:
+  # this is the cluster with empty worker config
+  example:
+    type: tencentcloud:Kubernetes:Cluster
+    properties:
+      vpcId: ${vpc.instanceLists[0].vpcId}
+      clusterCidr: ${clusterCidr}
+      clusterMaxPodNum: 32
+      clusterName: tf-tke-unit-test
+      clusterDesc: test cluster desc
+      clusterMaxServiceNum: 32
+      clusterVersion: 1.18.4
+      clusterDeployType: MANAGED_CLUSTER
+  # this is one example of managing node using node pool
+  exampleNodePool:
+    type: tencentcloud:Kubernetes:NodePool
+    name: example
+    properties:
+      name: tf-example
+      clusterId: ${example.id}
+      maxSize: 6
+      minSize: 1
+      vpcId: ${vpc.instanceLists[0].vpcId}
+      subnetIds:
+        - ${vpc.instanceLists[0].subnetId}
+      retryPolicy: INCREMENTAL_INTERVALS
+      desiredCapacity: 4
+      enableAutoScale: true
+      multiZoneSubnetPolicy: EQUALITY
+      nodeOs: img-9qrfy1xt
+      autoScalingConfig:
+        instanceType: ${defaultInstanceType}
+        systemDiskType: CLOUD_PREMIUM
+        systemDiskSize: '50'
+        orderlySecurityGroupIds:
+          - sg-24vswocp
+        dataDisks:
+          - diskType: CLOUD_PREMIUM
+            diskSize: 50
+        internetChargeType: TRAFFIC_POSTPAID_BY_HOUR
+        internetMaxBandwidthOut: 10
+        publicIpAssigned: true
+        password: Password@123
+        enhancedSecurityService: false
+        enhancedMonitorService: false
+        hostName: 12.123.0.0
+        hostNameStyle: ORIGINAL
+      labels:
+        test1: test1
+        test2: test2
+      taints:
+        - key: test_taint
+          value: taint_value
+          effect: PreferNoSchedule
+        - key: test_taint2
+          value: taint_value2
+          effect: PreferNoSchedule
+      nodeConfig:
+        dockerGraphPath: /var/lib/docker
+        extraArgs:
+          - root-dir=/var/lib/kubelet
+variables:
+  vpc:
+    fn::invoke:
+      function: tencentcloud:Vpc:getSubnets
+      arguments:
+        isDefault: true
+        availabilityZone: ${availabilityZone}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_vpc_getsubnets" "vpc" {
+  is_default        = true
+  availability_zone = var.availabilityZone
+}
+
+//this is the cluster with empty worker config
+resource "tencentcloud_kubernetes_cluster" "example" {
+  vpc_id                  = data.tencentcloud_vpc_getsubnets.vpc.instance_lists[0].vpc_id
+  cluster_cidr            = var.clusterCidr
+  cluster_max_pod_num     = 32
+  cluster_name            = "tf-tke-unit-test"
+  cluster_desc            = "test cluster desc"
+  cluster_max_service_num = 32
+  cluster_version         = "1.18.4"
+  cluster_deploy_type     = "MANAGED_CLUSTER"
+}
+//this is one example of managing node using node pool
+resource "tencentcloud_kubernetes_nodepool" "example" {
+  name                     = "tf-example"
+  cluster_id               = tencentcloud_kubernetes_cluster.example.id
+  max_size                 = 6
+  min_size                 = 1
+  vpc_id                   = data.tencentcloud_vpc_getsubnets.vpc.instance_lists[0].vpc_id
+  subnet_ids               = [data.tencentcloud_vpc_getsubnets.vpc.instance_lists[0].subnet_id]
+  retry_policy             = "INCREMENTAL_INTERVALS"
+  desired_capacity         = 4
+  enable_auto_scale        = true
+  multi_zone_subnet_policy = "EQUALITY"
+  node_os                  = "img-9qrfy1xt"
+  auto_scaling_config = {
+    instance_type              = var.defaultInstanceType
+    system_disk_type           = "CLOUD_PREMIUM"
+    system_disk_size           = "50"
+    orderly_security_group_ids = ["sg-24vswocp"]
+    data_disks = [{
+      "diskType" = "CLOUD_PREMIUM"
+      "diskSize" = 50
+    }]
+    internet_charge_type       = "TRAFFIC_POSTPAID_BY_HOUR"
+    internet_max_bandwidth_out = 10
+    public_ip_assigned         = true
+    password                   = "Password@123"
+    enhanced_security_service  = false
+    enhanced_monitor_service   = false
+    host_name                  = "12.123.0.0"
+    host_name_style            = "ORIGINAL"
+  }
+  labels = {
+    "test1" = "test1"
+    "test2" = "test2"
+  }
+  taints {
+    key    = "test_taint"
+    value  = "taint_value"
+    effect = "PreferNoSchedule"
+  }
+  taints {
+    key    = "test_taint2"
+    value  = "taint_value2"
+    effect = "PreferNoSchedule"
+  }
+  node_config = {
+    docker_graph_path = "/var/lib/docker"
+    extra_args        = ["root-dir=/var/lib/kubelet"]
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-3"
+}
+variable "clusterCidr" {
+  type    = string
+  default = "172.31.0.0/16"
+}
+variable "defaultInstanceType" {
+  type    = string
+  default = "S1.SMALL1"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Using Spot CVM Instance
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.kubernetes.NodePool("example", {
+    name: "tf-example",
+    clusterId: managedCluster.id,
+    maxSize: 6,
+    minSize: 1,
+    vpcId: vpc.instanceList[0].vpcId,
+    subnetIds: [vpc.instanceList[0].subnetId],
+    retryPolicy: "INCREMENTAL_INTERVALS",
+    desiredCapacity: 4,
+    enableAutoScale: true,
+    multiZoneSubnetPolicy: "EQUALITY",
+    autoScalingConfig: {
+        instanceType: defaultInstanceType,
+        systemDiskType: "CLOUD_PREMIUM",
+        systemDiskSize: 50,
+        orderlySecurityGroupIds: [
+            "sg-24vswocp",
+            "sg-3qntci2v",
+            "sg-7y1t2wax",
+        ],
+        instanceChargeType: "SPOTPAID",
+        spotInstanceType: "one-time",
+        spotMaxPrice: "1000",
+        dataDisks: [{
+            diskType: "CLOUD_PREMIUM",
+            diskSize: 50,
+        }],
+        internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+        internetMaxBandwidthOut: 10,
+        publicIpAssigned: true,
+        password: "Password@123",
+        enhancedSecurityService: false,
+        enhancedMonitorService: false,
+    },
+    labels: {
+        test1: "test1",
+        test2: "test2",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.kubernetes.NodePool("example",
+    name="tf-example",
+    cluster_id=managed_cluster["id"],
+    max_size=6,
+    min_size=1,
+    vpc_id=vpc["instanceList"][0]["vpcId"],
+    subnet_ids=[vpc["instanceList"][0]["subnetId"]],
+    retry_policy="INCREMENTAL_INTERVALS",
+    desired_capacity=4,
+    enable_auto_scale=True,
+    multi_zone_subnet_policy="EQUALITY",
+    auto_scaling_config={
+        "instance_type": default_instance_type,
+        "system_disk_type": "CLOUD_PREMIUM",
+        "system_disk_size": 50,
+        "orderly_security_group_ids": [
+            "sg-24vswocp",
+            "sg-3qntci2v",
+            "sg-7y1t2wax",
+        ],
+        "instance_charge_type": "SPOTPAID",
+        "spot_instance_type": "one-time",
+        "spot_max_price": "1000",
+        "data_disks": [{
+            "disk_type": "CLOUD_PREMIUM",
+            "disk_size": 50,
+        }],
+        "internet_charge_type": "TRAFFIC_POSTPAID_BY_HOUR",
+        "internet_max_bandwidth_out": 10,
+        "public_ip_assigned": True,
+        "password": "Password@123",
+        "enhanced_security_service": False,
+        "enhanced_monitor_service": False,
+    },
+    labels={
+        "test1": "test1",
+        "test2": "test2",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := kubernetes.NewNodePool(ctx, "example", &kubernetes.NodePoolArgs{
+			Name:      pulumi.String("tf-example"),
+			ClusterId: pulumi.Any(managedCluster.Id),
+			MaxSize:   pulumi.Int(6),
+			MinSize:   pulumi.Int(1),
+			VpcId:     pulumi.Any(vpc.InstanceList[0].VpcId),
+			SubnetIds: pulumi.StringArray{
+				vpc.InstanceList[0].SubnetId,
+			},
+			RetryPolicy:           pulumi.String("INCREMENTAL_INTERVALS"),
+			DesiredCapacity:       pulumi.Int(4),
+			EnableAutoScale:       pulumi.Bool(true),
+			MultiZoneSubnetPolicy: pulumi.String("EQUALITY"),
+			AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
+				InstanceType:   pulumi.Any(defaultInstanceType),
+				SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
+				SystemDiskSize: pulumi.Int(50),
+				OrderlySecurityGroupIds: pulumi.StringArray{
+					pulumi.String("sg-24vswocp"),
+					pulumi.String("sg-3qntci2v"),
+					pulumi.String("sg-7y1t2wax"),
+				},
+				InstanceChargeType: pulumi.String("SPOTPAID"),
+				SpotInstanceType:   pulumi.String("one-time"),
+				SpotMaxPrice:       pulumi.String("1000"),
+				DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
+					&kubernetes.NodePoolAutoScalingConfigDataDiskArgs{
+						DiskType: pulumi.String("CLOUD_PREMIUM"),
+						DiskSize: pulumi.Int(50),
+					},
+				},
+				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+				InternetMaxBandwidthOut: pulumi.Int(10),
+				PublicIpAssigned:        pulumi.Bool(true),
+				Password:                pulumi.String("Password@123"),
+				EnhancedSecurityService: pulumi.Bool(false),
+				EnhancedMonitorService:  pulumi.Bool(false),
+			},
+			Labels: pulumi.StringMap{
+				"test1": pulumi.String("test1"),
+				"test2": pulumi.String("test2"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Kubernetes.NodePool("example", new()
+    {
+        Name = "tf-example",
+        ClusterId = managedCluster.Id,
+        MaxSize = 6,
+        MinSize = 1,
+        VpcId = vpc.InstanceList[0].VpcId,
+        SubnetIds = new[]
+        {
+            vpc.InstanceList[0].SubnetId,
+        },
+        RetryPolicy = "INCREMENTAL_INTERVALS",
+        DesiredCapacity = 4,
+        EnableAutoScale = true,
+        MultiZoneSubnetPolicy = "EQUALITY",
+        AutoScalingConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigArgs
+        {
+            InstanceType = defaultInstanceType,
+            SystemDiskType = "CLOUD_PREMIUM",
+            SystemDiskSize = 50,
+            OrderlySecurityGroupIds = new[]
+            {
+                "sg-24vswocp",
+                "sg-3qntci2v",
+                "sg-7y1t2wax",
+            },
+            InstanceChargeType = "SPOTPAID",
+            SpotInstanceType = "one-time",
+            SpotMaxPrice = "1000",
+            DataDisks = new[]
+            {
+                new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigDataDiskArgs
+                {
+                    DiskType = "CLOUD_PREMIUM",
+                    DiskSize = 50,
+                },
+            },
+            InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+            InternetMaxBandwidthOut = 10,
+            PublicIpAssigned = true,
+            Password = "Password@123",
+            EnhancedSecurityService = false,
+            EnhancedMonitorService = false,
+        },
+        Labels = 
+        {
+            { "test1", "test1" },
+            { "test2", "test2" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Kubernetes.NodePool;
+import com.pulumi.tencentcloud.Kubernetes.NodePoolArgs;
+import com.pulumi.tencentcloud.Kubernetes.inputs.NodePoolAutoScalingConfigArgs;
+import com.pulumi.tencentcloud.Kubernetes.inputs.NodePoolAutoScalingConfigDataDiskArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new NodePool("example", NodePoolArgs.builder()
+            .name("tf-example")
+            .clusterId(managedCluster.id())
+            .maxSize(6)
+            .minSize(1)
+            .vpcId(vpc.instanceList()[0].vpcId())
+            .subnetIds(vpc.instanceList()[0].subnetId())
+            .retryPolicy("INCREMENTAL_INTERVALS")
+            .desiredCapacity(4)
+            .enableAutoScale(true)
+            .multiZoneSubnetPolicy("EQUALITY")
+            .autoScalingConfig(NodePoolAutoScalingConfigArgs.builder()
+                .instanceType(defaultInstanceType)
+                .systemDiskType("CLOUD_PREMIUM")
+                .systemDiskSize(50)
+                .orderlySecurityGroupIds(                
+                    "sg-24vswocp",
+                    "sg-3qntci2v",
+                    "sg-7y1t2wax")
+                .instanceChargeType("SPOTPAID")
+                .spotInstanceType("one-time")
+                .spotMaxPrice("1000")
+                .dataDisks(NodePoolAutoScalingConfigDataDiskArgs.builder()
+                    .diskType("CLOUD_PREMIUM")
+                    .diskSize(50)
+                    .build())
+                .internetChargeType("TRAFFIC_POSTPAID_BY_HOUR")
+                .internetMaxBandwidthOut(10)
+                .publicIpAssigned(true)
+                .password("Password@123")
+                .enhancedSecurityService(false)
+                .enhancedMonitorService(false)
+                .build())
+            .labels(Map.ofEntries(
+                Map.entry("test1", "test1"),
+                Map.entry("test2", "test2")
+            ))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Kubernetes:NodePool
+    properties:
+      name: tf-example
+      clusterId: ${managedCluster.id}
+      maxSize: 6
+      minSize: 1
+      vpcId: ${vpc.instanceList[0].vpcId}
+      subnetIds:
+        - ${vpc.instanceList[0].subnetId}
+      retryPolicy: INCREMENTAL_INTERVALS
+      desiredCapacity: 4
+      enableAutoScale: true
+      multiZoneSubnetPolicy: EQUALITY
+      autoScalingConfig:
+        instanceType: ${defaultInstanceType}
+        systemDiskType: CLOUD_PREMIUM
+        systemDiskSize: '50'
+        orderlySecurityGroupIds:
+          - sg-24vswocp
+          - sg-3qntci2v
+          - sg-7y1t2wax
+        instanceChargeType: SPOTPAID
+        spotInstanceType: one-time
+        spotMaxPrice: '1000'
+        dataDisks:
+          - diskType: CLOUD_PREMIUM
+            diskSize: 50
+        internetChargeType: TRAFFIC_POSTPAID_BY_HOUR
+        internetMaxBandwidthOut: 10
+        publicIpAssigned: true
+        password: Password@123
+        enhancedSecurityService: false
+        enhancedMonitorService: false
+      labels:
+        test1: test1
+        test2: test2
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_kubernetes_nodepool" "example" {
+  name                     = "tf-example"
+  cluster_id               = managedCluster.id
+  max_size                 = 6
+  min_size                 = 1
+  vpc_id                   = vpc.instanceList[0].vpcId
+  subnet_ids               = [vpc.instanceList[0].subnetId]
+  retry_policy             = "INCREMENTAL_INTERVALS"
+  desired_capacity         = 4
+  enable_auto_scale        = true
+  multi_zone_subnet_policy = "EQUALITY"
+  auto_scaling_config = {
+    instance_type              = defaultInstanceType
+    system_disk_type           = "CLOUD_PREMIUM"
+    system_disk_size           = "50"
+    orderly_security_group_ids = ["sg-24vswocp", "sg-3qntci2v", "sg-7y1t2wax"]
+    instance_charge_type       = "SPOTPAID"
+    spot_instance_type         = "one-time"
+    spot_max_price             = "1000"
+    data_disks = [{
+      "diskType" = "CLOUD_PREMIUM"
+      "diskSize" = 50
+    }]
+    internet_charge_type       = "TRAFFIC_POSTPAID_BY_HOUR"
+    internet_max_bandwidth_out = 10
+    public_ip_assigned         = true
+    password                   = "Password@123"
+    enhanced_security_service  = false
+    enhanced_monitor_service   = false
+  }
+  labels = {
+    "test1" = "test1"
+    "test2" = "test2"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### If instanceType is CBM
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.kubernetes.NodePool("example", {
+    name: "tf-example",
+    clusterId: "cls-23ieal0c",
+    maxSize: 100,
+    minSize: 1,
+    vpcId: "vpc-i5yyodl9",
+    subnetIds: ["subnet-d4umunpy"],
+    retryPolicy: "INCREMENTAL_INTERVALS",
+    enableAutoScale: true,
+    multiZoneSubnetPolicy: "EQUALITY",
+    nodeOs: "img-eb30mz89",
+    deleteKeepInstance: false,
+    nodeConfig: {
+        dataDisks: [
+            {
+                diskType: "LOCAL_NVME",
+                diskSize: 3570,
+                fileSystem: "ext4",
+                mountTarget: "/var/lib/data1",
+            },
+            {
+                diskType: "LOCAL_NVME",
+                diskSize: 3570,
+                fileSystem: "ext4",
+                mountTarget: "/var/lib/data2",
+            },
+        ],
+    },
+    autoScalingConfig: {
+        instanceType: "BMI5.24XLARGE384",
+        systemDiskType: "LOCAL_BASIC",
+        systemDiskSize: 440,
+        orderlySecurityGroupIds: ["sg-4z20n68d"],
+        internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+        internetMaxBandwidthOut: 10,
+        publicIpAssigned: true,
+        password: "Password@123",
+        enhancedSecurityService: false,
+        enhancedMonitorService: false,
+        hostName: "example",
+        hostNameStyle: "ORIGINAL",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.kubernetes.NodePool("example",
+    name="tf-example",
+    cluster_id="cls-23ieal0c",
+    max_size=100,
+    min_size=1,
+    vpc_id="vpc-i5yyodl9",
+    subnet_ids=["subnet-d4umunpy"],
+    retry_policy="INCREMENTAL_INTERVALS",
+    enable_auto_scale=True,
+    multi_zone_subnet_policy="EQUALITY",
+    node_os="img-eb30mz89",
+    delete_keep_instance=False,
+    node_config={
+        "data_disks": [
+            {
+                "disk_type": "LOCAL_NVME",
+                "disk_size": 3570,
+                "file_system": "ext4",
+                "mount_target": "/var/lib/data1",
+            },
+            {
+                "disk_type": "LOCAL_NVME",
+                "disk_size": 3570,
+                "file_system": "ext4",
+                "mount_target": "/var/lib/data2",
+            },
+        ],
+    },
+    auto_scaling_config={
+        "instance_type": "BMI5.24XLARGE384",
+        "system_disk_type": "LOCAL_BASIC",
+        "system_disk_size": 440,
+        "orderly_security_group_ids": ["sg-4z20n68d"],
+        "internet_charge_type": "TRAFFIC_POSTPAID_BY_HOUR",
+        "internet_max_bandwidth_out": 10,
+        "public_ip_assigned": True,
+        "password": "Password@123",
+        "enhanced_security_service": False,
+        "enhanced_monitor_service": False,
+        "host_name": "example",
+        "host_name_style": "ORIGINAL",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := kubernetes.NewNodePool(ctx, "example", &kubernetes.NodePoolArgs{
+			Name:      pulumi.String("tf-example"),
+			ClusterId: pulumi.String("cls-23ieal0c"),
+			MaxSize:   pulumi.Int(100),
+			MinSize:   pulumi.Int(1),
+			VpcId:     pulumi.String("vpc-i5yyodl9"),
+			SubnetIds: pulumi.StringArray{
+				pulumi.String("subnet-d4umunpy"),
+			},
+			RetryPolicy:           pulumi.String("INCREMENTAL_INTERVALS"),
+			EnableAutoScale:       pulumi.Bool(true),
+			MultiZoneSubnetPolicy: pulumi.String("EQUALITY"),
+			NodeOs:                pulumi.String("img-eb30mz89"),
+			DeleteKeepInstance:    pulumi.Bool(false),
+			NodeConfig: &kubernetes.NodePoolNodeConfigArgs{
+				DataDisks: kubernetes.NodePoolNodeConfigDataDiskArray{
+					&kubernetes.NodePoolNodeConfigDataDiskArgs{
+						DiskType:    pulumi.String("LOCAL_NVME"),
+						DiskSize:    pulumi.Int(3570),
+						FileSystem:  pulumi.String("ext4"),
+						MountTarget: pulumi.String("/var/lib/data1"),
+					},
+					&kubernetes.NodePoolNodeConfigDataDiskArgs{
+						DiskType:    pulumi.String("LOCAL_NVME"),
+						DiskSize:    pulumi.Int(3570),
+						FileSystem:  pulumi.String("ext4"),
+						MountTarget: pulumi.String("/var/lib/data2"),
+					},
+				},
+			},
+			AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
+				InstanceType:   pulumi.String("BMI5.24XLARGE384"),
+				SystemDiskType: pulumi.String("LOCAL_BASIC"),
+				SystemDiskSize: pulumi.Int(440),
+				OrderlySecurityGroupIds: pulumi.StringArray{
+					pulumi.String("sg-4z20n68d"),
+				},
+				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+				InternetMaxBandwidthOut: pulumi.Int(10),
+				PublicIpAssigned:        pulumi.Bool(true),
+				Password:                pulumi.String("Password@123"),
+				EnhancedSecurityService: pulumi.Bool(false),
+				EnhancedMonitorService:  pulumi.Bool(false),
+				HostName:                pulumi.String("example"),
+				HostNameStyle:           pulumi.String("ORIGINAL"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Kubernetes.NodePool("example", new()
+    {
+        Name = "tf-example",
+        ClusterId = "cls-23ieal0c",
+        MaxSize = 100,
+        MinSize = 1,
+        VpcId = "vpc-i5yyodl9",
+        SubnetIds = new[]
+        {
+            "subnet-d4umunpy",
+        },
+        RetryPolicy = "INCREMENTAL_INTERVALS",
+        EnableAutoScale = true,
+        MultiZoneSubnetPolicy = "EQUALITY",
+        NodeOs = "img-eb30mz89",
+        DeleteKeepInstance = false,
+        NodeConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolNodeConfigArgs
+        {
+            DataDisks = new[]
+            {
+                new Tencentcloud.Kubernetes.Inputs.NodePoolNodeConfigDataDiskArgs
+                {
+                    DiskType = "LOCAL_NVME",
+                    DiskSize = 3570,
+                    FileSystem = "ext4",
+                    MountTarget = "/var/lib/data1",
+                },
+                new Tencentcloud.Kubernetes.Inputs.NodePoolNodeConfigDataDiskArgs
+                {
+                    DiskType = "LOCAL_NVME",
+                    DiskSize = 3570,
+                    FileSystem = "ext4",
+                    MountTarget = "/var/lib/data2",
+                },
+            },
+        },
+        AutoScalingConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigArgs
+        {
+            InstanceType = "BMI5.24XLARGE384",
+            SystemDiskType = "LOCAL_BASIC",
+            SystemDiskSize = 440,
+            OrderlySecurityGroupIds = new[]
+            {
+                "sg-4z20n68d",
+            },
+            InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+            InternetMaxBandwidthOut = 10,
+            PublicIpAssigned = true,
+            Password = "Password@123",
+            EnhancedSecurityService = false,
+            EnhancedMonitorService = false,
+            HostName = "example",
+            HostNameStyle = "ORIGINAL",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Kubernetes.NodePool;
+import com.pulumi.tencentcloud.Kubernetes.NodePoolArgs;
+import com.pulumi.tencentcloud.Kubernetes.inputs.NodePoolNodeConfigArgs;
+import com.pulumi.tencentcloud.Kubernetes.inputs.NodePoolNodeConfigDataDiskArgs;
+import com.pulumi.tencentcloud.Kubernetes.inputs.NodePoolAutoScalingConfigArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new NodePool("example", NodePoolArgs.builder()
+            .name("tf-example")
+            .clusterId("cls-23ieal0c")
+            .maxSize(100)
+            .minSize(1)
+            .vpcId("vpc-i5yyodl9")
+            .subnetIds("subnet-d4umunpy")
+            .retryPolicy("INCREMENTAL_INTERVALS")
+            .enableAutoScale(true)
+            .multiZoneSubnetPolicy("EQUALITY")
+            .nodeOs("img-eb30mz89")
+            .deleteKeepInstance(false)
+            .nodeConfig(NodePoolNodeConfigArgs.builder()
+                .dataDisks(                
+                    NodePoolNodeConfigDataDiskArgs.builder()
+                        .diskType("LOCAL_NVME")
+                        .diskSize(3570)
+                        .fileSystem("ext4")
+                        .mountTarget("/var/lib/data1")
+                        .build(),
+                    NodePoolNodeConfigDataDiskArgs.builder()
+                        .diskType("LOCAL_NVME")
+                        .diskSize(3570)
+                        .fileSystem("ext4")
+                        .mountTarget("/var/lib/data2")
+                        .build())
+                .build())
+            .autoScalingConfig(NodePoolAutoScalingConfigArgs.builder()
+                .instanceType("BMI5.24XLARGE384")
+                .systemDiskType("LOCAL_BASIC")
+                .systemDiskSize(440)
+                .orderlySecurityGroupIds("sg-4z20n68d")
+                .internetChargeType("TRAFFIC_POSTPAID_BY_HOUR")
+                .internetMaxBandwidthOut(10)
+                .publicIpAssigned(true)
+                .password("Password@123")
+                .enhancedSecurityService(false)
+                .enhancedMonitorService(false)
+                .hostName("example")
+                .hostNameStyle("ORIGINAL")
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Kubernetes:NodePool
+    properties:
+      name: tf-example
+      clusterId: cls-23ieal0c
+      maxSize: 100
+      minSize: 1
+      vpcId: vpc-i5yyodl9
+      subnetIds:
+        - subnet-d4umunpy
+      retryPolicy: INCREMENTAL_INTERVALS
+      enableAutoScale: true
+      multiZoneSubnetPolicy: EQUALITY
+      nodeOs: img-eb30mz89
+      deleteKeepInstance: false
+      nodeConfig:
+        dataDisks:
+          - diskType: LOCAL_NVME
+            diskSize: 3570
+            fileSystem: ext4
+            mountTarget: /var/lib/data1
+          - diskType: LOCAL_NVME
+            diskSize: 3570
+            fileSystem: ext4
+            mountTarget: /var/lib/data2
+      autoScalingConfig:
+        instanceType: BMI5.24XLARGE384
+        systemDiskType: LOCAL_BASIC
+        systemDiskSize: '440'
+        orderlySecurityGroupIds:
+          - sg-4z20n68d
+        internetChargeType: TRAFFIC_POSTPAID_BY_HOUR
+        internetMaxBandwidthOut: 10
+        publicIpAssigned: true
+        password: Password@123
+        enhancedSecurityService: false
+        enhancedMonitorService: false
+        hostName: example
+        hostNameStyle: ORIGINAL
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_kubernetes_nodepool" "example" {
+  name                     = "tf-example"
+  cluster_id               = "cls-23ieal0c"
+  max_size                 = 100
+  min_size                 = 1
+  vpc_id                   = "vpc-i5yyodl9"
+  subnet_ids               = ["subnet-d4umunpy"]
+  retry_policy             = "INCREMENTAL_INTERVALS"
+  enable_auto_scale        = true
+  multi_zone_subnet_policy = "EQUALITY"
+  node_os                  = "img-eb30mz89"
+  delete_keep_instance     = false
+  node_config = {
+    data_disks = [{
+      "diskType"    = "LOCAL_NVME"
+      "diskSize"    = 3570
+      "fileSystem"  = "ext4"
+      "mountTarget" = "/var/lib/data1"
+      }, {
+      "diskType"    = "LOCAL_NVME"
+      "diskSize"    = 3570
+      "fileSystem"  = "ext4"
+      "mountTarget" = "/var/lib/data2"
+    }]
+  }
+  auto_scaling_config = {
+    instance_type              = "BMI5.24XLARGE384"
+    system_disk_type           = "LOCAL_BASIC"
+    system_disk_size           = "440"
+    orderly_security_group_ids = ["sg-4z20n68d"]
+    internet_charge_type       = "TRAFFIC_POSTPAID_BY_HOUR"
+    internet_max_bandwidth_out = 10
+    public_ip_assigned         = true
+    password                   = "Password@123"
+    enhanced_security_service  = false
+    enhanced_monitor_service   = false
+    host_name                  = "example"
+    host_name_style            = "ORIGINAL"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Wait for all scaling nodes to be ready with waitNodeReady and scaleTolerance parameters. The default maximum scaling timeout is 30 minutes.
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.kubernetes.NodePool("example", {
+    name: "tf-example",
+    clusterId: managedCluster.id,
+    maxSize: 100,
+    minSize: 1,
+    vpcId: vpc.instanceList[0].vpcId,
+    subnetIds: [vpc.instanceList[0].subnetId],
+    retryPolicy: "INCREMENTAL_INTERVALS",
+    desiredCapacity: 50,
+    enableAutoScale: false,
+    waitNodeReady: true,
+    scaleTolerance: 90,
+    multiZoneSubnetPolicy: "EQUALITY",
+    nodeOs: "img-6n21msk1",
+    deleteKeepInstance: false,
+    autoScalingConfig: {
+        instanceType: defaultInstanceType,
+        systemDiskType: "CLOUD_PREMIUM",
+        systemDiskSize: 50,
+        orderlySecurityGroupIds: ["sg-bw28gmso"],
+        dataDisks: [{
+            diskType: "CLOUD_PREMIUM",
+            diskSize: 50,
+            deleteWithInstance: true,
         }],
         internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
         internetMaxBandwidthOut: 10,
@@ -93,133 +1605,192 @@ const mynodepool = new tencentcloud.kubernetes.NodePool("mynodepool", {
         },
     ],
     nodeConfig: {
+        dockerGraphPath: "/var/lib/docker",
         extraArgs: ["root-dir=/var/lib/kubelet"],
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
-import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-config = pulumi.Config()
-availability_zone = config.get("availabilityZone")
-if availability_zone is None:
-    availability_zone = "ap-guangzhou-3"
-cluster_cidr = config.get("clusterCidr")
-if cluster_cidr is None:
-    cluster_cidr = "172.31.0.0/16"
-vpc = tencentcloud.Vpc.get_subnets(is_default=True,
-    availability_zone=availability_zone)
-default_instance_type = config.get("defaultInstanceType")
-if default_instance_type is None:
-    default_instance_type = "S1.SMALL1"
-#this is the cluster with empty worker config
-managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
-    vpc_id=vpc.instance_lists[0].vpc_id,
-    cluster_cidr=cluster_cidr,
-    cluster_max_pod_num=32,
-    cluster_name="tf-tke-unit-test",
-    cluster_desc="test cluster desc",
-    cluster_max_service_num=32,
-    cluster_version="1.18.4",
-    cluster_deploy_type="MANAGED_CLUSTER")
-#this is one example of managing node using node pool
-mynodepool = tencentcloud.kubernetes.NodePool("mynodepool",
-    cluster_id=managed_cluster.id,
-    max_size=6,
+example = tencentcloud.kubernetes.NodePool("example",
+    name="tf-example",
+    cluster_id=managed_cluster["id"],
+    max_size=100,
     min_size=1,
-    vpc_id=vpc.instance_lists[0].vpc_id,
-    subnet_ids=[vpc.instance_lists[0].subnet_id],
+    vpc_id=vpc["instanceList"][0]["vpcId"],
+    subnet_ids=[vpc["instanceList"][0]["subnetId"]],
     retry_policy="INCREMENTAL_INTERVALS",
-    desired_capacity=4,
-    enable_auto_scale=True,
+    desired_capacity=50,
+    enable_auto_scale=False,
+    wait_node_ready=True,
+    scale_tolerance=90,
     multi_zone_subnet_policy="EQUALITY",
-    auto_scaling_config=tencentcloud.kubernetes.NodePoolAutoScalingConfigArgs(
-        instance_type=default_instance_type,
-        system_disk_type="CLOUD_PREMIUM",
-        system_disk_size=50,
-        orderly_security_group_ids=["sg-24vswocp"],
-        data_disks=[tencentcloud.kubernetes.NodePoolAutoScalingConfigDataDiskArgs(
-            disk_type="CLOUD_PREMIUM",
-            disk_size=50,
-        )],
-        internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
-        internet_max_bandwidth_out=10,
-        public_ip_assigned=True,
-        password="test123#",
-        enhanced_security_service=False,
-        enhanced_monitor_service=False,
-        host_name="12.123.0.0",
-        host_name_style="ORIGINAL",
-    ),
+    node_os="img-6n21msk1",
+    delete_keep_instance=False,
+    auto_scaling_config={
+        "instance_type": default_instance_type,
+        "system_disk_type": "CLOUD_PREMIUM",
+        "system_disk_size": 50,
+        "orderly_security_group_ids": ["sg-bw28gmso"],
+        "data_disks": [{
+            "disk_type": "CLOUD_PREMIUM",
+            "disk_size": 50,
+            "delete_with_instance": True,
+        }],
+        "internet_charge_type": "TRAFFIC_POSTPAID_BY_HOUR",
+        "internet_max_bandwidth_out": 10,
+        "public_ip_assigned": True,
+        "password": "test123#",
+        "enhanced_security_service": False,
+        "enhanced_monitor_service": False,
+        "host_name": "12.123.0.0",
+        "host_name_style": "ORIGINAL",
+    },
     labels={
         "test1": "test1",
         "test2": "test2",
     },
     taints=[
-        tencentcloud.kubernetes.NodePoolTaintArgs(
-            key="test_taint",
-            value="taint_value",
-            effect="PreferNoSchedule",
-        ),
-        tencentcloud.kubernetes.NodePoolTaintArgs(
-            key="test_taint2",
-            value="taint_value2",
-            effect="PreferNoSchedule",
-        ),
+        {
+            "key": "test_taint",
+            "value": "taint_value",
+            "effect": "PreferNoSchedule",
+        },
+        {
+            "key": "test_taint2",
+            "value": "taint_value2",
+            "effect": "PreferNoSchedule",
+        },
     ],
-    node_config=tencentcloud.kubernetes.NodePoolNodeConfigArgs(
-        extra_args=["root-dir=/var/lib/kubelet"],
-    ))
+    node_config={
+        "docker_graph_path": "/var/lib/docker",
+        "extra_args": ["root-dir=/var/lib/kubelet"],
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := kubernetes.NewNodePool(ctx, "example", &kubernetes.NodePoolArgs{
+			Name:      pulumi.String("tf-example"),
+			ClusterId: pulumi.Any(managedCluster.Id),
+			MaxSize:   pulumi.Int(100),
+			MinSize:   pulumi.Int(1),
+			VpcId:     pulumi.Any(vpc.InstanceList[0].VpcId),
+			SubnetIds: pulumi.StringArray{
+				vpc.InstanceList[0].SubnetId,
+			},
+			RetryPolicy:           pulumi.String("INCREMENTAL_INTERVALS"),
+			DesiredCapacity:       pulumi.Int(50),
+			EnableAutoScale:       pulumi.Bool(false),
+			WaitNodeReady:         pulumi.Bool(true),
+			ScaleTolerance:        pulumi.Int(90),
+			MultiZoneSubnetPolicy: pulumi.String("EQUALITY"),
+			NodeOs:                pulumi.String("img-6n21msk1"),
+			DeleteKeepInstance:    pulumi.Bool(false),
+			AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
+				InstanceType:   pulumi.Any(defaultInstanceType),
+				SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
+				SystemDiskSize: pulumi.Int(50),
+				OrderlySecurityGroupIds: pulumi.StringArray{
+					pulumi.String("sg-bw28gmso"),
+				},
+				DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
+					&kubernetes.NodePoolAutoScalingConfigDataDiskArgs{
+						DiskType:           pulumi.String("CLOUD_PREMIUM"),
+						DiskSize:           pulumi.Int(50),
+						DeleteWithInstance: pulumi.Bool(true),
+					},
+				},
+				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+				InternetMaxBandwidthOut: pulumi.Int(10),
+				PublicIpAssigned:        pulumi.Bool(true),
+				Password:                pulumi.String("test123#"),
+				EnhancedSecurityService: pulumi.Bool(false),
+				EnhancedMonitorService:  pulumi.Bool(false),
+				HostName:                pulumi.String("12.123.0.0"),
+				HostNameStyle:           pulumi.String("ORIGINAL"),
+			},
+			Labels: pulumi.StringMap{
+				"test1": pulumi.String("test1"),
+				"test2": pulumi.String("test2"),
+			},
+			Taints: kubernetes.NodePoolTaintArray{
+				&kubernetes.NodePoolTaintArgs{
+					Key:    pulumi.String("test_taint"),
+					Value:  pulumi.String("taint_value"),
+					Effect: pulumi.String("PreferNoSchedule"),
+				},
+				&kubernetes.NodePoolTaintArgs{
+					Key:    pulumi.String("test_taint2"),
+					Value:  pulumi.String("taint_value2"),
+					Effect: pulumi.String("PreferNoSchedule"),
+				},
+			},
+			NodeConfig: &kubernetes.NodePoolNodeConfigArgs{
+				DockerGraphPath: pulumi.String("/var/lib/docker"),
+				ExtraArgs: pulumi.StringArray{
+					pulumi.String("root-dir=/var/lib/kubelet"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var config = new Config();
-    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    var clusterCidr = config.Get("clusterCidr") ?? "172.31.0.0/16";
-    var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+    var example = new Tencentcloud.Kubernetes.NodePool("example", new()
     {
-        IsDefault = true,
-        AvailabilityZone = availabilityZone,
-    });
-
-    var defaultInstanceType = config.Get("defaultInstanceType") ?? "S1.SMALL1";
-    //this is the cluster with empty worker config
-    var managedCluster = new Tencentcloud.Kubernetes.Cluster("managedCluster", new()
-    {
-        VpcId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.VpcId),
-        ClusterCidr = clusterCidr,
-        ClusterMaxPodNum = 32,
-        ClusterName = "tf-tke-unit-test",
-        ClusterDesc = "test cluster desc",
-        ClusterMaxServiceNum = 32,
-        ClusterVersion = "1.18.4",
-        ClusterDeployType = "MANAGED_CLUSTER",
-    });
-
-    //this is one example of managing node using node pool
-    var mynodepool = new Tencentcloud.Kubernetes.NodePool("mynodepool", new()
-    {
+        Name = "tf-example",
         ClusterId = managedCluster.Id,
-        MaxSize = 6,
+        MaxSize = 100,
         MinSize = 1,
-        VpcId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.VpcId),
+        VpcId = vpc.InstanceList[0].VpcId,
         SubnetIds = new[]
         {
-            vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.SubnetId),
+            vpc.InstanceList[0].SubnetId,
         },
         RetryPolicy = "INCREMENTAL_INTERVALS",
-        DesiredCapacity = 4,
-        EnableAutoScale = true,
+        DesiredCapacity = 50,
+        EnableAutoScale = false,
+        WaitNodeReady = true,
+        ScaleTolerance = 90,
         MultiZoneSubnetPolicy = "EQUALITY",
+        NodeOs = "img-6n21msk1",
+        DeleteKeepInstance = false,
         AutoScalingConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigArgs
         {
             InstanceType = defaultInstanceType,
@@ -227,7 +1798,7 @@ return await Deployment.RunAsync(() =>
             SystemDiskSize = 50,
             OrderlySecurityGroupIds = new[]
             {
-                "sg-24vswocp",
+                "sg-bw28gmso",
             },
             DataDisks = new[]
             {
@@ -235,6 +1806,7 @@ return await Deployment.RunAsync(() =>
                 {
                     DiskType = "CLOUD_PREMIUM",
                     DiskSize = 50,
+                    DeleteWithInstance = true,
                 },
             },
             InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
@@ -268,6 +1840,7 @@ return await Deployment.RunAsync(() =>
         },
         NodeConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolNodeConfigArgs
         {
+            DockerGraphPath = "/var/lib/docker",
             ExtraArgs = new[]
             {
                 "root-dir=/var/lib/kubelet",
@@ -277,133 +1850,25 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		cfg := config.New(ctx, "")
-		availabilityZone := "ap-guangzhou-3"
-		if param := cfg.Get("availabilityZone"); param != "" {
-			availabilityZone = param
-		}
-		clusterCidr := "172.31.0.0/16"
-		if param := cfg.Get("clusterCidr"); param != "" {
-			clusterCidr = param
-		}
-		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-			IsDefault:        pulumi.BoolRef(true),
-			AvailabilityZone: pulumi.StringRef(availabilityZone),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		defaultInstanceType := "S1.SMALL1"
-		if param := cfg.Get("defaultInstanceType"); param != "" {
-			defaultInstanceType = param
-		}
-		// this is the cluster with empty worker config
-		managedCluster, err := Kubernetes.NewCluster(ctx, "managedCluster", &Kubernetes.ClusterArgs{
-			VpcId:                pulumi.String(vpc.InstanceLists[0].VpcId),
-			ClusterCidr:          pulumi.String(clusterCidr),
-			ClusterMaxPodNum:     pulumi.Int(32),
-			ClusterName:          pulumi.String("tf-tke-unit-test"),
-			ClusterDesc:          pulumi.String("test cluster desc"),
-			ClusterMaxServiceNum: pulumi.Int(32),
-			ClusterVersion:       pulumi.String("1.18.4"),
-			ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
-		})
-		if err != nil {
-			return err
-		}
-		// this is one example of managing node using node pool
-		_, err = Kubernetes.NewNodePool(ctx, "mynodepool", &Kubernetes.NodePoolArgs{
-			ClusterId: managedCluster.ID(),
-			MaxSize:   pulumi.Int(6),
-			MinSize:   pulumi.Int(1),
-			VpcId:     pulumi.String(vpc.InstanceLists[0].VpcId),
-			SubnetIds: pulumi.StringArray{
-				pulumi.String(vpc.InstanceLists[0].SubnetId),
-			},
-			RetryPolicy:           pulumi.String("INCREMENTAL_INTERVALS"),
-			DesiredCapacity:       pulumi.Int(4),
-			EnableAutoScale:       pulumi.Bool(true),
-			MultiZoneSubnetPolicy: pulumi.String("EQUALITY"),
-			AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
-				InstanceType:   pulumi.String(defaultInstanceType),
-				SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
-				SystemDiskSize: pulumi.Int(50),
-				OrderlySecurityGroupIds: pulumi.StringArray{
-					pulumi.String("sg-24vswocp"),
-				},
-				DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
-					&kubernetes.NodePoolAutoScalingConfigDataDiskArgs{
-						DiskType: pulumi.String("CLOUD_PREMIUM"),
-						DiskSize: pulumi.Int(50),
-					},
-				},
-				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-				InternetMaxBandwidthOut: pulumi.Int(10),
-				PublicIpAssigned:        pulumi.Bool(true),
-				Password:                pulumi.String("test123#"),
-				EnhancedSecurityService: pulumi.Bool(false),
-				EnhancedMonitorService:  pulumi.Bool(false),
-				HostName:                pulumi.String("12.123.0.0"),
-				HostNameStyle:           pulumi.String("ORIGINAL"),
-			},
-			Labels: pulumi.Map{
-				"test1": pulumi.Any("test1"),
-				"test2": pulumi.Any("test2"),
-			},
-			Taints: kubernetes.NodePoolTaintArray{
-				&kubernetes.NodePoolTaintArgs{
-					Key:    pulumi.String("test_taint"),
-					Value:  pulumi.String("taint_value"),
-					Effect: pulumi.String("PreferNoSchedule"),
-				},
-				&kubernetes.NodePoolTaintArgs{
-					Key:    pulumi.String("test_taint2"),
-					Value:  pulumi.String("taint_value2"),
-					Effect: pulumi.String("PreferNoSchedule"),
-				},
-			},
-			NodeConfig: &kubernetes.NodePoolNodeConfigArgs{
-				ExtraArgs: pulumi.StringArray{
-					pulumi.String("root-dir=/var/lib/kubelet"),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Vpc.VpcFunctions;
-import com.pulumi.tencentcloud.Vpc.inputs.GetSubnetsArgs;
-import com.pulumi.tencentcloud.Kubernetes.Cluster;
-import com.pulumi.tencentcloud.Kubernetes.ClusterArgs;
 import com.pulumi.tencentcloud.Kubernetes.NodePool;
 import com.pulumi.tencentcloud.Kubernetes.NodePoolArgs;
 import com.pulumi.tencentcloud.Kubernetes.inputs.NodePoolAutoScalingConfigArgs;
+import com.pulumi.tencentcloud.Kubernetes.inputs.NodePoolAutoScalingConfigDataDiskArgs;
 import com.pulumi.tencentcloud.Kubernetes.inputs.NodePoolTaintArgs;
 import com.pulumi.tencentcloud.Kubernetes.inputs.NodePoolNodeConfigArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -415,46 +1880,30 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var config = ctx.config();
-        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-3");
-        final var clusterCidr = config.get("clusterCidr").orElse("172.31.0.0/16");
-        final var vpc = VpcFunctions.getSubnets(GetSubnetsArgs.builder()
-            .isDefault(true)
-            .availabilityZone(availabilityZone)
-            .build());
-
-        final var defaultInstanceType = config.get("defaultInstanceType").orElse("S1.SMALL1");
-        //this is the cluster with empty worker config
-        var managedCluster = new Cluster("managedCluster", ClusterArgs.builder()        
-            .vpcId(vpc.applyValue(getSubnetsResult -> getSubnetsResult.instanceLists()[0].vpcId()))
-            .clusterCidr(clusterCidr)
-            .clusterMaxPodNum(32)
-            .clusterName("tf-tke-unit-test")
-            .clusterDesc("test cluster desc")
-            .clusterMaxServiceNum(32)
-            .clusterVersion("1.18.4")
-            .clusterDeployType("MANAGED_CLUSTER")
-            .build());
-
-        //this is one example of managing node using node pool
-        var mynodepool = new NodePool("mynodepool", NodePoolArgs.builder()        
+        var example = new NodePool("example", NodePoolArgs.builder()
+            .name("tf-example")
             .clusterId(managedCluster.id())
-            .maxSize(6)
+            .maxSize(100)
             .minSize(1)
-            .vpcId(vpc.applyValue(getSubnetsResult -> getSubnetsResult.instanceLists()[0].vpcId()))
-            .subnetIds(vpc.applyValue(getSubnetsResult -> getSubnetsResult.instanceLists()[0].subnetId()))
+            .vpcId(vpc.instanceList()[0].vpcId())
+            .subnetIds(vpc.instanceList()[0].subnetId())
             .retryPolicy("INCREMENTAL_INTERVALS")
-            .desiredCapacity(4)
-            .enableAutoScale(true)
+            .desiredCapacity(50)
+            .enableAutoScale(false)
+            .waitNodeReady(true)
+            .scaleTolerance(90)
             .multiZoneSubnetPolicy("EQUALITY")
+            .nodeOs("img-6n21msk1")
+            .deleteKeepInstance(false)
             .autoScalingConfig(NodePoolAutoScalingConfigArgs.builder()
                 .instanceType(defaultInstanceType)
                 .systemDiskType("CLOUD_PREMIUM")
-                .systemDiskSize("50")
-                .orderlySecurityGroupIds("sg-24vswocp")
+                .systemDiskSize(50)
+                .orderlySecurityGroupIds("sg-bw28gmso")
                 .dataDisks(NodePoolAutoScalingConfigDataDiskArgs.builder()
                     .diskType("CLOUD_PREMIUM")
                     .diskSize(50)
+                    .deleteWithInstance(true)
                     .build())
                 .internetChargeType("TRAFFIC_POSTPAID_BY_HOUR")
                 .internetMaxBandwidthOut(10)
@@ -481,6 +1930,7 @@ public class App {
                     .effect("PreferNoSchedule")
                     .build())
             .nodeConfig(NodePoolNodeConfigArgs.builder()
+                .dockerGraphPath("/var/lib/docker")
                 .extraArgs("root-dir=/var/lib/kubelet")
                 .build())
             .build());
@@ -488,53 +1938,41 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
-configuration:
-  availabilityZone:
-    type: string
-    default: ap-guangzhou-3
-  clusterCidr:
-    type: string
-    default: 172.31.0.0/16
-  defaultInstanceType:
-    type: string
-    default: S1.SMALL1
 resources:
-  # this is the cluster with empty worker config
-  managedCluster:
-    type: tencentcloud:Kubernetes:Cluster
-    properties:
-      vpcId: ${vpc.instanceLists[0].vpcId}
-      clusterCidr: ${clusterCidr}
-      clusterMaxPodNum: 32
-      clusterName: tf-tke-unit-test
-      clusterDesc: test cluster desc
-      clusterMaxServiceNum: 32
-      clusterVersion: 1.18.4
-      clusterDeployType: MANAGED_CLUSTER
-  # this is one example of managing node using node pool
-  mynodepool:
+  example:
     type: tencentcloud:Kubernetes:NodePool
     properties:
+      name: tf-example
       clusterId: ${managedCluster.id}
-      maxSize: 6
+      maxSize: 100
       minSize: 1
-      vpcId: ${vpc.instanceLists[0].vpcId}
+      vpcId: ${vpc.instanceList[0].vpcId}
       subnetIds:
-        - ${vpc.instanceLists[0].subnetId}
+        - ${vpc.instanceList[0].subnetId}
       retryPolicy: INCREMENTAL_INTERVALS
-      desiredCapacity: 4
-      enableAutoScale: true
+      desiredCapacity: 50
+      enableAutoScale: false
+      waitNodeReady: true
+      scaleTolerance: 90
       multiZoneSubnetPolicy: EQUALITY
+      nodeOs: img-6n21msk1
+      deleteKeepInstance: false
       autoScalingConfig:
         instanceType: ${defaultInstanceType}
         systemDiskType: CLOUD_PREMIUM
         systemDiskSize: '50'
         orderlySecurityGroupIds:
-          - sg-24vswocp
+          - sg-bw28gmso
         dataDisks:
           - diskType: CLOUD_PREMIUM
             diskSize: 50
+            deleteWithInstance: true
         internetChargeType: TRAFFIC_POSTPAID_BY_HOUR
         internetMaxBandwidthOut: 10
         publicIpAssigned: true
@@ -554,216 +1992,269 @@ resources:
           value: taint_value2
           effect: PreferNoSchedule
       nodeConfig:
+        dockerGraphPath: /var/lib/docker
         extraArgs:
           - root-dir=/var/lib/kubelet
-variables:
-  vpc:
-    fn::invoke:
-      Function: tencentcloud:Vpc:getSubnets
-      Arguments:
-        isDefault: true
-        availabilityZone: ${availabilityZone}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### Using Spot CVM Instance
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+resource "tencentcloud_kubernetes_nodepool" "example" {
+  name                     = "tf-example"
+  cluster_id               = managedCluster.id
+  max_size                 = 100
+  min_size                 = 1
+  vpc_id                   = vpc.instanceList[0].vpcId
+  subnet_ids               = [vpc.instanceList[0].subnetId]
+  retry_policy             = "INCREMENTAL_INTERVALS"
+  desired_capacity         = 50
+  enable_auto_scale        = false
+  wait_node_ready          = true
+  scale_tolerance          = 90
+  multi_zone_subnet_policy = "EQUALITY"
+  node_os                  = "img-6n21msk1"
+  delete_keep_instance     = false
+  auto_scaling_config = {
+    instance_type              = defaultInstanceType
+    system_disk_type           = "CLOUD_PREMIUM"
+    system_disk_size           = "50"
+    orderly_security_group_ids = ["sg-bw28gmso"]
+    data_disks = [{
+      "diskType"           = "CLOUD_PREMIUM"
+      "diskSize"           = 50
+      "deleteWithInstance" = true
+    }]
+    internet_charge_type       = "TRAFFIC_POSTPAID_BY_HOUR"
+    internet_max_bandwidth_out = 10
+    public_ip_assigned         = true
+    password                   = "test123#"
+    enhanced_security_service  = false
+    enhanced_monitor_service   = false
+    host_name                  = "12.123.0.0"
+    host_name_style            = "ORIGINAL"
+  }
+  labels = {
+    "test1" = "test1"
+    "test2" = "test2"
+  }
+  taints {
+    key    = "test_taint"
+    value  = "taint_value"
+    effect = "PreferNoSchedule"
+  }
+  taints {
+    key    = "test_taint2"
+    value  = "taint_value2"
+    effect = "PreferNoSchedule"
+  }
+  node_config = {
+    docker_graph_path = "/var/lib/docker"
+    extra_args        = ["root-dir=/var/lib/kubelet"]
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create Node pool for CDC cluster
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const mynodepool = new tencentcloud.kubernetes.NodePool("mynodepool", {
-    clusterId: tencentcloud_kubernetes_cluster.managed_cluster.id,
-    maxSize: 6,
+const example = new tencentcloud.kubernetes.NodePool("example", {
+    name: "tf-example",
+    clusterId: "cls-nhhpsdx8",
+    defaultCooldown: 400,
+    maxSize: 4,
     minSize: 1,
-    vpcId: data.tencentcloud_vpc_subnets.vpc.instance_list[0].vpc_id,
-    subnetIds: [data.tencentcloud_vpc_subnets.vpc.instance_list[0].subnet_id],
+    desiredCapacity: 2,
+    vpcId: "vpc-pi5u9uth",
+    subnetIds: ["subnet-muu9a0gk"],
     retryPolicy: "INCREMENTAL_INTERVALS",
-    desiredCapacity: 4,
     enableAutoScale: true,
     multiZoneSubnetPolicy: "EQUALITY",
-    autoScalingConfig: {
-        instanceType: _var.default_instance_type,
-        systemDiskType: "CLOUD_PREMIUM",
-        systemDiskSize: 50,
-        orderlySecurityGroupIds: [
-            "sg-24vswocp",
-            "sg-3qntci2v",
-            "sg-7y1t2wax",
-        ],
-        instanceChargeType: "SPOTPAID",
-        spotInstanceType: "one-time",
-        spotMaxPrice: "1000",
+    nodeOs: "img-eb30mz89",
+    deleteKeepInstance: true,
+    nodeConfig: {
         dataDisks: [{
-            diskType: "CLOUD_PREMIUM",
+            diskType: "CLOUD_SSD",
+            diskSize: 50,
+            fileSystem: "ext4",
+            mountTarget: "/var/lib/data1",
+        }],
+    },
+    autoScalingConfig: {
+        instanceType: "S5.MEDIUM4",
+        instanceChargeType: "CDCPAID",
+        systemDiskType: "CLOUD_SSD",
+        systemDiskSize: 100,
+        orderlySecurityGroupIds: ["sg-4z20n68d"],
+        dataDisks: [{
+            diskType: "CLOUD_SSD",
             diskSize: 50,
         }],
         internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
         internetMaxBandwidthOut: 10,
         publicIpAssigned: true,
-        password: "test123#",
+        password: "Password@123",
         enhancedSecurityService: false,
         enhancedMonitorService: false,
+        hostName: "example",
+        hostNameStyle: "ORIGINAL",
+        instanceName: "example",
+        instanceNameStyle: "ORIGINAL",
+        cdcId: "cluster-262n63e8",
     },
-    labels: {
-        test1: "test1",
-        test2: "test2",
+    tags: {
+        createBy: "Terraform",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-mynodepool = tencentcloud.kubernetes.NodePool("mynodepool",
-    cluster_id=tencentcloud_kubernetes_cluster["managed_cluster"]["id"],
-    max_size=6,
+example = tencentcloud.kubernetes.NodePool("example",
+    name="tf-example",
+    cluster_id="cls-nhhpsdx8",
+    default_cooldown=400,
+    max_size=4,
     min_size=1,
-    vpc_id=data["tencentcloud_vpc_subnets"]["vpc"]["instance_list"][0]["vpc_id"],
-    subnet_ids=[data["tencentcloud_vpc_subnets"]["vpc"]["instance_list"][0]["subnet_id"]],
+    desired_capacity=2,
+    vpc_id="vpc-pi5u9uth",
+    subnet_ids=["subnet-muu9a0gk"],
     retry_policy="INCREMENTAL_INTERVALS",
-    desired_capacity=4,
     enable_auto_scale=True,
     multi_zone_subnet_policy="EQUALITY",
-    auto_scaling_config=tencentcloud.kubernetes.NodePoolAutoScalingConfigArgs(
-        instance_type=var["default_instance_type"],
-        system_disk_type="CLOUD_PREMIUM",
-        system_disk_size=50,
-        orderly_security_group_ids=[
-            "sg-24vswocp",
-            "sg-3qntci2v",
-            "sg-7y1t2wax",
-        ],
-        instance_charge_type="SPOTPAID",
-        spot_instance_type="one-time",
-        spot_max_price="1000",
-        data_disks=[tencentcloud.kubernetes.NodePoolAutoScalingConfigDataDiskArgs(
-            disk_type="CLOUD_PREMIUM",
-            disk_size=50,
-        )],
-        internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
-        internet_max_bandwidth_out=10,
-        public_ip_assigned=True,
-        password="test123#",
-        enhanced_security_service=False,
-        enhanced_monitor_service=False,
-    ),
-    labels={
-        "test1": "test1",
-        "test2": "test2",
+    node_os="img-eb30mz89",
+    delete_keep_instance=True,
+    node_config={
+        "data_disks": [{
+            "disk_type": "CLOUD_SSD",
+            "disk_size": 50,
+            "file_system": "ext4",
+            "mount_target": "/var/lib/data1",
+        }],
+    },
+    auto_scaling_config={
+        "instance_type": "S5.MEDIUM4",
+        "instance_charge_type": "CDCPAID",
+        "system_disk_type": "CLOUD_SSD",
+        "system_disk_size": 100,
+        "orderly_security_group_ids": ["sg-4z20n68d"],
+        "data_disks": [{
+            "disk_type": "CLOUD_SSD",
+            "disk_size": 50,
+        }],
+        "internet_charge_type": "TRAFFIC_POSTPAID_BY_HOUR",
+        "internet_max_bandwidth_out": 10,
+        "public_ip_assigned": True,
+        "password": "Password@123",
+        "enhanced_security_service": False,
+        "enhanced_monitor_service": False,
+        "host_name": "example",
+        "host_name_style": "ORIGINAL",
+        "instance_name": "example",
+        "instance_name_style": "ORIGINAL",
+        "cdc_id": "cluster-262n63e8",
+    },
+    tags={
+        "createBy": "Terraform",
     })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var mynodepool = new Tencentcloud.Kubernetes.NodePool("mynodepool", new()
-    {
-        ClusterId = tencentcloud_kubernetes_cluster.Managed_cluster.Id,
-        MaxSize = 6,
-        MinSize = 1,
-        VpcId = data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Vpc_id,
-        SubnetIds = new[]
-        {
-            data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Subnet_id,
-        },
-        RetryPolicy = "INCREMENTAL_INTERVALS",
-        DesiredCapacity = 4,
-        EnableAutoScale = true,
-        MultiZoneSubnetPolicy = "EQUALITY",
-        AutoScalingConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigArgs
-        {
-            InstanceType = @var.Default_instance_type,
-            SystemDiskType = "CLOUD_PREMIUM",
-            SystemDiskSize = 50,
-            OrderlySecurityGroupIds = new[]
-            {
-                "sg-24vswocp",
-                "sg-3qntci2v",
-                "sg-7y1t2wax",
-            },
-            InstanceChargeType = "SPOTPAID",
-            SpotInstanceType = "one-time",
-            SpotMaxPrice = "1000",
-            DataDisks = new[]
-            {
-                new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigDataDiskArgs
-                {
-                    DiskType = "CLOUD_PREMIUM",
-                    DiskSize = 50,
-                },
-            },
-            InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
-            InternetMaxBandwidthOut = 10,
-            PublicIpAssigned = true,
-            Password = "test123#",
-            EnhancedSecurityService = false,
-            EnhancedMonitorService = false,
-        },
-        Labels = 
-        {
-            { "test1", "test1" },
-            { "test2", "test2" },
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Kubernetes.NewNodePool(ctx, "mynodepool", &Kubernetes.NodePoolArgs{
-			ClusterId: pulumi.Any(tencentcloud_kubernetes_cluster.Managed_cluster.Id),
-			MaxSize:   pulumi.Int(6),
-			MinSize:   pulumi.Int(1),
-			VpcId:     pulumi.Any(data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Vpc_id),
+		_, err := kubernetes.NewNodePool(ctx, "example", &kubernetes.NodePoolArgs{
+			Name:            pulumi.String("tf-example"),
+			ClusterId:       pulumi.String("cls-nhhpsdx8"),
+			DefaultCooldown: pulumi.Int(400),
+			MaxSize:         pulumi.Int(4),
+			MinSize:         pulumi.Int(1),
+			DesiredCapacity: pulumi.Int(2),
+			VpcId:           pulumi.String("vpc-pi5u9uth"),
 			SubnetIds: pulumi.StringArray{
-				data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Subnet_id,
+				pulumi.String("subnet-muu9a0gk"),
 			},
 			RetryPolicy:           pulumi.String("INCREMENTAL_INTERVALS"),
-			DesiredCapacity:       pulumi.Int(4),
 			EnableAutoScale:       pulumi.Bool(true),
 			MultiZoneSubnetPolicy: pulumi.String("EQUALITY"),
-			AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
-				InstanceType:   pulumi.Any(_var.Default_instance_type),
-				SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
-				SystemDiskSize: pulumi.Int(50),
-				OrderlySecurityGroupIds: pulumi.StringArray{
-					pulumi.String("sg-24vswocp"),
-					pulumi.String("sg-3qntci2v"),
-					pulumi.String("sg-7y1t2wax"),
+			NodeOs:                pulumi.String("img-eb30mz89"),
+			DeleteKeepInstance:    pulumi.Bool(true),
+			NodeConfig: &kubernetes.NodePoolNodeConfigArgs{
+				DataDisks: kubernetes.NodePoolNodeConfigDataDiskArray{
+					&kubernetes.NodePoolNodeConfigDataDiskArgs{
+						DiskType:    pulumi.String("CLOUD_SSD"),
+						DiskSize:    pulumi.Int(50),
+						FileSystem:  pulumi.String("ext4"),
+						MountTarget: pulumi.String("/var/lib/data1"),
+					},
 				},
-				InstanceChargeType: pulumi.String("SPOTPAID"),
-				SpotInstanceType:   pulumi.String("one-time"),
-				SpotMaxPrice:       pulumi.String("1000"),
+			},
+			AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
+				InstanceType:       pulumi.String("S5.MEDIUM4"),
+				InstanceChargeType: pulumi.String("CDCPAID"),
+				SystemDiskType:     pulumi.String("CLOUD_SSD"),
+				SystemDiskSize:     pulumi.Int(100),
+				OrderlySecurityGroupIds: pulumi.StringArray{
+					pulumi.String("sg-4z20n68d"),
+				},
 				DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
 					&kubernetes.NodePoolAutoScalingConfigDataDiskArgs{
-						DiskType: pulumi.String("CLOUD_PREMIUM"),
+						DiskType: pulumi.String("CLOUD_SSD"),
 						DiskSize: pulumi.Int(50),
 					},
 				},
 				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
 				InternetMaxBandwidthOut: pulumi.Int(10),
 				PublicIpAssigned:        pulumi.Bool(true),
-				Password:                pulumi.String("test123#"),
+				Password:                pulumi.String("Password@123"),
 				EnhancedSecurityService: pulumi.Bool(false),
 				EnhancedMonitorService:  pulumi.Bool(false),
+				HostName:                pulumi.String("example"),
+				HostNameStyle:           pulumi.String("ORIGINAL"),
+				InstanceName:            pulumi.String("example"),
+				InstanceNameStyle:       pulumi.String("ORIGINAL"),
+				CdcId:                   pulumi.String("cluster-262n63e8"),
 			},
-			Labels: pulumi.Map{
-				"test1": pulumi.Any("test1"),
-				"test2": pulumi.Any("test2"),
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("Terraform"),
 			},
 		})
 		if err != nil {
@@ -773,6 +2264,93 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Kubernetes.NodePool("example", new()
+    {
+        Name = "tf-example",
+        ClusterId = "cls-nhhpsdx8",
+        DefaultCooldown = 400,
+        MaxSize = 4,
+        MinSize = 1,
+        DesiredCapacity = 2,
+        VpcId = "vpc-pi5u9uth",
+        SubnetIds = new[]
+        {
+            "subnet-muu9a0gk",
+        },
+        RetryPolicy = "INCREMENTAL_INTERVALS",
+        EnableAutoScale = true,
+        MultiZoneSubnetPolicy = "EQUALITY",
+        NodeOs = "img-eb30mz89",
+        DeleteKeepInstance = true,
+        NodeConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolNodeConfigArgs
+        {
+            DataDisks = new[]
+            {
+                new Tencentcloud.Kubernetes.Inputs.NodePoolNodeConfigDataDiskArgs
+                {
+                    DiskType = "CLOUD_SSD",
+                    DiskSize = 50,
+                    FileSystem = "ext4",
+                    MountTarget = "/var/lib/data1",
+                },
+            },
+        },
+        AutoScalingConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigArgs
+        {
+            InstanceType = "S5.MEDIUM4",
+            InstanceChargeType = "CDCPAID",
+            SystemDiskType = "CLOUD_SSD",
+            SystemDiskSize = 100,
+            OrderlySecurityGroupIds = new[]
+            {
+                "sg-4z20n68d",
+            },
+            DataDisks = new[]
+            {
+                new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigDataDiskArgs
+                {
+                    DiskType = "CLOUD_SSD",
+                    DiskSize = 50,
+                },
+            },
+            InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+            InternetMaxBandwidthOut = 10,
+            PublicIpAssigned = true,
+            Password = "Password@123",
+            EnhancedSecurityService = false,
+            EnhancedMonitorService = false,
+            HostName = "example",
+            HostNameStyle = "ORIGINAL",
+            InstanceName = "example",
+            InstanceNameStyle = "ORIGINAL",
+            CdcId = "cluster-262n63e8",
+        },
+        Tags = 
+        {
+            { "createBy", "Terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -781,9 +2359,12 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Kubernetes.NodePool;
 import com.pulumi.tencentcloud.Kubernetes.NodePoolArgs;
+import com.pulumi.tencentcloud.Kubernetes.inputs.NodePoolNodeConfigArgs;
+import com.pulumi.tencentcloud.Kubernetes.inputs.NodePoolNodeConfigDataDiskArgs;
 import com.pulumi.tencentcloud.Kubernetes.inputs.NodePoolAutoScalingConfigArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Kubernetes.inputs.NodePoolAutoScalingConfigDataDiskArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -795,170 +2376,300 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var mynodepool = new NodePool("mynodepool", NodePoolArgs.builder()        
-            .clusterId(tencentcloud_kubernetes_cluster.managed_cluster().id())
-            .maxSize(6)
+        var example = new NodePool("example", NodePoolArgs.builder()
+            .name("tf-example")
+            .clusterId("cls-nhhpsdx8")
+            .defaultCooldown(400)
+            .maxSize(4)
             .minSize(1)
-            .vpcId(data.tencentcloud_vpc_subnets().vpc().instance_list()[0].vpc_id())
-            .subnetIds(data.tencentcloud_vpc_subnets().vpc().instance_list()[0].subnet_id())
+            .desiredCapacity(2)
+            .vpcId("vpc-pi5u9uth")
+            .subnetIds("subnet-muu9a0gk")
             .retryPolicy("INCREMENTAL_INTERVALS")
-            .desiredCapacity(4)
             .enableAutoScale(true)
             .multiZoneSubnetPolicy("EQUALITY")
+            .nodeOs("img-eb30mz89")
+            .deleteKeepInstance(true)
+            .nodeConfig(NodePoolNodeConfigArgs.builder()
+                .dataDisks(NodePoolNodeConfigDataDiskArgs.builder()
+                    .diskType("CLOUD_SSD")
+                    .diskSize(50)
+                    .fileSystem("ext4")
+                    .mountTarget("/var/lib/data1")
+                    .build())
+                .build())
             .autoScalingConfig(NodePoolAutoScalingConfigArgs.builder()
-                .instanceType(var_.default_instance_type())
-                .systemDiskType("CLOUD_PREMIUM")
-                .systemDiskSize("50")
-                .orderlySecurityGroupIds(                
-                    "sg-24vswocp",
-                    "sg-3qntci2v",
-                    "sg-7y1t2wax")
-                .instanceChargeType("SPOTPAID")
-                .spotInstanceType("one-time")
-                .spotMaxPrice("1000")
+                .instanceType("S5.MEDIUM4")
+                .instanceChargeType("CDCPAID")
+                .systemDiskType("CLOUD_SSD")
+                .systemDiskSize(100)
+                .orderlySecurityGroupIds("sg-4z20n68d")
                 .dataDisks(NodePoolAutoScalingConfigDataDiskArgs.builder()
-                    .diskType("CLOUD_PREMIUM")
+                    .diskType("CLOUD_SSD")
                     .diskSize(50)
                     .build())
                 .internetChargeType("TRAFFIC_POSTPAID_BY_HOUR")
                 .internetMaxBandwidthOut(10)
                 .publicIpAssigned(true)
-                .password("test123#")
+                .password("Password@123")
                 .enhancedSecurityService(false)
                 .enhancedMonitorService(false)
+                .hostName("example")
+                .hostNameStyle("ORIGINAL")
+                .instanceName("example")
+                .instanceNameStyle("ORIGINAL")
+                .cdcId("cluster-262n63e8")
                 .build())
-            .labels(Map.ofEntries(
-                Map.entry("test1", "test1"),
-                Map.entry("test2", "test2")
-            ))
+            .tags(Map.of("createBy", "Terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  mynodepool:
+  example:
     type: tencentcloud:Kubernetes:NodePool
     properties:
-      clusterId: ${tencentcloud_kubernetes_cluster.managed_cluster.id}
-      maxSize: 6
+      name: tf-example
+      clusterId: cls-nhhpsdx8
+      defaultCooldown: 400
+      maxSize: 4
       minSize: 1
-      vpcId: ${data.tencentcloud_vpc_subnets.vpc.instance_list[0].vpc_id}
+      desiredCapacity: 2
+      vpcId: vpc-pi5u9uth
       subnetIds:
-        - ${data.tencentcloud_vpc_subnets.vpc.instance_list[0].subnet_id}
+        - subnet-muu9a0gk
       retryPolicy: INCREMENTAL_INTERVALS
-      desiredCapacity: 4
       enableAutoScale: true
       multiZoneSubnetPolicy: EQUALITY
-      autoScalingConfig:
-        instanceType: ${var.default_instance_type}
-        systemDiskType: CLOUD_PREMIUM
-        systemDiskSize: '50'
-        orderlySecurityGroupIds:
-          - sg-24vswocp
-          - sg-3qntci2v
-          - sg-7y1t2wax
-        instanceChargeType: SPOTPAID
-        spotInstanceType: one-time
-        spotMaxPrice: '1000'
+      nodeOs: img-eb30mz89
+      deleteKeepInstance: true
+      nodeConfig:
         dataDisks:
-          - diskType: CLOUD_PREMIUM
+          - diskType: CLOUD_SSD
+            diskSize: 50
+            fileSystem: ext4
+            mountTarget: /var/lib/data1
+      autoScalingConfig:
+        instanceType: S5.MEDIUM4
+        instanceChargeType: CDCPAID
+        systemDiskType: CLOUD_SSD
+        systemDiskSize: '100'
+        orderlySecurityGroupIds:
+          - sg-4z20n68d
+        dataDisks:
+          - diskType: CLOUD_SSD
             diskSize: 50
         internetChargeType: TRAFFIC_POSTPAID_BY_HOUR
         internetMaxBandwidthOut: 10
         publicIpAssigned: true
-        password: test123#
+        password: Password@123
         enhancedSecurityService: false
         enhancedMonitorService: false
-      labels:
-        test1: test1
-        test2: test2
+        hostName: example
+        hostNameStyle: ORIGINAL
+        instanceName: example
+        instanceNameStyle: ORIGINAL
+        cdcId: cluster-262n63e8
+      tags:
+        createBy: Terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_kubernetes_nodepool" "example" {
+  name                     = "tf-example"
+  cluster_id               = "cls-nhhpsdx8"
+  default_cooldown         = 400
+  max_size                 = 4
+  min_size                 = 1
+  desired_capacity         = 2
+  vpc_id                   = "vpc-pi5u9uth"
+  subnet_ids               = ["subnet-muu9a0gk"]
+  retry_policy             = "INCREMENTAL_INTERVALS"
+  enable_auto_scale        = true
+  multi_zone_subnet_policy = "EQUALITY"
+  node_os                  = "img-eb30mz89"
+  delete_keep_instance     = true
+  node_config = {
+    data_disks = [{
+      "diskType"    = "CLOUD_SSD"
+      "diskSize"    = 50
+      "fileSystem"  = "ext4"
+      "mountTarget" = "/var/lib/data1"
+    }]
+  }
+  auto_scaling_config = {
+    instance_type              = "S5.MEDIUM4"
+    instance_charge_type       = "CDCPAID"
+    system_disk_type           = "CLOUD_SSD"
+    system_disk_size           = "100"
+    orderly_security_group_ids = ["sg-4z20n68d"]
+    data_disks = [{
+      "diskType" = "CLOUD_SSD"
+      "diskSize" = 50
+    }]
+    internet_charge_type       = "TRAFFIC_POSTPAID_BY_HOUR"
+    internet_max_bandwidth_out = 10
+    public_ip_assigned         = true
+    password                   = "Password@123"
+    enhanced_security_service  = false
+    enhanced_monitor_service   = false
+    host_name                  = "example"
+    host_name_style            = "ORIGINAL"
+    instance_name              = "example"
+    instance_name_style        = "ORIGINAL"
+    cdc_id                     = "cluster-262n63e8"
+  }
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateClusterNodePool](https://www.tencentcloud.com/document/api/457/38781)
+* Read:
+  - [DescribeClusterNodePoolDetail](https://www.tencentcloud.com/document/api/457/38778)
+  - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+* Update:
+  - [DeleteMachine](https://www.tencentcloud.com/document/api/296/30907)
+  - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+  - [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
+  - [DescribeClusterNodePoolDetail](https://www.tencentcloud.com/document/api/457/38778)
+  - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+  - [InvokeCommand](https://www.tencentcloud.com/document/api/1147/46690)
+  - [ModifyClusterNodePool](https://www.tencentcloud.com/document/api/457/38776)
+  - [ModifyLaunchConfigurationAttributes](https://www.tencentcloud.com/document/api/377/30998)
+  - [ModifyNodePoolDesiredCapacityAboutAsg](https://www.tencentcloud.com/search/?wd=ModifyNodePoolDesiredCapacityAboutAsg&type=document&lang=en)
+  - [Send](https://www.tencentcloud.com/search/?wd=Send&type=document&lang=en)
+  - [UseAsClient](https://www.tencentcloud.com/search/?wd=UseAsClient&type=document&lang=en)
+* Delete: [DeleteClusterNodePool](https://www.tencentcloud.com/document/api/457/38779)
 
 
 ## Create NodePool Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">NodePool</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NodePoolArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">NodePool</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NodePoolArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">NodePool</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NodePoolArgs</a></span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">NodePool</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-             <span class="nx">auto_scaling_config</span><span class="p">:</span> <span class="nx">Optional[_kubernetes.NodePoolAutoScalingConfigArgs]</span> = None<span class="p">,</span>
+             <span class="nx">max_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">auto_scaling_config</span><span class="p">:</span> <span class="nx">Optional[NodePoolAutoScalingConfigArgs]</span> = None<span class="p">,</span>
+             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">default_cooldown</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">delete_keep_instance</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-             <span class="nx">deletion_protection</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">min_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">node_config</span><span class="p">:</span> <span class="nx">Optional[NodePoolNodeConfigArgs]</span> = None<span class="p">,</span>
+             <span class="nx">scale_tolerance</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">desired_capacity</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">enable_auto_scale</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-             <span class="nx">labels</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-             <span class="nx">max_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">min_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">labels</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+             <span class="nx">delete_keep_instance</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">default_cooldown</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">multi_zone_subnet_policy</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">node_config</span><span class="p">:</span> <span class="nx">Optional[_kubernetes.NodePoolNodeConfigArgs]</span> = None<span class="p">,</span>
+             <span class="nx">annotations</span><span class="p">:</span> <span class="nx">Optional[Sequence[NodePoolAnnotationArgs]]</span> = None<span class="p">,</span>
              <span class="nx">node_os</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">node_os_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">retry_policy</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">deletion_protection</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">scaling_group_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">scaling_group_project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">scaling_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">subnet_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-             <span class="nx">taints</span><span class="p">:</span> <span class="nx">Optional[Sequence[_kubernetes.NodePoolTaintArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+             <span class="nx">taints</span><span class="p">:</span> <span class="nx">Optional[Sequence[NodePoolTaintArgs]]</span> = None<span class="p">,</span>
              <span class="nx">termination_policies</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">unschedulable</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">zones</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">NodePool</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NodePoolArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">auto_update_instance_tags</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">wait_node_ready</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">zones</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewNodePool</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">NodePoolArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">NodePool</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewNodePool</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">NodePoolArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">NodePool</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">NodePool</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NodePoolArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">NodePool</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NodePoolArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">NodePool</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NodePoolArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">NodePool</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NodePoolArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Kubernetes:NodePool</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Kubernetes:NodePool</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_kubernetes_node_pool&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -979,7 +2690,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -1096,11 +2807,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## NodePool Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -1114,10 +2833,9 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalingconfig_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Scaling<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepoolautoscalingconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#nodepoolautoscalingconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config</a></span>
     </dt>
-    <dd><p>Auto scaling config parameters.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Auto scaling config parameters.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1125,8 +2843,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
@@ -1134,8 +2851,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of node.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of node.</dd><dt class="property-required"
             title="Required">
         <span id="minsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Size</a>
@@ -1143,8 +2859,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum number of node.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Minimum number of node.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1152,8 +2867,23 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="annotations_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_csharp" style="color: inherit; text-decoration: inherit;">Annotations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolannotation">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Node<wbr>Pool<wbr>Annotation&gt;</a></span>
+    </dt>
+    <dd>Node Annotation List.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="autoupdateinstancetags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoupdateinstancetags_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Update<wbr>Instance<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Automatically update instance tags. The default value is false. After configuration, if the scaling group tags are updated, the tags of the running instances in the scaling group will be updated synchronously (synchronous updates only support adding and modifying tags, and do not support deleting tags for the time being). Synchronous updates do not take effect immediately and there is a certain delay.</dd><dt class="property-optional"
             title="Optional">
         <span id="defaultcooldown_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultcooldown_csharp" style="color: inherit; text-decoration: inherit;">Default<wbr>Cooldown</a>
@@ -1161,8 +2891,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Seconds of scaling group cool down. Default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Seconds of scaling group cool down. Default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletekeepinstance_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletekeepinstance_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Keep<wbr>Instance</a>
@@ -1170,8 +2899,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletionprotection_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletionprotection_csharp" style="color: inherit; text-decoration: inherit;">Deletion<wbr>Protection</a>
@@ -1179,8 +2907,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the node pool deletion protection is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the node pool deletion protection is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="desiredcapacity_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacity_csharp" style="color: inherit; text-decoration: inherit;">Desired<wbr>Capacity</a>
@@ -1188,8 +2915,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Desired capacity of the node. If <code>enable_auto_scale</code> is set <code>true</code>, this will be a computed parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Desired capacity of the node. If <code>enableAutoScale</code> is set <code>true</code>, this will be a computed parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="enableautoscale_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableautoscale_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Auto<wbr>Scale</a>
@@ -1197,17 +2923,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to enable auto scaling or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to enable auto scaling or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="labels_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_csharp" style="color: inherit; text-decoration: inherit;">Labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-optional"
+    <dd>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-optional"
             title="Optional">
         <span id="multizonesubnetpolicy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizonesubnetpolicy_csharp" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -1215,8 +2939,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1224,17 +2947,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodeconfig_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeconfig_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepoolnodeconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#nodepoolnodeconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Node<wbr>Pool<wbr>Node<wbr>Config</a></span>
     </dt>
-    <dd><p>Node config.</p>
-</dd><dt class="property-optional"
+    <dd>Node config.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodeos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeos_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Os</a>
@@ -1242,8 +2963,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operating system of the cluster. Please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image). If custom image, please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodeostype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeostype_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Os<wbr>Type</a>
@@ -1251,8 +2971,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="retrypolicy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrypolicy_csharp" style="color: inherit; text-decoration: inherit;">Retry<wbr>Policy</a>
@@ -1260,8 +2979,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scaletolerance_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaletolerance_csharp" style="color: inherit; text-decoration: inherit;">Scale<wbr>Tolerance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Control how many expectations(<code>desiredCapacity</code>) can be tolerated successfully. Unit is percentage, Default is <code>100</code>. Only can be set if <code>waitNodeReady</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Name</a>
@@ -1269,8 +2995,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of relative scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Name of relative scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupprojectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupprojectid_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Project<wbr>Id</a>
@@ -1278,8 +3003,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID the scaling group belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Project ID the scaling group belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="scalingmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingmode_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Mode</a>
@@ -1287,8 +3011,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Ids</a>
@@ -1296,26 +3019,23 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Node pool tag specifications, will passthroughs to the scaling instances.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool tag specifications, will passthroughs to the scaling instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="taints_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taints_csharp" style="color: inherit; text-decoration: inherit;">Taints</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepooltaint">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Node<wbr>Pool<wbr>Taint<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#nodepooltaint">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Node<wbr>Pool<wbr>Taint&gt;</a></span>
     </dt>
-    <dd><p>Taints of kubernetes node pool created nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Taints of kubernetes node pool created nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="terminationpolicies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationpolicies_csharp" style="color: inherit; text-decoration: inherit;">Termination<wbr>Policies</a>
@@ -1323,8 +3043,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="unschedulable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unschedulable_csharp" style="color: inherit; text-decoration: inherit;">Unschedulable</a>
@@ -1332,8 +3051,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</p>
-</dd><dt class="property-optional"
+    <dd>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="waitnodeready_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitnodeready_csharp" style="color: inherit; text-decoration: inherit;">Wait<wbr>Node<wbr>Ready</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to wait for all desired nodes to be ready. Default is false. Only can be set if <code>enableAutoScale</code> is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="zones_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_csharp" style="color: inherit; text-decoration: inherit;">Zones</a>
@@ -1341,8 +3067,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of auto scaling group available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of auto scaling group available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1356,8 +3081,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolautoscalingconfig">Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Auto scaling config parameters.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Auto scaling config parameters.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1365,8 +3089,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
@@ -1374,8 +3097,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of node.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of node.</dd><dt class="property-required"
             title="Required">
         <span id="minsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Size</a>
@@ -1383,8 +3105,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum number of node.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Minimum number of node.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1392,8 +3113,23 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="annotations_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_go" style="color: inherit; text-decoration: inherit;">Annotations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolannotation">[]Node<wbr>Pool<wbr>Annotation<wbr>Args</a></span>
+    </dt>
+    <dd>Node Annotation List.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="autoupdateinstancetags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoupdateinstancetags_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Update<wbr>Instance<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Automatically update instance tags. The default value is false. After configuration, if the scaling group tags are updated, the tags of the running instances in the scaling group will be updated synchronously (synchronous updates only support adding and modifying tags, and do not support deleting tags for the time being). Synchronous updates do not take effect immediately and there is a certain delay.</dd><dt class="property-optional"
             title="Optional">
         <span id="defaultcooldown_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultcooldown_go" style="color: inherit; text-decoration: inherit;">Default<wbr>Cooldown</a>
@@ -1401,8 +3137,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Seconds of scaling group cool down. Default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Seconds of scaling group cool down. Default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletekeepinstance_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletekeepinstance_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Keep<wbr>Instance</a>
@@ -1410,8 +3145,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletionprotection_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletionprotection_go" style="color: inherit; text-decoration: inherit;">Deletion<wbr>Protection</a>
@@ -1419,8 +3153,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the node pool deletion protection is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the node pool deletion protection is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="desiredcapacity_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacity_go" style="color: inherit; text-decoration: inherit;">Desired<wbr>Capacity</a>
@@ -1428,8 +3161,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Desired capacity of the node. If <code>enable_auto_scale</code> is set <code>true</code>, this will be a computed parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Desired capacity of the node. If <code>enableAutoScale</code> is set <code>true</code>, this will be a computed parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="enableautoscale_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableautoscale_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Auto<wbr>Scale</a>
@@ -1437,17 +3169,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to enable auto scaling or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to enable auto scaling or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="labels_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_go" style="color: inherit; text-decoration: inherit;">Labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-optional"
+    <dd>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-optional"
             title="Optional">
         <span id="multizonesubnetpolicy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizonesubnetpolicy_go" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -1455,8 +3185,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1464,8 +3193,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodeconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeconfig_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Config</a>
@@ -1473,8 +3201,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolnodeconfig">Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Node config.</p>
-</dd><dt class="property-optional"
+    <dd>Node config.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodeos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeos_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Os</a>
@@ -1482,8 +3209,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operating system of the cluster. Please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image). If custom image, please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodeostype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeostype_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Os<wbr>Type</a>
@@ -1491,8 +3217,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="retrypolicy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrypolicy_go" style="color: inherit; text-decoration: inherit;">Retry<wbr>Policy</a>
@@ -1500,8 +3225,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scaletolerance_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaletolerance_go" style="color: inherit; text-decoration: inherit;">Scale<wbr>Tolerance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Control how many expectations(<code>desiredCapacity</code>) can be tolerated successfully. Unit is percentage, Default is <code>100</code>. Only can be set if <code>waitNodeReady</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Name</a>
@@ -1509,8 +3241,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of relative scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Name of relative scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupprojectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupprojectid_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Project<wbr>Id</a>
@@ -1518,8 +3249,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID the scaling group belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Project ID the scaling group belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="scalingmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingmode_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Mode</a>
@@ -1527,8 +3257,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Ids</a>
@@ -1536,17 +3265,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Node pool tag specifications, will passthroughs to the scaling instances.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool tag specifications, will passthroughs to the scaling instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="taints_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taints_go" style="color: inherit; text-decoration: inherit;">Taints</a>
@@ -1554,8 +3281,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepooltaint">[]Node<wbr>Pool<wbr>Taint<wbr>Args</a></span>
     </dt>
-    <dd><p>Taints of kubernetes node pool created nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Taints of kubernetes node pool created nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="terminationpolicies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationpolicies_go" style="color: inherit; text-decoration: inherit;">Termination<wbr>Policies</a>
@@ -1563,8 +3289,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="unschedulable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unschedulable_go" style="color: inherit; text-decoration: inherit;">Unschedulable</a>
@@ -1572,8 +3297,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</p>
-</dd><dt class="property-optional"
+    <dd>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="waitnodeready_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitnodeready_go" style="color: inherit; text-decoration: inherit;">Wait<wbr>Node<wbr>Ready</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to wait for all desired nodes to be ready. Default is false. Only can be set if <code>enableAutoScale</code> is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="zones_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_go" style="color: inherit; text-decoration: inherit;">Zones</a>
@@ -1581,8 +3313,253 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of auto scaling group available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of auto scaling group available zones, for Basic network it is required.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="auto_scaling_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_scaling_config_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolautoscalingconfig">object</a></span>
+    </dt>
+    <dd>Auto scaling config parameters.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of node.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_size_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum number of node.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="annotations_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_hcl" style="color: inherit; text-decoration: inherit;">annotations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolannotation">list(object)</a></span>
+    </dt>
+    <dd>Node Annotation List.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="auto_update_instance_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_update_instance_tags_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>update_<wbr>instance_<wbr>tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Automatically update instance tags. The default value is false. After configuration, if the scaling group tags are updated, the tags of the running instances in the scaling group will be updated synchronously (synchronous updates only support adding and modifying tags, and do not support deleting tags for the time being). Synchronous updates do not take effect immediately and there is a certain delay.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="default_cooldown_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_cooldown_hcl" style="color: inherit; text-decoration: inherit;">default_<wbr>cooldown</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Seconds of scaling group cool down. Default value is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="delete_keep_instance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_keep_instance_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>keep_<wbr>instance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deletion_protection_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletion_protection_hcl" style="color: inherit; text-decoration: inherit;">deletion_<wbr>protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the node pool deletion protection is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="desired_capacity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desired_capacity_hcl" style="color: inherit; text-decoration: inherit;">desired_<wbr>capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Desired capacity of the node. If <code>enableAutoScale</code> is set <code>true</code>, this will be a computed parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_auto_scale_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_auto_scale_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>auto_<wbr>scale</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to enable auto scaling or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="labels_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_hcl" style="color: inherit; text-decoration: inherit;">labels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multi_zone_subnet_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_zone_subnet_policy_hcl" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone_<wbr>subnet_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="node_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_config_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolnodeconfig">object</a></span>
+    </dt>
+    <dd>Node config.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="node_os_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_os_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>os</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image). If custom image, please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="node_os_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_os_type_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>os_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="retry_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retry_policy_hcl" style="color: inherit; text-decoration: inherit;">retry_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scale_tolerance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scale_tolerance_hcl" style="color: inherit; text-decoration: inherit;">scale_<wbr>tolerance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Control how many expectations(<code>desiredCapacity</code>) can be tolerated successfully. Unit is percentage, Default is <code>100</code>. Only can be set if <code>waitNodeReady</code> is <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scaling_group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_name_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of relative scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scaling_group_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_project_id_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID the scaling group belongs to.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="scaling_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_mode_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="subnet_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_ids_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Node pool tag specifications, will passthroughs to the scaling instances.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="taints_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taints_hcl" style="color: inherit; text-decoration: inherit;">taints</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepooltaint">list(object)</a></span>
+    </dt>
+    <dd>Taints of kubernetes node pool created nodes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="termination_policies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#termination_policies_hcl" style="color: inherit; text-decoration: inherit;">termination_<wbr>policies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="unschedulable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unschedulable_hcl" style="color: inherit; text-decoration: inherit;">unschedulable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="wait_node_ready_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wait_node_ready_hcl" style="color: inherit; text-decoration: inherit;">wait_<wbr>node_<wbr>ready</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to wait for all desired nodes to be ready. Default is false. Only can be set if <code>enableAutoScale</code> is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zones_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_hcl" style="color: inherit; text-decoration: inherit;">zones</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of auto scaling group available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1594,10 +3571,9 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalingconfig_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepoolautoscalingconfig">Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#nodepoolautoscalingconfig">Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config</a></span>
     </dt>
-    <dd><p>Auto scaling config parameters.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Auto scaling config parameters.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1605,8 +3581,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -1614,8 +3589,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of node.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of node.</dd><dt class="property-required"
             title="Required">
         <span id="minsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_java" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -1623,8 +3597,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Minimum number of node.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Minimum number of node.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1632,8 +3605,23 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="annotations_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_java" style="color: inherit; text-decoration: inherit;">annotations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolannotation">List&lt;Node<wbr>Pool<wbr>Annotation&gt;</a></span>
+    </dt>
+    <dd>Node Annotation List.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="autoupdateinstancetags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoupdateinstancetags_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Update<wbr>Instance<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Automatically update instance tags. The default value is false. After configuration, if the scaling group tags are updated, the tags of the running instances in the scaling group will be updated synchronously (synchronous updates only support adding and modifying tags, and do not support deleting tags for the time being). Synchronous updates do not take effect immediately and there is a certain delay.</dd><dt class="property-optional"
             title="Optional">
         <span id="defaultcooldown_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultcooldown_java" style="color: inherit; text-decoration: inherit;">default<wbr>Cooldown</a>
@@ -1641,8 +3629,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Seconds of scaling group cool down. Default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Seconds of scaling group cool down. Default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletekeepinstance_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletekeepinstance_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Keep<wbr>Instance</a>
@@ -1650,8 +3637,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletionprotection_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletionprotection_java" style="color: inherit; text-decoration: inherit;">deletion<wbr>Protection</a>
@@ -1659,8 +3645,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the node pool deletion protection is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the node pool deletion protection is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="desiredcapacity_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacity_java" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity</a>
@@ -1668,8 +3653,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Desired capacity of the node. If <code>enable_auto_scale</code> is set <code>true</code>, this will be a computed parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Desired capacity of the node. If <code>enableAutoScale</code> is set <code>true</code>, this will be a computed parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="enableautoscale_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableautoscale_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Auto<wbr>Scale</a>
@@ -1677,17 +3661,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to enable auto scaling or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to enable auto scaling or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="labels_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_java" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-optional"
+    <dd>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-optional"
             title="Optional">
         <span id="multizonesubnetpolicy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizonesubnetpolicy_java" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -1695,8 +3677,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1704,17 +3685,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodeconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeconfig_java" style="color: inherit; text-decoration: inherit;">node<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepoolnodeconfig">Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#nodepoolnodeconfig">Node<wbr>Pool<wbr>Node<wbr>Config</a></span>
     </dt>
-    <dd><p>Node config.</p>
-</dd><dt class="property-optional"
+    <dd>Node config.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodeos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeos_java" style="color: inherit; text-decoration: inherit;">node<wbr>Os</a>
@@ -1722,8 +3701,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operating system of the cluster. Please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image). If custom image, please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodeostype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeostype_java" style="color: inherit; text-decoration: inherit;">node<wbr>Os<wbr>Type</a>
@@ -1731,8 +3709,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="retrypolicy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrypolicy_java" style="color: inherit; text-decoration: inherit;">retry<wbr>Policy</a>
@@ -1740,8 +3717,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scaletolerance_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaletolerance_java" style="color: inherit; text-decoration: inherit;">scale<wbr>Tolerance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Control how many expectations(<code>desiredCapacity</code>) can be tolerated successfully. Unit is percentage, Default is <code>100</code>. Only can be set if <code>waitNodeReady</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -1749,8 +3733,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of relative scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Name of relative scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupprojectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupprojectid_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Project<wbr>Id</a>
@@ -1758,8 +3741,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID the scaling group belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Project ID the scaling group belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="scalingmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingmode_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Mode</a>
@@ -1767,8 +3749,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -1776,26 +3757,23 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Node pool tag specifications, will passthroughs to the scaling instances.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool tag specifications, will passthroughs to the scaling instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="taints_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taints_java" style="color: inherit; text-decoration: inherit;">taints</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepooltaint">List&lt;Node<wbr>Pool<wbr>Taint<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#nodepooltaint">List&lt;Node<wbr>Pool<wbr>Taint&gt;</a></span>
     </dt>
-    <dd><p>Taints of kubernetes node pool created nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Taints of kubernetes node pool created nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="terminationpolicies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationpolicies_java" style="color: inherit; text-decoration: inherit;">termination<wbr>Policies</a>
@@ -1803,8 +3781,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="unschedulable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unschedulable_java" style="color: inherit; text-decoration: inherit;">unschedulable</a>
@@ -1812,8 +3789,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</p>
-</dd><dt class="property-optional"
+    <dd>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="waitnodeready_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitnodeready_java" style="color: inherit; text-decoration: inherit;">wait<wbr>Node<wbr>Ready</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to wait for all desired nodes to be ready. Default is false. Only can be set if <code>enableAutoScale</code> is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="zones_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_java" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -1821,8 +3805,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of auto scaling group available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of auto scaling group available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1834,10 +3817,9 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalingconfig_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepoolautoscalingconfig">Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#nodepoolautoscalingconfig">Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config</a></span>
     </dt>
-    <dd><p>Auto scaling config parameters.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Auto scaling config parameters.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1845,8 +3827,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -1854,8 +3835,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of node.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of node.</dd><dt class="property-required"
             title="Required">
         <span id="minsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -1863,8 +3843,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Minimum number of node.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Minimum number of node.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1872,8 +3851,23 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="annotations_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_nodejs" style="color: inherit; text-decoration: inherit;">annotations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolannotation">Node<wbr>Pool<wbr>Annotation[]</a></span>
+    </dt>
+    <dd>Node Annotation List.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="autoupdateinstancetags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoupdateinstancetags_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Update<wbr>Instance<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Automatically update instance tags. The default value is false. After configuration, if the scaling group tags are updated, the tags of the running instances in the scaling group will be updated synchronously (synchronous updates only support adding and modifying tags, and do not support deleting tags for the time being). Synchronous updates do not take effect immediately and there is a certain delay.</dd><dt class="property-optional"
             title="Optional">
         <span id="defaultcooldown_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultcooldown_nodejs" style="color: inherit; text-decoration: inherit;">default<wbr>Cooldown</a>
@@ -1881,8 +3875,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Seconds of scaling group cool down. Default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Seconds of scaling group cool down. Default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletekeepinstance_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletekeepinstance_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Keep<wbr>Instance</a>
@@ -1890,8 +3883,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletionprotection_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletionprotection_nodejs" style="color: inherit; text-decoration: inherit;">deletion<wbr>Protection</a>
@@ -1899,8 +3891,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the node pool deletion protection is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the node pool deletion protection is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="desiredcapacity_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacity_nodejs" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity</a>
@@ -1908,8 +3899,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Desired capacity of the node. If <code>enable_auto_scale</code> is set <code>true</code>, this will be a computed parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Desired capacity of the node. If <code>enableAutoScale</code> is set <code>true</code>, this will be a computed parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="enableautoscale_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableautoscale_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Auto<wbr>Scale</a>
@@ -1917,17 +3907,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to enable auto scaling or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to enable auto scaling or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="labels_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_nodejs" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-optional"
+    <dd>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-optional"
             title="Optional">
         <span id="multizonesubnetpolicy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizonesubnetpolicy_nodejs" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -1935,8 +3923,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1944,17 +3931,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodeconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeconfig_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepoolnodeconfig">Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#nodepoolnodeconfig">Node<wbr>Pool<wbr>Node<wbr>Config</a></span>
     </dt>
-    <dd><p>Node config.</p>
-</dd><dt class="property-optional"
+    <dd>Node config.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodeos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeos_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Os</a>
@@ -1962,8 +3947,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operating system of the cluster. Please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image). If custom image, please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodeostype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeostype_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Os<wbr>Type</a>
@@ -1971,8 +3955,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="retrypolicy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrypolicy_nodejs" style="color: inherit; text-decoration: inherit;">retry<wbr>Policy</a>
@@ -1980,8 +3963,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scaletolerance_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaletolerance_nodejs" style="color: inherit; text-decoration: inherit;">scale<wbr>Tolerance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Control how many expectations(<code>desiredCapacity</code>) can be tolerated successfully. Unit is percentage, Default is <code>100</code>. Only can be set if <code>waitNodeReady</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -1989,8 +3979,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of relative scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Name of relative scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupprojectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupprojectid_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Project<wbr>Id</a>
@@ -1998,8 +3987,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID the scaling group belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Project ID the scaling group belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="scalingmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingmode_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Mode</a>
@@ -2007,8 +3995,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -2016,26 +4003,23 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Node pool tag specifications, will passthroughs to the scaling instances.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool tag specifications, will passthroughs to the scaling instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="taints_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taints_nodejs" style="color: inherit; text-decoration: inherit;">taints</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepooltaint">Node<wbr>Pool<wbr>Taint<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#nodepooltaint">Node<wbr>Pool<wbr>Taint[]</a></span>
     </dt>
-    <dd><p>Taints of kubernetes node pool created nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Taints of kubernetes node pool created nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="terminationpolicies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationpolicies_nodejs" style="color: inherit; text-decoration: inherit;">termination<wbr>Policies</a>
@@ -2043,8 +4027,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="unschedulable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unschedulable_nodejs" style="color: inherit; text-decoration: inherit;">unschedulable</a>
@@ -2052,8 +4035,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</p>
-</dd><dt class="property-optional"
+    <dd>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="waitnodeready_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitnodeready_nodejs" style="color: inherit; text-decoration: inherit;">wait<wbr>Node<wbr>Ready</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to wait for all desired nodes to be ready. Default is false. Only can be set if <code>enableAutoScale</code> is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="zones_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_nodejs" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -2061,8 +4051,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of auto scaling group available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of auto scaling group available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2076,8 +4065,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolautoscalingconfig">Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Auto scaling config parameters.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Auto scaling config parameters.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -2085,8 +4073,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="max_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
@@ -2094,8 +4081,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of node.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of node.</dd><dt class="property-required"
             title="Required">
         <span id="min_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_size_python" style="color: inherit; text-decoration: inherit;">min_<wbr>size</a>
@@ -2103,8 +4089,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum number of node.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Minimum number of node.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2112,8 +4097,23 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="annotations_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_python" style="color: inherit; text-decoration: inherit;">annotations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolannotation">Sequence[Node<wbr>Pool<wbr>Annotation<wbr>Args]</a></span>
+    </dt>
+    <dd>Node Annotation List.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="auto_update_instance_tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_update_instance_tags_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>update_<wbr>instance_<wbr>tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Automatically update instance tags. The default value is false. After configuration, if the scaling group tags are updated, the tags of the running instances in the scaling group will be updated synchronously (synchronous updates only support adding and modifying tags, and do not support deleting tags for the time being). Synchronous updates do not take effect immediately and there is a certain delay.</dd><dt class="property-optional"
             title="Optional">
         <span id="default_cooldown_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_cooldown_python" style="color: inherit; text-decoration: inherit;">default_<wbr>cooldown</a>
@@ -2121,8 +4121,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Seconds of scaling group cool down. Default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Seconds of scaling group cool down. Default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="delete_keep_instance_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_keep_instance_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>keep_<wbr>instance</a>
@@ -2130,8 +4129,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletion_protection_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletion_protection_python" style="color: inherit; text-decoration: inherit;">deletion_<wbr>protection</a>
@@ -2139,8 +4137,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the node pool deletion protection is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the node pool deletion protection is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="desired_capacity_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desired_capacity_python" style="color: inherit; text-decoration: inherit;">desired_<wbr>capacity</a>
@@ -2148,8 +4145,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Desired capacity of the node. If <code>enable_auto_scale</code> is set <code>true</code>, this will be a computed parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Desired capacity of the node. If <code>enableAutoScale</code> is set <code>true</code>, this will be a computed parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_auto_scale_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_auto_scale_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>auto_<wbr>scale</a>
@@ -2157,17 +4153,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to enable auto scaling or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to enable auto scaling or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="labels_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_python" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-optional"
+    <dd>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-optional"
             title="Optional">
         <span id="multi_zone_subnet_policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_zone_subnet_policy_python" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone_<wbr>subnet_<wbr>policy</a>
@@ -2175,8 +4169,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2184,8 +4177,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</dd><dt class="property-optional"
             title="Optional">
         <span id="node_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_config_python" style="color: inherit; text-decoration: inherit;">node_<wbr>config</a>
@@ -2193,8 +4185,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolnodeconfig">Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Node config.</p>
-</dd><dt class="property-optional"
+    <dd>Node config.</dd><dt class="property-optional"
             title="Optional">
         <span id="node_os_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_os_python" style="color: inherit; text-decoration: inherit;">node_<wbr>os</a>
@@ -2202,8 +4193,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Operating system of the cluster. Please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image). If custom image, please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="node_os_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_os_type_python" style="color: inherit; text-decoration: inherit;">node_<wbr>os_<wbr>type</a>
@@ -2211,8 +4201,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="retry_policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retry_policy_python" style="color: inherit; text-decoration: inherit;">retry_<wbr>policy</a>
@@ -2220,8 +4209,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scale_tolerance_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scale_tolerance_python" style="color: inherit; text-decoration: inherit;">scale_<wbr>tolerance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Control how many expectations(<code>desiredCapacity</code>) can be tolerated successfully. Unit is percentage, Default is <code>100</code>. Only can be set if <code>waitNodeReady</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="scaling_group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_name_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>name</a>
@@ -2229,8 +4225,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of relative scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Name of relative scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="scaling_group_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_project_id_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>project_<wbr>id</a>
@@ -2238,8 +4233,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID the scaling group belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Project ID the scaling group belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="scaling_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_mode_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>mode</a>
@@ -2247,8 +4241,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnet_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_ids_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>ids</a>
@@ -2256,26 +4249,23 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Node pool tag specifications, will passthroughs to the scaling instances.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool tag specifications, will passthroughs to the scaling instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="taints_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taints_python" style="color: inherit; text-decoration: inherit;">taints</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepooltaint">Node<wbr>Pool<wbr>Taint<wbr>Args]</a></span>
+        <span class="property-type"><a href="#nodepooltaint">Sequence[Node<wbr>Pool<wbr>Taint<wbr>Args]</a></span>
     </dt>
-    <dd><p>Taints of kubernetes node pool created nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Taints of kubernetes node pool created nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="termination_policies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#termination_policies_python" style="color: inherit; text-decoration: inherit;">termination_<wbr>policies</a>
@@ -2283,8 +4273,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="unschedulable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unschedulable_python" style="color: inherit; text-decoration: inherit;">unschedulable</a>
@@ -2292,8 +4281,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</p>
-</dd><dt class="property-optional"
+    <dd>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="wait_node_ready_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wait_node_ready_python" style="color: inherit; text-decoration: inherit;">wait_<wbr>node_<wbr>ready</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to wait for all desired nodes to be ready. Default is false. Only can be set if <code>enableAutoScale</code> is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="zones_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_python" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -2301,8 +4297,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of auto scaling group available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of auto scaling group available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2316,8 +4311,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolautoscalingconfig">Property Map</a></span>
     </dt>
-    <dd><p>Auto scaling config parameters.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Auto scaling config parameters.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -2325,8 +4319,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-required"
+    <dd>ID of the cluster.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -2334,8 +4327,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of node.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of node.</dd><dt class="property-required"
             title="Required">
         <span id="minsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -2343,8 +4335,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Minimum number of node.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Minimum number of node.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2352,8 +4343,23 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="annotations_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_yaml" style="color: inherit; text-decoration: inherit;">annotations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolannotation">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Node Annotation List.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="autoupdateinstancetags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoupdateinstancetags_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Update<wbr>Instance<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Automatically update instance tags. The default value is false. After configuration, if the scaling group tags are updated, the tags of the running instances in the scaling group will be updated synchronously (synchronous updates only support adding and modifying tags, and do not support deleting tags for the time being). Synchronous updates do not take effect immediately and there is a certain delay.</dd><dt class="property-optional"
             title="Optional">
         <span id="defaultcooldown_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultcooldown_yaml" style="color: inherit; text-decoration: inherit;">default<wbr>Cooldown</a>
@@ -2361,8 +4367,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Seconds of scaling group cool down. Default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Seconds of scaling group cool down. Default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletekeepinstance_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletekeepinstance_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Keep<wbr>Instance</a>
@@ -2370,8 +4375,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletionprotection_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletionprotection_yaml" style="color: inherit; text-decoration: inherit;">deletion<wbr>Protection</a>
@@ -2379,8 +4383,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the node pool deletion protection is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the node pool deletion protection is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="desiredcapacity_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacity_yaml" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity</a>
@@ -2388,8 +4391,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Desired capacity of the node. If <code>enable_auto_scale</code> is set <code>true</code>, this will be a computed parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Desired capacity of the node. If <code>enableAutoScale</code> is set <code>true</code>, this will be a computed parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="enableautoscale_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableautoscale_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Auto<wbr>Scale</a>
@@ -2397,17 +4399,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to enable auto scaling or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to enable auto scaling or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="labels_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_yaml" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-optional"
+    <dd>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-optional"
             title="Optional">
         <span id="multizonesubnetpolicy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizonesubnetpolicy_yaml" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -2415,8 +4415,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2424,8 +4423,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodeconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeconfig_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Config</a>
@@ -2433,8 +4431,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolnodeconfig">Property Map</a></span>
     </dt>
-    <dd><p>Node config.</p>
-</dd><dt class="property-optional"
+    <dd>Node config.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodeos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeos_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Os</a>
@@ -2442,8 +4439,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operating system of the cluster. Please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image). If custom image, please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodeostype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeostype_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Os<wbr>Type</a>
@@ -2451,8 +4447,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="retrypolicy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrypolicy_yaml" style="color: inherit; text-decoration: inherit;">retry<wbr>Policy</a>
@@ -2460,8 +4455,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scaletolerance_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaletolerance_yaml" style="color: inherit; text-decoration: inherit;">scale<wbr>Tolerance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Control how many expectations(<code>desiredCapacity</code>) can be tolerated successfully. Unit is percentage, Default is <code>100</code>. Only can be set if <code>waitNodeReady</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -2469,8 +4471,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of relative scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Name of relative scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupprojectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupprojectid_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Project<wbr>Id</a>
@@ -2478,8 +4479,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID the scaling group belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Project ID the scaling group belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="scalingmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingmode_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Mode</a>
@@ -2487,8 +4487,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -2496,17 +4495,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Node pool tag specifications, will passthroughs to the scaling instances.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool tag specifications, will passthroughs to the scaling instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="taints_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taints_yaml" style="color: inherit; text-decoration: inherit;">taints</a>
@@ -2514,8 +4511,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepooltaint">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Taints of kubernetes node pool created nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Taints of kubernetes node pool created nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="terminationpolicies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationpolicies_yaml" style="color: inherit; text-decoration: inherit;">termination<wbr>Policies</a>
@@ -2523,8 +4519,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="unschedulable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unschedulable_yaml" style="color: inherit; text-decoration: inherit;">unschedulable</a>
@@ -2532,8 +4527,15 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</p>
-</dd><dt class="property-optional"
+    <dd>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="waitnodeready_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitnodeready_yaml" style="color: inherit; text-decoration: inherit;">wait<wbr>Node<wbr>Ready</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to wait for all desired nodes to be ready. Default is false. Only can be set if <code>enableAutoScale</code> is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="zones_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_yaml" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -2541,8 +4543,7 @@ The NodePool resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of auto scaling group available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of auto scaling group available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2563,8 +4564,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The auto scaling group ID.</p>
-</dd><dt class="property-"
+    <dd>The auto scaling group ID.</dd><dt class="property-"
             title="">
         <span id="autoscalingaddedtotal_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalingaddedtotal_csharp" style="color: inherit; text-decoration: inherit;">Autoscaling<wbr>Added<wbr>Total</a>
@@ -2572,8 +4572,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total of autoscaling added node.</p>
-</dd><dt class="property-"
+    <dd>The total of autoscaling added node.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2581,8 +4580,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="launchconfigid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launchconfigid_csharp" style="color: inherit; text-decoration: inherit;">Launch<wbr>Config<wbr>Id</a>
@@ -2590,8 +4588,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The launch config ID.</p>
-</dd><dt class="property-"
+    <dd>The launch config ID.</dd><dt class="property-"
             title="">
         <span id="manuallyaddedtotal_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#manuallyaddedtotal_csharp" style="color: inherit; text-decoration: inherit;">Manually<wbr>Added<wbr>Total</a>
@@ -2599,8 +4596,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total of manually added node.</p>
-</dd><dt class="property-"
+    <dd>The total of manually added node.</dd><dt class="property-"
             title="">
         <span id="nodecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Count</a>
@@ -2608,8 +4604,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total node count.</p>
-</dd><dt class="property-"
+    <dd>The total node count.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2617,8 +4612,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the node pool.</p>
-</dd></dl>
+    <dd>Status of the node pool.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2632,8 +4626,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The auto scaling group ID.</p>
-</dd><dt class="property-"
+    <dd>The auto scaling group ID.</dd><dt class="property-"
             title="">
         <span id="autoscalingaddedtotal_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalingaddedtotal_go" style="color: inherit; text-decoration: inherit;">Autoscaling<wbr>Added<wbr>Total</a>
@@ -2641,8 +4634,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total of autoscaling added node.</p>
-</dd><dt class="property-"
+    <dd>The total of autoscaling added node.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2650,8 +4642,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="launchconfigid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launchconfigid_go" style="color: inherit; text-decoration: inherit;">Launch<wbr>Config<wbr>Id</a>
@@ -2659,8 +4650,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The launch config ID.</p>
-</dd><dt class="property-"
+    <dd>The launch config ID.</dd><dt class="property-"
             title="">
         <span id="manuallyaddedtotal_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#manuallyaddedtotal_go" style="color: inherit; text-decoration: inherit;">Manually<wbr>Added<wbr>Total</a>
@@ -2668,8 +4658,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total of manually added node.</p>
-</dd><dt class="property-"
+    <dd>The total of manually added node.</dd><dt class="property-"
             title="">
         <span id="nodecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Count</a>
@@ -2677,8 +4666,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total node count.</p>
-</dd><dt class="property-"
+    <dd>The total node count.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2686,8 +4674,69 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the node pool.</p>
-</dd></dl>
+    <dd>Status of the node pool.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="auto_scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The auto scaling group ID.</dd><dt class="property-"
+            title="">
+        <span id="autoscaling_added_total_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscaling_added_total_hcl" style="color: inherit; text-decoration: inherit;">autoscaling_<wbr>added_<wbr>total</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The total of autoscaling added node.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="launch_config_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launch_config_id_hcl" style="color: inherit; text-decoration: inherit;">launch_<wbr>config_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The launch config ID.</dd><dt class="property-"
+            title="">
+        <span id="manually_added_total_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#manually_added_total_hcl" style="color: inherit; text-decoration: inherit;">manually_<wbr>added_<wbr>total</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The total of manually added node.</dd><dt class="property-"
+            title="">
+        <span id="node_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_count_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The total node count.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the node pool.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2701,8 +4750,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The auto scaling group ID.</p>
-</dd><dt class="property-"
+    <dd>The auto scaling group ID.</dd><dt class="property-"
             title="">
         <span id="autoscalingaddedtotal_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalingaddedtotal_java" style="color: inherit; text-decoration: inherit;">autoscaling<wbr>Added<wbr>Total</a>
@@ -2710,8 +4758,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The total of autoscaling added node.</p>
-</dd><dt class="property-"
+    <dd>The total of autoscaling added node.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2719,8 +4766,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="launchconfigid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launchconfigid_java" style="color: inherit; text-decoration: inherit;">launch<wbr>Config<wbr>Id</a>
@@ -2728,8 +4774,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The launch config ID.</p>
-</dd><dt class="property-"
+    <dd>The launch config ID.</dd><dt class="property-"
             title="">
         <span id="manuallyaddedtotal_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#manuallyaddedtotal_java" style="color: inherit; text-decoration: inherit;">manually<wbr>Added<wbr>Total</a>
@@ -2737,8 +4782,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The total of manually added node.</p>
-</dd><dt class="property-"
+    <dd>The total of manually added node.</dd><dt class="property-"
             title="">
         <span id="nodecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_java" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -2746,8 +4790,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The total node count.</p>
-</dd><dt class="property-"
+    <dd>The total node count.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2755,8 +4798,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the node pool.</p>
-</dd></dl>
+    <dd>Status of the node pool.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2770,8 +4812,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The auto scaling group ID.</p>
-</dd><dt class="property-"
+    <dd>The auto scaling group ID.</dd><dt class="property-"
             title="">
         <span id="autoscalingaddedtotal_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalingaddedtotal_nodejs" style="color: inherit; text-decoration: inherit;">autoscaling<wbr>Added<wbr>Total</a>
@@ -2779,8 +4820,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The total of autoscaling added node.</p>
-</dd><dt class="property-"
+    <dd>The total of autoscaling added node.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2788,8 +4828,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="launchconfigid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launchconfigid_nodejs" style="color: inherit; text-decoration: inherit;">launch<wbr>Config<wbr>Id</a>
@@ -2797,8 +4836,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The launch config ID.</p>
-</dd><dt class="property-"
+    <dd>The launch config ID.</dd><dt class="property-"
             title="">
         <span id="manuallyaddedtotal_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#manuallyaddedtotal_nodejs" style="color: inherit; text-decoration: inherit;">manually<wbr>Added<wbr>Total</a>
@@ -2806,8 +4844,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The total of manually added node.</p>
-</dd><dt class="property-"
+    <dd>The total of manually added node.</dd><dt class="property-"
             title="">
         <span id="nodecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -2815,8 +4852,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The total node count.</p>
-</dd><dt class="property-"
+    <dd>The total node count.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2824,8 +4860,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the node pool.</p>
-</dd></dl>
+    <dd>Status of the node pool.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2839,8 +4874,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The auto scaling group ID.</p>
-</dd><dt class="property-"
+    <dd>The auto scaling group ID.</dd><dt class="property-"
             title="">
         <span id="autoscaling_added_total_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscaling_added_total_python" style="color: inherit; text-decoration: inherit;">autoscaling_<wbr>added_<wbr>total</a>
@@ -2848,8 +4882,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total of autoscaling added node.</p>
-</dd><dt class="property-"
+    <dd>The total of autoscaling added node.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2857,8 +4890,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="launch_config_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launch_config_id_python" style="color: inherit; text-decoration: inherit;">launch_<wbr>config_<wbr>id</a>
@@ -2866,8 +4898,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The launch config ID.</p>
-</dd><dt class="property-"
+    <dd>The launch config ID.</dd><dt class="property-"
             title="">
         <span id="manually_added_total_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#manually_added_total_python" style="color: inherit; text-decoration: inherit;">manually_<wbr>added_<wbr>total</a>
@@ -2875,8 +4906,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total of manually added node.</p>
-</dd><dt class="property-"
+    <dd>The total of manually added node.</dd><dt class="property-"
             title="">
         <span id="node_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_count_python" style="color: inherit; text-decoration: inherit;">node_<wbr>count</a>
@@ -2884,8 +4914,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total node count.</p>
-</dd><dt class="property-"
+    <dd>The total node count.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2893,8 +4922,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the node pool.</p>
-</dd></dl>
+    <dd>Status of the node pool.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2908,8 +4936,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The auto scaling group ID.</p>
-</dd><dt class="property-"
+    <dd>The auto scaling group ID.</dd><dt class="property-"
             title="">
         <span id="autoscalingaddedtotal_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalingaddedtotal_yaml" style="color: inherit; text-decoration: inherit;">autoscaling<wbr>Added<wbr>Total</a>
@@ -2917,8 +4944,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The total of autoscaling added node.</p>
-</dd><dt class="property-"
+    <dd>The total of autoscaling added node.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2926,8 +4952,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="launchconfigid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launchconfigid_yaml" style="color: inherit; text-decoration: inherit;">launch<wbr>Config<wbr>Id</a>
@@ -2935,8 +4960,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The launch config ID.</p>
-</dd><dt class="property-"
+    <dd>The launch config ID.</dd><dt class="property-"
             title="">
         <span id="manuallyaddedtotal_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#manuallyaddedtotal_yaml" style="color: inherit; text-decoration: inherit;">manually<wbr>Added<wbr>Total</a>
@@ -2944,8 +4968,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The total of manually added node.</p>
-</dd><dt class="property-"
+    <dd>The total of manually added node.</dd><dt class="property-"
             title="">
         <span id="nodecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -2953,8 +4976,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The total node count.</p>
-</dd><dt class="property-"
+    <dd>The total node count.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2962,8 +4984,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the node pool.</p>
-</dd></dl>
+    <dd>Status of the node pool.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2973,23 +4994,25 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing NodePool resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">NodePoolState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">NodePool</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">NodePoolState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">NodePool</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">auto_scaling_config</span><span class="p">:</span> <span class="nx">Optional[_kubernetes.NodePoolAutoScalingConfigArgs]</span> = None<span class="p">,</span>
+        <span class="nx">annotations</span><span class="p">:</span> <span class="nx">Optional[Sequence[NodePoolAnnotationArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">auto_scaling_config</span><span class="p">:</span> <span class="nx">Optional[NodePoolAutoScalingConfigArgs]</span> = None<span class="p">,</span>
         <span class="nx">auto_scaling_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">auto_update_instance_tags</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">autoscaling_added_total</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">default_cooldown</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
@@ -2997,127 +5020,168 @@ Get an existing NodePool resource's state with the given name, ID, and optional 
         <span class="nx">deletion_protection</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">desired_capacity</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">enable_auto_scale</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-        <span class="nx">labels</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">labels</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">launch_config_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">manually_added_total</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">max_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">min_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">multi_zone_subnet_policy</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">node_config</span><span class="p">:</span> <span class="nx">Optional[_kubernetes.NodePoolNodeConfigArgs]</span> = None<span class="p">,</span>
+        <span class="nx">node_config</span><span class="p">:</span> <span class="nx">Optional[NodePoolNodeConfigArgs]</span> = None<span class="p">,</span>
         <span class="nx">node_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">node_os</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">node_os_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">retry_policy</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">scale_tolerance</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">scaling_group_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">scaling_group_project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">scaling_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">subnet_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-        <span class="nx">taints</span><span class="p">:</span> <span class="nx">Optional[Sequence[_kubernetes.NodePoolTaintArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+        <span class="nx">taints</span><span class="p">:</span> <span class="nx">Optional[Sequence[NodePoolTaintArgs]]</span> = None<span class="p">,</span>
         <span class="nx">termination_policies</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">unschedulable</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">wait_node_ready</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">zones</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">) -&gt;</span> NodePool</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetNodePool<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">NodePoolState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">NodePool</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetNodePool<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">NodePoolState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">NodePool</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">NodePool</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NodePoolState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">NodePool</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NodePoolState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">NodePool</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NodePoolState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">NodePool</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NodePoolState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingNodePool</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Kubernetes:NodePool</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_kubernetes_node_pool</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NodePoolState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NodePoolState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3125,28 +5189,31 @@ Get an existing NodePool resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NodePoolState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3154,28 +5221,31 @@ Get an existing NodePool resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NodePoolState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3189,14 +5259,21 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_annotations_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_annotations_csharp" style="color: inherit; text-decoration: inherit;">Annotations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolannotation">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Node<wbr>Pool<wbr>Annotation&gt;</a></span>
+    </dt>
+    <dd>Node Annotation List.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_autoscalingconfig_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalingconfig_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Scaling<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepoolautoscalingconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#nodepoolautoscalingconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config</a></span>
     </dt>
-    <dd><p>Auto scaling config parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Auto scaling config parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoscalinggroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalinggroupid_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Scaling<wbr>Group<wbr>Id</a>
@@ -3204,8 +5281,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The auto scaling group ID.</p>
-</dd><dt class="property-optional"
+    <dd>The auto scaling group ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_autoupdateinstancetags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoupdateinstancetags_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Update<wbr>Instance<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Automatically update instance tags. The default value is false. After configuration, if the scaling group tags are updated, the tags of the running instances in the scaling group will be updated synchronously (synchronous updates only support adding and modifying tags, and do not support deleting tags for the time being). Synchronous updates do not take effect immediately and there is a certain delay.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoscalingaddedtotal_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalingaddedtotal_csharp" style="color: inherit; text-decoration: inherit;">Autoscaling<wbr>Added<wbr>Total</a>
@@ -3213,8 +5297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total of autoscaling added node.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The total of autoscaling added node.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -3222,8 +5305,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultcooldown_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultcooldown_csharp" style="color: inherit; text-decoration: inherit;">Default<wbr>Cooldown</a>
@@ -3231,8 +5313,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Seconds of scaling group cool down. Default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Seconds of scaling group cool down. Default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deletekeepinstance_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletekeepinstance_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Keep<wbr>Instance</a>
@@ -3240,8 +5321,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deletionprotection_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletionprotection_csharp" style="color: inherit; text-decoration: inherit;">Deletion<wbr>Protection</a>
@@ -3249,8 +5329,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the node pool deletion protection is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the node pool deletion protection is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_desiredcapacity_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desiredcapacity_csharp" style="color: inherit; text-decoration: inherit;">Desired<wbr>Capacity</a>
@@ -3258,8 +5337,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Desired capacity of the node. If <code>enable_auto_scale</code> is set <code>true</code>, this will be a computed parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Desired capacity of the node. If <code>enableAutoScale</code> is set <code>true</code>, this will be a computed parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enableautoscale_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableautoscale_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Auto<wbr>Scale</a>
@@ -3267,17 +5345,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to enable auto scaling or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to enable auto scaling or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_labels_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_csharp" style="color: inherit; text-decoration: inherit;">Labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-optional"
+    <dd>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-optional"
             title="Optional">
         <span id="state_launchconfigid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_launchconfigid_csharp" style="color: inherit; text-decoration: inherit;">Launch<wbr>Config<wbr>Id</a>
@@ -3285,8 +5361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The launch config ID.</p>
-</dd><dt class="property-optional"
+    <dd>The launch config ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_manuallyaddedtotal_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_manuallyaddedtotal_csharp" style="color: inherit; text-decoration: inherit;">Manually<wbr>Added<wbr>Total</a>
@@ -3294,8 +5369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total of manually added node.</p>
-</dd><dt class="property-optional"
+    <dd>The total of manually added node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
@@ -3303,8 +5377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of node.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minsize_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Size</a>
@@ -3312,8 +5385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum number of node.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum number of node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_multizonesubnetpolicy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizonesubnetpolicy_csharp" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -3321,8 +5393,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -3330,17 +5401,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeconfig_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeconfig_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepoolnodeconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#nodepoolnodeconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Node<wbr>Pool<wbr>Node<wbr>Config</a></span>
     </dt>
-    <dd><p>Node config.</p>
-</dd><dt class="property-optional"
+    <dd>Node config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodecount_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Count</a>
@@ -3348,8 +5417,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total node count.</p>
-</dd><dt class="property-optional"
+    <dd>The total node count.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeos_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Os</a>
@@ -3357,8 +5425,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operating system of the cluster. Please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image). If custom image, please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeostype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeostype_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Os<wbr>Type</a>
@@ -3366,8 +5433,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_retrypolicy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retrypolicy_csharp" style="color: inherit; text-decoration: inherit;">Retry<wbr>Policy</a>
@@ -3375,8 +5441,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scaletolerance_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaletolerance_csharp" style="color: inherit; text-decoration: inherit;">Scale<wbr>Tolerance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Control how many expectations(<code>desiredCapacity</code>) can be tolerated successfully. Unit is percentage, Default is <code>100</code>. Only can be set if <code>waitNodeReady</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalinggroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupname_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Name</a>
@@ -3384,8 +5457,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of relative scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Name of relative scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalinggroupprojectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupprojectid_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Project<wbr>Id</a>
@@ -3393,8 +5465,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID the scaling group belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Project ID the scaling group belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalingmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalingmode_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Mode</a>
@@ -3402,8 +5473,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</p>
-</dd><dt class="property-optional"
+    <dd>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -3411,8 +5481,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the node pool.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of the node pool.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetids_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Ids</a>
@@ -3420,26 +5489,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Node pool tag specifications, will passthroughs to the scaling instances.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool tag specifications, will passthroughs to the scaling instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taints_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taints_csharp" style="color: inherit; text-decoration: inherit;">Taints</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepooltaint">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Node<wbr>Pool<wbr>Taint<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#nodepooltaint">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Node<wbr>Pool<wbr>Taint&gt;</a></span>
     </dt>
-    <dd><p>Taints of kubernetes node pool created nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Taints of kubernetes node pool created nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_terminationpolicies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_terminationpolicies_csharp" style="color: inherit; text-decoration: inherit;">Termination<wbr>Policies</a>
@@ -3447,8 +5513,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_unschedulable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_unschedulable_csharp" style="color: inherit; text-decoration: inherit;">Unschedulable</a>
@@ -3456,8 +5521,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -3465,8 +5529,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_waitnodeready_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitnodeready_csharp" style="color: inherit; text-decoration: inherit;">Wait<wbr>Node<wbr>Ready</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to wait for all desired nodes to be ready. Default is false. Only can be set if <code>enableAutoScale</code> is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zones_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zones_csharp" style="color: inherit; text-decoration: inherit;">Zones</a>
@@ -3474,8 +5545,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of auto scaling group available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of auto scaling group available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3483,14 +5553,21 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_annotations_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_annotations_go" style="color: inherit; text-decoration: inherit;">Annotations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolannotation">[]Node<wbr>Pool<wbr>Annotation<wbr>Args</a></span>
+    </dt>
+    <dd>Node Annotation List.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_autoscalingconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalingconfig_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Scaling<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolautoscalingconfig">Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Auto scaling config parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Auto scaling config parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoscalinggroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalinggroupid_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Scaling<wbr>Group<wbr>Id</a>
@@ -3498,8 +5575,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The auto scaling group ID.</p>
-</dd><dt class="property-optional"
+    <dd>The auto scaling group ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_autoupdateinstancetags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoupdateinstancetags_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Update<wbr>Instance<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Automatically update instance tags. The default value is false. After configuration, if the scaling group tags are updated, the tags of the running instances in the scaling group will be updated synchronously (synchronous updates only support adding and modifying tags, and do not support deleting tags for the time being). Synchronous updates do not take effect immediately and there is a certain delay.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoscalingaddedtotal_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalingaddedtotal_go" style="color: inherit; text-decoration: inherit;">Autoscaling<wbr>Added<wbr>Total</a>
@@ -3507,8 +5591,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total of autoscaling added node.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The total of autoscaling added node.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -3516,8 +5599,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultcooldown_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultcooldown_go" style="color: inherit; text-decoration: inherit;">Default<wbr>Cooldown</a>
@@ -3525,8 +5607,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Seconds of scaling group cool down. Default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Seconds of scaling group cool down. Default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deletekeepinstance_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletekeepinstance_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Keep<wbr>Instance</a>
@@ -3534,8 +5615,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deletionprotection_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletionprotection_go" style="color: inherit; text-decoration: inherit;">Deletion<wbr>Protection</a>
@@ -3543,8 +5623,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the node pool deletion protection is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the node pool deletion protection is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_desiredcapacity_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desiredcapacity_go" style="color: inherit; text-decoration: inherit;">Desired<wbr>Capacity</a>
@@ -3552,8 +5631,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Desired capacity of the node. If <code>enable_auto_scale</code> is set <code>true</code>, this will be a computed parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Desired capacity of the node. If <code>enableAutoScale</code> is set <code>true</code>, this will be a computed parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enableautoscale_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableautoscale_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Auto<wbr>Scale</a>
@@ -3561,17 +5639,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to enable auto scaling or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to enable auto scaling or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_labels_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_go" style="color: inherit; text-decoration: inherit;">Labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-optional"
+    <dd>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-optional"
             title="Optional">
         <span id="state_launchconfigid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_launchconfigid_go" style="color: inherit; text-decoration: inherit;">Launch<wbr>Config<wbr>Id</a>
@@ -3579,8 +5655,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The launch config ID.</p>
-</dd><dt class="property-optional"
+    <dd>The launch config ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_manuallyaddedtotal_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_manuallyaddedtotal_go" style="color: inherit; text-decoration: inherit;">Manually<wbr>Added<wbr>Total</a>
@@ -3588,8 +5663,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total of manually added node.</p>
-</dd><dt class="property-optional"
+    <dd>The total of manually added node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
@@ -3597,8 +5671,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of node.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minsize_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Size</a>
@@ -3606,8 +5679,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum number of node.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum number of node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_multizonesubnetpolicy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizonesubnetpolicy_go" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -3615,8 +5687,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -3624,8 +5695,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeconfig_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Config</a>
@@ -3633,8 +5703,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolnodeconfig">Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Node config.</p>
-</dd><dt class="property-optional"
+    <dd>Node config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodecount_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Count</a>
@@ -3642,8 +5711,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total node count.</p>
-</dd><dt class="property-optional"
+    <dd>The total node count.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeos_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Os</a>
@@ -3651,8 +5719,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operating system of the cluster. Please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image). If custom image, please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeostype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeostype_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Os<wbr>Type</a>
@@ -3660,8 +5727,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_retrypolicy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retrypolicy_go" style="color: inherit; text-decoration: inherit;">Retry<wbr>Policy</a>
@@ -3669,8 +5735,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scaletolerance_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaletolerance_go" style="color: inherit; text-decoration: inherit;">Scale<wbr>Tolerance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Control how many expectations(<code>desiredCapacity</code>) can be tolerated successfully. Unit is percentage, Default is <code>100</code>. Only can be set if <code>waitNodeReady</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalinggroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupname_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Name</a>
@@ -3678,8 +5751,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of relative scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Name of relative scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalinggroupprojectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupprojectid_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Project<wbr>Id</a>
@@ -3687,8 +5759,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID the scaling group belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Project ID the scaling group belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalingmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalingmode_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Mode</a>
@@ -3696,8 +5767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</p>
-</dd><dt class="property-optional"
+    <dd>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -3705,8 +5775,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the node pool.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of the node pool.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetids_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Ids</a>
@@ -3714,17 +5783,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Node pool tag specifications, will passthroughs to the scaling instances.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool tag specifications, will passthroughs to the scaling instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taints_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taints_go" style="color: inherit; text-decoration: inherit;">Taints</a>
@@ -3732,8 +5799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepooltaint">[]Node<wbr>Pool<wbr>Taint<wbr>Args</a></span>
     </dt>
-    <dd><p>Taints of kubernetes node pool created nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Taints of kubernetes node pool created nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_terminationpolicies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_terminationpolicies_go" style="color: inherit; text-decoration: inherit;">Termination<wbr>Policies</a>
@@ -3741,8 +5807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_unschedulable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_unschedulable_go" style="color: inherit; text-decoration: inherit;">Unschedulable</a>
@@ -3750,8 +5815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -3759,8 +5823,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_waitnodeready_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitnodeready_go" style="color: inherit; text-decoration: inherit;">Wait<wbr>Node<wbr>Ready</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to wait for all desired nodes to be ready. Default is false. Only can be set if <code>enableAutoScale</code> is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zones_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zones_go" style="color: inherit; text-decoration: inherit;">Zones</a>
@@ -3768,8 +5839,301 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of auto scaling group available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of auto scaling group available zones, for Basic network it is required.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_annotations_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_annotations_hcl" style="color: inherit; text-decoration: inherit;">annotations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolannotation">list(object)</a></span>
+    </dt>
+    <dd>Node Annotation List.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_scaling_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_scaling_config_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolautoscalingconfig">object</a></span>
+    </dt>
+    <dd>Auto scaling config parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The auto scaling group ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_auto_update_instance_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_update_instance_tags_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>update_<wbr>instance_<wbr>tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Automatically update instance tags. The default value is false. After configuration, if the scaling group tags are updated, the tags of the running instances in the scaling group will be updated synchronously (synchronous updates only support adding and modifying tags, and do not support deleting tags for the time being). Synchronous updates do not take effect immediately and there is a certain delay.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_autoscaling_added_total_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscaling_added_total_hcl" style="color: inherit; text-decoration: inherit;">autoscaling_<wbr>added_<wbr>total</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The total of autoscaling added node.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_default_cooldown_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_default_cooldown_hcl" style="color: inherit; text-decoration: inherit;">default_<wbr>cooldown</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Seconds of scaling group cool down. Default value is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_delete_keep_instance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_delete_keep_instance_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>keep_<wbr>instance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deletion_protection_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletion_protection_hcl" style="color: inherit; text-decoration: inherit;">deletion_<wbr>protection</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the node pool deletion protection is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_desired_capacity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desired_capacity_hcl" style="color: inherit; text-decoration: inherit;">desired_<wbr>capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Desired capacity of the node. If <code>enableAutoScale</code> is set <code>true</code>, this will be a computed parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_auto_scale_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_auto_scale_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>auto_<wbr>scale</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to enable auto scaling or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_labels_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_hcl" style="color: inherit; text-decoration: inherit;">labels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_launch_config_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_launch_config_id_hcl" style="color: inherit; text-decoration: inherit;">launch_<wbr>config_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The launch config ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_manually_added_total_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_manually_added_total_hcl" style="color: inherit; text-decoration: inherit;">manually_<wbr>added_<wbr>total</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The total of manually added node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_min_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_min_size_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum number of node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multi_zone_subnet_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multi_zone_subnet_policy_hcl" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone_<wbr>subnet_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_node_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_node_config_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolnodeconfig">object</a></span>
+    </dt>
+    <dd>Node config.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_node_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_node_count_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The total node count.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_node_os_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_node_os_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>os</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image). If custom image, please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_node_os_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_node_os_type_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>os_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_retry_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retry_policy_hcl" style="color: inherit; text-decoration: inherit;">retry_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scale_tolerance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scale_tolerance_hcl" style="color: inherit; text-decoration: inherit;">scale_<wbr>tolerance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Control how many expectations(<code>desiredCapacity</code>) can be tolerated successfully. Unit is percentage, Default is <code>100</code>. Only can be set if <code>waitNodeReady</code> is <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scaling_group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaling_group_name_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of relative scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scaling_group_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaling_group_project_id_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID the scaling group belongs to.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_scaling_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaling_mode_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the node pool.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_subnet_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_ids_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Node pool tag specifications, will passthroughs to the scaling instances.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_taints_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taints_hcl" style="color: inherit; text-decoration: inherit;">taints</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepooltaint">list(object)</a></span>
+    </dt>
+    <dd>Taints of kubernetes node pool created nodes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_termination_policies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_termination_policies_hcl" style="color: inherit; text-decoration: inherit;">termination_<wbr>policies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_unschedulable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_unschedulable_hcl" style="color: inherit; text-decoration: inherit;">unschedulable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wait_node_ready_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wait_node_ready_hcl" style="color: inherit; text-decoration: inherit;">wait_<wbr>node_<wbr>ready</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to wait for all desired nodes to be ready. Default is false. Only can be set if <code>enableAutoScale</code> is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_zones_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zones_hcl" style="color: inherit; text-decoration: inherit;">zones</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of auto scaling group available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3777,14 +6141,21 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_annotations_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_annotations_java" style="color: inherit; text-decoration: inherit;">annotations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolannotation">List&lt;Node<wbr>Pool<wbr>Annotation&gt;</a></span>
+    </dt>
+    <dd>Node Annotation List.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_autoscalingconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalingconfig_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepoolautoscalingconfig">Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#nodepoolautoscalingconfig">Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config</a></span>
     </dt>
-    <dd><p>Auto scaling config parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Auto scaling config parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoscalinggroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalinggroupid_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Id</a>
@@ -3792,8 +6163,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The auto scaling group ID.</p>
-</dd><dt class="property-optional"
+    <dd>The auto scaling group ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_autoupdateinstancetags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoupdateinstancetags_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Update<wbr>Instance<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Automatically update instance tags. The default value is false. After configuration, if the scaling group tags are updated, the tags of the running instances in the scaling group will be updated synchronously (synchronous updates only support adding and modifying tags, and do not support deleting tags for the time being). Synchronous updates do not take effect immediately and there is a certain delay.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoscalingaddedtotal_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalingaddedtotal_java" style="color: inherit; text-decoration: inherit;">autoscaling<wbr>Added<wbr>Total</a>
@@ -3801,8 +6179,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The total of autoscaling added node.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The total of autoscaling added node.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -3810,8 +6187,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultcooldown_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultcooldown_java" style="color: inherit; text-decoration: inherit;">default<wbr>Cooldown</a>
@@ -3819,8 +6195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Seconds of scaling group cool down. Default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Seconds of scaling group cool down. Default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deletekeepinstance_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletekeepinstance_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Keep<wbr>Instance</a>
@@ -3828,8 +6203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deletionprotection_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletionprotection_java" style="color: inherit; text-decoration: inherit;">deletion<wbr>Protection</a>
@@ -3837,8 +6211,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the node pool deletion protection is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the node pool deletion protection is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_desiredcapacity_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desiredcapacity_java" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity</a>
@@ -3846,8 +6219,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Desired capacity of the node. If <code>enable_auto_scale</code> is set <code>true</code>, this will be a computed parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Desired capacity of the node. If <code>enableAutoScale</code> is set <code>true</code>, this will be a computed parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enableautoscale_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableautoscale_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Auto<wbr>Scale</a>
@@ -3855,17 +6227,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to enable auto scaling or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to enable auto scaling or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_labels_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_java" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-optional"
+    <dd>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-optional"
             title="Optional">
         <span id="state_launchconfigid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_launchconfigid_java" style="color: inherit; text-decoration: inherit;">launch<wbr>Config<wbr>Id</a>
@@ -3873,8 +6243,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The launch config ID.</p>
-</dd><dt class="property-optional"
+    <dd>The launch config ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_manuallyaddedtotal_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_manuallyaddedtotal_java" style="color: inherit; text-decoration: inherit;">manually<wbr>Added<wbr>Total</a>
@@ -3882,8 +6251,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The total of manually added node.</p>
-</dd><dt class="property-optional"
+    <dd>The total of manually added node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -3891,8 +6259,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of node.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minsize_java" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -3900,8 +6267,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Minimum number of node.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum number of node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_multizonesubnetpolicy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizonesubnetpolicy_java" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -3909,8 +6275,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3918,17 +6283,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeconfig_java" style="color: inherit; text-decoration: inherit;">node<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepoolnodeconfig">Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#nodepoolnodeconfig">Node<wbr>Pool<wbr>Node<wbr>Config</a></span>
     </dt>
-    <dd><p>Node config.</p>
-</dd><dt class="property-optional"
+    <dd>Node config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodecount_java" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -3936,8 +6299,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The total node count.</p>
-</dd><dt class="property-optional"
+    <dd>The total node count.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeos_java" style="color: inherit; text-decoration: inherit;">node<wbr>Os</a>
@@ -3945,8 +6307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operating system of the cluster. Please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image). If custom image, please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeostype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeostype_java" style="color: inherit; text-decoration: inherit;">node<wbr>Os<wbr>Type</a>
@@ -3954,8 +6315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_retrypolicy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retrypolicy_java" style="color: inherit; text-decoration: inherit;">retry<wbr>Policy</a>
@@ -3963,8 +6323,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scaletolerance_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaletolerance_java" style="color: inherit; text-decoration: inherit;">scale<wbr>Tolerance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Control how many expectations(<code>desiredCapacity</code>) can be tolerated successfully. Unit is percentage, Default is <code>100</code>. Only can be set if <code>waitNodeReady</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalinggroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupname_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -3972,8 +6339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of relative scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Name of relative scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalinggroupprojectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupprojectid_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Project<wbr>Id</a>
@@ -3981,8 +6347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID the scaling group belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Project ID the scaling group belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalingmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalingmode_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Mode</a>
@@ -3990,8 +6355,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</p>
-</dd><dt class="property-optional"
+    <dd>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3999,8 +6363,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the node pool.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of the node pool.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetids_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -4008,26 +6371,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Node pool tag specifications, will passthroughs to the scaling instances.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool tag specifications, will passthroughs to the scaling instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taints_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taints_java" style="color: inherit; text-decoration: inherit;">taints</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepooltaint">List&lt;Node<wbr>Pool<wbr>Taint<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#nodepooltaint">List&lt;Node<wbr>Pool<wbr>Taint&gt;</a></span>
     </dt>
-    <dd><p>Taints of kubernetes node pool created nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Taints of kubernetes node pool created nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_terminationpolicies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_terminationpolicies_java" style="color: inherit; text-decoration: inherit;">termination<wbr>Policies</a>
@@ -4035,8 +6395,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_unschedulable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_unschedulable_java" style="color: inherit; text-decoration: inherit;">unschedulable</a>
@@ -4044,8 +6403,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -4053,8 +6411,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_waitnodeready_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitnodeready_java" style="color: inherit; text-decoration: inherit;">wait<wbr>Node<wbr>Ready</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to wait for all desired nodes to be ready. Default is false. Only can be set if <code>enableAutoScale</code> is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zones_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zones_java" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -4062,8 +6427,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of auto scaling group available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of auto scaling group available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4071,14 +6435,21 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_annotations_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_annotations_nodejs" style="color: inherit; text-decoration: inherit;">annotations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolannotation">Node<wbr>Pool<wbr>Annotation[]</a></span>
+    </dt>
+    <dd>Node Annotation List.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_autoscalingconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalingconfig_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepoolautoscalingconfig">Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#nodepoolautoscalingconfig">Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config</a></span>
     </dt>
-    <dd><p>Auto scaling config parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Auto scaling config parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoscalinggroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalinggroupid_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Id</a>
@@ -4086,8 +6457,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The auto scaling group ID.</p>
-</dd><dt class="property-optional"
+    <dd>The auto scaling group ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_autoupdateinstancetags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoupdateinstancetags_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Update<wbr>Instance<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Automatically update instance tags. The default value is false. After configuration, if the scaling group tags are updated, the tags of the running instances in the scaling group will be updated synchronously (synchronous updates only support adding and modifying tags, and do not support deleting tags for the time being). Synchronous updates do not take effect immediately and there is a certain delay.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoscalingaddedtotal_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalingaddedtotal_nodejs" style="color: inherit; text-decoration: inherit;">autoscaling<wbr>Added<wbr>Total</a>
@@ -4095,8 +6473,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The total of autoscaling added node.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The total of autoscaling added node.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -4104,8 +6481,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultcooldown_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultcooldown_nodejs" style="color: inherit; text-decoration: inherit;">default<wbr>Cooldown</a>
@@ -4113,8 +6489,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Seconds of scaling group cool down. Default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Seconds of scaling group cool down. Default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deletekeepinstance_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletekeepinstance_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Keep<wbr>Instance</a>
@@ -4122,8 +6497,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deletionprotection_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletionprotection_nodejs" style="color: inherit; text-decoration: inherit;">deletion<wbr>Protection</a>
@@ -4131,8 +6505,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the node pool deletion protection is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the node pool deletion protection is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_desiredcapacity_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desiredcapacity_nodejs" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity</a>
@@ -4140,8 +6513,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Desired capacity of the node. If <code>enable_auto_scale</code> is set <code>true</code>, this will be a computed parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Desired capacity of the node. If <code>enableAutoScale</code> is set <code>true</code>, this will be a computed parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enableautoscale_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableautoscale_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Auto<wbr>Scale</a>
@@ -4149,17 +6521,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to enable auto scaling or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to enable auto scaling or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_labels_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_nodejs" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-optional"
+    <dd>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-optional"
             title="Optional">
         <span id="state_launchconfigid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_launchconfigid_nodejs" style="color: inherit; text-decoration: inherit;">launch<wbr>Config<wbr>Id</a>
@@ -4167,8 +6537,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The launch config ID.</p>
-</dd><dt class="property-optional"
+    <dd>The launch config ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_manuallyaddedtotal_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_manuallyaddedtotal_nodejs" style="color: inherit; text-decoration: inherit;">manually<wbr>Added<wbr>Total</a>
@@ -4176,8 +6545,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The total of manually added node.</p>
-</dd><dt class="property-optional"
+    <dd>The total of manually added node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -4185,8 +6553,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of node.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minsize_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -4194,8 +6561,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Minimum number of node.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum number of node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_multizonesubnetpolicy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizonesubnetpolicy_nodejs" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -4203,8 +6569,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -4212,17 +6577,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeconfig_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepoolnodeconfig">Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#nodepoolnodeconfig">Node<wbr>Pool<wbr>Node<wbr>Config</a></span>
     </dt>
-    <dd><p>Node config.</p>
-</dd><dt class="property-optional"
+    <dd>Node config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodecount_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -4230,8 +6593,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The total node count.</p>
-</dd><dt class="property-optional"
+    <dd>The total node count.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeos_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Os</a>
@@ -4239,8 +6601,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operating system of the cluster. Please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image). If custom image, please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeostype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeostype_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Os<wbr>Type</a>
@@ -4248,8 +6609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_retrypolicy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retrypolicy_nodejs" style="color: inherit; text-decoration: inherit;">retry<wbr>Policy</a>
@@ -4257,8 +6617,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scaletolerance_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaletolerance_nodejs" style="color: inherit; text-decoration: inherit;">scale<wbr>Tolerance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Control how many expectations(<code>desiredCapacity</code>) can be tolerated successfully. Unit is percentage, Default is <code>100</code>. Only can be set if <code>waitNodeReady</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalinggroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupname_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -4266,8 +6633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of relative scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Name of relative scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalinggroupprojectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupprojectid_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Project<wbr>Id</a>
@@ -4275,8 +6641,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID the scaling group belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Project ID the scaling group belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalingmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalingmode_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Mode</a>
@@ -4284,8 +6649,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</p>
-</dd><dt class="property-optional"
+    <dd>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -4293,8 +6657,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the node pool.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of the node pool.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetids_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -4302,26 +6665,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Node pool tag specifications, will passthroughs to the scaling instances.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool tag specifications, will passthroughs to the scaling instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taints_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taints_nodejs" style="color: inherit; text-decoration: inherit;">taints</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepooltaint">Node<wbr>Pool<wbr>Taint<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#nodepooltaint">Node<wbr>Pool<wbr>Taint[]</a></span>
     </dt>
-    <dd><p>Taints of kubernetes node pool created nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Taints of kubernetes node pool created nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_terminationpolicies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_terminationpolicies_nodejs" style="color: inherit; text-decoration: inherit;">termination<wbr>Policies</a>
@@ -4329,8 +6689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_unschedulable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_unschedulable_nodejs" style="color: inherit; text-decoration: inherit;">unschedulable</a>
@@ -4338,8 +6697,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -4347,8 +6705,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_waitnodeready_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitnodeready_nodejs" style="color: inherit; text-decoration: inherit;">wait<wbr>Node<wbr>Ready</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to wait for all desired nodes to be ready. Default is false. Only can be set if <code>enableAutoScale</code> is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zones_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zones_nodejs" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -4356,8 +6721,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of auto scaling group available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of auto scaling group available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4365,14 +6729,21 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_annotations_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_annotations_python" style="color: inherit; text-decoration: inherit;">annotations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolannotation">Sequence[Node<wbr>Pool<wbr>Annotation<wbr>Args]</a></span>
+    </dt>
+    <dd>Node Annotation List.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_auto_scaling_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_scaling_config_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>config</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolautoscalingconfig">Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Auto scaling config parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Auto scaling config parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_auto_scaling_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_scaling_group_id_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>group_<wbr>id</a>
@@ -4380,8 +6751,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The auto scaling group ID.</p>
-</dd><dt class="property-optional"
+    <dd>The auto scaling group ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_auto_update_instance_tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_update_instance_tags_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>update_<wbr>instance_<wbr>tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Automatically update instance tags. The default value is false. After configuration, if the scaling group tags are updated, the tags of the running instances in the scaling group will be updated synchronously (synchronous updates only support adding and modifying tags, and do not support deleting tags for the time being). Synchronous updates do not take effect immediately and there is a certain delay.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoscaling_added_total_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscaling_added_total_python" style="color: inherit; text-decoration: inherit;">autoscaling_<wbr>added_<wbr>total</a>
@@ -4389,8 +6767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total of autoscaling added node.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The total of autoscaling added node.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -4398,8 +6775,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_default_cooldown_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_default_cooldown_python" style="color: inherit; text-decoration: inherit;">default_<wbr>cooldown</a>
@@ -4407,8 +6783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Seconds of scaling group cool down. Default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Seconds of scaling group cool down. Default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_delete_keep_instance_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_delete_keep_instance_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>keep_<wbr>instance</a>
@@ -4416,8 +6791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deletion_protection_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletion_protection_python" style="color: inherit; text-decoration: inherit;">deletion_<wbr>protection</a>
@@ -4425,8 +6799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the node pool deletion protection is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the node pool deletion protection is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_desired_capacity_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desired_capacity_python" style="color: inherit; text-decoration: inherit;">desired_<wbr>capacity</a>
@@ -4434,8 +6807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Desired capacity of the node. If <code>enable_auto_scale</code> is set <code>true</code>, this will be a computed parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Desired capacity of the node. If <code>enableAutoScale</code> is set <code>true</code>, this will be a computed parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_auto_scale_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_auto_scale_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>auto_<wbr>scale</a>
@@ -4443,17 +6815,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to enable auto scaling or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to enable auto scaling or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_labels_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_python" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-optional"
+    <dd>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-optional"
             title="Optional">
         <span id="state_launch_config_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_launch_config_id_python" style="color: inherit; text-decoration: inherit;">launch_<wbr>config_<wbr>id</a>
@@ -4461,8 +6831,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The launch config ID.</p>
-</dd><dt class="property-optional"
+    <dd>The launch config ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_manually_added_total_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_manually_added_total_python" style="color: inherit; text-decoration: inherit;">manually_<wbr>added_<wbr>total</a>
@@ -4470,8 +6839,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total of manually added node.</p>
-</dd><dt class="property-optional"
+    <dd>The total of manually added node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
@@ -4479,8 +6847,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of node.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_min_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_min_size_python" style="color: inherit; text-decoration: inherit;">min_<wbr>size</a>
@@ -4488,8 +6855,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum number of node.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum number of node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_multi_zone_subnet_policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multi_zone_subnet_policy_python" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone_<wbr>subnet_<wbr>policy</a>
@@ -4497,8 +6863,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -4506,8 +6871,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_node_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_node_config_python" style="color: inherit; text-decoration: inherit;">node_<wbr>config</a>
@@ -4515,8 +6879,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolnodeconfig">Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Node config.</p>
-</dd><dt class="property-optional"
+    <dd>Node config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_node_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_node_count_python" style="color: inherit; text-decoration: inherit;">node_<wbr>count</a>
@@ -4524,8 +6887,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total node count.</p>
-</dd><dt class="property-optional"
+    <dd>The total node count.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_node_os_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_node_os_python" style="color: inherit; text-decoration: inherit;">node_<wbr>os</a>
@@ -4533,8 +6895,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Operating system of the cluster. Please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image). If custom image, please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_node_os_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_node_os_type_python" style="color: inherit; text-decoration: inherit;">node_<wbr>os_<wbr>type</a>
@@ -4542,8 +6903,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_retry_policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retry_policy_python" style="color: inherit; text-decoration: inherit;">retry_<wbr>policy</a>
@@ -4551,8 +6911,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scale_tolerance_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scale_tolerance_python" style="color: inherit; text-decoration: inherit;">scale_<wbr>tolerance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Control how many expectations(<code>desiredCapacity</code>) can be tolerated successfully. Unit is percentage, Default is <code>100</code>. Only can be set if <code>waitNodeReady</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scaling_group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaling_group_name_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>name</a>
@@ -4560,8 +6927,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of relative scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Name of relative scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scaling_group_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaling_group_project_id_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>project_<wbr>id</a>
@@ -4569,8 +6935,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID the scaling group belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Project ID the scaling group belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scaling_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaling_mode_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>mode</a>
@@ -4578,8 +6943,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</p>
-</dd><dt class="property-optional"
+    <dd>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -4587,8 +6951,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the node pool.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of the node pool.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnet_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_ids_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>ids</a>
@@ -4596,26 +6959,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Node pool tag specifications, will passthroughs to the scaling instances.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool tag specifications, will passthroughs to the scaling instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taints_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taints_python" style="color: inherit; text-decoration: inherit;">taints</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepooltaint">Node<wbr>Pool<wbr>Taint<wbr>Args]</a></span>
+        <span class="property-type"><a href="#nodepooltaint">Sequence[Node<wbr>Pool<wbr>Taint<wbr>Args]</a></span>
     </dt>
-    <dd><p>Taints of kubernetes node pool created nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Taints of kubernetes node pool created nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_termination_policies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_termination_policies_python" style="color: inherit; text-decoration: inherit;">termination_<wbr>policies</a>
@@ -4623,8 +6983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_unschedulable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_unschedulable_python" style="color: inherit; text-decoration: inherit;">unschedulable</a>
@@ -4632,8 +6991,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -4641,8 +6999,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wait_node_ready_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wait_node_ready_python" style="color: inherit; text-decoration: inherit;">wait_<wbr>node_<wbr>ready</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to wait for all desired nodes to be ready. Default is false. Only can be set if <code>enableAutoScale</code> is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zones_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zones_python" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -4650,8 +7015,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of auto scaling group available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of auto scaling group available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4659,14 +7023,21 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_annotations_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_annotations_yaml" style="color: inherit; text-decoration: inherit;">annotations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolannotation">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Node Annotation List.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_autoscalingconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalingconfig_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolautoscalingconfig">Property Map</a></span>
     </dt>
-    <dd><p>Auto scaling config parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Auto scaling config parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoscalinggroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalinggroupid_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Id</a>
@@ -4674,8 +7045,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The auto scaling group ID.</p>
-</dd><dt class="property-optional"
+    <dd>The auto scaling group ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_autoupdateinstancetags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoupdateinstancetags_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Update<wbr>Instance<wbr>Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Automatically update instance tags. The default value is false. After configuration, if the scaling group tags are updated, the tags of the running instances in the scaling group will be updated synchronously (synchronous updates only support adding and modifying tags, and do not support deleting tags for the time being). Synchronous updates do not take effect immediately and there is a certain delay.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoscalingaddedtotal_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalingaddedtotal_yaml" style="color: inherit; text-decoration: inherit;">autoscaling<wbr>Added<wbr>Total</a>
@@ -4683,8 +7061,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The total of autoscaling added node.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The total of autoscaling added node.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -4692,8 +7069,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultcooldown_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultcooldown_yaml" style="color: inherit; text-decoration: inherit;">default<wbr>Cooldown</a>
@@ -4701,8 +7077,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Seconds of scaling group cool down. Default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Seconds of scaling group cool down. Default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deletekeepinstance_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletekeepinstance_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Keep<wbr>Instance</a>
@@ -4710,8 +7085,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate to keep the CVM instance when delete the node pool. Default is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deletionprotection_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deletionprotection_yaml" style="color: inherit; text-decoration: inherit;">deletion<wbr>Protection</a>
@@ -4719,8 +7093,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the node pool deletion protection is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the node pool deletion protection is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_desiredcapacity_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desiredcapacity_yaml" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity</a>
@@ -4728,8 +7101,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Desired capacity of the node. If <code>enable_auto_scale</code> is set <code>true</code>, this will be a computed parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Desired capacity of the node. If <code>enableAutoScale</code> is set <code>true</code>, this will be a computed parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enableautoscale_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableautoscale_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Auto<wbr>Scale</a>
@@ -4737,17 +7109,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to enable auto scaling or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to enable auto scaling or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_labels_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_yaml" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-optional"
+    <dd>Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-optional"
             title="Optional">
         <span id="state_launchconfigid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_launchconfigid_yaml" style="color: inherit; text-decoration: inherit;">launch<wbr>Config<wbr>Id</a>
@@ -4755,8 +7125,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The launch config ID.</p>
-</dd><dt class="property-optional"
+    <dd>The launch config ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_manuallyaddedtotal_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_manuallyaddedtotal_yaml" style="color: inherit; text-decoration: inherit;">manually<wbr>Added<wbr>Total</a>
@@ -4764,8 +7133,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The total of manually added node.</p>
-</dd><dt class="property-optional"
+    <dd>The total of manually added node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -4773,8 +7141,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of node.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minsize_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -4782,8 +7149,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Minimum number of node.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum number of node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_multizonesubnetpolicy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizonesubnetpolicy_yaml" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -4791,8 +7157,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -4800,8 +7165,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (<code>-</code>) and decimal points.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeconfig_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Config</a>
@@ -4809,8 +7173,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolnodeconfig">Property Map</a></span>
     </dt>
-    <dd><p>Node config.</p>
-</dd><dt class="property-optional"
+    <dd>Node config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodecount_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -4818,8 +7181,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The total node count.</p>
-</dd><dt class="property-optional"
+    <dd>The total node count.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeos_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Os</a>
@@ -4827,8 +7189,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operating system of the cluster. Please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image). If custom image, please refer to <a href="https://www.tencentcloud.com/document/product/457/46750?lang=en&amp;pg=#list-of-public-images-supported-by-tke">TencentCloud Documentation</a> for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeostype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeostype_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Os<wbr>Type</a>
@@ -4836,8 +7197,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The image version of the node. Valida values are <code>DOCKER_CUSTOMIZE</code> and <code>GENERAL</code>. Default is <code>GENERAL</code>. This parameter will only affect new nodes, not including the existing nodes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_retrypolicy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retrypolicy_yaml" style="color: inherit; text-decoration: inherit;">retry<wbr>Policy</a>
@@ -4845,8 +7205,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies include <code>IMMEDIATE_RETRY</code> and <code>INCREMENTAL_INTERVALS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scaletolerance_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaletolerance_yaml" style="color: inherit; text-decoration: inherit;">scale<wbr>Tolerance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Control how many expectations(<code>desiredCapacity</code>) can be tolerated successfully. Unit is percentage, Default is <code>100</code>. Only can be set if <code>waitNodeReady</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalinggroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupname_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -4854,8 +7221,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of relative scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Name of relative scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalinggroupprojectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupprojectid_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Project<wbr>Id</a>
@@ -4863,8 +7229,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID the scaling group belongs to.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Project ID the scaling group belongs to.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalingmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalingmode_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Mode</a>
@@ -4872,8 +7237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</p>
-</dd><dt class="property-optional"
+    <dd>Auto scaling mode. Valid values are <code>CLASSIC_SCALING</code>(scaling by create/destroy instances), <code>WAKE_UP_STOPPED_SCALING</code>(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -4881,8 +7245,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the node pool.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of the node pool.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetids_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -4890,17 +7253,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Node pool tag specifications, will passthroughs to the scaling instances.</p>
-</dd><dt class="property-optional"
+    <dd>Node pool tag specifications, will passthroughs to the scaling instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taints_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taints_yaml" style="color: inherit; text-decoration: inherit;">taints</a>
@@ -4908,8 +7269,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepooltaint">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Taints of kubernetes node pool created nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Taints of kubernetes node pool created nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_terminationpolicies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_terminationpolicies_yaml" style="color: inherit; text-decoration: inherit;">termination<wbr>Policies</a>
@@ -4917,8 +7277,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy of scaling group termination. Available values: <code>[&quot;OLDEST_INSTANCE&quot;]</code>, <code>[&quot;NEWEST_INSTANCE&quot;]</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_unschedulable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_unschedulable_yaml" style="color: inherit; text-decoration: inherit;">unschedulable</a>
@@ -4926,8 +7285,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -4935,8 +7293,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_waitnodeready_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitnodeready_yaml" style="color: inherit; text-decoration: inherit;">wait<wbr>Node<wbr>Ready</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to wait for all desired nodes to be ready. Default is false. Only can be set if <code>enableAutoScale</code> is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zones_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zones_yaml" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -4944,8 +7309,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of auto scaling group available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of auto scaling group available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -4960,7 +7324,167 @@ The following state arguments are supported:
 
 
 
-<h4 id="nodepoolautoscalingconfig">Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config</h4>
+<h4 id="nodepoolannotation">
+Node<wbr>Pool<wbr>Annotation<pulumi-choosable type="language" values="python,go" class="inline">, Node<wbr>Pool<wbr>Annotation<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name in the map table.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value in the map table.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name in the map table.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value in the map table.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name in the map table.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value in the map table.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Name in the map table.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Value in the map table.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name in the map table.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value in the map table.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Name in the map table.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Value in the map table.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Name in the map table.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Value in the map table.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="nodepoolautoscalingconfig">
+Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4972,8 +7496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specified types of CVM instance.</p>
-</dd><dt class="property-optional"
+    <dd>Specified types of CVM instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="backupinstancetypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupinstancetypes_csharp" style="color: inherit; text-decoration: inherit;">Backup<wbr>Instance<wbr>Types</a>
@@ -4981,8 +7504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Backup CVM instance types if specified instance type sold out or mismatch.</p>
-</dd><dt class="property-optional"
+    <dd>Backup CVM instance types if specified instance type sold out or mismatch.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Package<wbr>Id</a>
@@ -4990,8 +7512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="camrolename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_csharp" style="color: inherit; text-decoration: inherit;">Cam<wbr>Role<wbr>Name</a>
@@ -4999,8 +7520,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of cam role.</p>
-</dd><dt class="property-optional"
+    <dd>Name of cam role.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cdcid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_csharp" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="datadisks_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Disks</a>
@@ -5008,8 +7536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolautoscalingconfigdatadisk">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Data<wbr>Disk&gt;</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Configurations of data disk.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="enhancedmonitorservice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedmonitorservice_csharp" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Monitor<wbr>Service</a>
@@ -5017,8 +7544,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>To specify whether to enable cloud monitor service. Default is TRUE.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud monitor service. Default is TRUE.</dd><dt class="property-optional"
             title="Optional">
         <span id="enhancedsecurityservice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedsecurityservice_csharp" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Security<wbr>Service</a>
@@ -5026,8 +7552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>To specify whether to enable cloud security service. Default is TRUE.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud security service. Default is TRUE.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Name</a>
@@ -5035,8 +7560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</p>
-</dd><dt class="property-optional"
+    <dd>The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostnamestyle_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostnamestyle_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Name<wbr>Style</a>
@@ -5044,8 +7568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</p>
-</dd><dt class="property-optional"
+    <dd>The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type</a>
@@ -5053,8 +7576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spot_instance_type</code> and <code>spot_max_price</code> at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -5062,8 +7584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidrenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -5071,8 +7592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -5080,8 +7600,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance name, no more than 60 characters. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name, no more than 60 characters. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instancenamestyle_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenamestyle_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name<wbr>Style</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default value: <code>ORIGINAL</code>. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -5089,8 +7616,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge types for network traffic. Valid value: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charge types for network traffic. Valid value: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -5098,8 +7624,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv4addresstype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4addresstype_csharp" style="color: inherit; text-decoration: inherit;">Ipv4Address<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of public IP address. WanIP: Ordinary public IP address; HighQualityEIP: High Quality EIP is supported only in Singapore and Hong Kong; AntiDDoSEIP: Anti-DDoS IP is supported only in specific regions. For details, see EIP Product Overview. Specify the type of public IPv4 address to assign a public IPv4 address to the resource. HighQualityEIP and AntiDDoSEIP features are gradually released in select regions. For usage, submit a ticket for consultation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="keyids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyids_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Ids</a>
@@ -5107,8 +7640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID list of keys.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of keys.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderlysecuritygroupids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderlysecuritygroupids_csharp" style="color: inherit; text-decoration: inherit;">Orderly<wbr>Security<wbr>Group<wbr>Ids</a>
@@ -5116,8 +7648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Ordered security groups to which a CVM instance belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ordered security groups to which a CVM instance belongs.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -5125,8 +7656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password to access.</p>
-</dd><dt class="property-optional"
+    <dd>Password to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipassigned_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipassigned_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Assigned</a>
@@ -5134,8 +7664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="securitygroupids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
@@ -5143,9 +7672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The order of elements in this field cannot be guaranteed. Use <code>orderly_security_group_ids</code> instead. Security groups to which a CVM instance belongs.</p>
-<p class="property-message">Deprecated:<p>The order of elements in this field cannot be guaranteed. Use <code>orderly_security_group_ids</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>The order of elements in this field cannot be guaranteed. Use <code>orderlySecurityGroupIds</code> instead. Security groups to which a CVM instance belongs.<p class="property-message">Deprecated: The order of elements in this field cannot be guaranteed. Use <code>orderlySecurityGroupIds</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="spotinstancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotinstancetype_csharp" style="color: inherit; text-decoration: inherit;">Spot<wbr>Instance<wbr>Type</a>
@@ -5153,8 +7680,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="spotmaxprice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotmaxprice_csharp" style="color: inherit; text-decoration: inherit;">Spot<wbr>Max<wbr>Price</a>
@@ -5162,8 +7688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Size</a>
@@ -5171,8 +7696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of system disk in GB. Default is <code>50</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Type</a>
@@ -5180,8 +7704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of a CVM disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code> and <code>CLOUD_BSSD</code>. Default is <code>CLOUD_PREMIUM</code>.</p>
-</dd></dl>
+    <dd>Type of a CVM disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>. Default is <code>CLOUD_PREMIUM</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5195,8 +7718,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specified types of CVM instance.</p>
-</dd><dt class="property-optional"
+    <dd>Specified types of CVM instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="backupinstancetypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupinstancetypes_go" style="color: inherit; text-decoration: inherit;">Backup<wbr>Instance<wbr>Types</a>
@@ -5204,8 +7726,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Backup CVM instance types if specified instance type sold out or mismatch.</p>
-</dd><dt class="property-optional"
+    <dd>Backup CVM instance types if specified instance type sold out or mismatch.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_go" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Package<wbr>Id</a>
@@ -5213,8 +7734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="camrolename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_go" style="color: inherit; text-decoration: inherit;">Cam<wbr>Role<wbr>Name</a>
@@ -5222,8 +7742,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of cam role.</p>
-</dd><dt class="property-optional"
+    <dd>Name of cam role.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cdcid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_go" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="datadisks_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Disks</a>
@@ -5231,8 +7758,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolautoscalingconfigdatadisk">[]Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Data<wbr>Disk</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Configurations of data disk.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="enhancedmonitorservice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedmonitorservice_go" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Monitor<wbr>Service</a>
@@ -5240,8 +7766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>To specify whether to enable cloud monitor service. Default is TRUE.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud monitor service. Default is TRUE.</dd><dt class="property-optional"
             title="Optional">
         <span id="enhancedsecurityservice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedsecurityservice_go" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Security<wbr>Service</a>
@@ -5249,8 +7774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>To specify whether to enable cloud security service. Default is TRUE.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud security service. Default is TRUE.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Name</a>
@@ -5258,8 +7782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</p>
-</dd><dt class="property-optional"
+    <dd>The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostnamestyle_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostnamestyle_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Name<wbr>Style</a>
@@ -5267,8 +7790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</p>
-</dd><dt class="property-optional"
+    <dd>The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type</a>
@@ -5276,8 +7798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spot_instance_type</code> and <code>spot_max_price</code> at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidperiod_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -5285,8 +7806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidrenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -5294,8 +7814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -5303,8 +7822,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance name, no more than 60 characters. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name, no more than 60 characters. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instancenamestyle_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenamestyle_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name<wbr>Style</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default value: <code>ORIGINAL</code>. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -5312,8 +7838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge types for network traffic. Valid value: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charge types for network traffic. Valid value: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -5321,8 +7846,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv4addresstype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4addresstype_go" style="color: inherit; text-decoration: inherit;">Ipv4Address<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of public IP address. WanIP: Ordinary public IP address; HighQualityEIP: High Quality EIP is supported only in Singapore and Hong Kong; AntiDDoSEIP: Anti-DDoS IP is supported only in specific regions. For details, see EIP Product Overview. Specify the type of public IPv4 address to assign a public IPv4 address to the resource. HighQualityEIP and AntiDDoSEIP features are gradually released in select regions. For usage, submit a ticket for consultation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="keyids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyids_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Ids</a>
@@ -5330,8 +7862,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID list of keys.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of keys.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderlysecuritygroupids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderlysecuritygroupids_go" style="color: inherit; text-decoration: inherit;">Orderly<wbr>Security<wbr>Group<wbr>Ids</a>
@@ -5339,8 +7870,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Ordered security groups to which a CVM instance belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ordered security groups to which a CVM instance belongs.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -5348,8 +7878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password to access.</p>
-</dd><dt class="property-optional"
+    <dd>Password to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipassigned_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipassigned_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Assigned</a>
@@ -5357,8 +7886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="securitygroupids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
@@ -5366,9 +7894,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The order of elements in this field cannot be guaranteed. Use <code>orderly_security_group_ids</code> instead. Security groups to which a CVM instance belongs.</p>
-<p class="property-message">Deprecated:<p>The order of elements in this field cannot be guaranteed. Use <code>orderly_security_group_ids</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>The order of elements in this field cannot be guaranteed. Use <code>orderlySecurityGroupIds</code> instead. Security groups to which a CVM instance belongs.<p class="property-message">Deprecated: The order of elements in this field cannot be guaranteed. Use <code>orderlySecurityGroupIds</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="spotinstancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotinstancetype_go" style="color: inherit; text-decoration: inherit;">Spot<wbr>Instance<wbr>Type</a>
@@ -5376,8 +7902,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="spotmaxprice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotmaxprice_go" style="color: inherit; text-decoration: inherit;">Spot<wbr>Max<wbr>Price</a>
@@ -5385,8 +7910,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Size</a>
@@ -5394,8 +7918,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of system disk in GB. Default is <code>50</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Type</a>
@@ -5403,8 +7926,229 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of a CVM disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code> and <code>CLOUD_BSSD</code>. Default is <code>CLOUD_PREMIUM</code>.</p>
-</dd></dl>
+    <dd>Type of a CVM disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>. Default is <code>CLOUD_PREMIUM</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specified types of CVM instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="backup_instance_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_instance_types_hcl" style="color: inherit; text-decoration: inherit;">backup_<wbr>instance_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Backup CVM instance types if specified instance type sold out or mismatch.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bandwidth_package_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_package_id_hcl" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>package_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cam_role_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cam_role_name_hcl" style="color: inherit; text-decoration: inherit;">cam_<wbr>role_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of cam role.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cdc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="data_disks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_disks_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>disks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolautoscalingconfigdatadisk">list(object)</a></span>
+    </dt>
+    <dd>Configurations of data disk.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="enhanced_monitor_service_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhanced_monitor_service_hcl" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>monitor_<wbr>service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>To specify whether to enable cloud monitor service. Default is TRUE.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enhanced_security_service_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhanced_security_service_hcl" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>security_<wbr>service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>To specify whether to enable cloud security service. Default is TRUE.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="host_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_name_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="host_name_style_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_name_style_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>name_<wbr>style</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_charge_type_prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_charge_type_prepaid_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_prepaid_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance name, no more than 60 characters. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_name_style_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_style_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name_<wbr>style</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default value: <code>ORIGINAL</code>. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="internet_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_charge_type_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Charge types for network traffic. Valid value: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="internet_max_bandwidth_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_max_bandwidth_out_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv4_address_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_address_type_hcl" style="color: inherit; text-decoration: inherit;">ipv4_<wbr>address_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of public IP address. WanIP: Ordinary public IP address; HighQualityEIP: High Quality EIP is supported only in Singapore and Hong Kong; AntiDDoSEIP: Anti-DDoS IP is supported only in specific regions. For details, see EIP Product Overview. Specify the type of public IPv4 address to assign a public IPv4 address to the resource. HighQualityEIP and AntiDDoSEIP features are gradually released in select regions. For usage, submit a ticket for consultation.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="key_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_ids_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID list of keys.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="orderly_security_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderly_security_group_ids_hcl" style="color: inherit; text-decoration: inherit;">orderly_<wbr>security_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Ordered security groups to which a CVM instance belongs.</dd><dt class="property-optional property-replacement property-secret"
+            title="Optional">
+        <span id="password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password to access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="public_ip_assigned_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_assigned_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>assigned</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="security_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_ids_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The order of elements in this field cannot be guaranteed. Use <code>orderlySecurityGroupIds</code> instead. Security groups to which a CVM instance belongs.<p class="property-message">Deprecated: The order of elements in this field cannot be guaranteed. Use <code>orderlySecurityGroupIds</code> instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="spot_instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spot_instance_type_hcl" style="color: inherit; text-decoration: inherit;">spot_<wbr>instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="spot_max_price_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spot_max_price_hcl" style="color: inherit; text-decoration: inherit;">spot_<wbr>max_<wbr>price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="system_disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_size_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="system_disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_type_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of a CVM disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>. Default is <code>CLOUD_PREMIUM</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5418,8 +8162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specified types of CVM instance.</p>
-</dd><dt class="property-optional"
+    <dd>Specified types of CVM instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="backupinstancetypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupinstancetypes_java" style="color: inherit; text-decoration: inherit;">backup<wbr>Instance<wbr>Types</a>
@@ -5427,8 +8170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Backup CVM instance types if specified instance type sold out or mismatch.</p>
-</dd><dt class="property-optional"
+    <dd>Backup CVM instance types if specified instance type sold out or mismatch.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_java" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -5436,8 +8178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="camrolename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_java" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
@@ -5445,8 +8186,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of cam role.</p>
-</dd><dt class="property-optional"
+    <dd>Name of cam role.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cdcid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_java" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CDC ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="datadisks_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_java" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
@@ -5454,8 +8202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolautoscalingconfigdatadisk">List&lt;Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Data<wbr>Disk&gt;</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Configurations of data disk.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="enhancedmonitorservice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedmonitorservice_java" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Monitor<wbr>Service</a>
@@ -5463,8 +8210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>To specify whether to enable cloud monitor service. Default is TRUE.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud monitor service. Default is TRUE.</dd><dt class="property-optional"
             title="Optional">
         <span id="enhancedsecurityservice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedsecurityservice_java" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Security<wbr>Service</a>
@@ -5472,8 +8218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>To specify whether to enable cloud security service. Default is TRUE.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud security service. Default is TRUE.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_java" style="color: inherit; text-decoration: inherit;">host<wbr>Name</a>
@@ -5481,8 +8226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</p>
-</dd><dt class="property-optional"
+    <dd>The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostnamestyle_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostnamestyle_java" style="color: inherit; text-decoration: inherit;">host<wbr>Name<wbr>Style</a>
@@ -5490,8 +8234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</p>
-</dd><dt class="property-optional"
+    <dd>The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -5499,8 +8242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spot_instance_type</code> and <code>spot_max_price</code> at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidperiod_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -5508,8 +8250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidrenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -5517,8 +8258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -5526,8 +8266,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance name, no more than 60 characters. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name, no more than 60 characters. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instancenamestyle_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenamestyle_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name<wbr>Style</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default value: <code>ORIGINAL</code>. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -5535,8 +8282,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge types for network traffic. Valid value: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charge types for network traffic. Valid value: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -5544,8 +8290,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv4addresstype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4addresstype_java" style="color: inherit; text-decoration: inherit;">ipv4Address<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Type of public IP address. WanIP: Ordinary public IP address; HighQualityEIP: High Quality EIP is supported only in Singapore and Hong Kong; AntiDDoSEIP: Anti-DDoS IP is supported only in specific regions. For details, see EIP Product Overview. Specify the type of public IPv4 address to assign a public IPv4 address to the resource. HighQualityEIP and AntiDDoSEIP features are gradually released in select regions. For usage, submit a ticket for consultation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="keyids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyids_java" style="color: inherit; text-decoration: inherit;">key<wbr>Ids</a>
@@ -5553,8 +8306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of keys.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of keys.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderlysecuritygroupids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderlysecuritygroupids_java" style="color: inherit; text-decoration: inherit;">orderly<wbr>Security<wbr>Group<wbr>Ids</a>
@@ -5562,8 +8314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Ordered security groups to which a CVM instance belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ordered security groups to which a CVM instance belongs.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -5571,8 +8322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password to access.</p>
-</dd><dt class="property-optional"
+    <dd>Password to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipassigned_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipassigned_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Assigned</a>
@@ -5580,8 +8330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="securitygroupids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -5589,9 +8338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The order of elements in this field cannot be guaranteed. Use <code>orderly_security_group_ids</code> instead. Security groups to which a CVM instance belongs.</p>
-<p class="property-message">Deprecated:<p>The order of elements in this field cannot be guaranteed. Use <code>orderly_security_group_ids</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>The order of elements in this field cannot be guaranteed. Use <code>orderlySecurityGroupIds</code> instead. Security groups to which a CVM instance belongs.<p class="property-message">Deprecated: The order of elements in this field cannot be guaranteed. Use <code>orderlySecurityGroupIds</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="spotinstancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotinstancetype_java" style="color: inherit; text-decoration: inherit;">spot<wbr>Instance<wbr>Type</a>
@@ -5599,8 +8346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="spotmaxprice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotmaxprice_java" style="color: inherit; text-decoration: inherit;">spot<wbr>Max<wbr>Price</a>
@@ -5608,8 +8354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -5617,8 +8362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Volume of system disk in GB. Default is <code>50</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -5626,8 +8370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of a CVM disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code> and <code>CLOUD_BSSD</code>. Default is <code>CLOUD_PREMIUM</code>.</p>
-</dd></dl>
+    <dd>Type of a CVM disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>. Default is <code>CLOUD_PREMIUM</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5641,8 +8384,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specified types of CVM instance.</p>
-</dd><dt class="property-optional"
+    <dd>Specified types of CVM instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="backupinstancetypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupinstancetypes_nodejs" style="color: inherit; text-decoration: inherit;">backup<wbr>Instance<wbr>Types</a>
@@ -5650,8 +8392,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Backup CVM instance types if specified instance type sold out or mismatch.</p>
-</dd><dt class="property-optional"
+    <dd>Backup CVM instance types if specified instance type sold out or mismatch.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -5659,8 +8400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="camrolename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_nodejs" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
@@ -5668,8 +8408,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of cam role.</p>
-</dd><dt class="property-optional"
+    <dd>Name of cam role.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cdcid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_nodejs" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="datadisks_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
@@ -5677,8 +8424,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolautoscalingconfigdatadisk">Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Data<wbr>Disk[]</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Configurations of data disk.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="enhancedmonitorservice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedmonitorservice_nodejs" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Monitor<wbr>Service</a>
@@ -5686,8 +8432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>To specify whether to enable cloud monitor service. Default is TRUE.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud monitor service. Default is TRUE.</dd><dt class="property-optional"
             title="Optional">
         <span id="enhancedsecurityservice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedsecurityservice_nodejs" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Security<wbr>Service</a>
@@ -5695,8 +8440,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>To specify whether to enable cloud security service. Default is TRUE.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud security service. Default is TRUE.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Name</a>
@@ -5704,8 +8448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</p>
-</dd><dt class="property-optional"
+    <dd>The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostnamestyle_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostnamestyle_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Name<wbr>Style</a>
@@ -5713,8 +8456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</p>
-</dd><dt class="property-optional"
+    <dd>The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -5722,8 +8464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spot_instance_type</code> and <code>spot_max_price</code> at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -5731,8 +8472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidrenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -5740,8 +8480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -5749,8 +8488,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance name, no more than 60 characters. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name, no more than 60 characters. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instancenamestyle_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenamestyle_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name<wbr>Style</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default value: <code>ORIGINAL</code>. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -5758,8 +8504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge types for network traffic. Valid value: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charge types for network traffic. Valid value: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -5767,8 +8512,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv4addresstype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4addresstype_nodejs" style="color: inherit; text-decoration: inherit;">ipv4Address<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of public IP address. WanIP: Ordinary public IP address; HighQualityEIP: High Quality EIP is supported only in Singapore and Hong Kong; AntiDDoSEIP: Anti-DDoS IP is supported only in specific regions. For details, see EIP Product Overview. Specify the type of public IPv4 address to assign a public IPv4 address to the resource. HighQualityEIP and AntiDDoSEIP features are gradually released in select regions. For usage, submit a ticket for consultation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="keyids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyids_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Ids</a>
@@ -5776,8 +8528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID list of keys.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of keys.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderlysecuritygroupids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderlysecuritygroupids_nodejs" style="color: inherit; text-decoration: inherit;">orderly<wbr>Security<wbr>Group<wbr>Ids</a>
@@ -5785,8 +8536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Ordered security groups to which a CVM instance belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ordered security groups to which a CVM instance belongs.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -5794,8 +8544,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password to access.</p>
-</dd><dt class="property-optional"
+    <dd>Password to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipassigned_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipassigned_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Assigned</a>
@@ -5803,8 +8552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="securitygroupids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -5812,9 +8560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The order of elements in this field cannot be guaranteed. Use <code>orderly_security_group_ids</code> instead. Security groups to which a CVM instance belongs.</p>
-<p class="property-message">Deprecated:<p>The order of elements in this field cannot be guaranteed. Use <code>orderly_security_group_ids</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>The order of elements in this field cannot be guaranteed. Use <code>orderlySecurityGroupIds</code> instead. Security groups to which a CVM instance belongs.<p class="property-message">Deprecated: The order of elements in this field cannot be guaranteed. Use <code>orderlySecurityGroupIds</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="spotinstancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotinstancetype_nodejs" style="color: inherit; text-decoration: inherit;">spot<wbr>Instance<wbr>Type</a>
@@ -5822,8 +8568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="spotmaxprice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotmaxprice_nodejs" style="color: inherit; text-decoration: inherit;">spot<wbr>Max<wbr>Price</a>
@@ -5831,8 +8576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -5840,8 +8584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Volume of system disk in GB. Default is <code>50</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -5849,8 +8592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of a CVM disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code> and <code>CLOUD_BSSD</code>. Default is <code>CLOUD_PREMIUM</code>.</p>
-</dd></dl>
+    <dd>Type of a CVM disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>. Default is <code>CLOUD_PREMIUM</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5864,8 +8606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specified types of CVM instance.</p>
-</dd><dt class="property-optional"
+    <dd>Specified types of CVM instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="backup_instance_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_instance_types_python" style="color: inherit; text-decoration: inherit;">backup_<wbr>instance_<wbr>types</a>
@@ -5873,8 +8614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Backup CVM instance types if specified instance type sold out or mismatch.</p>
-</dd><dt class="property-optional"
+    <dd>Backup CVM instance types if specified instance type sold out or mismatch.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidth_package_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_package_id_python" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>package_<wbr>id</a>
@@ -5882,8 +8622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="cam_role_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cam_role_name_python" style="color: inherit; text-decoration: inherit;">cam_<wbr>role_<wbr>name</a>
@@ -5891,17 +8630,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of cam role.</p>
-</dd><dt class="property-optional"
+    <dd>Name of cam role.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cdc_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_python" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>CDC ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="data_disks_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_disks_python" style="color: inherit; text-decoration: inherit;">data_<wbr>disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepoolautoscalingconfigdatadisk">Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Data<wbr>Disk]</a></span>
+        <span class="property-type"><a href="#nodepoolautoscalingconfigdatadisk">Sequence[Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Data<wbr>Disk]</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Configurations of data disk.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="enhanced_monitor_service_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhanced_monitor_service_python" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>monitor_<wbr>service</a>
@@ -5909,8 +8654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>To specify whether to enable cloud monitor service. Default is TRUE.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud monitor service. Default is TRUE.</dd><dt class="property-optional"
             title="Optional">
         <span id="enhanced_security_service_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhanced_security_service_python" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>security_<wbr>service</a>
@@ -5918,8 +8662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>To specify whether to enable cloud security service. Default is TRUE.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud security service. Default is TRUE.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_name_python" style="color: inherit; text-decoration: inherit;">host_<wbr>name</a>
@@ -5927,8 +8670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</p>
-</dd><dt class="property-optional"
+    <dd>The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_name_style_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_name_style_python" style="color: inherit; text-decoration: inherit;">host_<wbr>name_<wbr>style</a>
@@ -5936,8 +8678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</p>
-</dd><dt class="property-optional"
+    <dd>The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type</a>
@@ -5945,8 +8686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spot_instance_type</code> and <code>spot_max_price</code> at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_charge_type_prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_prepaid_period_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>period</a>
@@ -5954,8 +8694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_charge_type_prepaid_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_prepaid_renew_flag_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>renew_<wbr>flag</a>
@@ -5963,8 +8702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -5972,8 +8710,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance name, no more than 60 characters. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name, no more than 60 characters. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_name_style_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_style_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name_<wbr>style</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default value: <code>ORIGINAL</code>. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
             title="Optional">
         <span id="internet_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_charge_type_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
@@ -5981,8 +8726,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Charge types for network traffic. Valid value: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charge types for network traffic. Valid value: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internet_max_bandwidth_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_max_bandwidth_out_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
@@ -5990,8 +8734,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv4_address_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_address_type_python" style="color: inherit; text-decoration: inherit;">ipv4_<wbr>address_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Type of public IP address. WanIP: Ordinary public IP address; HighQualityEIP: High Quality EIP is supported only in Singapore and Hong Kong; AntiDDoSEIP: Anti-DDoS IP is supported only in specific regions. For details, see EIP Product Overview. Specify the type of public IPv4 address to assign a public IPv4 address to the resource. HighQualityEIP and AntiDDoSEIP features are gradually released in select regions. For usage, submit a ticket for consultation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="key_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_ids_python" style="color: inherit; text-decoration: inherit;">key_<wbr>ids</a>
@@ -5999,8 +8750,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID list of keys.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of keys.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderly_security_group_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderly_security_group_ids_python" style="color: inherit; text-decoration: inherit;">orderly_<wbr>security_<wbr>group_<wbr>ids</a>
@@ -6008,8 +8758,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Ordered security groups to which a CVM instance belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ordered security groups to which a CVM instance belongs.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -6017,8 +8766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password to access.</p>
-</dd><dt class="property-optional"
+    <dd>Password to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="public_ip_assigned_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_assigned_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>assigned</a>
@@ -6026,8 +8774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="security_group_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_ids_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
@@ -6035,9 +8782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The order of elements in this field cannot be guaranteed. Use <code>orderly_security_group_ids</code> instead. Security groups to which a CVM instance belongs.</p>
-<p class="property-message">Deprecated:<p>The order of elements in this field cannot be guaranteed. Use <code>orderly_security_group_ids</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>The order of elements in this field cannot be guaranteed. Use <code>orderlySecurityGroupIds</code> instead. Security groups to which a CVM instance belongs.<p class="property-message">Deprecated: The order of elements in this field cannot be guaranteed. Use <code>orderlySecurityGroupIds</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="spot_instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spot_instance_type_python" style="color: inherit; text-decoration: inherit;">spot_<wbr>instance_<wbr>type</a>
@@ -6045,8 +8790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="spot_max_price_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spot_max_price_python" style="color: inherit; text-decoration: inherit;">spot_<wbr>max_<wbr>price</a>
@@ -6054,8 +8798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="system_disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_size_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>size</a>
@@ -6063,8 +8806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of system disk in GB. Default is <code>50</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="system_disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_type_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>type</a>
@@ -6072,8 +8814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of a CVM disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code> and <code>CLOUD_BSSD</code>. Default is <code>CLOUD_PREMIUM</code>.</p>
-</dd></dl>
+    <dd>Type of a CVM disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>. Default is <code>CLOUD_PREMIUM</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6087,8 +8828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specified types of CVM instance.</p>
-</dd><dt class="property-optional"
+    <dd>Specified types of CVM instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="backupinstancetypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupinstancetypes_yaml" style="color: inherit; text-decoration: inherit;">backup<wbr>Instance<wbr>Types</a>
@@ -6096,8 +8836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Backup CVM instance types if specified instance type sold out or mismatch.</p>
-</dd><dt class="property-optional"
+    <dd>Backup CVM instance types if specified instance type sold out or mismatch.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_yaml" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -6105,8 +8844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="camrolename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_yaml" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
@@ -6114,8 +8852,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of cam role.</p>
-</dd><dt class="property-optional"
+    <dd>Name of cam role.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cdcid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_yaml" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CDC ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="datadisks_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
@@ -6123,8 +8868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolautoscalingconfigdatadisk">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Configurations of data disk.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="enhancedmonitorservice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedmonitorservice_yaml" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Monitor<wbr>Service</a>
@@ -6132,8 +8876,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>To specify whether to enable cloud monitor service. Default is TRUE.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud monitor service. Default is TRUE.</dd><dt class="property-optional"
             title="Optional">
         <span id="enhancedsecurityservice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedsecurityservice_yaml" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Security<wbr>Service</a>
@@ -6141,8 +8884,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>To specify whether to enable cloud security service. Default is TRUE.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud security service. Default is TRUE.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostname_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Name</a>
@@ -6150,8 +8892,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</p>
-</dd><dt class="property-optional"
+    <dd>The hostname of the cloud server, dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows instances are not supported. Examples of other types (Linux, etc.): The character length is [2, 40], multiple periods are allowed, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (unlimited case), numbers and dashes (-). Pure numbers are not allowed. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostnamestyle_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostnamestyle_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Name<wbr>Style</a>
@@ -6159,8 +8900,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</p>
-</dd><dt class="property-optional"
+    <dd>The style of the host name of the cloud server, the value range includes ORIGINAL and UNIQUE, and the default is ORIGINAL. For usage, refer to <code>HostNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -6168,8 +8908,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spot_instance_type</code> and <code>spot_max_price</code> at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -6177,8 +8916,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidrenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -6186,8 +8924,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -6195,8 +8932,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance name, no more than 60 characters. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name, no more than 60 characters. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instancenamestyle_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenamestyle_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name<wbr>Style</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default value: <code>ORIGINAL</code>. For usage, refer to <code>InstanceNameSettings</code> in https://www.tencentcloud.com/document/product/377/31001.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -6204,8 +8948,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge types for network traffic. Valid value: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charge types for network traffic. Valid value: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -6213,8 +8956,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv4addresstype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4addresstype_yaml" style="color: inherit; text-decoration: inherit;">ipv4Address<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Type of public IP address. WanIP: Ordinary public IP address; HighQualityEIP: High Quality EIP is supported only in Singapore and Hong Kong; AntiDDoSEIP: Anti-DDoS IP is supported only in specific regions. For details, see EIP Product Overview. Specify the type of public IPv4 address to assign a public IPv4 address to the resource. HighQualityEIP and AntiDDoSEIP features are gradually released in select regions. For usage, submit a ticket for consultation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="keyids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyids_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Ids</a>
@@ -6222,8 +8972,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of keys.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of keys.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderlysecuritygroupids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderlysecuritygroupids_yaml" style="color: inherit; text-decoration: inherit;">orderly<wbr>Security<wbr>Group<wbr>Ids</a>
@@ -6231,8 +8980,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Ordered security groups to which a CVM instance belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ordered security groups to which a CVM instance belongs.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -6240,8 +8988,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password to access.</p>
-</dd><dt class="property-optional"
+    <dd>Password to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipassigned_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipassigned_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Assigned</a>
@@ -6249,8 +8996,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="securitygroupids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -6258,9 +9004,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The order of elements in this field cannot be guaranteed. Use <code>orderly_security_group_ids</code> instead. Security groups to which a CVM instance belongs.</p>
-<p class="property-message">Deprecated:<p>The order of elements in this field cannot be guaranteed. Use <code>orderly_security_group_ids</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>The order of elements in this field cannot be guaranteed. Use <code>orderlySecurityGroupIds</code> instead. Security groups to which a CVM instance belongs.<p class="property-message">Deprecated: The order of elements in this field cannot be guaranteed. Use <code>orderlySecurityGroupIds</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="spotinstancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotinstancetype_yaml" style="color: inherit; text-decoration: inherit;">spot<wbr>Instance<wbr>Type</a>
@@ -6268,8 +9012,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="spotmaxprice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotmaxprice_yaml" style="color: inherit; text-decoration: inherit;">spot<wbr>Max<wbr>Price</a>
@@ -6277,8 +9020,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -6286,8 +9028,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Volume of system disk in GB. Default is <code>50</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -6295,12 +9036,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of a CVM disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code> and <code>CLOUD_BSSD</code>. Default is <code>CLOUD_PREMIUM</code>.</p>
-</dd></dl>
+    <dd>Type of a CVM disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>. Default is <code>CLOUD_PREMIUM</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="nodepoolautoscalingconfigdatadisk">Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Data<wbr>Disk</h4>
+<h4 id="nodepoolautoscalingconfigdatadisk">
+Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Data<wbr>Disk<pulumi-choosable type="language" values="python,go" class="inline">, Node<wbr>Pool<wbr>Auto<wbr>Scaling<wbr>Config<wbr>Data<wbr>Disk<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -6312,8 +9054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -6321,8 +9062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -6330,8 +9070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code> and <code>CLOUD_BSSD</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_csharp" style="color: inherit; text-decoration: inherit;">Encrypt</a>
@@ -6339,8 +9078,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role <code>QcloudKMSAccessForCVMRole</code> was provided.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role <code>QcloudKMSAccessForCVMRole</code> was provided.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="snapshotid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_csharp" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Id</a>
@@ -6348,8 +9086,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data disk snapshot ID.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk snapshot ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="throughputperformance_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_csharp" style="color: inherit; text-decoration: inherit;">Throughput<wbr>Performance</a>
@@ -6357,8 +9094,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code> and <code>data_size</code> &gt; 460GB.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code> and <code>dataSize</code> &gt; 460GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6372,8 +9108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -6381,8 +9116,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -6390,8 +9124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code> and <code>CLOUD_BSSD</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_go" style="color: inherit; text-decoration: inherit;">Encrypt</a>
@@ -6399,8 +9132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role <code>QcloudKMSAccessForCVMRole</code> was provided.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role <code>QcloudKMSAccessForCVMRole</code> was provided.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="snapshotid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_go" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Id</a>
@@ -6408,8 +9140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data disk snapshot ID.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk snapshot ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="throughputperformance_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_go" style="color: inherit; text-decoration: inherit;">Throughput<wbr>Performance</a>
@@ -6417,8 +9148,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code> and <code>data_size</code> &gt; 460GB.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code> and <code>dataSize</code> &gt; 460GB.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="delete_with_instance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_with_instance_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>with_<wbr>instance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encrypt_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_hcl" style="color: inherit; text-decoration: inherit;">encrypt</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role <code>QcloudKMSAccessForCVMRole</code> was provided.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="snapshot_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_id_hcl" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data disk snapshot ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="throughput_performance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughput_performance_hcl" style="color: inherit; text-decoration: inherit;">throughput_<wbr>performance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code> and <code>dataSize</code> &gt; 460GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6432,8 +9216,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -6441,8 +9224,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -6450,8 +9232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code> and <code>CLOUD_BSSD</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_java" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -6459,8 +9240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role <code>QcloudKMSAccessForCVMRole</code> was provided.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role <code>QcloudKMSAccessForCVMRole</code> was provided.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="snapshotid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_java" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -6468,8 +9248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data disk snapshot ID.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk snapshot ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="throughputperformance_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_java" style="color: inherit; text-decoration: inherit;">throughput<wbr>Performance</a>
@@ -6477,8 +9256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code> and <code>data_size</code> &gt; 460GB.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code> and <code>dataSize</code> &gt; 460GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6492,8 +9270,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -6501,8 +9278,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -6510,8 +9286,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code> and <code>CLOUD_BSSD</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_nodejs" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -6519,8 +9294,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role <code>QcloudKMSAccessForCVMRole</code> was provided.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role <code>QcloudKMSAccessForCVMRole</code> was provided.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="snapshotid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_nodejs" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -6528,8 +9302,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data disk snapshot ID.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk snapshot ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="throughputperformance_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_nodejs" style="color: inherit; text-decoration: inherit;">throughput<wbr>Performance</a>
@@ -6537,8 +9310,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code> and <code>data_size</code> &gt; 460GB.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code> and <code>dataSize</code> &gt; 460GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6552,8 +9324,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
@@ -6561,8 +9332,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
@@ -6570,8 +9340,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code> and <code>CLOUD_BSSD</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_python" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -6579,8 +9348,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role <code>QcloudKMSAccessForCVMRole</code> was provided.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role <code>QcloudKMSAccessForCVMRole</code> was provided.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="snapshot_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_id_python" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
@@ -6588,8 +9356,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data disk snapshot ID.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk snapshot ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="throughput_performance_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughput_performance_python" style="color: inherit; text-decoration: inherit;">throughput_<wbr>performance</a>
@@ -6597,8 +9364,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code> and <code>data_size</code> &gt; 460GB.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code> and <code>dataSize</code> &gt; 460GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6612,8 +9378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -6621,8 +9386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -6630,8 +9394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code> and <code>CLOUD_BSSD</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_yaml" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -6639,8 +9402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role <code>QcloudKMSAccessForCVMRole</code> was provided.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role <code>QcloudKMSAccessForCVMRole</code> was provided.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="snapshotid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_yaml" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -6648,8 +9410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data disk snapshot ID.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk snapshot ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="throughputperformance_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_yaml" style="color: inherit; text-decoration: inherit;">throughput<wbr>Performance</a>
@@ -6657,12 +9418,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code> and <code>data_size</code> &gt; 460GB.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code> and <code>dataSize</code> &gt; 460GB.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="nodepoolnodeconfig">Node<wbr>Pool<wbr>Node<wbr>Config</h4>
+<h4 id="nodepoolnodeconfig">
+Node<wbr>Pool<wbr>Node<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -6674,8 +9436,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolnodeconfigdatadisk">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Data<wbr>Disk&gt;</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Configurations of data disk.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="desiredpodnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredpodnum_csharp" style="color: inherit; text-decoration: inherit;">Desired<wbr>Pod<wbr>Num</a>
@@ -6683,8 +9444,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicate to set desired pod number in node. valid when the cluster is podCIDR.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate to set desired pod number in node. valid when the cluster is podCIDR.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="dockergraphpath_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dockergraphpath_csharp" style="color: inherit; text-decoration: inherit;">Docker<wbr>Graph<wbr>Path</a>
@@ -6692,8 +9452,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Docker graph path. Default is <code>/var/lib/docker</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Docker graph path. Default is <code>/var/lib/docker</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="extraargs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraargs_csharp" style="color: inherit; text-decoration: inherit;">Extra<wbr>Args</a>
@@ -6701,8 +9460,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Custom parameter information related to the node. This is a white-list parameter.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Custom parameter information related to the node. This is a white-list parameter. It can be modified via the <code>ModifyClusterNodePool</code> API.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="gpuargs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpuargs_csharp" style="color: inherit; text-decoration: inherit;">Gpu<wbr>Args</a>
@@ -6710,8 +9468,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolnodeconfiggpuargs">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Gpu<wbr>Args</a></span>
     </dt>
-    <dd><p>GPU driver parameters.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>GPU driver parameters.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="isschedule_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isschedule_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Schedule</a>
@@ -6719,8 +9476,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to schedule the adding node or not. Default is true.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate to schedule the adding node or not. Default is true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="mounttarget_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mounttarget_csharp" style="color: inherit; text-decoration: inherit;">Mount<wbr>Target</a>
@@ -6728,8 +9484,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mount target. Default is not mounting.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Mount target. Default is not mounting.</dd><dt class="property-optional"
             title="Optional">
         <span id="prestartuserscript_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prestartuserscript_csharp" style="color: inherit; text-decoration: inherit;">Pre<wbr>Start<wbr>User<wbr>Script</a>
@@ -6737,8 +9492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="userdata_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Data</a>
@@ -6746,8 +9500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Base64-encoded User Data text, the length limit is 16KB.</p>
-</dd></dl>
+    <dd>Base64-encoded User Data text, the length limit is 16KB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6761,8 +9514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolnodeconfigdatadisk">[]Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Data<wbr>Disk</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Configurations of data disk.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="desiredpodnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredpodnum_go" style="color: inherit; text-decoration: inherit;">Desired<wbr>Pod<wbr>Num</a>
@@ -6770,8 +9522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicate to set desired pod number in node. valid when the cluster is podCIDR.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate to set desired pod number in node. valid when the cluster is podCIDR.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="dockergraphpath_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dockergraphpath_go" style="color: inherit; text-decoration: inherit;">Docker<wbr>Graph<wbr>Path</a>
@@ -6779,8 +9530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Docker graph path. Default is <code>/var/lib/docker</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Docker graph path. Default is <code>/var/lib/docker</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="extraargs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraargs_go" style="color: inherit; text-decoration: inherit;">Extra<wbr>Args</a>
@@ -6788,8 +9538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Custom parameter information related to the node. This is a white-list parameter.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Custom parameter information related to the node. This is a white-list parameter. It can be modified via the <code>ModifyClusterNodePool</code> API.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="gpuargs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpuargs_go" style="color: inherit; text-decoration: inherit;">Gpu<wbr>Args</a>
@@ -6797,8 +9546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolnodeconfiggpuargs">Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Gpu<wbr>Args</a></span>
     </dt>
-    <dd><p>GPU driver parameters.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>GPU driver parameters.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="isschedule_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isschedule_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Schedule</a>
@@ -6806,8 +9554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to schedule the adding node or not. Default is true.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate to schedule the adding node or not. Default is true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="mounttarget_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mounttarget_go" style="color: inherit; text-decoration: inherit;">Mount<wbr>Target</a>
@@ -6815,8 +9562,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mount target. Default is not mounting.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Mount target. Default is not mounting.</dd><dt class="property-optional"
             title="Optional">
         <span id="prestartuserscript_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prestartuserscript_go" style="color: inherit; text-decoration: inherit;">Pre<wbr>Start<wbr>User<wbr>Script</a>
@@ -6824,8 +9570,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="userdata_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_go" style="color: inherit; text-decoration: inherit;">User<wbr>Data</a>
@@ -6833,8 +9578,85 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Base64-encoded User Data text, the length limit is 16KB.</p>
-</dd></dl>
+    <dd>Base64-encoded User Data text, the length limit is 16KB.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="data_disks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_disks_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>disks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolnodeconfigdatadisk">list(object)</a></span>
+    </dt>
+    <dd>Configurations of data disk.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="desired_pod_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desired_pod_num_hcl" style="color: inherit; text-decoration: inherit;">desired_<wbr>pod_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Indicate to set desired pod number in node. valid when the cluster is podCIDR.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="docker_graph_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#docker_graph_path_hcl" style="color: inherit; text-decoration: inherit;">docker_<wbr>graph_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Docker graph path. Default is <code>/var/lib/docker</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="extra_args_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extra_args_hcl" style="color: inherit; text-decoration: inherit;">extra_<wbr>args</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Custom parameter information related to the node. This is a white-list parameter. It can be modified via the <code>ModifyClusterNodePool</code> API.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="gpu_args_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpu_args_hcl" style="color: inherit; text-decoration: inherit;">gpu_<wbr>args</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#nodepoolnodeconfiggpuargs">object</a></span>
+    </dt>
+    <dd>GPU driver parameters.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="is_schedule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_schedule_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>schedule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate to schedule the adding node or not. Default is true.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="mount_target_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mount_target_hcl" style="color: inherit; text-decoration: inherit;">mount_<wbr>target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mount target. Default is not mounting.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="pre_start_user_script_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pre_start_user_script_hcl" style="color: inherit; text-decoration: inherit;">pre_<wbr>start_<wbr>user_<wbr>script</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="user_data_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_data_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Base64-encoded User Data text, the length limit is 16KB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6848,8 +9670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolnodeconfigdatadisk">List&lt;Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Data<wbr>Disk&gt;</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Configurations of data disk.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="desiredpodnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredpodnum_java" style="color: inherit; text-decoration: inherit;">desired<wbr>Pod<wbr>Num</a>
@@ -6857,8 +9678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Indicate to set desired pod number in node. valid when the cluster is podCIDR.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate to set desired pod number in node. valid when the cluster is podCIDR.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="dockergraphpath_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dockergraphpath_java" style="color: inherit; text-decoration: inherit;">docker<wbr>Graph<wbr>Path</a>
@@ -6866,8 +9686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Docker graph path. Default is <code>/var/lib/docker</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Docker graph path. Default is <code>/var/lib/docker</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="extraargs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraargs_java" style="color: inherit; text-decoration: inherit;">extra<wbr>Args</a>
@@ -6875,8 +9694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Custom parameter information related to the node. This is a white-list parameter.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Custom parameter information related to the node. This is a white-list parameter. It can be modified via the <code>ModifyClusterNodePool</code> API.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="gpuargs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpuargs_java" style="color: inherit; text-decoration: inherit;">gpu<wbr>Args</a>
@@ -6884,8 +9702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolnodeconfiggpuargs">Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Gpu<wbr>Args</a></span>
     </dt>
-    <dd><p>GPU driver parameters.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>GPU driver parameters.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="isschedule_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isschedule_java" style="color: inherit; text-decoration: inherit;">is<wbr>Schedule</a>
@@ -6893,8 +9710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate to schedule the adding node or not. Default is true.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate to schedule the adding node or not. Default is true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="mounttarget_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mounttarget_java" style="color: inherit; text-decoration: inherit;">mount<wbr>Target</a>
@@ -6902,8 +9718,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mount target. Default is not mounting.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Mount target. Default is not mounting.</dd><dt class="property-optional"
             title="Optional">
         <span id="prestartuserscript_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prestartuserscript_java" style="color: inherit; text-decoration: inherit;">pre<wbr>Start<wbr>User<wbr>Script</a>
@@ -6911,8 +9726,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="userdata_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_java" style="color: inherit; text-decoration: inherit;">user<wbr>Data</a>
@@ -6920,8 +9734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Base64-encoded User Data text, the length limit is 16KB.</p>
-</dd></dl>
+    <dd>Base64-encoded User Data text, the length limit is 16KB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6935,8 +9748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolnodeconfigdatadisk">Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Data<wbr>Disk[]</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Configurations of data disk.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="desiredpodnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredpodnum_nodejs" style="color: inherit; text-decoration: inherit;">desired<wbr>Pod<wbr>Num</a>
@@ -6944,8 +9756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Indicate to set desired pod number in node. valid when the cluster is podCIDR.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate to set desired pod number in node. valid when the cluster is podCIDR.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="dockergraphpath_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dockergraphpath_nodejs" style="color: inherit; text-decoration: inherit;">docker<wbr>Graph<wbr>Path</a>
@@ -6953,8 +9764,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Docker graph path. Default is <code>/var/lib/docker</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Docker graph path. Default is <code>/var/lib/docker</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="extraargs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraargs_nodejs" style="color: inherit; text-decoration: inherit;">extra<wbr>Args</a>
@@ -6962,8 +9772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Custom parameter information related to the node. This is a white-list parameter.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Custom parameter information related to the node. This is a white-list parameter. It can be modified via the <code>ModifyClusterNodePool</code> API.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="gpuargs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpuargs_nodejs" style="color: inherit; text-decoration: inherit;">gpu<wbr>Args</a>
@@ -6971,8 +9780,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolnodeconfiggpuargs">Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Gpu<wbr>Args</a></span>
     </dt>
-    <dd><p>GPU driver parameters.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>GPU driver parameters.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="isschedule_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isschedule_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Schedule</a>
@@ -6980,8 +9788,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate to schedule the adding node or not. Default is true.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate to schedule the adding node or not. Default is true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="mounttarget_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mounttarget_nodejs" style="color: inherit; text-decoration: inherit;">mount<wbr>Target</a>
@@ -6989,8 +9796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mount target. Default is not mounting.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Mount target. Default is not mounting.</dd><dt class="property-optional"
             title="Optional">
         <span id="prestartuserscript_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prestartuserscript_nodejs" style="color: inherit; text-decoration: inherit;">pre<wbr>Start<wbr>User<wbr>Script</a>
@@ -6998,8 +9804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="userdata_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Data</a>
@@ -7007,8 +9812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Base64-encoded User Data text, the length limit is 16KB.</p>
-</dd></dl>
+    <dd>Base64-encoded User Data text, the length limit is 16KB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7020,10 +9824,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_disks_python" style="color: inherit; text-decoration: inherit;">data_<wbr>disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#nodepoolnodeconfigdatadisk">Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Data<wbr>Disk]</a></span>
+        <span class="property-type"><a href="#nodepoolnodeconfigdatadisk">Sequence[Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Data<wbr>Disk]</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Configurations of data disk.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="desired_pod_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desired_pod_num_python" style="color: inherit; text-decoration: inherit;">desired_<wbr>pod_<wbr>num</a>
@@ -7031,8 +9834,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicate to set desired pod number in node. valid when the cluster is podCIDR.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate to set desired pod number in node. valid when the cluster is podCIDR.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="docker_graph_path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#docker_graph_path_python" style="color: inherit; text-decoration: inherit;">docker_<wbr>graph_<wbr>path</a>
@@ -7040,8 +9842,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Docker graph path. Default is <code>/var/lib/docker</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Docker graph path. Default is <code>/var/lib/docker</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="extra_args_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extra_args_python" style="color: inherit; text-decoration: inherit;">extra_<wbr>args</a>
@@ -7049,8 +9850,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Custom parameter information related to the node. This is a white-list parameter.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Custom parameter information related to the node. This is a white-list parameter. It can be modified via the <code>ModifyClusterNodePool</code> API.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="gpu_args_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpu_args_python" style="color: inherit; text-decoration: inherit;">gpu_<wbr>args</a>
@@ -7058,8 +9858,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolnodeconfiggpuargs">Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Gpu<wbr>Args</a></span>
     </dt>
-    <dd><p>GPU driver parameters.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>GPU driver parameters.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="is_schedule_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_schedule_python" style="color: inherit; text-decoration: inherit;">is_<wbr>schedule</a>
@@ -7067,8 +9866,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to schedule the adding node or not. Default is true.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate to schedule the adding node or not. Default is true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="mount_target_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mount_target_python" style="color: inherit; text-decoration: inherit;">mount_<wbr>target</a>
@@ -7076,8 +9874,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mount target. Default is not mounting.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Mount target. Default is not mounting.</dd><dt class="property-optional"
             title="Optional">
         <span id="pre_start_user_script_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pre_start_user_script_python" style="color: inherit; text-decoration: inherit;">pre_<wbr>start_<wbr>user_<wbr>script</a>
@@ -7085,8 +9882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="user_data_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_data_python" style="color: inherit; text-decoration: inherit;">user_<wbr>data</a>
@@ -7094,8 +9890,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Base64-encoded User Data text, the length limit is 16KB.</p>
-</dd></dl>
+    <dd>Base64-encoded User Data text, the length limit is 16KB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7109,8 +9904,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolnodeconfigdatadisk">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Configurations of data disk.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="desiredpodnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredpodnum_yaml" style="color: inherit; text-decoration: inherit;">desired<wbr>Pod<wbr>Num</a>
@@ -7118,8 +9912,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Indicate to set desired pod number in node. valid when the cluster is podCIDR.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate to set desired pod number in node. valid when the cluster is podCIDR.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="dockergraphpath_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dockergraphpath_yaml" style="color: inherit; text-decoration: inherit;">docker<wbr>Graph<wbr>Path</a>
@@ -7127,8 +9920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Docker graph path. Default is <code>/var/lib/docker</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Docker graph path. Default is <code>/var/lib/docker</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="extraargs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extraargs_yaml" style="color: inherit; text-decoration: inherit;">extra<wbr>Args</a>
@@ -7136,8 +9928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Custom parameter information related to the node. This is a white-list parameter.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Custom parameter information related to the node. This is a white-list parameter. It can be modified via the <code>ModifyClusterNodePool</code> API.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="gpuargs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpuargs_yaml" style="color: inherit; text-decoration: inherit;">gpu<wbr>Args</a>
@@ -7145,8 +9936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#nodepoolnodeconfiggpuargs">Property Map</a></span>
     </dt>
-    <dd><p>GPU driver parameters.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>GPU driver parameters.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="isschedule_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isschedule_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Schedule</a>
@@ -7154,8 +9944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate to schedule the adding node or not. Default is true.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate to schedule the adding node or not. Default is true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="mounttarget_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mounttarget_yaml" style="color: inherit; text-decoration: inherit;">mount<wbr>Target</a>
@@ -7163,8 +9952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mount target. Default is not mounting.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Mount target. Default is not mounting.</dd><dt class="property-optional"
             title="Optional">
         <span id="prestartuserscript_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prestartuserscript_yaml" style="color: inherit; text-decoration: inherit;">pre<wbr>Start<wbr>User<wbr>Script</a>
@@ -7172,8 +9960,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="userdata_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Data</a>
@@ -7181,12 +9968,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Base64-encoded User Data text, the length limit is 16KB.</p>
-</dd></dl>
+    <dd>Base64-encoded User Data text, the length limit is 16KB.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="nodepoolnodeconfigdatadisk">Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Data<wbr>Disk</h4>
+<h4 id="nodepoolnodeconfigdatadisk">
+Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Data<wbr>Disk<pulumi-choosable type="language" values="python,go" class="inline">, Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Data<wbr>Disk<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -7198,8 +9986,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to auto format and mount or not. Default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate whether to auto format and mount or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="diskpartition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskpartition_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Partition</a>
@@ -7207,8 +9994,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="disksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -7216,8 +10002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="disktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -7225,8 +10010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code> and <code>CLOUD_BSSD</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="filesystem_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystem_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>System</a>
@@ -7234,8 +10018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File system, e.g. <code>ext3/ext4/xfs</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>File system, e.g. <code>ext3/ext4/xfs</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="mounttarget_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mounttarget_csharp" style="color: inherit; text-decoration: inherit;">Mount<wbr>Target</a>
@@ -7243,8 +10026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mount target.</p>
-</dd></dl>
+    <dd>Mount target.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7258,8 +10040,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to auto format and mount or not. Default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate whether to auto format and mount or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="diskpartition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskpartition_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Partition</a>
@@ -7267,8 +10048,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="disksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -7276,8 +10056,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="disktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -7285,8 +10064,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code> and <code>CLOUD_BSSD</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="filesystem_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystem_go" style="color: inherit; text-decoration: inherit;">File<wbr>System</a>
@@ -7294,8 +10072,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File system, e.g. <code>ext3/ext4/xfs</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>File system, e.g. <code>ext3/ext4/xfs</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="mounttarget_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mounttarget_go" style="color: inherit; text-decoration: inherit;">Mount<wbr>Target</a>
@@ -7303,8 +10080,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mount target.</p>
-</dd></dl>
+    <dd>Mount target.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="auto_format_and_mount_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_format_and_mount_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>format_<wbr>and_<wbr>mount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to auto format and mount or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="disk_partition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_partition_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>partition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="file_system_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_system_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>system</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File system, e.g. <code>ext3/ext4/xfs</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="mount_target_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mount_target_hcl" style="color: inherit; text-decoration: inherit;">mount_<wbr>target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mount target.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7318,8 +10148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to auto format and mount or not. Default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate whether to auto format and mount or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="diskpartition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskpartition_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Partition</a>
@@ -7327,8 +10156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="disksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -7336,8 +10164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="disktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -7345,8 +10172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code> and <code>CLOUD_BSSD</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="filesystem_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystem_java" style="color: inherit; text-decoration: inherit;">file<wbr>System</a>
@@ -7354,8 +10180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File system, e.g. <code>ext3/ext4/xfs</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>File system, e.g. <code>ext3/ext4/xfs</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="mounttarget_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mounttarget_java" style="color: inherit; text-decoration: inherit;">mount<wbr>Target</a>
@@ -7363,8 +10188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mount target.</p>
-</dd></dl>
+    <dd>Mount target.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7378,8 +10202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to auto format and mount or not. Default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate whether to auto format and mount or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="diskpartition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskpartition_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Partition</a>
@@ -7387,8 +10210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="disksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -7396,8 +10218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="disktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -7405,8 +10226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code> and <code>CLOUD_BSSD</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="filesystem_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystem_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>System</a>
@@ -7414,8 +10234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File system, e.g. <code>ext3/ext4/xfs</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>File system, e.g. <code>ext3/ext4/xfs</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="mounttarget_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mounttarget_nodejs" style="color: inherit; text-decoration: inherit;">mount<wbr>Target</a>
@@ -7423,8 +10242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mount target.</p>
-</dd></dl>
+    <dd>Mount target.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7438,8 +10256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to auto format and mount or not. Default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate whether to auto format and mount or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="disk_partition_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_partition_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>partition</a>
@@ -7447,8 +10264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
@@ -7456,8 +10272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
@@ -7465,8 +10280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code> and <code>CLOUD_BSSD</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="file_system_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_system_python" style="color: inherit; text-decoration: inherit;">file_<wbr>system</a>
@@ -7474,8 +10288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File system, e.g. <code>ext3/ext4/xfs</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>File system, e.g. <code>ext3/ext4/xfs</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="mount_target_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mount_target_python" style="color: inherit; text-decoration: inherit;">mount_<wbr>target</a>
@@ -7483,8 +10296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mount target.</p>
-</dd></dl>
+    <dd>Mount target.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7498,8 +10310,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to auto format and mount or not. Default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate whether to auto format and mount or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="diskpartition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskpartition_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Partition</a>
@@ -7507,8 +10318,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="disksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -7516,8 +10326,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="disktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -7525,8 +10334,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code> and <code>CLOUD_BSSD</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Types of disk. Valid value: <code>LOCAL_BASIC</code>, <code>LOCAL_SSD</code>, <code>CLOUD_BASIC</code>, <code>CLOUD_PREMIUM</code>, <code>CLOUD_SSD</code>, <code>CLOUD_HSSD</code>, <code>CLOUD_TSSD</code>, <code>CLOUD_BSSD</code> and <code>LOCAL_NVME</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="filesystem_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystem_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>System</a>
@@ -7534,8 +10342,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File system, e.g. <code>ext3/ext4/xfs</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>File system, e.g. <code>ext3/ext4/xfs</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="mounttarget_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mounttarget_yaml" style="color: inherit; text-decoration: inherit;">mount<wbr>Target</a>
@@ -7543,12 +10350,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mount target.</p>
-</dd></dl>
+    <dd>Mount target.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="nodepoolnodeconfiggpuargs">Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Gpu<wbr>Args</h4>
+<h4 id="nodepoolnodeconfiggpuargs">
+Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Gpu<wbr>Args<pulumi-choosable type="language" values="python,go" class="inline">, Node<wbr>Pool<wbr>Node<wbr>Config<wbr>Gpu<wbr>Args<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -7558,37 +10366,33 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cuda_csharp" style="color: inherit; text-decoration: inherit;">Cuda</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>CUDA  version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</p>
-</dd><dt class="property-optional"
+    <dd>CUDA  version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</dd><dt class="property-optional"
             title="Optional">
         <span id="cudnn_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cudnn_csharp" style="color: inherit; text-decoration: inherit;">Cudnn</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>cuDNN version. Format like: <code>{ version: String, name: String, doc_name: String, dev_name: String }</code>. <code>version</code>: cuDNN version; <code>name</code>: cuDNN name; <code>doc_name</code>: Doc name of cuDNN; <code>dev_name</code>: Dev name of cuDNN.</p>
-</dd><dt class="property-optional"
+    <dd>cuDNN version. Format like: <code>{ version: String, name: String, doc_name: String, dev_name: String }</code>. <code>version</code>: cuDNN version; <code>name</code>: cuDNN name; <code>docName</code>: Doc name of cuDNN; <code>devName</code>: Dev name of cuDNN.</dd><dt class="property-optional"
             title="Optional">
         <span id="customdriver_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customdriver_csharp" style="color: inherit; text-decoration: inherit;">Custom<wbr>Driver</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Custom GPU driver. Format like: <code>{address: String}</code>. <code>address</code>: URL of custom GPU driver address.</p>
-</dd><dt class="property-optional"
+    <dd>Custom GPU driver. Format like: <code>{address: String}</code>. <code>address</code>: URL of custom GPU driver address.</dd><dt class="property-optional"
             title="Optional">
         <span id="driver_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#driver_csharp" style="color: inherit; text-decoration: inherit;">Driver</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>GPU driver version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</p>
-</dd><dt class="property-optional"
+    <dd>GPU driver version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</dd><dt class="property-optional"
             title="Optional">
         <span id="migenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migenable_csharp" style="color: inherit; text-decoration: inherit;">Mig<wbr>Enable</a>
@@ -7596,8 +10400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable MIG.</p>
-</dd></dl>
+    <dd>Whether to enable MIG.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7609,37 +10412,33 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cuda_go" style="color: inherit; text-decoration: inherit;">Cuda</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>CUDA  version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</p>
-</dd><dt class="property-optional"
+    <dd>CUDA  version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</dd><dt class="property-optional"
             title="Optional">
         <span id="cudnn_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cudnn_go" style="color: inherit; text-decoration: inherit;">Cudnn</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>cuDNN version. Format like: <code>{ version: String, name: String, doc_name: String, dev_name: String }</code>. <code>version</code>: cuDNN version; <code>name</code>: cuDNN name; <code>doc_name</code>: Doc name of cuDNN; <code>dev_name</code>: Dev name of cuDNN.</p>
-</dd><dt class="property-optional"
+    <dd>cuDNN version. Format like: <code>{ version: String, name: String, doc_name: String, dev_name: String }</code>. <code>version</code>: cuDNN version; <code>name</code>: cuDNN name; <code>docName</code>: Doc name of cuDNN; <code>devName</code>: Dev name of cuDNN.</dd><dt class="property-optional"
             title="Optional">
         <span id="customdriver_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customdriver_go" style="color: inherit; text-decoration: inherit;">Custom<wbr>Driver</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Custom GPU driver. Format like: <code>{address: String}</code>. <code>address</code>: URL of custom GPU driver address.</p>
-</dd><dt class="property-optional"
+    <dd>Custom GPU driver. Format like: <code>{address: String}</code>. <code>address</code>: URL of custom GPU driver address.</dd><dt class="property-optional"
             title="Optional">
         <span id="driver_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#driver_go" style="color: inherit; text-decoration: inherit;">Driver</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>GPU driver version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</p>
-</dd><dt class="property-optional"
+    <dd>GPU driver version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</dd><dt class="property-optional"
             title="Optional">
         <span id="migenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migenable_go" style="color: inherit; text-decoration: inherit;">Mig<wbr>Enable</a>
@@ -7647,8 +10446,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable MIG.</p>
-</dd></dl>
+    <dd>Whether to enable MIG.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="cuda_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cuda_hcl" style="color: inherit; text-decoration: inherit;">cuda</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>CUDA  version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cudnn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cudnn_hcl" style="color: inherit; text-decoration: inherit;">cudnn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>cuDNN version. Format like: <code>{ version: String, name: String, doc_name: String, dev_name: String }</code>. <code>version</code>: cuDNN version; <code>name</code>: cuDNN name; <code>docName</code>: Doc name of cuDNN; <code>devName</code>: Dev name of cuDNN.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="custom_driver_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_driver_hcl" style="color: inherit; text-decoration: inherit;">custom_<wbr>driver</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Custom GPU driver. Format like: <code>{address: String}</code>. <code>address</code>: URL of custom GPU driver address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="driver_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#driver_hcl" style="color: inherit; text-decoration: inherit;">driver</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>GPU driver version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mig_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mig_enable_hcl" style="color: inherit; text-decoration: inherit;">mig_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable MIG.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7660,37 +10504,33 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cuda_java" style="color: inherit; text-decoration: inherit;">cuda</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>CUDA  version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</p>
-</dd><dt class="property-optional"
+    <dd>CUDA  version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</dd><dt class="property-optional"
             title="Optional">
         <span id="cudnn_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cudnn_java" style="color: inherit; text-decoration: inherit;">cudnn</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>cuDNN version. Format like: <code>{ version: String, name: String, doc_name: String, dev_name: String }</code>. <code>version</code>: cuDNN version; <code>name</code>: cuDNN name; <code>doc_name</code>: Doc name of cuDNN; <code>dev_name</code>: Dev name of cuDNN.</p>
-</dd><dt class="property-optional"
+    <dd>cuDNN version. Format like: <code>{ version: String, name: String, doc_name: String, dev_name: String }</code>. <code>version</code>: cuDNN version; <code>name</code>: cuDNN name; <code>docName</code>: Doc name of cuDNN; <code>devName</code>: Dev name of cuDNN.</dd><dt class="property-optional"
             title="Optional">
         <span id="customdriver_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customdriver_java" style="color: inherit; text-decoration: inherit;">custom<wbr>Driver</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Custom GPU driver. Format like: <code>{address: String}</code>. <code>address</code>: URL of custom GPU driver address.</p>
-</dd><dt class="property-optional"
+    <dd>Custom GPU driver. Format like: <code>{address: String}</code>. <code>address</code>: URL of custom GPU driver address.</dd><dt class="property-optional"
             title="Optional">
         <span id="driver_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#driver_java" style="color: inherit; text-decoration: inherit;">driver</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>GPU driver version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</p>
-</dd><dt class="property-optional"
+    <dd>GPU driver version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</dd><dt class="property-optional"
             title="Optional">
         <span id="migenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migenable_java" style="color: inherit; text-decoration: inherit;">mig<wbr>Enable</a>
@@ -7698,8 +10538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable MIG.</p>
-</dd></dl>
+    <dd>Whether to enable MIG.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7711,37 +10550,33 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cuda_nodejs" style="color: inherit; text-decoration: inherit;">cuda</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>CUDA  version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</p>
-</dd><dt class="property-optional"
+    <dd>CUDA  version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</dd><dt class="property-optional"
             title="Optional">
         <span id="cudnn_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cudnn_nodejs" style="color: inherit; text-decoration: inherit;">cudnn</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>cuDNN version. Format like: <code>{ version: String, name: String, doc_name: String, dev_name: String }</code>. <code>version</code>: cuDNN version; <code>name</code>: cuDNN name; <code>doc_name</code>: Doc name of cuDNN; <code>dev_name</code>: Dev name of cuDNN.</p>
-</dd><dt class="property-optional"
+    <dd>cuDNN version. Format like: <code>{ version: String, name: String, doc_name: String, dev_name: String }</code>. <code>version</code>: cuDNN version; <code>name</code>: cuDNN name; <code>docName</code>: Doc name of cuDNN; <code>devName</code>: Dev name of cuDNN.</dd><dt class="property-optional"
             title="Optional">
         <span id="customdriver_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customdriver_nodejs" style="color: inherit; text-decoration: inherit;">custom<wbr>Driver</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Custom GPU driver. Format like: <code>{address: String}</code>. <code>address</code>: URL of custom GPU driver address.</p>
-</dd><dt class="property-optional"
+    <dd>Custom GPU driver. Format like: <code>{address: String}</code>. <code>address</code>: URL of custom GPU driver address.</dd><dt class="property-optional"
             title="Optional">
         <span id="driver_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#driver_nodejs" style="color: inherit; text-decoration: inherit;">driver</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>GPU driver version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</p>
-</dd><dt class="property-optional"
+    <dd>GPU driver version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</dd><dt class="property-optional"
             title="Optional">
         <span id="migenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migenable_nodejs" style="color: inherit; text-decoration: inherit;">mig<wbr>Enable</a>
@@ -7749,8 +10584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable MIG.</p>
-</dd></dl>
+    <dd>Whether to enable MIG.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7762,37 +10596,33 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cuda_python" style="color: inherit; text-decoration: inherit;">cuda</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>CUDA  version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</p>
-</dd><dt class="property-optional"
+    <dd>CUDA  version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</dd><dt class="property-optional"
             title="Optional">
         <span id="cudnn_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cudnn_python" style="color: inherit; text-decoration: inherit;">cudnn</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>cuDNN version. Format like: <code>{ version: String, name: String, doc_name: String, dev_name: String }</code>. <code>version</code>: cuDNN version; <code>name</code>: cuDNN name; <code>doc_name</code>: Doc name of cuDNN; <code>dev_name</code>: Dev name of cuDNN.</p>
-</dd><dt class="property-optional"
+    <dd>cuDNN version. Format like: <code>{ version: String, name: String, doc_name: String, dev_name: String }</code>. <code>version</code>: cuDNN version; <code>name</code>: cuDNN name; <code>docName</code>: Doc name of cuDNN; <code>devName</code>: Dev name of cuDNN.</dd><dt class="property-optional"
             title="Optional">
         <span id="custom_driver_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_driver_python" style="color: inherit; text-decoration: inherit;">custom_<wbr>driver</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Custom GPU driver. Format like: <code>{address: String}</code>. <code>address</code>: URL of custom GPU driver address.</p>
-</dd><dt class="property-optional"
+    <dd>Custom GPU driver. Format like: <code>{address: String}</code>. <code>address</code>: URL of custom GPU driver address.</dd><dt class="property-optional"
             title="Optional">
         <span id="driver_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#driver_python" style="color: inherit; text-decoration: inherit;">driver</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>GPU driver version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</p>
-</dd><dt class="property-optional"
+    <dd>GPU driver version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</dd><dt class="property-optional"
             title="Optional">
         <span id="mig_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mig_enable_python" style="color: inherit; text-decoration: inherit;">mig_<wbr>enable</a>
@@ -7800,8 +10630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable MIG.</p>
-</dd></dl>
+    <dd>Whether to enable MIG.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7813,37 +10642,33 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cuda_yaml" style="color: inherit; text-decoration: inherit;">cuda</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>CUDA  version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</p>
-</dd><dt class="property-optional"
+    <dd>CUDA  version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</dd><dt class="property-optional"
             title="Optional">
         <span id="cudnn_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cudnn_yaml" style="color: inherit; text-decoration: inherit;">cudnn</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>cuDNN version. Format like: <code>{ version: String, name: String, doc_name: String, dev_name: String }</code>. <code>version</code>: cuDNN version; <code>name</code>: cuDNN name; <code>doc_name</code>: Doc name of cuDNN; <code>dev_name</code>: Dev name of cuDNN.</p>
-</dd><dt class="property-optional"
+    <dd>cuDNN version. Format like: <code>{ version: String, name: String, doc_name: String, dev_name: String }</code>. <code>version</code>: cuDNN version; <code>name</code>: cuDNN name; <code>docName</code>: Doc name of cuDNN; <code>devName</code>: Dev name of cuDNN.</dd><dt class="property-optional"
             title="Optional">
         <span id="customdriver_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customdriver_yaml" style="color: inherit; text-decoration: inherit;">custom<wbr>Driver</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Custom GPU driver. Format like: <code>{address: String}</code>. <code>address</code>: URL of custom GPU driver address.</p>
-</dd><dt class="property-optional"
+    <dd>Custom GPU driver. Format like: <code>{address: String}</code>. <code>address</code>: URL of custom GPU driver address.</dd><dt class="property-optional"
             title="Optional">
         <span id="driver_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#driver_yaml" style="color: inherit; text-decoration: inherit;">driver</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>GPU driver version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</p>
-</dd><dt class="property-optional"
+    <dd>GPU driver version. Format like: <code>{ version: String, name: String }</code>. <code>version</code>: Version of GPU driver or CUDA; <code>name</code>: Name of GPU driver or CUDA.</dd><dt class="property-optional"
             title="Optional">
         <span id="migenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#migenable_yaml" style="color: inherit; text-decoration: inherit;">mig<wbr>Enable</a>
@@ -7851,12 +10676,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable MIG.</p>
-</dd></dl>
+    <dd>Whether to enable MIG.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="nodepooltaint">Node<wbr>Pool<wbr>Taint</h4>
+<h4 id="nodepooltaint">
+Node<wbr>Pool<wbr>Taint<pulumi-choosable type="language" values="python,go" class="inline">, Node<wbr>Pool<wbr>Taint<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -7868,8 +10694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</p>
-</dd><dt class="property-required"
+    <dd>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</dd><dt class="property-required"
             title="Required">
         <span id="key_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -7877,8 +10702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-required"
+    <dd>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -7886,8 +10710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the taint.</p>
-</dd></dl>
+    <dd>Value of the taint.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7901,8 +10724,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</p>
-</dd><dt class="property-required"
+    <dd>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</dd><dt class="property-required"
             title="Required">
         <span id="key_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -7910,8 +10732,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-required"
+    <dd>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -7919,8 +10740,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the taint.</p>
-</dd></dl>
+    <dd>Value of the taint.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="effect_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#effect_hcl" style="color: inherit; text-decoration: inherit;">effect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value of the taint.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7934,8 +10784,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</p>
-</dd><dt class="property-required"
+    <dd>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</dd><dt class="property-required"
             title="Required">
         <span id="key_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
@@ -7943,8 +10792,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-required"
+    <dd>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -7952,8 +10800,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of the taint.</p>
-</dd></dl>
+    <dd>Value of the taint.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7967,8 +10814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</p>
-</dd><dt class="property-required"
+    <dd>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</dd><dt class="property-required"
             title="Required">
         <span id="key_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
@@ -7976,8 +10822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-required"
+    <dd>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -7985,8 +10830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the taint.</p>
-</dd></dl>
+    <dd>Value of the taint.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -8000,8 +10844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</p>
-</dd><dt class="property-required"
+    <dd>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</dd><dt class="property-required"
             title="Required">
         <span id="key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
@@ -8009,8 +10852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-required"
+    <dd>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -8018,8 +10860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Value of the taint.</p>
-</dd></dl>
+    <dd>Value of the taint.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -8033,8 +10874,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</p>
-</dd><dt class="property-required"
+    <dd>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</dd><dt class="property-required"
             title="Required">
         <span id="key_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
@@ -8042,8 +10882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-required"
+    <dd>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -8051,8 +10890,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of the taint.</p>
-</dd></dl>
+    <dd>Value of the taint.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -8063,9 +10901,12 @@ The following state arguments are supported:
 tke node pool can be imported, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Kubernetes/nodePool:NodePool test cls-xxx#np-xxx
+$ pulumi import tencentcloud:Kubernetes/nodePool:NodePool example cls-d2xdg3io#np-380ay1o8
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -8077,7 +10918,6 @@ $ pulumi import tencentcloud:Kubernetes/nodePool:NodePool test cls-xxx#np-xxx
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

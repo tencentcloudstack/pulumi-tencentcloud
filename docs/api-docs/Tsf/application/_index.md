@@ -2,9 +2,11 @@
 ---
 title: "Application"
 title_tag: "tencentcloud.Tsf.Application"
-meta_desc: "Documentation for the tencentcloud.Tsf.Application resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a tsf application"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,52 +18,111 @@ Provides a resource to create a tsf application
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const application = new tencentcloud.tsf.Application("application", {
-    applicationDesc: "This is my application",
     applicationName: "my-app",
-    applicationRuntimeType: "Java",
     applicationType: "C",
-    ignoreCreateImageRepository: true,
     microserviceType: "M",
+    applicationDesc: "This is my application",
+    applicationRuntimeType: "Java",
     serviceConfigLists: [{
+        name: "my-service",
+        ports: [{
+            targetPort: 8080,
+            protocol: "HTTP",
+        }],
         healthCheck: {
             path: "/health",
         },
-        name: "my-service",
-        ports: [{
-            protocol: "HTTP",
-            targetPort: 8080,
-        }],
     }],
+    ignoreCreateImageRepository: true,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 application = tencentcloud.tsf.Application("application",
-    application_desc="This is my application",
     application_name="my-app",
-    application_runtime_type="Java",
     application_type="C",
-    ignore_create_image_repository=True,
     microservice_type="M",
-    service_config_lists=[tencentcloud.tsf.ApplicationServiceConfigListArgs(
-        health_check=tencentcloud.tsf.ApplicationServiceConfigListHealthCheckArgs(
-            path="/health",
-        ),
-        name="my-service",
-        ports=[tencentcloud.tsf.ApplicationServiceConfigListPortArgs(
-            protocol="HTTP",
-            target_port=8080,
-        )],
-    )])
+    application_desc="This is my application",
+    application_runtime_type="Java",
+    service_config_lists=[{
+        "name": "my-service",
+        "ports": [{
+            "target_port": 8080,
+            "protocol": "HTTP",
+        }],
+        "health_check": {
+            "path": "/health",
+        },
+    }],
+    ignore_create_image_repository=True)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tsf"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tsf.NewApplication(ctx, "application", &tsf.ApplicationArgs{
+			ApplicationName:        pulumi.String("my-app"),
+			ApplicationType:        pulumi.String("C"),
+			MicroserviceType:       pulumi.String("M"),
+			ApplicationDesc:        pulumi.String("This is my application"),
+			ApplicationRuntimeType: pulumi.String("Java"),
+			ServiceConfigLists: tsf.ApplicationServiceConfigListArray{
+				&tsf.ApplicationServiceConfigListArgs{
+					Name: pulumi.String("my-service"),
+					Ports: tsf.ApplicationServiceConfigListPortArray{
+						&tsf.ApplicationServiceConfigListPortArgs{
+							TargetPort: pulumi.Int(8080),
+							Protocol:   pulumi.String("HTTP"),
+						},
+					},
+					HealthCheck: &tsf.ApplicationServiceConfigListHealthCheckArgs{
+						Path: pulumi.String("/health"),
+					},
+				},
+			},
+			IgnoreCreateImageRepository: pulumi.Bool(true),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -72,74 +133,40 @@ return await Deployment.RunAsync(() =>
 {
     var application = new Tencentcloud.Tsf.Application("application", new()
     {
-        ApplicationDesc = "This is my application",
         ApplicationName = "my-app",
-        ApplicationRuntimeType = "Java",
         ApplicationType = "C",
-        IgnoreCreateImageRepository = true,
         MicroserviceType = "M",
+        ApplicationDesc = "This is my application",
+        ApplicationRuntimeType = "Java",
         ServiceConfigLists = new[]
         {
             new Tencentcloud.Tsf.Inputs.ApplicationServiceConfigListArgs
             {
-                HealthCheck = new Tencentcloud.Tsf.Inputs.ApplicationServiceConfigListHealthCheckArgs
-                {
-                    Path = "/health",
-                },
                 Name = "my-service",
                 Ports = new[]
                 {
                     new Tencentcloud.Tsf.Inputs.ApplicationServiceConfigListPortArgs
                     {
-                        Protocol = "HTTP",
                         TargetPort = 8080,
+                        Protocol = "HTTP",
                     },
+                },
+                HealthCheck = new Tencentcloud.Tsf.Inputs.ApplicationServiceConfigListHealthCheckArgs
+                {
+                    Path = "/health",
                 },
             },
         },
+        IgnoreCreateImageRepository = true,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tsf.NewApplication(ctx, "application", &Tsf.ApplicationArgs{
-			ApplicationDesc:             pulumi.String("This is my application"),
-			ApplicationName:             pulumi.String("my-app"),
-			ApplicationRuntimeType:      pulumi.String("Java"),
-			ApplicationType:             pulumi.String("C"),
-			IgnoreCreateImageRepository: pulumi.Bool(true),
-			MicroserviceType:            pulumi.String("M"),
-			ServiceConfigLists: tsf.ApplicationServiceConfigListArray{
-				&tsf.ApplicationServiceConfigListArgs{
-					HealthCheck: &tsf.ApplicationServiceConfigListHealthCheckArgs{
-						Path: pulumi.String("/health"),
-					},
-					Name: pulumi.String("my-service"),
-					Ports: tsf.ApplicationServiceConfigListPortArray{
-						&tsf.ApplicationServiceConfigListPortArgs{
-							Protocol:   pulumi.String("HTTP"),
-							TargetPort: pulumi.Int(8080),
-						},
-					},
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -149,9 +176,10 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tsf.Application;
 import com.pulumi.tencentcloud.Tsf.ApplicationArgs;
 import com.pulumi.tencentcloud.Tsf.inputs.ApplicationServiceConfigListArgs;
+import com.pulumi.tencentcloud.Tsf.inputs.ApplicationServiceConfigListPortArgs;
 import com.pulumi.tencentcloud.Tsf.inputs.ApplicationServiceConfigListHealthCheckArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -163,117 +191,180 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var application = new Application("application", ApplicationArgs.builder()        
-            .applicationDesc("This is my application")
+        var application = new Application("application", ApplicationArgs.builder()
             .applicationName("my-app")
-            .applicationRuntimeType("Java")
             .applicationType("C")
-            .ignoreCreateImageRepository(true)
             .microserviceType("M")
+            .applicationDesc("This is my application")
+            .applicationRuntimeType("Java")
             .serviceConfigLists(ApplicationServiceConfigListArgs.builder()
+                .name("my-service")
+                .ports(ApplicationServiceConfigListPortArgs.builder()
+                    .targetPort(8080)
+                    .protocol("HTTP")
+                    .build())
                 .healthCheck(ApplicationServiceConfigListHealthCheckArgs.builder()
                     .path("/health")
                     .build())
-                .name("my-service")
-                .ports(ApplicationServiceConfigListPortArgs.builder()
-                    .protocol("HTTP")
-                    .targetPort(8080)
-                    .build())
                 .build())
+            .ignoreCreateImageRepository(true)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   application:
     type: tencentcloud:Tsf:Application
     properties:
-      applicationDesc: This is my application
       applicationName: my-app
-      applicationRuntimeType: Java
       applicationType: C
-      ignoreCreateImageRepository: true
       microserviceType: M
+      applicationDesc: This is my application
+      applicationRuntimeType: Java
       serviceConfigLists:
-        - healthCheck:
-            path: /health
-          name: my-service
+        - name: my-service
           ports:
-            - protocol: HTTP
-              targetPort: 8080
+            - targetPort: 8080
+              protocol: HTTP
+          healthCheck:
+            path: /health
+      ignoreCreateImageRepository: true
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tsf_application" "application" {
+  application_name         = "my-app"
+  application_type         = "C"
+  microservice_type        = "M"
+  application_desc         = "This is my application"
+  application_runtime_type = "Java"
+  service_config_lists {
+    name = "my-service"
+    ports {
+      target_port = 8080
+      protocol    = "HTTP"
+    }
+    health_check = {
+      path = "/health"
+    }
+  }
+  ignore_create_image_repository = true
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateApplication](https://www.tencentcloud.com/search/?wd=CreateApplication&type=document&lang=en)
+* Read: [DescribeApplication](https://www.tencentcloud.com/search/?wd=DescribeApplication&type=document&lang=en)
+* Update: [ModifyApplication](https://www.tencentcloud.com/search/?wd=ModifyApplication&type=document&lang=en)
+* Delete: [DeleteApplication](https://www.tencentcloud.com/search/?wd=DeleteApplication&type=document&lang=en)
 
 
 
 ## Create Application Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Application</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ApplicationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Application</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ApplicationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Application</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                <span class="nx">application_desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">application_log_config</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">application_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">application_resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">application_runtime_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">application_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">ignore_create_image_repository</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-                <span class="nx">microservice_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">program_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">program_id_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                <span class="nx">service_config_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tsf.ApplicationServiceConfigListArgs]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Application</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                 <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ApplicationArgs</a></span><span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Application</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                <span class="nx">application_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">application_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">microservice_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">application_desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">application_log_config</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">application_resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">application_runtime_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">ignore_create_image_repository</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+                <span class="nx">program_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">program_id_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+                <span class="nx">service_config_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[ApplicationServiceConfigListArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewApplication</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ApplicationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Application</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewApplication</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ApplicationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Application</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Application</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ApplicationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Application</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ApplicationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Application</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ApplicationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Application</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ApplicationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tsf:Application</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tsf:Application</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tsf_application&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -294,7 +385,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -411,11 +502,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Application Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Application resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -431,8 +530,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application name.</p>
-</dd><dt class="property-required"
+    <dd>Application name.</dd><dt class="property-required"
             title="Required">
         <span id="applicationtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Type</a>
@@ -440,8 +538,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application type: V for virtual machine, C for container, S for serverless.</p>
-</dd><dt class="property-required"
+    <dd>Application type: V for virtual machine, C for container, S for serverless.</dd><dt class="property-required"
             title="Required">
         <span id="microservicetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_csharp" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Type</a>
@@ -449,8 +546,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application microservice type: M for service mesh, N for normal application, G for gateway application.</p>
-</dd><dt class="property-optional"
+    <dd>Application microservice type: M for service mesh, N for normal application, G for gateway application.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationdesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationdesc_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Desc</a>
@@ -458,8 +554,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application description.</p>
-</dd><dt class="property-optional"
+    <dd>Application description.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationlogconfig_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationlogconfig_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Log<wbr>Config</a>
@@ -467,8 +562,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application log configuration, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application log configuration, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationresourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationresourcetype_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Resource<wbr>Type</a>
@@ -476,8 +570,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application resource type, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application resource type, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationruntimetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationruntimetype_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Runtime<wbr>Type</a>
@@ -485,8 +578,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application runtime type.</p>
-</dd><dt class="property-optional"
+    <dd>Application runtime type.</dd><dt class="property-optional"
             title="Optional">
         <span id="ignorecreateimagerepository_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignorecreateimagerepository_csharp" style="color: inherit; text-decoration: inherit;">Ignore<wbr>Create<wbr>Image<wbr>Repository</a>
@@ -494,8 +586,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Ignore creating image repository.</p>
-</dd><dt class="property-optional"
+    <dd>Ignore creating image repository.</dd><dt class="property-optional"
             title="Optional">
         <span id="programid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programid_csharp" style="color: inherit; text-decoration: inherit;">Program<wbr>Id</a>
@@ -503,8 +594,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_csharp" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -512,17 +602,15 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>N/A.</p>
-</dd><dt class="property-optional"
+    <dd>N/A.</dd><dt class="property-optional"
             title="Optional">
         <span id="serviceconfiglists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfiglists_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#applicationserviceconfiglist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Application<wbr>Service<wbr>Config<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#applicationserviceconfiglist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Application<wbr>Service<wbr>Config<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of service configuration information.</p>
-</dd></dl>
+    <dd>List of service configuration information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -536,8 +624,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application name.</p>
-</dd><dt class="property-required"
+    <dd>Application name.</dd><dt class="property-required"
             title="Required">
         <span id="applicationtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Type</a>
@@ -545,8 +632,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application type: V for virtual machine, C for container, S for serverless.</p>
-</dd><dt class="property-required"
+    <dd>Application type: V for virtual machine, C for container, S for serverless.</dd><dt class="property-required"
             title="Required">
         <span id="microservicetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_go" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Type</a>
@@ -554,8 +640,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application microservice type: M for service mesh, N for normal application, G for gateway application.</p>
-</dd><dt class="property-optional"
+    <dd>Application microservice type: M for service mesh, N for normal application, G for gateway application.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationdesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationdesc_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Desc</a>
@@ -563,8 +648,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application description.</p>
-</dd><dt class="property-optional"
+    <dd>Application description.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationlogconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationlogconfig_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Log<wbr>Config</a>
@@ -572,8 +656,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application log configuration, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application log configuration, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationresourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationresourcetype_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Resource<wbr>Type</a>
@@ -581,8 +664,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application resource type, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application resource type, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationruntimetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationruntimetype_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Runtime<wbr>Type</a>
@@ -590,8 +672,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application runtime type.</p>
-</dd><dt class="property-optional"
+    <dd>Application runtime type.</dd><dt class="property-optional"
             title="Optional">
         <span id="ignorecreateimagerepository_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignorecreateimagerepository_go" style="color: inherit; text-decoration: inherit;">Ignore<wbr>Create<wbr>Image<wbr>Repository</a>
@@ -599,8 +680,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Ignore creating image repository.</p>
-</dd><dt class="property-optional"
+    <dd>Ignore creating image repository.</dd><dt class="property-optional"
             title="Optional">
         <span id="programid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programid_go" style="color: inherit; text-decoration: inherit;">Program<wbr>Id</a>
@@ -608,8 +688,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_go" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -617,8 +696,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>N/A.</p>
-</dd><dt class="property-optional"
+    <dd>N/A.</dd><dt class="property-optional"
             title="Optional">
         <span id="serviceconfiglists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfiglists_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Lists</a>
@@ -626,8 +704,101 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationserviceconfiglist">[]Application<wbr>Service<wbr>Config<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>List of service configuration information.</p>
-</dd></dl>
+    <dd>List of service configuration information.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="application_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_name_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application name.</dd><dt class="property-required"
+            title="Required">
+        <span id="application_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_type_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application type: V for virtual machine, C for container, S for serverless.</dd><dt class="property-required"
+            title="Required">
+        <span id="microservice_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_type_hcl" style="color: inherit; text-decoration: inherit;">microservice_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application microservice type: M for service mesh, N for normal application, G for gateway application.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="application_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_desc_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="application_log_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_log_config_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>log_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application log configuration, deprecated parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="application_resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_resource_type_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application resource type, deprecated parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="application_runtime_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_runtime_type_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>runtime_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application runtime type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ignore_create_image_repository_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignore_create_image_repository_hcl" style="color: inherit; text-decoration: inherit;">ignore_<wbr>create_<wbr>image_<wbr>repository</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Ignore creating image repository.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="program_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#program_id_hcl" style="color: inherit; text-decoration: inherit;">program_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="program_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#program_id_lists_hcl" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>N/A.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="service_config_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_lists_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#applicationserviceconfiglist">list(object)</a></span>
+    </dt>
+    <dd>List of service configuration information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -641,8 +812,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application name.</p>
-</dd><dt class="property-required"
+    <dd>Application name.</dd><dt class="property-required"
             title="Required">
         <span id="applicationtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_java" style="color: inherit; text-decoration: inherit;">application<wbr>Type</a>
@@ -650,8 +820,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application type: V for virtual machine, C for container, S for serverless.</p>
-</dd><dt class="property-required"
+    <dd>Application type: V for virtual machine, C for container, S for serverless.</dd><dt class="property-required"
             title="Required">
         <span id="microservicetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_java" style="color: inherit; text-decoration: inherit;">microservice<wbr>Type</a>
@@ -659,8 +828,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application microservice type: M for service mesh, N for normal application, G for gateway application.</p>
-</dd><dt class="property-optional"
+    <dd>Application microservice type: M for service mesh, N for normal application, G for gateway application.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationdesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationdesc_java" style="color: inherit; text-decoration: inherit;">application<wbr>Desc</a>
@@ -668,8 +836,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application description.</p>
-</dd><dt class="property-optional"
+    <dd>Application description.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationlogconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationlogconfig_java" style="color: inherit; text-decoration: inherit;">application<wbr>Log<wbr>Config</a>
@@ -677,8 +844,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application log configuration, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application log configuration, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationresourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationresourcetype_java" style="color: inherit; text-decoration: inherit;">application<wbr>Resource<wbr>Type</a>
@@ -686,8 +852,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application resource type, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application resource type, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationruntimetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationruntimetype_java" style="color: inherit; text-decoration: inherit;">application<wbr>Runtime<wbr>Type</a>
@@ -695,8 +860,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application runtime type.</p>
-</dd><dt class="property-optional"
+    <dd>Application runtime type.</dd><dt class="property-optional"
             title="Optional">
         <span id="ignorecreateimagerepository_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignorecreateimagerepository_java" style="color: inherit; text-decoration: inherit;">ignore<wbr>Create<wbr>Image<wbr>Repository</a>
@@ -704,8 +868,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Ignore creating image repository.</p>
-</dd><dt class="property-optional"
+    <dd>Ignore creating image repository.</dd><dt class="property-optional"
             title="Optional">
         <span id="programid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programid_java" style="color: inherit; text-decoration: inherit;">program<wbr>Id</a>
@@ -713,8 +876,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_java" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -722,17 +884,15 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>N/A.</p>
-</dd><dt class="property-optional"
+    <dd>N/A.</dd><dt class="property-optional"
             title="Optional">
         <span id="serviceconfiglists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfiglists_java" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#applicationserviceconfiglist">List&lt;Application<wbr>Service<wbr>Config<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#applicationserviceconfiglist">List&lt;Application<wbr>Service<wbr>Config<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of service configuration information.</p>
-</dd></dl>
+    <dd>List of service configuration information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -746,8 +906,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application name.</p>
-</dd><dt class="property-required"
+    <dd>Application name.</dd><dt class="property-required"
             title="Required">
         <span id="applicationtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Type</a>
@@ -755,8 +914,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application type: V for virtual machine, C for container, S for serverless.</p>
-</dd><dt class="property-required"
+    <dd>Application type: V for virtual machine, C for container, S for serverless.</dd><dt class="property-required"
             title="Required">
         <span id="microservicetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_nodejs" style="color: inherit; text-decoration: inherit;">microservice<wbr>Type</a>
@@ -764,8 +922,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application microservice type: M for service mesh, N for normal application, G for gateway application.</p>
-</dd><dt class="property-optional"
+    <dd>Application microservice type: M for service mesh, N for normal application, G for gateway application.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationdesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationdesc_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Desc</a>
@@ -773,8 +930,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application description.</p>
-</dd><dt class="property-optional"
+    <dd>Application description.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationlogconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationlogconfig_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Log<wbr>Config</a>
@@ -782,8 +938,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application log configuration, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application log configuration, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationresourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationresourcetype_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Resource<wbr>Type</a>
@@ -791,8 +946,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application resource type, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application resource type, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationruntimetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationruntimetype_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Runtime<wbr>Type</a>
@@ -800,8 +954,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application runtime type.</p>
-</dd><dt class="property-optional"
+    <dd>Application runtime type.</dd><dt class="property-optional"
             title="Optional">
         <span id="ignorecreateimagerepository_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignorecreateimagerepository_nodejs" style="color: inherit; text-decoration: inherit;">ignore<wbr>Create<wbr>Image<wbr>Repository</a>
@@ -809,8 +962,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Ignore creating image repository.</p>
-</dd><dt class="property-optional"
+    <dd>Ignore creating image repository.</dd><dt class="property-optional"
             title="Optional">
         <span id="programid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programid_nodejs" style="color: inherit; text-decoration: inherit;">program<wbr>Id</a>
@@ -818,8 +970,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_nodejs" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -827,17 +978,15 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>N/A.</p>
-</dd><dt class="property-optional"
+    <dd>N/A.</dd><dt class="property-optional"
             title="Optional">
         <span id="serviceconfiglists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfiglists_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#applicationserviceconfiglist">Application<wbr>Service<wbr>Config<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#applicationserviceconfiglist">Application<wbr>Service<wbr>Config<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of service configuration information.</p>
-</dd></dl>
+    <dd>List of service configuration information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -851,8 +1000,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application name.</p>
-</dd><dt class="property-required"
+    <dd>Application name.</dd><dt class="property-required"
             title="Required">
         <span id="application_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_type_python" style="color: inherit; text-decoration: inherit;">application_<wbr>type</a>
@@ -860,8 +1008,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application type: V for virtual machine, C for container, S for serverless.</p>
-</dd><dt class="property-required"
+    <dd>Application type: V for virtual machine, C for container, S for serverless.</dd><dt class="property-required"
             title="Required">
         <span id="microservice_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_type_python" style="color: inherit; text-decoration: inherit;">microservice_<wbr>type</a>
@@ -869,8 +1016,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application microservice type: M for service mesh, N for normal application, G for gateway application.</p>
-</dd><dt class="property-optional"
+    <dd>Application microservice type: M for service mesh, N for normal application, G for gateway application.</dd><dt class="property-optional"
             title="Optional">
         <span id="application_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_desc_python" style="color: inherit; text-decoration: inherit;">application_<wbr>desc</a>
@@ -878,8 +1024,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application description.</p>
-</dd><dt class="property-optional"
+    <dd>Application description.</dd><dt class="property-optional"
             title="Optional">
         <span id="application_log_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_log_config_python" style="color: inherit; text-decoration: inherit;">application_<wbr>log_<wbr>config</a>
@@ -887,8 +1032,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application log configuration, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application log configuration, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="application_resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_resource_type_python" style="color: inherit; text-decoration: inherit;">application_<wbr>resource_<wbr>type</a>
@@ -896,8 +1040,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application resource type, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application resource type, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="application_runtime_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_runtime_type_python" style="color: inherit; text-decoration: inherit;">application_<wbr>runtime_<wbr>type</a>
@@ -905,8 +1048,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application runtime type.</p>
-</dd><dt class="property-optional"
+    <dd>Application runtime type.</dd><dt class="property-optional"
             title="Optional">
         <span id="ignore_create_image_repository_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignore_create_image_repository_python" style="color: inherit; text-decoration: inherit;">ignore_<wbr>create_<wbr>image_<wbr>repository</a>
@@ -914,8 +1056,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Ignore creating image repository.</p>
-</dd><dt class="property-optional"
+    <dd>Ignore creating image repository.</dd><dt class="property-optional"
             title="Optional">
         <span id="program_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#program_id_python" style="color: inherit; text-decoration: inherit;">program_<wbr>id</a>
@@ -923,8 +1064,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="program_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#program_id_lists_python" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
@@ -932,17 +1072,15 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>N/A.</p>
-</dd><dt class="property-optional"
+    <dd>N/A.</dd><dt class="property-optional"
             title="Optional">
         <span id="service_config_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_config_lists_python" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#applicationserviceconfiglist">Application<wbr>Service<wbr>Config<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#applicationserviceconfiglist">Sequence[Application<wbr>Service<wbr>Config<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of service configuration information.</p>
-</dd></dl>
+    <dd>List of service configuration information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -956,8 +1094,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application name.</p>
-</dd><dt class="property-required"
+    <dd>Application name.</dd><dt class="property-required"
             title="Required">
         <span id="applicationtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Type</a>
@@ -965,8 +1102,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application type: V for virtual machine, C for container, S for serverless.</p>
-</dd><dt class="property-required"
+    <dd>Application type: V for virtual machine, C for container, S for serverless.</dd><dt class="property-required"
             title="Required">
         <span id="microservicetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_yaml" style="color: inherit; text-decoration: inherit;">microservice<wbr>Type</a>
@@ -974,8 +1110,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application microservice type: M for service mesh, N for normal application, G for gateway application.</p>
-</dd><dt class="property-optional"
+    <dd>Application microservice type: M for service mesh, N for normal application, G for gateway application.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationdesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationdesc_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Desc</a>
@@ -983,8 +1118,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application description.</p>
-</dd><dt class="property-optional"
+    <dd>Application description.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationlogconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationlogconfig_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Log<wbr>Config</a>
@@ -992,8 +1126,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application log configuration, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application log configuration, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationresourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationresourcetype_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Resource<wbr>Type</a>
@@ -1001,8 +1134,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application resource type, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application resource type, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="applicationruntimetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationruntimetype_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Runtime<wbr>Type</a>
@@ -1010,8 +1142,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application runtime type.</p>
-</dd><dt class="property-optional"
+    <dd>Application runtime type.</dd><dt class="property-optional"
             title="Optional">
         <span id="ignorecreateimagerepository_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ignorecreateimagerepository_yaml" style="color: inherit; text-decoration: inherit;">ignore<wbr>Create<wbr>Image<wbr>Repository</a>
@@ -1019,8 +1150,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Ignore creating image repository.</p>
-</dd><dt class="property-optional"
+    <dd>Ignore creating image repository.</dd><dt class="property-optional"
             title="Optional">
         <span id="programid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programid_yaml" style="color: inherit; text-decoration: inherit;">program<wbr>Id</a>
@@ -1028,8 +1158,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_yaml" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -1037,8 +1166,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>N/A.</p>
-</dd><dt class="property-optional"
+    <dd>N/A.</dd><dt class="property-optional"
             title="Optional">
         <span id="serviceconfiglists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceconfiglists_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Lists</a>
@@ -1046,8 +1174,7 @@ The Application resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationserviceconfiglist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of service configuration information.</p>
-</dd></dl>
+    <dd>List of service configuration information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1068,8 +1195,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1083,8 +1209,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1098,8 +1237,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1113,8 +1251,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1128,8 +1265,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1143,8 +1279,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1154,18 +1289,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Application resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ApplicationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Application</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ApplicationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Application</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1179,105 +1314,144 @@ Get an existing Application resource's state with the given name, ID, and option
         <span class="nx">microservice_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">program_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">program_id_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-        <span class="nx">service_config_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tsf.ApplicationServiceConfigListArgs]]</span> = None<span class="p">) -&gt;</span> Application</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">service_config_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[ApplicationServiceConfigListArgs]]</span> = None<span class="p">) -&gt;</span> Application</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetApplication<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ApplicationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Application</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetApplication<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ApplicationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Application</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Application</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ApplicationState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Application</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ApplicationState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Application</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ApplicationState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Application</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ApplicationState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingApplication</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tsf:Application</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tsf_application</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ApplicationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ApplicationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1285,28 +1459,31 @@ Get an existing Application resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ApplicationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1314,28 +1491,31 @@ Get an existing Application resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ApplicationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1355,8 +1535,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application description.</p>
-</dd><dt class="property-optional"
+    <dd>Application description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationlogconfig_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationlogconfig_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Log<wbr>Config</a>
@@ -1364,8 +1543,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application log configuration, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application log configuration, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationname_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Name</a>
@@ -1373,8 +1551,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application name.</p>
-</dd><dt class="property-optional"
+    <dd>Application name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationresourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationresourcetype_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Resource<wbr>Type</a>
@@ -1382,8 +1559,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application resource type, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application resource type, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationruntimetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationruntimetype_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Runtime<wbr>Type</a>
@@ -1391,8 +1567,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application runtime type.</p>
-</dd><dt class="property-optional"
+    <dd>Application runtime type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationtype_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Type</a>
@@ -1400,8 +1575,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application type: V for virtual machine, C for container, S for serverless.</p>
-</dd><dt class="property-optional"
+    <dd>Application type: V for virtual machine, C for container, S for serverless.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ignorecreateimagerepository_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ignorecreateimagerepository_csharp" style="color: inherit; text-decoration: inherit;">Ignore<wbr>Create<wbr>Image<wbr>Repository</a>
@@ -1409,8 +1583,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Ignore creating image repository.</p>
-</dd><dt class="property-optional"
+    <dd>Ignore creating image repository.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_microservicetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_microservicetype_csharp" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Type</a>
@@ -1418,8 +1591,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application microservice type: M for service mesh, N for normal application, G for gateway application.</p>
-</dd><dt class="property-optional"
+    <dd>Application microservice type: M for service mesh, N for normal application, G for gateway application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programid_csharp" style="color: inherit; text-decoration: inherit;">Program<wbr>Id</a>
@@ -1427,8 +1599,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_csharp" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -1436,17 +1607,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>N/A.</p>
-</dd><dt class="property-optional"
+    <dd>N/A.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serviceconfiglists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceconfiglists_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#applicationserviceconfiglist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Application<wbr>Service<wbr>Config<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#applicationserviceconfiglist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Application<wbr>Service<wbr>Config<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of service configuration information.</p>
-</dd></dl>
+    <dd>List of service configuration information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1460,8 +1629,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application description.</p>
-</dd><dt class="property-optional"
+    <dd>Application description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationlogconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationlogconfig_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Log<wbr>Config</a>
@@ -1469,8 +1637,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application log configuration, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application log configuration, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationname_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Name</a>
@@ -1478,8 +1645,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application name.</p>
-</dd><dt class="property-optional"
+    <dd>Application name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationresourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationresourcetype_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Resource<wbr>Type</a>
@@ -1487,8 +1653,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application resource type, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application resource type, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationruntimetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationruntimetype_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Runtime<wbr>Type</a>
@@ -1496,8 +1661,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application runtime type.</p>
-</dd><dt class="property-optional"
+    <dd>Application runtime type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationtype_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Type</a>
@@ -1505,8 +1669,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application type: V for virtual machine, C for container, S for serverless.</p>
-</dd><dt class="property-optional"
+    <dd>Application type: V for virtual machine, C for container, S for serverless.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ignorecreateimagerepository_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ignorecreateimagerepository_go" style="color: inherit; text-decoration: inherit;">Ignore<wbr>Create<wbr>Image<wbr>Repository</a>
@@ -1514,8 +1677,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Ignore creating image repository.</p>
-</dd><dt class="property-optional"
+    <dd>Ignore creating image repository.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_microservicetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_microservicetype_go" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Type</a>
@@ -1523,8 +1685,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application microservice type: M for service mesh, N for normal application, G for gateway application.</p>
-</dd><dt class="property-optional"
+    <dd>Application microservice type: M for service mesh, N for normal application, G for gateway application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programid_go" style="color: inherit; text-decoration: inherit;">Program<wbr>Id</a>
@@ -1532,8 +1693,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_go" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -1541,8 +1701,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>N/A.</p>
-</dd><dt class="property-optional"
+    <dd>N/A.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serviceconfiglists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceconfiglists_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Config<wbr>Lists</a>
@@ -1550,8 +1709,101 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationserviceconfiglist">[]Application<wbr>Service<wbr>Config<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>List of service configuration information.</p>
-</dd></dl>
+    <dd>List of service configuration information.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_application_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_application_desc_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_application_log_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_application_log_config_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>log_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application log configuration, deprecated parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_application_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_application_name_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_application_resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_application_resource_type_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application resource type, deprecated parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_application_runtime_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_application_runtime_type_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>runtime_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application runtime type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_application_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_application_type_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application type: V for virtual machine, C for container, S for serverless.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ignore_create_image_repository_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ignore_create_image_repository_hcl" style="color: inherit; text-decoration: inherit;">ignore_<wbr>create_<wbr>image_<wbr>repository</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Ignore creating image repository.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_microservice_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_microservice_type_hcl" style="color: inherit; text-decoration: inherit;">microservice_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application microservice type: M for service mesh, N for normal application, G for gateway application.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_program_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_program_id_hcl" style="color: inherit; text-decoration: inherit;">program_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_program_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_program_id_lists_hcl" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>N/A.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_service_config_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_config_lists_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#applicationserviceconfiglist">list(object)</a></span>
+    </dt>
+    <dd>List of service configuration information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1565,8 +1817,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application description.</p>
-</dd><dt class="property-optional"
+    <dd>Application description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationlogconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationlogconfig_java" style="color: inherit; text-decoration: inherit;">application<wbr>Log<wbr>Config</a>
@@ -1574,8 +1825,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application log configuration, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application log configuration, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationname_java" style="color: inherit; text-decoration: inherit;">application<wbr>Name</a>
@@ -1583,8 +1833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application name.</p>
-</dd><dt class="property-optional"
+    <dd>Application name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationresourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationresourcetype_java" style="color: inherit; text-decoration: inherit;">application<wbr>Resource<wbr>Type</a>
@@ -1592,8 +1841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application resource type, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application resource type, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationruntimetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationruntimetype_java" style="color: inherit; text-decoration: inherit;">application<wbr>Runtime<wbr>Type</a>
@@ -1601,8 +1849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application runtime type.</p>
-</dd><dt class="property-optional"
+    <dd>Application runtime type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationtype_java" style="color: inherit; text-decoration: inherit;">application<wbr>Type</a>
@@ -1610,8 +1857,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application type: V for virtual machine, C for container, S for serverless.</p>
-</dd><dt class="property-optional"
+    <dd>Application type: V for virtual machine, C for container, S for serverless.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ignorecreateimagerepository_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ignorecreateimagerepository_java" style="color: inherit; text-decoration: inherit;">ignore<wbr>Create<wbr>Image<wbr>Repository</a>
@@ -1619,8 +1865,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Ignore creating image repository.</p>
-</dd><dt class="property-optional"
+    <dd>Ignore creating image repository.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_microservicetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_microservicetype_java" style="color: inherit; text-decoration: inherit;">microservice<wbr>Type</a>
@@ -1628,8 +1873,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application microservice type: M for service mesh, N for normal application, G for gateway application.</p>
-</dd><dt class="property-optional"
+    <dd>Application microservice type: M for service mesh, N for normal application, G for gateway application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programid_java" style="color: inherit; text-decoration: inherit;">program<wbr>Id</a>
@@ -1637,8 +1881,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_java" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -1646,17 +1889,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>N/A.</p>
-</dd><dt class="property-optional"
+    <dd>N/A.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serviceconfiglists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceconfiglists_java" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#applicationserviceconfiglist">List&lt;Application<wbr>Service<wbr>Config<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#applicationserviceconfiglist">List&lt;Application<wbr>Service<wbr>Config<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of service configuration information.</p>
-</dd></dl>
+    <dd>List of service configuration information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1670,8 +1911,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application description.</p>
-</dd><dt class="property-optional"
+    <dd>Application description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationlogconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationlogconfig_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Log<wbr>Config</a>
@@ -1679,8 +1919,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application log configuration, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application log configuration, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationname_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Name</a>
@@ -1688,8 +1927,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application name.</p>
-</dd><dt class="property-optional"
+    <dd>Application name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationresourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationresourcetype_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Resource<wbr>Type</a>
@@ -1697,8 +1935,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application resource type, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application resource type, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationruntimetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationruntimetype_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Runtime<wbr>Type</a>
@@ -1706,8 +1943,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application runtime type.</p>
-</dd><dt class="property-optional"
+    <dd>Application runtime type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationtype_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Type</a>
@@ -1715,8 +1951,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application type: V for virtual machine, C for container, S for serverless.</p>
-</dd><dt class="property-optional"
+    <dd>Application type: V for virtual machine, C for container, S for serverless.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ignorecreateimagerepository_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ignorecreateimagerepository_nodejs" style="color: inherit; text-decoration: inherit;">ignore<wbr>Create<wbr>Image<wbr>Repository</a>
@@ -1724,8 +1959,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Ignore creating image repository.</p>
-</dd><dt class="property-optional"
+    <dd>Ignore creating image repository.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_microservicetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_microservicetype_nodejs" style="color: inherit; text-decoration: inherit;">microservice<wbr>Type</a>
@@ -1733,8 +1967,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application microservice type: M for service mesh, N for normal application, G for gateway application.</p>
-</dd><dt class="property-optional"
+    <dd>Application microservice type: M for service mesh, N for normal application, G for gateway application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programid_nodejs" style="color: inherit; text-decoration: inherit;">program<wbr>Id</a>
@@ -1742,8 +1975,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_nodejs" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -1751,17 +1983,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>N/A.</p>
-</dd><dt class="property-optional"
+    <dd>N/A.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serviceconfiglists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceconfiglists_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#applicationserviceconfiglist">Application<wbr>Service<wbr>Config<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#applicationserviceconfiglist">Application<wbr>Service<wbr>Config<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of service configuration information.</p>
-</dd></dl>
+    <dd>List of service configuration information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1775,8 +2005,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application description.</p>
-</dd><dt class="property-optional"
+    <dd>Application description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_application_log_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_application_log_config_python" style="color: inherit; text-decoration: inherit;">application_<wbr>log_<wbr>config</a>
@@ -1784,8 +2013,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application log configuration, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application log configuration, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_application_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_application_name_python" style="color: inherit; text-decoration: inherit;">application_<wbr>name</a>
@@ -1793,8 +2021,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application name.</p>
-</dd><dt class="property-optional"
+    <dd>Application name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_application_resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_application_resource_type_python" style="color: inherit; text-decoration: inherit;">application_<wbr>resource_<wbr>type</a>
@@ -1802,8 +2029,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application resource type, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application resource type, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_application_runtime_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_application_runtime_type_python" style="color: inherit; text-decoration: inherit;">application_<wbr>runtime_<wbr>type</a>
@@ -1811,8 +2037,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application runtime type.</p>
-</dd><dt class="property-optional"
+    <dd>Application runtime type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_application_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_application_type_python" style="color: inherit; text-decoration: inherit;">application_<wbr>type</a>
@@ -1820,8 +2045,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application type: V for virtual machine, C for container, S for serverless.</p>
-</dd><dt class="property-optional"
+    <dd>Application type: V for virtual machine, C for container, S for serverless.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ignore_create_image_repository_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ignore_create_image_repository_python" style="color: inherit; text-decoration: inherit;">ignore_<wbr>create_<wbr>image_<wbr>repository</a>
@@ -1829,8 +2053,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Ignore creating image repository.</p>
-</dd><dt class="property-optional"
+    <dd>Ignore creating image repository.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_microservice_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_microservice_type_python" style="color: inherit; text-decoration: inherit;">microservice_<wbr>type</a>
@@ -1838,8 +2061,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application microservice type: M for service mesh, N for normal application, G for gateway application.</p>
-</dd><dt class="property-optional"
+    <dd>Application microservice type: M for service mesh, N for normal application, G for gateway application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_program_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_program_id_python" style="color: inherit; text-decoration: inherit;">program_<wbr>id</a>
@@ -1847,8 +2069,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_program_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_program_id_lists_python" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
@@ -1856,17 +2077,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>N/A.</p>
-</dd><dt class="property-optional"
+    <dd>N/A.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_service_config_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_config_lists_python" style="color: inherit; text-decoration: inherit;">service_<wbr>config_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#applicationserviceconfiglist">Application<wbr>Service<wbr>Config<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#applicationserviceconfiglist">Sequence[Application<wbr>Service<wbr>Config<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of service configuration information.</p>
-</dd></dl>
+    <dd>List of service configuration information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1880,8 +2099,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application description.</p>
-</dd><dt class="property-optional"
+    <dd>Application description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationlogconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationlogconfig_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Log<wbr>Config</a>
@@ -1889,8 +2107,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application log configuration, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application log configuration, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationname_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Name</a>
@@ -1898,8 +2115,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application name.</p>
-</dd><dt class="property-optional"
+    <dd>Application name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationresourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationresourcetype_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Resource<wbr>Type</a>
@@ -1907,8 +2123,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application resource type, deprecated parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Application resource type, deprecated parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationruntimetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationruntimetype_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Runtime<wbr>Type</a>
@@ -1916,8 +2131,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application runtime type.</p>
-</dd><dt class="property-optional"
+    <dd>Application runtime type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_applicationtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicationtype_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Type</a>
@@ -1925,8 +2139,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application type: V for virtual machine, C for container, S for serverless.</p>
-</dd><dt class="property-optional"
+    <dd>Application type: V for virtual machine, C for container, S for serverless.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ignorecreateimagerepository_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ignorecreateimagerepository_yaml" style="color: inherit; text-decoration: inherit;">ignore<wbr>Create<wbr>Image<wbr>Repository</a>
@@ -1934,8 +2147,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Ignore creating image repository.</p>
-</dd><dt class="property-optional"
+    <dd>Ignore creating image repository.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_microservicetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_microservicetype_yaml" style="color: inherit; text-decoration: inherit;">microservice<wbr>Type</a>
@@ -1943,8 +2155,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application microservice type: M for service mesh, N for normal application, G for gateway application.</p>
-</dd><dt class="property-optional"
+    <dd>Application microservice type: M for service mesh, N for normal application, G for gateway application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programid_yaml" style="color: inherit; text-decoration: inherit;">program<wbr>Id</a>
@@ -1952,8 +2163,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the dataset to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dataset to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_yaml" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -1961,8 +2171,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>N/A.</p>
-</dd><dt class="property-optional"
+    <dd>N/A.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serviceconfiglists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceconfiglists_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Config<wbr>Lists</a>
@@ -1970,8 +2179,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationserviceconfiglist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of service configuration information.</p>
-</dd></dl>
+    <dd>List of service configuration information.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1986,7 +2194,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="applicationserviceconfiglist">Application<wbr>Service<wbr>Config<wbr>List</h4>
+<h4 id="applicationserviceconfiglist">
+Application<wbr>Service<wbr>Config<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Application<wbr>Service<wbr>Config<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1998,8 +2208,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service name.</p>
-</dd><dt class="property-required"
+    <dd>Service name.</dd><dt class="property-required"
             title="Required">
         <span id="ports_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_csharp" style="color: inherit; text-decoration: inherit;">Ports</a>
@@ -2007,8 +2216,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationserviceconfiglistport">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Application<wbr>Service<wbr>Config<wbr>List<wbr>Port&gt;</a></span>
     </dt>
-    <dd><p>List of port information.</p>
-</dd><dt class="property-optional"
+    <dd>List of port information.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheck_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check</a>
@@ -2016,8 +2224,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationserviceconfiglisthealthcheck">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Application<wbr>Service<wbr>Config<wbr>List<wbr>Health<wbr>Check</a></span>
     </dt>
-    <dd><p>Health check configuration.</p>
-</dd></dl>
+    <dd>Health check configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2031,8 +2238,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service name.</p>
-</dd><dt class="property-required"
+    <dd>Service name.</dd><dt class="property-required"
             title="Required">
         <span id="ports_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_go" style="color: inherit; text-decoration: inherit;">Ports</a>
@@ -2040,8 +2246,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationserviceconfiglistport">[]Application<wbr>Service<wbr>Config<wbr>List<wbr>Port</a></span>
     </dt>
-    <dd><p>List of port information.</p>
-</dd><dt class="property-optional"
+    <dd>List of port information.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheck_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check</a>
@@ -2049,8 +2254,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationserviceconfiglisthealthcheck">Application<wbr>Service<wbr>Config<wbr>List<wbr>Health<wbr>Check</a></span>
     </dt>
-    <dd><p>Health check configuration.</p>
-</dd></dl>
+    <dd>Health check configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Service name.</dd><dt class="property-required"
+            title="Required">
+        <span id="ports_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_hcl" style="color: inherit; text-decoration: inherit;">ports</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#applicationserviceconfiglistport">list(object)</a></span>
+    </dt>
+    <dd>List of port information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#applicationserviceconfiglisthealthcheck">object</a></span>
+    </dt>
+    <dd>Health check configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2064,8 +2298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service name.</p>
-</dd><dt class="property-required"
+    <dd>Service name.</dd><dt class="property-required"
             title="Required">
         <span id="ports_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_java" style="color: inherit; text-decoration: inherit;">ports</a>
@@ -2073,8 +2306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationserviceconfiglistport">List&lt;Application<wbr>Service<wbr>Config<wbr>List<wbr>Port&gt;</a></span>
     </dt>
-    <dd><p>List of port information.</p>
-</dd><dt class="property-optional"
+    <dd>List of port information.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheck_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
@@ -2082,8 +2314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationserviceconfiglisthealthcheck">Application<wbr>Service<wbr>Config<wbr>List<wbr>Health<wbr>Check</a></span>
     </dt>
-    <dd><p>Health check configuration.</p>
-</dd></dl>
+    <dd>Health check configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2097,8 +2328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service name.</p>
-</dd><dt class="property-required"
+    <dd>Service name.</dd><dt class="property-required"
             title="Required">
         <span id="ports_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_nodejs" style="color: inherit; text-decoration: inherit;">ports</a>
@@ -2106,8 +2336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationserviceconfiglistport">Application<wbr>Service<wbr>Config<wbr>List<wbr>Port[]</a></span>
     </dt>
-    <dd><p>List of port information.</p>
-</dd><dt class="property-optional"
+    <dd>List of port information.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheck_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
@@ -2115,8 +2344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationserviceconfiglisthealthcheck">Application<wbr>Service<wbr>Config<wbr>List<wbr>Health<wbr>Check</a></span>
     </dt>
-    <dd><p>Health check configuration.</p>
-</dd></dl>
+    <dd>Health check configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2130,17 +2358,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Service name.</p>
-</dd><dt class="property-required"
+    <dd>Service name.</dd><dt class="property-required"
             title="Required">
         <span id="ports_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_python" style="color: inherit; text-decoration: inherit;">ports</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#applicationserviceconfiglistport">Application<wbr>Service<wbr>Config<wbr>List<wbr>Port]</a></span>
+        <span class="property-type"><a href="#applicationserviceconfiglistport">Sequence[Application<wbr>Service<wbr>Config<wbr>List<wbr>Port]</a></span>
     </dt>
-    <dd><p>List of port information.</p>
-</dd><dt class="property-optional"
+    <dd>List of port information.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check</a>
@@ -2148,8 +2374,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationserviceconfiglisthealthcheck">Application<wbr>Service<wbr>Config<wbr>List<wbr>Health<wbr>Check</a></span>
     </dt>
-    <dd><p>Health check configuration.</p>
-</dd></dl>
+    <dd>Health check configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2163,8 +2388,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service name.</p>
-</dd><dt class="property-required"
+    <dd>Service name.</dd><dt class="property-required"
             title="Required">
         <span id="ports_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_yaml" style="color: inherit; text-decoration: inherit;">ports</a>
@@ -2172,8 +2396,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationserviceconfiglistport">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of port information.</p>
-</dd><dt class="property-optional"
+    <dd>List of port information.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheck_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
@@ -2181,12 +2404,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationserviceconfiglisthealthcheck">Property Map</a></span>
     </dt>
-    <dd><p>Health check configuration.</p>
-</dd></dl>
+    <dd>Health check configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="applicationserviceconfiglisthealthcheck">Application<wbr>Service<wbr>Config<wbr>List<wbr>Health<wbr>Check</h4>
+<h4 id="applicationserviceconfiglisthealthcheck">
+Application<wbr>Service<wbr>Config<wbr>List<wbr>Health<wbr>Check<pulumi-choosable type="language" values="python,go" class="inline">, Application<wbr>Service<wbr>Config<wbr>List<wbr>Health<wbr>Check<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2198,8 +2422,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check path.</p>
-</dd></dl>
+    <dd>Health check path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2213,8 +2436,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check path.</p>
-</dd></dl>
+    <dd>Health check path.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_hcl" style="color: inherit; text-decoration: inherit;">path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2228,8 +2464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Health check path.</p>
-</dd></dl>
+    <dd>Health check path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2243,8 +2478,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check path.</p>
-</dd></dl>
+    <dd>Health check path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2258,8 +2492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Health check path.</p>
-</dd></dl>
+    <dd>Health check path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2273,12 +2506,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Health check path.</p>
-</dd></dl>
+    <dd>Health check path.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="applicationserviceconfiglistport">Application<wbr>Service<wbr>Config<wbr>List<wbr>Port</h4>
+<h4 id="applicationserviceconfiglistport">
+Application<wbr>Service<wbr>Config<wbr>List<wbr>Port<pulumi-choosable type="language" values="python,go" class="inline">, Application<wbr>Service<wbr>Config<wbr>List<wbr>Port<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2290,8 +2524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port protocol.</p>
-</dd><dt class="property-required"
+    <dd>Port protocol.</dd><dt class="property-required"
             title="Required">
         <span id="targetport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetport_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Port</a>
@@ -2299,8 +2532,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Service port.</p>
-</dd></dl>
+    <dd>Service port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2314,8 +2546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port protocol.</p>
-</dd><dt class="property-required"
+    <dd>Port protocol.</dd><dt class="property-required"
             title="Required">
         <span id="targetport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetport_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Port</a>
@@ -2323,8 +2554,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Service port.</p>
-</dd></dl>
+    <dd>Service port.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Port protocol.</dd><dt class="property-required"
+            title="Required">
+        <span id="target_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_port_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Service port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2338,8 +2590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port protocol.</p>
-</dd><dt class="property-required"
+    <dd>Port protocol.</dd><dt class="property-required"
             title="Required">
         <span id="targetport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetport_java" style="color: inherit; text-decoration: inherit;">target<wbr>Port</a>
@@ -2347,8 +2598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Service port.</p>
-</dd></dl>
+    <dd>Service port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2362,8 +2612,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Port protocol.</p>
-</dd><dt class="property-required"
+    <dd>Port protocol.</dd><dt class="property-required"
             title="Required">
         <span id="targetport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetport_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Port</a>
@@ -2371,8 +2620,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Service port.</p>
-</dd></dl>
+    <dd>Service port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2386,8 +2634,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Port protocol.</p>
-</dd><dt class="property-required"
+    <dd>Port protocol.</dd><dt class="property-required"
             title="Required">
         <span id="target_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_port_python" style="color: inherit; text-decoration: inherit;">target_<wbr>port</a>
@@ -2395,8 +2642,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Service port.</p>
-</dd></dl>
+    <dd>Service port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2410,8 +2656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Port protocol.</p>
-</dd><dt class="property-required"
+    <dd>Port protocol.</dd><dt class="property-required"
             title="Required">
         <span id="targetport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetport_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Port</a>
@@ -2419,8 +2664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Service port.</p>
-</dd></dl>
+    <dd>Service port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2432,7 +2676,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

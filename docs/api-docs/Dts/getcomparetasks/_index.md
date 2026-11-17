@@ -2,9 +2,11 @@
 ---
 title: "getCompareTasks"
 title_tag: "tencentcloud.Dts.getCompareTasks"
-meta_desc: "Documentation for the tencentcloud.Dts.getCompareTasks function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of dts compareTasks"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query detailed information of dts compareTasks
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const compareTasks = tencentcloud.Dts.getCompareTasks({
+const compareTasks = tencentcloud.dts.getCompareTasks({
     jobId: "",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-compare_tasks = tencentcloud.Dts.get_compare_tasks(job_id="")
+compare_tasks = tencentcloud.dts.get_compare_tasks(job_id="")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dts"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dts.GetCompareTasks(ctx, &dts.GetCompareTasksArgs{
+			JobId: "",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dts.GetCompareTasks(ctx, &dts.GetCompareTasksArgs{
-			JobId: "",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dts.DtsFunctions;
 import com.pulumi.tencentcloud.Dts.inputs.GetCompareTasksArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   compareTasks:
     fn::invoke:
-      Function: tencentcloud:Dts:getCompareTasks
-      Arguments:
-        jobId:
+      function: tencentcloud:Dts:getCompareTasks
+      arguments:
+        jobId: ""
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dts_getcomparetasks" "compareTasks" {
+  job_id = ""
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeCompareTasks](https://www.tencentcloud.com/document/api/571/51816)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getCompareTasks<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCompareTasksArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetCompareTasksResult</a></span>></span
+><span class="k">function </span>getCompareTasks<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCompareTasksArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetCompareTasksResult</a></span>></span
 ><span class="k">
-function </span>getCompareTasksOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCompareTasksOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetCompareTasksResult</a></span>></span
+function </span>getCompareTasksOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCompareTasksOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetCompareTasksResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -138,9 +195,9 @@ function </span>getCompareTasksOutput<span class="p">(</span><span class="nx">ar
                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetCompareTasksResult</span
 ><span class="k">
-def </span>get_compare_tasks_output<span class="p">(</span><span class="nx">job_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetCompareTasksResult]</span
+def </span>get_compare_tasks_output<span class="p">(</span><span class="nx">job_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetCompareTasksResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -165,7 +222,8 @@ func </span>GetCompareTasksOutput<span class="p">(</span><span class="nx">ctx</s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetCompareTasks </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetCompareTasksResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetCompareTasksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetCompareTasksResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCompareTasksInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetCompareTasksResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCompareTasksInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetCompareTasksResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCompareTasksInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,7 +232,8 @@ func </span>GetCompareTasksOutput<span class="p">(</span><span class="nx">ctx</s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetCompareTasksResult</a></span>> </span>getCompareTasks<span class="p">(</span><span class="nx">GetCompareTasksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetCompareTasksResult</a></span>> </span>getCompareTasks<span class="p">(</span><span class="nx">GetCompareTasksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetCompareTasksResult</a></span>> </span>getCompareTasks<span class="p">(</span><span class="nx">GetCompareTasksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -186,6 +245,15 @@ func </span>GetCompareTasksOutput<span class="p">(</span><span class="nx">ctx</s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dts/getCompareTasks:getCompareTasks
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dts_get_compare_tasks&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -204,8 +272,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-optional"
+    <dd>job id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -213,8 +280,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +294,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-optional"
+    <dd>job id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -237,8 +302,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="job_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_id_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>job id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-optional"
+    <dd>job id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -261,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -276,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-optional"
+    <dd>job id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -285,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -300,8 +382,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-optional"
+    <dd>job id.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -309,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,8 +404,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-optional"
+    <dd>job id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -333,8 +412,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -357,8 +435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -366,8 +443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-"
+    <dd>job id.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -375,8 +451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Outputs.<wbr>Get<wbr>Compare<wbr>Tasks<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>compare task list.</p>
-</dd><dt class="property-"
+    <dd>compare task list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -398,8 +473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -407,8 +481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-"
+    <dd>job id.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -416,11 +489,48 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslist">[]Get<wbr>Compare<wbr>Tasks<wbr>List</a></span>
     </dt>
-    <dd><p>compare task list.</p>
-</dd><dt class="property-"
+    <dd>compare task list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="job_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_id_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>job id.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcomparetaskslist">list(object)</a></span>
+    </dt>
+    <dd>compare task list.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -439,8 +549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_java" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -448,8 +557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-"
+    <dd>job id.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -457,8 +565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslist">List&lt;Get<wbr>Compare<wbr>Tasks<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>compare task list.</p>
-</dd><dt class="property-"
+    <dd>compare task list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -480,8 +587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -489,8 +595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-"
+    <dd>job id.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -498,8 +603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslist">Get<wbr>Compare<wbr>Tasks<wbr>List[]</a></span>
     </dt>
-    <dd><p>compare task list.</p>
-</dd><dt class="property-"
+    <dd>compare task list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -521,8 +625,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="job_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_id_python" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
@@ -530,17 +633,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-"
+    <dd>job id.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcomparetaskslist">Get<wbr>Compare<wbr>Tasks<wbr>List]</a></span>
+        <span class="property-type"><a href="#getcomparetaskslist">Sequence[Get<wbr>Compare<wbr>Tasks<wbr>List]</a></span>
     </dt>
-    <dd><p>compare task list.</p>
-</dd><dt class="property-"
+    <dd>compare task list.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -562,8 +663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -571,8 +671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-"
+    <dd>job id.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -580,8 +679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>compare task list.</p>
-</dd><dt class="property-"
+    <dd>compare task list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -613,8 +711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocess">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process&gt;</a></span>
     </dt>
-    <dd><p>compare check info.</p>
-</dd><dt class="property-required"
+    <dd>compare check info.</dd><dt class="property-required"
             title="Required">
         <span id="compareprocesses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compareprocesses_csharp" style="color: inherit; text-decoration: inherit;">Compare<wbr>Processes</a>
@@ -622,8 +719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocess">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process&gt;</a></span>
     </dt>
-    <dd><p>compare processing info.</p>
-</dd><dt class="property-required"
+    <dd>compare processing info.</dd><dt class="property-required"
             title="Required">
         <span id="comparetaskid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparetaskid_csharp" style="color: inherit; text-decoration: inherit;">Compare<wbr>Task<wbr>Id</a>
@@ -631,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task id.</p>
-</dd><dt class="property-required"
+    <dd>compare task id.</dd><dt class="property-required"
             title="Required">
         <span id="conclusion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conclusion_csharp" style="color: inherit; text-decoration: inherit;">Conclusion</a>
@@ -640,8 +735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>conclusion.</p>
-</dd><dt class="property-required"
+    <dd>conclusion.</dd><dt class="property-required"
             title="Required">
         <span id="configs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configs_csharp" style="color: inherit; text-decoration: inherit;">Configs</a>
@@ -649,8 +743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>config.</p>
-</dd><dt class="property-required"
+    <dd>config.</dd><dt class="property-required"
             title="Required">
         <span id="createdat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdat_csharp" style="color: inherit; text-decoration: inherit;">Created<wbr>At</a>
@@ -658,8 +751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="finishedat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finishedat_csharp" style="color: inherit; text-decoration: inherit;">Finished<wbr>At</a>
@@ -667,8 +759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>finished time.</p>
-</dd><dt class="property-required"
+    <dd>finished time.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -676,8 +767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-required"
+    <dd>job id.</dd><dt class="property-required"
             title="Required">
         <span id="startedat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startedat_csharp" style="color: inherit; text-decoration: inherit;">Started<wbr>At</a>
@@ -685,8 +775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -694,8 +783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-required"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
             title="Required">
         <span id="taskname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskname_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Name</a>
@@ -703,8 +791,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task name.</p>
-</dd></dl>
+    <dd>compare task name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -718,8 +805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocess">[]Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process</a></span>
     </dt>
-    <dd><p>compare check info.</p>
-</dd><dt class="property-required"
+    <dd>compare check info.</dd><dt class="property-required"
             title="Required">
         <span id="compareprocesses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compareprocesses_go" style="color: inherit; text-decoration: inherit;">Compare<wbr>Processes</a>
@@ -727,8 +813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocess">[]Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process</a></span>
     </dt>
-    <dd><p>compare processing info.</p>
-</dd><dt class="property-required"
+    <dd>compare processing info.</dd><dt class="property-required"
             title="Required">
         <span id="comparetaskid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparetaskid_go" style="color: inherit; text-decoration: inherit;">Compare<wbr>Task<wbr>Id</a>
@@ -736,8 +821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task id.</p>
-</dd><dt class="property-required"
+    <dd>compare task id.</dd><dt class="property-required"
             title="Required">
         <span id="conclusion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conclusion_go" style="color: inherit; text-decoration: inherit;">Conclusion</a>
@@ -745,8 +829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>conclusion.</p>
-</dd><dt class="property-required"
+    <dd>conclusion.</dd><dt class="property-required"
             title="Required">
         <span id="configs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configs_go" style="color: inherit; text-decoration: inherit;">Configs</a>
@@ -754,8 +837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfig">[]Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config</a></span>
     </dt>
-    <dd><p>config.</p>
-</dd><dt class="property-required"
+    <dd>config.</dd><dt class="property-required"
             title="Required">
         <span id="createdat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdat_go" style="color: inherit; text-decoration: inherit;">Created<wbr>At</a>
@@ -763,8 +845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="finishedat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finishedat_go" style="color: inherit; text-decoration: inherit;">Finished<wbr>At</a>
@@ -772,8 +853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>finished time.</p>
-</dd><dt class="property-required"
+    <dd>finished time.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -781,8 +861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-required"
+    <dd>job id.</dd><dt class="property-required"
             title="Required">
         <span id="startedat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startedat_go" style="color: inherit; text-decoration: inherit;">Started<wbr>At</a>
@@ -790,8 +869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -799,8 +877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-required"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
             title="Required">
         <span id="taskname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskname_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Name</a>
@@ -808,8 +885,101 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task name.</p>
-</dd></dl>
+    <dd>compare task name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="check_processes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#check_processes_hcl" style="color: inherit; text-decoration: inherit;">check_<wbr>processes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcomparetaskslistcheckprocess">list(object)</a></span>
+    </dt>
+    <dd>compare check info.</dd><dt class="property-required"
+            title="Required">
+        <span id="compare_processes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compare_processes_hcl" style="color: inherit; text-decoration: inherit;">compare_<wbr>processes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcomparetaskslistcompareprocess">list(object)</a></span>
+    </dt>
+    <dd>compare processing info.</dd><dt class="property-required"
+            title="Required">
+        <span id="compare_task_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compare_task_id_hcl" style="color: inherit; text-decoration: inherit;">compare_<wbr>task_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>compare task id.</dd><dt class="property-required"
+            title="Required">
+        <span id="conclusion_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conclusion_hcl" style="color: inherit; text-decoration: inherit;">conclusion</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>conclusion.</dd><dt class="property-required"
+            title="Required">
+        <span id="configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configs_hcl" style="color: inherit; text-decoration: inherit;">configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcomparetaskslistconfig">list(object)</a></span>
+    </dt>
+    <dd>config.</dd><dt class="property-required"
+            title="Required">
+        <span id="created_at_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_at_hcl" style="color: inherit; text-decoration: inherit;">created_<wbr>at</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>create time.</dd><dt class="property-required"
+            title="Required">
+        <span id="finished_at_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finished_at_hcl" style="color: inherit; text-decoration: inherit;">finished_<wbr>at</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>finished time.</dd><dt class="property-required"
+            title="Required">
+        <span id="job_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_id_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>job id.</dd><dt class="property-required"
+            title="Required">
+        <span id="started_at_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#started_at_hcl" style="color: inherit; text-decoration: inherit;">started_<wbr>at</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>start time.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
+            title="Required">
+        <span id="task_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_name_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>compare task name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -823,8 +993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocess">List&lt;Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process&gt;</a></span>
     </dt>
-    <dd><p>compare check info.</p>
-</dd><dt class="property-required"
+    <dd>compare check info.</dd><dt class="property-required"
             title="Required">
         <span id="compareprocesses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compareprocesses_java" style="color: inherit; text-decoration: inherit;">compare<wbr>Processes</a>
@@ -832,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocess">List&lt;Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process&gt;</a></span>
     </dt>
-    <dd><p>compare processing info.</p>
-</dd><dt class="property-required"
+    <dd>compare processing info.</dd><dt class="property-required"
             title="Required">
         <span id="comparetaskid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparetaskid_java" style="color: inherit; text-decoration: inherit;">compare<wbr>Task<wbr>Id</a>
@@ -841,8 +1009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>compare task id.</p>
-</dd><dt class="property-required"
+    <dd>compare task id.</dd><dt class="property-required"
             title="Required">
         <span id="conclusion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conclusion_java" style="color: inherit; text-decoration: inherit;">conclusion</a>
@@ -850,8 +1017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>conclusion.</p>
-</dd><dt class="property-required"
+    <dd>conclusion.</dd><dt class="property-required"
             title="Required">
         <span id="configs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configs_java" style="color: inherit; text-decoration: inherit;">configs</a>
@@ -859,8 +1025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfig">List&lt;Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>config.</p>
-</dd><dt class="property-required"
+    <dd>config.</dd><dt class="property-required"
             title="Required">
         <span id="createdat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdat_java" style="color: inherit; text-decoration: inherit;">created<wbr>At</a>
@@ -868,8 +1033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="finishedat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finishedat_java" style="color: inherit; text-decoration: inherit;">finished<wbr>At</a>
@@ -877,8 +1041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>finished time.</p>
-</dd><dt class="property-required"
+    <dd>finished time.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_java" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -886,8 +1049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-required"
+    <dd>job id.</dd><dt class="property-required"
             title="Required">
         <span id="startedat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startedat_java" style="color: inherit; text-decoration: inherit;">started<wbr>At</a>
@@ -895,8 +1057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -904,8 +1065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-required"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
             title="Required">
         <span id="taskname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskname_java" style="color: inherit; text-decoration: inherit;">task<wbr>Name</a>
@@ -913,8 +1073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>compare task name.</p>
-</dd></dl>
+    <dd>compare task name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -928,8 +1087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocess">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process[]</a></span>
     </dt>
-    <dd><p>compare check info.</p>
-</dd><dt class="property-required"
+    <dd>compare check info.</dd><dt class="property-required"
             title="Required">
         <span id="compareprocesses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compareprocesses_nodejs" style="color: inherit; text-decoration: inherit;">compare<wbr>Processes</a>
@@ -937,8 +1095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocess">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process[]</a></span>
     </dt>
-    <dd><p>compare processing info.</p>
-</dd><dt class="property-required"
+    <dd>compare processing info.</dd><dt class="property-required"
             title="Required">
         <span id="comparetaskid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparetaskid_nodejs" style="color: inherit; text-decoration: inherit;">compare<wbr>Task<wbr>Id</a>
@@ -946,8 +1103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task id.</p>
-</dd><dt class="property-required"
+    <dd>compare task id.</dd><dt class="property-required"
             title="Required">
         <span id="conclusion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conclusion_nodejs" style="color: inherit; text-decoration: inherit;">conclusion</a>
@@ -955,8 +1111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>conclusion.</p>
-</dd><dt class="property-required"
+    <dd>conclusion.</dd><dt class="property-required"
             title="Required">
         <span id="configs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configs_nodejs" style="color: inherit; text-decoration: inherit;">configs</a>
@@ -964,8 +1119,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfig">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config[]</a></span>
     </dt>
-    <dd><p>config.</p>
-</dd><dt class="property-required"
+    <dd>config.</dd><dt class="property-required"
             title="Required">
         <span id="createdat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdat_nodejs" style="color: inherit; text-decoration: inherit;">created<wbr>At</a>
@@ -973,8 +1127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="finishedat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finishedat_nodejs" style="color: inherit; text-decoration: inherit;">finished<wbr>At</a>
@@ -982,8 +1135,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>finished time.</p>
-</dd><dt class="property-required"
+    <dd>finished time.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -991,8 +1143,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-required"
+    <dd>job id.</dd><dt class="property-required"
             title="Required">
         <span id="startedat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startedat_nodejs" style="color: inherit; text-decoration: inherit;">started<wbr>At</a>
@@ -1000,8 +1151,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1009,8 +1159,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-required"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
             title="Required">
         <span id="taskname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskname_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Name</a>
@@ -1018,8 +1167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task name.</p>
-</dd></dl>
+    <dd>compare task name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1031,19 +1179,17 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#check_processes_python" style="color: inherit; text-decoration: inherit;">check_<wbr>processes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcomparetaskslistcheckprocess">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process]</a></span>
+        <span class="property-type"><a href="#getcomparetaskslistcheckprocess">Sequence[Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process]</a></span>
     </dt>
-    <dd><p>compare check info.</p>
-</dd><dt class="property-required"
+    <dd>compare check info.</dd><dt class="property-required"
             title="Required">
         <span id="compare_processes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compare_processes_python" style="color: inherit; text-decoration: inherit;">compare_<wbr>processes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcomparetaskslistcompareprocess">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process]</a></span>
+        <span class="property-type"><a href="#getcomparetaskslistcompareprocess">Sequence[Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process]</a></span>
     </dt>
-    <dd><p>compare processing info.</p>
-</dd><dt class="property-required"
+    <dd>compare processing info.</dd><dt class="property-required"
             title="Required">
         <span id="compare_task_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compare_task_id_python" style="color: inherit; text-decoration: inherit;">compare_<wbr>task_<wbr>id</a>
@@ -1051,8 +1197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>compare task id.</p>
-</dd><dt class="property-required"
+    <dd>compare task id.</dd><dt class="property-required"
             title="Required">
         <span id="conclusion_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conclusion_python" style="color: inherit; text-decoration: inherit;">conclusion</a>
@@ -1060,17 +1205,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>conclusion.</p>
-</dd><dt class="property-required"
+    <dd>conclusion.</dd><dt class="property-required"
             title="Required">
         <span id="configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configs_python" style="color: inherit; text-decoration: inherit;">configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcomparetaskslistconfig">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config]</a></span>
+        <span class="property-type"><a href="#getcomparetaskslistconfig">Sequence[Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config]</a></span>
     </dt>
-    <dd><p>config.</p>
-</dd><dt class="property-required"
+    <dd>config.</dd><dt class="property-required"
             title="Required">
         <span id="created_at_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_at_python" style="color: inherit; text-decoration: inherit;">created_<wbr>at</a>
@@ -1078,8 +1221,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="finished_at_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finished_at_python" style="color: inherit; text-decoration: inherit;">finished_<wbr>at</a>
@@ -1087,8 +1229,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>finished time.</p>
-</dd><dt class="property-required"
+    <dd>finished time.</dd><dt class="property-required"
             title="Required">
         <span id="job_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_id_python" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
@@ -1096,8 +1237,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-required"
+    <dd>job id.</dd><dt class="property-required"
             title="Required">
         <span id="started_at_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#started_at_python" style="color: inherit; text-decoration: inherit;">started_<wbr>at</a>
@@ -1105,8 +1245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1114,8 +1253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-required"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
             title="Required">
         <span id="task_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_name_python" style="color: inherit; text-decoration: inherit;">task_<wbr>name</a>
@@ -1123,8 +1261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>compare task name.</p>
-</dd></dl>
+    <dd>compare task name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1138,8 +1275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocess">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>compare check info.</p>
-</dd><dt class="property-required"
+    <dd>compare check info.</dd><dt class="property-required"
             title="Required">
         <span id="compareprocesses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compareprocesses_yaml" style="color: inherit; text-decoration: inherit;">compare<wbr>Processes</a>
@@ -1147,8 +1283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocess">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>compare processing info.</p>
-</dd><dt class="property-required"
+    <dd>compare processing info.</dd><dt class="property-required"
             title="Required">
         <span id="comparetaskid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparetaskid_yaml" style="color: inherit; text-decoration: inherit;">compare<wbr>Task<wbr>Id</a>
@@ -1156,8 +1291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>compare task id.</p>
-</dd><dt class="property-required"
+    <dd>compare task id.</dd><dt class="property-required"
             title="Required">
         <span id="conclusion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conclusion_yaml" style="color: inherit; text-decoration: inherit;">conclusion</a>
@@ -1165,8 +1299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>conclusion.</p>
-</dd><dt class="property-required"
+    <dd>conclusion.</dd><dt class="property-required"
             title="Required">
         <span id="configs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configs_yaml" style="color: inherit; text-decoration: inherit;">configs</a>
@@ -1174,8 +1307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>config.</p>
-</dd><dt class="property-required"
+    <dd>config.</dd><dt class="property-required"
             title="Required">
         <span id="createdat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdat_yaml" style="color: inherit; text-decoration: inherit;">created<wbr>At</a>
@@ -1183,8 +1315,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="finishedat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#finishedat_yaml" style="color: inherit; text-decoration: inherit;">finished<wbr>At</a>
@@ -1192,8 +1323,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>finished time.</p>
-</dd><dt class="property-required"
+    <dd>finished time.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -1201,8 +1331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>job id.</p>
-</dd><dt class="property-required"
+    <dd>job id.</dd><dt class="property-required"
             title="Required">
         <span id="startedat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startedat_yaml" style="color: inherit; text-decoration: inherit;">started<wbr>At</a>
@@ -1210,8 +1339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1219,8 +1347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-required"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
             title="Required">
         <span id="taskname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskname_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Name</a>
@@ -1228,8 +1355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>compare task name.</p>
-</dd></dl>
+    <dd>compare task name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1247,8 +1373,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="percent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_csharp" style="color: inherit; text-decoration: inherit;">Percent</a>
@@ -1256,8 +1381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-required"
+    <dd>progress info.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1265,8 +1389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-required"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
             title="Required">
         <span id="stepall_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepall_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>All</a>
@@ -1274,8 +1397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>all step counts.</p>
-</dd><dt class="property-required"
+    <dd>all step counts.</dd><dt class="property-required"
             title="Required">
         <span id="stepnow_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepnow_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>Now</a>
@@ -1283,8 +1405,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>current step number.</p>
-</dd><dt class="property-required"
+    <dd>current step number.</dd><dt class="property-required"
             title="Required">
         <span id="steps_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#steps_csharp" style="color: inherit; text-decoration: inherit;">Steps</a>
@@ -1292,8 +1413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocessstep">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process<wbr>Step&gt;</a></span>
     </dt>
-    <dd><p>step info.</p>
-</dd></dl>
+    <dd>step info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1307,8 +1427,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="percent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_go" style="color: inherit; text-decoration: inherit;">Percent</a>
@@ -1316,8 +1435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-required"
+    <dd>progress info.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1325,8 +1443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-required"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
             title="Required">
         <span id="stepall_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepall_go" style="color: inherit; text-decoration: inherit;">Step<wbr>All</a>
@@ -1334,8 +1451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>all step counts.</p>
-</dd><dt class="property-required"
+    <dd>all step counts.</dd><dt class="property-required"
             title="Required">
         <span id="stepnow_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepnow_go" style="color: inherit; text-decoration: inherit;">Step<wbr>Now</a>
@@ -1343,8 +1459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>current step number.</p>
-</dd><dt class="property-required"
+    <dd>current step number.</dd><dt class="property-required"
             title="Required">
         <span id="steps_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#steps_go" style="color: inherit; text-decoration: inherit;">Steps</a>
@@ -1352,8 +1467,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocessstep">[]Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process<wbr>Step</a></span>
     </dt>
-    <dd><p>step info.</p>
-</dd></dl>
+    <dd>step info.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="message_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_hcl" style="color: inherit; text-decoration: inherit;">message</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>message.</dd><dt class="property-required"
+            title="Required">
+        <span id="percent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_hcl" style="color: inherit; text-decoration: inherit;">percent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>progress info.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
+            title="Required">
+        <span id="step_all_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_all_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>all</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>all step counts.</dd><dt class="property-required"
+            title="Required">
+        <span id="step_now_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_now_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>now</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>current step number.</dd><dt class="property-required"
+            title="Required">
+        <span id="steps_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#steps_hcl" style="color: inherit; text-decoration: inherit;">steps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcomparetaskslistcheckprocessstep">list(object)</a></span>
+    </dt>
+    <dd>step info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1367,8 +1535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="percent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_java" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -1376,8 +1543,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-required"
+    <dd>progress info.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1385,8 +1551,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-required"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
             title="Required">
         <span id="stepall_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepall_java" style="color: inherit; text-decoration: inherit;">step<wbr>All</a>
@@ -1394,8 +1559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>all step counts.</p>
-</dd><dt class="property-required"
+    <dd>all step counts.</dd><dt class="property-required"
             title="Required">
         <span id="stepnow_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepnow_java" style="color: inherit; text-decoration: inherit;">step<wbr>Now</a>
@@ -1403,8 +1567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>current step number.</p>
-</dd><dt class="property-required"
+    <dd>current step number.</dd><dt class="property-required"
             title="Required">
         <span id="steps_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#steps_java" style="color: inherit; text-decoration: inherit;">steps</a>
@@ -1412,8 +1575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocessstep">List&lt;Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process<wbr>Step&gt;</a></span>
     </dt>
-    <dd><p>step info.</p>
-</dd></dl>
+    <dd>step info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1427,8 +1589,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="percent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_nodejs" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -1436,8 +1597,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-required"
+    <dd>progress info.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1445,8 +1605,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-required"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
             title="Required">
         <span id="stepall_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepall_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>All</a>
@@ -1454,8 +1613,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>all step counts.</p>
-</dd><dt class="property-required"
+    <dd>all step counts.</dd><dt class="property-required"
             title="Required">
         <span id="stepnow_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepnow_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>Now</a>
@@ -1463,8 +1621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>current step number.</p>
-</dd><dt class="property-required"
+    <dd>current step number.</dd><dt class="property-required"
             title="Required">
         <span id="steps_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#steps_nodejs" style="color: inherit; text-decoration: inherit;">steps</a>
@@ -1472,8 +1629,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocessstep">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process<wbr>Step[]</a></span>
     </dt>
-    <dd><p>step info.</p>
-</dd></dl>
+    <dd>step info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1487,8 +1643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="percent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_python" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -1496,8 +1651,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-required"
+    <dd>progress info.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1505,8 +1659,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-required"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
             title="Required">
         <span id="step_all_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_all_python" style="color: inherit; text-decoration: inherit;">step_<wbr>all</a>
@@ -1514,8 +1667,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>all step counts.</p>
-</dd><dt class="property-required"
+    <dd>all step counts.</dd><dt class="property-required"
             title="Required">
         <span id="step_now_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_now_python" style="color: inherit; text-decoration: inherit;">step_<wbr>now</a>
@@ -1523,17 +1675,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>current step number.</p>
-</dd><dt class="property-required"
+    <dd>current step number.</dd><dt class="property-required"
             title="Required">
         <span id="steps_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#steps_python" style="color: inherit; text-decoration: inherit;">steps</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcomparetaskslistcheckprocessstep">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process<wbr>Step]</a></span>
+        <span class="property-type"><a href="#getcomparetaskslistcheckprocessstep">Sequence[Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process<wbr>Step]</a></span>
     </dt>
-    <dd><p>step info.</p>
-</dd></dl>
+    <dd>step info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1547,8 +1697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="percent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_yaml" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -1556,8 +1705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-required"
+    <dd>progress info.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1565,8 +1713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-required"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
             title="Required">
         <span id="stepall_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepall_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>All</a>
@@ -1574,8 +1721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>all step counts.</p>
-</dd><dt class="property-required"
+    <dd>all step counts.</dd><dt class="property-required"
             title="Required">
         <span id="stepnow_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepnow_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>Now</a>
@@ -1583,8 +1729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>current step number.</p>
-</dd><dt class="property-required"
+    <dd>current step number.</dd><dt class="property-required"
             title="Required">
         <span id="steps_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#steps_yaml" style="color: inherit; text-decoration: inherit;">steps</a>
@@ -1592,8 +1737,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocessstep">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>step info.</p>
-</dd></dl>
+    <dd>step info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1611,8 +1755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocesssteperror">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process<wbr>Step<wbr>Error&gt;</a></span>
     </dt>
-    <dd><p>errors info.</p>
-</dd><dt class="property-optional"
+    <dd>errors info.</dd><dt class="property-optional"
             title="Optional">
         <span id="percent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_csharp" style="color: inherit; text-decoration: inherit;">Percent</a>
@@ -1620,8 +1763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-optional"
+    <dd>progress info.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -1629,8 +1771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-optional"
+    <dd>start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1638,8 +1779,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-optional"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepid_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>Id</a>
@@ -1647,8 +1787,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step id.</p>
-</dd><dt class="property-optional"
+    <dd>step id.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepmessage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepmessage_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>Message</a>
@@ -1656,8 +1795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step message.</p>
-</dd><dt class="property-optional"
+    <dd>step message.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepname_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>Name</a>
@@ -1665,8 +1803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step name.</p>
-</dd><dt class="property-optional"
+    <dd>step name.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepno_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepno_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>No</a>
@@ -1674,8 +1811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>step number.</p>
-</dd><dt class="property-optional"
+    <dd>step number.</dd><dt class="property-optional"
             title="Optional">
         <span id="warnings_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_csharp" style="color: inherit; text-decoration: inherit;">Warnings</a>
@@ -1683,8 +1819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocessstepwarning">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process<wbr>Step<wbr>Warning&gt;</a></span>
     </dt>
-    <dd><p>warnings info.</p>
-</dd></dl>
+    <dd>warnings info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1698,8 +1833,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocesssteperror">[]Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process<wbr>Step<wbr>Error</a></span>
     </dt>
-    <dd><p>errors info.</p>
-</dd><dt class="property-optional"
+    <dd>errors info.</dd><dt class="property-optional"
             title="Optional">
         <span id="percent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_go" style="color: inherit; text-decoration: inherit;">Percent</a>
@@ -1707,8 +1841,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-optional"
+    <dd>progress info.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -1716,8 +1849,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-optional"
+    <dd>start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1725,8 +1857,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-optional"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepid_go" style="color: inherit; text-decoration: inherit;">Step<wbr>Id</a>
@@ -1734,8 +1865,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step id.</p>
-</dd><dt class="property-optional"
+    <dd>step id.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepmessage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepmessage_go" style="color: inherit; text-decoration: inherit;">Step<wbr>Message</a>
@@ -1743,8 +1873,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step message.</p>
-</dd><dt class="property-optional"
+    <dd>step message.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepname_go" style="color: inherit; text-decoration: inherit;">Step<wbr>Name</a>
@@ -1752,8 +1881,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step name.</p>
-</dd><dt class="property-optional"
+    <dd>step name.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepno_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepno_go" style="color: inherit; text-decoration: inherit;">Step<wbr>No</a>
@@ -1761,8 +1889,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>step number.</p>
-</dd><dt class="property-optional"
+    <dd>step number.</dd><dt class="property-optional"
             title="Optional">
         <span id="warnings_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_go" style="color: inherit; text-decoration: inherit;">Warnings</a>
@@ -1770,8 +1897,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocessstepwarning">[]Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process<wbr>Step<wbr>Warning</a></span>
     </dt>
-    <dd><p>warnings info.</p>
-</dd></dl>
+    <dd>warnings info.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="errors_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errors_hcl" style="color: inherit; text-decoration: inherit;">errors</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcomparetaskslistcheckprocesssteperror">list(object)</a></span>
+    </dt>
+    <dd>errors info.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="percent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_hcl" style="color: inherit; text-decoration: inherit;">percent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>progress info.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>start time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="step_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_id_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>step id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="step_message_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_message_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>message</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>step message.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="step_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_name_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>step name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="step_no_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_no_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>no</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>step number.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="warnings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_hcl" style="color: inherit; text-decoration: inherit;">warnings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcomparetaskslistcheckprocessstepwarning">list(object)</a></span>
+    </dt>
+    <dd>warnings info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1785,8 +1989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocesssteperror">List&lt;Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process<wbr>Step<wbr>Error&gt;</a></span>
     </dt>
-    <dd><p>errors info.</p>
-</dd><dt class="property-optional"
+    <dd>errors info.</dd><dt class="property-optional"
             title="Optional">
         <span id="percent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_java" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -1794,8 +1997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-optional"
+    <dd>progress info.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1803,8 +2005,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-optional"
+    <dd>start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1812,8 +2013,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-optional"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepid_java" style="color: inherit; text-decoration: inherit;">step<wbr>Id</a>
@@ -1821,8 +2021,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>step id.</p>
-</dd><dt class="property-optional"
+    <dd>step id.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepmessage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepmessage_java" style="color: inherit; text-decoration: inherit;">step<wbr>Message</a>
@@ -1830,8 +2029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>step message.</p>
-</dd><dt class="property-optional"
+    <dd>step message.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepname_java" style="color: inherit; text-decoration: inherit;">step<wbr>Name</a>
@@ -1839,8 +2037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>step name.</p>
-</dd><dt class="property-optional"
+    <dd>step name.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepno_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepno_java" style="color: inherit; text-decoration: inherit;">step<wbr>No</a>
@@ -1848,8 +2045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>step number.</p>
-</dd><dt class="property-optional"
+    <dd>step number.</dd><dt class="property-optional"
             title="Optional">
         <span id="warnings_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_java" style="color: inherit; text-decoration: inherit;">warnings</a>
@@ -1857,8 +2053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocessstepwarning">List&lt;Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process<wbr>Step<wbr>Warning&gt;</a></span>
     </dt>
-    <dd><p>warnings info.</p>
-</dd></dl>
+    <dd>warnings info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1872,8 +2067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocesssteperror">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process<wbr>Step<wbr>Error[]</a></span>
     </dt>
-    <dd><p>errors info.</p>
-</dd><dt class="property-optional"
+    <dd>errors info.</dd><dt class="property-optional"
             title="Optional">
         <span id="percent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_nodejs" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -1881,8 +2075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-optional"
+    <dd>progress info.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1890,8 +2083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-optional"
+    <dd>start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1899,8 +2091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-optional"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepid_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>Id</a>
@@ -1908,8 +2099,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step id.</p>
-</dd><dt class="property-optional"
+    <dd>step id.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepmessage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepmessage_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>Message</a>
@@ -1917,8 +2107,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step message.</p>
-</dd><dt class="property-optional"
+    <dd>step message.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepname_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>Name</a>
@@ -1926,8 +2115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step name.</p>
-</dd><dt class="property-optional"
+    <dd>step name.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepno_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepno_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>No</a>
@@ -1935,8 +2123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>step number.</p>
-</dd><dt class="property-optional"
+    <dd>step number.</dd><dt class="property-optional"
             title="Optional">
         <span id="warnings_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_nodejs" style="color: inherit; text-decoration: inherit;">warnings</a>
@@ -1944,8 +2131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocessstepwarning">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process<wbr>Step<wbr>Warning[]</a></span>
     </dt>
-    <dd><p>warnings info.</p>
-</dd></dl>
+    <dd>warnings info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1957,10 +2143,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errors_python" style="color: inherit; text-decoration: inherit;">errors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcomparetaskslistcheckprocesssteperror">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process<wbr>Step<wbr>Error]</a></span>
+        <span class="property-type"><a href="#getcomparetaskslistcheckprocesssteperror">Sequence[Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process<wbr>Step<wbr>Error]</a></span>
     </dt>
-    <dd><p>errors info.</p>
-</dd><dt class="property-optional"
+    <dd>errors info.</dd><dt class="property-optional"
             title="Optional">
         <span id="percent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_python" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -1968,8 +2153,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-optional"
+    <dd>progress info.</dd><dt class="property-optional"
             title="Optional">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -1977,8 +2161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-optional"
+    <dd>start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1986,8 +2169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-optional"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-optional"
             title="Optional">
         <span id="step_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_id_python" style="color: inherit; text-decoration: inherit;">step_<wbr>id</a>
@@ -1995,8 +2177,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>step id.</p>
-</dd><dt class="property-optional"
+    <dd>step id.</dd><dt class="property-optional"
             title="Optional">
         <span id="step_message_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_message_python" style="color: inherit; text-decoration: inherit;">step_<wbr>message</a>
@@ -2004,8 +2185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>step message.</p>
-</dd><dt class="property-optional"
+    <dd>step message.</dd><dt class="property-optional"
             title="Optional">
         <span id="step_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_name_python" style="color: inherit; text-decoration: inherit;">step_<wbr>name</a>
@@ -2013,8 +2193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>step name.</p>
-</dd><dt class="property-optional"
+    <dd>step name.</dd><dt class="property-optional"
             title="Optional">
         <span id="step_no_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_no_python" style="color: inherit; text-decoration: inherit;">step_<wbr>no</a>
@@ -2022,17 +2201,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>step number.</p>
-</dd><dt class="property-optional"
+    <dd>step number.</dd><dt class="property-optional"
             title="Optional">
         <span id="warnings_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_python" style="color: inherit; text-decoration: inherit;">warnings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcomparetaskslistcheckprocessstepwarning">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process<wbr>Step<wbr>Warning]</a></span>
+        <span class="property-type"><a href="#getcomparetaskslistcheckprocessstepwarning">Sequence[Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Check<wbr>Process<wbr>Step<wbr>Warning]</a></span>
     </dt>
-    <dd><p>warnings info.</p>
-</dd></dl>
+    <dd>warnings info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2046,8 +2223,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocesssteperror">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>errors info.</p>
-</dd><dt class="property-optional"
+    <dd>errors info.</dd><dt class="property-optional"
             title="Optional">
         <span id="percent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_yaml" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -2055,8 +2231,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-optional"
+    <dd>progress info.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -2064,8 +2239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-optional"
+    <dd>start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2073,8 +2247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-optional"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepid_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>Id</a>
@@ -2082,8 +2255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>step id.</p>
-</dd><dt class="property-optional"
+    <dd>step id.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepmessage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepmessage_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>Message</a>
@@ -2091,8 +2263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>step message.</p>
-</dd><dt class="property-optional"
+    <dd>step message.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepname_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>Name</a>
@@ -2100,8 +2271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>step name.</p>
-</dd><dt class="property-optional"
+    <dd>step name.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepno_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepno_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>No</a>
@@ -2109,8 +2279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>step number.</p>
-</dd><dt class="property-optional"
+    <dd>step number.</dd><dt class="property-optional"
             title="Optional">
         <span id="warnings_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_yaml" style="color: inherit; text-decoration: inherit;">warnings</a>
@@ -2118,8 +2287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcheckprocessstepwarning">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>warnings info.</p>
-</dd></dl>
+    <dd>warnings info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2137,8 +2305,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_csharp" style="color: inherit; text-decoration: inherit;">Message</a>
@@ -2146,8 +2313,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_csharp" style="color: inherit; text-decoration: inherit;">Solution</a>
@@ -2155,8 +2321,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2170,8 +2335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_go" style="color: inherit; text-decoration: inherit;">Message</a>
@@ -2179,8 +2343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_go" style="color: inherit; text-decoration: inherit;">Solution</a>
@@ -2188,8 +2351,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="help_doc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#help_doc_hcl" style="color: inherit; text-decoration: inherit;">help_<wbr>doc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>help document.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="message_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_hcl" style="color: inherit; text-decoration: inherit;">message</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>message.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="solution_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_hcl" style="color: inherit; text-decoration: inherit;">solution</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2203,8 +2395,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_java" style="color: inherit; text-decoration: inherit;">message</a>
@@ -2212,8 +2403,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_java" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -2221,8 +2411,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2236,8 +2425,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_nodejs" style="color: inherit; text-decoration: inherit;">message</a>
@@ -2245,8 +2433,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_nodejs" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -2254,8 +2441,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2269,8 +2455,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_python" style="color: inherit; text-decoration: inherit;">message</a>
@@ -2278,8 +2463,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_python" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -2287,8 +2471,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2302,8 +2485,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_yaml" style="color: inherit; text-decoration: inherit;">message</a>
@@ -2311,8 +2493,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_yaml" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -2320,8 +2501,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2339,8 +2519,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_csharp" style="color: inherit; text-decoration: inherit;">Message</a>
@@ -2348,8 +2527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_csharp" style="color: inherit; text-decoration: inherit;">Solution</a>
@@ -2357,8 +2535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2372,8 +2549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_go" style="color: inherit; text-decoration: inherit;">Message</a>
@@ -2381,8 +2557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_go" style="color: inherit; text-decoration: inherit;">Solution</a>
@@ -2390,8 +2565,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="help_doc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#help_doc_hcl" style="color: inherit; text-decoration: inherit;">help_<wbr>doc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>help document.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="message_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_hcl" style="color: inherit; text-decoration: inherit;">message</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>message.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="solution_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_hcl" style="color: inherit; text-decoration: inherit;">solution</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2405,8 +2609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_java" style="color: inherit; text-decoration: inherit;">message</a>
@@ -2414,8 +2617,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_java" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -2423,8 +2625,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2438,8 +2639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_nodejs" style="color: inherit; text-decoration: inherit;">message</a>
@@ -2447,8 +2647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_nodejs" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -2456,8 +2655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2471,8 +2669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_python" style="color: inherit; text-decoration: inherit;">message</a>
@@ -2480,8 +2677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_python" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -2489,8 +2685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2504,8 +2699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_yaml" style="color: inherit; text-decoration: inherit;">message</a>
@@ -2513,8 +2707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_yaml" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -2522,8 +2715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2541,8 +2733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="percent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_csharp" style="color: inherit; text-decoration: inherit;">Percent</a>
@@ -2550,8 +2741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-required"
+    <dd>progress info.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2559,8 +2749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-required"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
             title="Required">
         <span id="stepall_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepall_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>All</a>
@@ -2568,8 +2757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>all step counts.</p>
-</dd><dt class="property-required"
+    <dd>all step counts.</dd><dt class="property-required"
             title="Required">
         <span id="stepnow_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepnow_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>Now</a>
@@ -2577,8 +2765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>current step number.</p>
-</dd><dt class="property-required"
+    <dd>current step number.</dd><dt class="property-required"
             title="Required">
         <span id="steps_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#steps_csharp" style="color: inherit; text-decoration: inherit;">Steps</a>
@@ -2586,8 +2773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocessstep">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process<wbr>Step&gt;</a></span>
     </dt>
-    <dd><p>step info.</p>
-</dd></dl>
+    <dd>step info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2601,8 +2787,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="percent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_go" style="color: inherit; text-decoration: inherit;">Percent</a>
@@ -2610,8 +2795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-required"
+    <dd>progress info.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2619,8 +2803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-required"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
             title="Required">
         <span id="stepall_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepall_go" style="color: inherit; text-decoration: inherit;">Step<wbr>All</a>
@@ -2628,8 +2811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>all step counts.</p>
-</dd><dt class="property-required"
+    <dd>all step counts.</dd><dt class="property-required"
             title="Required">
         <span id="stepnow_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepnow_go" style="color: inherit; text-decoration: inherit;">Step<wbr>Now</a>
@@ -2637,8 +2819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>current step number.</p>
-</dd><dt class="property-required"
+    <dd>current step number.</dd><dt class="property-required"
             title="Required">
         <span id="steps_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#steps_go" style="color: inherit; text-decoration: inherit;">Steps</a>
@@ -2646,8 +2827,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocessstep">[]Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process<wbr>Step</a></span>
     </dt>
-    <dd><p>step info.</p>
-</dd></dl>
+    <dd>step info.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="message_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_hcl" style="color: inherit; text-decoration: inherit;">message</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>message.</dd><dt class="property-required"
+            title="Required">
+        <span id="percent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_hcl" style="color: inherit; text-decoration: inherit;">percent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>progress info.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
+            title="Required">
+        <span id="step_all_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_all_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>all</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>all step counts.</dd><dt class="property-required"
+            title="Required">
+        <span id="step_now_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_now_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>now</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>current step number.</dd><dt class="property-required"
+            title="Required">
+        <span id="steps_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#steps_hcl" style="color: inherit; text-decoration: inherit;">steps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcomparetaskslistcompareprocessstep">list(object)</a></span>
+    </dt>
+    <dd>step info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2661,8 +2895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="percent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_java" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -2670,8 +2903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-required"
+    <dd>progress info.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2679,8 +2911,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-required"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
             title="Required">
         <span id="stepall_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepall_java" style="color: inherit; text-decoration: inherit;">step<wbr>All</a>
@@ -2688,8 +2919,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>all step counts.</p>
-</dd><dt class="property-required"
+    <dd>all step counts.</dd><dt class="property-required"
             title="Required">
         <span id="stepnow_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepnow_java" style="color: inherit; text-decoration: inherit;">step<wbr>Now</a>
@@ -2697,8 +2927,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>current step number.</p>
-</dd><dt class="property-required"
+    <dd>current step number.</dd><dt class="property-required"
             title="Required">
         <span id="steps_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#steps_java" style="color: inherit; text-decoration: inherit;">steps</a>
@@ -2706,8 +2935,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocessstep">List&lt;Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process<wbr>Step&gt;</a></span>
     </dt>
-    <dd><p>step info.</p>
-</dd></dl>
+    <dd>step info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2721,8 +2949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="percent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_nodejs" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -2730,8 +2957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-required"
+    <dd>progress info.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2739,8 +2965,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-required"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
             title="Required">
         <span id="stepall_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepall_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>All</a>
@@ -2748,8 +2973,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>all step counts.</p>
-</dd><dt class="property-required"
+    <dd>all step counts.</dd><dt class="property-required"
             title="Required">
         <span id="stepnow_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepnow_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>Now</a>
@@ -2757,8 +2981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>current step number.</p>
-</dd><dt class="property-required"
+    <dd>current step number.</dd><dt class="property-required"
             title="Required">
         <span id="steps_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#steps_nodejs" style="color: inherit; text-decoration: inherit;">steps</a>
@@ -2766,8 +2989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocessstep">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process<wbr>Step[]</a></span>
     </dt>
-    <dd><p>step info.</p>
-</dd></dl>
+    <dd>step info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2781,8 +3003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="percent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_python" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -2790,8 +3011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-required"
+    <dd>progress info.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2799,8 +3019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-required"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
             title="Required">
         <span id="step_all_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_all_python" style="color: inherit; text-decoration: inherit;">step_<wbr>all</a>
@@ -2808,8 +3027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>all step counts.</p>
-</dd><dt class="property-required"
+    <dd>all step counts.</dd><dt class="property-required"
             title="Required">
         <span id="step_now_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_now_python" style="color: inherit; text-decoration: inherit;">step_<wbr>now</a>
@@ -2817,17 +3035,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>current step number.</p>
-</dd><dt class="property-required"
+    <dd>current step number.</dd><dt class="property-required"
             title="Required">
         <span id="steps_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#steps_python" style="color: inherit; text-decoration: inherit;">steps</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcomparetaskslistcompareprocessstep">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process<wbr>Step]</a></span>
+        <span class="property-type"><a href="#getcomparetaskslistcompareprocessstep">Sequence[Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process<wbr>Step]</a></span>
     </dt>
-    <dd><p>step info.</p>
-</dd></dl>
+    <dd>step info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2841,8 +3057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-required"
+    <dd>message.</dd><dt class="property-required"
             title="Required">
         <span id="percent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_yaml" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -2850,8 +3065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-required"
+    <dd>progress info.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2859,8 +3073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-required"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-required"
             title="Required">
         <span id="stepall_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepall_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>All</a>
@@ -2868,8 +3081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>all step counts.</p>
-</dd><dt class="property-required"
+    <dd>all step counts.</dd><dt class="property-required"
             title="Required">
         <span id="stepnow_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepnow_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>Now</a>
@@ -2877,8 +3089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>current step number.</p>
-</dd><dt class="property-required"
+    <dd>current step number.</dd><dt class="property-required"
             title="Required">
         <span id="steps_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#steps_yaml" style="color: inherit; text-decoration: inherit;">steps</a>
@@ -2886,8 +3097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocessstep">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>step info.</p>
-</dd></dl>
+    <dd>step info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2905,8 +3115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocesssteperror">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process<wbr>Step<wbr>Error&gt;</a></span>
     </dt>
-    <dd><p>errors info.</p>
-</dd><dt class="property-optional"
+    <dd>errors info.</dd><dt class="property-optional"
             title="Optional">
         <span id="percent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_csharp" style="color: inherit; text-decoration: inherit;">Percent</a>
@@ -2914,8 +3123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-optional"
+    <dd>progress info.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -2923,8 +3131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-optional"
+    <dd>start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2932,8 +3139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-optional"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepid_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>Id</a>
@@ -2941,8 +3147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step id.</p>
-</dd><dt class="property-optional"
+    <dd>step id.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepmessage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepmessage_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>Message</a>
@@ -2950,8 +3155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step message.</p>
-</dd><dt class="property-optional"
+    <dd>step message.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepname_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>Name</a>
@@ -2959,8 +3163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step name.</p>
-</dd><dt class="property-optional"
+    <dd>step name.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepno_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepno_csharp" style="color: inherit; text-decoration: inherit;">Step<wbr>No</a>
@@ -2968,8 +3171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>step number.</p>
-</dd><dt class="property-optional"
+    <dd>step number.</dd><dt class="property-optional"
             title="Optional">
         <span id="warnings_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_csharp" style="color: inherit; text-decoration: inherit;">Warnings</a>
@@ -2977,8 +3179,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocessstepwarning">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process<wbr>Step<wbr>Warning&gt;</a></span>
     </dt>
-    <dd><p>warnings info.</p>
-</dd></dl>
+    <dd>warnings info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2992,8 +3193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocesssteperror">[]Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process<wbr>Step<wbr>Error</a></span>
     </dt>
-    <dd><p>errors info.</p>
-</dd><dt class="property-optional"
+    <dd>errors info.</dd><dt class="property-optional"
             title="Optional">
         <span id="percent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_go" style="color: inherit; text-decoration: inherit;">Percent</a>
@@ -3001,8 +3201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-optional"
+    <dd>progress info.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -3010,8 +3209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-optional"
+    <dd>start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -3019,8 +3217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-optional"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepid_go" style="color: inherit; text-decoration: inherit;">Step<wbr>Id</a>
@@ -3028,8 +3225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step id.</p>
-</dd><dt class="property-optional"
+    <dd>step id.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepmessage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepmessage_go" style="color: inherit; text-decoration: inherit;">Step<wbr>Message</a>
@@ -3037,8 +3233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step message.</p>
-</dd><dt class="property-optional"
+    <dd>step message.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepname_go" style="color: inherit; text-decoration: inherit;">Step<wbr>Name</a>
@@ -3046,8 +3241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step name.</p>
-</dd><dt class="property-optional"
+    <dd>step name.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepno_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepno_go" style="color: inherit; text-decoration: inherit;">Step<wbr>No</a>
@@ -3055,8 +3249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>step number.</p>
-</dd><dt class="property-optional"
+    <dd>step number.</dd><dt class="property-optional"
             title="Optional">
         <span id="warnings_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_go" style="color: inherit; text-decoration: inherit;">Warnings</a>
@@ -3064,8 +3257,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocessstepwarning">[]Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process<wbr>Step<wbr>Warning</a></span>
     </dt>
-    <dd><p>warnings info.</p>
-</dd></dl>
+    <dd>warnings info.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="errors_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errors_hcl" style="color: inherit; text-decoration: inherit;">errors</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcomparetaskslistcompareprocesssteperror">list(object)</a></span>
+    </dt>
+    <dd>errors info.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="percent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_hcl" style="color: inherit; text-decoration: inherit;">percent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>progress info.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>start time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="step_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_id_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>step id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="step_message_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_message_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>message</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>step message.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="step_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_name_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>step name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="step_no_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_no_hcl" style="color: inherit; text-decoration: inherit;">step_<wbr>no</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>step number.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="warnings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_hcl" style="color: inherit; text-decoration: inherit;">warnings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcomparetaskslistcompareprocessstepwarning">list(object)</a></span>
+    </dt>
+    <dd>warnings info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3079,8 +3349,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocesssteperror">List&lt;Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process<wbr>Step<wbr>Error&gt;</a></span>
     </dt>
-    <dd><p>errors info.</p>
-</dd><dt class="property-optional"
+    <dd>errors info.</dd><dt class="property-optional"
             title="Optional">
         <span id="percent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_java" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -3088,8 +3357,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-optional"
+    <dd>progress info.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -3097,8 +3365,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-optional"
+    <dd>start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3106,8 +3373,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-optional"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepid_java" style="color: inherit; text-decoration: inherit;">step<wbr>Id</a>
@@ -3115,8 +3381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>step id.</p>
-</dd><dt class="property-optional"
+    <dd>step id.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepmessage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepmessage_java" style="color: inherit; text-decoration: inherit;">step<wbr>Message</a>
@@ -3124,8 +3389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>step message.</p>
-</dd><dt class="property-optional"
+    <dd>step message.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepname_java" style="color: inherit; text-decoration: inherit;">step<wbr>Name</a>
@@ -3133,8 +3397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>step name.</p>
-</dd><dt class="property-optional"
+    <dd>step name.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepno_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepno_java" style="color: inherit; text-decoration: inherit;">step<wbr>No</a>
@@ -3142,8 +3405,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>step number.</p>
-</dd><dt class="property-optional"
+    <dd>step number.</dd><dt class="property-optional"
             title="Optional">
         <span id="warnings_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_java" style="color: inherit; text-decoration: inherit;">warnings</a>
@@ -3151,8 +3413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocessstepwarning">List&lt;Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process<wbr>Step<wbr>Warning&gt;</a></span>
     </dt>
-    <dd><p>warnings info.</p>
-</dd></dl>
+    <dd>warnings info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3166,8 +3427,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocesssteperror">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process<wbr>Step<wbr>Error[]</a></span>
     </dt>
-    <dd><p>errors info.</p>
-</dd><dt class="property-optional"
+    <dd>errors info.</dd><dt class="property-optional"
             title="Optional">
         <span id="percent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_nodejs" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -3175,8 +3435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-optional"
+    <dd>progress info.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -3184,8 +3443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-optional"
+    <dd>start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3193,8 +3451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-optional"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepid_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>Id</a>
@@ -3202,8 +3459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step id.</p>
-</dd><dt class="property-optional"
+    <dd>step id.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepmessage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepmessage_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>Message</a>
@@ -3211,8 +3467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step message.</p>
-</dd><dt class="property-optional"
+    <dd>step message.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepname_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>Name</a>
@@ -3220,8 +3475,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>step name.</p>
-</dd><dt class="property-optional"
+    <dd>step name.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepno_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepno_nodejs" style="color: inherit; text-decoration: inherit;">step<wbr>No</a>
@@ -3229,8 +3483,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>step number.</p>
-</dd><dt class="property-optional"
+    <dd>step number.</dd><dt class="property-optional"
             title="Optional">
         <span id="warnings_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_nodejs" style="color: inherit; text-decoration: inherit;">warnings</a>
@@ -3238,8 +3491,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocessstepwarning">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process<wbr>Step<wbr>Warning[]</a></span>
     </dt>
-    <dd><p>warnings info.</p>
-</dd></dl>
+    <dd>warnings info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3251,10 +3503,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errors_python" style="color: inherit; text-decoration: inherit;">errors</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcomparetaskslistcompareprocesssteperror">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process<wbr>Step<wbr>Error]</a></span>
+        <span class="property-type"><a href="#getcomparetaskslistcompareprocesssteperror">Sequence[Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process<wbr>Step<wbr>Error]</a></span>
     </dt>
-    <dd><p>errors info.</p>
-</dd><dt class="property-optional"
+    <dd>errors info.</dd><dt class="property-optional"
             title="Optional">
         <span id="percent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_python" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -3262,8 +3513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-optional"
+    <dd>progress info.</dd><dt class="property-optional"
             title="Optional">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -3271,8 +3521,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-optional"
+    <dd>start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3280,8 +3529,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-optional"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-optional"
             title="Optional">
         <span id="step_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_id_python" style="color: inherit; text-decoration: inherit;">step_<wbr>id</a>
@@ -3289,8 +3537,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>step id.</p>
-</dd><dt class="property-optional"
+    <dd>step id.</dd><dt class="property-optional"
             title="Optional">
         <span id="step_message_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_message_python" style="color: inherit; text-decoration: inherit;">step_<wbr>message</a>
@@ -3298,8 +3545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>step message.</p>
-</dd><dt class="property-optional"
+    <dd>step message.</dd><dt class="property-optional"
             title="Optional">
         <span id="step_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_name_python" style="color: inherit; text-decoration: inherit;">step_<wbr>name</a>
@@ -3307,8 +3553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>step name.</p>
-</dd><dt class="property-optional"
+    <dd>step name.</dd><dt class="property-optional"
             title="Optional">
         <span id="step_no_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#step_no_python" style="color: inherit; text-decoration: inherit;">step_<wbr>no</a>
@@ -3316,17 +3561,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>step number.</p>
-</dd><dt class="property-optional"
+    <dd>step number.</dd><dt class="property-optional"
             title="Optional">
         <span id="warnings_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_python" style="color: inherit; text-decoration: inherit;">warnings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcomparetaskslistcompareprocessstepwarning">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process<wbr>Step<wbr>Warning]</a></span>
+        <span class="property-type"><a href="#getcomparetaskslistcompareprocessstepwarning">Sequence[Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Compare<wbr>Process<wbr>Step<wbr>Warning]</a></span>
     </dt>
-    <dd><p>warnings info.</p>
-</dd></dl>
+    <dd>warnings info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3340,8 +3583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocesssteperror">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>errors info.</p>
-</dd><dt class="property-optional"
+    <dd>errors info.</dd><dt class="property-optional"
             title="Optional">
         <span id="percent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_yaml" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -3349,8 +3591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>progress info.</p>
-</dd><dt class="property-optional"
+    <dd>progress info.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -3358,8 +3599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-optional"
+    <dd>start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3367,8 +3607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</p>
-</dd><dt class="property-optional"
+    <dd>compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepid_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>Id</a>
@@ -3376,8 +3615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>step id.</p>
-</dd><dt class="property-optional"
+    <dd>step id.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepmessage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepmessage_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>Message</a>
@@ -3385,8 +3623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>step message.</p>
-</dd><dt class="property-optional"
+    <dd>step message.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepname_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>Name</a>
@@ -3394,8 +3631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>step name.</p>
-</dd><dt class="property-optional"
+    <dd>step name.</dd><dt class="property-optional"
             title="Optional">
         <span id="stepno_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stepno_yaml" style="color: inherit; text-decoration: inherit;">step<wbr>No</a>
@@ -3403,8 +3639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>step number.</p>
-</dd><dt class="property-optional"
+    <dd>step number.</dd><dt class="property-optional"
             title="Optional">
         <span id="warnings_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#warnings_yaml" style="color: inherit; text-decoration: inherit;">warnings</a>
@@ -3412,8 +3647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistcompareprocessstepwarning">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>warnings info.</p>
-</dd></dl>
+    <dd>warnings info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3431,8 +3665,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_csharp" style="color: inherit; text-decoration: inherit;">Message</a>
@@ -3440,8 +3673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_csharp" style="color: inherit; text-decoration: inherit;">Solution</a>
@@ -3449,8 +3681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3464,8 +3695,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_go" style="color: inherit; text-decoration: inherit;">Message</a>
@@ -3473,8 +3703,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_go" style="color: inherit; text-decoration: inherit;">Solution</a>
@@ -3482,8 +3711,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="help_doc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#help_doc_hcl" style="color: inherit; text-decoration: inherit;">help_<wbr>doc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>help document.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="message_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_hcl" style="color: inherit; text-decoration: inherit;">message</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>message.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="solution_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_hcl" style="color: inherit; text-decoration: inherit;">solution</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3497,8 +3755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_java" style="color: inherit; text-decoration: inherit;">message</a>
@@ -3506,8 +3763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_java" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -3515,8 +3771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3530,8 +3785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_nodejs" style="color: inherit; text-decoration: inherit;">message</a>
@@ -3539,8 +3793,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_nodejs" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -3548,8 +3801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3563,8 +3815,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_python" style="color: inherit; text-decoration: inherit;">message</a>
@@ -3572,8 +3823,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_python" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -3581,8 +3831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3596,8 +3845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_yaml" style="color: inherit; text-decoration: inherit;">message</a>
@@ -3605,8 +3853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_yaml" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -3614,8 +3861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3633,8 +3879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_csharp" style="color: inherit; text-decoration: inherit;">Message</a>
@@ -3642,8 +3887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_csharp" style="color: inherit; text-decoration: inherit;">Solution</a>
@@ -3651,8 +3895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3666,8 +3909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_go" style="color: inherit; text-decoration: inherit;">Message</a>
@@ -3675,8 +3917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_go" style="color: inherit; text-decoration: inherit;">Solution</a>
@@ -3684,8 +3925,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="help_doc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#help_doc_hcl" style="color: inherit; text-decoration: inherit;">help_<wbr>doc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>help document.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="message_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_hcl" style="color: inherit; text-decoration: inherit;">message</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>message.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="solution_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_hcl" style="color: inherit; text-decoration: inherit;">solution</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3699,8 +3969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_java" style="color: inherit; text-decoration: inherit;">message</a>
@@ -3708,8 +3977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_java" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -3717,8 +3985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3732,8 +3999,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_nodejs" style="color: inherit; text-decoration: inherit;">message</a>
@@ -3741,8 +4007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_nodejs" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -3750,8 +4015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3765,8 +4029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_python" style="color: inherit; text-decoration: inherit;">message</a>
@@ -3774,8 +4037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_python" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -3783,8 +4045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3798,8 +4059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>help document.</p>
-</dd><dt class="property-optional"
+    <dd>help document.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_yaml" style="color: inherit; text-decoration: inherit;">message</a>
@@ -3807,8 +4067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>message.</p>
-</dd><dt class="property-optional"
+    <dd>message.</dd><dt class="property-optional"
             title="Optional">
         <span id="solution_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_yaml" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -3816,8 +4075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>solution.</p>
-</dd></dl>
+    <dd>solution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3835,8 +4093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfigobjectitem">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config<wbr>Object<wbr>Item&gt;</a></span>
     </dt>
-    <dd><p>object items.</p>
-</dd><dt class="property-required"
+    <dd>object items.</dd><dt class="property-required"
             title="Required">
         <span id="objectmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectmode_csharp" style="color: inherit; text-decoration: inherit;">Object<wbr>Mode</a>
@@ -3844,8 +4101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>object mode.</p>
-</dd></dl>
+    <dd>object mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3859,8 +4115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfigobjectitem">[]Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config<wbr>Object<wbr>Item</a></span>
     </dt>
-    <dd><p>object items.</p>
-</dd><dt class="property-required"
+    <dd>object items.</dd><dt class="property-required"
             title="Required">
         <span id="objectmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectmode_go" style="color: inherit; text-decoration: inherit;">Object<wbr>Mode</a>
@@ -3868,8 +4123,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>object mode.</p>
-</dd></dl>
+    <dd>object mode.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="object_items_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#object_items_hcl" style="color: inherit; text-decoration: inherit;">object_<wbr>items</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcomparetaskslistconfigobjectitem">list(object)</a></span>
+    </dt>
+    <dd>object items.</dd><dt class="property-required"
+            title="Required">
+        <span id="object_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#object_mode_hcl" style="color: inherit; text-decoration: inherit;">object_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>object mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3883,8 +4159,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfigobjectitem">List&lt;Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config<wbr>Object<wbr>Item&gt;</a></span>
     </dt>
-    <dd><p>object items.</p>
-</dd><dt class="property-required"
+    <dd>object items.</dd><dt class="property-required"
             title="Required">
         <span id="objectmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectmode_java" style="color: inherit; text-decoration: inherit;">object<wbr>Mode</a>
@@ -3892,8 +4167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>object mode.</p>
-</dd></dl>
+    <dd>object mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3907,8 +4181,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfigobjectitem">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config<wbr>Object<wbr>Item[]</a></span>
     </dt>
-    <dd><p>object items.</p>
-</dd><dt class="property-required"
+    <dd>object items.</dd><dt class="property-required"
             title="Required">
         <span id="objectmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectmode_nodejs" style="color: inherit; text-decoration: inherit;">object<wbr>Mode</a>
@@ -3916,8 +4189,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>object mode.</p>
-</dd></dl>
+    <dd>object mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3929,10 +4201,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#object_items_python" style="color: inherit; text-decoration: inherit;">object_<wbr>items</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcomparetaskslistconfigobjectitem">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config<wbr>Object<wbr>Item]</a></span>
+        <span class="property-type"><a href="#getcomparetaskslistconfigobjectitem">Sequence[Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config<wbr>Object<wbr>Item]</a></span>
     </dt>
-    <dd><p>object items.</p>
-</dd><dt class="property-required"
+    <dd>object items.</dd><dt class="property-required"
             title="Required">
         <span id="object_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#object_mode_python" style="color: inherit; text-decoration: inherit;">object_<wbr>mode</a>
@@ -3940,8 +4211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>object mode.</p>
-</dd></dl>
+    <dd>object mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3955,8 +4225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfigobjectitem">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>object items.</p>
-</dd><dt class="property-required"
+    <dd>object items.</dd><dt class="property-required"
             title="Required">
         <span id="objectmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#objectmode_yaml" style="color: inherit; text-decoration: inherit;">object<wbr>Mode</a>
@@ -3964,8 +4233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>object mode.</p>
-</dd></dl>
+    <dd>object mode.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3983,8 +4251,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>database mode.</p>
-</dd><dt class="property-optional"
+    <dd>database mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -3992,8 +4259,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>database name.</p>
-</dd><dt class="property-optional"
+    <dd>database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="schemaname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schemaname_csharp" style="color: inherit; text-decoration: inherit;">Schema<wbr>Name</a>
@@ -4001,8 +4267,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>schema name.</p>
-</dd><dt class="property-optional"
+    <dd>schema name.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablemode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablemode_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Mode</a>
@@ -4010,8 +4275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>table mode.</p>
-</dd><dt class="property-optional"
+    <dd>table mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="tables_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_csharp" style="color: inherit; text-decoration: inherit;">Tables</a>
@@ -4019,8 +4283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfigobjectitemtable">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config<wbr>Object<wbr>Item<wbr>Table&gt;</a></span>
     </dt>
-    <dd><p>table list.</p>
-</dd><dt class="property-optional"
+    <dd>table list.</dd><dt class="property-optional"
             title="Optional">
         <span id="viewmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viewmode_csharp" style="color: inherit; text-decoration: inherit;">View<wbr>Mode</a>
@@ -4028,8 +4291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>view mode.</p>
-</dd><dt class="property-optional"
+    <dd>view mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="views_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#views_csharp" style="color: inherit; text-decoration: inherit;">Views</a>
@@ -4037,8 +4299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfigobjectitemview">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dts.<wbr>Inputs.<wbr>Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config<wbr>Object<wbr>Item<wbr>View&gt;</a></span>
     </dt>
-    <dd><p>view list.</p>
-</dd></dl>
+    <dd>view list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4052,8 +4313,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>database mode.</p>
-</dd><dt class="property-optional"
+    <dd>database mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -4061,8 +4321,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>database name.</p>
-</dd><dt class="property-optional"
+    <dd>database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="schemaname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schemaname_go" style="color: inherit; text-decoration: inherit;">Schema<wbr>Name</a>
@@ -4070,8 +4329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>schema name.</p>
-</dd><dt class="property-optional"
+    <dd>schema name.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablemode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablemode_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Mode</a>
@@ -4079,8 +4337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>table mode.</p>
-</dd><dt class="property-optional"
+    <dd>table mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="tables_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_go" style="color: inherit; text-decoration: inherit;">Tables</a>
@@ -4088,8 +4345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfigobjectitemtable">[]Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config<wbr>Object<wbr>Item<wbr>Table</a></span>
     </dt>
-    <dd><p>table list.</p>
-</dd><dt class="property-optional"
+    <dd>table list.</dd><dt class="property-optional"
             title="Optional">
         <span id="viewmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viewmode_go" style="color: inherit; text-decoration: inherit;">View<wbr>Mode</a>
@@ -4097,8 +4353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>view mode.</p>
-</dd><dt class="property-optional"
+    <dd>view mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="views_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#views_go" style="color: inherit; text-decoration: inherit;">Views</a>
@@ -4106,8 +4361,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfigobjectitemview">[]Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config<wbr>Object<wbr>Item<wbr>View</a></span>
     </dt>
-    <dd><p>view list.</p>
-</dd></dl>
+    <dd>view list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="db_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_mode_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>database mode.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="db_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_name_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>database name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="schema_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schema_name_hcl" style="color: inherit; text-decoration: inherit;">schema_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>schema name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="table_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_mode_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>table mode.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tables_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_hcl" style="color: inherit; text-decoration: inherit;">tables</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcomparetaskslistconfigobjectitemtable">list(object)</a></span>
+    </dt>
+    <dd>table list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="view_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#view_mode_hcl" style="color: inherit; text-decoration: inherit;">view_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>view mode.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="views_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#views_hcl" style="color: inherit; text-decoration: inherit;">views</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcomparetaskslistconfigobjectitemview">list(object)</a></span>
+    </dt>
+    <dd>view list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4121,8 +4437,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>database mode.</p>
-</dd><dt class="property-optional"
+    <dd>database mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_java" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -4130,8 +4445,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>database name.</p>
-</dd><dt class="property-optional"
+    <dd>database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="schemaname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schemaname_java" style="color: inherit; text-decoration: inherit;">schema<wbr>Name</a>
@@ -4139,8 +4453,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>schema name.</p>
-</dd><dt class="property-optional"
+    <dd>schema name.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablemode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablemode_java" style="color: inherit; text-decoration: inherit;">table<wbr>Mode</a>
@@ -4148,8 +4461,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>table mode.</p>
-</dd><dt class="property-optional"
+    <dd>table mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="tables_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_java" style="color: inherit; text-decoration: inherit;">tables</a>
@@ -4157,8 +4469,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfigobjectitemtable">List&lt;Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config<wbr>Object<wbr>Item<wbr>Table&gt;</a></span>
     </dt>
-    <dd><p>table list.</p>
-</dd><dt class="property-optional"
+    <dd>table list.</dd><dt class="property-optional"
             title="Optional">
         <span id="viewmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viewmode_java" style="color: inherit; text-decoration: inherit;">view<wbr>Mode</a>
@@ -4166,8 +4477,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>view mode.</p>
-</dd><dt class="property-optional"
+    <dd>view mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="views_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#views_java" style="color: inherit; text-decoration: inherit;">views</a>
@@ -4175,8 +4485,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfigobjectitemview">List&lt;Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config<wbr>Object<wbr>Item<wbr>View&gt;</a></span>
     </dt>
-    <dd><p>view list.</p>
-</dd></dl>
+    <dd>view list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4190,8 +4499,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>database mode.</p>
-</dd><dt class="property-optional"
+    <dd>database mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -4199,8 +4507,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>database name.</p>
-</dd><dt class="property-optional"
+    <dd>database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="schemaname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schemaname_nodejs" style="color: inherit; text-decoration: inherit;">schema<wbr>Name</a>
@@ -4208,8 +4515,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>schema name.</p>
-</dd><dt class="property-optional"
+    <dd>schema name.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablemode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablemode_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Mode</a>
@@ -4217,8 +4523,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>table mode.</p>
-</dd><dt class="property-optional"
+    <dd>table mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="tables_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_nodejs" style="color: inherit; text-decoration: inherit;">tables</a>
@@ -4226,8 +4531,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfigobjectitemtable">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config<wbr>Object<wbr>Item<wbr>Table[]</a></span>
     </dt>
-    <dd><p>table list.</p>
-</dd><dt class="property-optional"
+    <dd>table list.</dd><dt class="property-optional"
             title="Optional">
         <span id="viewmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viewmode_nodejs" style="color: inherit; text-decoration: inherit;">view<wbr>Mode</a>
@@ -4235,8 +4539,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>view mode.</p>
-</dd><dt class="property-optional"
+    <dd>view mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="views_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#views_nodejs" style="color: inherit; text-decoration: inherit;">views</a>
@@ -4244,8 +4547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfigobjectitemview">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config<wbr>Object<wbr>Item<wbr>View[]</a></span>
     </dt>
-    <dd><p>view list.</p>
-</dd></dl>
+    <dd>view list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4259,8 +4561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>database mode.</p>
-</dd><dt class="property-optional"
+    <dd>database mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="db_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_name_python" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
@@ -4268,8 +4569,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>database name.</p>
-</dd><dt class="property-optional"
+    <dd>database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="schema_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schema_name_python" style="color: inherit; text-decoration: inherit;">schema_<wbr>name</a>
@@ -4277,8 +4577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>schema name.</p>
-</dd><dt class="property-optional"
+    <dd>schema name.</dd><dt class="property-optional"
             title="Optional">
         <span id="table_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_mode_python" style="color: inherit; text-decoration: inherit;">table_<wbr>mode</a>
@@ -4286,17 +4585,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>table mode.</p>
-</dd><dt class="property-optional"
+    <dd>table mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="tables_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_python" style="color: inherit; text-decoration: inherit;">tables</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcomparetaskslistconfigobjectitemtable">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config<wbr>Object<wbr>Item<wbr>Table]</a></span>
+        <span class="property-type"><a href="#getcomparetaskslistconfigobjectitemtable">Sequence[Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config<wbr>Object<wbr>Item<wbr>Table]</a></span>
     </dt>
-    <dd><p>table list.</p>
-</dd><dt class="property-optional"
+    <dd>table list.</dd><dt class="property-optional"
             title="Optional">
         <span id="view_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#view_mode_python" style="color: inherit; text-decoration: inherit;">view_<wbr>mode</a>
@@ -4304,17 +4601,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>view mode.</p>
-</dd><dt class="property-optional"
+    <dd>view mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="views_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#views_python" style="color: inherit; text-decoration: inherit;">views</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcomparetaskslistconfigobjectitemview">Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config<wbr>Object<wbr>Item<wbr>View]</a></span>
+        <span class="property-type"><a href="#getcomparetaskslistconfigobjectitemview">Sequence[Get<wbr>Compare<wbr>Tasks<wbr>List<wbr>Config<wbr>Object<wbr>Item<wbr>View]</a></span>
     </dt>
-    <dd><p>view list.</p>
-</dd></dl>
+    <dd>view list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4328,8 +4623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>database mode.</p>
-</dd><dt class="property-optional"
+    <dd>database mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -4337,8 +4631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>database name.</p>
-</dd><dt class="property-optional"
+    <dd>database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="schemaname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schemaname_yaml" style="color: inherit; text-decoration: inherit;">schema<wbr>Name</a>
@@ -4346,8 +4639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>schema name.</p>
-</dd><dt class="property-optional"
+    <dd>schema name.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablemode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablemode_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Mode</a>
@@ -4355,8 +4647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>table mode.</p>
-</dd><dt class="property-optional"
+    <dd>table mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="tables_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_yaml" style="color: inherit; text-decoration: inherit;">tables</a>
@@ -4364,8 +4655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfigobjectitemtable">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>table list.</p>
-</dd><dt class="property-optional"
+    <dd>table list.</dd><dt class="property-optional"
             title="Optional">
         <span id="viewmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viewmode_yaml" style="color: inherit; text-decoration: inherit;">view<wbr>Mode</a>
@@ -4373,8 +4663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>view mode.</p>
-</dd><dt class="property-optional"
+    <dd>view mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="views_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#views_yaml" style="color: inherit; text-decoration: inherit;">views</a>
@@ -4382,8 +4671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcomparetaskslistconfigobjectitemview">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>view list.</p>
-</dd></dl>
+    <dd>view list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4401,8 +4689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>table name.</p>
-</dd></dl>
+    <dd>table name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4416,8 +4703,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>table name.</p>
-</dd></dl>
+    <dd>table name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="table_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_name_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>table name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4431,8 +4731,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>table name.</p>
-</dd></dl>
+    <dd>table name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4446,8 +4745,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>table name.</p>
-</dd></dl>
+    <dd>table name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4461,8 +4759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>table name.</p>
-</dd></dl>
+    <dd>table name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4476,8 +4773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>table name.</p>
-</dd></dl>
+    <dd>table name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4495,8 +4791,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>view name.</p>
-</dd></dl>
+    <dd>view name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4510,8 +4805,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>view name.</p>
-</dd></dl>
+    <dd>view name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="view_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#view_name_hcl" style="color: inherit; text-decoration: inherit;">view_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>view name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4525,8 +4833,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>view name.</p>
-</dd></dl>
+    <dd>view name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4540,8 +4847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>view name.</p>
-</dd></dl>
+    <dd>view name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4555,8 +4861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>view name.</p>
-</dd></dl>
+    <dd>view name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4570,8 +4875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>view name.</p>
-</dd></dl>
+    <dd>view name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4586,7 +4890,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

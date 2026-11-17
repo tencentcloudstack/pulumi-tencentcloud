@@ -2,9 +2,11 @@
 ---
 title: "ClbInstance"
 title_tag: "tencentcloud.Waf.ClbInstance"
-meta_desc: "Documentation for the tencentcloud.Waf.ClbInstance resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a waf clb instance NOTE: Region only supports ap-guangzhou and ap-seoul."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -20,7 +22,12 @@ Provides a resource to create a waf clb instance
 
 ### Create a basic waf premium clb instance
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -30,6 +37,11 @@ const example = new tencentcloud.waf.ClbInstance("example", {
     instanceName: "tf-example-clb-waf",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -38,6 +50,37 @@ example = tencentcloud.waf.ClbInstance("example",
     goods_category="premium_clb",
     instance_name="tf-example-clb-waf")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/waf"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := waf.NewClbInstance(ctx, "example", &waf.ClbInstanceArgs{
+			GoodsCategory: pulumi.String("premium_clb"),
+			InstanceName:  pulumi.String("tf-example-clb-waf"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -54,27 +97,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Waf.NewClbInstance(ctx, "example", &Waf.ClbInstanceArgs{
-			GoodsCategory: pulumi.String("premium_clb"),
-			InstanceName:  pulumi.String("tf-example-clb-waf"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -83,8 +110,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Waf.ClbInstance;
 import com.pulumi.tencentcloud.Waf.ClbInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -96,7 +123,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new ClbInstance("example", ClbInstanceArgs.builder()        
+        var example = new ClbInstance("example", ClbInstanceArgs.builder()
             .goodsCategory("premium_clb")
             .instanceName("tf-example-clb-waf")
             .build());
@@ -104,6 +131,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
@@ -112,40 +144,108 @@ resources:
       goodsCategory: premium_clb
       instanceName: tf-example-clb-waf
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### Create a complete waf ultimate_clb instance
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+resource "tencentcloud_waf_clbinstance" "example" {
+  goods_category = "premium_clb"
+  instance_name  = "tf-example-clb-waf"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create a complete waf ultimateClb instance
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.waf.ClbInstance("example", {
-    apiSecurity: 1,
-    autoRenewFlag: 1,
-    botManagement: 1,
-    elasticMode: 1,
     goodsCategory: "ultimate_clb",
     instanceName: "tf-example-clb-waf",
     timeSpan: 1,
     timeUnit: "m",
+    autoRenewFlag: 1,
+    elasticMode: 1,
+    botManagement: 1,
+    apiSecurity: 1,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.waf.ClbInstance("example",
-    api_security=1,
-    auto_renew_flag=1,
-    bot_management=1,
-    elastic_mode=1,
     goods_category="ultimate_clb",
     instance_name="tf-example-clb-waf",
     time_span=1,
-    time_unit="m")
+    time_unit="m",
+    auto_renew_flag=1,
+    elastic_mode=1,
+    bot_management=1,
+    api_security=1)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/waf"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := waf.NewClbInstance(ctx, "example", &waf.ClbInstanceArgs{
+			GoodsCategory: pulumi.String("ultimate_clb"),
+			InstanceName:  pulumi.String("tf-example-clb-waf"),
+			TimeSpan:      pulumi.Int(1),
+			TimeUnit:      pulumi.String("m"),
+			AutoRenewFlag: pulumi.Int(1),
+			ElasticMode:   pulumi.Int(1),
+			BotManagement: pulumi.Int(1),
+			ApiSecurity:   pulumi.Int(1),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -156,45 +256,23 @@ return await Deployment.RunAsync(() =>
 {
     var example = new Tencentcloud.Waf.ClbInstance("example", new()
     {
-        ApiSecurity = 1,
-        AutoRenewFlag = 1,
-        BotManagement = 1,
-        ElasticMode = 1,
         GoodsCategory = "ultimate_clb",
         InstanceName = "tf-example-clb-waf",
         TimeSpan = 1,
         TimeUnit = "m",
+        AutoRenewFlag = 1,
+        ElasticMode = 1,
+        BotManagement = 1,
+        ApiSecurity = 1,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Waf.NewClbInstance(ctx, "example", &Waf.ClbInstanceArgs{
-			ApiSecurity:   pulumi.Int(1),
-			AutoRenewFlag: pulumi.Int(1),
-			BotManagement: pulumi.Int(1),
-			ElasticMode:   pulumi.Int(1),
-			GoodsCategory: pulumi.String("ultimate_clb"),
-			InstanceName:  pulumi.String("tf-example-clb-waf"),
-			TimeSpan:      pulumi.Int(1),
-			TimeUnit:      pulumi.String("m"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -203,8 +281,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Waf.ClbInstance;
 import com.pulumi.tencentcloud.Waf.ClbInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -216,70 +294,150 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new ClbInstance("example", ClbInstanceArgs.builder()        
-            .apiSecurity(1)
-            .autoRenewFlag(1)
-            .botManagement(1)
-            .elasticMode(1)
+        var example = new ClbInstance("example", ClbInstanceArgs.builder()
             .goodsCategory("ultimate_clb")
             .instanceName("tf-example-clb-waf")
             .timeSpan(1)
             .timeUnit("m")
+            .autoRenewFlag(1)
+            .elasticMode(1)
+            .botManagement(1)
+            .apiSecurity(1)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:Waf:ClbInstance
     properties:
-      apiSecurity: 1
-      autoRenewFlag: 1
-      botManagement: 1
-      elasticMode: 1
       goodsCategory: ultimate_clb
       instanceName: tf-example-clb-waf
       timeSpan: 1
       timeUnit: m
+      autoRenewFlag: 1
+      elasticMode: 1
+      botManagement: 1
+      apiSecurity: 1
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### Set waf ultimate_clb instance qps limit
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+resource "tencentcloud_waf_clbinstance" "example" {
+  goods_category  = "ultimate_clb"
+  instance_name   = "tf-example-clb-waf"
+  time_span       = 1
+  time_unit       = "m"
+  auto_renew_flag = 1
+  elastic_mode    = 1
+  bot_management  = 1
+  api_security    = 1
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Set waf ultimateClb instance qps limit
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.waf.ClbInstance("example", {
-    apiSecurity: 1,
-    autoRenewFlag: 1,
-    botManagement: 1,
-    elasticMode: 1,
     goodsCategory: "ultimate_clb",
     instanceName: "tf-example-clb-waf",
+    timeSpan: 1,
+    timeUnit: "m",
+    autoRenewFlag: 1,
+    elasticMode: 1,
     qpsLimit: 200000,
-    timeSpan: 1,
-    timeUnit: "m",
+    botManagement: 1,
+    apiSecurity: 1,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.waf.ClbInstance("example",
-    api_security=1,
-    auto_renew_flag=1,
-    bot_management=1,
-    elastic_mode=1,
     goods_category="ultimate_clb",
     instance_name="tf-example-clb-waf",
-    qps_limit=200000,
     time_span=1,
-    time_unit="m")
+    time_unit="m",
+    auto_renew_flag=1,
+    elastic_mode=1,
+    qps_limit=200000,
+    bot_management=1,
+    api_security=1)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/waf"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := waf.NewClbInstance(ctx, "example", &waf.ClbInstanceArgs{
+			GoodsCategory: pulumi.String("ultimate_clb"),
+			InstanceName:  pulumi.String("tf-example-clb-waf"),
+			TimeSpan:      pulumi.Int(1),
+			TimeUnit:      pulumi.String("m"),
+			AutoRenewFlag: pulumi.Int(1),
+			ElasticMode:   pulumi.Int(1),
+			QpsLimit:      pulumi.Int(200000),
+			BotManagement: pulumi.Int(1),
+			ApiSecurity:   pulumi.Int(1),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -290,47 +448,24 @@ return await Deployment.RunAsync(() =>
 {
     var example = new Tencentcloud.Waf.ClbInstance("example", new()
     {
-        ApiSecurity = 1,
-        AutoRenewFlag = 1,
-        BotManagement = 1,
-        ElasticMode = 1,
         GoodsCategory = "ultimate_clb",
         InstanceName = "tf-example-clb-waf",
-        QpsLimit = 200000,
         TimeSpan = 1,
         TimeUnit = "m",
+        AutoRenewFlag = 1,
+        ElasticMode = 1,
+        QpsLimit = 200000,
+        BotManagement = 1,
+        ApiSecurity = 1,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Waf.NewClbInstance(ctx, "example", &Waf.ClbInstanceArgs{
-			ApiSecurity:   pulumi.Int(1),
-			AutoRenewFlag: pulumi.Int(1),
-			BotManagement: pulumi.Int(1),
-			ElasticMode:   pulumi.Int(1),
-			GoodsCategory: pulumi.String("ultimate_clb"),
-			InstanceName:  pulumi.String("tf-example-clb-waf"),
-			QpsLimit:      pulumi.Int(200000),
-			TimeSpan:      pulumi.Int(1),
-			TimeUnit:      pulumi.String("m"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -339,8 +474,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Waf.ClbInstance;
 import com.pulumi.tencentcloud.Waf.ClbInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -352,104 +487,166 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new ClbInstance("example", ClbInstanceArgs.builder()        
-            .apiSecurity(1)
-            .autoRenewFlag(1)
-            .botManagement(1)
-            .elasticMode(1)
+        var example = new ClbInstance("example", ClbInstanceArgs.builder()
             .goodsCategory("ultimate_clb")
             .instanceName("tf-example-clb-waf")
-            .qpsLimit(200000)
             .timeSpan(1)
             .timeUnit("m")
+            .autoRenewFlag(1)
+            .elasticMode(1)
+            .qpsLimit(200000)
+            .botManagement(1)
+            .apiSecurity(1)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:Waf:ClbInstance
     properties:
-      apiSecurity: 1
-      autoRenewFlag: 1
-      botManagement: 1
-      elasticMode: 1
       goodsCategory: ultimate_clb
       instanceName: tf-example-clb-waf
-      qpsLimit: 200000
       timeSpan: 1
       timeUnit: m
+      autoRenewFlag: 1
+      elasticMode: 1
+      qpsLimit: 200000
+      botManagement: 1
+      apiSecurity: 1
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_waf_clbinstance" "example" {
+  goods_category  = "ultimate_clb"
+  instance_name   = "tf-example-clb-waf"
+  time_span       = 1
+  time_unit       = "m"
+  auto_renew_flag = 1
+  elastic_mode    = 1
+  qps_limit       = 200000
+  bot_management  = 1
+  api_security    = 1
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [GenerateDealsAndPayNew](https://www.tencentcloud.com/document/api/627/64577)
+  - [ModifyInstanceQpsLimit](https://www.tencentcloud.com/document/api/627/64762)
+  - [SwitchElasticMode](https://www.tencentcloud.com/document/api/627/64756)
+* Read: [DescribeInstances](https://www.tencentcloud.com/document/api/627/64766)
+* Update:
+  - [ModifyInstanceName](https://www.tencentcloud.com/document/api/627/64763)
+  - [ModifyInstanceQpsLimit](https://www.tencentcloud.com/document/api/627/64762)
+  - [ModifyInstanceRenewFlag](https://www.tencentcloud.com/document/api/627/64761)
+  - [SwitchElasticMode](https://www.tencentcloud.com/document/api/627/64756)
 
 
 
 ## Create ClbInstance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ClbInstance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ClbInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ClbInstance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ClbInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ClbInstance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ClbInstanceArgs</a></span><span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ClbInstance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                <span class="nx">goods_category</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">api_security</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                 <span class="nx">auto_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                 <span class="nx">bot_management</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                 <span class="nx">elastic_mode</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                <span class="nx">goods_category</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">qps_limit</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                 <span class="nx">time_span</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                <span class="nx">time_unit</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ClbInstance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ClbInstanceArgs</a></span><span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                <span class="nx">time_unit</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewClbInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ClbInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ClbInstance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewClbInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ClbInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ClbInstance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ClbInstance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ClbInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ClbInstance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ClbInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ClbInstance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ClbInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ClbInstance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ClbInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Waf:ClbInstance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Waf:ClbInstance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_waf_clb_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -470,7 +667,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -587,11 +784,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## ClbInstance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ClbInstance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -607,8 +812,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</p>
-</dd><dt class="property-optional"
+    <dd>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</dd><dt class="property-optional"
             title="Optional">
         <span id="apisecurity_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apisecurity_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Security</a>
@@ -616,8 +820,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -625,8 +828,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="botmanagement_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#botmanagement_csharp" style="color: inherit; text-decoration: inherit;">Bot<wbr>Management</a>
@@ -634,8 +836,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="elasticmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticmode_csharp" style="color: inherit; text-decoration: inherit;">Elastic<wbr>Mode</a>
@@ -643,8 +844,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Is elastic billing enabled, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Is elastic billing enabled, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -652,8 +852,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Waf instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Waf instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="qpslimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qpslimit_csharp" style="color: inherit; text-decoration: inherit;">Qps<wbr>Limit</a>
@@ -661,8 +860,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>QPS Limit, Minimum setting 10000. Only <code>elastic_mode</code> is 1, can be set.</p>
-</dd><dt class="property-optional"
+    <dd>QPS Limit, Minimum setting 10000. Only <code>elasticMode</code> is 1, can be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="timespan_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Span</a>
@@ -670,8 +868,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Unit</a>
@@ -679,8 +876,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time unit, support d, m, y. d: day, m: month, y: year.</p>
-</dd></dl>
+    <dd>Time unit, support d, m, y. d: day, m: month, y: year.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -694,8 +890,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</p>
-</dd><dt class="property-optional"
+    <dd>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</dd><dt class="property-optional"
             title="Optional">
         <span id="apisecurity_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apisecurity_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Security</a>
@@ -703,8 +898,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -712,8 +906,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="botmanagement_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#botmanagement_go" style="color: inherit; text-decoration: inherit;">Bot<wbr>Management</a>
@@ -721,8 +914,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="elasticmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticmode_go" style="color: inherit; text-decoration: inherit;">Elastic<wbr>Mode</a>
@@ -730,8 +922,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Is elastic billing enabled, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Is elastic billing enabled, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -739,8 +930,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Waf instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Waf instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="qpslimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qpslimit_go" style="color: inherit; text-decoration: inherit;">Qps<wbr>Limit</a>
@@ -748,8 +938,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>QPS Limit, Minimum setting 10000. Only <code>elastic_mode</code> is 1, can be set.</p>
-</dd><dt class="property-optional"
+    <dd>QPS Limit, Minimum setting 10000. Only <code>elasticMode</code> is 1, can be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="timespan_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Span</a>
@@ -757,8 +946,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Unit</a>
@@ -766,8 +954,85 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time unit, support d, m, y. d: day, m: month, y: year.</p>
-</dd></dl>
+    <dd>Time unit, support d, m, y. d: day, m: month, y: year.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="goods_category_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#goods_category_hcl" style="color: inherit; text-decoration: inherit;">goods_<wbr>category</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="api_security_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_security_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>security</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auto renew flag, 1: enable, 0: disable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bot_management_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bot_management_hcl" style="color: inherit; text-decoration: inherit;">bot_<wbr>management</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="elastic_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elastic_mode_hcl" style="color: inherit; text-decoration: inherit;">elastic_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Is elastic billing enabled, 1: enable, 0: disable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Waf instance name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="qps_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_limit_hcl" style="color: inherit; text-decoration: inherit;">qps_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>QPS Limit, Minimum setting 10000. Only <code>elasticMode</code> is 1, can be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="time_span_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_span_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>span</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Time interval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="time_unit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_unit_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Time unit, support d, m, y. d: day, m: month, y: year.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -781,8 +1046,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</p>
-</dd><dt class="property-optional"
+    <dd>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</dd><dt class="property-optional"
             title="Optional">
         <span id="apisecurity_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apisecurity_java" style="color: inherit; text-decoration: inherit;">api<wbr>Security</a>
@@ -790,8 +1054,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -799,8 +1062,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auto renew flag, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="botmanagement_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#botmanagement_java" style="color: inherit; text-decoration: inherit;">bot<wbr>Management</a>
@@ -808,8 +1070,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="elasticmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticmode_java" style="color: inherit; text-decoration: inherit;">elastic<wbr>Mode</a>
@@ -817,8 +1078,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Is elastic billing enabled, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Is elastic billing enabled, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -826,8 +1086,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Waf instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Waf instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="qpslimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qpslimit_java" style="color: inherit; text-decoration: inherit;">qps<wbr>Limit</a>
@@ -835,8 +1094,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>QPS Limit, Minimum setting 10000. Only <code>elastic_mode</code> is 1, can be set.</p>
-</dd><dt class="property-optional"
+    <dd>QPS Limit, Minimum setting 10000. Only <code>elasticMode</code> is 1, can be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="timespan_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_java" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -844,8 +1102,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_java" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -853,8 +1110,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time unit, support d, m, y. d: day, m: month, y: year.</p>
-</dd></dl>
+    <dd>Time unit, support d, m, y. d: day, m: month, y: year.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -868,8 +1124,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</p>
-</dd><dt class="property-optional"
+    <dd>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</dd><dt class="property-optional"
             title="Optional">
         <span id="apisecurity_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apisecurity_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Security</a>
@@ -877,8 +1132,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -886,8 +1140,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auto renew flag, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="botmanagement_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#botmanagement_nodejs" style="color: inherit; text-decoration: inherit;">bot<wbr>Management</a>
@@ -895,8 +1148,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="elasticmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticmode_nodejs" style="color: inherit; text-decoration: inherit;">elastic<wbr>Mode</a>
@@ -904,8 +1156,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Is elastic billing enabled, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Is elastic billing enabled, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -913,8 +1164,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Waf instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Waf instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="qpslimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qpslimit_nodejs" style="color: inherit; text-decoration: inherit;">qps<wbr>Limit</a>
@@ -922,8 +1172,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>QPS Limit, Minimum setting 10000. Only <code>elastic_mode</code> is 1, can be set.</p>
-</dd><dt class="property-optional"
+    <dd>QPS Limit, Minimum setting 10000. Only <code>elasticMode</code> is 1, can be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="timespan_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -931,8 +1180,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -940,8 +1188,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time unit, support d, m, y. d: day, m: month, y: year.</p>
-</dd></dl>
+    <dd>Time unit, support d, m, y. d: day, m: month, y: year.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -955,8 +1202,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</p>
-</dd><dt class="property-optional"
+    <dd>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</dd><dt class="property-optional"
             title="Optional">
         <span id="api_security_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_security_python" style="color: inherit; text-decoration: inherit;">api_<wbr>security</a>
@@ -964,8 +1210,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_flag_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
@@ -973,8 +1218,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="bot_management_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bot_management_python" style="color: inherit; text-decoration: inherit;">bot_<wbr>management</a>
@@ -982,8 +1226,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="elastic_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elastic_mode_python" style="color: inherit; text-decoration: inherit;">elastic_<wbr>mode</a>
@@ -991,8 +1234,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Is elastic billing enabled, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Is elastic billing enabled, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -1000,8 +1242,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Waf instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Waf instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="qps_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_limit_python" style="color: inherit; text-decoration: inherit;">qps_<wbr>limit</a>
@@ -1009,8 +1250,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>QPS Limit, Minimum setting 10000. Only <code>elastic_mode</code> is 1, can be set.</p>
-</dd><dt class="property-optional"
+    <dd>QPS Limit, Minimum setting 10000. Only <code>elasticMode</code> is 1, can be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="time_span_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_span_python" style="color: inherit; text-decoration: inherit;">time_<wbr>span</a>
@@ -1018,8 +1258,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="time_unit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_unit_python" style="color: inherit; text-decoration: inherit;">time_<wbr>unit</a>
@@ -1027,8 +1266,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Time unit, support d, m, y. d: day, m: month, y: year.</p>
-</dd></dl>
+    <dd>Time unit, support d, m, y. d: day, m: month, y: year.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1042,8 +1280,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</p>
-</dd><dt class="property-optional"
+    <dd>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</dd><dt class="property-optional"
             title="Optional">
         <span id="apisecurity_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apisecurity_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Security</a>
@@ -1051,8 +1288,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -1060,8 +1296,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auto renew flag, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="botmanagement_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#botmanagement_yaml" style="color: inherit; text-decoration: inherit;">bot<wbr>Management</a>
@@ -1069,8 +1304,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="elasticmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#elasticmode_yaml" style="color: inherit; text-decoration: inherit;">elastic<wbr>Mode</a>
@@ -1078,8 +1312,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Is elastic billing enabled, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Is elastic billing enabled, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1087,8 +1320,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Waf instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Waf instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="qpslimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qpslimit_yaml" style="color: inherit; text-decoration: inherit;">qps<wbr>Limit</a>
@@ -1096,8 +1328,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>QPS Limit, Minimum setting 10000. Only <code>elastic_mode</code> is 1, can be set.</p>
-</dd><dt class="property-optional"
+    <dd>QPS Limit, Minimum setting 10000. Only <code>elasticMode</code> is 1, can be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="timespan_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -1105,8 +1336,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -1114,8 +1344,7 @@ The ClbInstance resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time unit, support d, m, y. d: day, m: month, y: year.</p>
-</dd></dl>
+    <dd>Time unit, support d, m, y. d: day, m: month, y: year.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1136,8 +1365,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance start time.</p>
-</dd><dt class="property-"
+    <dd>waf instance start time.</dd><dt class="property-"
             title="">
         <span id="edition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#edition_csharp" style="color: inherit; text-decoration: inherit;">Edition</a>
@@ -1145,8 +1373,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance edition, clb or saas.</p>
-</dd><dt class="property-"
+    <dd>waf instance edition, clb or saas.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1154,8 +1381,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1163,8 +1389,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance id.</p>
-</dd><dt class="property-"
+    <dd>waf instance id.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1172,8 +1397,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>waf instance status.</p>
-</dd><dt class="property-"
+    <dd>waf instance status.</dd><dt class="property-"
             title="">
         <span id="validtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validtime_csharp" style="color: inherit; text-decoration: inherit;">Valid<wbr>Time</a>
@@ -1181,8 +1405,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance valid time.</p>
-</dd></dl>
+    <dd>waf instance valid time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1196,8 +1419,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance start time.</p>
-</dd><dt class="property-"
+    <dd>waf instance start time.</dd><dt class="property-"
             title="">
         <span id="edition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#edition_go" style="color: inherit; text-decoration: inherit;">Edition</a>
@@ -1205,8 +1427,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance edition, clb or saas.</p>
-</dd><dt class="property-"
+    <dd>waf instance edition, clb or saas.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1214,8 +1435,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1223,8 +1443,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance id.</p>
-</dd><dt class="property-"
+    <dd>waf instance id.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1232,8 +1451,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>waf instance status.</p>
-</dd><dt class="property-"
+    <dd>waf instance status.</dd><dt class="property-"
             title="">
         <span id="validtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validtime_go" style="color: inherit; text-decoration: inherit;">Valid<wbr>Time</a>
@@ -1241,8 +1459,61 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance valid time.</p>
-</dd></dl>
+    <dd>waf instance valid time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="begin_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begin_time_hcl" style="color: inherit; text-decoration: inherit;">begin_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>waf instance start time.</dd><dt class="property-"
+            title="">
+        <span id="edition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#edition_hcl" style="color: inherit; text-decoration: inherit;">edition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>waf instance edition, clb or saas.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>waf instance id.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>waf instance status.</dd><dt class="property-"
+            title="">
+        <span id="valid_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#valid_time_hcl" style="color: inherit; text-decoration: inherit;">valid_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>waf instance valid time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1256,8 +1527,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>waf instance start time.</p>
-</dd><dt class="property-"
+    <dd>waf instance start time.</dd><dt class="property-"
             title="">
         <span id="edition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#edition_java" style="color: inherit; text-decoration: inherit;">edition</a>
@@ -1265,8 +1535,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>waf instance edition, clb or saas.</p>
-</dd><dt class="property-"
+    <dd>waf instance edition, clb or saas.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1274,8 +1543,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1283,8 +1551,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>waf instance id.</p>
-</dd><dt class="property-"
+    <dd>waf instance id.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1292,8 +1559,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>waf instance status.</p>
-</dd><dt class="property-"
+    <dd>waf instance status.</dd><dt class="property-"
             title="">
         <span id="validtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validtime_java" style="color: inherit; text-decoration: inherit;">valid<wbr>Time</a>
@@ -1301,8 +1567,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>waf instance valid time.</p>
-</dd></dl>
+    <dd>waf instance valid time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1316,8 +1581,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance start time.</p>
-</dd><dt class="property-"
+    <dd>waf instance start time.</dd><dt class="property-"
             title="">
         <span id="edition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#edition_nodejs" style="color: inherit; text-decoration: inherit;">edition</a>
@@ -1325,8 +1589,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance edition, clb or saas.</p>
-</dd><dt class="property-"
+    <dd>waf instance edition, clb or saas.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1334,8 +1597,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1343,8 +1605,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance id.</p>
-</dd><dt class="property-"
+    <dd>waf instance id.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1352,8 +1613,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>waf instance status.</p>
-</dd><dt class="property-"
+    <dd>waf instance status.</dd><dt class="property-"
             title="">
         <span id="validtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validtime_nodejs" style="color: inherit; text-decoration: inherit;">valid<wbr>Time</a>
@@ -1361,8 +1621,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance valid time.</p>
-</dd></dl>
+    <dd>waf instance valid time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1376,8 +1635,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>waf instance start time.</p>
-</dd><dt class="property-"
+    <dd>waf instance start time.</dd><dt class="property-"
             title="">
         <span id="edition_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#edition_python" style="color: inherit; text-decoration: inherit;">edition</a>
@@ -1385,8 +1643,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>waf instance edition, clb or saas.</p>
-</dd><dt class="property-"
+    <dd>waf instance edition, clb or saas.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1394,8 +1651,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1403,8 +1659,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>waf instance id.</p>
-</dd><dt class="property-"
+    <dd>waf instance id.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1412,8 +1667,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>waf instance status.</p>
-</dd><dt class="property-"
+    <dd>waf instance status.</dd><dt class="property-"
             title="">
         <span id="valid_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#valid_time_python" style="color: inherit; text-decoration: inherit;">valid_<wbr>time</a>
@@ -1421,8 +1675,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>waf instance valid time.</p>
-</dd></dl>
+    <dd>waf instance valid time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1436,8 +1689,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>waf instance start time.</p>
-</dd><dt class="property-"
+    <dd>waf instance start time.</dd><dt class="property-"
             title="">
         <span id="edition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#edition_yaml" style="color: inherit; text-decoration: inherit;">edition</a>
@@ -1445,8 +1697,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>waf instance edition, clb or saas.</p>
-</dd><dt class="property-"
+    <dd>waf instance edition, clb or saas.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1454,8 +1705,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1463,8 +1713,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>waf instance id.</p>
-</dd><dt class="property-"
+    <dd>waf instance id.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1472,8 +1721,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>waf instance status.</p>
-</dd><dt class="property-"
+    <dd>waf instance status.</dd><dt class="property-"
             title="">
         <span id="validtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validtime_yaml" style="color: inherit; text-decoration: inherit;">valid<wbr>Time</a>
@@ -1481,8 +1729,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>waf instance valid time.</p>
-</dd></dl>
+    <dd>waf instance valid time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1492,18 +1739,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ClbInstance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ClbInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ClbInstance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ClbInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ClbInstance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1521,104 +1768,143 @@ Get an existing ClbInstance resource's state with the given name, ID, and option
         <span class="nx">time_span</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">time_unit</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">valid_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> ClbInstance</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetClbInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ClbInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ClbInstance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetClbInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ClbInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ClbInstance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ClbInstance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ClbInstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ClbInstance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ClbInstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ClbInstance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ClbInstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ClbInstance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ClbInstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingClbInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Waf:ClbInstance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_waf_clb_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ClbInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ClbInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1626,28 +1912,31 @@ Get an existing ClbInstance resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ClbInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1655,28 +1944,31 @@ Get an existing ClbInstance resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ClbInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1696,8 +1988,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autorenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autorenewflag_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -1705,8 +1996,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_begintime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_begintime_csharp" style="color: inherit; text-decoration: inherit;">Begin<wbr>Time</a>
@@ -1714,8 +2004,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance start time.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_botmanagement_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_botmanagement_csharp" style="color: inherit; text-decoration: inherit;">Bot<wbr>Management</a>
@@ -1723,8 +2012,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_edition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_edition_csharp" style="color: inherit; text-decoration: inherit;">Edition</a>
@@ -1732,8 +2020,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance edition, clb or saas.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance edition, clb or saas.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticmode_csharp" style="color: inherit; text-decoration: inherit;">Elastic<wbr>Mode</a>
@@ -1741,8 +2028,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Is elastic billing enabled, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Is elastic billing enabled, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_goodscategory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_goodscategory_csharp" style="color: inherit; text-decoration: inherit;">Goods<wbr>Category</a>
@@ -1750,8 +2036,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</p>
-</dd><dt class="property-optional"
+    <dd>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1759,8 +2044,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance id.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1768,8 +2052,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Waf instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Waf instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_qpslimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_qpslimit_csharp" style="color: inherit; text-decoration: inherit;">Qps<wbr>Limit</a>
@@ -1777,8 +2060,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>QPS Limit, Minimum setting 10000. Only <code>elastic_mode</code> is 1, can be set.</p>
-</dd><dt class="property-optional"
+    <dd>QPS Limit, Minimum setting 10000. Only <code>elasticMode</code> is 1, can be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1786,8 +2068,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>waf instance status.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timespan_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timespan_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Span</a>
@@ -1795,8 +2076,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeunit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeunit_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Unit</a>
@@ -1804,8 +2084,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time unit, support d, m, y. d: day, m: month, y: year.</p>
-</dd><dt class="property-optional"
+    <dd>Time unit, support d, m, y. d: day, m: month, y: year.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validtime_csharp" style="color: inherit; text-decoration: inherit;">Valid<wbr>Time</a>
@@ -1813,8 +2092,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance valid time.</p>
-</dd></dl>
+    <dd>waf instance valid time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1828,8 +2106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autorenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autorenewflag_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -1837,8 +2114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_begintime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_begintime_go" style="color: inherit; text-decoration: inherit;">Begin<wbr>Time</a>
@@ -1846,8 +2122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance start time.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_botmanagement_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_botmanagement_go" style="color: inherit; text-decoration: inherit;">Bot<wbr>Management</a>
@@ -1855,8 +2130,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_edition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_edition_go" style="color: inherit; text-decoration: inherit;">Edition</a>
@@ -1864,8 +2138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance edition, clb or saas.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance edition, clb or saas.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticmode_go" style="color: inherit; text-decoration: inherit;">Elastic<wbr>Mode</a>
@@ -1873,8 +2146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Is elastic billing enabled, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Is elastic billing enabled, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_goodscategory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_goodscategory_go" style="color: inherit; text-decoration: inherit;">Goods<wbr>Category</a>
@@ -1882,8 +2154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</p>
-</dd><dt class="property-optional"
+    <dd>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1891,8 +2162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance id.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1900,8 +2170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Waf instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Waf instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_qpslimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_qpslimit_go" style="color: inherit; text-decoration: inherit;">Qps<wbr>Limit</a>
@@ -1909,8 +2178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>QPS Limit, Minimum setting 10000. Only <code>elastic_mode</code> is 1, can be set.</p>
-</dd><dt class="property-optional"
+    <dd>QPS Limit, Minimum setting 10000. Only <code>elasticMode</code> is 1, can be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1918,8 +2186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>waf instance status.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timespan_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timespan_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Span</a>
@@ -1927,8 +2194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeunit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeunit_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Unit</a>
@@ -1936,8 +2202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time unit, support d, m, y. d: day, m: month, y: year.</p>
-</dd><dt class="property-optional"
+    <dd>Time unit, support d, m, y. d: day, m: month, y: year.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validtime_go" style="color: inherit; text-decoration: inherit;">Valid<wbr>Time</a>
@@ -1945,8 +2210,125 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance valid time.</p>
-</dd></dl>
+    <dd>waf instance valid time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_api_security_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_api_security_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>security</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auto renew flag, 1: enable, 0: disable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_begin_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_begin_time_hcl" style="color: inherit; text-decoration: inherit;">begin_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>waf instance start time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_bot_management_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bot_management_hcl" style="color: inherit; text-decoration: inherit;">bot_<wbr>management</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_edition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_edition_hcl" style="color: inherit; text-decoration: inherit;">edition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>waf instance edition, clb or saas.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_elastic_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elastic_mode_hcl" style="color: inherit; text-decoration: inherit;">elastic_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Is elastic billing enabled, 1: enable, 0: disable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_goods_category_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_goods_category_hcl" style="color: inherit; text-decoration: inherit;">goods_<wbr>category</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>waf instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Waf instance name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_qps_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_qps_limit_hcl" style="color: inherit; text-decoration: inherit;">qps_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>QPS Limit, Minimum setting 10000. Only <code>elasticMode</code> is 1, can be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>waf instance status.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_time_span_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_time_span_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>span</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Time interval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_time_unit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_time_unit_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Time unit, support d, m, y. d: day, m: month, y: year.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_valid_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_valid_time_hcl" style="color: inherit; text-decoration: inherit;">valid_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>waf instance valid time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1960,8 +2342,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autorenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autorenewflag_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -1969,8 +2350,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auto renew flag, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_begintime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_begintime_java" style="color: inherit; text-decoration: inherit;">begin<wbr>Time</a>
@@ -1978,8 +2358,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>waf instance start time.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_botmanagement_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_botmanagement_java" style="color: inherit; text-decoration: inherit;">bot<wbr>Management</a>
@@ -1987,8 +2366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_edition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_edition_java" style="color: inherit; text-decoration: inherit;">edition</a>
@@ -1996,8 +2374,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>waf instance edition, clb or saas.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance edition, clb or saas.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticmode_java" style="color: inherit; text-decoration: inherit;">elastic<wbr>Mode</a>
@@ -2005,8 +2382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Is elastic billing enabled, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Is elastic billing enabled, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_goodscategory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_goodscategory_java" style="color: inherit; text-decoration: inherit;">goods<wbr>Category</a>
@@ -2014,8 +2390,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</p>
-</dd><dt class="property-optional"
+    <dd>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2023,8 +2398,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>waf instance id.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2032,8 +2406,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Waf instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Waf instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_qpslimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_qpslimit_java" style="color: inherit; text-decoration: inherit;">qps<wbr>Limit</a>
@@ -2041,8 +2414,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>QPS Limit, Minimum setting 10000. Only <code>elastic_mode</code> is 1, can be set.</p>
-</dd><dt class="property-optional"
+    <dd>QPS Limit, Minimum setting 10000. Only <code>elasticMode</code> is 1, can be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2050,8 +2422,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>waf instance status.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timespan_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timespan_java" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -2059,8 +2430,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeunit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeunit_java" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -2068,8 +2438,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time unit, support d, m, y. d: day, m: month, y: year.</p>
-</dd><dt class="property-optional"
+    <dd>Time unit, support d, m, y. d: day, m: month, y: year.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validtime_java" style="color: inherit; text-decoration: inherit;">valid<wbr>Time</a>
@@ -2077,8 +2446,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>waf instance valid time.</p>
-</dd></dl>
+    <dd>waf instance valid time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2092,8 +2460,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autorenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autorenewflag_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -2101,8 +2468,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auto renew flag, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_begintime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_begintime_nodejs" style="color: inherit; text-decoration: inherit;">begin<wbr>Time</a>
@@ -2110,8 +2476,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance start time.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_botmanagement_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_botmanagement_nodejs" style="color: inherit; text-decoration: inherit;">bot<wbr>Management</a>
@@ -2119,8 +2484,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_edition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_edition_nodejs" style="color: inherit; text-decoration: inherit;">edition</a>
@@ -2128,8 +2492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance edition, clb or saas.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance edition, clb or saas.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticmode_nodejs" style="color: inherit; text-decoration: inherit;">elastic<wbr>Mode</a>
@@ -2137,8 +2500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Is elastic billing enabled, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Is elastic billing enabled, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_goodscategory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_goodscategory_nodejs" style="color: inherit; text-decoration: inherit;">goods<wbr>Category</a>
@@ -2146,8 +2508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</p>
-</dd><dt class="property-optional"
+    <dd>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2155,8 +2516,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance id.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2164,8 +2524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Waf instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Waf instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_qpslimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_qpslimit_nodejs" style="color: inherit; text-decoration: inherit;">qps<wbr>Limit</a>
@@ -2173,8 +2532,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>QPS Limit, Minimum setting 10000. Only <code>elastic_mode</code> is 1, can be set.</p>
-</dd><dt class="property-optional"
+    <dd>QPS Limit, Minimum setting 10000. Only <code>elasticMode</code> is 1, can be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2182,8 +2540,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>waf instance status.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timespan_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timespan_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -2191,8 +2548,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeunit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeunit_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -2200,8 +2556,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time unit, support d, m, y. d: day, m: month, y: year.</p>
-</dd><dt class="property-optional"
+    <dd>Time unit, support d, m, y. d: day, m: month, y: year.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validtime_nodejs" style="color: inherit; text-decoration: inherit;">valid<wbr>Time</a>
@@ -2209,8 +2564,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>waf instance valid time.</p>
-</dd></dl>
+    <dd>waf instance valid time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2224,8 +2578,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_auto_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_renew_flag_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
@@ -2233,8 +2586,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_begin_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_begin_time_python" style="color: inherit; text-decoration: inherit;">begin_<wbr>time</a>
@@ -2242,8 +2594,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>waf instance start time.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bot_management_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bot_management_python" style="color: inherit; text-decoration: inherit;">bot_<wbr>management</a>
@@ -2251,8 +2602,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_edition_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_edition_python" style="color: inherit; text-decoration: inherit;">edition</a>
@@ -2260,8 +2610,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>waf instance edition, clb or saas.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance edition, clb or saas.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elastic_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elastic_mode_python" style="color: inherit; text-decoration: inherit;">elastic_<wbr>mode</a>
@@ -2269,8 +2618,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Is elastic billing enabled, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Is elastic billing enabled, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_goods_category_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_goods_category_python" style="color: inherit; text-decoration: inherit;">goods_<wbr>category</a>
@@ -2278,8 +2626,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</p>
-</dd><dt class="property-optional"
+    <dd>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -2287,8 +2634,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>waf instance id.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -2296,8 +2642,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Waf instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Waf instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_qps_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_qps_limit_python" style="color: inherit; text-decoration: inherit;">qps_<wbr>limit</a>
@@ -2305,8 +2650,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>QPS Limit, Minimum setting 10000. Only <code>elastic_mode</code> is 1, can be set.</p>
-</dd><dt class="property-optional"
+    <dd>QPS Limit, Minimum setting 10000. Only <code>elasticMode</code> is 1, can be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2314,8 +2658,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>waf instance status.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_time_span_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_time_span_python" style="color: inherit; text-decoration: inherit;">time_<wbr>span</a>
@@ -2323,8 +2666,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_time_unit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_time_unit_python" style="color: inherit; text-decoration: inherit;">time_<wbr>unit</a>
@@ -2332,8 +2674,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Time unit, support d, m, y. d: day, m: month, y: year.</p>
-</dd><dt class="property-optional"
+    <dd>Time unit, support d, m, y. d: day, m: month, y: year.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_valid_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_valid_time_python" style="color: inherit; text-decoration: inherit;">valid_<wbr>time</a>
@@ -2341,8 +2682,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>waf instance valid time.</p>
-</dd></dl>
+    <dd>waf instance valid time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2356,8 +2696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase API Security, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autorenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autorenewflag_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -2365,8 +2704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auto renew flag, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_begintime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_begintime_yaml" style="color: inherit; text-decoration: inherit;">begin<wbr>Time</a>
@@ -2374,8 +2712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>waf instance start time.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance start time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_botmanagement_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_botmanagement_yaml" style="color: inherit; text-decoration: inherit;">bot<wbr>Management</a>
@@ -2383,8 +2720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to purchase Bot management, 1: yes, 0: no. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_edition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_edition_yaml" style="color: inherit; text-decoration: inherit;">edition</a>
@@ -2392,8 +2728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>waf instance edition, clb or saas.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance edition, clb or saas.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_elasticmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_elasticmode_yaml" style="color: inherit; text-decoration: inherit;">elastic<wbr>Mode</a>
@@ -2401,8 +2736,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Is elastic billing enabled, 1: enable, 0: disable.</p>
-</dd><dt class="property-optional"
+    <dd>Is elastic billing enabled, 1: enable, 0: disable.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_goodscategory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_goodscategory_yaml" style="color: inherit; text-decoration: inherit;">goods<wbr>Category</a>
@@ -2410,8 +2744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</p>
-</dd><dt class="property-optional"
+    <dd>Billing order parameters. support: premium_clb, enterprise_clb, ultimate_clb.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2419,8 +2752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>waf instance id.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2428,8 +2760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Waf instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Waf instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_qpslimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_qpslimit_yaml" style="color: inherit; text-decoration: inherit;">qps<wbr>Limit</a>
@@ -2437,8 +2768,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>QPS Limit, Minimum setting 10000. Only <code>elastic_mode</code> is 1, can be set.</p>
-</dd><dt class="property-optional"
+    <dd>QPS Limit, Minimum setting 10000. Only <code>elasticMode</code> is 1, can be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2446,8 +2776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>waf instance status.</p>
-</dd><dt class="property-optional"
+    <dd>waf instance status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timespan_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timespan_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -2455,8 +2784,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeunit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeunit_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -2464,8 +2792,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time unit, support d, m, y. d: day, m: month, y: year.</p>
-</dd><dt class="property-optional"
+    <dd>Time unit, support d, m, y. d: day, m: month, y: year.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validtime_yaml" style="color: inherit; text-decoration: inherit;">valid<wbr>Time</a>
@@ -2473,8 +2800,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>waf instance valid time.</p>
-</dd></dl>
+    <dd>waf instance valid time.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2493,7 +2819,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

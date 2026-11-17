@@ -2,9 +2,11 @@
 ---
 title: "getProxyStatistics"
 title_tag: "tencentcloud.Gaap.getProxyStatistics"
-meta_desc: "Documentation for the tencentcloud.Gaap.getProxyStatistics function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of gaap proxy statistics"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,14 +18,20 @@ Use this data source to query detailed information of gaap proxy statistics
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const proxyStatistics = tencentcloud.Gaap.getProxyStatistics({
+const proxyStatistics = tencentcloud.gaap.getProxyStatistics({
+    proxyId: "link-m9t4yho9",
+    startTime: "2024-05-20 00:00:00",
     endTime: "2024-05-20 23:59:59",
-    granularity: 300,
     metricNames: [
         "InBandwidth",
         "OutBandwidth",
@@ -37,16 +45,21 @@ const proxyStatistics = tencentcloud.Gaap.getProxyStatistics({
         "Latency",
         "PacketLoss",
     ],
-    proxyId: "link-m9t4yho9",
-    startTime: "2024-05-20 00:00:00",
+    granularity: 300,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-proxy_statistics = tencentcloud.Gaap.get_proxy_statistics(end_time="2024-05-20 23:59:59",
-    granularity=300,
+proxy_statistics = tencentcloud.gaap.get_proxy_statistics(proxy_id="link-m9t4yho9",
+    start_time="2024-05-20 00:00:00",
+    end_time="2024-05-20 23:59:59",
     metric_names=[
         "InBandwidth",
         "OutBandwidth",
@@ -60,21 +73,67 @@ proxy_statistics = tencentcloud.Gaap.get_proxy_statistics(end_time="2024-05-20 2
         "Latency",
         "PacketLoss",
     ],
-    proxy_id="link-m9t4yho9",
-    start_time="2024-05-20 00:00:00")
+    granularity=300)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := gaap.GetProxyStatistics(ctx, &gaap.GetProxyStatisticsArgs{
+			ProxyId:   "link-m9t4yho9",
+			StartTime: "2024-05-20 00:00:00",
+			EndTime:   "2024-05-20 23:59:59",
+			MetricNames: []string{
+				"InBandwidth",
+				"OutBandwidth",
+				"InFlow",
+				"OutFlow",
+				"InPackets",
+				"OutPackets",
+				"Concurrent",
+				"HttpQPS",
+				"HttpsQPS",
+				"Latency",
+				"PacketLoss",
+			},
+			Granularity: 300,
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
     var proxyStatistics = Tencentcloud.Gaap.GetProxyStatistics.Invoke(new()
     {
+        ProxyId = "link-m9t4yho9",
+        StartTime = "2024-05-20 00:00:00",
         EndTime = "2024-05-20 23:59:59",
-        Granularity = 300,
         MetricNames = new[]
         {
             "InBandwidth",
@@ -89,48 +148,16 @@ return await Deployment.RunAsync(() =>
             "Latency",
             "PacketLoss",
         },
-        ProxyId = "link-m9t4yho9",
-        StartTime = "2024-05-20 00:00:00",
+        Granularity = 300,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Gaap.GetProxyStatistics(ctx, &gaap.GetProxyStatisticsArgs{
-			EndTime:     "2024-05-20 23:59:59",
-			Granularity: 300,
-			MetricNames: []string{
-				"InBandwidth",
-				"OutBandwidth",
-				"InFlow",
-				"OutFlow",
-				"InPackets",
-				"OutPackets",
-				"Concurrent",
-				"HttpQPS",
-				"HttpsQPS",
-				"Latency",
-				"PacketLoss",
-			},
-			ProxyId:   "link-m9t4yho9",
-			StartTime: "2024-05-20 00:00:00",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -139,8 +166,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Gaap.GaapFunctions;
 import com.pulumi.tencentcloud.Gaap.inputs.GetProxyStatisticsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -153,8 +180,9 @@ public class App {
 
     public static void stack(Context ctx) {
         final var proxyStatistics = GaapFunctions.getProxyStatistics(GetProxyStatisticsArgs.builder()
+            .proxyId("link-m9t4yho9")
+            .startTime("2024-05-20 00:00:00")
             .endTime("2024-05-20 23:59:59")
-            .granularity(300)
             .metricNames(            
                 "InBandwidth",
                 "OutBandwidth",
@@ -167,21 +195,26 @@ public class App {
                 "HttpsQPS",
                 "Latency",
                 "PacketLoss")
-            .proxyId("link-m9t4yho9")
-            .startTime("2024-05-20 00:00:00")
+            .granularity(300)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   proxyStatistics:
     fn::invoke:
-      Function: tencentcloud:Gaap:getProxyStatistics
-      Arguments:
+      function: tencentcloud:Gaap:getProxyStatistics
+      arguments:
+        proxyId: link-m9t4yho9
+        startTime: 2024-05-20 00:00:00
         endTime: 2024-05-20 23:59:59
-        granularity: 300
         metricNames:
           - InBandwidth
           - OutBandwidth
@@ -194,11 +227,39 @@ variables:
           - HttpsQPS
           - Latency
           - PacketLoss
-        proxyId: link-m9t4yho9
-        startTime: 2024-05-20 00:00:00
+        granularity: 300
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_getproxystatistics" "proxyStatistics" {
+  proxy_id     = "link-m9t4yho9"
+  start_time   = "2024-05-20 00:00:00"
+  end_time     = "2024-05-20 23:59:59"
+  metric_names = ["InBandwidth", "OutBandwidth", "InFlow", "OutFlow", "InPackets", "OutPackets", "Concurrent", "HttpQPS", "HttpsQPS", "Latency", "PacketLoss"]
+  granularity  = 300
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeProxyStatistics](https://www.tencentcloud.com/document/api/608/33052)
 
 
 
@@ -210,7 +271,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -218,9 +279,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getProxyStatistics<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxyStatisticsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetProxyStatisticsResult</a></span>></span
+><span class="k">function </span>getProxyStatistics<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxyStatisticsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetProxyStatisticsResult</a></span>></span
 ><span class="k">
-function </span>getProxyStatisticsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxyStatisticsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetProxyStatisticsResult</a></span>></span
+function </span>getProxyStatisticsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxyStatisticsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetProxyStatisticsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -238,14 +299,14 @@ function </span>getProxyStatisticsOutput<span class="p">(</span><span class="nx"
                          <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetProxyStatisticsResult</span
 ><span class="k">
-def </span>get_proxy_statistics_output<span class="p">(</span><span class="nx">end_time</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">granularity</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                         <span class="nx">isp</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">metric_names</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                         <span class="nx">proxy_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetProxyStatisticsResult]</span
+def </span>get_proxy_statistics_output<span class="p">(</span><span class="nx">end_time</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">granularity</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                         <span class="nx">isp</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">metric_names</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                         <span class="nx">proxy_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">start_time</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetProxyStatisticsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -270,7 +331,8 @@ func </span>GetProxyStatisticsOutput<span class="p">(</span><span class="nx">ctx
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetProxyStatistics </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetProxyStatisticsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetProxyStatisticsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetProxyStatisticsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProxyStatisticsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetProxyStatisticsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProxyStatisticsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetProxyStatisticsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProxyStatisticsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -279,7 +341,8 @@ func </span>GetProxyStatisticsOutput<span class="p">(</span><span class="nx">ctx
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetProxyStatisticsResult</a></span>> </span>getProxyStatistics<span class="p">(</span><span class="nx">GetProxyStatisticsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetProxyStatisticsResult</a></span>> </span>getProxyStatistics<span class="p">(</span><span class="nx">GetProxyStatisticsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetProxyStatisticsResult</a></span>> </span>getProxyStatistics<span class="p">(</span><span class="nx">GetProxyStatisticsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -291,6 +354,15 @@ func </span>GetProxyStatisticsOutput<span class="p">(</span><span class="nx">ctx
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getProxyStatistics:getProxyStatistics
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_proxy_statistics&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -309,8 +381,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End Time(2019-03-25 12:00:00).</p>
-</dd><dt class="property-required"
+    <dd>End Time(2019-03-25 12:00:00).</dd><dt class="property-required"
             title="Required">
         <span id="granularity_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#granularity_csharp" style="color: inherit; text-decoration: inherit;">Granularity</a>
@@ -318,8 +389,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Monitoring granularity, currently supporting 60 300 3600 86400, in seconds.When the time range does not exceed 3 days, support a minimum granularity of 60 seconds;When the time range does not exceed 7 days, support a minimum granularity of 300 seconds;When the time range does not exceed 30 days, the minimum granularity supported is 3600 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Monitoring granularity, currently supporting 60 300 3600 86400, in seconds.When the time range does not exceed 3 days, support a minimum granularity of 60 seconds;When the time range does not exceed 7 days, support a minimum granularity of 300 seconds;When the time range does not exceed 30 days, the minimum granularity supported is 3600 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="metricnames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricnames_csharp" style="color: inherit; text-decoration: inherit;">Metric<wbr>Names</a>
@@ -327,8 +397,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS.</p>
-</dd><dt class="property-required"
+    <dd>Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS, HttpQPSPercent, HttpsQPSPercent.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -336,8 +405,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy Id.</p>
-</dd><dt class="property-required"
+    <dd>Proxy Id.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -345,8 +413,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start Time(2019-03-25 12:00:00).</p>
-</dd><dt class="property-optional"
+    <dd>Start Time(2019-03-25 12:00:00).</dd><dt class="property-optional"
             title="Optional">
         <span id="isp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_csharp" style="color: inherit; text-decoration: inherit;">Isp</a>
@@ -354,8 +421,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator (valid when the proxy is a three network proxy), supports CMCC, CUCC, CTCC, and merges data from the three operators if null values are passed or not passed.</p>
-</dd><dt class="property-optional"
+    <dd>Operator (valid when the proxy is a three network proxy), supports CMCC, CUCC, CTCC, and merges data from the three operators if null values are passed or not passed.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -363,8 +429,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -378,8 +443,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End Time(2019-03-25 12:00:00).</p>
-</dd><dt class="property-required"
+    <dd>End Time(2019-03-25 12:00:00).</dd><dt class="property-required"
             title="Required">
         <span id="granularity_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#granularity_go" style="color: inherit; text-decoration: inherit;">Granularity</a>
@@ -387,8 +451,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Monitoring granularity, currently supporting 60 300 3600 86400, in seconds.When the time range does not exceed 3 days, support a minimum granularity of 60 seconds;When the time range does not exceed 7 days, support a minimum granularity of 300 seconds;When the time range does not exceed 30 days, the minimum granularity supported is 3600 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Monitoring granularity, currently supporting 60 300 3600 86400, in seconds.When the time range does not exceed 3 days, support a minimum granularity of 60 seconds;When the time range does not exceed 7 days, support a minimum granularity of 300 seconds;When the time range does not exceed 30 days, the minimum granularity supported is 3600 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="metricnames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricnames_go" style="color: inherit; text-decoration: inherit;">Metric<wbr>Names</a>
@@ -396,8 +459,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS.</p>
-</dd><dt class="property-required"
+    <dd>Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS, HttpQPSPercent, HttpsQPSPercent.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -405,8 +467,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy Id.</p>
-</dd><dt class="property-required"
+    <dd>Proxy Id.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -414,8 +475,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start Time(2019-03-25 12:00:00).</p>
-</dd><dt class="property-optional"
+    <dd>Start Time(2019-03-25 12:00:00).</dd><dt class="property-optional"
             title="Optional">
         <span id="isp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_go" style="color: inherit; text-decoration: inherit;">Isp</a>
@@ -423,8 +483,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator (valid when the proxy is a three network proxy), supports CMCC, CUCC, CTCC, and merges data from the three operators if null values are passed or not passed.</p>
-</dd><dt class="property-optional"
+    <dd>Operator (valid when the proxy is a three network proxy), supports CMCC, CUCC, CTCC, and merges data from the three operators if null values are passed or not passed.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -432,8 +491,69 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>End Time(2019-03-25 12:00:00).</dd><dt class="property-required"
+            title="Required">
+        <span id="granularity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#granularity_hcl" style="color: inherit; text-decoration: inherit;">granularity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Monitoring granularity, currently supporting 60 300 3600 86400, in seconds.When the time range does not exceed 3 days, support a minimum granularity of 60 seconds;When the time range does not exceed 7 days, support a minimum granularity of 300 seconds;When the time range does not exceed 30 days, the minimum granularity supported is 3600 seconds.</dd><dt class="property-required"
+            title="Required">
+        <span id="metric_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_names_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS, HttpQPSPercent, HttpsQPSPercent.</dd><dt class="property-required"
+            title="Required">
+        <span id="proxy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Proxy Id.</dd><dt class="property-required"
+            title="Required">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Start Time(2019-03-25 12:00:00).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="isp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_hcl" style="color: inherit; text-decoration: inherit;">isp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Operator (valid when the proxy is a three network proxy), supports CMCC, CUCC, CTCC, and merges data from the three operators if null values are passed or not passed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -447,8 +567,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End Time(2019-03-25 12:00:00).</p>
-</dd><dt class="property-required"
+    <dd>End Time(2019-03-25 12:00:00).</dd><dt class="property-required"
             title="Required">
         <span id="granularity_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#granularity_java" style="color: inherit; text-decoration: inherit;">granularity</a>
@@ -456,8 +575,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Monitoring granularity, currently supporting 60 300 3600 86400, in seconds.When the time range does not exceed 3 days, support a minimum granularity of 60 seconds;When the time range does not exceed 7 days, support a minimum granularity of 300 seconds;When the time range does not exceed 30 days, the minimum granularity supported is 3600 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Monitoring granularity, currently supporting 60 300 3600 86400, in seconds.When the time range does not exceed 3 days, support a minimum granularity of 60 seconds;When the time range does not exceed 7 days, support a minimum granularity of 300 seconds;When the time range does not exceed 30 days, the minimum granularity supported is 3600 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="metricnames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricnames_java" style="color: inherit; text-decoration: inherit;">metric<wbr>Names</a>
@@ -465,8 +583,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS.</p>
-</dd><dt class="property-required"
+    <dd>Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS, HttpQPSPercent, HttpsQPSPercent.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -474,8 +591,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proxy Id.</p>
-</dd><dt class="property-required"
+    <dd>Proxy Id.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -483,8 +599,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start Time(2019-03-25 12:00:00).</p>
-</dd><dt class="property-optional"
+    <dd>Start Time(2019-03-25 12:00:00).</dd><dt class="property-optional"
             title="Optional">
         <span id="isp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_java" style="color: inherit; text-decoration: inherit;">isp</a>
@@ -492,8 +607,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operator (valid when the proxy is a three network proxy), supports CMCC, CUCC, CTCC, and merges data from the three operators if null values are passed or not passed.</p>
-</dd><dt class="property-optional"
+    <dd>Operator (valid when the proxy is a three network proxy), supports CMCC, CUCC, CTCC, and merges data from the three operators if null values are passed or not passed.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -501,8 +615,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -516,8 +629,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End Time(2019-03-25 12:00:00).</p>
-</dd><dt class="property-required"
+    <dd>End Time(2019-03-25 12:00:00).</dd><dt class="property-required"
             title="Required">
         <span id="granularity_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#granularity_nodejs" style="color: inherit; text-decoration: inherit;">granularity</a>
@@ -525,8 +637,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Monitoring granularity, currently supporting 60 300 3600 86400, in seconds.When the time range does not exceed 3 days, support a minimum granularity of 60 seconds;When the time range does not exceed 7 days, support a minimum granularity of 300 seconds;When the time range does not exceed 30 days, the minimum granularity supported is 3600 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Monitoring granularity, currently supporting 60 300 3600 86400, in seconds.When the time range does not exceed 3 days, support a minimum granularity of 60 seconds;When the time range does not exceed 7 days, support a minimum granularity of 300 seconds;When the time range does not exceed 30 days, the minimum granularity supported is 3600 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="metricnames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricnames_nodejs" style="color: inherit; text-decoration: inherit;">metric<wbr>Names</a>
@@ -534,8 +645,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS.</p>
-</dd><dt class="property-required"
+    <dd>Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS, HttpQPSPercent, HttpsQPSPercent.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -543,8 +653,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy Id.</p>
-</dd><dt class="property-required"
+    <dd>Proxy Id.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -552,8 +661,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start Time(2019-03-25 12:00:00).</p>
-</dd><dt class="property-optional"
+    <dd>Start Time(2019-03-25 12:00:00).</dd><dt class="property-optional"
             title="Optional">
         <span id="isp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_nodejs" style="color: inherit; text-decoration: inherit;">isp</a>
@@ -561,8 +669,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator (valid when the proxy is a three network proxy), supports CMCC, CUCC, CTCC, and merges data from the three operators if null values are passed or not passed.</p>
-</dd><dt class="property-optional"
+    <dd>Operator (valid when the proxy is a three network proxy), supports CMCC, CUCC, CTCC, and merges data from the three operators if null values are passed or not passed.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -570,8 +677,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -585,8 +691,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>End Time(2019-03-25 12:00:00).</p>
-</dd><dt class="property-required"
+    <dd>End Time(2019-03-25 12:00:00).</dd><dt class="property-required"
             title="Required">
         <span id="granularity_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#granularity_python" style="color: inherit; text-decoration: inherit;">granularity</a>
@@ -594,8 +699,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Monitoring granularity, currently supporting 60 300 3600 86400, in seconds.When the time range does not exceed 3 days, support a minimum granularity of 60 seconds;When the time range does not exceed 7 days, support a minimum granularity of 300 seconds;When the time range does not exceed 30 days, the minimum granularity supported is 3600 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Monitoring granularity, currently supporting 60 300 3600 86400, in seconds.When the time range does not exceed 3 days, support a minimum granularity of 60 seconds;When the time range does not exceed 7 days, support a minimum granularity of 300 seconds;When the time range does not exceed 30 days, the minimum granularity supported is 3600 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="metric_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_names_python" style="color: inherit; text-decoration: inherit;">metric_<wbr>names</a>
@@ -603,8 +707,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS.</p>
-</dd><dt class="property-required"
+    <dd>Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS, HttpQPSPercent, HttpsQPSPercent.</dd><dt class="property-required"
             title="Required">
         <span id="proxy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
@@ -612,8 +715,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Proxy Id.</p>
-</dd><dt class="property-required"
+    <dd>Proxy Id.</dd><dt class="property-required"
             title="Required">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -621,8 +723,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Start Time(2019-03-25 12:00:00).</p>
-</dd><dt class="property-optional"
+    <dd>Start Time(2019-03-25 12:00:00).</dd><dt class="property-optional"
             title="Optional">
         <span id="isp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_python" style="color: inherit; text-decoration: inherit;">isp</a>
@@ -630,8 +731,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Operator (valid when the proxy is a three network proxy), supports CMCC, CUCC, CTCC, and merges data from the three operators if null values are passed or not passed.</p>
-</dd><dt class="property-optional"
+    <dd>Operator (valid when the proxy is a three network proxy), supports CMCC, CUCC, CTCC, and merges data from the three operators if null values are passed or not passed.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -639,8 +739,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -654,8 +753,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End Time(2019-03-25 12:00:00).</p>
-</dd><dt class="property-required"
+    <dd>End Time(2019-03-25 12:00:00).</dd><dt class="property-required"
             title="Required">
         <span id="granularity_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#granularity_yaml" style="color: inherit; text-decoration: inherit;">granularity</a>
@@ -663,8 +761,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Monitoring granularity, currently supporting 60 300 3600 86400, in seconds.When the time range does not exceed 3 days, support a minimum granularity of 60 seconds;When the time range does not exceed 7 days, support a minimum granularity of 300 seconds;When the time range does not exceed 30 days, the minimum granularity supported is 3600 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Monitoring granularity, currently supporting 60 300 3600 86400, in seconds.When the time range does not exceed 3 days, support a minimum granularity of 60 seconds;When the time range does not exceed 7 days, support a minimum granularity of 300 seconds;When the time range does not exceed 30 days, the minimum granularity supported is 3600 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="metricnames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricnames_yaml" style="color: inherit; text-decoration: inherit;">metric<wbr>Names</a>
@@ -672,8 +769,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS.</p>
-</dd><dt class="property-required"
+    <dd>Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS, HttpQPSPercent, HttpsQPSPercent.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -681,8 +777,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proxy Id.</p>
-</dd><dt class="property-required"
+    <dd>Proxy Id.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -690,8 +785,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start Time(2019-03-25 12:00:00).</p>
-</dd><dt class="property-optional"
+    <dd>Start Time(2019-03-25 12:00:00).</dd><dt class="property-optional"
             title="Optional">
         <span id="isp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_yaml" style="color: inherit; text-decoration: inherit;">isp</a>
@@ -699,8 +793,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operator (valid when the proxy is a three network proxy), supports CMCC, CUCC, CTCC, and merges data from the three operators if null values are passed or not passed.</p>
-</dd><dt class="property-optional"
+    <dd>Operator (valid when the proxy is a three network proxy), supports CMCC, CUCC, CTCC, and merges data from the three operators if null values are passed or not passed.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -708,8 +801,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -748,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="metricnames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricnames_csharp" style="color: inherit; text-decoration: inherit;">Metric<wbr>Names</a>
@@ -781,8 +872,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxystatisticsstatisticsdata">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Proxy<wbr>Statistics<wbr>Statistics<wbr>Data&gt;</a></span>
     </dt>
-    <dd><p>proxy Statistics.</p>
-</dd><dt class="property-"
+    <dd>proxy Statistics.</dd><dt class="property-"
             title="">
         <span id="isp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_csharp" style="color: inherit; text-decoration: inherit;">Isp</a>
@@ -828,8 +918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="metricnames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricnames_go" style="color: inherit; text-decoration: inherit;">Metric<wbr>Names</a>
@@ -861,8 +950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxystatisticsstatisticsdata">[]Get<wbr>Proxy<wbr>Statistics<wbr>Statistics<wbr>Data</a></span>
     </dt>
-    <dd><p>proxy Statistics.</p>
-</dd><dt class="property-"
+    <dd>proxy Statistics.</dd><dt class="property-"
             title="">
         <span id="isp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_go" style="color: inherit; text-decoration: inherit;">Isp</a>
@@ -874,6 +962,84 @@ The following output properties are available:
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="granularity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#granularity_hcl" style="color: inherit; text-decoration: inherit;">granularity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="metric_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_names_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="proxy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="statistics_datas_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statistics_datas_hcl" style="color: inherit; text-decoration: inherit;">statistics_<wbr>datas</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproxystatisticsstatisticsdata">list(object)</a></span>
+    </dt>
+    <dd>proxy Statistics.</dd><dt class="property-"
+            title="">
+        <span id="isp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_hcl" style="color: inherit; text-decoration: inherit;">isp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -908,8 +1074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="metricnames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricnames_java" style="color: inherit; text-decoration: inherit;">metric<wbr>Names</a>
@@ -941,8 +1106,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxystatisticsstatisticsdata">List&lt;Get<wbr>Proxy<wbr>Statistics<wbr>Statistics<wbr>Data&gt;</a></span>
     </dt>
-    <dd><p>proxy Statistics.</p>
-</dd><dt class="property-"
+    <dd>proxy Statistics.</dd><dt class="property-"
             title="">
         <span id="isp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_java" style="color: inherit; text-decoration: inherit;">isp</a>
@@ -988,8 +1152,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="metricnames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricnames_nodejs" style="color: inherit; text-decoration: inherit;">metric<wbr>Names</a>
@@ -1021,8 +1184,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxystatisticsstatisticsdata">Get<wbr>Proxy<wbr>Statistics<wbr>Statistics<wbr>Data[]</a></span>
     </dt>
-    <dd><p>proxy Statistics.</p>
-</dd><dt class="property-"
+    <dd>proxy Statistics.</dd><dt class="property-"
             title="">
         <span id="isp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_nodejs" style="color: inherit; text-decoration: inherit;">isp</a>
@@ -1068,8 +1230,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="metric_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_names_python" style="color: inherit; text-decoration: inherit;">metric_<wbr>names</a>
@@ -1099,10 +1260,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statistics_datas_python" style="color: inherit; text-decoration: inherit;">statistics_<wbr>datas</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproxystatisticsstatisticsdata">Get<wbr>Proxy<wbr>Statistics<wbr>Statistics<wbr>Data]</a></span>
+        <span class="property-type"><a href="#getproxystatisticsstatisticsdata">Sequence[Get<wbr>Proxy<wbr>Statistics<wbr>Statistics<wbr>Data]</a></span>
     </dt>
-    <dd><p>proxy Statistics.</p>
-</dd><dt class="property-"
+    <dd>proxy Statistics.</dd><dt class="property-"
             title="">
         <span id="isp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_python" style="color: inherit; text-decoration: inherit;">isp</a>
@@ -1148,8 +1308,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="metricnames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricnames_yaml" style="color: inherit; text-decoration: inherit;">metric<wbr>Names</a>
@@ -1181,8 +1340,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxystatisticsstatisticsdata">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>proxy Statistics.</p>
-</dd><dt class="property-"
+    <dd>proxy Statistics.</dd><dt class="property-"
             title="">
         <span id="isp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_yaml" style="color: inherit; text-decoration: inherit;">isp</a>
@@ -1222,8 +1380,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxystatisticsstatisticsdatametricdata">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Inputs.<wbr>Get<wbr>Proxy<wbr>Statistics<wbr>Statistics<wbr>Data<wbr>Metric<wbr>Data&gt;</a></span>
     </dt>
-    <dd><p>Metric Data.</p>
-</dd><dt class="property-required"
+    <dd>Metric Data.</dd><dt class="property-required"
             title="Required">
         <span id="metricname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_csharp" style="color: inherit; text-decoration: inherit;">Metric<wbr>Name</a>
@@ -1231,8 +1388,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Metric Name.</p>
-</dd></dl>
+    <dd>Metric Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1246,8 +1402,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxystatisticsstatisticsdatametricdata">[]Get<wbr>Proxy<wbr>Statistics<wbr>Statistics<wbr>Data<wbr>Metric<wbr>Data</a></span>
     </dt>
-    <dd><p>Metric Data.</p>
-</dd><dt class="property-required"
+    <dd>Metric Data.</dd><dt class="property-required"
             title="Required">
         <span id="metricname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_go" style="color: inherit; text-decoration: inherit;">Metric<wbr>Name</a>
@@ -1255,8 +1410,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Metric Name.</p>
-</dd></dl>
+    <dd>Metric Name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="metric_datas_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_datas_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>datas</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproxystatisticsstatisticsdatametricdata">list(object)</a></span>
+    </dt>
+    <dd>Metric Data.</dd><dt class="property-required"
+            title="Required">
+        <span id="metric_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_name_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Metric Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1270,8 +1446,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxystatisticsstatisticsdatametricdata">List&lt;Get<wbr>Proxy<wbr>Statistics<wbr>Statistics<wbr>Data<wbr>Metric<wbr>Data&gt;</a></span>
     </dt>
-    <dd><p>Metric Data.</p>
-</dd><dt class="property-required"
+    <dd>Metric Data.</dd><dt class="property-required"
             title="Required">
         <span id="metricname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_java" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
@@ -1279,8 +1454,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Metric Name.</p>
-</dd></dl>
+    <dd>Metric Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1294,8 +1468,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxystatisticsstatisticsdatametricdata">Get<wbr>Proxy<wbr>Statistics<wbr>Statistics<wbr>Data<wbr>Metric<wbr>Data[]</a></span>
     </dt>
-    <dd><p>Metric Data.</p>
-</dd><dt class="property-required"
+    <dd>Metric Data.</dd><dt class="property-required"
             title="Required">
         <span id="metricname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_nodejs" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
@@ -1303,8 +1476,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Metric Name.</p>
-</dd></dl>
+    <dd>Metric Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1316,10 +1488,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_datas_python" style="color: inherit; text-decoration: inherit;">metric_<wbr>datas</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproxystatisticsstatisticsdatametricdata">Get<wbr>Proxy<wbr>Statistics<wbr>Statistics<wbr>Data<wbr>Metric<wbr>Data]</a></span>
+        <span class="property-type"><a href="#getproxystatisticsstatisticsdatametricdata">Sequence[Get<wbr>Proxy<wbr>Statistics<wbr>Statistics<wbr>Data<wbr>Metric<wbr>Data]</a></span>
     </dt>
-    <dd><p>Metric Data.</p>
-</dd><dt class="property-required"
+    <dd>Metric Data.</dd><dt class="property-required"
             title="Required">
         <span id="metric_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_name_python" style="color: inherit; text-decoration: inherit;">metric_<wbr>name</a>
@@ -1327,8 +1498,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Metric Name.</p>
-</dd></dl>
+    <dd>Metric Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1342,8 +1512,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxystatisticsstatisticsdatametricdata">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Metric Data.</p>
-</dd><dt class="property-required"
+    <dd>Metric Data.</dd><dt class="property-required"
             title="Required">
         <span id="metricname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_yaml" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
@@ -1351,8 +1520,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Metric Name.</p>
-</dd></dl>
+    <dd>Metric Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1370,8 +1538,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>DataNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>DataNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="time_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_csharp" style="color: inherit; text-decoration: inherit;">Time</a>
@@ -1379,8 +1546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time.</p>
-</dd></dl>
+    <dd>Time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1394,8 +1560,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>DataNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>DataNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="time_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_go" style="color: inherit; text-decoration: inherit;">Time</a>
@@ -1403,8 +1568,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time.</p>
-</dd></dl>
+    <dd>Time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="data_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_hcl" style="color: inherit; text-decoration: inherit;">data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>DataNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_hcl" style="color: inherit; text-decoration: inherit;">time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1418,8 +1604,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>DataNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>DataNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="time_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_java" style="color: inherit; text-decoration: inherit;">time</a>
@@ -1427,8 +1612,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Time.</p>
-</dd></dl>
+    <dd>Time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1442,8 +1626,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>DataNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>DataNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="time_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_nodejs" style="color: inherit; text-decoration: inherit;">time</a>
@@ -1451,8 +1634,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Time.</p>
-</dd></dl>
+    <dd>Time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1466,8 +1648,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>DataNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>DataNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_python" style="color: inherit; text-decoration: inherit;">time</a>
@@ -1475,8 +1656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time.</p>
-</dd></dl>
+    <dd>Time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1490,8 +1670,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>DataNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>DataNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="time_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_yaml" style="color: inherit; text-decoration: inherit;">time</a>
@@ -1499,8 +1678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Time.</p>
-</dd></dl>
+    <dd>Time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1515,7 +1693,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

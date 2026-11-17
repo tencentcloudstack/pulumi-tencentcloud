@@ -2,9 +2,11 @@
 ---
 title: "ParamTemplate"
 title_tag: "tencentcloud.Mysql.ParamTemplate"
-meta_desc: "Documentation for the tencentcloud.Mysql.ParamTemplate resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a mysql param template"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,24 +18,35 @@ Provides a resource to create a mysql param template
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zones = tencentcloud.Availability.getZonesByProduct({
+const zones = tencentcloud.availability.getZonesByProduct({
     product: "cdb",
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-mysql",
+    cidrBlock: "10.0.0.0/16",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
+    name: "subnet-mysql",
     vpcId: vpc.id,
     cidrBlock: "10.0.0.0/16",
     isMulticast: false,
 });
-const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "mysql test"});
-const exampleInstance = new tencentcloud.mysql.Instance("exampleInstance", {
+const securityGroup = new tencentcloud.security.Group("security_group", {
+    name: "sg-mysql",
+    description: "mysql test",
+});
+const example = new tencentcloud.mysql.Instance("example", {
     internetService: 1,
     engineVersion: "5.7",
     chargeType: "POSTPAID",
@@ -56,7 +69,8 @@ const exampleInstance = new tencentcloud.mysql.Instance("exampleInstance", {
         max_connections: "1000",
     },
 });
-const exampleParamTemplate = new tencentcloud.mysql.ParamTemplate("exampleParamTemplate", {
+const exampleParamTemplate = new tencentcloud.mysql.ParamTemplate("example", {
+    name: "tf-example",
     description: "desc.",
     engineVersion: "8.0",
     paramLists: [
@@ -77,20 +91,30 @@ const exampleParamTemplate = new tencentcloud.mysql.ParamTemplate("exampleParamT
     engineType: "InnoDB",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+zones = tencentcloud.availability.get_zones_by_product(product="cdb")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-mysql",
+    cidr_block="10.0.0.0/16")
 subnet = tencentcloud.subnet.Instance("subnet",
     availability_zone=zones.zones[0].name,
+    name="subnet-mysql",
     vpc_id=vpc.id,
     cidr_block="10.0.0.0/16",
     is_multicast=False)
-security_group = tencentcloud.security.Group("securityGroup", description="mysql test")
-example_instance = tencentcloud.mysql.Instance("exampleInstance",
+security_group = tencentcloud.security.Group("security_group",
+    name="sg-mysql",
+    description="mysql test")
+example = tencentcloud.mysql.Instance("example",
     internet_service=1,
     engine_version="5.7",
     charge_type="POSTPAID",
@@ -112,31 +136,141 @@ example_instance = tencentcloud.mysql.Instance("exampleInstance",
         "character_set_server": "utf8",
         "max_connections": "1000",
     })
-example_param_template = tencentcloud.mysql.ParamTemplate("exampleParamTemplate",
+example_param_template = tencentcloud.mysql.ParamTemplate("example",
+    name="tf-example",
     description="desc.",
     engine_version="8.0",
     param_lists=[
-        tencentcloud.mysql.ParamTemplateParamListArgs(
-            current_value="1",
-            name="auto_increment_increment",
-        ),
-        tencentcloud.mysql.ParamTemplateParamListArgs(
-            current_value="1",
-            name="auto_increment_offset",
-        ),
-        tencentcloud.mysql.ParamTemplateParamListArgs(
-            current_value="ON",
-            name="automatic_sp_privileges",
-        ),
+        {
+            "current_value": "1",
+            "name": "auto_increment_increment",
+        },
+        {
+            "current_value": "1",
+            "name": "auto_increment_offset",
+        },
+        {
+            "current_value": "ON",
+            "name": "automatic_sp_privileges",
+        },
     ],
     template_type="HIGH_STABILITY",
     engine_type="InnoDB")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mysql"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "cdb",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-mysql"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+			Name:             pulumi.String("subnet-mysql"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			CidrBlock:        pulumi.String("10.0.0.0/16"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		securityGroup, err := security.NewGroup(ctx, "security_group", &security.GroupArgs{
+			Name:        pulumi.String("sg-mysql"),
+			Description: pulumi.String("mysql test"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = mysql.NewInstance(ctx, "example", &mysql.InstanceArgs{
+			InternetService:  pulumi.Int(1),
+			EngineVersion:    pulumi.String("5.7"),
+			ChargeType:       pulumi.String("POSTPAID"),
+			RootPassword:     pulumi.String("PassWord123"),
+			SlaveDeployMode:  pulumi.Int(0),
+			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+			SlaveSyncMode:    pulumi.Int(1),
+			InstanceName:     pulumi.String("tf-example-mysql"),
+			MemSize:          pulumi.Int(4000),
+			VolumeSize:       pulumi.Int(200),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+			IntranetPort:     pulumi.Int(3306),
+			SecurityGroups: pulumi.StringArray{
+				securityGroup.ID().ToIDOutput().ToStringOutput(),
+			},
+			Tags: pulumi.StringMap{
+				"name": pulumi.String("test"),
+			},
+			Parameters: pulumi.StringMap{
+				"character_set_server": pulumi.String("utf8"),
+				"max_connections":      pulumi.String("1000"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = mysql.NewParamTemplate(ctx, "example", &mysql.ParamTemplateArgs{
+			Name:          pulumi.String("tf-example"),
+			Description:   pulumi.String("desc."),
+			EngineVersion: pulumi.String("8.0"),
+			ParamLists: mysql.ParamTemplateParamListArray{
+				&mysql.ParamTemplateParamListArgs{
+					CurrentValue: pulumi.String("1"),
+					Name:         pulumi.String("auto_increment_increment"),
+				},
+				&mysql.ParamTemplateParamListArgs{
+					CurrentValue: pulumi.String("1"),
+					Name:         pulumi.String("auto_increment_offset"),
+				},
+				&mysql.ParamTemplateParamListArgs{
+					CurrentValue: pulumi.String("ON"),
+					Name:         pulumi.String("automatic_sp_privileges"),
+				},
+			},
+			TemplateType: pulumi.String("HIGH_STABILITY"),
+			EngineType:   pulumi.String("InnoDB"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -148,23 +282,26 @@ return await Deployment.RunAsync(() =>
 
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc-mysql",
         CidrBlock = "10.0.0.0/16",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
+        Name = "subnet-mysql",
         VpcId = vpc.Id,
         CidrBlock = "10.0.0.0/16",
         IsMulticast = false,
     });
 
-    var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    var securityGroup = new Tencentcloud.Security.Group("security_group", new()
     {
+        Name = "sg-mysql",
         Description = "mysql test",
     });
 
-    var exampleInstance = new Tencentcloud.Mysql.Instance("exampleInstance", new()
+    var example = new Tencentcloud.Mysql.Instance("example", new()
     {
         InternetService = 1,
         EngineVersion = "5.7",
@@ -194,8 +331,9 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleParamTemplate = new Tencentcloud.Mysql.ParamTemplate("exampleParamTemplate", new()
+    var exampleParamTemplate = new Tencentcloud.Mysql.ParamTemplate("example", new()
     {
+        Name = "tf-example",
         Description = "desc.",
         EngineVersion = "8.0",
         ParamLists = new[]
@@ -222,102 +360,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-			Product: "cdb",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-			VpcId:            vpc.ID(),
-			CidrBlock:        pulumi.String("10.0.0.0/16"),
-			IsMulticast:      pulumi.Bool(false),
-		})
-		if err != nil {
-			return err
-		}
-		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-			Description: pulumi.String("mysql test"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Mysql.NewInstance(ctx, "exampleInstance", &Mysql.InstanceArgs{
-			InternetService:  pulumi.Int(1),
-			EngineVersion:    pulumi.String("5.7"),
-			ChargeType:       pulumi.String("POSTPAID"),
-			RootPassword:     pulumi.String("PassWord123"),
-			SlaveDeployMode:  pulumi.Int(0),
-			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-			SlaveSyncMode:    pulumi.Int(1),
-			InstanceName:     pulumi.String("tf-example-mysql"),
-			MemSize:          pulumi.Int(4000),
-			VolumeSize:       pulumi.Int(200),
-			VpcId:            vpc.ID(),
-			SubnetId:         subnet.ID(),
-			IntranetPort:     pulumi.Int(3306),
-			SecurityGroups: pulumi.StringArray{
-				securityGroup.ID(),
-			},
-			Tags: pulumi.Map{
-				"name": pulumi.Any("test"),
-			},
-			Parameters: pulumi.Map{
-				"character_set_server": pulumi.Any("utf8"),
-				"max_connections":      pulumi.Any("1000"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Mysql.NewParamTemplate(ctx, "exampleParamTemplate", &Mysql.ParamTemplateArgs{
-			Description:   pulumi.String("desc."),
-			EngineVersion: pulumi.String("8.0"),
-			ParamLists: mysql.ParamTemplateParamListArray{
-				&mysql.ParamTemplateParamListArgs{
-					CurrentValue: pulumi.String("1"),
-					Name:         pulumi.String("auto_increment_increment"),
-				},
-				&mysql.ParamTemplateParamListArgs{
-					CurrentValue: pulumi.String("1"),
-					Name:         pulumi.String("auto_increment_offset"),
-				},
-				&mysql.ParamTemplateParamListArgs{
-					CurrentValue: pulumi.String("ON"),
-					Name:         pulumi.String("automatic_sp_privileges"),
-				},
-			},
-			TemplateType: pulumi.String("HIGH_STABILITY"),
-			EngineType:   pulumi.String("InnoDB"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -326,19 +373,13 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
 import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
 import com.pulumi.tencentcloud.Security.Group;
 import com.pulumi.tencentcloud.Security.GroupArgs;
-import com.pulumi.tencentcloud.Mysql.Instance;
-import com.pulumi.tencentcloud.Mysql.InstanceArgs;
 import com.pulumi.tencentcloud.Mysql.ParamTemplate;
 import com.pulumi.tencentcloud.Mysql.ParamTemplateArgs;
 import com.pulumi.tencentcloud.Mysql.inputs.ParamTemplateParamListArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -354,28 +395,31 @@ public class App {
             .product("cdb")
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc-mysql")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .availabilityZone(zones.zones()[0].name())
+            .name("subnet-mysql")
             .vpcId(vpc.id())
             .cidrBlock("10.0.0.0/16")
             .isMulticast(false)
             .build());
 
-        var securityGroup = new Group("securityGroup", GroupArgs.builder()        
+        var securityGroup = new Group("securityGroup", GroupArgs.builder()
+            .name("sg-mysql")
             .description("mysql test")
             .build());
 
-        var exampleInstance = new Instance("exampleInstance", InstanceArgs.builder()        
+        var example = new com.pulumi.tencentcloud.Mysql.Instance("example", com.pulumi.tencentcloud.Mysql.InstanceArgs.builder()
             .internetService(1)
             .engineVersion("5.7")
             .chargeType("POSTPAID")
             .rootPassword("PassWord123")
             .slaveDeployMode(0)
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
+            .availabilityZone(zones.zones()[0].name())
             .slaveSyncMode(1)
             .instanceName("tf-example-mysql")
             .memSize(4000)
@@ -391,7 +435,8 @@ public class App {
             ))
             .build());
 
-        var exampleParamTemplate = new ParamTemplate("exampleParamTemplate", ParamTemplateArgs.builder()        
+        var exampleParamTemplate = new ParamTemplate("exampleParamTemplate", ParamTemplateArgs.builder()
+            .name("tf-example")
             .description("desc.")
             .engineVersion("8.0")
             .paramLists(            
@@ -414,24 +459,33 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-mysql
       cidrBlock: 10.0.0.0/16
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       availabilityZone: ${zones.zones[0].name}
+      name: subnet-mysql
       vpcId: ${vpc.id}
       cidrBlock: 10.0.0.0/16
       isMulticast: false
   securityGroup:
     type: tencentcloud:Security:Group
+    name: security_group
     properties:
+      name: sg-mysql
       description: mysql test
-  exampleInstance:
+  example:
     type: tencentcloud:Mysql:Instance
     properties:
       internetService: 1
@@ -456,7 +510,9 @@ resources:
         max_connections: '1000'
   exampleParamTemplate:
     type: tencentcloud:Mysql:ParamTemplate
+    name: example
     properties:
+      name: tf-example
       description: desc.
       engineVersion: '8.0'
       paramLists:
@@ -471,75 +527,178 @@ resources:
 variables:
   zones:
     fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
         product: cdb
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "zones" {
+  product = "cdb"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-mysql"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[0].name
+  name              = "subnet-mysql"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.0.0/16"
+  is_multicast      = false
+}
+resource "tencentcloud_security_group" "security_group" {
+  name        = "sg-mysql"
+  description = "mysql test"
+}
+resource "tencentcloud_mysql_instance" "example" {
+  internet_service  = 1
+  engine_version    = "5.7"
+  charge_type       = "POSTPAID"
+  root_password     = "PassWord123"
+  slave_deploy_mode = 0
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[0].name
+  slave_sync_mode   = 1
+  instance_name     = "tf-example-mysql"
+  mem_size          = 4000
+  volume_size       = 200
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  subnet_id         = tencentcloud_subnet_instance.subnet.id
+  intranet_port     = 3306
+  security_groups   = [tencentcloud_security_group.security_group.id]
+  tags = {
+    "name" = "test"
+  }
+  parameters = {
+    "character_set_server" = "utf8"
+    "max_connections"      = "1000"
+  }
+}
+resource "tencentcloud_mysql_paramtemplate" "example" {
+  name           = "tf-example"
+  description    = "desc."
+  engine_version = "8.0"
+  param_lists {
+    current_value = "1"
+    name          = "auto_increment_increment"
+  }
+  param_lists {
+    current_value = "1"
+    name          = "auto_increment_offset"
+  }
+  param_lists {
+    current_value = "ON"
+    name          = "automatic_sp_privileges"
+  }
+  template_type = "HIGH_STABILITY"
+  engine_type   = "InnoDB"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateParamTemplate](https://www.tencentcloud.com/document/api/236/34471)
+* Read:
+  - [DescribeParamTemplateInfo](https://www.tencentcloud.com/document/api/236/34466)
+  - [DescribeParamTemplates](https://www.tencentcloud.com/document/api/236/34465)
+* Update: [ModifyParamTemplate](https://www.tencentcloud.com/document/api/236/34464)
+* Delete: [DeleteParamTemplate](https://www.tencentcloud.com/document/api/236/34470)
 
 
 ## Create ParamTemplate Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ParamTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">ParamTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ParamTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">ParamTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ParamTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[ParamTemplateArgs]</a></span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ParamTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                   <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">engine_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">engine_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">param_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_mysql.ParamTemplateParamListArgs]]</span> = None<span class="p">,</span>
+                  <span class="nx">param_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[ParamTemplateParamListArgs]]</span> = None<span class="p">,</span>
                   <span class="nx">template_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                  <span class="nx">template_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ParamTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[ParamTemplateArgs]</a></span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                  <span class="nx">template_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewParamTemplate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">ParamTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ParamTemplate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewParamTemplate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">ParamTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ParamTemplate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ParamTemplate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ParamTemplateArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ParamTemplate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ParamTemplateArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ParamTemplate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ParamTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ParamTemplate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ParamTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Mysql:ParamTemplate</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Mysql:ParamTemplate</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_mysql_param_template&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -560,7 +719,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -677,11 +836,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## ParamTemplate Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ParamTemplate resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -697,8 +864,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The description of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="enginetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enginetype_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Type</a>
@@ -706,8 +872,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</p>
-</dd><dt class="property-optional"
+    <dd>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -715,8 +880,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The version of MySQL.</p>
-</dd><dt class="property-optional"
+    <dd>The version of MySQL.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -724,17 +888,15 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The name of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramlists_csharp" style="color: inherit; text-decoration: inherit;">Param<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Param<wbr>Template<wbr>Param<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#paramtemplateparamlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Param<wbr>Template<wbr>Param<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>parameter list.</p>
-</dd><dt class="property-optional"
+    <dd>parameter list.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_csharp" style="color: inherit; text-decoration: inherit;">Template<wbr>Id</a>
@@ -742,8 +904,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of source parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of source parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="templatetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templatetype_csharp" style="color: inherit; text-decoration: inherit;">Template<wbr>Type</a>
@@ -751,8 +912,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</p>
-</dd></dl>
+    <dd>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -766,8 +926,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The description of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="enginetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enginetype_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Type</a>
@@ -775,8 +934,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</p>
-</dd><dt class="property-optional"
+    <dd>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -784,8 +942,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The version of MySQL.</p>
-</dd><dt class="property-optional"
+    <dd>The version of MySQL.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -793,8 +950,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The name of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramlists_go" style="color: inherit; text-decoration: inherit;">Param<wbr>Lists</a>
@@ -802,8 +958,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paramtemplateparamlist">[]Param<wbr>Template<wbr>Param<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>parameter list.</p>
-</dd><dt class="property-optional"
+    <dd>parameter list.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_go" style="color: inherit; text-decoration: inherit;">Template<wbr>Id</a>
@@ -811,8 +966,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of source parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of source parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="templatetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templatetype_go" style="color: inherit; text-decoration: inherit;">Template<wbr>Type</a>
@@ -820,8 +974,69 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</p>
-</dd></dl>
+    <dd>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The description of parameter template.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="engine_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_type_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="engine_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The version of MySQL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of parameter template.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="param_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_lists_hcl" style="color: inherit; text-decoration: inherit;">param_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#paramtemplateparamlist">list(object)</a></span>
+    </dt>
+    <dd>parameter list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_id_hcl" style="color: inherit; text-decoration: inherit;">template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The ID of source parameter template.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="template_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_type_hcl" style="color: inherit; text-decoration: inherit;">template_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -835,8 +1050,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The description of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The description of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="enginetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enginetype_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Type</a>
@@ -844,8 +1058,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</p>
-</dd><dt class="property-optional"
+    <dd>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -853,8 +1066,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The version of MySQL.</p>
-</dd><dt class="property-optional"
+    <dd>The version of MySQL.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -862,17 +1074,15 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The name of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramlists_java" style="color: inherit; text-decoration: inherit;">param<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamlist">List&lt;Param<wbr>Template<wbr>Param<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#paramtemplateparamlist">List&lt;Param<wbr>Template<wbr>Param<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>parameter list.</p>
-</dd><dt class="property-optional"
+    <dd>parameter list.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_java" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -880,8 +1090,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The ID of source parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of source parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="templatetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templatetype_java" style="color: inherit; text-decoration: inherit;">template<wbr>Type</a>
@@ -889,8 +1098,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</p>
-</dd></dl>
+    <dd>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -904,8 +1112,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The description of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="enginetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enginetype_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Type</a>
@@ -913,8 +1120,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</p>
-</dd><dt class="property-optional"
+    <dd>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -922,8 +1128,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The version of MySQL.</p>
-</dd><dt class="property-optional"
+    <dd>The version of MySQL.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -931,17 +1136,15 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The name of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramlists_nodejs" style="color: inherit; text-decoration: inherit;">param<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamlist">Param<wbr>Template<wbr>Param<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#paramtemplateparamlist">Param<wbr>Template<wbr>Param<wbr>List[]</a></span>
     </dt>
-    <dd><p>parameter list.</p>
-</dd><dt class="property-optional"
+    <dd>parameter list.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_nodejs" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -949,8 +1152,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The ID of source parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of source parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="templatetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templatetype_nodejs" style="color: inherit; text-decoration: inherit;">template<wbr>Type</a>
@@ -958,8 +1160,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</p>
-</dd></dl>
+    <dd>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -973,8 +1174,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The description of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The description of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="engine_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_type_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>type</a>
@@ -982,8 +1182,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</p>
-</dd><dt class="property-optional"
+    <dd>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</dd><dt class="property-optional"
             title="Optional">
         <span id="engine_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
@@ -991,8 +1190,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The version of MySQL.</p>
-</dd><dt class="property-optional"
+    <dd>The version of MySQL.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1000,17 +1198,15 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The name of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="param_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_lists_python" style="color: inherit; text-decoration: inherit;">param_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamlist">Param<wbr>Template<wbr>Param<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#paramtemplateparamlist">Sequence[Param<wbr>Template<wbr>Param<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>parameter list.</p>
-</dd><dt class="property-optional"
+    <dd>parameter list.</dd><dt class="property-optional"
             title="Optional">
         <span id="template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_id_python" style="color: inherit; text-decoration: inherit;">template_<wbr>id</a>
@@ -1018,8 +1214,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of source parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of source parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="template_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_type_python" style="color: inherit; text-decoration: inherit;">template_<wbr>type</a>
@@ -1027,8 +1222,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</p>
-</dd></dl>
+    <dd>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1042,8 +1236,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The description of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The description of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="enginetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enginetype_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Type</a>
@@ -1051,8 +1244,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</p>
-</dd><dt class="property-optional"
+    <dd>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -1060,8 +1252,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The version of MySQL.</p>
-</dd><dt class="property-optional"
+    <dd>The version of MySQL.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1069,8 +1260,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The name of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramlists_yaml" style="color: inherit; text-decoration: inherit;">param<wbr>Lists</a>
@@ -1078,8 +1268,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paramtemplateparamlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>parameter list.</p>
-</dd><dt class="property-optional"
+    <dd>parameter list.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_yaml" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1087,8 +1276,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The ID of source parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of source parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="templatetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templatetype_yaml" style="color: inherit; text-decoration: inherit;">template<wbr>Type</a>
@@ -1096,8 +1284,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</p>
-</dd></dl>
+    <dd>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1118,8 +1305,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1133,8 +1319,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1148,8 +1347,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1163,8 +1361,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1178,8 +1375,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1193,8 +1389,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1204,18 +1399,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ParamTemplate resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ParamTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ParamTemplate</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ParamTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ParamTemplate</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1223,107 +1418,146 @@ Get an existing ParamTemplate resource's state with the given name, ID, and opti
         <span class="nx">engine_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">engine_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">param_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_mysql.ParamTemplateParamListArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">param_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[ParamTemplateParamListArgs]]</span> = None<span class="p">,</span>
         <span class="nx">template_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">template_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> ParamTemplate</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetParamTemplate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ParamTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ParamTemplate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetParamTemplate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ParamTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ParamTemplate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ParamTemplate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ParamTemplateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ParamTemplate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ParamTemplateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ParamTemplate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ParamTemplateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ParamTemplate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ParamTemplateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingParamTemplate</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Mysql:ParamTemplate</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_mysql_param_template</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ParamTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ParamTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1331,28 +1565,31 @@ Get an existing ParamTemplate resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ParamTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1360,28 +1597,31 @@ Get an existing ParamTemplate resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ParamTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1401,8 +1641,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The description of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginetype_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Type</a>
@@ -1410,8 +1649,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</p>
-</dd><dt class="property-optional"
+    <dd>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -1419,8 +1657,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The version of MySQL.</p>
-</dd><dt class="property-optional"
+    <dd>The version of MySQL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1428,17 +1665,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The name of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramlists_csharp" style="color: inherit; text-decoration: inherit;">Param<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Param<wbr>Template<wbr>Param<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#paramtemplateparamlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Param<wbr>Template<wbr>Param<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>parameter list.</p>
-</dd><dt class="property-optional"
+    <dd>parameter list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templateid_csharp" style="color: inherit; text-decoration: inherit;">Template<wbr>Id</a>
@@ -1446,8 +1681,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of source parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of source parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templatetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templatetype_csharp" style="color: inherit; text-decoration: inherit;">Template<wbr>Type</a>
@@ -1455,8 +1689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</p>
-</dd></dl>
+    <dd>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1470,8 +1703,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The description of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginetype_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Type</a>
@@ -1479,8 +1711,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</p>
-</dd><dt class="property-optional"
+    <dd>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -1488,8 +1719,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The version of MySQL.</p>
-</dd><dt class="property-optional"
+    <dd>The version of MySQL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1497,8 +1727,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The name of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramlists_go" style="color: inherit; text-decoration: inherit;">Param<wbr>Lists</a>
@@ -1506,8 +1735,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paramtemplateparamlist">[]Param<wbr>Template<wbr>Param<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>parameter list.</p>
-</dd><dt class="property-optional"
+    <dd>parameter list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templateid_go" style="color: inherit; text-decoration: inherit;">Template<wbr>Id</a>
@@ -1515,8 +1743,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of source parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of source parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templatetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templatetype_go" style="color: inherit; text-decoration: inherit;">Template<wbr>Type</a>
@@ -1524,8 +1751,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</p>
-</dd></dl>
+    <dd>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The description of parameter template.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_engine_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_type_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_engine_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_version_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The version of MySQL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of parameter template.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_param_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_param_lists_hcl" style="color: inherit; text-decoration: inherit;">param_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#paramtemplateparamlist">list(object)</a></span>
+    </dt>
+    <dd>parameter list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_template_id_hcl" style="color: inherit; text-decoration: inherit;">template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The ID of source parameter template.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_template_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_template_type_hcl" style="color: inherit; text-decoration: inherit;">template_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1539,8 +1827,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The description of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The description of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginetype_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Type</a>
@@ -1548,8 +1835,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</p>
-</dd><dt class="property-optional"
+    <dd>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -1557,8 +1843,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The version of MySQL.</p>
-</dd><dt class="property-optional"
+    <dd>The version of MySQL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1566,17 +1851,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The name of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramlists_java" style="color: inherit; text-decoration: inherit;">param<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamlist">List&lt;Param<wbr>Template<wbr>Param<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#paramtemplateparamlist">List&lt;Param<wbr>Template<wbr>Param<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>parameter list.</p>
-</dd><dt class="property-optional"
+    <dd>parameter list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templateid_java" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1584,8 +1867,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The ID of source parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of source parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templatetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templatetype_java" style="color: inherit; text-decoration: inherit;">template<wbr>Type</a>
@@ -1593,8 +1875,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</p>
-</dd></dl>
+    <dd>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1608,8 +1889,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The description of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginetype_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Type</a>
@@ -1617,8 +1897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</p>
-</dd><dt class="property-optional"
+    <dd>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -1626,8 +1905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The version of MySQL.</p>
-</dd><dt class="property-optional"
+    <dd>The version of MySQL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1635,17 +1913,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The name of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramlists_nodejs" style="color: inherit; text-decoration: inherit;">param<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamlist">Param<wbr>Template<wbr>Param<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#paramtemplateparamlist">Param<wbr>Template<wbr>Param<wbr>List[]</a></span>
     </dt>
-    <dd><p>parameter list.</p>
-</dd><dt class="property-optional"
+    <dd>parameter list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templateid_nodejs" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1653,8 +1929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The ID of source parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of source parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templatetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templatetype_nodejs" style="color: inherit; text-decoration: inherit;">template<wbr>Type</a>
@@ -1662,8 +1937,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</p>
-</dd></dl>
+    <dd>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1677,8 +1951,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The description of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The description of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engine_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_type_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>type</a>
@@ -1686,8 +1959,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</p>
-</dd><dt class="property-optional"
+    <dd>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engine_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_version_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
@@ -1695,8 +1967,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The version of MySQL.</p>
-</dd><dt class="property-optional"
+    <dd>The version of MySQL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1704,17 +1975,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The name of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_param_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_param_lists_python" style="color: inherit; text-decoration: inherit;">param_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamlist">Param<wbr>Template<wbr>Param<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#paramtemplateparamlist">Sequence[Param<wbr>Template<wbr>Param<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>parameter list.</p>
-</dd><dt class="property-optional"
+    <dd>parameter list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_template_id_python" style="color: inherit; text-decoration: inherit;">template_<wbr>id</a>
@@ -1722,8 +1991,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of source parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of source parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_template_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_template_type_python" style="color: inherit; text-decoration: inherit;">template_<wbr>type</a>
@@ -1731,8 +1999,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</p>
-</dd></dl>
+    <dd>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1746,8 +2013,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The description of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The description of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enginetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enginetype_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Type</a>
@@ -1755,8 +2021,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</p>
-</dd><dt class="property-optional"
+    <dd>The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -1764,8 +2029,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The version of MySQL.</p>
-</dd><dt class="property-optional"
+    <dd>The version of MySQL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1773,8 +2037,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The name of parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramlists_yaml" style="color: inherit; text-decoration: inherit;">param<wbr>Lists</a>
@@ -1782,8 +2045,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paramtemplateparamlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>parameter list.</p>
-</dd><dt class="property-optional"
+    <dd>parameter list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templateid_yaml" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1791,8 +2053,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The ID of source parameter template.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of source parameter template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templatetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templatetype_yaml" style="color: inherit; text-decoration: inherit;">template<wbr>Type</a>
@@ -1800,8 +2061,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</p>
-</dd></dl>
+    <dd>The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1816,7 +2076,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="paramtemplateparamlist">Param<wbr>Template<wbr>Param<wbr>List</h4>
+<h4 id="paramtemplateparamlist">
+Param<wbr>Template<wbr>Param<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Param<wbr>Template<wbr>Param<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1828,8 +2090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The value of parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The value of parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1837,8 +2098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of parameter.</p>
-</dd></dl>
+    <dd>The name of parameter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1852,8 +2112,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The value of parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The value of parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1861,8 +2120,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of parameter.</p>
-</dd></dl>
+    <dd>The name of parameter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="current_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#current_value_hcl" style="color: inherit; text-decoration: inherit;">current_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The value of parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of parameter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1876,8 +2156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The value of parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The value of parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1885,8 +2164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of parameter.</p>
-</dd></dl>
+    <dd>The name of parameter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1900,8 +2178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The value of parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The value of parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1909,8 +2186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of parameter.</p>
-</dd></dl>
+    <dd>The name of parameter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1924,8 +2200,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The value of parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The value of parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1933,8 +2208,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of parameter.</p>
-</dd></dl>
+    <dd>The name of parameter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1948,8 +2222,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The value of parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The value of parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1957,8 +2230,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of parameter.</p>
-</dd></dl>
+    <dd>The name of parameter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1974,6 +2246,9 @@ $ pulumi import tencentcloud:Mysql/paramTemplate:ParamTemplate param_template te
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1983,7 +2258,6 @@ $ pulumi import tencentcloud:Mysql/paramTemplate:ParamTemplate param_template te
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

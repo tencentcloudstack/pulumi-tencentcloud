@@ -2,9 +2,11 @@
 ---
 title: "ScalingPolicy"
 title_tag: "tencentcloud.As.ScalingPolicy"
-meta_desc: "Documentation for the tencentcloud.As.ScalingPolicy resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource for an AS (Auto scaling) policy."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,36 @@ Provides a resource for an AS (Auto scaling) policy.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Create Simple policy
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zones = tencentcloud.Availability.getZonesByProduct({
+const zones = tencentcloud.availability.getZonesByProduct({
     product: "as",
 });
-const image = tencentcloud.Images.getInstance({
+const image = tencentcloud.images.getInstance({
     imageTypes: ["PUBLIC_IMAGE"],
     osName: "TencentOS Server 3.2 (Final)",
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-example",
+    cidrBlock: "10.0.0.0/16",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     vpcId: vpc.id,
+    name: "subnet-example",
     cidrBlock: "10.0.0.0/16",
     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
 });
-const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
+const example = new tencentcloud.as.ScalingConfig("example", {
     configurationName: "tf-example",
     imageId: image.then(image => image.images?.[0]?.imageId),
     instanceTypes: [
@@ -48,15 +60,15 @@ const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingCo
         instanceName: "test-ins-name",
     },
 });
-const exampleScalingGroup = new tencentcloud.as.ScalingGroup("exampleScalingGroup", {
+const exampleScalingGroup = new tencentcloud.as.ScalingGroup("example", {
     scalingGroupName: "tf-example",
-    configurationId: exampleScalingConfig.id,
+    configurationId: example.id,
     maxSize: 1,
     minSize: 0,
     vpcId: vpc.id,
     subnetIds: [subnet.id],
 });
-const exampleScalingPolicy = new tencentcloud.as.ScalingPolicy("exampleScalingPolicy", {
+const exampleScalingPolicy = new tencentcloud.as.ScalingPolicy("example", {
     scalingGroupId: exampleScalingGroup.id,
     policyName: "tf-as-scaling-policy",
     adjustmentType: "EXACT_CAPACITY",
@@ -70,20 +82,28 @@ const exampleScalingPolicy = new tencentcloud.as.ScalingPolicy("exampleScalingPo
     cooldown: 360,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zones = tencentcloud.Availability.get_zones_by_product(product="as")
-image = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+zones = tencentcloud.availability.get_zones_by_product(product="as")
+image = tencentcloud.images.get_instance(image_types=["PUBLIC_IMAGE"],
     os_name="TencentOS Server 3.2 (Final)")
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-example",
+    cidr_block="10.0.0.0/16")
 subnet = tencentcloud.subnet.Instance("subnet",
     vpc_id=vpc.id,
+    name="subnet-example",
     cidr_block="10.0.0.0/16",
     availability_zone=zones.zones[0].name)
-example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
+example = tencentcloud.as_.ScalingConfig("example",
     configuration_name="tf-example",
     image_id=image.images[0].image_id,
     instance_types=[
@@ -92,17 +112,17 @@ example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
         "SA2.SMALL2",
         "SA2.SMALL4",
     ],
-    instance_name_settings=tencentcloud.as_.ScalingConfigInstanceNameSettingsArgs(
-        instance_name="test-ins-name",
-    ))
-example_scaling_group = tencentcloud.as_.ScalingGroup("exampleScalingGroup",
+    instance_name_settings={
+        "instance_name": "test-ins-name",
+    })
+example_scaling_group = tencentcloud.as_.ScalingGroup("example",
     scaling_group_name="tf-example",
-    configuration_id=example_scaling_config.id,
+    configuration_id=example.id,
     max_size=1,
     min_size=0,
     vpc_id=vpc.id,
     subnet_ids=[subnet.id])
-example_scaling_policy = tencentcloud.as_.ScalingPolicy("exampleScalingPolicy",
+example_scaling_policy = tencentcloud.as_.ScalingPolicy("example",
     scaling_group_id=example_scaling_group.id,
     policy_name="tf-as-scaling-policy",
     adjustment_type="EXACT_CAPACITY",
@@ -115,11 +135,114 @@ example_scaling_policy = tencentcloud.as_.ScalingPolicy("exampleScalingPolicy",
     statistic="AVERAGE",
     cooldown=360)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "as",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		image, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+			ImageTypes: []string{
+				"PUBLIC_IMAGE",
+			},
+			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-example"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			Name:             pulumi.String("subnet-example"),
+			CidrBlock:        pulumi.String("10.0.0.0/16"),
+			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+		})
+		if err != nil {
+			return err
+		}
+		example, err := as.NewScalingConfig(ctx, "example", &as.ScalingConfigArgs{
+			ConfigurationName: pulumi.String("tf-example"),
+			ImageId:           pulumi.String(image.Images[0].ImageId),
+			InstanceTypes: pulumi.StringArray{
+				pulumi.String("SA1.SMALL1"),
+				pulumi.String("SA2.SMALL1"),
+				pulumi.String("SA2.SMALL2"),
+				pulumi.String("SA2.SMALL4"),
+			},
+			InstanceNameSettings: &as.ScalingConfigInstanceNameSettingsArgs{
+				InstanceName: pulumi.String("test-ins-name"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		exampleScalingGroup, err := as.NewScalingGroup(ctx, "example", &as.ScalingGroupArgs{
+			ScalingGroupName: pulumi.String("tf-example"),
+			ConfigurationId:  example.ID().ToIDOutput().ToStringOutput(),
+			MaxSize:          pulumi.Int(1),
+			MinSize:          pulumi.Int(0),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetIds: pulumi.StringArray{
+				subnet2.ID().ToIDOutput().ToStringOutput(),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = as.NewScalingPolicy(ctx, "example", &as.ScalingPolicyArgs{
+			ScalingGroupId:     exampleScalingGroup.ID().ToIDOutput().ToStringOutput(),
+			PolicyName:         pulumi.String("tf-as-scaling-policy"),
+			AdjustmentType:     pulumi.String("EXACT_CAPACITY"),
+			AdjustmentValue:    pulumi.Int(0),
+			ComparisonOperator: pulumi.String("GREATER_THAN"),
+			MetricName:         pulumi.String("CPU_UTILIZATION"),
+			Threshold:          pulumi.Int(80),
+			Period:             pulumi.Int(300),
+			ContinuousTime:     pulumi.Int(10),
+			Statistic:          pulumi.String("AVERAGE"),
+			Cooldown:           pulumi.Int(360),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -140,17 +263,19 @@ return await Deployment.RunAsync(() =>
 
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc-example",
         CidrBlock = "10.0.0.0/16",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         VpcId = vpc.Id,
+        Name = "subnet-example",
         CidrBlock = "10.0.0.0/16",
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
     });
 
-    var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new()
+    var example = new Tencentcloud.As.ScalingConfig("example", new()
     {
         ConfigurationName = "tf-example",
         ImageId = image.Apply(getInstanceResult => getInstanceResult.Images[0]?.ImageId),
@@ -167,10 +292,10 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("exampleScalingGroup", new()
+    var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("example", new()
     {
         ScalingGroupName = "tf-example",
-        ConfigurationId = exampleScalingConfig.Id,
+        ConfigurationId = example.Id,
         MaxSize = 1,
         MinSize = 0,
         VpcId = vpc.Id,
@@ -180,7 +305,7 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleScalingPolicy = new Tencentcloud.As.ScalingPolicy("exampleScalingPolicy", new()
+    var exampleScalingPolicy = new Tencentcloud.As.ScalingPolicy("example", new()
     {
         ScalingGroupId = exampleScalingGroup.Id,
         PolicyName = "tf-as-scaling-policy",
@@ -197,98 +322,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-			Product: "as",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		image, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-			ImageTypes: []string{
-				"PUBLIC_IMAGE",
-			},
-			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			VpcId:            vpc.ID(),
-			CidrBlock:        pulumi.String("10.0.0.0/16"),
-			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-		})
-		if err != nil {
-			return err
-		}
-		exampleScalingConfig, err := As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
-			ConfigurationName: pulumi.String("tf-example"),
-			ImageId:           pulumi.String(image.Images[0].ImageId),
-			InstanceTypes: pulumi.StringArray{
-				pulumi.String("SA1.SMALL1"),
-				pulumi.String("SA2.SMALL1"),
-				pulumi.String("SA2.SMALL2"),
-				pulumi.String("SA2.SMALL4"),
-			},
-			InstanceNameSettings: &as.ScalingConfigInstanceNameSettingsArgs{
-				InstanceName: pulumi.String("test-ins-name"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		exampleScalingGroup, err := As.NewScalingGroup(ctx, "exampleScalingGroup", &As.ScalingGroupArgs{
-			ScalingGroupName: pulumi.String("tf-example"),
-			ConfigurationId:  exampleScalingConfig.ID(),
-			MaxSize:          pulumi.Int(1),
-			MinSize:          pulumi.Int(0),
-			VpcId:            vpc.ID(),
-			SubnetIds: pulumi.StringArray{
-				subnet.ID(),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = As.NewScalingPolicy(ctx, "exampleScalingPolicy", &As.ScalingPolicyArgs{
-			ScalingGroupId:     exampleScalingGroup.ID(),
-			PolicyName:         pulumi.String("tf-as-scaling-policy"),
-			AdjustmentType:     pulumi.String("EXACT_CAPACITY"),
-			AdjustmentValue:    pulumi.Int(0),
-			ComparisonOperator: pulumi.String("GREATER_THAN"),
-			MetricName:         pulumi.String("CPU_UTILIZATION"),
-			Threshold:          pulumi.Int(80),
-			Period:             pulumi.Int(300),
-			ContinuousTime:     pulumi.Int(10),
-			Statistic:          pulumi.String("AVERAGE"),
-			Cooldown:           pulumi.Int(360),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -299,10 +337,6 @@ import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
 import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
 import com.pulumi.tencentcloud.Images.ImagesFunctions;
 import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
 import com.pulumi.tencentcloud.As.ScalingConfig;
 import com.pulumi.tencentcloud.As.ScalingConfigArgs;
 import com.pulumi.tencentcloud.As.inputs.ScalingConfigInstanceNameSettingsArgs;
@@ -310,8 +344,8 @@ import com.pulumi.tencentcloud.As.ScalingGroup;
 import com.pulumi.tencentcloud.As.ScalingGroupArgs;
 import com.pulumi.tencentcloud.As.ScalingPolicy;
 import com.pulumi.tencentcloud.As.ScalingPolicyArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -332,19 +366,21 @@ public class App {
             .osName("TencentOS Server 3.2 (Final)")
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc-example")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
             .vpcId(vpc.id())
+            .name("subnet-example")
             .cidrBlock("10.0.0.0/16")
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
+            .availabilityZone(zones.zones()[0].name())
             .build());
 
-        var exampleScalingConfig = new ScalingConfig("exampleScalingConfig", ScalingConfigArgs.builder()        
+        var example = new ScalingConfig("example", ScalingConfigArgs.builder()
             .configurationName("tf-example")
-            .imageId(image.applyValue(getInstanceResult -> getInstanceResult.images()[0].imageId()))
+            .imageId(image.images()[0].imageId())
             .instanceTypes(            
                 "SA1.SMALL1",
                 "SA2.SMALL1",
@@ -355,16 +391,16 @@ public class App {
                 .build())
             .build());
 
-        var exampleScalingGroup = new ScalingGroup("exampleScalingGroup", ScalingGroupArgs.builder()        
+        var exampleScalingGroup = new ScalingGroup("exampleScalingGroup", ScalingGroupArgs.builder()
             .scalingGroupName("tf-example")
-            .configurationId(exampleScalingConfig.id())
+            .configurationId(example.id())
             .maxSize(1)
             .minSize(0)
             .vpcId(vpc.id())
             .subnetIds(subnet.id())
             .build());
 
-        var exampleScalingPolicy = new ScalingPolicy("exampleScalingPolicy", ScalingPolicyArgs.builder()        
+        var exampleScalingPolicy = new ScalingPolicy("exampleScalingPolicy", ScalingPolicyArgs.builder()
             .scalingGroupId(exampleScalingGroup.id())
             .policyName("tf-as-scaling-policy")
             .adjustmentType("EXACT_CAPACITY")
@@ -381,19 +417,26 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-example
       cidrBlock: 10.0.0.0/16
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       vpcId: ${vpc.id}
+      name: subnet-example
       cidrBlock: 10.0.0.0/16
       availabilityZone: ${zones.zones[0].name}
-  exampleScalingConfig:
+  example:
     type: tencentcloud:As:ScalingConfig
     properties:
       configurationName: tf-example
@@ -407,9 +450,10 @@ resources:
         instanceName: test-ins-name
   exampleScalingGroup:
     type: tencentcloud:As:ScalingGroup
+    name: example
     properties:
       scalingGroupName: tf-example
-      configurationId: ${exampleScalingConfig.id}
+      configurationId: ${example.id}
       maxSize: 1
       minSize: 0
       vpcId: ${vpc.id}
@@ -417,6 +461,7 @@ resources:
         - ${subnet.id}
   exampleScalingPolicy:
     type: tencentcloud:As:ScalingPolicy
+    name: example
     properties:
       scalingGroupId: ${exampleScalingGroup.id}
       policyName: tf-as-scaling-policy
@@ -432,88 +477,673 @@ resources:
 variables:
   zones:
     fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
         product: as
   image:
     fn::invoke:
-      Function: tencentcloud:Images:getInstance
-      Arguments:
+      function: tencentcloud:Images:getInstance
+      arguments:
         imageTypes:
           - PUBLIC_IMAGE
         osName: TencentOS Server 3.2 (Final)
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "zones" {
+  product = "as"
+}
+data "tencentcloud_images_getinstance" "image" {
+  image_types = ["PUBLIC_IMAGE"]
+  os_name     = "TencentOS Server 3.2 (Final)"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-example"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  name              = "subnet-example"
+  cidr_block        = "10.0.0.0/16"
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[0].name
+}
+resource "tencentcloud_as_scalingconfig" "example" {
+  configuration_name = "tf-example"
+  image_id           = data.tencentcloud_images_getinstance.image.images[0].image_id
+  instance_types     = ["SA1.SMALL1", "SA2.SMALL1", "SA2.SMALL2", "SA2.SMALL4"]
+  instance_name_settings = {
+    instance_name = "test-ins-name"
+  }
+}
+resource "tencentcloud_as_scalinggroup" "example" {
+  scaling_group_name = "tf-example"
+  configuration_id   = tencentcloud_as_scalingconfig.example.id
+  max_size           = 1
+  min_size           = 0
+  vpc_id             = tencentcloud_vpc_instance.vpc.id
+  subnet_ids         = [tencentcloud_subnet_instance.subnet.id]
+}
+resource "tencentcloud_as_scalingpolicy" "example" {
+  scaling_group_id    = tencentcloud_as_scalinggroup.example.id
+  policy_name         = "tf-as-scaling-policy"
+  adjustment_type     = "EXACT_CAPACITY"
+  adjustment_value    = 0
+  comparison_operator = "GREATER_THAN"
+  metric_name         = "CPU_UTILIZATION"
+  threshold           = 80
+  period              = 300
+  continuous_time     = 10
+  statistic           = "AVERAGE"
+  cooldown            = 360
+}
+```
+</pulumi-choosable>
+</div>
 
 
+### Create a Target tracking policy
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const zones = tencentcloud.availability.getZonesByProduct({
+    product: "as",
+});
+const image = tencentcloud.images.getInstance({
+    imageTypes: ["PUBLIC_IMAGE"],
+    osName: "TencentOS Server 3.2 (Final)",
+});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-example",
+    cidrBlock: "10.0.0.0/16",
+});
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    vpcId: vpc.id,
+    name: "subnet-example",
+    cidrBlock: "10.0.0.0/16",
+    availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
+});
+const example = new tencentcloud.as.ScalingConfig("example", {
+    configurationName: "tf-example",
+    imageId: image.then(image => image.images?.[0]?.imageId),
+    instanceTypes: [
+        "SA1.SMALL1",
+        "SA2.SMALL1",
+        "SA2.SMALL2",
+        "SA2.SMALL4",
+    ],
+    instanceNameSettings: {
+        instanceName: "test-ins-name",
+    },
+});
+const exampleScalingGroup = new tencentcloud.as.ScalingGroup("example", {
+    scalingGroupName: "tf-example",
+    configurationId: example.id,
+    maxSize: 1,
+    minSize: 0,
+    vpcId: vpc.id,
+    subnetIds: [subnet.id],
+});
+const exampleScalingPolicy = new tencentcloud.as.ScalingPolicy("example", {
+    scalingGroupId: scalingGroup.id,
+    policyName: "tf-as-scaling-policy",
+    policyType: "TARGET_TRACKING",
+    predefinedMetricType: "ASG_AVG_CPU_UTILIZATION",
+    targetValue: 80,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+zones = tencentcloud.availability.get_zones_by_product(product="as")
+image = tencentcloud.images.get_instance(image_types=["PUBLIC_IMAGE"],
+    os_name="TencentOS Server 3.2 (Final)")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-example",
+    cidr_block="10.0.0.0/16")
+subnet = tencentcloud.subnet.Instance("subnet",
+    vpc_id=vpc.id,
+    name="subnet-example",
+    cidr_block="10.0.0.0/16",
+    availability_zone=zones.zones[0].name)
+example = tencentcloud.as_.ScalingConfig("example",
+    configuration_name="tf-example",
+    image_id=image.images[0].image_id,
+    instance_types=[
+        "SA1.SMALL1",
+        "SA2.SMALL1",
+        "SA2.SMALL2",
+        "SA2.SMALL4",
+    ],
+    instance_name_settings={
+        "instance_name": "test-ins-name",
+    })
+example_scaling_group = tencentcloud.as_.ScalingGroup("example",
+    scaling_group_name="tf-example",
+    configuration_id=example.id,
+    max_size=1,
+    min_size=0,
+    vpc_id=vpc.id,
+    subnet_ids=[subnet.id])
+example_scaling_policy = tencentcloud.as_.ScalingPolicy("example",
+    scaling_group_id=scaling_group["id"],
+    policy_name="tf-as-scaling-policy",
+    policy_type="TARGET_TRACKING",
+    predefined_metric_type="ASG_AVG_CPU_UTILIZATION",
+    target_value=80)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "as",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		image, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+			ImageTypes: []string{
+				"PUBLIC_IMAGE",
+			},
+			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-example"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			Name:             pulumi.String("subnet-example"),
+			CidrBlock:        pulumi.String("10.0.0.0/16"),
+			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+		})
+		if err != nil {
+			return err
+		}
+		example, err := as.NewScalingConfig(ctx, "example", &as.ScalingConfigArgs{
+			ConfigurationName: pulumi.String("tf-example"),
+			ImageId:           pulumi.String(image.Images[0].ImageId),
+			InstanceTypes: pulumi.StringArray{
+				pulumi.String("SA1.SMALL1"),
+				pulumi.String("SA2.SMALL1"),
+				pulumi.String("SA2.SMALL2"),
+				pulumi.String("SA2.SMALL4"),
+			},
+			InstanceNameSettings: &as.ScalingConfigInstanceNameSettingsArgs{
+				InstanceName: pulumi.String("test-ins-name"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = as.NewScalingGroup(ctx, "example", &as.ScalingGroupArgs{
+			ScalingGroupName: pulumi.String("tf-example"),
+			ConfigurationId:  example.ID().ToIDOutput().ToStringOutput(),
+			MaxSize:          pulumi.Int(1),
+			MinSize:          pulumi.Int(0),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetIds: pulumi.StringArray{
+				subnet2.ID().ToIDOutput().ToStringOutput(),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = as.NewScalingPolicy(ctx, "example", &as.ScalingPolicyArgs{
+			ScalingGroupId:       pulumi.Any(scalingGroup.Id),
+			PolicyName:           pulumi.String("tf-as-scaling-policy"),
+			PolicyType:           pulumi.String("TARGET_TRACKING"),
+			PredefinedMetricType: pulumi.String("ASG_AVG_CPU_UTILIZATION"),
+			TargetValue:          pulumi.Int(80),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
+    {
+        Product = "as",
+    });
+
+    var image = Tencentcloud.Images.GetInstance.Invoke(new()
+    {
+        ImageTypes = new[]
+        {
+            "PUBLIC_IMAGE",
+        },
+        OsName = "TencentOS Server 3.2 (Final)",
+    });
+
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        Name = "vpc-example",
+        CidrBlock = "10.0.0.0/16",
+    });
+
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        VpcId = vpc.Id,
+        Name = "subnet-example",
+        CidrBlock = "10.0.0.0/16",
+        AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
+    });
+
+    var example = new Tencentcloud.As.ScalingConfig("example", new()
+    {
+        ConfigurationName = "tf-example",
+        ImageId = image.Apply(getInstanceResult => getInstanceResult.Images[0]?.ImageId),
+        InstanceTypes = new[]
+        {
+            "SA1.SMALL1",
+            "SA2.SMALL1",
+            "SA2.SMALL2",
+            "SA2.SMALL4",
+        },
+        InstanceNameSettings = new Tencentcloud.As.Inputs.ScalingConfigInstanceNameSettingsArgs
+        {
+            InstanceName = "test-ins-name",
+        },
+    });
+
+    var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("example", new()
+    {
+        ScalingGroupName = "tf-example",
+        ConfigurationId = example.Id,
+        MaxSize = 1,
+        MinSize = 0,
+        VpcId = vpc.Id,
+        SubnetIds = new[]
+        {
+            subnet.Id,
+        },
+    });
+
+    var exampleScalingPolicy = new Tencentcloud.As.ScalingPolicy("example", new()
+    {
+        ScalingGroupId = scalingGroup.Id,
+        PolicyName = "tf-as-scaling-policy",
+        PolicyType = "TARGET_TRACKING",
+        PredefinedMetricType = "ASG_AVG_CPU_UTILIZATION",
+        TargetValue = 80,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
+import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
+import com.pulumi.tencentcloud.Images.ImagesFunctions;
+import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
+import com.pulumi.tencentcloud.As.ScalingConfig;
+import com.pulumi.tencentcloud.As.ScalingConfigArgs;
+import com.pulumi.tencentcloud.As.inputs.ScalingConfigInstanceNameSettingsArgs;
+import com.pulumi.tencentcloud.As.ScalingGroup;
+import com.pulumi.tencentcloud.As.ScalingGroupArgs;
+import com.pulumi.tencentcloud.As.ScalingPolicy;
+import com.pulumi.tencentcloud.As.ScalingPolicyArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var zones = AvailabilityFunctions.getZonesByProduct(GetZonesByProductArgs.builder()
+            .product("as")
+            .build());
+
+        final var image = ImagesFunctions.getInstance(GetInstanceArgs.builder()
+            .imageTypes("PUBLIC_IMAGE")
+            .osName("TencentOS Server 3.2 (Final)")
+            .build());
+
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc-example")
+            .cidrBlock("10.0.0.0/16")
+            .build());
+
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .vpcId(vpc.id())
+            .name("subnet-example")
+            .cidrBlock("10.0.0.0/16")
+            .availabilityZone(zones.zones()[0].name())
+            .build());
+
+        var example = new ScalingConfig("example", ScalingConfigArgs.builder()
+            .configurationName("tf-example")
+            .imageId(image.images()[0].imageId())
+            .instanceTypes(            
+                "SA1.SMALL1",
+                "SA2.SMALL1",
+                "SA2.SMALL2",
+                "SA2.SMALL4")
+            .instanceNameSettings(ScalingConfigInstanceNameSettingsArgs.builder()
+                .instanceName("test-ins-name")
+                .build())
+            .build());
+
+        var exampleScalingGroup = new ScalingGroup("exampleScalingGroup", ScalingGroupArgs.builder()
+            .scalingGroupName("tf-example")
+            .configurationId(example.id())
+            .maxSize(1)
+            .minSize(0)
+            .vpcId(vpc.id())
+            .subnetIds(subnet.id())
+            .build());
+
+        var exampleScalingPolicy = new ScalingPolicy("exampleScalingPolicy", ScalingPolicyArgs.builder()
+            .scalingGroupId(scalingGroup.id())
+            .policyName("tf-as-scaling-policy")
+            .policyType("TARGET_TRACKING")
+            .predefinedMetricType("ASG_AVG_CPU_UTILIZATION")
+            .targetValue(80)
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      name: vpc-example
+      cidrBlock: 10.0.0.0/16
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      vpcId: ${vpc.id}
+      name: subnet-example
+      cidrBlock: 10.0.0.0/16
+      availabilityZone: ${zones.zones[0].name}
+  example:
+    type: tencentcloud:As:ScalingConfig
+    properties:
+      configurationName: tf-example
+      imageId: ${image.images[0].imageId}
+      instanceTypes:
+        - SA1.SMALL1
+        - SA2.SMALL1
+        - SA2.SMALL2
+        - SA2.SMALL4
+      instanceNameSettings:
+        instanceName: test-ins-name
+  exampleScalingGroup:
+    type: tencentcloud:As:ScalingGroup
+    name: example
+    properties:
+      scalingGroupName: tf-example
+      configurationId: ${example.id}
+      maxSize: 1
+      minSize: 0
+      vpcId: ${vpc.id}
+      subnetIds:
+        - ${subnet.id}
+  exampleScalingPolicy:
+    type: tencentcloud:As:ScalingPolicy
+    name: example
+    properties:
+      scalingGroupId: ${scalingGroup.id}
+      policyName: tf-as-scaling-policy
+      policyType: TARGET_TRACKING
+      predefinedMetricType: ASG_AVG_CPU_UTILIZATION
+      targetValue: 80
+variables:
+  zones:
+    fn::invoke:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
+        product: as
+  image:
+    fn::invoke:
+      function: tencentcloud:Images:getInstance
+      arguments:
+        imageTypes:
+          - PUBLIC_IMAGE
+        osName: TencentOS Server 3.2 (Final)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "zones" {
+  product = "as"
+}
+data "tencentcloud_images_getinstance" "image" {
+  image_types = ["PUBLIC_IMAGE"]
+  os_name     = "TencentOS Server 3.2 (Final)"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-example"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  name              = "subnet-example"
+  cidr_block        = "10.0.0.0/16"
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[0].name
+}
+resource "tencentcloud_as_scalingconfig" "example" {
+  configuration_name = "tf-example"
+  image_id           = data.tencentcloud_images_getinstance.image.images[0].image_id
+  instance_types     = ["SA1.SMALL1", "SA2.SMALL1", "SA2.SMALL2", "SA2.SMALL4"]
+  instance_name_settings = {
+    instance_name = "test-ins-name"
+  }
+}
+resource "tencentcloud_as_scalinggroup" "example" {
+  scaling_group_name = "tf-example"
+  configuration_id   = tencentcloud_as_scalingconfig.example.id
+  max_size           = 1
+  min_size           = 0
+  vpc_id             = tencentcloud_vpc_instance.vpc.id
+  subnet_ids         = [tencentcloud_subnet_instance.subnet.id]
+}
+resource "tencentcloud_as_scalingpolicy" "example" {
+  scaling_group_id       = scalingGroup.id
+  policy_name            = "tf-as-scaling-policy"
+  policy_type            = "TARGET_TRACKING"
+  predefined_metric_type = "ASG_AVG_CPU_UTILIZATION"
+  target_value           = 80
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateScalingPolicy](https://www.tencentcloud.com/document/api/377/33210)
+* Read: [DescribeScalingPolicies](https://www.tencentcloud.com/document/api/377/33208)
+* Update: [ModifyScalingPolicy](https://www.tencentcloud.com/document/api/377/33206)
+* Delete: [DeleteScalingPolicy](https://www.tencentcloud.com/document/api/377/33209)
 
 
 ## Create ScalingPolicy Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ScalingPolicy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ScalingPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ScalingPolicy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ScalingPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ScalingPolicy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                  <span class="nx">adjustment_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">adjustment_value</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                  <span class="nx">comparison_operator</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">continuous_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                  <span class="nx">cooldown</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                  <span class="nx">metric_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">notification_user_group_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                  <span class="nx">policy_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">scaling_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">statistic</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">threshold</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ScalingPolicy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                   <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ScalingPolicyArgs</a></span><span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ScalingPolicy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                  <span class="nx">policy_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">scaling_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">notification_user_group_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                  <span class="nx">cooldown</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                  <span class="nx">disable_scale_in</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+                  <span class="nx">estimated_instance_warmup</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                  <span class="nx">metric_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">adjustment_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">continuous_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                  <span class="nx">comparison_operator</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">policy_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">predefined_metric_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">adjustment_value</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                  <span class="nx">statistic</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">target_value</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                  <span class="nx">threshold</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewScalingPolicy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ScalingPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ScalingPolicy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewScalingPolicy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ScalingPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ScalingPolicy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ScalingPolicy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScalingPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ScalingPolicy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScalingPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ScalingPolicy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScalingPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ScalingPolicy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScalingPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:As:ScalingPolicy</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:As:ScalingPolicy</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_as_scaling_policy&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -534,7 +1164,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -651,11 +1281,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## ScalingPolicy Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -665,68 +1303,13 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="adjustmenttype_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmenttype_csharp" style="color: inherit; text-decoration: inherit;">Adjustment<wbr>Type</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="adjustmentvalue_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmentvalue_csharp" style="color: inherit; text-decoration: inherit;">Adjustment<wbr>Value</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">int</span>
-    </dt>
-    <dd><p>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="comparisonoperator_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparisonoperator_csharp" style="color: inherit; text-decoration: inherit;">Comparison<wbr>Operator</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="continuoustime_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuoustime_csharp" style="color: inherit; text-decoration: inherit;">Continuous<wbr>Time</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">int</span>
-    </dt>
-    <dd><p>Retry times. Valid value ranges: (1~10).</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="metricname_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_csharp" style="color: inherit; text-decoration: inherit;">Metric<wbr>Name</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="period_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">int</span>
-    </dt>
-    <dd><p>Time period in second. Valid values: <code>60</code> and <code>300</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
         <span id="policyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a policy used to define a reaction when an alarm is triggered.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of a policy used to define a reaction when an alarm is triggered.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -734,17 +1317,39 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="threshold_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_csharp" style="color: inherit; text-decoration: inherit;">Threshold</a>
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="adjustmenttype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmenttype_csharp" style="color: inherit; text-decoration: inherit;">Adjustment<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="adjustmentvalue_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmentvalue_csharp" style="color: inherit; text-decoration: inherit;">Adjustment<wbr>Value</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm threshold.</p>
-</dd><dt class="property-optional"
+    <dd>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="comparisonoperator_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparisonoperator_csharp" style="color: inherit; text-decoration: inherit;">Comparison<wbr>Operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="continuoustime_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuoustime_csharp" style="color: inherit; text-decoration: inherit;">Continuous<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Retry times. Valid value ranges: (1~10).</dd><dt class="property-optional"
             title="Optional">
         <span id="cooldown_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cooldown_csharp" style="color: inherit; text-decoration: inherit;">Cooldown</a>
@@ -752,8 +1357,31 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cooldwon time in second. Default is <code>30</code>0.</p>
-</dd><dt class="property-optional"
+    <dd>Cooldwon time in second. Default is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disablescalein_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablescalein_csharp" style="color: inherit; text-decoration: inherit;">Disable<wbr>Scale<wbr>In</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to disable scaling down applies only to the target tracking strategy; the default value is false. Value range: true: The target tracking strategy only triggers scaling up; false: The target tracking strategy triggers both scaling up and scaling down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="estimatedinstancewarmup_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#estimatedinstancewarmup_csharp" style="color: inherit; text-decoration: inherit;">Estimated<wbr>Instance<wbr>Warmup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Instance warm-up time, in seconds, applicable only to target tracking strategies. Value range is 0-3600, with a default warm-up time of 300 seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="metricname_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_csharp" style="color: inherit; text-decoration: inherit;">Metric<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationusergroupids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationusergroupids_csharp" style="color: inherit; text-decoration: inherit;">Notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -761,8 +1389,31 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>An ID group of users to be notified when an alarm is triggered.</p>
-</dd><dt class="property-optional"
+    <dd>An ID group of users to be notified when an alarm is triggered.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="period_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Time period in second. Valid values: <code>60</code> and <code>300</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="policytype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alarm triggering policy type, the default type is SIMPLE. Value range: SIMPLE: Simple policy; TARGET_TRACKING: Target tracking policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="predefinedmetrictype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#predefinedmetrictype_csharp" style="color: inherit; text-decoration: inherit;">Predefined<wbr>Metric<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Predefined monitoring items, applicable only to target tracking policies, and required in target tracking policy scenarios. Value range: ASG_AVG_CPU_UTILIZATION: Average CPU utilization; ASG_AVG_LAN_TRAFFIC_OUT: Average intranet outbound bandwidth; ASG_AVG_LAN_TRAFFIC_IN: Average intranet inbound bandwidth; ASG_AVG_WAN_TRAFFIC_OUT: Average internet outbound bandwidth; ASG_AVG_WAN_TRAFFIC_IN: Average internet inbound bandwidth.</dd><dt class="property-optional"
             title="Optional">
         <span id="statistic_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statistic_csharp" style="color: inherit; text-decoration: inherit;">Statistic</a>
@@ -770,8 +1421,23 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</p>
-</dd></dl>
+    <dd>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="targetvalue_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetvalue_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Target value, applicable only to target tracking strategies, and required in target tracking strategy scenarios. ASG_AVG_CPU_UTILIZATION: [1, 100), Unit: %; ASG_AVG_LAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_LAN_TRAFFIC_IN: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_IN: &gt;0, Unit: Mbps.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="threshold_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_csharp" style="color: inherit; text-decoration: inherit;">Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Alarm threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -779,68 +1445,13 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="adjustmenttype_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmenttype_go" style="color: inherit; text-decoration: inherit;">Adjustment<wbr>Type</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="adjustmentvalue_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmentvalue_go" style="color: inherit; text-decoration: inherit;">Adjustment<wbr>Value</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">int</span>
-    </dt>
-    <dd><p>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="comparisonoperator_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparisonoperator_go" style="color: inherit; text-decoration: inherit;">Comparison<wbr>Operator</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="continuoustime_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuoustime_go" style="color: inherit; text-decoration: inherit;">Continuous<wbr>Time</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">int</span>
-    </dt>
-    <dd><p>Retry times. Valid value ranges: (1~10).</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="metricname_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_go" style="color: inherit; text-decoration: inherit;">Metric<wbr>Name</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="period_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_go" style="color: inherit; text-decoration: inherit;">Period</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">int</span>
-    </dt>
-    <dd><p>Time period in second. Valid values: <code>60</code> and <code>300</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
         <span id="policyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a policy used to define a reaction when an alarm is triggered.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of a policy used to define a reaction when an alarm is triggered.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -848,17 +1459,39 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="threshold_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_go" style="color: inherit; text-decoration: inherit;">Threshold</a>
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="adjustmenttype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmenttype_go" style="color: inherit; text-decoration: inherit;">Adjustment<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="adjustmentvalue_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmentvalue_go" style="color: inherit; text-decoration: inherit;">Adjustment<wbr>Value</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm threshold.</p>
-</dd><dt class="property-optional"
+    <dd>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="comparisonoperator_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparisonoperator_go" style="color: inherit; text-decoration: inherit;">Comparison<wbr>Operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="continuoustime_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuoustime_go" style="color: inherit; text-decoration: inherit;">Continuous<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Retry times. Valid value ranges: (1~10).</dd><dt class="property-optional"
             title="Optional">
         <span id="cooldown_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cooldown_go" style="color: inherit; text-decoration: inherit;">Cooldown</a>
@@ -866,8 +1499,31 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cooldwon time in second. Default is <code>30</code>0.</p>
-</dd><dt class="property-optional"
+    <dd>Cooldwon time in second. Default is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disablescalein_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablescalein_go" style="color: inherit; text-decoration: inherit;">Disable<wbr>Scale<wbr>In</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to disable scaling down applies only to the target tracking strategy; the default value is false. Value range: true: The target tracking strategy only triggers scaling up; false: The target tracking strategy triggers both scaling up and scaling down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="estimatedinstancewarmup_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#estimatedinstancewarmup_go" style="color: inherit; text-decoration: inherit;">Estimated<wbr>Instance<wbr>Warmup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Instance warm-up time, in seconds, applicable only to target tracking strategies. Value range is 0-3600, with a default warm-up time of 300 seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="metricname_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_go" style="color: inherit; text-decoration: inherit;">Metric<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationusergroupids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationusergroupids_go" style="color: inherit; text-decoration: inherit;">Notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -875,8 +1531,31 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>An ID group of users to be notified when an alarm is triggered.</p>
-</dd><dt class="property-optional"
+    <dd>An ID group of users to be notified when an alarm is triggered.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="period_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_go" style="color: inherit; text-decoration: inherit;">Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Time period in second. Valid values: <code>60</code> and <code>300</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="policytype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alarm triggering policy type, the default type is SIMPLE. Value range: SIMPLE: Simple policy; TARGET_TRACKING: Target tracking policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="predefinedmetrictype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#predefinedmetrictype_go" style="color: inherit; text-decoration: inherit;">Predefined<wbr>Metric<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Predefined monitoring items, applicable only to target tracking policies, and required in target tracking policy scenarios. Value range: ASG_AVG_CPU_UTILIZATION: Average CPU utilization; ASG_AVG_LAN_TRAFFIC_OUT: Average intranet outbound bandwidth; ASG_AVG_LAN_TRAFFIC_IN: Average intranet inbound bandwidth; ASG_AVG_WAN_TRAFFIC_OUT: Average internet outbound bandwidth; ASG_AVG_WAN_TRAFFIC_IN: Average internet inbound bandwidth.</dd><dt class="property-optional"
             title="Optional">
         <span id="statistic_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statistic_go" style="color: inherit; text-decoration: inherit;">Statistic</a>
@@ -884,8 +1563,165 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</p>
-</dd></dl>
+    <dd>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="targetvalue_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetvalue_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Target value, applicable only to target tracking strategies, and required in target tracking strategy scenarios. ASG_AVG_CPU_UTILIZATION: [1, 100), Unit: %; ASG_AVG_LAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_LAN_TRAFFIC_IN: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_IN: &gt;0, Unit: Mbps.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="threshold_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_go" style="color: inherit; text-decoration: inherit;">Threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Alarm threshold.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="policy_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_name_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of a policy used to define a reaction when an alarm is triggered.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="adjustment_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustment_type_hcl" style="color: inherit; text-decoration: inherit;">adjustment_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="adjustment_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustment_value_hcl" style="color: inherit; text-decoration: inherit;">adjustment_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="comparison_operator_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparison_operator_hcl" style="color: inherit; text-decoration: inherit;">comparison_<wbr>operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="continuous_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuous_time_hcl" style="color: inherit; text-decoration: inherit;">continuous_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Retry times. Valid value ranges: (1~10).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cooldown_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cooldown_hcl" style="color: inherit; text-decoration: inherit;">cooldown</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cooldwon time in second. Default is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disable_scale_in_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_scale_in_hcl" style="color: inherit; text-decoration: inherit;">disable_<wbr>scale_<wbr>in</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to disable scaling down applies only to the target tracking strategy; the default value is false. Value range: true: The target tracking strategy only triggers scaling up; false: The target tracking strategy triggers both scaling up and scaling down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="estimated_instance_warmup_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#estimated_instance_warmup_hcl" style="color: inherit; text-decoration: inherit;">estimated_<wbr>instance_<wbr>warmup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance warm-up time, in seconds, applicable only to target tracking strategies. Value range is 0-3600, with a default warm-up time of 300 seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="metric_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_name_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="notification_user_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_user_group_ids_hcl" style="color: inherit; text-decoration: inherit;">notification_<wbr>user_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>An ID group of users to be notified when an alarm is triggered.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Time period in second. Valid values: <code>60</code> and <code>300</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="policy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_type_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alarm triggering policy type, the default type is SIMPLE. Value range: SIMPLE: Simple policy; TARGET_TRACKING: Target tracking policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="predefined_metric_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#predefined_metric_type_hcl" style="color: inherit; text-decoration: inherit;">predefined_<wbr>metric_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Predefined monitoring items, applicable only to target tracking policies, and required in target tracking policy scenarios. Value range: ASG_AVG_CPU_UTILIZATION: Average CPU utilization; ASG_AVG_LAN_TRAFFIC_OUT: Average intranet outbound bandwidth; ASG_AVG_LAN_TRAFFIC_IN: Average intranet inbound bandwidth; ASG_AVG_WAN_TRAFFIC_OUT: Average internet outbound bandwidth; ASG_AVG_WAN_TRAFFIC_IN: Average internet inbound bandwidth.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="statistic_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statistic_hcl" style="color: inherit; text-decoration: inherit;">statistic</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="target_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_value_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Target value, applicable only to target tracking strategies, and required in target tracking strategy scenarios. ASG_AVG_CPU_UTILIZATION: [1, 100), Unit: %; ASG_AVG_LAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_LAN_TRAFFIC_IN: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_IN: &gt;0, Unit: Mbps.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="threshold_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_hcl" style="color: inherit; text-decoration: inherit;">threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -893,68 +1729,13 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="adjustmenttype_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmenttype_java" style="color: inherit; text-decoration: inherit;">adjustment<wbr>Type</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="adjustmentvalue_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmentvalue_java" style="color: inherit; text-decoration: inherit;">adjustment<wbr>Value</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">Integer</span>
-    </dt>
-    <dd><p>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="comparisonoperator_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparisonoperator_java" style="color: inherit; text-decoration: inherit;">comparison<wbr>Operator</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="continuoustime_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuoustime_java" style="color: inherit; text-decoration: inherit;">continuous<wbr>Time</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">Integer</span>
-    </dt>
-    <dd><p>Retry times. Valid value ranges: (1~10).</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="metricname_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_java" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="period_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_java" style="color: inherit; text-decoration: inherit;">period</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">Integer</span>
-    </dt>
-    <dd><p>Time period in second. Valid values: <code>60</code> and <code>300</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
         <span id="policyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a policy used to define a reaction when an alarm is triggered.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of a policy used to define a reaction when an alarm is triggered.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -962,17 +1743,39 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="threshold_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_java" style="color: inherit; text-decoration: inherit;">threshold</a>
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="adjustmenttype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmenttype_java" style="color: inherit; text-decoration: inherit;">adjustment<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="adjustmentvalue_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmentvalue_java" style="color: inherit; text-decoration: inherit;">adjustment<wbr>Value</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Alarm threshold.</p>
-</dd><dt class="property-optional"
+    <dd>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="comparisonoperator_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparisonoperator_java" style="color: inherit; text-decoration: inherit;">comparison<wbr>Operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="continuoustime_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuoustime_java" style="color: inherit; text-decoration: inherit;">continuous<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Retry times. Valid value ranges: (1~10).</dd><dt class="property-optional"
             title="Optional">
         <span id="cooldown_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cooldown_java" style="color: inherit; text-decoration: inherit;">cooldown</a>
@@ -980,8 +1783,31 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Cooldwon time in second. Default is <code>30</code>0.</p>
-</dd><dt class="property-optional"
+    <dd>Cooldwon time in second. Default is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disablescalein_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablescalein_java" style="color: inherit; text-decoration: inherit;">disable<wbr>Scale<wbr>In</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to disable scaling down applies only to the target tracking strategy; the default value is false. Value range: true: The target tracking strategy only triggers scaling up; false: The target tracking strategy triggers both scaling up and scaling down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="estimatedinstancewarmup_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#estimatedinstancewarmup_java" style="color: inherit; text-decoration: inherit;">estimated<wbr>Instance<wbr>Warmup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Instance warm-up time, in seconds, applicable only to target tracking strategies. Value range is 0-3600, with a default warm-up time of 300 seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="metricname_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_java" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationusergroupids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationusergroupids_java" style="color: inherit; text-decoration: inherit;">notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -989,8 +1815,31 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>An ID group of users to be notified when an alarm is triggered.</p>
-</dd><dt class="property-optional"
+    <dd>An ID group of users to be notified when an alarm is triggered.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="period_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_java" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Time period in second. Valid values: <code>60</code> and <code>300</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="policytype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Alarm triggering policy type, the default type is SIMPLE. Value range: SIMPLE: Simple policy; TARGET_TRACKING: Target tracking policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="predefinedmetrictype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#predefinedmetrictype_java" style="color: inherit; text-decoration: inherit;">predefined<wbr>Metric<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Predefined monitoring items, applicable only to target tracking policies, and required in target tracking policy scenarios. Value range: ASG_AVG_CPU_UTILIZATION: Average CPU utilization; ASG_AVG_LAN_TRAFFIC_OUT: Average intranet outbound bandwidth; ASG_AVG_LAN_TRAFFIC_IN: Average intranet inbound bandwidth; ASG_AVG_WAN_TRAFFIC_OUT: Average internet outbound bandwidth; ASG_AVG_WAN_TRAFFIC_IN: Average internet inbound bandwidth.</dd><dt class="property-optional"
             title="Optional">
         <span id="statistic_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statistic_java" style="color: inherit; text-decoration: inherit;">statistic</a>
@@ -998,8 +1847,23 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</p>
-</dd></dl>
+    <dd>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="targetvalue_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetvalue_java" style="color: inherit; text-decoration: inherit;">target<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Target value, applicable only to target tracking strategies, and required in target tracking strategy scenarios. ASG_AVG_CPU_UTILIZATION: [1, 100), Unit: %; ASG_AVG_LAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_LAN_TRAFFIC_IN: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_IN: &gt;0, Unit: Mbps.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="threshold_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_java" style="color: inherit; text-decoration: inherit;">threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Alarm threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1007,68 +1871,13 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="adjustmenttype_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmenttype_nodejs" style="color: inherit; text-decoration: inherit;">adjustment<wbr>Type</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="adjustmentvalue_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmentvalue_nodejs" style="color: inherit; text-decoration: inherit;">adjustment<wbr>Value</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">number</span>
-    </dt>
-    <dd><p>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="comparisonoperator_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparisonoperator_nodejs" style="color: inherit; text-decoration: inherit;">comparison<wbr>Operator</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="continuoustime_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuoustime_nodejs" style="color: inherit; text-decoration: inherit;">continuous<wbr>Time</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">number</span>
-    </dt>
-    <dd><p>Retry times. Valid value ranges: (1~10).</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="metricname_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_nodejs" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="period_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">number</span>
-    </dt>
-    <dd><p>Time period in second. Valid values: <code>60</code> and <code>300</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
         <span id="policyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a policy used to define a reaction when an alarm is triggered.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of a policy used to define a reaction when an alarm is triggered.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1076,17 +1885,39 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="threshold_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_nodejs" style="color: inherit; text-decoration: inherit;">threshold</a>
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="adjustmenttype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmenttype_nodejs" style="color: inherit; text-decoration: inherit;">adjustment<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="adjustmentvalue_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmentvalue_nodejs" style="color: inherit; text-decoration: inherit;">adjustment<wbr>Value</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Alarm threshold.</p>
-</dd><dt class="property-optional"
+    <dd>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="comparisonoperator_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparisonoperator_nodejs" style="color: inherit; text-decoration: inherit;">comparison<wbr>Operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="continuoustime_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuoustime_nodejs" style="color: inherit; text-decoration: inherit;">continuous<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Retry times. Valid value ranges: (1~10).</dd><dt class="property-optional"
             title="Optional">
         <span id="cooldown_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cooldown_nodejs" style="color: inherit; text-decoration: inherit;">cooldown</a>
@@ -1094,8 +1925,31 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cooldwon time in second. Default is <code>30</code>0.</p>
-</dd><dt class="property-optional"
+    <dd>Cooldwon time in second. Default is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disablescalein_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablescalein_nodejs" style="color: inherit; text-decoration: inherit;">disable<wbr>Scale<wbr>In</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to disable scaling down applies only to the target tracking strategy; the default value is false. Value range: true: The target tracking strategy only triggers scaling up; false: The target tracking strategy triggers both scaling up and scaling down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="estimatedinstancewarmup_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#estimatedinstancewarmup_nodejs" style="color: inherit; text-decoration: inherit;">estimated<wbr>Instance<wbr>Warmup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance warm-up time, in seconds, applicable only to target tracking strategies. Value range is 0-3600, with a default warm-up time of 300 seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="metricname_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_nodejs" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationusergroupids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationusergroupids_nodejs" style="color: inherit; text-decoration: inherit;">notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -1103,8 +1957,31 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>An ID group of users to be notified when an alarm is triggered.</p>
-</dd><dt class="property-optional"
+    <dd>An ID group of users to be notified when an alarm is triggered.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="period_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Time period in second. Valid values: <code>60</code> and <code>300</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="policytype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alarm triggering policy type, the default type is SIMPLE. Value range: SIMPLE: Simple policy; TARGET_TRACKING: Target tracking policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="predefinedmetrictype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#predefinedmetrictype_nodejs" style="color: inherit; text-decoration: inherit;">predefined<wbr>Metric<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Predefined monitoring items, applicable only to target tracking policies, and required in target tracking policy scenarios. Value range: ASG_AVG_CPU_UTILIZATION: Average CPU utilization; ASG_AVG_LAN_TRAFFIC_OUT: Average intranet outbound bandwidth; ASG_AVG_LAN_TRAFFIC_IN: Average intranet inbound bandwidth; ASG_AVG_WAN_TRAFFIC_OUT: Average internet outbound bandwidth; ASG_AVG_WAN_TRAFFIC_IN: Average internet inbound bandwidth.</dd><dt class="property-optional"
             title="Optional">
         <span id="statistic_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statistic_nodejs" style="color: inherit; text-decoration: inherit;">statistic</a>
@@ -1112,8 +1989,23 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</p>
-</dd></dl>
+    <dd>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="targetvalue_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetvalue_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Target value, applicable only to target tracking strategies, and required in target tracking strategy scenarios. ASG_AVG_CPU_UTILIZATION: [1, 100), Unit: %; ASG_AVG_LAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_LAN_TRAFFIC_IN: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_IN: &gt;0, Unit: Mbps.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="threshold_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_nodejs" style="color: inherit; text-decoration: inherit;">threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1121,68 +2013,13 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="adjustment_type_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustment_type_python" style="color: inherit; text-decoration: inherit;">adjustment_<wbr>type</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">str</span>
-    </dt>
-    <dd><p>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="adjustment_value_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustment_value_python" style="color: inherit; text-decoration: inherit;">adjustment_<wbr>value</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">int</span>
-    </dt>
-    <dd><p>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="comparison_operator_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparison_operator_python" style="color: inherit; text-decoration: inherit;">comparison_<wbr>operator</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">str</span>
-    </dt>
-    <dd><p>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="continuous_time_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuous_time_python" style="color: inherit; text-decoration: inherit;">continuous_<wbr>time</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">int</span>
-    </dt>
-    <dd><p>Retry times. Valid value ranges: (1~10).</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="metric_name_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_name_python" style="color: inherit; text-decoration: inherit;">metric_<wbr>name</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">str</span>
-    </dt>
-    <dd><p>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="period_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_python" style="color: inherit; text-decoration: inherit;">period</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">int</span>
-    </dt>
-    <dd><p>Time period in second. Valid values: <code>60</code> and <code>300</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
         <span id="policy_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_name_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of a policy used to define a reaction when an alarm is triggered.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of a policy used to define a reaction when an alarm is triggered.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scaling_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_id_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
@@ -1190,17 +2027,39 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="threshold_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_python" style="color: inherit; text-decoration: inherit;">threshold</a>
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="adjustment_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustment_type_python" style="color: inherit; text-decoration: inherit;">adjustment_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="adjustment_value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustment_value_python" style="color: inherit; text-decoration: inherit;">adjustment_<wbr>value</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm threshold.</p>
-</dd><dt class="property-optional"
+    <dd>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="comparison_operator_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparison_operator_python" style="color: inherit; text-decoration: inherit;">comparison_<wbr>operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="continuous_time_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuous_time_python" style="color: inherit; text-decoration: inherit;">continuous_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Retry times. Valid value ranges: (1~10).</dd><dt class="property-optional"
             title="Optional">
         <span id="cooldown_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cooldown_python" style="color: inherit; text-decoration: inherit;">cooldown</a>
@@ -1208,8 +2067,31 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cooldwon time in second. Default is <code>30</code>0.</p>
-</dd><dt class="property-optional"
+    <dd>Cooldwon time in second. Default is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disable_scale_in_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_scale_in_python" style="color: inherit; text-decoration: inherit;">disable_<wbr>scale_<wbr>in</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to disable scaling down applies only to the target tracking strategy; the default value is false. Value range: true: The target tracking strategy only triggers scaling up; false: The target tracking strategy triggers both scaling up and scaling down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="estimated_instance_warmup_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#estimated_instance_warmup_python" style="color: inherit; text-decoration: inherit;">estimated_<wbr>instance_<wbr>warmup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Instance warm-up time, in seconds, applicable only to target tracking strategies. Value range is 0-3600, with a default warm-up time of 300 seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="metric_name_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_name_python" style="color: inherit; text-decoration: inherit;">metric_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="notification_user_group_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_user_group_ids_python" style="color: inherit; text-decoration: inherit;">notification_<wbr>user_<wbr>group_<wbr>ids</a>
@@ -1217,8 +2099,31 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>An ID group of users to be notified when an alarm is triggered.</p>
-</dd><dt class="property-optional"
+    <dd>An ID group of users to be notified when an alarm is triggered.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="period_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_python" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Time period in second. Valid values: <code>60</code> and <code>300</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="policy_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_type_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Alarm triggering policy type, the default type is SIMPLE. Value range: SIMPLE: Simple policy; TARGET_TRACKING: Target tracking policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="predefined_metric_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#predefined_metric_type_python" style="color: inherit; text-decoration: inherit;">predefined_<wbr>metric_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Predefined monitoring items, applicable only to target tracking policies, and required in target tracking policy scenarios. Value range: ASG_AVG_CPU_UTILIZATION: Average CPU utilization; ASG_AVG_LAN_TRAFFIC_OUT: Average intranet outbound bandwidth; ASG_AVG_LAN_TRAFFIC_IN: Average intranet inbound bandwidth; ASG_AVG_WAN_TRAFFIC_OUT: Average internet outbound bandwidth; ASG_AVG_WAN_TRAFFIC_IN: Average internet inbound bandwidth.</dd><dt class="property-optional"
             title="Optional">
         <span id="statistic_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statistic_python" style="color: inherit; text-decoration: inherit;">statistic</a>
@@ -1226,8 +2131,23 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</p>
-</dd></dl>
+    <dd>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="target_value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_value_python" style="color: inherit; text-decoration: inherit;">target_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Target value, applicable only to target tracking strategies, and required in target tracking strategy scenarios. ASG_AVG_CPU_UTILIZATION: [1, 100), Unit: %; ASG_AVG_LAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_LAN_TRAFFIC_IN: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_IN: &gt;0, Unit: Mbps.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="threshold_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_python" style="color: inherit; text-decoration: inherit;">threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Alarm threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1235,68 +2155,13 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="adjustmenttype_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmenttype_yaml" style="color: inherit; text-decoration: inherit;">adjustment<wbr>Type</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="adjustmentvalue_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmentvalue_yaml" style="color: inherit; text-decoration: inherit;">adjustment<wbr>Value</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">Number</span>
-    </dt>
-    <dd><p>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="comparisonoperator_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparisonoperator_yaml" style="color: inherit; text-decoration: inherit;">comparison<wbr>Operator</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="continuoustime_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuoustime_yaml" style="color: inherit; text-decoration: inherit;">continuous<wbr>Time</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">Number</span>
-    </dt>
-    <dd><p>Retry times. Valid value ranges: (1~10).</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="metricname_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_yaml" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="period_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">Number</span>
-    </dt>
-    <dd><p>Time period in second. Valid values: <code>60</code> and <code>300</code>.</p>
-</dd><dt class="property-required"
-            title="Required">
         <span id="policyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a policy used to define a reaction when an alarm is triggered.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of a policy used to define a reaction when an alarm is triggered.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1304,17 +2169,39 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="threshold_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_yaml" style="color: inherit; text-decoration: inherit;">threshold</a>
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="adjustmenttype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmenttype_yaml" style="color: inherit; text-decoration: inherit;">adjustment<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="adjustmentvalue_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmentvalue_yaml" style="color: inherit; text-decoration: inherit;">adjustment<wbr>Value</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Alarm threshold.</p>
-</dd><dt class="property-optional"
+    <dd>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="comparisonoperator_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparisonoperator_yaml" style="color: inherit; text-decoration: inherit;">comparison<wbr>Operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="continuoustime_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuoustime_yaml" style="color: inherit; text-decoration: inherit;">continuous<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Retry times. Valid value ranges: (1~10).</dd><dt class="property-optional"
             title="Optional">
         <span id="cooldown_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cooldown_yaml" style="color: inherit; text-decoration: inherit;">cooldown</a>
@@ -1322,8 +2209,31 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cooldwon time in second. Default is <code>30</code>0.</p>
-</dd><dt class="property-optional"
+    <dd>Cooldwon time in second. Default is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disablescalein_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disablescalein_yaml" style="color: inherit; text-decoration: inherit;">disable<wbr>Scale<wbr>In</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to disable scaling down applies only to the target tracking strategy; the default value is false. Value range: true: The target tracking strategy only triggers scaling up; false: The target tracking strategy triggers both scaling up and scaling down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="estimatedinstancewarmup_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#estimatedinstancewarmup_yaml" style="color: inherit; text-decoration: inherit;">estimated<wbr>Instance<wbr>Warmup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Instance warm-up time, in seconds, applicable only to target tracking strategies. Value range is 0-3600, with a default warm-up time of 300 seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="metricname_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_yaml" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="notificationusergroupids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationusergroupids_yaml" style="color: inherit; text-decoration: inherit;">notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -1331,8 +2241,31 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>An ID group of users to be notified when an alarm is triggered.</p>
-</dd><dt class="property-optional"
+    <dd>An ID group of users to be notified when an alarm is triggered.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="period_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Time period in second. Valid values: <code>60</code> and <code>300</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="policytype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Alarm triggering policy type, the default type is SIMPLE. Value range: SIMPLE: Simple policy; TARGET_TRACKING: Target tracking policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="predefinedmetrictype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#predefinedmetrictype_yaml" style="color: inherit; text-decoration: inherit;">predefined<wbr>Metric<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Predefined monitoring items, applicable only to target tracking policies, and required in target tracking policy scenarios. Value range: ASG_AVG_CPU_UTILIZATION: Average CPU utilization; ASG_AVG_LAN_TRAFFIC_OUT: Average intranet outbound bandwidth; ASG_AVG_LAN_TRAFFIC_IN: Average intranet inbound bandwidth; ASG_AVG_WAN_TRAFFIC_OUT: Average internet outbound bandwidth; ASG_AVG_WAN_TRAFFIC_IN: Average internet inbound bandwidth.</dd><dt class="property-optional"
             title="Optional">
         <span id="statistic_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statistic_yaml" style="color: inherit; text-decoration: inherit;">statistic</a>
@@ -1340,8 +2273,23 @@ The ScalingPolicy resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</p>
-</dd></dl>
+    <dd>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="targetvalue_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetvalue_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Target value, applicable only to target tracking strategies, and required in target tracking strategy scenarios. ASG_AVG_CPU_UTILIZATION: [1, 100), Unit: %; ASG_AVG_LAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_LAN_TRAFFIC_IN: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_IN: &gt;0, Unit: Mbps.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="threshold_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_yaml" style="color: inherit; text-decoration: inherit;">threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Alarm threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1362,8 +2310,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1377,8 +2324,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1392,8 +2352,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1407,8 +2366,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1422,8 +2380,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1437,8 +2394,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1448,18 +2404,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ScalingPolicy resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ScalingPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ScalingPolicy</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ScalingPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ScalingPolicy</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1468,111 +2424,155 @@ Get an existing ScalingPolicy resource's state with the given name, ID, and opti
         <span class="nx">comparison_operator</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">continuous_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">cooldown</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">disable_scale_in</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">estimated_instance_warmup</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">metric_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">notification_user_group_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">policy_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">policy_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">predefined_metric_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">scaling_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">statistic</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">target_value</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">threshold</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> ScalingPolicy</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetScalingPolicy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ScalingPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ScalingPolicy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetScalingPolicy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ScalingPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ScalingPolicy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ScalingPolicy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScalingPolicyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ScalingPolicy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScalingPolicyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ScalingPolicy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScalingPolicyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ScalingPolicy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScalingPolicyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingScalingPolicy</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:As:ScalingPolicy</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_as_scaling_policy</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScalingPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScalingPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1580,28 +2580,31 @@ Get an existing ScalingPolicy resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScalingPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1609,28 +2612,31 @@ Get an existing ScalingPolicy resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScalingPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1650,8 +2656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_adjustmentvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_adjustmentvalue_csharp" style="color: inherit; text-decoration: inherit;">Adjustment<wbr>Value</a>
@@ -1659,8 +2664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</p>
-</dd><dt class="property-optional"
+    <dd>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comparisonoperator_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comparisonoperator_csharp" style="color: inherit; text-decoration: inherit;">Comparison<wbr>Operator</a>
@@ -1668,8 +2672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_continuoustime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_continuoustime_csharp" style="color: inherit; text-decoration: inherit;">Continuous<wbr>Time</a>
@@ -1677,8 +2680,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retry times. Valid value ranges: (1~10).</p>
-</dd><dt class="property-optional"
+    <dd>Retry times. Valid value ranges: (1~10).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cooldown_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cooldown_csharp" style="color: inherit; text-decoration: inherit;">Cooldown</a>
@@ -1686,8 +2688,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cooldwon time in second. Default is <code>30</code>0.</p>
-</dd><dt class="property-optional"
+    <dd>Cooldwon time in second. Default is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disablescalein_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disablescalein_csharp" style="color: inherit; text-decoration: inherit;">Disable<wbr>Scale<wbr>In</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to disable scaling down applies only to the target tracking strategy; the default value is false. Value range: true: The target tracking strategy only triggers scaling up; false: The target tracking strategy triggers both scaling up and scaling down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_estimatedinstancewarmup_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_estimatedinstancewarmup_csharp" style="color: inherit; text-decoration: inherit;">Estimated<wbr>Instance<wbr>Warmup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Instance warm-up time, in seconds, applicable only to target tracking strategies. Value range is 0-3600, with a default warm-up time of 300 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_metricname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metricname_csharp" style="color: inherit; text-decoration: inherit;">Metric<wbr>Name</a>
@@ -1695,8 +2712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationusergroupids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationusergroupids_csharp" style="color: inherit; text-decoration: inherit;">Notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -1704,8 +2720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>An ID group of users to be notified when an alarm is triggered.</p>
-</dd><dt class="property-optional"
+    <dd>An ID group of users to be notified when an alarm is triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -1713,8 +2728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time period in second. Valid values: <code>60</code> and <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Time period in second. Valid values: <code>60</code> and <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyname_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Name</a>
@@ -1722,8 +2736,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a policy used to define a reaction when an alarm is triggered.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of a policy used to define a reaction when an alarm is triggered.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_policytype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policytype_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alarm triggering policy type, the default type is SIMPLE. Value range: SIMPLE: Simple policy; TARGET_TRACKING: Target tracking policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_predefinedmetrictype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_predefinedmetrictype_csharp" style="color: inherit; text-decoration: inherit;">Predefined<wbr>Metric<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Predefined monitoring items, applicable only to target tracking policies, and required in target tracking policy scenarios. Value range: ASG_AVG_CPU_UTILIZATION: Average CPU utilization; ASG_AVG_LAN_TRAFFIC_OUT: Average intranet outbound bandwidth; ASG_AVG_LAN_TRAFFIC_IN: Average intranet inbound bandwidth; ASG_AVG_WAN_TRAFFIC_OUT: Average internet outbound bandwidth; ASG_AVG_WAN_TRAFFIC_IN: Average internet inbound bandwidth.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -1731,8 +2760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statistic_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statistic_csharp" style="color: inherit; text-decoration: inherit;">Statistic</a>
@@ -1740,8 +2768,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_targetvalue_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetvalue_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Target value, applicable only to target tracking strategies, and required in target tracking strategy scenarios. ASG_AVG_CPU_UTILIZATION: [1, 100), Unit: %; ASG_AVG_LAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_LAN_TRAFFIC_IN: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_IN: &gt;0, Unit: Mbps.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_threshold_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_threshold_csharp" style="color: inherit; text-decoration: inherit;">Threshold</a>
@@ -1749,8 +2784,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm threshold.</p>
-</dd></dl>
+    <dd>Alarm threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1764,8 +2798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_adjustmentvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_adjustmentvalue_go" style="color: inherit; text-decoration: inherit;">Adjustment<wbr>Value</a>
@@ -1773,8 +2806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</p>
-</dd><dt class="property-optional"
+    <dd>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comparisonoperator_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comparisonoperator_go" style="color: inherit; text-decoration: inherit;">Comparison<wbr>Operator</a>
@@ -1782,8 +2814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_continuoustime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_continuoustime_go" style="color: inherit; text-decoration: inherit;">Continuous<wbr>Time</a>
@@ -1791,8 +2822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retry times. Valid value ranges: (1~10).</p>
-</dd><dt class="property-optional"
+    <dd>Retry times. Valid value ranges: (1~10).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cooldown_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cooldown_go" style="color: inherit; text-decoration: inherit;">Cooldown</a>
@@ -1800,8 +2830,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cooldwon time in second. Default is <code>30</code>0.</p>
-</dd><dt class="property-optional"
+    <dd>Cooldwon time in second. Default is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disablescalein_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disablescalein_go" style="color: inherit; text-decoration: inherit;">Disable<wbr>Scale<wbr>In</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to disable scaling down applies only to the target tracking strategy; the default value is false. Value range: true: The target tracking strategy only triggers scaling up; false: The target tracking strategy triggers both scaling up and scaling down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_estimatedinstancewarmup_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_estimatedinstancewarmup_go" style="color: inherit; text-decoration: inherit;">Estimated<wbr>Instance<wbr>Warmup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Instance warm-up time, in seconds, applicable only to target tracking strategies. Value range is 0-3600, with a default warm-up time of 300 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_metricname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metricname_go" style="color: inherit; text-decoration: inherit;">Metric<wbr>Name</a>
@@ -1809,8 +2854,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationusergroupids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationusergroupids_go" style="color: inherit; text-decoration: inherit;">Notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -1818,8 +2862,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>An ID group of users to be notified when an alarm is triggered.</p>
-</dd><dt class="property-optional"
+    <dd>An ID group of users to be notified when an alarm is triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_go" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -1827,8 +2870,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time period in second. Valid values: <code>60</code> and <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Time period in second. Valid values: <code>60</code> and <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyname_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Name</a>
@@ -1836,8 +2878,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a policy used to define a reaction when an alarm is triggered.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of a policy used to define a reaction when an alarm is triggered.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_policytype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policytype_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alarm triggering policy type, the default type is SIMPLE. Value range: SIMPLE: Simple policy; TARGET_TRACKING: Target tracking policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_predefinedmetrictype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_predefinedmetrictype_go" style="color: inherit; text-decoration: inherit;">Predefined<wbr>Metric<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Predefined monitoring items, applicable only to target tracking policies, and required in target tracking policy scenarios. Value range: ASG_AVG_CPU_UTILIZATION: Average CPU utilization; ASG_AVG_LAN_TRAFFIC_OUT: Average intranet outbound bandwidth; ASG_AVG_LAN_TRAFFIC_IN: Average intranet inbound bandwidth; ASG_AVG_WAN_TRAFFIC_OUT: Average internet outbound bandwidth; ASG_AVG_WAN_TRAFFIC_IN: Average internet inbound bandwidth.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -1845,8 +2902,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statistic_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statistic_go" style="color: inherit; text-decoration: inherit;">Statistic</a>
@@ -1854,8 +2910,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_targetvalue_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetvalue_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Target value, applicable only to target tracking strategies, and required in target tracking strategy scenarios. ASG_AVG_CPU_UTILIZATION: [1, 100), Unit: %; ASG_AVG_LAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_LAN_TRAFFIC_IN: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_IN: &gt;0, Unit: Mbps.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_threshold_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_threshold_go" style="color: inherit; text-decoration: inherit;">Threshold</a>
@@ -1863,8 +2926,149 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm threshold.</p>
-</dd></dl>
+    <dd>Alarm threshold.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_adjustment_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_adjustment_type_hcl" style="color: inherit; text-decoration: inherit;">adjustment_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_adjustment_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_adjustment_value_hcl" style="color: inherit; text-decoration: inherit;">adjustment_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_comparison_operator_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comparison_operator_hcl" style="color: inherit; text-decoration: inherit;">comparison_<wbr>operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_continuous_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_continuous_time_hcl" style="color: inherit; text-decoration: inherit;">continuous_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Retry times. Valid value ranges: (1~10).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cooldown_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cooldown_hcl" style="color: inherit; text-decoration: inherit;">cooldown</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cooldwon time in second. Default is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disable_scale_in_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disable_scale_in_hcl" style="color: inherit; text-decoration: inherit;">disable_<wbr>scale_<wbr>in</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to disable scaling down applies only to the target tracking strategy; the default value is false. Value range: true: The target tracking strategy only triggers scaling up; false: The target tracking strategy triggers both scaling up and scaling down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_estimated_instance_warmup_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_estimated_instance_warmup_hcl" style="color: inherit; text-decoration: inherit;">estimated_<wbr>instance_<wbr>warmup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance warm-up time, in seconds, applicable only to target tracking strategies. Value range is 0-3600, with a default warm-up time of 300 seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_metric_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metric_name_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_notification_user_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notification_user_group_ids_hcl" style="color: inherit; text-decoration: inherit;">notification_<wbr>user_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>An ID group of users to be notified when an alarm is triggered.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Time period in second. Valid values: <code>60</code> and <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_policy_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_name_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of a policy used to define a reaction when an alarm is triggered.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_policy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_type_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alarm triggering policy type, the default type is SIMPLE. Value range: SIMPLE: Simple policy; TARGET_TRACKING: Target tracking policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_predefined_metric_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_predefined_metric_type_hcl" style="color: inherit; text-decoration: inherit;">predefined_<wbr>metric_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Predefined monitoring items, applicable only to target tracking policies, and required in target tracking policy scenarios. Value range: ASG_AVG_CPU_UTILIZATION: Average CPU utilization; ASG_AVG_LAN_TRAFFIC_OUT: Average intranet outbound bandwidth; ASG_AVG_LAN_TRAFFIC_IN: Average intranet inbound bandwidth; ASG_AVG_WAN_TRAFFIC_OUT: Average internet outbound bandwidth; ASG_AVG_WAN_TRAFFIC_IN: Average internet inbound bandwidth.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_statistic_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statistic_hcl" style="color: inherit; text-decoration: inherit;">statistic</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_target_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_value_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Target value, applicable only to target tracking strategies, and required in target tracking strategy scenarios. ASG_AVG_CPU_UTILIZATION: [1, 100), Unit: %; ASG_AVG_LAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_LAN_TRAFFIC_IN: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_IN: &gt;0, Unit: Mbps.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_threshold_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_threshold_hcl" style="color: inherit; text-decoration: inherit;">threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1878,8 +3082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_adjustmentvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_adjustmentvalue_java" style="color: inherit; text-decoration: inherit;">adjustment<wbr>Value</a>
@@ -1887,8 +3090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</p>
-</dd><dt class="property-optional"
+    <dd>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comparisonoperator_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comparisonoperator_java" style="color: inherit; text-decoration: inherit;">comparison<wbr>Operator</a>
@@ -1896,8 +3098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_continuoustime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_continuoustime_java" style="color: inherit; text-decoration: inherit;">continuous<wbr>Time</a>
@@ -1905,8 +3106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Retry times. Valid value ranges: (1~10).</p>
-</dd><dt class="property-optional"
+    <dd>Retry times. Valid value ranges: (1~10).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cooldown_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cooldown_java" style="color: inherit; text-decoration: inherit;">cooldown</a>
@@ -1914,8 +3114,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Cooldwon time in second. Default is <code>30</code>0.</p>
-</dd><dt class="property-optional"
+    <dd>Cooldwon time in second. Default is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disablescalein_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disablescalein_java" style="color: inherit; text-decoration: inherit;">disable<wbr>Scale<wbr>In</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to disable scaling down applies only to the target tracking strategy; the default value is false. Value range: true: The target tracking strategy only triggers scaling up; false: The target tracking strategy triggers both scaling up and scaling down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_estimatedinstancewarmup_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_estimatedinstancewarmup_java" style="color: inherit; text-decoration: inherit;">estimated<wbr>Instance<wbr>Warmup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Instance warm-up time, in seconds, applicable only to target tracking strategies. Value range is 0-3600, with a default warm-up time of 300 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_metricname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metricname_java" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
@@ -1923,8 +3138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationusergroupids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationusergroupids_java" style="color: inherit; text-decoration: inherit;">notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -1932,8 +3146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>An ID group of users to be notified when an alarm is triggered.</p>
-</dd><dt class="property-optional"
+    <dd>An ID group of users to be notified when an alarm is triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_java" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1941,8 +3154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Time period in second. Valid values: <code>60</code> and <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Time period in second. Valid values: <code>60</code> and <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyname_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -1950,8 +3162,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a policy used to define a reaction when an alarm is triggered.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of a policy used to define a reaction when an alarm is triggered.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_policytype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policytype_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Alarm triggering policy type, the default type is SIMPLE. Value range: SIMPLE: Simple policy; TARGET_TRACKING: Target tracking policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_predefinedmetrictype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_predefinedmetrictype_java" style="color: inherit; text-decoration: inherit;">predefined<wbr>Metric<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Predefined monitoring items, applicable only to target tracking policies, and required in target tracking policy scenarios. Value range: ASG_AVG_CPU_UTILIZATION: Average CPU utilization; ASG_AVG_LAN_TRAFFIC_OUT: Average intranet outbound bandwidth; ASG_AVG_LAN_TRAFFIC_IN: Average intranet inbound bandwidth; ASG_AVG_WAN_TRAFFIC_OUT: Average internet outbound bandwidth; ASG_AVG_WAN_TRAFFIC_IN: Average internet inbound bandwidth.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1959,8 +3186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statistic_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statistic_java" style="color: inherit; text-decoration: inherit;">statistic</a>
@@ -1968,8 +3194,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_targetvalue_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetvalue_java" style="color: inherit; text-decoration: inherit;">target<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Target value, applicable only to target tracking strategies, and required in target tracking strategy scenarios. ASG_AVG_CPU_UTILIZATION: [1, 100), Unit: %; ASG_AVG_LAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_LAN_TRAFFIC_IN: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_IN: &gt;0, Unit: Mbps.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_threshold_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_threshold_java" style="color: inherit; text-decoration: inherit;">threshold</a>
@@ -1977,8 +3210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Alarm threshold.</p>
-</dd></dl>
+    <dd>Alarm threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1992,8 +3224,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_adjustmentvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_adjustmentvalue_nodejs" style="color: inherit; text-decoration: inherit;">adjustment<wbr>Value</a>
@@ -2001,8 +3232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</p>
-</dd><dt class="property-optional"
+    <dd>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comparisonoperator_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comparisonoperator_nodejs" style="color: inherit; text-decoration: inherit;">comparison<wbr>Operator</a>
@@ -2010,8 +3240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_continuoustime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_continuoustime_nodejs" style="color: inherit; text-decoration: inherit;">continuous<wbr>Time</a>
@@ -2019,8 +3248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Retry times. Valid value ranges: (1~10).</p>
-</dd><dt class="property-optional"
+    <dd>Retry times. Valid value ranges: (1~10).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cooldown_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cooldown_nodejs" style="color: inherit; text-decoration: inherit;">cooldown</a>
@@ -2028,8 +3256,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cooldwon time in second. Default is <code>30</code>0.</p>
-</dd><dt class="property-optional"
+    <dd>Cooldwon time in second. Default is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disablescalein_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disablescalein_nodejs" style="color: inherit; text-decoration: inherit;">disable<wbr>Scale<wbr>In</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to disable scaling down applies only to the target tracking strategy; the default value is false. Value range: true: The target tracking strategy only triggers scaling up; false: The target tracking strategy triggers both scaling up and scaling down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_estimatedinstancewarmup_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_estimatedinstancewarmup_nodejs" style="color: inherit; text-decoration: inherit;">estimated<wbr>Instance<wbr>Warmup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance warm-up time, in seconds, applicable only to target tracking strategies. Value range is 0-3600, with a default warm-up time of 300 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_metricname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metricname_nodejs" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
@@ -2037,8 +3280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationusergroupids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationusergroupids_nodejs" style="color: inherit; text-decoration: inherit;">notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -2046,8 +3288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>An ID group of users to be notified when an alarm is triggered.</p>
-</dd><dt class="property-optional"
+    <dd>An ID group of users to be notified when an alarm is triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
@@ -2055,8 +3296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Time period in second. Valid values: <code>60</code> and <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Time period in second. Valid values: <code>60</code> and <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyname_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -2064,8 +3304,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a policy used to define a reaction when an alarm is triggered.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of a policy used to define a reaction when an alarm is triggered.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_policytype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policytype_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alarm triggering policy type, the default type is SIMPLE. Value range: SIMPLE: Simple policy; TARGET_TRACKING: Target tracking policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_predefinedmetrictype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_predefinedmetrictype_nodejs" style="color: inherit; text-decoration: inherit;">predefined<wbr>Metric<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Predefined monitoring items, applicable only to target tracking policies, and required in target tracking policy scenarios. Value range: ASG_AVG_CPU_UTILIZATION: Average CPU utilization; ASG_AVG_LAN_TRAFFIC_OUT: Average intranet outbound bandwidth; ASG_AVG_LAN_TRAFFIC_IN: Average intranet inbound bandwidth; ASG_AVG_WAN_TRAFFIC_OUT: Average internet outbound bandwidth; ASG_AVG_WAN_TRAFFIC_IN: Average internet inbound bandwidth.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -2073,8 +3328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statistic_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statistic_nodejs" style="color: inherit; text-decoration: inherit;">statistic</a>
@@ -2082,8 +3336,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_targetvalue_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetvalue_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Target value, applicable only to target tracking strategies, and required in target tracking strategy scenarios. ASG_AVG_CPU_UTILIZATION: [1, 100), Unit: %; ASG_AVG_LAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_LAN_TRAFFIC_IN: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_IN: &gt;0, Unit: Mbps.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_threshold_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_threshold_nodejs" style="color: inherit; text-decoration: inherit;">threshold</a>
@@ -2091,8 +3352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Alarm threshold.</p>
-</dd></dl>
+    <dd>Alarm threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2106,8 +3366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_adjustment_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_adjustment_value_python" style="color: inherit; text-decoration: inherit;">adjustment_<wbr>value</a>
@@ -2115,8 +3374,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</p>
-</dd><dt class="property-optional"
+    <dd>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comparison_operator_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comparison_operator_python" style="color: inherit; text-decoration: inherit;">comparison_<wbr>operator</a>
@@ -2124,8 +3382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_continuous_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_continuous_time_python" style="color: inherit; text-decoration: inherit;">continuous_<wbr>time</a>
@@ -2133,8 +3390,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retry times. Valid value ranges: (1~10).</p>
-</dd><dt class="property-optional"
+    <dd>Retry times. Valid value ranges: (1~10).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cooldown_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cooldown_python" style="color: inherit; text-decoration: inherit;">cooldown</a>
@@ -2142,8 +3398,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cooldwon time in second. Default is <code>30</code>0.</p>
-</dd><dt class="property-optional"
+    <dd>Cooldwon time in second. Default is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disable_scale_in_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disable_scale_in_python" style="color: inherit; text-decoration: inherit;">disable_<wbr>scale_<wbr>in</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to disable scaling down applies only to the target tracking strategy; the default value is false. Value range: true: The target tracking strategy only triggers scaling up; false: The target tracking strategy triggers both scaling up and scaling down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_estimated_instance_warmup_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_estimated_instance_warmup_python" style="color: inherit; text-decoration: inherit;">estimated_<wbr>instance_<wbr>warmup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Instance warm-up time, in seconds, applicable only to target tracking strategies. Value range is 0-3600, with a default warm-up time of 300 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_metric_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metric_name_python" style="color: inherit; text-decoration: inherit;">metric_<wbr>name</a>
@@ -2151,8 +3422,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notification_user_group_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notification_user_group_ids_python" style="color: inherit; text-decoration: inherit;">notification_<wbr>user_<wbr>group_<wbr>ids</a>
@@ -2160,8 +3430,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>An ID group of users to be notified when an alarm is triggered.</p>
-</dd><dt class="property-optional"
+    <dd>An ID group of users to be notified when an alarm is triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_python" style="color: inherit; text-decoration: inherit;">period</a>
@@ -2169,8 +3438,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time period in second. Valid values: <code>60</code> and <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Time period in second. Valid values: <code>60</code> and <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policy_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_name_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>name</a>
@@ -2178,8 +3446,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of a policy used to define a reaction when an alarm is triggered.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of a policy used to define a reaction when an alarm is triggered.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_policy_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_type_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Alarm triggering policy type, the default type is SIMPLE. Value range: SIMPLE: Simple policy; TARGET_TRACKING: Target tracking policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_predefined_metric_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_predefined_metric_type_python" style="color: inherit; text-decoration: inherit;">predefined_<wbr>metric_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Predefined monitoring items, applicable only to target tracking policies, and required in target tracking policy scenarios. Value range: ASG_AVG_CPU_UTILIZATION: Average CPU utilization; ASG_AVG_LAN_TRAFFIC_OUT: Average intranet outbound bandwidth; ASG_AVG_LAN_TRAFFIC_IN: Average intranet inbound bandwidth; ASG_AVG_WAN_TRAFFIC_OUT: Average internet outbound bandwidth; ASG_AVG_WAN_TRAFFIC_IN: Average internet inbound bandwidth.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scaling_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaling_group_id_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
@@ -2187,8 +3470,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statistic_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statistic_python" style="color: inherit; text-decoration: inherit;">statistic</a>
@@ -2196,8 +3478,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_target_value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_value_python" style="color: inherit; text-decoration: inherit;">target_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Target value, applicable only to target tracking strategies, and required in target tracking strategy scenarios. ASG_AVG_CPU_UTILIZATION: [1, 100), Unit: %; ASG_AVG_LAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_LAN_TRAFFIC_IN: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_IN: &gt;0, Unit: Mbps.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_threshold_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_threshold_python" style="color: inherit; text-decoration: inherit;">threshold</a>
@@ -2205,8 +3494,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm threshold.</p>
-</dd></dl>
+    <dd>Alarm threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2220,8 +3508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: <code>CHANGE_IN_CAPACITY</code>, <code>EXACT_CAPACITY</code> and <code>PERCENT_CHANGE_IN_CAPACITY</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_adjustmentvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_adjustmentvalue_yaml" style="color: inherit; text-decoration: inherit;">adjustment<wbr>Value</a>
@@ -2229,8 +3516,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</p>
-</dd><dt class="property-optional"
+    <dd>Define the number of instances by which to scale.For <code>CHANGE_IN_CAPACITY</code> type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For <code>EXACT_CAPACITY</code> type, it defines an absolute number of the existing Auto Scaling group size.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comparisonoperator_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comparisonoperator_yaml" style="color: inherit; text-decoration: inherit;">comparison<wbr>Operator</a>
@@ -2238,8 +3524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Comparison operator. Valid values: <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_continuoustime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_continuoustime_yaml" style="color: inherit; text-decoration: inherit;">continuous<wbr>Time</a>
@@ -2247,8 +3532,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Retry times. Valid value ranges: (1~10).</p>
-</dd><dt class="property-optional"
+    <dd>Retry times. Valid value ranges: (1~10).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cooldown_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cooldown_yaml" style="color: inherit; text-decoration: inherit;">cooldown</a>
@@ -2256,8 +3540,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cooldwon time in second. Default is <code>30</code>0.</p>
-</dd><dt class="property-optional"
+    <dd>Cooldwon time in second. Default is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disablescalein_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disablescalein_yaml" style="color: inherit; text-decoration: inherit;">disable<wbr>Scale<wbr>In</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to disable scaling down applies only to the target tracking strategy; the default value is false. Value range: true: The target tracking strategy only triggers scaling up; false: The target tracking strategy triggers both scaling up and scaling down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_estimatedinstancewarmup_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_estimatedinstancewarmup_yaml" style="color: inherit; text-decoration: inherit;">estimated<wbr>Instance<wbr>Warmup</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Instance warm-up time, in seconds, applicable only to target tracking strategies. Value range is 0-3600, with a default warm-up time of 300 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_metricname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metricname_yaml" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
@@ -2265,8 +3564,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of an indicator. Valid values: <code>CPU_UTILIZATION</code>, <code>MEM_UTILIZATION</code>, <code>LAN_TRAFFIC_OUT</code>, <code>LAN_TRAFFIC_IN</code>, <code>WAN_TRAFFIC_OUT</code> and <code>WAN_TRAFFIC_IN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationusergroupids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationusergroupids_yaml" style="color: inherit; text-decoration: inherit;">notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -2274,8 +3572,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>An ID group of users to be notified when an alarm is triggered.</p>
-</dd><dt class="property-optional"
+    <dd>An ID group of users to be notified when an alarm is triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
@@ -2283,8 +3580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Time period in second. Valid values: <code>60</code> and <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Time period in second. Valid values: <code>60</code> and <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyname_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -2292,8 +3588,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a policy used to define a reaction when an alarm is triggered.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of a policy used to define a reaction when an alarm is triggered.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_policytype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policytype_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Alarm triggering policy type, the default type is SIMPLE. Value range: SIMPLE: Simple policy; TARGET_TRACKING: Target tracking policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_predefinedmetrictype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_predefinedmetrictype_yaml" style="color: inherit; text-decoration: inherit;">predefined<wbr>Metric<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Predefined monitoring items, applicable only to target tracking policies, and required in target tracking policy scenarios. Value range: ASG_AVG_CPU_UTILIZATION: Average CPU utilization; ASG_AVG_LAN_TRAFFIC_OUT: Average intranet outbound bandwidth; ASG_AVG_LAN_TRAFFIC_IN: Average intranet inbound bandwidth; ASG_AVG_WAN_TRAFFIC_OUT: Average internet outbound bandwidth; ASG_AVG_WAN_TRAFFIC_IN: Average internet inbound bandwidth.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -2301,8 +3612,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statistic_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statistic_yaml" style="color: inherit; text-decoration: inherit;">statistic</a>
@@ -2310,8 +3620,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Statistic types. Valid values: <code>AVERAGE</code>, <code>MAXIMUM</code> and <code>MINIMUM</code>. Default is <code>AVERAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_targetvalue_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetvalue_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Target value, applicable only to target tracking strategies, and required in target tracking strategy scenarios. ASG_AVG_CPU_UTILIZATION: [1, 100), Unit: %; ASG_AVG_LAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_LAN_TRAFFIC_IN: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_OUT: &gt;0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_IN: &gt;0, Unit: Mbps.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_threshold_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_threshold_yaml" style="color: inherit; text-decoration: inherit;">threshold</a>
@@ -2319,8 +3636,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Alarm threshold.</p>
-</dd></dl>
+    <dd>Alarm threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2328,6 +3644,22 @@ The following state arguments are supported:
 
 
 
+
+
+
+## Import
+
+
+
+AS scaling policy can be imported using the id, e.g.
+
+```sh
+$ pulumi import tencentcloud:As/scalingPolicy:ScalingPolicy example asp-519acdug
+```
+
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2339,7 +3671,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

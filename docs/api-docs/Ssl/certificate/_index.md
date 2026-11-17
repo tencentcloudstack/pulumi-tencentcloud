@@ -2,9 +2,11 @@
 ---
 title: "Certificate"
 title_tag: "tencentcloud.Ssl.Certificate"
-meta_desc: "Documentation for the tencentcloud.Ssl.Certificate resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a SSL certificate. Upload the existing SSL certificate to Tencent Cloud."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,10 +20,14 @@ Upload the existing SSL certificate to Tencent Cloud.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const config = new pulumi.Config();
@@ -49,14 +55,20 @@ FWukAolm9/cagmD6IhNishM3Uzng+UYyCC8uQq3Z7FGqJpXSI79wZYjudnCLPVCg
 OIfJHQeJFLryn6GxiSYmYs6dgUJiiTV+I/2Y5X7ZFdb5FC1J/WmvoCv6yO7NiirY
 BSgfV0lp5CuV8SfiSClpYfrM28NbNgxveUqET642BJOPLQ==
 -----END CERTIFICATE-----`;
-const caCertificate = new tencentcloud.ssl.Certificate("caCertificate", {
+const caCertificate = new tencentcloud.ssl.Certificate("ca", {
+    name: "ssl-ca",
     type: "CA",
     cert: ca,
 });
-const caCertificates = tencentcloud.Ssl.getCertificatesOutput({
+const caGetCertificates = tencentcloud.ssl.getCertificatesOutput({
     name: caCertificate.name,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
@@ -89,65 +101,24 @@ FWukAolm9/cagmD6IhNishM3Uzng+UYyCC8uQq3Z7FGqJpXSI79wZYjudnCLPVCg
 OIfJHQeJFLryn6GxiSYmYs6dgUJiiTV+I/2Y5X7ZFdb5FC1J/WmvoCv6yO7NiirY
 BSgfV0lp5CuV8SfiSClpYfrM28NbNgxveUqET642BJOPLQ==
 -----END CERTIFICATE-----"""
-ca_certificate = tencentcloud.ssl.Certificate("caCertificate",
+ca_certificate = tencentcloud.ssl.Certificate("ca",
+    name="ssl-ca",
     type="CA",
     cert=ca)
-ca_certificates = tencentcloud.Ssl.get_certificates_output(name=ca_certificate.name)
+ca_get_certificates = tencentcloud.ssl.get_certificates_output(name=ca_certificate.name)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var config = new Config();
-    var ca = config.Get("ca") ?? @"-----BEGIN CERTIFICATE-----
-MIIEDjCCAnagAwIBAgIBATANBgkqhkiG9w0BAQsFADAoMQ0wCwYDVQQDEwR0ZXN0
-MRcwFQYDVQQKEw50ZXJyYWZvcm0gdGVzdDAeFw0xOTA4MTMwMzA4MjBaFw0yOTA4
-MTAwMzA4MjBaMCgxDTALBgNVBAMTBHRlc3QxFzAVBgNVBAoTDnRlcnJhZm9ybSB0
-ZXN0MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEA0k2vqg/GHtFP5P7r
-dbzswfx1jSHeK9r4StV4mGOAoKyzvAJA5BvYbAHpSrL2ZAd6ShjHgRVU1qEroeFn
-8fwTrAVQttMltBFABx7G4iN4Zf6EUXzhhFN6vVVbWaqhYhrdMoPvZxgGSA/4hG4W
-GIr8MXZzXbKLoRoz4Bvq1Ymg5eO14KLJFSTahvIkG60egGN5pmi4czxWy2U7ycA5
-Q5TuQBnF0rKQJW5XKIV3kr5YrzDdJK7up9E6Od4T5jz+qY97KAjIpWD/pTAsc7+6
-fPBpY7NHT9Bw0fDmvsWO/PtswY4hW02n86b5eWA9sfKJGphhsBxgpuuhmxYHS6pA
-B+C7IkyxcADNT5u9tEo2JGOj+/veXKrEhZin7inKsQLD0WOobcg1Rh/3NSWD7geF
-TJBRnzgplaN7cK6c/utEAAnngS38q4DGBR/jHmkWjAeQPZj1eLLBk686HEEbKeU+
-9yAVcPRhA9tuL7wMeSX32VunWZunoA/f8iuGZYJlZsNBqyJbAgMBAAGjQzBBMA8G
-A1UdEwEB/wQFMAMBAf8wDwYDVR0PAQH/BAUDAweGADAdBgNVHQ4EFgQUKwfrmq79
-1mY831S6UHARHtgYnlgwDQYJKoZIhvcNAQELBQADggGBAInM+aeaHoZdw9B9nAH2
-HscEoOulF+RxnysSXTTRLd2VQph4+ynlfRZT4evLBBj/ppmqjp8F7/OcRiiZwSXl
-namyP/UUINtHfgDM0kll/5Za0aYzMhrORNw+3ythIv2yPJX8t4LmsG1L4PMO8ZU8
-N0K9XyKRaL/tq6rw1gQM152OmNgTzfAQoKYxrvbftOZz4J0ZACctuBmwtp5upKvJ
-36aQ4wJLUzOt69mnW+AaL5EPA37mwtzdnzTTxd3SBfOYXjsflc3l2raljJznnqU2
-ySynjb6L3D3L/pObL1Uu7nQBy8CazJBsBsVFK/pr61vcllm8lG7vOhHOUSFUeezq
-FWukAolm9/cagmD6IhNishM3Uzng+UYyCC8uQq3Z7FGqJpXSI79wZYjudnCLPVCg
-OIfJHQeJFLryn6GxiSYmYs6dgUJiiTV+I/2Y5X7ZFdb5FC1J/WmvoCv6yO7NiirY
-BSgfV0lp5CuV8SfiSClpYfrM28NbNgxveUqET642BJOPLQ==
------END CERTIFICATE-----";
-    var caCertificate = new Tencentcloud.Ssl.Certificate("caCertificate", new()
-    {
-        Type = "CA",
-        Cert = ca,
-    });
-
-    var caCertificates = Tencentcloud.Ssl.GetCertificates.Invoke(new()
-    {
-        Name = caCertificate.Name,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ssl"
 )
 
 func main() {
@@ -180,20 +151,78 @@ BSgfV0lp5CuV8SfiSClpYfrM28NbNgxveUqET642BJOPLQ==
 		if param := cfg.Get("ca"); param != "" {
 			ca = param
 		}
-		caCertificate, err := Ssl.NewCertificate(ctx, "caCertificate", &Ssl.CertificateArgs{
+		caCertificate, err := ssl.NewCertificate(ctx, "ca", &ssl.CertificateArgs{
+			Name: pulumi.String("ssl-ca"),
 			Type: pulumi.String("CA"),
 			Cert: pulumi.String(ca),
 		})
 		if err != nil {
 			return err
 		}
-		_ = Ssl.GetCertificatesOutput(ctx, ssl.GetCertificatesOutputArgs{
+		_ = ssl.GetCertificatesOutput(ctx, ssl.GetCertificatesOutputArgs{
 			Name: caCertificate.Name,
 		}, nil)
 		return nil
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var ca = config.Get("ca") ?? @"-----BEGIN CERTIFICATE-----
+MIIEDjCCAnagAwIBAgIBATANBgkqhkiG9w0BAQsFADAoMQ0wCwYDVQQDEwR0ZXN0
+MRcwFQYDVQQKEw50ZXJyYWZvcm0gdGVzdDAeFw0xOTA4MTMwMzA4MjBaFw0yOTA4
+MTAwMzA4MjBaMCgxDTALBgNVBAMTBHRlc3QxFzAVBgNVBAoTDnRlcnJhZm9ybSB0
+ZXN0MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEA0k2vqg/GHtFP5P7r
+dbzswfx1jSHeK9r4StV4mGOAoKyzvAJA5BvYbAHpSrL2ZAd6ShjHgRVU1qEroeFn
+8fwTrAVQttMltBFABx7G4iN4Zf6EUXzhhFN6vVVbWaqhYhrdMoPvZxgGSA/4hG4W
+GIr8MXZzXbKLoRoz4Bvq1Ymg5eO14KLJFSTahvIkG60egGN5pmi4czxWy2U7ycA5
+Q5TuQBnF0rKQJW5XKIV3kr5YrzDdJK7up9E6Od4T5jz+qY97KAjIpWD/pTAsc7+6
+fPBpY7NHT9Bw0fDmvsWO/PtswY4hW02n86b5eWA9sfKJGphhsBxgpuuhmxYHS6pA
+B+C7IkyxcADNT5u9tEo2JGOj+/veXKrEhZin7inKsQLD0WOobcg1Rh/3NSWD7geF
+TJBRnzgplaN7cK6c/utEAAnngS38q4DGBR/jHmkWjAeQPZj1eLLBk686HEEbKeU+
+9yAVcPRhA9tuL7wMeSX32VunWZunoA/f8iuGZYJlZsNBqyJbAgMBAAGjQzBBMA8G
+A1UdEwEB/wQFMAMBAf8wDwYDVR0PAQH/BAUDAweGADAdBgNVHQ4EFgQUKwfrmq79
+1mY831S6UHARHtgYnlgwDQYJKoZIhvcNAQELBQADggGBAInM+aeaHoZdw9B9nAH2
+HscEoOulF+RxnysSXTTRLd2VQph4+ynlfRZT4evLBBj/ppmqjp8F7/OcRiiZwSXl
+namyP/UUINtHfgDM0kll/5Za0aYzMhrORNw+3ythIv2yPJX8t4LmsG1L4PMO8ZU8
+N0K9XyKRaL/tq6rw1gQM152OmNgTzfAQoKYxrvbftOZz4J0ZACctuBmwtp5upKvJ
+36aQ4wJLUzOt69mnW+AaL5EPA37mwtzdnzTTxd3SBfOYXjsflc3l2raljJznnqU2
+ySynjb6L3D3L/pObL1Uu7nQBy8CazJBsBsVFK/pr61vcllm8lG7vOhHOUSFUeezq
+FWukAolm9/cagmD6IhNishM3Uzng+UYyCC8uQq3Z7FGqJpXSI79wZYjudnCLPVCg
+OIfJHQeJFLryn6GxiSYmYs6dgUJiiTV+I/2Y5X7ZFdb5FC1J/WmvoCv6yO7NiirY
+BSgfV0lp5CuV8SfiSClpYfrM28NbNgxveUqET642BJOPLQ==
+-----END CERTIFICATE-----";
+    var caCertificate = new Tencentcloud.Ssl.Certificate("ca", new()
+    {
+        Name = "ssl-ca",
+        Type = "CA",
+        Cert = ca,
+    });
+
+    var caGetCertificates = Tencentcloud.Ssl.GetCertificates.Invoke(new()
+    {
+        Name = caCertificate.Name,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -204,8 +233,8 @@ import com.pulumi.tencentcloud.Ssl.Certificate;
 import com.pulumi.tencentcloud.Ssl.CertificateArgs;
 import com.pulumi.tencentcloud.Ssl.SslFunctions;
 import com.pulumi.tencentcloud.Ssl.inputs.GetCertificatesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -243,18 +272,24 @@ FWukAolm9/cagmD6IhNishM3Uzng+UYyCC8uQq3Z7FGqJpXSI79wZYjudnCLPVCg
 OIfJHQeJFLryn6GxiSYmYs6dgUJiiTV+I/2Y5X7ZFdb5FC1J/WmvoCv6yO7NiirY
 BSgfV0lp5CuV8SfiSClpYfrM28NbNgxveUqET642BJOPLQ==
 -----END CERTIFICATE-----        """);
-        var caCertificate = new Certificate("caCertificate", CertificateArgs.builder()        
+        var caCertificate = new Certificate("caCertificate", CertificateArgs.builder()
+            .name("ssl-ca")
             .type("CA")
             .cert(ca)
             .build());
 
-        final var caCertificates = SslFunctions.getCertificates(GetCertificatesArgs.builder()
+        final var caGetCertificates = SslFunctions.getCertificates(GetCertificatesArgs.builder()
             .name(caCertificate.name())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 configuration:
   ca:
@@ -287,22 +322,60 @@ configuration:
 resources:
   caCertificate:
     type: tencentcloud:Ssl:Certificate
+    name: ca
     properties:
+      name: ssl-ca
       type: CA
       cert: ${ca}
 variables:
-  caCertificates:
+  caGetCertificates:
     fn::invoke:
-      Function: tencentcloud:Ssl:getCertificates
-      Arguments:
+      function: tencentcloud:Ssl:getCertificates
+      arguments:
         name: ${caCertificate.name}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-<!--Start PulumiCodeChooser -->
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_ssl_getcertificates" "caGetCertificates" {
+  name = tencentcloud_ssl_certificate.ca.name
+}
+
+resource "tencentcloud_ssl_certificate" "ca" {
+  name = "ssl-ca"
+  type = "CA"
+  cert = var.ca
+}
+variable "ca" {
+  type    = string
+  default = "-----BEGIN CERTIFICATE-----\nMIIEDjCCAnagAwIBAgIBATANBgkqhkiG9w0BAQsFADAoMQ0wCwYDVQQDEwR0ZXN0\nMRcwFQYDVQQKEw50ZXJyYWZvcm0gdGVzdDAeFw0xOTA4MTMwMzA4MjBaFw0yOTA4\nMTAwMzA4MjBaMCgxDTALBgNVBAMTBHRlc3QxFzAVBgNVBAoTDnRlcnJhZm9ybSB0\nZXN0MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEA0k2vqg/GHtFP5P7r\ndbzswfx1jSHeK9r4StV4mGOAoKyzvAJA5BvYbAHpSrL2ZAd6ShjHgRVU1qEroeFn\n8fwTrAVQttMltBFABx7G4iN4Zf6EUXzhhFN6vVVbWaqhYhrdMoPvZxgGSA/4hG4W\nGIr8MXZzXbKLoRoz4Bvq1Ymg5eO14KLJFSTahvIkG60egGN5pmi4czxWy2U7ycA5\nQ5TuQBnF0rKQJW5XKIV3kr5YrzDdJK7up9E6Od4T5jz+qY97KAjIpWD/pTAsc7+6\nfPBpY7NHT9Bw0fDmvsWO/PtswY4hW02n86b5eWA9sfKJGphhsBxgpuuhmxYHS6pA\nB+C7IkyxcADNT5u9tEo2JGOj+/veXKrEhZin7inKsQLD0WOobcg1Rh/3NSWD7geF\nTJBRnzgplaN7cK6c/utEAAnngS38q4DGBR/jHmkWjAeQPZj1eLLBk686HEEbKeU+\n9yAVcPRhA9tuL7wMeSX32VunWZunoA/f8iuGZYJlZsNBqyJbAgMBAAGjQzBBMA8G\nA1UdEwEB/wQFMAMBAf8wDwYDVR0PAQH/BAUDAweGADAdBgNVHQ4EFgQUKwfrmq79\n1mY831S6UHARHtgYnlgwDQYJKoZIhvcNAQELBQADggGBAInM+aeaHoZdw9B9nAH2\nHscEoOulF+RxnysSXTTRLd2VQph4+ynlfRZT4evLBBj/ppmqjp8F7/OcRiiZwSXl\nnamyP/UUINtHfgDM0kll/5Za0aYzMhrORNw+3ythIv2yPJX8t4LmsG1L4PMO8ZU8\nN0K9XyKRaL/tq6rw1gQM152OmNgTzfAQoKYxrvbftOZz4J0ZACctuBmwtp5upKvJ\n36aQ4wJLUzOt69mnW+AaL5EPA37mwtzdnzTTxd3SBfOYXjsflc3l2raljJznnqU2\nySynjb6L3D3L/pObL1Uu7nQBy8CazJBsBsVFK/pr61vcllm8lG7vOhHOUSFUeezq\nFWukAolm9/cagmD6IhNishM3Uzng+UYyCC8uQq3Z7FGqJpXSI79wZYjudnCLPVCg\nOIfJHQeJFLryn6GxiSYmYs6dgUJiiTV+I/2Y5X7ZFdb5FC1J/WmvoCv6yO7NiirY\nBSgfV0lp5CuV8SfiSClpYfrM28NbNgxveUqET642BJOPLQ==\n-----END CERTIFICATE-----"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const config = new pulumi.Config();
@@ -332,147 +405,147 @@ jCbLMjNjtM5KriCaR7wDARgHiG0gBEPOEW1PIjZ9UOH+LtIxbNZ4eEIIINLHnBHf
 L+doVeZtS/gJc4G4Adr5HYuaS9ZxJ0W2uy0eQlOHzjyxR6Mf/rpnilJlcQ==
 -----END CERTIFICATE-----`;
 const key = config.get("key") || `Public Key Info:
-	Public Key Algorithm: RSA
-	Key Security Level: High (3072 bits)
+\x09Public Key Algorithm: RSA
+\x09Key Security Level: High (3072 bits)
 
 modulus:
-	00:d5:1c:a9:f8:32:8a:48:d1:4a:66:c3:ed:c1:f4:7e
-	8f:33:a7:43:c6:05:89:e2:0a:62:06:a4:57:af:3c:77
-	c6:20:a6:89:5e:9d:b9:9e:10:fa:f3:4f:ce:ed:ba:71
-	43:ec:6f:5f:e8:02:c6:34:3f:2b:8f:b9:e9:8f:40:28
-	c3:18:4e:2f:f8:7f:bf:50:fd:bb:45:2c:21:a8:f9:8b
-	61:96:26:ba:8d:02:11:8b:6b:15:a2:10:1f:e1:cb:95
-	8e:8b:0c:43:ac:67:a2:81:0a:89:90:53:39:d8:4a:7b
-	1b:56:31:ec:f1:c9:98:a1:46:c0:df:45:84:8b:05:8b
-	57:0d:65:f5:51:a2:96:6e:09:ef:d1:30:f3:6e:b0:d5
-	59:68:88:be:a9:c1:1f:7e:c1:35:72:67:e6:b9:29:46
-	dc:0a:74:44:a3:88:c9:1d:1a:8c:31:33:a9:99:fd:ff
-	44:7b:57:05:82:17:de:ea:cb:c4:cd:62:4f:78:2b:fd
-	6d:ab:7c:f2:85:5c:d1:67:cd:f1:39:27:eb:4e:a1:1f
-	6f:7b:28:dc:05:36:8f:22:a0:61:dc:2b:fc:56:52:ef
-	65:42:1d:2f:08:b2:58:27:a8:95:b8:8b:32:17:66:a8
-	08:2a:61:da:45:9b:4c:37:88:d4:96:88:ba:97:fe:a5
-	92:db:7a:2e:c8:21:f7:11:02:79:cc:73:89:22:6d:3c
-	c6:a8:83:cf:1a:0b:c1:e7:32:a2:49:de:44:9c:18:22
-	f7:e8:66:06:f8:a6:b0:e4:f9:c3:95:65:c1:69:e8:83
-	7b:cc:ff:79:62:bd:f9:1a:f6:33:ea:e1:4c:dc:68:b0
-	05:46:7c:32:72:c4:05:f2:89:7e:3d:2d:0d:2f:ed:ff
-	6a:cf:07:3f:d0:98:83:6e:fb:14:bf:57:26:e8:e8:29
-	a0:43:0f:f5:25:ea:a8:17:70:1a:a7:8a:6c:3d:bf:da
-	39:4f:e3:cc:65:60:fe:a5:d5:2a:09:1b:71:a0:67:c7
-	5b:
+\x0900:d5:1c:a9:f8:32:8a:48:d1:4a:66:c3:ed:c1:f4:7e
+\x098f:33:a7:43:c6:05:89:e2:0a:62:06:a4:57:af:3c:77
+\x09c6:20:a6:89:5e:9d:b9:9e:10:fa:f3:4f:ce:ed:ba:71
+\x0943:ec:6f:5f:e8:02:c6:34:3f:2b:8f:b9:e9:8f:40:28
+\x09c3:18:4e:2f:f8:7f:bf:50:fd:bb:45:2c:21:a8:f9:8b
+\x0961:96:26:ba:8d:02:11:8b:6b:15:a2:10:1f:e1:cb:95
+\x098e:8b:0c:43:ac:67:a2:81:0a:89:90:53:39:d8:4a:7b
+\x091b:56:31:ec:f1:c9:98:a1:46:c0:df:45:84:8b:05:8b
+\x0957:0d:65:f5:51:a2:96:6e:09:ef:d1:30:f3:6e:b0:d5
+\x0959:68:88:be:a9:c1:1f:7e:c1:35:72:67:e6:b9:29:46
+\x09dc:0a:74:44:a3:88:c9:1d:1a:8c:31:33:a9:99:fd:ff
+\x0944:7b:57:05:82:17:de:ea:cb:c4:cd:62:4f:78:2b:fd
+\x096d:ab:7c:f2:85:5c:d1:67:cd:f1:39:27:eb:4e:a1:1f
+\x096f:7b:28:dc:05:36:8f:22:a0:61:dc:2b:fc:56:52:ef
+\x0965:42:1d:2f:08:b2:58:27:a8:95:b8:8b:32:17:66:a8
+\x0908:2a:61:da:45:9b:4c:37:88:d4:96:88:ba:97:fe:a5
+\x0992:db:7a:2e:c8:21:f7:11:02:79:cc:73:89:22:6d:3c
+\x09c6:a8:83:cf:1a:0b:c1:e7:32:a2:49:de:44:9c:18:22
+\x09f7:e8:66:06:f8:a6:b0:e4:f9:c3:95:65:c1:69:e8:83
+\x097b:cc:ff:79:62:bd:f9:1a:f6:33:ea:e1:4c:dc:68:b0
+\x0905:46:7c:32:72:c4:05:f2:89:7e:3d:2d:0d:2f:ed:ff
+\x096a:cf:07:3f:d0:98:83:6e:fb:14:bf:57:26:e8:e8:29
+\x09a0:43:0f:f5:25:ea:a8:17:70:1a:a7:8a:6c:3d:bf:da
+\x0939:4f:e3:cc:65:60:fe:a5:d5:2a:09:1b:71:a0:67:c7
+\x095b:
 
 public exponent:
-	01:00:01:
+\x0901:00:01:
 
 private exponent:
-	00:b1:56:d0:fa:00:d4:a2:13:c7:5e:0c:dc:e4:f1:97
-	ff:82:74:46:29:9a:a2:4a:bf:69:23:2d:ce:e9:bb:df
-	cf:b7:8b:dd:f4:26:3c:38:14:d9:3f:6f:c2:3a:81:53
-	8f:ba:48:53:fe:b5:90:4a:19:e7:1e:0b:0f:18:6d:c3
-	7d:d5:d3:fa:87:47:86:e4:d6:bf:e7:a7:f9:ba:ab:2e
-	19:5e:e1:8b:8b:9b:95:0d:f7:66:61:1e:19:e9:c3:88
-	08:be:1c:ce:93:c1:09:b1:68:1b:61:46:60:74:64:46
-	5d:51:34:ea:7f:a9:ca:a1:2a:47:85:84:4b:ef:84:05
-	97:c3:46:7d:06:19:ce:24:73:90:64:fb:df:16:d5:80
-	34:8e:90:7c:58:b6:a4:86:ce:30:b3:ab:52:8b:f2:95
-	4c:b6:46:5a:77:db:73:c0:0c:3f:6d:12:18:a8:54:7c
-	ff:77:c3:ca:89:9f:63:98:ef:48:2d:c1:09:70:6e:ea
-	cb:bb:78:91:42:8a:22:3e:21:ef:a5:bf:16:ee:66:45
-	e5:f0:26:6a:85:8e:e1:69:62:ac:05:00:a6:44:ba:c8
-	ac:10:00:97:f5:51:65:7f:9a:1f:7b:99:9d:02:d4:87
-	50:ce:74:06:51:67:fa:fb:90:e4:33:79:f2:a8:61:ee
-	45:1d:87:ca:22:5b:ac:e7:32:38:f8:2c:fd:55:92:1e
-	3d:60:1e:7c:4b:fd:28:ff:e5:b1:02:6a:aa:22:f7:ae
-	a8:36:90:7b:a6:f7:29:05:14:3a:21:da:36:05:f9:b0
-	9d:f7:fb:10:75:d7:2c:21:32:95:e7:f7:17:be:09:cb
-	66:fe:f1:69:71:df:a4:5e:3f:fc:67:6c:37:65:b8:51
-	c6:22:38:fb:07:ce:89:54:50:43:71:44:3d:c3:51:5a
-	bd:e5:c7:87:b2:ea:7b:64:0f:5d:34:9c:a1:52:b3:ce
-	06:86:ba:7a:05:80:48:b3:6c:1b:79:74:9b:49:f2:30
-	c1:
+\x0900:b1:56:d0:fa:00:d4:a2:13:c7:5e:0c:dc:e4:f1:97
+\x09ff:82:74:46:29:9a:a2:4a:bf:69:23:2d:ce:e9:bb:df
+\x09cf:b7:8b:dd:f4:26:3c:38:14:d9:3f:6f:c2:3a:81:53
+\x098f:ba:48:53:fe:b5:90:4a:19:e7:1e:0b:0f:18:6d:c3
+\x097d:d5:d3:fa:87:47:86:e4:d6:bf:e7:a7:f9:ba:ab:2e
+\x0919:5e:e1:8b:8b:9b:95:0d:f7:66:61:1e:19:e9:c3:88
+\x0908:be:1c:ce:93:c1:09:b1:68:1b:61:46:60:74:64:46
+\x095d:51:34:ea:7f:a9:ca:a1:2a:47:85:84:4b:ef:84:05
+\x0997:c3:46:7d:06:19:ce:24:73:90:64:fb:df:16:d5:80
+\x0934:8e:90:7c:58:b6:a4:86:ce:30:b3:ab:52:8b:f2:95
+\x094c:b6:46:5a:77:db:73:c0:0c:3f:6d:12:18:a8:54:7c
+\x09ff:77:c3:ca:89:9f:63:98:ef:48:2d:c1:09:70:6e:ea
+\x09cb:bb:78:91:42:8a:22:3e:21:ef:a5:bf:16:ee:66:45
+\x09e5:f0:26:6a:85:8e:e1:69:62:ac:05:00:a6:44:ba:c8
+\x09ac:10:00:97:f5:51:65:7f:9a:1f:7b:99:9d:02:d4:87
+\x0950:ce:74:06:51:67:fa:fb:90:e4:33:79:f2:a8:61:ee
+\x0945:1d:87:ca:22:5b:ac:e7:32:38:f8:2c:fd:55:92:1e
+\x093d:60:1e:7c:4b:fd:28:ff:e5:b1:02:6a:aa:22:f7:ae
+\x09a8:36:90:7b:a6:f7:29:05:14:3a:21:da:36:05:f9:b0
+\x099d:f7:fb:10:75:d7:2c:21:32:95:e7:f7:17:be:09:cb
+\x0966:fe:f1:69:71:df:a4:5e:3f:fc:67:6c:37:65:b8:51
+\x09c6:22:38:fb:07:ce:89:54:50:43:71:44:3d:c3:51:5a
+\x09bd:e5:c7:87:b2:ea:7b:64:0f:5d:34:9c:a1:52:b3:ce
+\x0906:86:ba:7a:05:80:48:b3:6c:1b:79:74:9b:49:f2:30
+\x09c1:
 
 prime1:
-	00:e4:31:46:59:3d:24:f7:31:d9:22:26:af:c0:3e:f5
-	c1:6d:be:ba:d3:9e:3f:b9:2c:43:a0:d0:47:09:e4:35
-	63:19:a4:33:82:af:f9:76:3c:11:c2:cb:34:f9:a6:ab
-	dd:ab:64:5a:6b:9c:c1:2a:52:89:64:7e:b5:a7:f0:4d
-	29:13:a4:cf:17:f4:f2:0d:a0:6e:b9:5d:95:41:10:df
-	ae:f3:7a:13:49:21:66:73:2a:b7:e2:8d:7c:c2:34:e5
-	3f:bd:78:ca:fc:64:c5:1c:3a:66:7a:12:53:96:bd:b0
-	c3:7a:0c:ec:5e:55:c0:c3:3f:7f:25:72:f4:e2:19:94
-	9d:65:15:be:c8:82:20:57:12:97:b2:a8:4d:3d:e0:8f
-	e2:1f:d0:c8:49:aa:f4:34:fa:91:d1:d1:cc:98:bc:3d
-	8b:b1:9b:8f:fd:ef:03:dd:92:fb:ca:99:45:af:cc:83
-	58:4c:bb:ba:73:9e:23:84:f9:7e:4f:40:fe:00:b5:bf
-	6f:
+\x0900:e4:31:46:59:3d:24:f7:31:d9:22:26:af:c0:3e:f5
+\x09c1:6d:be:ba:d3:9e:3f:b9:2c:43:a0:d0:47:09:e4:35
+\x0963:19:a4:33:82:af:f9:76:3c:11:c2:cb:34:f9:a6:ab
+\x09dd:ab:64:5a:6b:9c:c1:2a:52:89:64:7e:b5:a7:f0:4d
+\x0929:13:a4:cf:17:f4:f2:0d:a0:6e:b9:5d:95:41:10:df
+\x09ae:f3:7a:13:49:21:66:73:2a:b7:e2:8d:7c:c2:34:e5
+\x093f:bd:78:ca:fc:64:c5:1c:3a:66:7a:12:53:96:bd:b0
+\x09c3:7a:0c:ec:5e:55:c0:c3:3f:7f:25:72:f4:e2:19:94
+\x099d:65:15:be:c8:82:20:57:12:97:b2:a8:4d:3d:e0:8f
+\x09e2:1f:d0:c8:49:aa:f4:34:fa:91:d1:d1:cc:98:bc:3d
+\x098b:b1:9b:8f:fd:ef:03:dd:92:fb:ca:99:45:af:cc:83
+\x0958:4c:bb:ba:73:9e:23:84:f9:7e:4f:40:fe:00:b5:bf
+\x096f:
 
 prime2:
-	00:ef:14:ef:73:fc:0c:fc:e3:87:d9:7f:a6:f8:55:86
-	57:63:8a:86:87:f5:ef:63:20:1f:b2:ae:28:dc:ab:59
-	80:8f:15:64:44:e2:bc:a5:7b:d7:69:ef:30:b1:83:b3
-	bd:09:fd:4a:0c:c6:31:5b:a4:79:d0:e5:d3:a8:31:fd
-	59:ea:52:63:cf:17:a7:c1:54:bf:a8:11:9b:b1:85:47
-	5a:08:a6:9c:2f:47:9d:ac:5d:e8:7c:e4:31:6c:99:71
-	04:7d:20:98:be:8b:60:07:66:2d:b9:41:10:ea:dd:5b
-	87:20:65:62:ea:75:a7:a6:04:a2:18:66:6b:db:5b:a4
-	9f:12:97:cb:7c:8c:d2:e0:ce:02:ef:1e:df:a1:9d:6a
-	bc:00:38:18:36:a1:c5:97:16:be:7a:df:5f:4f:4f:de
-	a3:cb:25:fe:f6:67:0d:31:aa:0a:d4:1b:be:df:91:2c
-	05:14:20:37:cc:4f:50:33:a6:50:1b:90:f9:b2:08:80
-	d5:
+\x0900:ef:14:ef:73:fc:0c:fc:e3:87:d9:7f:a6:f8:55:86
+\x0957:63:8a:86:87:f5:ef:63:20:1f:b2:ae:28:dc:ab:59
+\x0980:8f:15:64:44:e2:bc:a5:7b:d7:69:ef:30:b1:83:b3
+\x09bd:09:fd:4a:0c:c6:31:5b:a4:79:d0:e5:d3:a8:31:fd
+\x0959:ea:52:63:cf:17:a7:c1:54:bf:a8:11:9b:b1:85:47
+\x095a:08:a6:9c:2f:47:9d:ac:5d:e8:7c:e4:31:6c:99:71
+\x0904:7d:20:98:be:8b:60:07:66:2d:b9:41:10:ea:dd:5b
+\x0987:20:65:62:ea:75:a7:a6:04:a2:18:66:6b:db:5b:a4
+\x099f:12:97:cb:7c:8c:d2:e0:ce:02:ef:1e:df:a1:9d:6a
+\x09bc:00:38:18:36:a1:c5:97:16:be:7a:df:5f:4f:4f:de
+\x09a3:cb:25:fe:f6:67:0d:31:aa:0a:d4:1b:be:df:91:2c
+\x0905:14:20:37:cc:4f:50:33:a6:50:1b:90:f9:b2:08:80
+\x09d5:
 
 coefficient:
-	47:d1:7f:ca:93:6a:14:9b:fe:85:8d:c2:15:11:52:a2
-	a5:bc:f5:6b:a2:69:76:49:1e:09:79:f1:15:bf:39:48
-	41:ff:92:78:af:bc:7d:6f:76:3b:32:9e:08:d2:42:06
-	04:5f:36:e0:be:a8:1d:21:5c:ec:39:09:e0:77:c5:86
-	06:e6:ce:98:16:fc:0f:30:de:a7:69:7a:8f:dd:01:42
-	2a:22:f5:b7:c2:fc:c8:90:5a:78:dc:b3:e0:4d:e7:2d
-	98:6c:e3:34:1b:d7:e8:f8:90:57:7e:4d:41:d6:4a:29
-	81:92:eb:89:5b:45:85:dd:b9:16:20:63:cb:59:f6:06
-	59:c1:dd:3b:6b:92:0a:5e:5e:63:4a:f1:a7:d5:16:b9
-	8b:6c:d8:ad:76:0e:2d:3c:e0:b3:73:e0:6d:af:d4:a2
-	bc:4b:fd:6c:2d:d7:5d:4d:cd:28:03:64:b2:ef:9a:1d
-	82:8d:53:40:c5:f8:fb:f3:63:de:8e:1a:21:b6:35:14
-	
+\x0947:d1:7f:ca:93:6a:14:9b:fe:85:8d:c2:15:11:52:a2
+\x09a5:bc:f5:6b:a2:69:76:49:1e:09:79:f1:15:bf:39:48
+\x0941:ff:92:78:af:bc:7d:6f:76:3b:32:9e:08:d2:42:06
+\x0904:5f:36:e0:be:a8:1d:21:5c:ec:39:09:e0:77:c5:86
+\x0906:e6:ce:98:16:fc:0f:30:de:a7:69:7a:8f:dd:01:42
+\x092a:22:f5:b7:c2:fc:c8:90:5a:78:dc:b3:e0:4d:e7:2d
+\x0998:6c:e3:34:1b:d7:e8:f8:90:57:7e:4d:41:d6:4a:29
+\x0981:92:eb:89:5b:45:85:dd:b9:16:20:63:cb:59:f6:06
+\x0959:c1:dd:3b:6b:92:0a:5e:5e:63:4a:f1:a7:d5:16:b9
+\x098b:6c:d8:ad:76:0e:2d:3c:e0:b3:73:e0:6d:af:d4:a2
+\x09bc:4b:fd:6c:2d:d7:5d:4d:cd:28:03:64:b2:ef:9a:1d
+\x0982:8d:53:40:c5:f8:fb:f3:63:de:8e:1a:21:b6:35:14
+\x09
 
 exp1:
-	00:9c:a5:8a:d2:65:dc:03:69:8f:d2:16:d6:9d:55:5b
-	25:4e:ae:18:d8:7e:90:e6:10:11:d8:ca:41:89:f3:c4
-	06:64:aa:c8:c5:95:01:dd:fd:7c:7f:c9:39:73:8b:cb
-	fd:9e:d3:84:12:cd:87:f9:02:b1:d8:6f:f7:49:f2:f7
-	35:14:8c:15:b2:2f:6f:1e:95:9c:8c:d9:46:45:65:4c
-	f8:6f:a1:c4:ad:76:25:3b:37:ff:05:a1:f5:1b:e8:6d
-	db:64:b9:10:37:55:01:ce:cf:f4:5b:26:4b:85:76:70
-	6a:b0:55:40:c9:bd:7a:57:4e:36:7d:41:be:03:9c:65
-	dd:ea:6f:94:09:56:f2:d6:73:27:f9:f7:f9:16:5a:1a
-	cb:b2:e5:83:28:b7:17:6f:6a:f7:41:1f:11:a1:63:cf
-	a8:1e:e3:58:64:8c:78:8d:d9:81:c9:e1:8f:ea:0f:ad
-	b6:a6:ee:54:1f:5c:56:ab:c9:0d:c1:60:2f:3d:d3:86
-	37:
+\x0900:9c:a5:8a:d2:65:dc:03:69:8f:d2:16:d6:9d:55:5b
+\x0925:4e:ae:18:d8:7e:90:e6:10:11:d8:ca:41:89:f3:c4
+\x0906:64:aa:c8:c5:95:01:dd:fd:7c:7f:c9:39:73:8b:cb
+\x09fd:9e:d3:84:12:cd:87:f9:02:b1:d8:6f:f7:49:f2:f7
+\x0935:14:8c:15:b2:2f:6f:1e:95:9c:8c:d9:46:45:65:4c
+\x09f8:6f:a1:c4:ad:76:25:3b:37:ff:05:a1:f5:1b:e8:6d
+\x09db:64:b9:10:37:55:01:ce:cf:f4:5b:26:4b:85:76:70
+\x096a:b0:55:40:c9:bd:7a:57:4e:36:7d:41:be:03:9c:65
+\x09dd:ea:6f:94:09:56:f2:d6:73:27:f9:f7:f9:16:5a:1a
+\x09cb:b2:e5:83:28:b7:17:6f:6a:f7:41:1f:11:a1:63:cf
+\x09a8:1e:e3:58:64:8c:78:8d:d9:81:c9:e1:8f:ea:0f:ad
+\x09b6:a6:ee:54:1f:5c:56:ab:c9:0d:c1:60:2f:3d:d3:86
+\x0937:
 
 exp2:
-	64:12:b7:48:2d:30:a2:89:fa:cb:27:8b:94:56:f8:2c
-	8c:15:e7:c9:f1:3f:8a:96:5f:ae:43:08:07:96:11:98
-	a6:4b:a5:f4:cf:93:77:11:27:51:c8:34:f1:98:d7:1b
-	41:9b:2b:eb:bc:e9:dc:1a:34:83:24:30:3c:2e:f0:85
-	3a:77:d2:1f:55:1f:7a:e5:26:74:0b:2a:c8:5b:a9:4a
-	1e:64:de:eb:4b:66:cc:47:62:91:24:53:2b:c9:ee:6c
-	9a:93:92:5b:ef:aa:fa:6d:e2:a5:b0:7e:8c:50:ab:87
-	1c:20:54:0f:1f:c0:54:d5:8b:a3:fa:fb:1a:8e:79:91
-	bc:0e:9d:b6:3c:9b:e8:4d:53:1d:14:27:37:56:d4:de
-	6c:99:0e:49:8f:dd:4d:28:d0:02:4e:8d:6e:7d:58:0b
-	e7:74:b8:0c:1b:86:82:4b:52:cd:05:f0:17:54:84:c0
-	7b:74:20:e6:fc:2b:ed:f2:a7:85:62:61:a2:0b:bd:21
-	
+\x0964:12:b7:48:2d:30:a2:89:fa:cb:27:8b:94:56:f8:2c
+\x098c:15:e7:c9:f1:3f:8a:96:5f:ae:43:08:07:96:11:98
+\x09a6:4b:a5:f4:cf:93:77:11:27:51:c8:34:f1:98:d7:1b
+\x0941:9b:2b:eb:bc:e9:dc:1a:34:83:24:30:3c:2e:f0:85
+\x093a:77:d2:1f:55:1f:7a:e5:26:74:0b:2a:c8:5b:a9:4a
+\x091e:64:de:eb:4b:66:cc:47:62:91:24:53:2b:c9:ee:6c
+\x099a:93:92:5b:ef:aa:fa:6d:e2:a5:b0:7e:8c:50:ab:87
+\x091c:20:54:0f:1f:c0:54:d5:8b:a3:fa:fb:1a:8e:79:91
+\x09bc:0e:9d:b6:3c:9b:e8:4d:53:1d:14:27:37:56:d4:de
+\x096c:99:0e:49:8f:dd:4d:28:d0:02:4e:8d:6e:7d:58:0b
+\x09e7:74:b8:0c:1b:86:82:4b:52:cd:05:f0:17:54:84:c0
+\x097b:74:20:e6:fc:2b:ed:f2:a7:85:62:61:a2:0b:bd:21
+\x09
 
 
 Public Key PIN:
-	pin-sha256:t5OXXC5gYqMNtUMsTqRs3A3vhfK2BiXVOgYzIEYv7Y8=
+\x09pin-sha256:t5OXXC5gYqMNtUMsTqRs3A3vhfK2BiXVOgYzIEYv7Y8=
 Public Key ID:
-	sha256:b793975c2e6062a30db5432c4ea46cdc0def85f2b60625d53a063320462fed8f
-	sha1:2f058a05034b2fdb3771bded4e7c8f560fa6a423
+\x09sha256:b793975c2e6062a30db5432c4ea46cdc0def85f2b60625d53a063320462fed8f
+\x09sha1:2f058a05034b2fdb3771bded4e7c8f560fa6a423
 
 -----BEGIN RSA PRIVATE KEY-----
 MIIG5AIBAAKCAYEA1Ryp+DKKSNFKZsPtwfR+jzOnQ8YFieIKYgakV688d8Ygpole
@@ -513,15 +586,21 @@ XOw5CeB3xYYG5s6YFvwPMN6naXqP3QFCKiL1t8L8yJBaeNyz4E3nLZhs4zQb1+j4
 kFd+TUHWSimBkuuJW0WF3bkWIGPLWfYGWcHdO2uSCl5eY0rxp9UWuYts2K12Di08
 4LNz4G2v1KK8S/1sLdddTc0oA2Sy75odgo1TQMX4+/Nj3o4aIbY1FA==
 -----END RSA PRIVATE KEY-----`;
-const svrCertificate = new tencentcloud.ssl.Certificate("svrCertificate", {
+const svrCertificate = new tencentcloud.ssl.Certificate("svr", {
+    name: "ssl-svr",
     type: "SVR",
     cert: cert,
     key: key,
 });
-const svrCertificates = tencentcloud.Ssl.getCertificatesOutput({
+const svr = tencentcloud.ssl.getCertificatesOutput({
     name: svrCertificate.name,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
@@ -558,147 +637,147 @@ L+doVeZtS/gJc4G4Adr5HYuaS9ZxJ0W2uy0eQlOHzjyxR6Mf/rpnilJlcQ==
 key = config.get("key")
 if key is None:
     key = """Public Key Info:
-	Public Key Algorithm: RSA
-	Key Security Level: High (3072 bits)
+\x09Public Key Algorithm: RSA
+\x09Key Security Level: High (3072 bits)
 
 modulus:
-	00:d5:1c:a9:f8:32:8a:48:d1:4a:66:c3:ed:c1:f4:7e
-	8f:33:a7:43:c6:05:89:e2:0a:62:06:a4:57:af:3c:77
-	c6:20:a6:89:5e:9d:b9:9e:10:fa:f3:4f:ce:ed:ba:71
-	43:ec:6f:5f:e8:02:c6:34:3f:2b:8f:b9:e9:8f:40:28
-	c3:18:4e:2f:f8:7f:bf:50:fd:bb:45:2c:21:a8:f9:8b
-	61:96:26:ba:8d:02:11:8b:6b:15:a2:10:1f:e1:cb:95
-	8e:8b:0c:43:ac:67:a2:81:0a:89:90:53:39:d8:4a:7b
-	1b:56:31:ec:f1:c9:98:a1:46:c0:df:45:84:8b:05:8b
-	57:0d:65:f5:51:a2:96:6e:09:ef:d1:30:f3:6e:b0:d5
-	59:68:88:be:a9:c1:1f:7e:c1:35:72:67:e6:b9:29:46
-	dc:0a:74:44:a3:88:c9:1d:1a:8c:31:33:a9:99:fd:ff
-	44:7b:57:05:82:17:de:ea:cb:c4:cd:62:4f:78:2b:fd
-	6d:ab:7c:f2:85:5c:d1:67:cd:f1:39:27:eb:4e:a1:1f
-	6f:7b:28:dc:05:36:8f:22:a0:61:dc:2b:fc:56:52:ef
-	65:42:1d:2f:08:b2:58:27:a8:95:b8:8b:32:17:66:a8
-	08:2a:61:da:45:9b:4c:37:88:d4:96:88:ba:97:fe:a5
-	92:db:7a:2e:c8:21:f7:11:02:79:cc:73:89:22:6d:3c
-	c6:a8:83:cf:1a:0b:c1:e7:32:a2:49:de:44:9c:18:22
-	f7:e8:66:06:f8:a6:b0:e4:f9:c3:95:65:c1:69:e8:83
-	7b:cc:ff:79:62:bd:f9:1a:f6:33:ea:e1:4c:dc:68:b0
-	05:46:7c:32:72:c4:05:f2:89:7e:3d:2d:0d:2f:ed:ff
-	6a:cf:07:3f:d0:98:83:6e:fb:14:bf:57:26:e8:e8:29
-	a0:43:0f:f5:25:ea:a8:17:70:1a:a7:8a:6c:3d:bf:da
-	39:4f:e3:cc:65:60:fe:a5:d5:2a:09:1b:71:a0:67:c7
-	5b:
+\x0900:d5:1c:a9:f8:32:8a:48:d1:4a:66:c3:ed:c1:f4:7e
+\x098f:33:a7:43:c6:05:89:e2:0a:62:06:a4:57:af:3c:77
+\x09c6:20:a6:89:5e:9d:b9:9e:10:fa:f3:4f:ce:ed:ba:71
+\x0943:ec:6f:5f:e8:02:c6:34:3f:2b:8f:b9:e9:8f:40:28
+\x09c3:18:4e:2f:f8:7f:bf:50:fd:bb:45:2c:21:a8:f9:8b
+\x0961:96:26:ba:8d:02:11:8b:6b:15:a2:10:1f:e1:cb:95
+\x098e:8b:0c:43:ac:67:a2:81:0a:89:90:53:39:d8:4a:7b
+\x091b:56:31:ec:f1:c9:98:a1:46:c0:df:45:84:8b:05:8b
+\x0957:0d:65:f5:51:a2:96:6e:09:ef:d1:30:f3:6e:b0:d5
+\x0959:68:88:be:a9:c1:1f:7e:c1:35:72:67:e6:b9:29:46
+\x09dc:0a:74:44:a3:88:c9:1d:1a:8c:31:33:a9:99:fd:ff
+\x0944:7b:57:05:82:17:de:ea:cb:c4:cd:62:4f:78:2b:fd
+\x096d:ab:7c:f2:85:5c:d1:67:cd:f1:39:27:eb:4e:a1:1f
+\x096f:7b:28:dc:05:36:8f:22:a0:61:dc:2b:fc:56:52:ef
+\x0965:42:1d:2f:08:b2:58:27:a8:95:b8:8b:32:17:66:a8
+\x0908:2a:61:da:45:9b:4c:37:88:d4:96:88:ba:97:fe:a5
+\x0992:db:7a:2e:c8:21:f7:11:02:79:cc:73:89:22:6d:3c
+\x09c6:a8:83:cf:1a:0b:c1:e7:32:a2:49:de:44:9c:18:22
+\x09f7:e8:66:06:f8:a6:b0:e4:f9:c3:95:65:c1:69:e8:83
+\x097b:cc:ff:79:62:bd:f9:1a:f6:33:ea:e1:4c:dc:68:b0
+\x0905:46:7c:32:72:c4:05:f2:89:7e:3d:2d:0d:2f:ed:ff
+\x096a:cf:07:3f:d0:98:83:6e:fb:14:bf:57:26:e8:e8:29
+\x09a0:43:0f:f5:25:ea:a8:17:70:1a:a7:8a:6c:3d:bf:da
+\x0939:4f:e3:cc:65:60:fe:a5:d5:2a:09:1b:71:a0:67:c7
+\x095b:
 
 public exponent:
-	01:00:01:
+\x0901:00:01:
 
 private exponent:
-	00:b1:56:d0:fa:00:d4:a2:13:c7:5e:0c:dc:e4:f1:97
-	ff:82:74:46:29:9a:a2:4a:bf:69:23:2d:ce:e9:bb:df
-	cf:b7:8b:dd:f4:26:3c:38:14:d9:3f:6f:c2:3a:81:53
-	8f:ba:48:53:fe:b5:90:4a:19:e7:1e:0b:0f:18:6d:c3
-	7d:d5:d3:fa:87:47:86:e4:d6:bf:e7:a7:f9:ba:ab:2e
-	19:5e:e1:8b:8b:9b:95:0d:f7:66:61:1e:19:e9:c3:88
-	08:be:1c:ce:93:c1:09:b1:68:1b:61:46:60:74:64:46
-	5d:51:34:ea:7f:a9:ca:a1:2a:47:85:84:4b:ef:84:05
-	97:c3:46:7d:06:19:ce:24:73:90:64:fb:df:16:d5:80
-	34:8e:90:7c:58:b6:a4:86:ce:30:b3:ab:52:8b:f2:95
-	4c:b6:46:5a:77:db:73:c0:0c:3f:6d:12:18:a8:54:7c
-	ff:77:c3:ca:89:9f:63:98:ef:48:2d:c1:09:70:6e:ea
-	cb:bb:78:91:42:8a:22:3e:21:ef:a5:bf:16:ee:66:45
-	e5:f0:26:6a:85:8e:e1:69:62:ac:05:00:a6:44:ba:c8
-	ac:10:00:97:f5:51:65:7f:9a:1f:7b:99:9d:02:d4:87
-	50:ce:74:06:51:67:fa:fb:90:e4:33:79:f2:a8:61:ee
-	45:1d:87:ca:22:5b:ac:e7:32:38:f8:2c:fd:55:92:1e
-	3d:60:1e:7c:4b:fd:28:ff:e5:b1:02:6a:aa:22:f7:ae
-	a8:36:90:7b:a6:f7:29:05:14:3a:21:da:36:05:f9:b0
-	9d:f7:fb:10:75:d7:2c:21:32:95:e7:f7:17:be:09:cb
-	66:fe:f1:69:71:df:a4:5e:3f:fc:67:6c:37:65:b8:51
-	c6:22:38:fb:07:ce:89:54:50:43:71:44:3d:c3:51:5a
-	bd:e5:c7:87:b2:ea:7b:64:0f:5d:34:9c:a1:52:b3:ce
-	06:86:ba:7a:05:80:48:b3:6c:1b:79:74:9b:49:f2:30
-	c1:
+\x0900:b1:56:d0:fa:00:d4:a2:13:c7:5e:0c:dc:e4:f1:97
+\x09ff:82:74:46:29:9a:a2:4a:bf:69:23:2d:ce:e9:bb:df
+\x09cf:b7:8b:dd:f4:26:3c:38:14:d9:3f:6f:c2:3a:81:53
+\x098f:ba:48:53:fe:b5:90:4a:19:e7:1e:0b:0f:18:6d:c3
+\x097d:d5:d3:fa:87:47:86:e4:d6:bf:e7:a7:f9:ba:ab:2e
+\x0919:5e:e1:8b:8b:9b:95:0d:f7:66:61:1e:19:e9:c3:88
+\x0908:be:1c:ce:93:c1:09:b1:68:1b:61:46:60:74:64:46
+\x095d:51:34:ea:7f:a9:ca:a1:2a:47:85:84:4b:ef:84:05
+\x0997:c3:46:7d:06:19:ce:24:73:90:64:fb:df:16:d5:80
+\x0934:8e:90:7c:58:b6:a4:86:ce:30:b3:ab:52:8b:f2:95
+\x094c:b6:46:5a:77:db:73:c0:0c:3f:6d:12:18:a8:54:7c
+\x09ff:77:c3:ca:89:9f:63:98:ef:48:2d:c1:09:70:6e:ea
+\x09cb:bb:78:91:42:8a:22:3e:21:ef:a5:bf:16:ee:66:45
+\x09e5:f0:26:6a:85:8e:e1:69:62:ac:05:00:a6:44:ba:c8
+\x09ac:10:00:97:f5:51:65:7f:9a:1f:7b:99:9d:02:d4:87
+\x0950:ce:74:06:51:67:fa:fb:90:e4:33:79:f2:a8:61:ee
+\x0945:1d:87:ca:22:5b:ac:e7:32:38:f8:2c:fd:55:92:1e
+\x093d:60:1e:7c:4b:fd:28:ff:e5:b1:02:6a:aa:22:f7:ae
+\x09a8:36:90:7b:a6:f7:29:05:14:3a:21:da:36:05:f9:b0
+\x099d:f7:fb:10:75:d7:2c:21:32:95:e7:f7:17:be:09:cb
+\x0966:fe:f1:69:71:df:a4:5e:3f:fc:67:6c:37:65:b8:51
+\x09c6:22:38:fb:07:ce:89:54:50:43:71:44:3d:c3:51:5a
+\x09bd:e5:c7:87:b2:ea:7b:64:0f:5d:34:9c:a1:52:b3:ce
+\x0906:86:ba:7a:05:80:48:b3:6c:1b:79:74:9b:49:f2:30
+\x09c1:
 
 prime1:
-	00:e4:31:46:59:3d:24:f7:31:d9:22:26:af:c0:3e:f5
-	c1:6d:be:ba:d3:9e:3f:b9:2c:43:a0:d0:47:09:e4:35
-	63:19:a4:33:82:af:f9:76:3c:11:c2:cb:34:f9:a6:ab
-	dd:ab:64:5a:6b:9c:c1:2a:52:89:64:7e:b5:a7:f0:4d
-	29:13:a4:cf:17:f4:f2:0d:a0:6e:b9:5d:95:41:10:df
-	ae:f3:7a:13:49:21:66:73:2a:b7:e2:8d:7c:c2:34:e5
-	3f:bd:78:ca:fc:64:c5:1c:3a:66:7a:12:53:96:bd:b0
-	c3:7a:0c:ec:5e:55:c0:c3:3f:7f:25:72:f4:e2:19:94
-	9d:65:15:be:c8:82:20:57:12:97:b2:a8:4d:3d:e0:8f
-	e2:1f:d0:c8:49:aa:f4:34:fa:91:d1:d1:cc:98:bc:3d
-	8b:b1:9b:8f:fd:ef:03:dd:92:fb:ca:99:45:af:cc:83
-	58:4c:bb:ba:73:9e:23:84:f9:7e:4f:40:fe:00:b5:bf
-	6f:
+\x0900:e4:31:46:59:3d:24:f7:31:d9:22:26:af:c0:3e:f5
+\x09c1:6d:be:ba:d3:9e:3f:b9:2c:43:a0:d0:47:09:e4:35
+\x0963:19:a4:33:82:af:f9:76:3c:11:c2:cb:34:f9:a6:ab
+\x09dd:ab:64:5a:6b:9c:c1:2a:52:89:64:7e:b5:a7:f0:4d
+\x0929:13:a4:cf:17:f4:f2:0d:a0:6e:b9:5d:95:41:10:df
+\x09ae:f3:7a:13:49:21:66:73:2a:b7:e2:8d:7c:c2:34:e5
+\x093f:bd:78:ca:fc:64:c5:1c:3a:66:7a:12:53:96:bd:b0
+\x09c3:7a:0c:ec:5e:55:c0:c3:3f:7f:25:72:f4:e2:19:94
+\x099d:65:15:be:c8:82:20:57:12:97:b2:a8:4d:3d:e0:8f
+\x09e2:1f:d0:c8:49:aa:f4:34:fa:91:d1:d1:cc:98:bc:3d
+\x098b:b1:9b:8f:fd:ef:03:dd:92:fb:ca:99:45:af:cc:83
+\x0958:4c:bb:ba:73:9e:23:84:f9:7e:4f:40:fe:00:b5:bf
+\x096f:
 
 prime2:
-	00:ef:14:ef:73:fc:0c:fc:e3:87:d9:7f:a6:f8:55:86
-	57:63:8a:86:87:f5:ef:63:20:1f:b2:ae:28:dc:ab:59
-	80:8f:15:64:44:e2:bc:a5:7b:d7:69:ef:30:b1:83:b3
-	bd:09:fd:4a:0c:c6:31:5b:a4:79:d0:e5:d3:a8:31:fd
-	59:ea:52:63:cf:17:a7:c1:54:bf:a8:11:9b:b1:85:47
-	5a:08:a6:9c:2f:47:9d:ac:5d:e8:7c:e4:31:6c:99:71
-	04:7d:20:98:be:8b:60:07:66:2d:b9:41:10:ea:dd:5b
-	87:20:65:62:ea:75:a7:a6:04:a2:18:66:6b:db:5b:a4
-	9f:12:97:cb:7c:8c:d2:e0:ce:02:ef:1e:df:a1:9d:6a
-	bc:00:38:18:36:a1:c5:97:16:be:7a:df:5f:4f:4f:de
-	a3:cb:25:fe:f6:67:0d:31:aa:0a:d4:1b:be:df:91:2c
-	05:14:20:37:cc:4f:50:33:a6:50:1b:90:f9:b2:08:80
-	d5:
+\x0900:ef:14:ef:73:fc:0c:fc:e3:87:d9:7f:a6:f8:55:86
+\x0957:63:8a:86:87:f5:ef:63:20:1f:b2:ae:28:dc:ab:59
+\x0980:8f:15:64:44:e2:bc:a5:7b:d7:69:ef:30:b1:83:b3
+\x09bd:09:fd:4a:0c:c6:31:5b:a4:79:d0:e5:d3:a8:31:fd
+\x0959:ea:52:63:cf:17:a7:c1:54:bf:a8:11:9b:b1:85:47
+\x095a:08:a6:9c:2f:47:9d:ac:5d:e8:7c:e4:31:6c:99:71
+\x0904:7d:20:98:be:8b:60:07:66:2d:b9:41:10:ea:dd:5b
+\x0987:20:65:62:ea:75:a7:a6:04:a2:18:66:6b:db:5b:a4
+\x099f:12:97:cb:7c:8c:d2:e0:ce:02:ef:1e:df:a1:9d:6a
+\x09bc:00:38:18:36:a1:c5:97:16:be:7a:df:5f:4f:4f:de
+\x09a3:cb:25:fe:f6:67:0d:31:aa:0a:d4:1b:be:df:91:2c
+\x0905:14:20:37:cc:4f:50:33:a6:50:1b:90:f9:b2:08:80
+\x09d5:
 
 coefficient:
-	47:d1:7f:ca:93:6a:14:9b:fe:85:8d:c2:15:11:52:a2
-	a5:bc:f5:6b:a2:69:76:49:1e:09:79:f1:15:bf:39:48
-	41:ff:92:78:af:bc:7d:6f:76:3b:32:9e:08:d2:42:06
-	04:5f:36:e0:be:a8:1d:21:5c:ec:39:09:e0:77:c5:86
-	06:e6:ce:98:16:fc:0f:30:de:a7:69:7a:8f:dd:01:42
-	2a:22:f5:b7:c2:fc:c8:90:5a:78:dc:b3:e0:4d:e7:2d
-	98:6c:e3:34:1b:d7:e8:f8:90:57:7e:4d:41:d6:4a:29
-	81:92:eb:89:5b:45:85:dd:b9:16:20:63:cb:59:f6:06
-	59:c1:dd:3b:6b:92:0a:5e:5e:63:4a:f1:a7:d5:16:b9
-	8b:6c:d8:ad:76:0e:2d:3c:e0:b3:73:e0:6d:af:d4:a2
-	bc:4b:fd:6c:2d:d7:5d:4d:cd:28:03:64:b2:ef:9a:1d
-	82:8d:53:40:c5:f8:fb:f3:63:de:8e:1a:21:b6:35:14
-	
+\x0947:d1:7f:ca:93:6a:14:9b:fe:85:8d:c2:15:11:52:a2
+\x09a5:bc:f5:6b:a2:69:76:49:1e:09:79:f1:15:bf:39:48
+\x0941:ff:92:78:af:bc:7d:6f:76:3b:32:9e:08:d2:42:06
+\x0904:5f:36:e0:be:a8:1d:21:5c:ec:39:09:e0:77:c5:86
+\x0906:e6:ce:98:16:fc:0f:30:de:a7:69:7a:8f:dd:01:42
+\x092a:22:f5:b7:c2:fc:c8:90:5a:78:dc:b3:e0:4d:e7:2d
+\x0998:6c:e3:34:1b:d7:e8:f8:90:57:7e:4d:41:d6:4a:29
+\x0981:92:eb:89:5b:45:85:dd:b9:16:20:63:cb:59:f6:06
+\x0959:c1:dd:3b:6b:92:0a:5e:5e:63:4a:f1:a7:d5:16:b9
+\x098b:6c:d8:ad:76:0e:2d:3c:e0:b3:73:e0:6d:af:d4:a2
+\x09bc:4b:fd:6c:2d:d7:5d:4d:cd:28:03:64:b2:ef:9a:1d
+\x0982:8d:53:40:c5:f8:fb:f3:63:de:8e:1a:21:b6:35:14
+\x09
 
 exp1:
-	00:9c:a5:8a:d2:65:dc:03:69:8f:d2:16:d6:9d:55:5b
-	25:4e:ae:18:d8:7e:90:e6:10:11:d8:ca:41:89:f3:c4
-	06:64:aa:c8:c5:95:01:dd:fd:7c:7f:c9:39:73:8b:cb
-	fd:9e:d3:84:12:cd:87:f9:02:b1:d8:6f:f7:49:f2:f7
-	35:14:8c:15:b2:2f:6f:1e:95:9c:8c:d9:46:45:65:4c
-	f8:6f:a1:c4:ad:76:25:3b:37:ff:05:a1:f5:1b:e8:6d
-	db:64:b9:10:37:55:01:ce:cf:f4:5b:26:4b:85:76:70
-	6a:b0:55:40:c9:bd:7a:57:4e:36:7d:41:be:03:9c:65
-	dd:ea:6f:94:09:56:f2:d6:73:27:f9:f7:f9:16:5a:1a
-	cb:b2:e5:83:28:b7:17:6f:6a:f7:41:1f:11:a1:63:cf
-	a8:1e:e3:58:64:8c:78:8d:d9:81:c9:e1:8f:ea:0f:ad
-	b6:a6:ee:54:1f:5c:56:ab:c9:0d:c1:60:2f:3d:d3:86
-	37:
+\x0900:9c:a5:8a:d2:65:dc:03:69:8f:d2:16:d6:9d:55:5b
+\x0925:4e:ae:18:d8:7e:90:e6:10:11:d8:ca:41:89:f3:c4
+\x0906:64:aa:c8:c5:95:01:dd:fd:7c:7f:c9:39:73:8b:cb
+\x09fd:9e:d3:84:12:cd:87:f9:02:b1:d8:6f:f7:49:f2:f7
+\x0935:14:8c:15:b2:2f:6f:1e:95:9c:8c:d9:46:45:65:4c
+\x09f8:6f:a1:c4:ad:76:25:3b:37:ff:05:a1:f5:1b:e8:6d
+\x09db:64:b9:10:37:55:01:ce:cf:f4:5b:26:4b:85:76:70
+\x096a:b0:55:40:c9:bd:7a:57:4e:36:7d:41:be:03:9c:65
+\x09dd:ea:6f:94:09:56:f2:d6:73:27:f9:f7:f9:16:5a:1a
+\x09cb:b2:e5:83:28:b7:17:6f:6a:f7:41:1f:11:a1:63:cf
+\x09a8:1e:e3:58:64:8c:78:8d:d9:81:c9:e1:8f:ea:0f:ad
+\x09b6:a6:ee:54:1f:5c:56:ab:c9:0d:c1:60:2f:3d:d3:86
+\x0937:
 
 exp2:
-	64:12:b7:48:2d:30:a2:89:fa:cb:27:8b:94:56:f8:2c
-	8c:15:e7:c9:f1:3f:8a:96:5f:ae:43:08:07:96:11:98
-	a6:4b:a5:f4:cf:93:77:11:27:51:c8:34:f1:98:d7:1b
-	41:9b:2b:eb:bc:e9:dc:1a:34:83:24:30:3c:2e:f0:85
-	3a:77:d2:1f:55:1f:7a:e5:26:74:0b:2a:c8:5b:a9:4a
-	1e:64:de:eb:4b:66:cc:47:62:91:24:53:2b:c9:ee:6c
-	9a:93:92:5b:ef:aa:fa:6d:e2:a5:b0:7e:8c:50:ab:87
-	1c:20:54:0f:1f:c0:54:d5:8b:a3:fa:fb:1a:8e:79:91
-	bc:0e:9d:b6:3c:9b:e8:4d:53:1d:14:27:37:56:d4:de
-	6c:99:0e:49:8f:dd:4d:28:d0:02:4e:8d:6e:7d:58:0b
-	e7:74:b8:0c:1b:86:82:4b:52:cd:05:f0:17:54:84:c0
-	7b:74:20:e6:fc:2b:ed:f2:a7:85:62:61:a2:0b:bd:21
-	
+\x0964:12:b7:48:2d:30:a2:89:fa:cb:27:8b:94:56:f8:2c
+\x098c:15:e7:c9:f1:3f:8a:96:5f:ae:43:08:07:96:11:98
+\x09a6:4b:a5:f4:cf:93:77:11:27:51:c8:34:f1:98:d7:1b
+\x0941:9b:2b:eb:bc:e9:dc:1a:34:83:24:30:3c:2e:f0:85
+\x093a:77:d2:1f:55:1f:7a:e5:26:74:0b:2a:c8:5b:a9:4a
+\x091e:64:de:eb:4b:66:cc:47:62:91:24:53:2b:c9:ee:6c
+\x099a:93:92:5b:ef:aa:fa:6d:e2:a5:b0:7e:8c:50:ab:87
+\x091c:20:54:0f:1f:c0:54:d5:8b:a3:fa:fb:1a:8e:79:91
+\x09bc:0e:9d:b6:3c:9b:e8:4d:53:1d:14:27:37:56:d4:de
+\x096c:99:0e:49:8f:dd:4d:28:d0:02:4e:8d:6e:7d:58:0b
+\x09e7:74:b8:0c:1b:86:82:4b:52:cd:05:f0:17:54:84:c0
+\x097b:74:20:e6:fc:2b:ed:f2:a7:85:62:61:a2:0b:bd:21
+\x09
 
 
 Public Key PIN:
-	pin-sha256:t5OXXC5gYqMNtUMsTqRs3A3vhfK2BiXVOgYzIEYv7Y8=
+\x09pin-sha256:t5OXXC5gYqMNtUMsTqRs3A3vhfK2BiXVOgYzIEYv7Y8=
 Public Key ID:
-	sha256:b793975c2e6062a30db5432c4ea46cdc0def85f2b60625d53a063320462fed8f
-	sha1:2f058a05034b2fdb3771bded4e7c8f560fa6a423
+\x09sha256:b793975c2e6062a30db5432c4ea46cdc0def85f2b60625d53a063320462fed8f
+\x09sha1:2f058a05034b2fdb3771bded4e7c8f560fa6a423
 
 -----BEGIN RSA PRIVATE KEY-----
 MIIG5AIBAAKCAYEA1Ryp+DKKSNFKZsPtwfR+jzOnQ8YFieIKYgakV688d8Ygpole
@@ -739,250 +818,25 @@ XOw5CeB3xYYG5s6YFvwPMN6naXqP3QFCKiL1t8L8yJBaeNyz4E3nLZhs4zQb1+j4
 kFd+TUHWSimBkuuJW0WF3bkWIGPLWfYGWcHdO2uSCl5eY0rxp9UWuYts2K12Di08
 4LNz4G2v1KK8S/1sLdddTc0oA2Sy75odgo1TQMX4+/Nj3o4aIbY1FA==
 -----END RSA PRIVATE KEY-----"""
-svr_certificate = tencentcloud.ssl.Certificate("svrCertificate",
+svr_certificate = tencentcloud.ssl.Certificate("svr",
+    name="ssl-svr",
     type="SVR",
     cert=cert,
     key=key)
-svr_certificates = tencentcloud.Ssl.get_certificates_output(name=svr_certificate.name)
+svr = tencentcloud.ssl.get_certificates_output(name=svr_certificate.name)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var config = new Config();
-    var cert = config.Get("cert") ?? @"-----BEGIN CERTIFICATE-----
-MIIERzCCAq+gAwIBAgIBAjANBgkqhkiG9w0BAQsFADAoMQ0wCwYDVQQDEwR0ZXN0
-MRcwFQYDVQQKEw50ZXJyYWZvcm0gdGVzdDAeFw0xOTA4MTMwMzE5MzlaFw0yOTA4
-MTAwMzE5MzlaMC4xEzARBgNVBAMTCnNlcnZlciBzc2wxFzAVBgNVBAoTDnRlcnJh
-Zm9ybS10ZXN0MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEA1Ryp+DKK
-SNFKZsPtwfR+jzOnQ8YFieIKYgakV688d8YgpolenbmeEPrzT87tunFD7G9f6ALG
-ND8rj7npj0AowxhOL/h/v1D9u0UsIaj5i2GWJrqNAhGLaxWiEB/hy5WOiwxDrGei
-gQqJkFM52Ep7G1Yx7PHJmKFGwN9FhIsFi1cNZfVRopZuCe/RMPNusNVZaIi+qcEf
-fsE1cmfmuSlG3Ap0RKOIyR0ajDEzqZn9/0R7VwWCF97qy8TNYk94K/1tq3zyhVzR
-Z83xOSfrTqEfb3so3AU2jyKgYdwr/FZS72VCHS8IslgnqJW4izIXZqgIKmHaRZtM
-N4jUloi6l/6lktt6Lsgh9xECecxziSJtPMaog88aC8HnMqJJ3kScGCL36GYG+Kaw
-5PnDlWXBaeiDe8z/eWK9+Rr2M+rhTNxosAVGfDJyxAXyiX49LQ0v7f9qzwc/0JiD
-bvsUv1cm6OgpoEMP9SXqqBdwGqeKbD2/2jlP48xlYP6l1SoJG3GgZ8dbAgMBAAGj
-djB0MAwGA1UdEwEB/wQCMAAwEwYDVR0lBAwwCgYIKwYBBQUHAwEwDwYDVR0PAQH/
-BAUDAweAADAdBgNVHQ4EFgQULwWKBQNLL9s3cb3tTnyPVg+mpCMwHwYDVR0jBBgw
-FoAUKwfrmq791mY831S6UHARHtgYnlgwDQYJKoZIhvcNAQELBQADggGBAMo5RglS
-AHdPgaicWJvmvjjexjF/42b7Rz4pPfMjYw6uYO8He/f4UZWv5CZLrbEe7MywaK3y
-0OsfH8AhyN29pv2x8g9wbmq7omZIOZ0oCAGduEXs/A/qY/hFaCohdkz/IN8qi6JW
-VXreGli3SrpcHFchSwHTyJEXgkutcGAsOvdsOuVSmplOyrkLHc8uUe8SG4j8kGyg
-EzaszFjHkR7g1dVyDVUedc588mjkQxYeAamJgfkgIhljWKMa2XzkVMcVfQHfNpM1
-n+bu8SmqRt9Wma2bMijKRG/Blm756LoI+skY+WRZmlDnq8zj95TT0vceGP0FUWh5
-hKyiocABmpQs9OK9HMi8vgSWISP+fYgkm/bKtKup2NbZBoO5/VL2vCEPInYzUhBO
-jCbLMjNjtM5KriCaR7wDARgHiG0gBEPOEW1PIjZ9UOH+LtIxbNZ4eEIIINLHnBHf
-L+doVeZtS/gJc4G4Adr5HYuaS9ZxJ0W2uy0eQlOHzjyxR6Mf/rpnilJlcQ==
------END CERTIFICATE-----";
-    var key = config.Get("key") ?? @"Public Key Info:
-	Public Key Algorithm: RSA
-	Key Security Level: High (3072 bits)
-
-modulus:
-	00:d5:1c:a9:f8:32:8a:48:d1:4a:66:c3:ed:c1:f4:7e
-	8f:33:a7:43:c6:05:89:e2:0a:62:06:a4:57:af:3c:77
-	c6:20:a6:89:5e:9d:b9:9e:10:fa:f3:4f:ce:ed:ba:71
-	43:ec:6f:5f:e8:02:c6:34:3f:2b:8f:b9:e9:8f:40:28
-	c3:18:4e:2f:f8:7f:bf:50:fd:bb:45:2c:21:a8:f9:8b
-	61:96:26:ba:8d:02:11:8b:6b:15:a2:10:1f:e1:cb:95
-	8e:8b:0c:43:ac:67:a2:81:0a:89:90:53:39:d8:4a:7b
-	1b:56:31:ec:f1:c9:98:a1:46:c0:df:45:84:8b:05:8b
-	57:0d:65:f5:51:a2:96:6e:09:ef:d1:30:f3:6e:b0:d5
-	59:68:88:be:a9:c1:1f:7e:c1:35:72:67:e6:b9:29:46
-	dc:0a:74:44:a3:88:c9:1d:1a:8c:31:33:a9:99:fd:ff
-	44:7b:57:05:82:17:de:ea:cb:c4:cd:62:4f:78:2b:fd
-	6d:ab:7c:f2:85:5c:d1:67:cd:f1:39:27:eb:4e:a1:1f
-	6f:7b:28:dc:05:36:8f:22:a0:61:dc:2b:fc:56:52:ef
-	65:42:1d:2f:08:b2:58:27:a8:95:b8:8b:32:17:66:a8
-	08:2a:61:da:45:9b:4c:37:88:d4:96:88:ba:97:fe:a5
-	92:db:7a:2e:c8:21:f7:11:02:79:cc:73:89:22:6d:3c
-	c6:a8:83:cf:1a:0b:c1:e7:32:a2:49:de:44:9c:18:22
-	f7:e8:66:06:f8:a6:b0:e4:f9:c3:95:65:c1:69:e8:83
-	7b:cc:ff:79:62:bd:f9:1a:f6:33:ea:e1:4c:dc:68:b0
-	05:46:7c:32:72:c4:05:f2:89:7e:3d:2d:0d:2f:ed:ff
-	6a:cf:07:3f:d0:98:83:6e:fb:14:bf:57:26:e8:e8:29
-	a0:43:0f:f5:25:ea:a8:17:70:1a:a7:8a:6c:3d:bf:da
-	39:4f:e3:cc:65:60:fe:a5:d5:2a:09:1b:71:a0:67:c7
-	5b:
-
-public exponent:
-	01:00:01:
-
-private exponent:
-	00:b1:56:d0:fa:00:d4:a2:13:c7:5e:0c:dc:e4:f1:97
-	ff:82:74:46:29:9a:a2:4a:bf:69:23:2d:ce:e9:bb:df
-	cf:b7:8b:dd:f4:26:3c:38:14:d9:3f:6f:c2:3a:81:53
-	8f:ba:48:53:fe:b5:90:4a:19:e7:1e:0b:0f:18:6d:c3
-	7d:d5:d3:fa:87:47:86:e4:d6:bf:e7:a7:f9:ba:ab:2e
-	19:5e:e1:8b:8b:9b:95:0d:f7:66:61:1e:19:e9:c3:88
-	08:be:1c:ce:93:c1:09:b1:68:1b:61:46:60:74:64:46
-	5d:51:34:ea:7f:a9:ca:a1:2a:47:85:84:4b:ef:84:05
-	97:c3:46:7d:06:19:ce:24:73:90:64:fb:df:16:d5:80
-	34:8e:90:7c:58:b6:a4:86:ce:30:b3:ab:52:8b:f2:95
-	4c:b6:46:5a:77:db:73:c0:0c:3f:6d:12:18:a8:54:7c
-	ff:77:c3:ca:89:9f:63:98:ef:48:2d:c1:09:70:6e:ea
-	cb:bb:78:91:42:8a:22:3e:21:ef:a5:bf:16:ee:66:45
-	e5:f0:26:6a:85:8e:e1:69:62:ac:05:00:a6:44:ba:c8
-	ac:10:00:97:f5:51:65:7f:9a:1f:7b:99:9d:02:d4:87
-	50:ce:74:06:51:67:fa:fb:90:e4:33:79:f2:a8:61:ee
-	45:1d:87:ca:22:5b:ac:e7:32:38:f8:2c:fd:55:92:1e
-	3d:60:1e:7c:4b:fd:28:ff:e5:b1:02:6a:aa:22:f7:ae
-	a8:36:90:7b:a6:f7:29:05:14:3a:21:da:36:05:f9:b0
-	9d:f7:fb:10:75:d7:2c:21:32:95:e7:f7:17:be:09:cb
-	66:fe:f1:69:71:df:a4:5e:3f:fc:67:6c:37:65:b8:51
-	c6:22:38:fb:07:ce:89:54:50:43:71:44:3d:c3:51:5a
-	bd:e5:c7:87:b2:ea:7b:64:0f:5d:34:9c:a1:52:b3:ce
-	06:86:ba:7a:05:80:48:b3:6c:1b:79:74:9b:49:f2:30
-	c1:
-
-prime1:
-	00:e4:31:46:59:3d:24:f7:31:d9:22:26:af:c0:3e:f5
-	c1:6d:be:ba:d3:9e:3f:b9:2c:43:a0:d0:47:09:e4:35
-	63:19:a4:33:82:af:f9:76:3c:11:c2:cb:34:f9:a6:ab
-	dd:ab:64:5a:6b:9c:c1:2a:52:89:64:7e:b5:a7:f0:4d
-	29:13:a4:cf:17:f4:f2:0d:a0:6e:b9:5d:95:41:10:df
-	ae:f3:7a:13:49:21:66:73:2a:b7:e2:8d:7c:c2:34:e5
-	3f:bd:78:ca:fc:64:c5:1c:3a:66:7a:12:53:96:bd:b0
-	c3:7a:0c:ec:5e:55:c0:c3:3f:7f:25:72:f4:e2:19:94
-	9d:65:15:be:c8:82:20:57:12:97:b2:a8:4d:3d:e0:8f
-	e2:1f:d0:c8:49:aa:f4:34:fa:91:d1:d1:cc:98:bc:3d
-	8b:b1:9b:8f:fd:ef:03:dd:92:fb:ca:99:45:af:cc:83
-	58:4c:bb:ba:73:9e:23:84:f9:7e:4f:40:fe:00:b5:bf
-	6f:
-
-prime2:
-	00:ef:14:ef:73:fc:0c:fc:e3:87:d9:7f:a6:f8:55:86
-	57:63:8a:86:87:f5:ef:63:20:1f:b2:ae:28:dc:ab:59
-	80:8f:15:64:44:e2:bc:a5:7b:d7:69:ef:30:b1:83:b3
-	bd:09:fd:4a:0c:c6:31:5b:a4:79:d0:e5:d3:a8:31:fd
-	59:ea:52:63:cf:17:a7:c1:54:bf:a8:11:9b:b1:85:47
-	5a:08:a6:9c:2f:47:9d:ac:5d:e8:7c:e4:31:6c:99:71
-	04:7d:20:98:be:8b:60:07:66:2d:b9:41:10:ea:dd:5b
-	87:20:65:62:ea:75:a7:a6:04:a2:18:66:6b:db:5b:a4
-	9f:12:97:cb:7c:8c:d2:e0:ce:02:ef:1e:df:a1:9d:6a
-	bc:00:38:18:36:a1:c5:97:16:be:7a:df:5f:4f:4f:de
-	a3:cb:25:fe:f6:67:0d:31:aa:0a:d4:1b:be:df:91:2c
-	05:14:20:37:cc:4f:50:33:a6:50:1b:90:f9:b2:08:80
-	d5:
-
-coefficient:
-	47:d1:7f:ca:93:6a:14:9b:fe:85:8d:c2:15:11:52:a2
-	a5:bc:f5:6b:a2:69:76:49:1e:09:79:f1:15:bf:39:48
-	41:ff:92:78:af:bc:7d:6f:76:3b:32:9e:08:d2:42:06
-	04:5f:36:e0:be:a8:1d:21:5c:ec:39:09:e0:77:c5:86
-	06:e6:ce:98:16:fc:0f:30:de:a7:69:7a:8f:dd:01:42
-	2a:22:f5:b7:c2:fc:c8:90:5a:78:dc:b3:e0:4d:e7:2d
-	98:6c:e3:34:1b:d7:e8:f8:90:57:7e:4d:41:d6:4a:29
-	81:92:eb:89:5b:45:85:dd:b9:16:20:63:cb:59:f6:06
-	59:c1:dd:3b:6b:92:0a:5e:5e:63:4a:f1:a7:d5:16:b9
-	8b:6c:d8:ad:76:0e:2d:3c:e0:b3:73:e0:6d:af:d4:a2
-	bc:4b:fd:6c:2d:d7:5d:4d:cd:28:03:64:b2:ef:9a:1d
-	82:8d:53:40:c5:f8:fb:f3:63:de:8e:1a:21:b6:35:14
-	
-
-exp1:
-	00:9c:a5:8a:d2:65:dc:03:69:8f:d2:16:d6:9d:55:5b
-	25:4e:ae:18:d8:7e:90:e6:10:11:d8:ca:41:89:f3:c4
-	06:64:aa:c8:c5:95:01:dd:fd:7c:7f:c9:39:73:8b:cb
-	fd:9e:d3:84:12:cd:87:f9:02:b1:d8:6f:f7:49:f2:f7
-	35:14:8c:15:b2:2f:6f:1e:95:9c:8c:d9:46:45:65:4c
-	f8:6f:a1:c4:ad:76:25:3b:37:ff:05:a1:f5:1b:e8:6d
-	db:64:b9:10:37:55:01:ce:cf:f4:5b:26:4b:85:76:70
-	6a:b0:55:40:c9:bd:7a:57:4e:36:7d:41:be:03:9c:65
-	dd:ea:6f:94:09:56:f2:d6:73:27:f9:f7:f9:16:5a:1a
-	cb:b2:e5:83:28:b7:17:6f:6a:f7:41:1f:11:a1:63:cf
-	a8:1e:e3:58:64:8c:78:8d:d9:81:c9:e1:8f:ea:0f:ad
-	b6:a6:ee:54:1f:5c:56:ab:c9:0d:c1:60:2f:3d:d3:86
-	37:
-
-exp2:
-	64:12:b7:48:2d:30:a2:89:fa:cb:27:8b:94:56:f8:2c
-	8c:15:e7:c9:f1:3f:8a:96:5f:ae:43:08:07:96:11:98
-	a6:4b:a5:f4:cf:93:77:11:27:51:c8:34:f1:98:d7:1b
-	41:9b:2b:eb:bc:e9:dc:1a:34:83:24:30:3c:2e:f0:85
-	3a:77:d2:1f:55:1f:7a:e5:26:74:0b:2a:c8:5b:a9:4a
-	1e:64:de:eb:4b:66:cc:47:62:91:24:53:2b:c9:ee:6c
-	9a:93:92:5b:ef:aa:fa:6d:e2:a5:b0:7e:8c:50:ab:87
-	1c:20:54:0f:1f:c0:54:d5:8b:a3:fa:fb:1a:8e:79:91
-	bc:0e:9d:b6:3c:9b:e8:4d:53:1d:14:27:37:56:d4:de
-	6c:99:0e:49:8f:dd:4d:28:d0:02:4e:8d:6e:7d:58:0b
-	e7:74:b8:0c:1b:86:82:4b:52:cd:05:f0:17:54:84:c0
-	7b:74:20:e6:fc:2b:ed:f2:a7:85:62:61:a2:0b:bd:21
-	
-
-
-Public Key PIN:
-	pin-sha256:t5OXXC5gYqMNtUMsTqRs3A3vhfK2BiXVOgYzIEYv7Y8=
-Public Key ID:
-	sha256:b793975c2e6062a30db5432c4ea46cdc0def85f2b60625d53a063320462fed8f
-	sha1:2f058a05034b2fdb3771bded4e7c8f560fa6a423
-
------BEGIN RSA PRIVATE KEY-----
-MIIG5AIBAAKCAYEA1Ryp+DKKSNFKZsPtwfR+jzOnQ8YFieIKYgakV688d8Ygpole
-nbmeEPrzT87tunFD7G9f6ALGND8rj7npj0AowxhOL/h/v1D9u0UsIaj5i2GWJrqN
-AhGLaxWiEB/hy5WOiwxDrGeigQqJkFM52Ep7G1Yx7PHJmKFGwN9FhIsFi1cNZfVR
-opZuCe/RMPNusNVZaIi+qcEffsE1cmfmuSlG3Ap0RKOIyR0ajDEzqZn9/0R7VwWC
-F97qy8TNYk94K/1tq3zyhVzRZ83xOSfrTqEfb3so3AU2jyKgYdwr/FZS72VCHS8I
-slgnqJW4izIXZqgIKmHaRZtMN4jUloi6l/6lktt6Lsgh9xECecxziSJtPMaog88a
-C8HnMqJJ3kScGCL36GYG+Kaw5PnDlWXBaeiDe8z/eWK9+Rr2M+rhTNxosAVGfDJy
-xAXyiX49LQ0v7f9qzwc/0JiDbvsUv1cm6OgpoEMP9SXqqBdwGqeKbD2/2jlP48xl
-YP6l1SoJG3GgZ8dbAgMBAAECggGBALFW0PoA1KITx14M3OTxl/+CdEYpmqJKv2kj
-Lc7pu9/Pt4vd9CY8OBTZP2/COoFTj7pIU/61kEoZ5x4LDxhtw33V0/qHR4bk1r/n
-p/m6qy4ZXuGLi5uVDfdmYR4Z6cOICL4czpPBCbFoG2FGYHRkRl1RNOp/qcqhKkeF
-hEvvhAWXw0Z9BhnOJHOQZPvfFtWANI6QfFi2pIbOMLOrUovylUy2Rlp323PADD9t
-EhioVHz/d8PKiZ9jmO9ILcEJcG7qy7t4kUKKIj4h76W/Fu5mReXwJmqFjuFpYqwF
-AKZEusisEACX9VFlf5ofe5mdAtSHUM50BlFn+vuQ5DN58qhh7kUdh8oiW6znMjj4
-LP1Vkh49YB58S/0o/+WxAmqqIveuqDaQe6b3KQUUOiHaNgX5sJ33+xB11ywhMpXn
-9xe+Cctm/vFpcd+kXj/8Z2w3ZbhRxiI4+wfOiVRQQ3FEPcNRWr3lx4ey6ntkD100
-nKFSs84Ghrp6BYBIs2wbeXSbSfIwwQKBwQDkMUZZPST3MdkiJq/APvXBbb66054/
-uSxDoNBHCeQ1YxmkM4Kv+XY8EcLLNPmmq92rZFprnMEqUolkfrWn8E0pE6TPF/Ty
-DaBuuV2VQRDfrvN6E0khZnMqt+KNfMI05T+9eMr8ZMUcOmZ6ElOWvbDDegzsXlXA
-wz9/JXL04hmUnWUVvsiCIFcSl7KoTT3gj+If0MhJqvQ0+pHR0cyYvD2LsZuP/e8D
-3ZL7yplFr8yDWEy7unOeI4T5fk9A/gC1v28CgcEA7xTvc/wM/OOH2X+m+FWGV2OK
-hof172MgH7KuKNyrWYCPFWRE4ryle9dp7zCxg7O9Cf1KDMYxW6R50OXTqDH9WepS
-Y88Xp8FUv6gRm7GFR1oIppwvR52sXeh85DFsmXEEfSCYvotgB2YtuUEQ6t1bhyBl
-Yup1p6YEohhma9tbpJ8Sl8t8jNLgzgLvHt+hnWq8ADgYNqHFlxa+et9fT0/eo8sl
-/vZnDTGqCtQbvt+RLAUUIDfMT1AzplAbkPmyCIDVAoHBAJylitJl3ANpj9IW1p1V
-WyVOrhjYfpDmEBHYykGJ88QGZKrIxZUB3f18f8k5c4vL/Z7ThBLNh/kCsdhv90ny
-9zUUjBWyL28elZyM2UZFZUz4b6HErXYlOzf/BaH1G+ht22S5EDdVAc7P9FsmS4V2
-cGqwVUDJvXpXTjZ9Qb4DnGXd6m+UCVby1nMn+ff5Floay7Llgyi3F29q90EfEaFj
-z6ge41hkjHiN2YHJ4Y/qD622pu5UH1xWq8kNwWAvPdOGNwKBwGQSt0gtMKKJ+ssn
-i5RW+CyMFefJ8T+Kll+uQwgHlhGYpkul9M+TdxEnUcg08ZjXG0GbK+u86dwaNIMk
-MDwu8IU6d9IfVR965SZ0CyrIW6lKHmTe60tmzEdikSRTK8nubJqTklvvqvpt4qWw
-foxQq4ccIFQPH8BU1Yuj+vsajnmRvA6dtjyb6E1THRQnN1bU3myZDkmP3U0o0AJO
-jW59WAvndLgMG4aCS1LNBfAXVITAe3Qg5vwr7fKnhWJhogu9IQKBwEfRf8qTahSb
-/oWNwhURUqKlvPVroml2SR4JefEVvzlIQf+SeK+8fW92OzKeCNJCBgRfNuC+qB0h
-XOw5CeB3xYYG5s6YFvwPMN6naXqP3QFCKiL1t8L8yJBaeNyz4E3nLZhs4zQb1+j4
-kFd+TUHWSimBkuuJW0WF3bkWIGPLWfYGWcHdO2uSCl5eY0rxp9UWuYts2K12Di08
-4LNz4G2v1KK8S/1sLdddTc0oA2Sy75odgo1TQMX4+/Nj3o4aIbY1FA==
------END RSA PRIVATE KEY-----";
-    var svrCertificate = new Tencentcloud.Ssl.Certificate("svrCertificate", new()
-    {
-        Type = "SVR",
-        Cert = cert,
-        Key = key,
-    });
-
-    var svrCertificates = Tencentcloud.Ssl.GetCertificates.Invoke(new()
-    {
-        Name = svrCertificate.Name,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ssl"
 )
 
 func main() {
@@ -1201,7 +1055,8 @@ kFd+TUHWSimBkuuJW0WF3bkWIGPLWfYGWcHdO2uSCl5eY0rxp9UWuYts2K12Di08
 		if param := cfg.Get("key"); param != "" {
 			key = param
 		}
-		svrCertificate, err := Ssl.NewCertificate(ctx, "svrCertificate", &Ssl.CertificateArgs{
+		svrCertificate, err := ssl.NewCertificate(ctx, "svr", &ssl.CertificateArgs{
+			Name: pulumi.String("ssl-svr"),
 			Type: pulumi.String("SVR"),
 			Cert: pulumi.String(cert),
 			Key:  pulumi.String(key),
@@ -1209,13 +1064,254 @@ kFd+TUHWSimBkuuJW0WF3bkWIGPLWfYGWcHdO2uSCl5eY0rxp9UWuYts2K12Di08
 		if err != nil {
 			return err
 		}
-		_ = Ssl.GetCertificatesOutput(ctx, ssl.GetCertificatesOutputArgs{
+		_ = ssl.GetCertificatesOutput(ctx, ssl.GetCertificatesOutputArgs{
 			Name: svrCertificate.Name,
 		}, nil)
 		return nil
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var cert = config.Get("cert") ?? @"-----BEGIN CERTIFICATE-----
+MIIERzCCAq+gAwIBAgIBAjANBgkqhkiG9w0BAQsFADAoMQ0wCwYDVQQDEwR0ZXN0
+MRcwFQYDVQQKEw50ZXJyYWZvcm0gdGVzdDAeFw0xOTA4MTMwMzE5MzlaFw0yOTA4
+MTAwMzE5MzlaMC4xEzARBgNVBAMTCnNlcnZlciBzc2wxFzAVBgNVBAoTDnRlcnJh
+Zm9ybS10ZXN0MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEA1Ryp+DKK
+SNFKZsPtwfR+jzOnQ8YFieIKYgakV688d8YgpolenbmeEPrzT87tunFD7G9f6ALG
+ND8rj7npj0AowxhOL/h/v1D9u0UsIaj5i2GWJrqNAhGLaxWiEB/hy5WOiwxDrGei
+gQqJkFM52Ep7G1Yx7PHJmKFGwN9FhIsFi1cNZfVRopZuCe/RMPNusNVZaIi+qcEf
+fsE1cmfmuSlG3Ap0RKOIyR0ajDEzqZn9/0R7VwWCF97qy8TNYk94K/1tq3zyhVzR
+Z83xOSfrTqEfb3so3AU2jyKgYdwr/FZS72VCHS8IslgnqJW4izIXZqgIKmHaRZtM
+N4jUloi6l/6lktt6Lsgh9xECecxziSJtPMaog88aC8HnMqJJ3kScGCL36GYG+Kaw
+5PnDlWXBaeiDe8z/eWK9+Rr2M+rhTNxosAVGfDJyxAXyiX49LQ0v7f9qzwc/0JiD
+bvsUv1cm6OgpoEMP9SXqqBdwGqeKbD2/2jlP48xlYP6l1SoJG3GgZ8dbAgMBAAGj
+djB0MAwGA1UdEwEB/wQCMAAwEwYDVR0lBAwwCgYIKwYBBQUHAwEwDwYDVR0PAQH/
+BAUDAweAADAdBgNVHQ4EFgQULwWKBQNLL9s3cb3tTnyPVg+mpCMwHwYDVR0jBBgw
+FoAUKwfrmq791mY831S6UHARHtgYnlgwDQYJKoZIhvcNAQELBQADggGBAMo5RglS
+AHdPgaicWJvmvjjexjF/42b7Rz4pPfMjYw6uYO8He/f4UZWv5CZLrbEe7MywaK3y
+0OsfH8AhyN29pv2x8g9wbmq7omZIOZ0oCAGduEXs/A/qY/hFaCohdkz/IN8qi6JW
+VXreGli3SrpcHFchSwHTyJEXgkutcGAsOvdsOuVSmplOyrkLHc8uUe8SG4j8kGyg
+EzaszFjHkR7g1dVyDVUedc588mjkQxYeAamJgfkgIhljWKMa2XzkVMcVfQHfNpM1
+n+bu8SmqRt9Wma2bMijKRG/Blm756LoI+skY+WRZmlDnq8zj95TT0vceGP0FUWh5
+hKyiocABmpQs9OK9HMi8vgSWISP+fYgkm/bKtKup2NbZBoO5/VL2vCEPInYzUhBO
+jCbLMjNjtM5KriCaR7wDARgHiG0gBEPOEW1PIjZ9UOH+LtIxbNZ4eEIIINLHnBHf
+L+doVeZtS/gJc4G4Adr5HYuaS9ZxJ0W2uy0eQlOHzjyxR6Mf/rpnilJlcQ==
+-----END CERTIFICATE-----";
+    var key = config.Get("key") ?? @"Public Key Info:
+	Public Key Algorithm: RSA
+	Key Security Level: High (3072 bits)
+
+modulus:
+	00:d5:1c:a9:f8:32:8a:48:d1:4a:66:c3:ed:c1:f4:7e
+	8f:33:a7:43:c6:05:89:e2:0a:62:06:a4:57:af:3c:77
+	c6:20:a6:89:5e:9d:b9:9e:10:fa:f3:4f:ce:ed:ba:71
+	43:ec:6f:5f:e8:02:c6:34:3f:2b:8f:b9:e9:8f:40:28
+	c3:18:4e:2f:f8:7f:bf:50:fd:bb:45:2c:21:a8:f9:8b
+	61:96:26:ba:8d:02:11:8b:6b:15:a2:10:1f:e1:cb:95
+	8e:8b:0c:43:ac:67:a2:81:0a:89:90:53:39:d8:4a:7b
+	1b:56:31:ec:f1:c9:98:a1:46:c0:df:45:84:8b:05:8b
+	57:0d:65:f5:51:a2:96:6e:09:ef:d1:30:f3:6e:b0:d5
+	59:68:88:be:a9:c1:1f:7e:c1:35:72:67:e6:b9:29:46
+	dc:0a:74:44:a3:88:c9:1d:1a:8c:31:33:a9:99:fd:ff
+	44:7b:57:05:82:17:de:ea:cb:c4:cd:62:4f:78:2b:fd
+	6d:ab:7c:f2:85:5c:d1:67:cd:f1:39:27:eb:4e:a1:1f
+	6f:7b:28:dc:05:36:8f:22:a0:61:dc:2b:fc:56:52:ef
+	65:42:1d:2f:08:b2:58:27:a8:95:b8:8b:32:17:66:a8
+	08:2a:61:da:45:9b:4c:37:88:d4:96:88:ba:97:fe:a5
+	92:db:7a:2e:c8:21:f7:11:02:79:cc:73:89:22:6d:3c
+	c6:a8:83:cf:1a:0b:c1:e7:32:a2:49:de:44:9c:18:22
+	f7:e8:66:06:f8:a6:b0:e4:f9:c3:95:65:c1:69:e8:83
+	7b:cc:ff:79:62:bd:f9:1a:f6:33:ea:e1:4c:dc:68:b0
+	05:46:7c:32:72:c4:05:f2:89:7e:3d:2d:0d:2f:ed:ff
+	6a:cf:07:3f:d0:98:83:6e:fb:14:bf:57:26:e8:e8:29
+	a0:43:0f:f5:25:ea:a8:17:70:1a:a7:8a:6c:3d:bf:da
+	39:4f:e3:cc:65:60:fe:a5:d5:2a:09:1b:71:a0:67:c7
+	5b:
+
+public exponent:
+	01:00:01:
+
+private exponent:
+	00:b1:56:d0:fa:00:d4:a2:13:c7:5e:0c:dc:e4:f1:97
+	ff:82:74:46:29:9a:a2:4a:bf:69:23:2d:ce:e9:bb:df
+	cf:b7:8b:dd:f4:26:3c:38:14:d9:3f:6f:c2:3a:81:53
+	8f:ba:48:53:fe:b5:90:4a:19:e7:1e:0b:0f:18:6d:c3
+	7d:d5:d3:fa:87:47:86:e4:d6:bf:e7:a7:f9:ba:ab:2e
+	19:5e:e1:8b:8b:9b:95:0d:f7:66:61:1e:19:e9:c3:88
+	08:be:1c:ce:93:c1:09:b1:68:1b:61:46:60:74:64:46
+	5d:51:34:ea:7f:a9:ca:a1:2a:47:85:84:4b:ef:84:05
+	97:c3:46:7d:06:19:ce:24:73:90:64:fb:df:16:d5:80
+	34:8e:90:7c:58:b6:a4:86:ce:30:b3:ab:52:8b:f2:95
+	4c:b6:46:5a:77:db:73:c0:0c:3f:6d:12:18:a8:54:7c
+	ff:77:c3:ca:89:9f:63:98:ef:48:2d:c1:09:70:6e:ea
+	cb:bb:78:91:42:8a:22:3e:21:ef:a5:bf:16:ee:66:45
+	e5:f0:26:6a:85:8e:e1:69:62:ac:05:00:a6:44:ba:c8
+	ac:10:00:97:f5:51:65:7f:9a:1f:7b:99:9d:02:d4:87
+	50:ce:74:06:51:67:fa:fb:90:e4:33:79:f2:a8:61:ee
+	45:1d:87:ca:22:5b:ac:e7:32:38:f8:2c:fd:55:92:1e
+	3d:60:1e:7c:4b:fd:28:ff:e5:b1:02:6a:aa:22:f7:ae
+	a8:36:90:7b:a6:f7:29:05:14:3a:21:da:36:05:f9:b0
+	9d:f7:fb:10:75:d7:2c:21:32:95:e7:f7:17:be:09:cb
+	66:fe:f1:69:71:df:a4:5e:3f:fc:67:6c:37:65:b8:51
+	c6:22:38:fb:07:ce:89:54:50:43:71:44:3d:c3:51:5a
+	bd:e5:c7:87:b2:ea:7b:64:0f:5d:34:9c:a1:52:b3:ce
+	06:86:ba:7a:05:80:48:b3:6c:1b:79:74:9b:49:f2:30
+	c1:
+
+prime1:
+	00:e4:31:46:59:3d:24:f7:31:d9:22:26:af:c0:3e:f5
+	c1:6d:be:ba:d3:9e:3f:b9:2c:43:a0:d0:47:09:e4:35
+	63:19:a4:33:82:af:f9:76:3c:11:c2:cb:34:f9:a6:ab
+	dd:ab:64:5a:6b:9c:c1:2a:52:89:64:7e:b5:a7:f0:4d
+	29:13:a4:cf:17:f4:f2:0d:a0:6e:b9:5d:95:41:10:df
+	ae:f3:7a:13:49:21:66:73:2a:b7:e2:8d:7c:c2:34:e5
+	3f:bd:78:ca:fc:64:c5:1c:3a:66:7a:12:53:96:bd:b0
+	c3:7a:0c:ec:5e:55:c0:c3:3f:7f:25:72:f4:e2:19:94
+	9d:65:15:be:c8:82:20:57:12:97:b2:a8:4d:3d:e0:8f
+	e2:1f:d0:c8:49:aa:f4:34:fa:91:d1:d1:cc:98:bc:3d
+	8b:b1:9b:8f:fd:ef:03:dd:92:fb:ca:99:45:af:cc:83
+	58:4c:bb:ba:73:9e:23:84:f9:7e:4f:40:fe:00:b5:bf
+	6f:
+
+prime2:
+	00:ef:14:ef:73:fc:0c:fc:e3:87:d9:7f:a6:f8:55:86
+	57:63:8a:86:87:f5:ef:63:20:1f:b2:ae:28:dc:ab:59
+	80:8f:15:64:44:e2:bc:a5:7b:d7:69:ef:30:b1:83:b3
+	bd:09:fd:4a:0c:c6:31:5b:a4:79:d0:e5:d3:a8:31:fd
+	59:ea:52:63:cf:17:a7:c1:54:bf:a8:11:9b:b1:85:47
+	5a:08:a6:9c:2f:47:9d:ac:5d:e8:7c:e4:31:6c:99:71
+	04:7d:20:98:be:8b:60:07:66:2d:b9:41:10:ea:dd:5b
+	87:20:65:62:ea:75:a7:a6:04:a2:18:66:6b:db:5b:a4
+	9f:12:97:cb:7c:8c:d2:e0:ce:02:ef:1e:df:a1:9d:6a
+	bc:00:38:18:36:a1:c5:97:16:be:7a:df:5f:4f:4f:de
+	a3:cb:25:fe:f6:67:0d:31:aa:0a:d4:1b:be:df:91:2c
+	05:14:20:37:cc:4f:50:33:a6:50:1b:90:f9:b2:08:80
+	d5:
+
+coefficient:
+	47:d1:7f:ca:93:6a:14:9b:fe:85:8d:c2:15:11:52:a2
+	a5:bc:f5:6b:a2:69:76:49:1e:09:79:f1:15:bf:39:48
+	41:ff:92:78:af:bc:7d:6f:76:3b:32:9e:08:d2:42:06
+	04:5f:36:e0:be:a8:1d:21:5c:ec:39:09:e0:77:c5:86
+	06:e6:ce:98:16:fc:0f:30:de:a7:69:7a:8f:dd:01:42
+	2a:22:f5:b7:c2:fc:c8:90:5a:78:dc:b3:e0:4d:e7:2d
+	98:6c:e3:34:1b:d7:e8:f8:90:57:7e:4d:41:d6:4a:29
+	81:92:eb:89:5b:45:85:dd:b9:16:20:63:cb:59:f6:06
+	59:c1:dd:3b:6b:92:0a:5e:5e:63:4a:f1:a7:d5:16:b9
+	8b:6c:d8:ad:76:0e:2d:3c:e0:b3:73:e0:6d:af:d4:a2
+	bc:4b:fd:6c:2d:d7:5d:4d:cd:28:03:64:b2:ef:9a:1d
+	82:8d:53:40:c5:f8:fb:f3:63:de:8e:1a:21:b6:35:14
+	
+
+exp1:
+	00:9c:a5:8a:d2:65:dc:03:69:8f:d2:16:d6:9d:55:5b
+	25:4e:ae:18:d8:7e:90:e6:10:11:d8:ca:41:89:f3:c4
+	06:64:aa:c8:c5:95:01:dd:fd:7c:7f:c9:39:73:8b:cb
+	fd:9e:d3:84:12:cd:87:f9:02:b1:d8:6f:f7:49:f2:f7
+	35:14:8c:15:b2:2f:6f:1e:95:9c:8c:d9:46:45:65:4c
+	f8:6f:a1:c4:ad:76:25:3b:37:ff:05:a1:f5:1b:e8:6d
+	db:64:b9:10:37:55:01:ce:cf:f4:5b:26:4b:85:76:70
+	6a:b0:55:40:c9:bd:7a:57:4e:36:7d:41:be:03:9c:65
+	dd:ea:6f:94:09:56:f2:d6:73:27:f9:f7:f9:16:5a:1a
+	cb:b2:e5:83:28:b7:17:6f:6a:f7:41:1f:11:a1:63:cf
+	a8:1e:e3:58:64:8c:78:8d:d9:81:c9:e1:8f:ea:0f:ad
+	b6:a6:ee:54:1f:5c:56:ab:c9:0d:c1:60:2f:3d:d3:86
+	37:
+
+exp2:
+	64:12:b7:48:2d:30:a2:89:fa:cb:27:8b:94:56:f8:2c
+	8c:15:e7:c9:f1:3f:8a:96:5f:ae:43:08:07:96:11:98
+	a6:4b:a5:f4:cf:93:77:11:27:51:c8:34:f1:98:d7:1b
+	41:9b:2b:eb:bc:e9:dc:1a:34:83:24:30:3c:2e:f0:85
+	3a:77:d2:1f:55:1f:7a:e5:26:74:0b:2a:c8:5b:a9:4a
+	1e:64:de:eb:4b:66:cc:47:62:91:24:53:2b:c9:ee:6c
+	9a:93:92:5b:ef:aa:fa:6d:e2:a5:b0:7e:8c:50:ab:87
+	1c:20:54:0f:1f:c0:54:d5:8b:a3:fa:fb:1a:8e:79:91
+	bc:0e:9d:b6:3c:9b:e8:4d:53:1d:14:27:37:56:d4:de
+	6c:99:0e:49:8f:dd:4d:28:d0:02:4e:8d:6e:7d:58:0b
+	e7:74:b8:0c:1b:86:82:4b:52:cd:05:f0:17:54:84:c0
+	7b:74:20:e6:fc:2b:ed:f2:a7:85:62:61:a2:0b:bd:21
+	
+
+
+Public Key PIN:
+	pin-sha256:t5OXXC5gYqMNtUMsTqRs3A3vhfK2BiXVOgYzIEYv7Y8=
+Public Key ID:
+	sha256:b793975c2e6062a30db5432c4ea46cdc0def85f2b60625d53a063320462fed8f
+	sha1:2f058a05034b2fdb3771bded4e7c8f560fa6a423
+
+-----BEGIN RSA PRIVATE KEY-----
+MIIG5AIBAAKCAYEA1Ryp+DKKSNFKZsPtwfR+jzOnQ8YFieIKYgakV688d8Ygpole
+nbmeEPrzT87tunFD7G9f6ALGND8rj7npj0AowxhOL/h/v1D9u0UsIaj5i2GWJrqN
+AhGLaxWiEB/hy5WOiwxDrGeigQqJkFM52Ep7G1Yx7PHJmKFGwN9FhIsFi1cNZfVR
+opZuCe/RMPNusNVZaIi+qcEffsE1cmfmuSlG3Ap0RKOIyR0ajDEzqZn9/0R7VwWC
+F97qy8TNYk94K/1tq3zyhVzRZ83xOSfrTqEfb3so3AU2jyKgYdwr/FZS72VCHS8I
+slgnqJW4izIXZqgIKmHaRZtMN4jUloi6l/6lktt6Lsgh9xECecxziSJtPMaog88a
+C8HnMqJJ3kScGCL36GYG+Kaw5PnDlWXBaeiDe8z/eWK9+Rr2M+rhTNxosAVGfDJy
+xAXyiX49LQ0v7f9qzwc/0JiDbvsUv1cm6OgpoEMP9SXqqBdwGqeKbD2/2jlP48xl
+YP6l1SoJG3GgZ8dbAgMBAAECggGBALFW0PoA1KITx14M3OTxl/+CdEYpmqJKv2kj
+Lc7pu9/Pt4vd9CY8OBTZP2/COoFTj7pIU/61kEoZ5x4LDxhtw33V0/qHR4bk1r/n
+p/m6qy4ZXuGLi5uVDfdmYR4Z6cOICL4czpPBCbFoG2FGYHRkRl1RNOp/qcqhKkeF
+hEvvhAWXw0Z9BhnOJHOQZPvfFtWANI6QfFi2pIbOMLOrUovylUy2Rlp323PADD9t
+EhioVHz/d8PKiZ9jmO9ILcEJcG7qy7t4kUKKIj4h76W/Fu5mReXwJmqFjuFpYqwF
+AKZEusisEACX9VFlf5ofe5mdAtSHUM50BlFn+vuQ5DN58qhh7kUdh8oiW6znMjj4
+LP1Vkh49YB58S/0o/+WxAmqqIveuqDaQe6b3KQUUOiHaNgX5sJ33+xB11ywhMpXn
+9xe+Cctm/vFpcd+kXj/8Z2w3ZbhRxiI4+wfOiVRQQ3FEPcNRWr3lx4ey6ntkD100
+nKFSs84Ghrp6BYBIs2wbeXSbSfIwwQKBwQDkMUZZPST3MdkiJq/APvXBbb66054/
+uSxDoNBHCeQ1YxmkM4Kv+XY8EcLLNPmmq92rZFprnMEqUolkfrWn8E0pE6TPF/Ty
+DaBuuV2VQRDfrvN6E0khZnMqt+KNfMI05T+9eMr8ZMUcOmZ6ElOWvbDDegzsXlXA
+wz9/JXL04hmUnWUVvsiCIFcSl7KoTT3gj+If0MhJqvQ0+pHR0cyYvD2LsZuP/e8D
+3ZL7yplFr8yDWEy7unOeI4T5fk9A/gC1v28CgcEA7xTvc/wM/OOH2X+m+FWGV2OK
+hof172MgH7KuKNyrWYCPFWRE4ryle9dp7zCxg7O9Cf1KDMYxW6R50OXTqDH9WepS
+Y88Xp8FUv6gRm7GFR1oIppwvR52sXeh85DFsmXEEfSCYvotgB2YtuUEQ6t1bhyBl
+Yup1p6YEohhma9tbpJ8Sl8t8jNLgzgLvHt+hnWq8ADgYNqHFlxa+et9fT0/eo8sl
+/vZnDTGqCtQbvt+RLAUUIDfMT1AzplAbkPmyCIDVAoHBAJylitJl3ANpj9IW1p1V
+WyVOrhjYfpDmEBHYykGJ88QGZKrIxZUB3f18f8k5c4vL/Z7ThBLNh/kCsdhv90ny
+9zUUjBWyL28elZyM2UZFZUz4b6HErXYlOzf/BaH1G+ht22S5EDdVAc7P9FsmS4V2
+cGqwVUDJvXpXTjZ9Qb4DnGXd6m+UCVby1nMn+ff5Floay7Llgyi3F29q90EfEaFj
+z6ge41hkjHiN2YHJ4Y/qD622pu5UH1xWq8kNwWAvPdOGNwKBwGQSt0gtMKKJ+ssn
+i5RW+CyMFefJ8T+Kll+uQwgHlhGYpkul9M+TdxEnUcg08ZjXG0GbK+u86dwaNIMk
+MDwu8IU6d9IfVR965SZ0CyrIW6lKHmTe60tmzEdikSRTK8nubJqTklvvqvpt4qWw
+foxQq4ccIFQPH8BU1Yuj+vsajnmRvA6dtjyb6E1THRQnN1bU3myZDkmP3U0o0AJO
+jW59WAvndLgMG4aCS1LNBfAXVITAe3Qg5vwr7fKnhWJhogu9IQKBwEfRf8qTahSb
+/oWNwhURUqKlvPVroml2SR4JefEVvzlIQf+SeK+8fW92OzKeCNJCBgRfNuC+qB0h
+XOw5CeB3xYYG5s6YFvwPMN6naXqP3QFCKiL1t8L8yJBaeNyz4E3nLZhs4zQb1+j4
+kFd+TUHWSimBkuuJW0WF3bkWIGPLWfYGWcHdO2uSCl5eY0rxp9UWuYts2K12Di08
+4LNz4G2v1KK8S/1sLdddTc0oA2Sy75odgo1TQMX4+/Nj3o4aIbY1FA==
+-----END RSA PRIVATE KEY-----";
+    var svrCertificate = new Tencentcloud.Ssl.Certificate("svr", new()
+    {
+        Name = "ssl-svr",
+        Type = "SVR",
+        Cert = cert,
+        Key = key,
+    });
+
+    var svr = Tencentcloud.Ssl.GetCertificates.Invoke(new()
+    {
+        Name = svrCertificate.Name,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -1226,8 +1322,8 @@ import com.pulumi.tencentcloud.Ssl.Certificate;
 import com.pulumi.tencentcloud.Ssl.CertificateArgs;
 import com.pulumi.tencentcloud.Ssl.SslFunctions;
 import com.pulumi.tencentcloud.Ssl.inputs.GetCertificatesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -1449,19 +1545,25 @@ XOw5CeB3xYYG5s6YFvwPMN6naXqP3QFCKiL1t8L8yJBaeNyz4E3nLZhs4zQb1+j4
 kFd+TUHWSimBkuuJW0WF3bkWIGPLWfYGWcHdO2uSCl5eY0rxp9UWuYts2K12Di08
 4LNz4G2v1KK8S/1sLdddTc0oA2Sy75odgo1TQMX4+/Nj3o4aIbY1FA==
 -----END RSA PRIVATE KEY-----        """);
-        var svrCertificate = new Certificate("svrCertificate", CertificateArgs.builder()        
+        var svrCertificate = new Certificate("svrCertificate", CertificateArgs.builder()
+            .name("ssl-svr")
             .type("SVR")
             .cert(cert)
             .key(key)
             .build());
 
-        final var svrCertificates = SslFunctions.getCertificates(GetCertificatesArgs.builder()
+        final var svr = SslFunctions.getCertificates(GetCertificatesArgs.builder()
             .name(svrCertificate.name())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 configuration:
   cert:
@@ -1680,81 +1782,149 @@ configuration:
 resources:
   svrCertificate:
     type: tencentcloud:Ssl:Certificate
+    name: svr
     properties:
+      name: ssl-svr
       type: SVR
       cert: ${cert}
       key: ${key}
 variables:
-  svrCertificates:
+  svr:
     fn::invoke:
-      Function: tencentcloud:Ssl:getCertificates
-      Arguments:
+      function: tencentcloud:Ssl:getCertificates
+      arguments:
         name: ${svrCertificate.name}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_ssl_getcertificates" "svr" {
+  name = tencentcloud_ssl_certificate.svr.name
+}
+
+resource "tencentcloud_ssl_certificate" "svr" {
+  name = "ssl-svr"
+  type = "SVR"
+  cert = var.cert
+  key  = var.key
+}
+variable "cert" {
+  type    = string
+  default = "-----BEGIN CERTIFICATE-----\nMIIERzCCAq+gAwIBAgIBAjANBgkqhkiG9w0BAQsFADAoMQ0wCwYDVQQDEwR0ZXN0\nMRcwFQYDVQQKEw50ZXJyYWZvcm0gdGVzdDAeFw0xOTA4MTMwMzE5MzlaFw0yOTA4\nMTAwMzE5MzlaMC4xEzARBgNVBAMTCnNlcnZlciBzc2wxFzAVBgNVBAoTDnRlcnJh\nZm9ybS10ZXN0MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEA1Ryp+DKK\nSNFKZsPtwfR+jzOnQ8YFieIKYgakV688d8YgpolenbmeEPrzT87tunFD7G9f6ALG\nND8rj7npj0AowxhOL/h/v1D9u0UsIaj5i2GWJrqNAhGLaxWiEB/hy5WOiwxDrGei\ngQqJkFM52Ep7G1Yx7PHJmKFGwN9FhIsFi1cNZfVRopZuCe/RMPNusNVZaIi+qcEf\nfsE1cmfmuSlG3Ap0RKOIyR0ajDEzqZn9/0R7VwWCF97qy8TNYk94K/1tq3zyhVzR\nZ83xOSfrTqEfb3so3AU2jyKgYdwr/FZS72VCHS8IslgnqJW4izIXZqgIKmHaRZtM\nN4jUloi6l/6lktt6Lsgh9xECecxziSJtPMaog88aC8HnMqJJ3kScGCL36GYG+Kaw\n5PnDlWXBaeiDe8z/eWK9+Rr2M+rhTNxosAVGfDJyxAXyiX49LQ0v7f9qzwc/0JiD\nbvsUv1cm6OgpoEMP9SXqqBdwGqeKbD2/2jlP48xlYP6l1SoJG3GgZ8dbAgMBAAGj\ndjB0MAwGA1UdEwEB/wQCMAAwEwYDVR0lBAwwCgYIKwYBBQUHAwEwDwYDVR0PAQH/\nBAUDAweAADAdBgNVHQ4EFgQULwWKBQNLL9s3cb3tTnyPVg+mpCMwHwYDVR0jBBgw\nFoAUKwfrmq791mY831S6UHARHtgYnlgwDQYJKoZIhvcNAQELBQADggGBAMo5RglS\nAHdPgaicWJvmvjjexjF/42b7Rz4pPfMjYw6uYO8He/f4UZWv5CZLrbEe7MywaK3y\n0OsfH8AhyN29pv2x8g9wbmq7omZIOZ0oCAGduEXs/A/qY/hFaCohdkz/IN8qi6JW\nVXreGli3SrpcHFchSwHTyJEXgkutcGAsOvdsOuVSmplOyrkLHc8uUe8SG4j8kGyg\nEzaszFjHkR7g1dVyDVUedc588mjkQxYeAamJgfkgIhljWKMa2XzkVMcVfQHfNpM1\nn+bu8SmqRt9Wma2bMijKRG/Blm756LoI+skY+WRZmlDnq8zj95TT0vceGP0FUWh5\nhKyiocABmpQs9OK9HMi8vgSWISP+fYgkm/bKtKup2NbZBoO5/VL2vCEPInYzUhBO\njCbLMjNjtM5KriCaR7wDARgHiG0gBEPOEW1PIjZ9UOH+LtIxbNZ4eEIIINLHnBHf\nL+doVeZtS/gJc4G4Adr5HYuaS9ZxJ0W2uy0eQlOHzjyxR6Mf/rpnilJlcQ==\n-----END CERTIFICATE-----"
+}
+variable "key" {
+  type    = string
+  default = "Public Key Info:\n\tPublic Key Algorithm: RSA\n\tKey Security Level: High (3072 bits)\n\nmodulus:\n\t00:d5:1c:a9:f8:32:8a:48:d1:4a:66:c3:ed:c1:f4:7e\n\t8f:33:a7:43:c6:05:89:e2:0a:62:06:a4:57:af:3c:77\n\tc6:20:a6:89:5e:9d:b9:9e:10:fa:f3:4f:ce:ed:ba:71\n\t43:ec:6f:5f:e8:02:c6:34:3f:2b:8f:b9:e9:8f:40:28\n\tc3:18:4e:2f:f8:7f:bf:50:fd:bb:45:2c:21:a8:f9:8b\n\t61:96:26:ba:8d:02:11:8b:6b:15:a2:10:1f:e1:cb:95\n\t8e:8b:0c:43:ac:67:a2:81:0a:89:90:53:39:d8:4a:7b\n\t1b:56:31:ec:f1:c9:98:a1:46:c0:df:45:84:8b:05:8b\n\t57:0d:65:f5:51:a2:96:6e:09:ef:d1:30:f3:6e:b0:d5\n\t59:68:88:be:a9:c1:1f:7e:c1:35:72:67:e6:b9:29:46\n\tdc:0a:74:44:a3:88:c9:1d:1a:8c:31:33:a9:99:fd:ff\n\t44:7b:57:05:82:17:de:ea:cb:c4:cd:62:4f:78:2b:fd\n\t6d:ab:7c:f2:85:5c:d1:67:cd:f1:39:27:eb:4e:a1:1f\n\t6f:7b:28:dc:05:36:8f:22:a0:61:dc:2b:fc:56:52:ef\n\t65:42:1d:2f:08:b2:58:27:a8:95:b8:8b:32:17:66:a8\n\t08:2a:61:da:45:9b:4c:37:88:d4:96:88:ba:97:fe:a5\n\t92:db:7a:2e:c8:21:f7:11:02:79:cc:73:89:22:6d:3c\n\tc6:a8:83:cf:1a:0b:c1:e7:32:a2:49:de:44:9c:18:22\n\tf7:e8:66:06:f8:a6:b0:e4:f9:c3:95:65:c1:69:e8:83\n\t7b:cc:ff:79:62:bd:f9:1a:f6:33:ea:e1:4c:dc:68:b0\n\t05:46:7c:32:72:c4:05:f2:89:7e:3d:2d:0d:2f:ed:ff\n\t6a:cf:07:3f:d0:98:83:6e:fb:14:bf:57:26:e8:e8:29\n\ta0:43:0f:f5:25:ea:a8:17:70:1a:a7:8a:6c:3d:bf:da\n\t39:4f:e3:cc:65:60:fe:a5:d5:2a:09:1b:71:a0:67:c7\n\t5b:\n\npublic exponent:\n\t01:00:01:\n\nprivate exponent:\n\t00:b1:56:d0:fa:00:d4:a2:13:c7:5e:0c:dc:e4:f1:97\n\tff:82:74:46:29:9a:a2:4a:bf:69:23:2d:ce:e9:bb:df\n\tcf:b7:8b:dd:f4:26:3c:38:14:d9:3f:6f:c2:3a:81:53\n\t8f:ba:48:53:fe:b5:90:4a:19:e7:1e:0b:0f:18:6d:c3\n\t7d:d5:d3:fa:87:47:86:e4:d6:bf:e7:a7:f9:ba:ab:2e\n\t19:5e:e1:8b:8b:9b:95:0d:f7:66:61:1e:19:e9:c3:88\n\t08:be:1c:ce:93:c1:09:b1:68:1b:61:46:60:74:64:46\n\t5d:51:34:ea:7f:a9:ca:a1:2a:47:85:84:4b:ef:84:05\n\t97:c3:46:7d:06:19:ce:24:73:90:64:fb:df:16:d5:80\n\t34:8e:90:7c:58:b6:a4:86:ce:30:b3:ab:52:8b:f2:95\n\t4c:b6:46:5a:77:db:73:c0:0c:3f:6d:12:18:a8:54:7c\n\tff:77:c3:ca:89:9f:63:98:ef:48:2d:c1:09:70:6e:ea\n\tcb:bb:78:91:42:8a:22:3e:21:ef:a5:bf:16:ee:66:45\n\te5:f0:26:6a:85:8e:e1:69:62:ac:05:00:a6:44:ba:c8\n\tac:10:00:97:f5:51:65:7f:9a:1f:7b:99:9d:02:d4:87\n\t50:ce:74:06:51:67:fa:fb:90:e4:33:79:f2:a8:61:ee\n\t45:1d:87:ca:22:5b:ac:e7:32:38:f8:2c:fd:55:92:1e\n\t3d:60:1e:7c:4b:fd:28:ff:e5:b1:02:6a:aa:22:f7:ae\n\ta8:36:90:7b:a6:f7:29:05:14:3a:21:da:36:05:f9:b0\n\t9d:f7:fb:10:75:d7:2c:21:32:95:e7:f7:17:be:09:cb\n\t66:fe:f1:69:71:df:a4:5e:3f:fc:67:6c:37:65:b8:51\n\tc6:22:38:fb:07:ce:89:54:50:43:71:44:3d:c3:51:5a\n\tbd:e5:c7:87:b2:ea:7b:64:0f:5d:34:9c:a1:52:b3:ce\n\t06:86:ba:7a:05:80:48:b3:6c:1b:79:74:9b:49:f2:30\n\tc1:\n\nprime1:\n\t00:e4:31:46:59:3d:24:f7:31:d9:22:26:af:c0:3e:f5\n\tc1:6d:be:ba:d3:9e:3f:b9:2c:43:a0:d0:47:09:e4:35\n\t63:19:a4:33:82:af:f9:76:3c:11:c2:cb:34:f9:a6:ab\n\tdd:ab:64:5a:6b:9c:c1:2a:52:89:64:7e:b5:a7:f0:4d\n\t29:13:a4:cf:17:f4:f2:0d:a0:6e:b9:5d:95:41:10:df\n\tae:f3:7a:13:49:21:66:73:2a:b7:e2:8d:7c:c2:34:e5\n\t3f:bd:78:ca:fc:64:c5:1c:3a:66:7a:12:53:96:bd:b0\n\tc3:7a:0c:ec:5e:55:c0:c3:3f:7f:25:72:f4:e2:19:94\n\t9d:65:15:be:c8:82:20:57:12:97:b2:a8:4d:3d:e0:8f\n\te2:1f:d0:c8:49:aa:f4:34:fa:91:d1:d1:cc:98:bc:3d\n\t8b:b1:9b:8f:fd:ef:03:dd:92:fb:ca:99:45:af:cc:83\n\t58:4c:bb:ba:73:9e:23:84:f9:7e:4f:40:fe:00:b5:bf\n\t6f:\n\nprime2:\n\t00:ef:14:ef:73:fc:0c:fc:e3:87:d9:7f:a6:f8:55:86\n\t57:63:8a:86:87:f5:ef:63:20:1f:b2:ae:28:dc:ab:59\n\t80:8f:15:64:44:e2:bc:a5:7b:d7:69:ef:30:b1:83:b3\n\tbd:09:fd:4a:0c:c6:31:5b:a4:79:d0:e5:d3:a8:31:fd\n\t59:ea:52:63:cf:17:a7:c1:54:bf:a8:11:9b:b1:85:47\n\t5a:08:a6:9c:2f:47:9d:ac:5d:e8:7c:e4:31:6c:99:71\n\t04:7d:20:98:be:8b:60:07:66:2d:b9:41:10:ea:dd:5b\n\t87:20:65:62:ea:75:a7:a6:04:a2:18:66:6b:db:5b:a4\n\t9f:12:97:cb:7c:8c:d2:e0:ce:02:ef:1e:df:a1:9d:6a\n\tbc:00:38:18:36:a1:c5:97:16:be:7a:df:5f:4f:4f:de\n\ta3:cb:25:fe:f6:67:0d:31:aa:0a:d4:1b:be:df:91:2c\n\t05:14:20:37:cc:4f:50:33:a6:50:1b:90:f9:b2:08:80\n\td5:\n\ncoefficient:\n\t47:d1:7f:ca:93:6a:14:9b:fe:85:8d:c2:15:11:52:a2\n\ta5:bc:f5:6b:a2:69:76:49:1e:09:79:f1:15:bf:39:48\n\t41:ff:92:78:af:bc:7d:6f:76:3b:32:9e:08:d2:42:06\n\t04:5f:36:e0:be:a8:1d:21:5c:ec:39:09:e0:77:c5:86\n\t06:e6:ce:98:16:fc:0f:30:de:a7:69:7a:8f:dd:01:42\n\t2a:22:f5:b7:c2:fc:c8:90:5a:78:dc:b3:e0:4d:e7:2d\n\t98:6c:e3:34:1b:d7:e8:f8:90:57:7e:4d:41:d6:4a:29\n\t81:92:eb:89:5b:45:85:dd:b9:16:20:63:cb:59:f6:06\n\t59:c1:dd:3b:6b:92:0a:5e:5e:63:4a:f1:a7:d5:16:b9\n\t8b:6c:d8:ad:76:0e:2d:3c:e0:b3:73:e0:6d:af:d4:a2\n\tbc:4b:fd:6c:2d:d7:5d:4d:cd:28:03:64:b2:ef:9a:1d\n\t82:8d:53:40:c5:f8:fb:f3:63:de:8e:1a:21:b6:35:14\n\t\n\nexp1:\n\t00:9c:a5:8a:d2:65:dc:03:69:8f:d2:16:d6:9d:55:5b\n\t25:4e:ae:18:d8:7e:90:e6:10:11:d8:ca:41:89:f3:c4\n\t06:64:aa:c8:c5:95:01:dd:fd:7c:7f:c9:39:73:8b:cb\n\tfd:9e:d3:84:12:cd:87:f9:02:b1:d8:6f:f7:49:f2:f7\n\t35:14:8c:15:b2:2f:6f:1e:95:9c:8c:d9:46:45:65:4c\n\tf8:6f:a1:c4:ad:76:25:3b:37:ff:05:a1:f5:1b:e8:6d\n\tdb:64:b9:10:37:55:01:ce:cf:f4:5b:26:4b:85:76:70\n\t6a:b0:55:40:c9:bd:7a:57:4e:36:7d:41:be:03:9c:65\n\tdd:ea:6f:94:09:56:f2:d6:73:27:f9:f7:f9:16:5a:1a\n\tcb:b2:e5:83:28:b7:17:6f:6a:f7:41:1f:11:a1:63:cf\n\ta8:1e:e3:58:64:8c:78:8d:d9:81:c9:e1:8f:ea:0f:ad\n\tb6:a6:ee:54:1f:5c:56:ab:c9:0d:c1:60:2f:3d:d3:86\n\t37:\n\nexp2:\n\t64:12:b7:48:2d:30:a2:89:fa:cb:27:8b:94:56:f8:2c\n\t8c:15:e7:c9:f1:3f:8a:96:5f:ae:43:08:07:96:11:98\n\ta6:4b:a5:f4:cf:93:77:11:27:51:c8:34:f1:98:d7:1b\n\t41:9b:2b:eb:bc:e9:dc:1a:34:83:24:30:3c:2e:f0:85\n\t3a:77:d2:1f:55:1f:7a:e5:26:74:0b:2a:c8:5b:a9:4a\n\t1e:64:de:eb:4b:66:cc:47:62:91:24:53:2b:c9:ee:6c\n\t9a:93:92:5b:ef:aa:fa:6d:e2:a5:b0:7e:8c:50:ab:87\n\t1c:20:54:0f:1f:c0:54:d5:8b:a3:fa:fb:1a:8e:79:91\n\tbc:0e:9d:b6:3c:9b:e8:4d:53:1d:14:27:37:56:d4:de\n\t6c:99:0e:49:8f:dd:4d:28:d0:02:4e:8d:6e:7d:58:0b\n\te7:74:b8:0c:1b:86:82:4b:52:cd:05:f0:17:54:84:c0\n\t7b:74:20:e6:fc:2b:ed:f2:a7:85:62:61:a2:0b:bd:21\n\t\n\n\nPublic Key PIN:\n\tpin-sha256:t5OXXC5gYqMNtUMsTqRs3A3vhfK2BiXVOgYzIEYv7Y8=\nPublic Key ID:\n\tsha256:b793975c2e6062a30db5432c4ea46cdc0def85f2b60625d53a063320462fed8f\n\tsha1:2f058a05034b2fdb3771bded4e7c8f560fa6a423\n\n-----BEGIN RSA PRIVATE KEY-----\nMIIG5AIBAAKCAYEA1Ryp+DKKSNFKZsPtwfR+jzOnQ8YFieIKYgakV688d8Ygpole\nnbmeEPrzT87tunFD7G9f6ALGND8rj7npj0AowxhOL/h/v1D9u0UsIaj5i2GWJrqN\nAhGLaxWiEB/hy5WOiwxDrGeigQqJkFM52Ep7G1Yx7PHJmKFGwN9FhIsFi1cNZfVR\nopZuCe/RMPNusNVZaIi+qcEffsE1cmfmuSlG3Ap0RKOIyR0ajDEzqZn9/0R7VwWC\nF97qy8TNYk94K/1tq3zyhVzRZ83xOSfrTqEfb3so3AU2jyKgYdwr/FZS72VCHS8I\nslgnqJW4izIXZqgIKmHaRZtMN4jUloi6l/6lktt6Lsgh9xECecxziSJtPMaog88a\nC8HnMqJJ3kScGCL36GYG+Kaw5PnDlWXBaeiDe8z/eWK9+Rr2M+rhTNxosAVGfDJy\nxAXyiX49LQ0v7f9qzwc/0JiDbvsUv1cm6OgpoEMP9SXqqBdwGqeKbD2/2jlP48xl\nYP6l1SoJG3GgZ8dbAgMBAAECggGBALFW0PoA1KITx14M3OTxl/+CdEYpmqJKv2kj\nLc7pu9/Pt4vd9CY8OBTZP2/COoFTj7pIU/61kEoZ5x4LDxhtw33V0/qHR4bk1r/n\np/m6qy4ZXuGLi5uVDfdmYR4Z6cOICL4czpPBCbFoG2FGYHRkRl1RNOp/qcqhKkeF\nhEvvhAWXw0Z9BhnOJHOQZPvfFtWANI6QfFi2pIbOMLOrUovylUy2Rlp323PADD9t\nEhioVHz/d8PKiZ9jmO9ILcEJcG7qy7t4kUKKIj4h76W/Fu5mReXwJmqFjuFpYqwF\nAKZEusisEACX9VFlf5ofe5mdAtSHUM50BlFn+vuQ5DN58qhh7kUdh8oiW6znMjj4\nLP1Vkh49YB58S/0o/+WxAmqqIveuqDaQe6b3KQUUOiHaNgX5sJ33+xB11ywhMpXn\n9xe+Cctm/vFpcd+kXj/8Z2w3ZbhRxiI4+wfOiVRQQ3FEPcNRWr3lx4ey6ntkD100\nnKFSs84Ghrp6BYBIs2wbeXSbSfIwwQKBwQDkMUZZPST3MdkiJq/APvXBbb66054/\nuSxDoNBHCeQ1YxmkM4Kv+XY8EcLLNPmmq92rZFprnMEqUolkfrWn8E0pE6TPF/Ty\nDaBuuV2VQRDfrvN6E0khZnMqt+KNfMI05T+9eMr8ZMUcOmZ6ElOWvbDDegzsXlXA\nwz9/JXL04hmUnWUVvsiCIFcSl7KoTT3gj+If0MhJqvQ0+pHR0cyYvD2LsZuP/e8D\n3ZL7yplFr8yDWEy7unOeI4T5fk9A/gC1v28CgcEA7xTvc/wM/OOH2X+m+FWGV2OK\nhof172MgH7KuKNyrWYCPFWRE4ryle9dp7zCxg7O9Cf1KDMYxW6R50OXTqDH9WepS\nY88Xp8FUv6gRm7GFR1oIppwvR52sXeh85DFsmXEEfSCYvotgB2YtuUEQ6t1bhyBl\nYup1p6YEohhma9tbpJ8Sl8t8jNLgzgLvHt+hnWq8ADgYNqHFlxa+et9fT0/eo8sl\n/vZnDTGqCtQbvt+RLAUUIDfMT1AzplAbkPmyCIDVAoHBAJylitJl3ANpj9IW1p1V\nWyVOrhjYfpDmEBHYykGJ88QGZKrIxZUB3f18f8k5c4vL/Z7ThBLNh/kCsdhv90ny\n9zUUjBWyL28elZyM2UZFZUz4b6HErXYlOzf/BaH1G+ht22S5EDdVAc7P9FsmS4V2\ncGqwVUDJvXpXTjZ9Qb4DnGXd6m+UCVby1nMn+ff5Floay7Llgyi3F29q90EfEaFj\nz6ge41hkjHiN2YHJ4Y/qD622pu5UH1xWq8kNwWAvPdOGNwKBwGQSt0gtMKKJ+ssn\ni5RW+CyMFefJ8T+Kll+uQwgHlhGYpkul9M+TdxEnUcg08ZjXG0GbK+u86dwaNIMk\nMDwu8IU6d9IfVR965SZ0CyrIW6lKHmTe60tmzEdikSRTK8nubJqTklvvqvpt4qWw\nfoxQq4ccIFQPH8BU1Yuj+vsajnmRvA6dtjyb6E1THRQnN1bU3myZDkmP3U0o0AJO\njW59WAvndLgMG4aCS1LNBfAXVITAe3Qg5vwr7fKnhWJhogu9IQKBwEfRf8qTahSb\n/oWNwhURUqKlvPVroml2SR4JefEVvzlIQf+SeK+8fW92OzKeCNJCBgRfNuC+qB0h\nXOw5CeB3xYYG5s6YFvwPMN6naXqP3QFCKiL1t8L8yJBaeNyz4E3nLZhs4zQb1+j4\nkFd+TUHWSimBkuuJW0WF3bkWIGPLWfYGWcHdO2uSCl5eY0rxp9UWuYts2K12Di08\n4LNz4G2v1KK8S/1sLdddTc0oA2Sy75odgo1TQMX4+/Nj3o4aIbY1FA==\n-----END RSA PRIVATE KEY-----"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [DescribeCertificateDetail](https://www.tencentcloud.com/document/api/1007/36587)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [UploadCertificate](https://www.tencentcloud.com/document/api/1007/36579)
+* Read:
+  - [DescribeCertificateDetail](https://www.tencentcloud.com/document/api/1007/36587)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [ModifyCertificateAlias](https://www.tencentcloud.com/document/api/1007/36583)
+  - [ModifyCertificateProject](https://www.tencentcloud.com/document/api/1007/36582)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Delete: [DeleteCertificate](https://www.tencentcloud.com/document/api/1007/36589)
 
 
 ## Create Certificate Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Certificate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Certificate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Certificate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Certificate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                 <span class="nx">cert</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-                <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Certificate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCertificate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Certificate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCertificate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Certificate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Certificate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Certificate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Certificate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Certificate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CertificateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ssl:Certificate</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ssl:Certificate</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_ssl_certificate&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -1775,7 +1945,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -1892,11 +2062,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## Certificate Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Certificate resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -1912,8 +2090,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content of the SSL certificate. Not allowed newline at the start and end.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Content of the SSL certificate. Not allowed newline at the start and end.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1921,8 +2098,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="key_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -1930,8 +2106,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1939,8 +2114,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1948,17 +2122,15 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the SSL certificate. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the SSL certificate. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the SSL certificate.</p>
-</dd></dl>
+    <dd>Tags of the SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1972,8 +2144,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content of the SSL certificate. Not allowed newline at the start and end.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Content of the SSL certificate. Not allowed newline at the start and end.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1981,8 +2152,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="key_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -1990,8 +2160,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1999,8 +2168,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2008,17 +2176,69 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the SSL certificate. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the SSL certificate. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the SSL certificate.</p>
-</dd></dl>
+    <dd>Tags of the SSL certificate.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cert_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_hcl" style="color: inherit; text-decoration: inherit;">cert</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Content of the SSL certificate. Not allowed newline at the start and end.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</dd><dt class="property-optional property-replacement property-secret"
+            title="Optional">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SSL certificate.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID of the SSL certificate. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2032,8 +2252,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Content of the SSL certificate. Not allowed newline at the start and end.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Content of the SSL certificate. Not allowed newline at the start and end.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2041,8 +2260,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="key_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
@@ -2050,8 +2268,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2059,8 +2276,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2068,17 +2284,15 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID of the SSL certificate. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the SSL certificate. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the SSL certificate.</p>
-</dd></dl>
+    <dd>Tags of the SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2092,8 +2306,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content of the SSL certificate. Not allowed newline at the start and end.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Content of the SSL certificate. Not allowed newline at the start and end.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2101,8 +2314,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="key_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
@@ -2110,8 +2322,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2119,8 +2330,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2128,17 +2338,15 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID of the SSL certificate. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the SSL certificate. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the SSL certificate.</p>
-</dd></dl>
+    <dd>Tags of the SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2152,8 +2360,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Content of the SSL certificate. Not allowed newline at the start and end.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Content of the SSL certificate. Not allowed newline at the start and end.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2161,8 +2368,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
@@ -2170,8 +2376,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2179,8 +2384,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -2188,17 +2392,15 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the SSL certificate. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the SSL certificate. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the SSL certificate.</p>
-</dd></dl>
+    <dd>Tags of the SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2212,8 +2414,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Content of the SSL certificate. Not allowed newline at the start and end.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Content of the SSL certificate. Not allowed newline at the start and end.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2221,8 +2422,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="key_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
@@ -2230,8 +2430,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2239,8 +2438,7 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2248,17 +2446,15 @@ The Certificate resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID of the SSL certificate. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the SSL certificate. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the SSL certificate.</p>
-</dd></dl>
+    <dd>Tags of the SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2279,8 +2475,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Beginning time of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Beginning time of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2288,8 +2483,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -2297,8 +2491,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Primary domain of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Primary domain of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -2306,8 +2499,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ending time of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Ending time of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2315,8 +2507,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="productzhname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productzhname_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Zh<wbr>Name</a>
@@ -2324,8 +2515,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate authority.</p>
-</dd><dt class="property-"
+    <dd>Certificate authority.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2333,8 +2523,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Status of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="subjectnames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subjectnames_csharp" style="color: inherit; text-decoration: inherit;">Subject<wbr>Names</a>
@@ -2342,8 +2531,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ALL domains included in the SSL certificate. Including the primary domain name.</p>
-</dd></dl>
+    <dd>ALL domains included in the SSL certificate. Including the primary domain name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2357,8 +2545,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Beginning time of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Beginning time of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2366,8 +2553,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -2375,8 +2561,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Primary domain of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Primary domain of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -2384,8 +2569,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ending time of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Ending time of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2393,8 +2577,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="productzhname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productzhname_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Zh<wbr>Name</a>
@@ -2402,8 +2585,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate authority.</p>
-</dd><dt class="property-"
+    <dd>Certificate authority.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2411,8 +2593,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Status of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="subjectnames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subjectnames_go" style="color: inherit; text-decoration: inherit;">Subject<wbr>Names</a>
@@ -2420,8 +2601,77 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ALL domains included in the SSL certificate. Including the primary domain name.</p>
-</dd></dl>
+    <dd>ALL domains included in the SSL certificate. Including the primary domain name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="begin_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begin_time_hcl" style="color: inherit; text-decoration: inherit;">begin_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Beginning time of the SSL certificate.</dd><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the SSL certificate.</dd><dt class="property-"
+            title="">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Primary domain of the SSL certificate.</dd><dt class="property-"
+            title="">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ending time of the SSL certificate.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="product_zh_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_zh_name_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>zh_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate authority.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Status of the SSL certificate.</dd><dt class="property-"
+            title="">
+        <span id="subject_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subject_names_hcl" style="color: inherit; text-decoration: inherit;">subject_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ALL domains included in the SSL certificate. Including the primary domain name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2435,8 +2685,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Beginning time of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Beginning time of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2444,8 +2693,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2453,8 +2701,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Primary domain of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Primary domain of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -2462,8 +2709,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ending time of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Ending time of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2471,8 +2717,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="productzhname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productzhname_java" style="color: inherit; text-decoration: inherit;">product<wbr>Zh<wbr>Name</a>
@@ -2480,8 +2725,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate authority.</p>
-</dd><dt class="property-"
+    <dd>Certificate authority.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2489,8 +2733,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Status of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Status of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="subjectnames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subjectnames_java" style="color: inherit; text-decoration: inherit;">subject<wbr>Names</a>
@@ -2498,8 +2741,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ALL domains included in the SSL certificate. Including the primary domain name.</p>
-</dd></dl>
+    <dd>ALL domains included in the SSL certificate. Including the primary domain name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2513,8 +2755,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Beginning time of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Beginning time of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2522,8 +2763,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2531,8 +2771,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Primary domain of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Primary domain of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -2540,8 +2779,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ending time of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Ending time of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2549,8 +2787,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="productzhname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productzhname_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Zh<wbr>Name</a>
@@ -2558,8 +2795,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate authority.</p>
-</dd><dt class="property-"
+    <dd>Certificate authority.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2567,8 +2803,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Status of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Status of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="subjectnames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subjectnames_nodejs" style="color: inherit; text-decoration: inherit;">subject<wbr>Names</a>
@@ -2576,8 +2811,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ALL domains included in the SSL certificate. Including the primary domain name.</p>
-</dd></dl>
+    <dd>ALL domains included in the SSL certificate. Including the primary domain name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2591,8 +2825,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Beginning time of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Beginning time of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2600,8 +2833,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2609,8 +2841,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Primary domain of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Primary domain of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -2618,8 +2849,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ending time of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Ending time of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2627,8 +2857,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="product_zh_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_zh_name_python" style="color: inherit; text-decoration: inherit;">product_<wbr>zh_<wbr>name</a>
@@ -2636,8 +2865,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate authority.</p>
-</dd><dt class="property-"
+    <dd>Certificate authority.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2645,8 +2873,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Status of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="subject_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subject_names_python" style="color: inherit; text-decoration: inherit;">subject_<wbr>names</a>
@@ -2654,8 +2881,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ALL domains included in the SSL certificate. Including the primary domain name.</p>
-</dd></dl>
+    <dd>ALL domains included in the SSL certificate. Including the primary domain name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2669,8 +2895,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Beginning time of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Beginning time of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2678,8 +2903,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2687,8 +2911,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Primary domain of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Primary domain of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -2696,8 +2919,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ending time of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Ending time of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2705,8 +2927,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="productzhname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productzhname_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Zh<wbr>Name</a>
@@ -2714,8 +2935,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate authority.</p>
-</dd><dt class="property-"
+    <dd>Certificate authority.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2723,8 +2943,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Status of the SSL certificate.</p>
-</dd><dt class="property-"
+    <dd>Status of the SSL certificate.</dd><dt class="property-"
             title="">
         <span id="subjectnames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subjectnames_yaml" style="color: inherit; text-decoration: inherit;">subject<wbr>Names</a>
@@ -2732,8 +2951,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ALL domains included in the SSL certificate. Including the primary domain name.</p>
-</dd></dl>
+    <dd>ALL domains included in the SSL certificate. Including the primary domain name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2743,18 +2961,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Certificate resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">CertificateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Certificate</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">CertificateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Certificate</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -2769,106 +2987,145 @@ Get an existing Certificate resource's state with the given name, ID, and option
         <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">subject_names</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Certificate</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCertificate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">CertificateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Certificate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCertificate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">CertificateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Certificate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Certificate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CertificateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Certificate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CertificateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Certificate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CertificateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Certificate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CertificateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingCertificate</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Ssl:Certificate</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_ssl_certificate</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CertificateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CertificateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2876,28 +3133,31 @@ Get an existing Certificate resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CertificateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2905,28 +3165,31 @@ Get an existing Certificate resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CertificateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2946,8 +3209,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Beginning time of the SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Beginning time of the SSL certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cert_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cert_csharp" style="color: inherit; text-decoration: inherit;">Cert</a>
@@ -2955,8 +3217,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content of the SSL certificate. Not allowed newline at the start and end.</p>
-</dd><dt class="property-optional"
+    <dd>Content of the SSL certificate. Not allowed newline at the start and end.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2964,8 +3225,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -2973,8 +3233,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Primary domain of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Primary domain of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -2982,8 +3241,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ending time of the SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ending time of the SSL certificate.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="state_key_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -2991,8 +3249,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -3000,8 +3257,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_productzhname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productzhname_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Zh<wbr>Name</a>
@@ -3009,8 +3265,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate authority.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate authority.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -3018,8 +3273,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the SSL certificate. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the SSL certificate. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -3027,8 +3281,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subjectnames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subjectnames_csharp" style="color: inherit; text-decoration: inherit;">Subject<wbr>Names</a>
@@ -3036,17 +3289,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ALL domains included in the SSL certificate. Including the primary domain name.</p>
-</dd><dt class="property-optional"
+    <dd>ALL domains included in the SSL certificate. Including the primary domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Tags of the SSL certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -3054,8 +3305,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</p>
-</dd></dl>
+    <dd>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3069,8 +3319,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Beginning time of the SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Beginning time of the SSL certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cert_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cert_go" style="color: inherit; text-decoration: inherit;">Cert</a>
@@ -3078,8 +3327,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content of the SSL certificate. Not allowed newline at the start and end.</p>
-</dd><dt class="property-optional"
+    <dd>Content of the SSL certificate. Not allowed newline at the start and end.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -3087,8 +3335,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -3096,8 +3343,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Primary domain of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Primary domain of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -3105,8 +3351,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ending time of the SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ending time of the SSL certificate.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="state_key_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_go" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -3114,8 +3359,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -3123,8 +3367,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_productzhname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productzhname_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Zh<wbr>Name</a>
@@ -3132,8 +3375,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate authority.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate authority.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -3141,8 +3383,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the SSL certificate. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the SSL certificate. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -3150,8 +3391,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subjectnames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subjectnames_go" style="color: inherit; text-decoration: inherit;">Subject<wbr>Names</a>
@@ -3159,17 +3399,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ALL domains included in the SSL certificate. Including the primary domain name.</p>
-</dd><dt class="property-optional"
+    <dd>ALL domains included in the SSL certificate. Including the primary domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Tags of the SSL certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -3177,8 +3415,117 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</p>
-</dd></dl>
+    <dd>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_begin_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_begin_time_hcl" style="color: inherit; text-decoration: inherit;">begin_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Beginning time of the SSL certificate.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cert_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cert_hcl" style="color: inherit; text-decoration: inherit;">cert</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Content of the SSL certificate. Not allowed newline at the start and end.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the SSL certificate.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Primary domain of the SSL certificate.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ending time of the SSL certificate.</dd><dt class="property-optional property-replacement property-secret"
+            title="Optional">
+        <span id="state_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SSL certificate.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_product_zh_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_zh_name_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>zh_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate authority.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID of the SSL certificate. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Status of the SSL certificate.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_subject_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subject_names_hcl" style="color: inherit; text-decoration: inherit;">subject_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ALL domains included in the SSL certificate. Including the primary domain name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the SSL certificate.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3192,8 +3539,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Beginning time of the SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Beginning time of the SSL certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cert_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cert_java" style="color: inherit; text-decoration: inherit;">cert</a>
@@ -3201,8 +3547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Content of the SSL certificate. Not allowed newline at the start and end.</p>
-</dd><dt class="property-optional"
+    <dd>Content of the SSL certificate. Not allowed newline at the start and end.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3210,8 +3555,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -3219,8 +3563,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Primary domain of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Primary domain of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -3228,8 +3571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ending time of the SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ending time of the SSL certificate.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="state_key_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_java" style="color: inherit; text-decoration: inherit;">key</a>
@@ -3237,8 +3579,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3246,8 +3587,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_productzhname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productzhname_java" style="color: inherit; text-decoration: inherit;">product<wbr>Zh<wbr>Name</a>
@@ -3255,8 +3595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate authority.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate authority.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3264,8 +3603,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID of the SSL certificate. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the SSL certificate. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3273,8 +3611,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Status of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subjectnames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subjectnames_java" style="color: inherit; text-decoration: inherit;">subject<wbr>Names</a>
@@ -3282,17 +3619,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ALL domains included in the SSL certificate. Including the primary domain name.</p>
-</dd><dt class="property-optional"
+    <dd>ALL domains included in the SSL certificate. Including the primary domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Tags of the SSL certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3300,8 +3635,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</p>
-</dd></dl>
+    <dd>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3315,8 +3649,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Beginning time of the SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Beginning time of the SSL certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cert_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cert_nodejs" style="color: inherit; text-decoration: inherit;">cert</a>
@@ -3324,8 +3657,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content of the SSL certificate. Not allowed newline at the start and end.</p>
-</dd><dt class="property-optional"
+    <dd>Content of the SSL certificate. Not allowed newline at the start and end.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3333,8 +3665,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -3342,8 +3673,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Primary domain of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Primary domain of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -3351,8 +3681,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ending time of the SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ending time of the SSL certificate.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="state_key_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
@@ -3360,8 +3689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3369,8 +3697,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_productzhname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productzhname_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Zh<wbr>Name</a>
@@ -3378,8 +3705,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate authority.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate authority.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3387,8 +3713,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID of the SSL certificate. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the SSL certificate. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3396,8 +3721,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Status of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subjectnames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subjectnames_nodejs" style="color: inherit; text-decoration: inherit;">subject<wbr>Names</a>
@@ -3405,17 +3729,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ALL domains included in the SSL certificate. Including the primary domain name.</p>
-</dd><dt class="property-optional"
+    <dd>ALL domains included in the SSL certificate. Including the primary domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Tags of the SSL certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3423,8 +3745,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</p>
-</dd></dl>
+    <dd>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3438,8 +3759,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Beginning time of the SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Beginning time of the SSL certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cert_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cert_python" style="color: inherit; text-decoration: inherit;">cert</a>
@@ -3447,8 +3767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Content of the SSL certificate. Not allowed newline at the start and end.</p>
-</dd><dt class="property-optional"
+    <dd>Content of the SSL certificate. Not allowed newline at the start and end.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -3456,8 +3775,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -3465,8 +3783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Primary domain of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Primary domain of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -3474,8 +3791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ending time of the SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ending time of the SSL certificate.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="state_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_python" style="color: inherit; text-decoration: inherit;">key</a>
@@ -3483,8 +3799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3492,8 +3807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_product_zh_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_zh_name_python" style="color: inherit; text-decoration: inherit;">product_<wbr>zh_<wbr>name</a>
@@ -3501,8 +3815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate authority.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate authority.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -3510,8 +3823,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the SSL certificate. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the SSL certificate. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3519,8 +3831,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subject_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subject_names_python" style="color: inherit; text-decoration: inherit;">subject_<wbr>names</a>
@@ -3528,17 +3839,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ALL domains included in the SSL certificate. Including the primary domain name.</p>
-</dd><dt class="property-optional"
+    <dd>ALL domains included in the SSL certificate. Including the primary domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Tags of the SSL certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3546,8 +3855,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</p>
-</dd></dl>
+    <dd>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3561,8 +3869,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Beginning time of the SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Beginning time of the SSL certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cert_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cert_yaml" style="color: inherit; text-decoration: inherit;">cert</a>
@@ -3570,8 +3877,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Content of the SSL certificate. Not allowed newline at the start and end.</p>
-</dd><dt class="property-optional"
+    <dd>Content of the SSL certificate. Not allowed newline at the start and end.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3579,8 +3885,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -3588,8 +3893,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Primary domain of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Primary domain of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -3597,8 +3901,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ending time of the SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ending time of the SSL certificate.</dd><dt class="property-optional property-replacement property-secret"
             title="Optional">
         <span id="state_key_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
@@ -3606,8 +3909,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</p>
-</dd><dt class="property-optional"
+    <dd>Key of the SSL certificate and required when certificate type is <code>SVR</code>. Not allowed newline at the start and end.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3615,8 +3917,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_productzhname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productzhname_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Zh<wbr>Name</a>
@@ -3624,8 +3925,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate authority.</p>
-</dd><dt class="property-optional"
+    <dd>Certificate authority.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3633,8 +3933,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID of the SSL certificate. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the SSL certificate. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3642,8 +3941,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Status of the SSL certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the SSL certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subjectnames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subjectnames_yaml" style="color: inherit; text-decoration: inherit;">subject<wbr>Names</a>
@@ -3651,17 +3949,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ALL domains included in the SSL certificate. Including the primary domain name.</p>
-</dd><dt class="property-optional"
+    <dd>ALL domains included in the SSL certificate. Including the primary domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the SSL certificate.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Tags of the SSL certificate.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3669,8 +3965,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</p>
-</dd></dl>
+    <dd>Type of the SSL certificate. Valid values: <code>CA</code> and <code>SVR</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -3688,9 +3983,12 @@ The following state arguments are supported:
 ssl certificate can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Ssl/certificate:Certificate tencentcloud_ssl_certificate.cert GjTNRoK7
+  $ pulumi import tencentcloud:Ssl/certificate:Certificate cert GjTNRoK7
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -3702,7 +4000,6 @@ $ pulumi import tencentcloud:Ssl/certificate:Certificate tencentcloud_ssl_certif
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

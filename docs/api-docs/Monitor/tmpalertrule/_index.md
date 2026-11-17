@@ -2,9 +2,11 @@
 ---
 title: "TmpAlertRule"
 title_tag: "tencentcloud.Monitor.TmpAlertRule"
-meta_desc: "Documentation for the tencentcloud.Monitor.TmpAlertRule resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a monitor tmpAlertRule NOTE: This resource will be deprecated in a future version, please use."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,20 +20,29 @@ Provides a resource to create a monitor tmpAlertRule
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const config = new pulumi.Config();
 const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "tf_monitor_vpc",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     vpcId: vpc.id,
     availabilityZone: availabilityZone,
+    name: "tf_monitor_subnet",
     cidrBlock: "10.0.1.0/24",
 });
-const fooTmpInstance = new tencentcloud.monitor.TmpInstance("fooTmpInstance", {
+const foo = new tencentcloud.monitor.TmpInstance("foo", {
     instanceName: "tf-tmp-instance",
     vpcId: vpc.id,
     subnetId: subnet.id,
@@ -41,11 +52,14 @@ const fooTmpInstance = new tencentcloud.monitor.TmpInstance("fooTmpInstance", {
         createdBy: "terraform",
     },
 });
-const fooTmpCvmAgent = new tencentcloud.monitor.TmpCvmAgent("fooTmpCvmAgent", {instanceId: fooTmpInstance.id});
-const fooTmpAlertRule = new tencentcloud.monitor.TmpAlertRule("fooTmpAlertRule", {
+const fooTmpCvmAgent = new tencentcloud.monitor.TmpCvmAgent("foo", {
+    instanceId: foo.id,
+    name: "tf-agent",
+});
+const fooTmpAlertRule = new tencentcloud.monitor.TmpAlertRule("foo", {
     duration: "2m",
     expr: "avg by (instance) (mysql_global_status_threads_connected) / avg by (instance) (mysql_global_variables_max_connections)  > 0.8",
-    instanceId: fooTmpInstance.id,
+    instanceId: foo.id,
     receivers: ["notice-f2svbu3w"],
     ruleName: "MySQL 连接数过多",
     ruleState: 2,
@@ -66,6 +80,11 @@ const fooTmpAlertRule = new tencentcloud.monitor.TmpAlertRule("fooTmpAlertRule",
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -74,12 +93,15 @@ config = pulumi.Config()
 availability_zone = config.get("availabilityZone")
 if availability_zone is None:
     availability_zone = "ap-guangzhou-4"
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="tf_monitor_vpc")
 subnet = tencentcloud.subnet.Instance("subnet",
     vpc_id=vpc.id,
     availability_zone=availability_zone,
+    name="tf_monitor_subnet",
     cidr_block="10.0.1.0/24")
-foo_tmp_instance = tencentcloud.monitor.TmpInstance("fooTmpInstance",
+foo = tencentcloud.monitor.TmpInstance("foo",
     instance_name="tf-tmp-instance",
     vpc_id=vpc.id,
     subnet_id=subnet.id,
@@ -88,30 +110,130 @@ foo_tmp_instance = tencentcloud.monitor.TmpInstance("fooTmpInstance",
     tags={
         "createdBy": "terraform",
     })
-foo_tmp_cvm_agent = tencentcloud.monitor.TmpCvmAgent("fooTmpCvmAgent", instance_id=foo_tmp_instance.id)
-foo_tmp_alert_rule = tencentcloud.monitor.TmpAlertRule("fooTmpAlertRule",
+foo_tmp_cvm_agent = tencentcloud.monitor.TmpCvmAgent("foo",
+    instance_id=foo.id,
+    name="tf-agent")
+foo_tmp_alert_rule = tencentcloud.monitor.TmpAlertRule("foo",
     duration="2m",
     expr="avg by (instance) (mysql_global_status_threads_connected) / avg by (instance) (mysql_global_variables_max_connections)  > 0.8",
-    instance_id=foo_tmp_instance.id,
+    instance_id=foo.id,
     receivers=["notice-f2svbu3w"],
     rule_name="MySQL 连接数过多",
     rule_state=2,
     type="MySQL/MySQL 连接数过多",
     annotations=[
-        tencentcloud.monitor.TmpAlertRuleAnnotationArgs(
-            key="description",
-            value="MySQL 连接数过多, 实例: {{$labels.instance}}，当前值: {{ $value | humanizePercentage }}。",
-        ),
-        tencentcloud.monitor.TmpAlertRuleAnnotationArgs(
-            key="summary",
-            value="MySQL 连接数过多(>80%)",
-        ),
+        {
+            "key": "description",
+            "value": "MySQL 连接数过多, 实例: {{$labels.instance}}，当前值: {{ $value | humanizePercentage }}。",
+        },
+        {
+            "key": "summary",
+            "value": "MySQL 连接数过多(>80%)",
+        },
     ],
-    labels=[tencentcloud.monitor.TmpAlertRuleLabelArgs(
-        key="severity",
-        value="warning",
-    )])
+    labels=[{
+        "key": "severity",
+        "value": "warning",
+    }])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-4"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("tf_monitor_vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(availabilityZone),
+			Name:             pulumi.String("tf_monitor_subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+		})
+		if err != nil {
+			return err
+		}
+		foo, err := monitor.NewTmpInstance(ctx, "foo", &monitor.TmpInstanceArgs{
+			InstanceName:      pulumi.String("tf-tmp-instance"),
+			VpcId:             vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:          subnet2.ID().ToIDOutput().ToStringOutput(),
+			DataRetentionTime: pulumi.Int(30),
+			Zone:              pulumi.String(availabilityZone),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = monitor.NewTmpCvmAgent(ctx, "foo", &monitor.TmpCvmAgentArgs{
+			InstanceId: foo.ID().ToIDOutput().ToStringOutput(),
+			Name:       pulumi.String("tf-agent"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = monitor.NewTmpAlertRule(ctx, "foo", &monitor.TmpAlertRuleArgs{
+			Duration:   pulumi.String("2m"),
+			Expr:       pulumi.String("avg by (instance) (mysql_global_status_threads_connected) / avg by (instance) (mysql_global_variables_max_connections)  > 0.8"),
+			InstanceId: foo.ID().ToIDOutput().ToStringOutput(),
+			Receivers: pulumi.StringArray{
+				pulumi.String("notice-f2svbu3w"),
+			},
+			RuleName:  pulumi.String("MySQL 连接数过多"),
+			RuleState: pulumi.Int(2),
+			Type:      pulumi.String("MySQL/MySQL 连接数过多"),
+			Annotations: monitor.TmpAlertRuleAnnotationArray{
+				&monitor.TmpAlertRuleAnnotationArgs{
+					Key:   pulumi.String("description"),
+					Value: pulumi.String("MySQL 连接数过多, 实例: {{$labels.instance}}，当前值: {{ $value | humanizePercentage }}。"),
+				},
+				&monitor.TmpAlertRuleAnnotationArgs{
+					Key:   pulumi.String("summary"),
+					Value: pulumi.String("MySQL 连接数过多(>80%)"),
+				},
+			},
+			Labels: monitor.TmpAlertRuleLabelArray{
+				&monitor.TmpAlertRuleLabelArgs{
+					Key:   pulumi.String("severity"),
+					Value: pulumi.String("warning"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -125,16 +247,18 @@ return await Deployment.RunAsync(() =>
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
         CidrBlock = "10.0.0.0/16",
+        Name = "tf_monitor_vpc",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         VpcId = vpc.Id,
         AvailabilityZone = availabilityZone,
+        Name = "tf_monitor_subnet",
         CidrBlock = "10.0.1.0/24",
     });
 
-    var fooTmpInstance = new Tencentcloud.Monitor.TmpInstance("fooTmpInstance", new()
+    var foo = new Tencentcloud.Monitor.TmpInstance("foo", new()
     {
         InstanceName = "tf-tmp-instance",
         VpcId = vpc.Id,
@@ -147,16 +271,17 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var fooTmpCvmAgent = new Tencentcloud.Monitor.TmpCvmAgent("fooTmpCvmAgent", new()
+    var fooTmpCvmAgent = new Tencentcloud.Monitor.TmpCvmAgent("foo", new()
     {
-        InstanceId = fooTmpInstance.Id,
+        InstanceId = foo.Id,
+        Name = "tf-agent",
     });
 
-    var fooTmpAlertRule = new Tencentcloud.Monitor.TmpAlertRule("fooTmpAlertRule", new()
+    var fooTmpAlertRule = new Tencentcloud.Monitor.TmpAlertRule("foo", new()
     {
         Duration = "2m",
         Expr = "avg by (instance) (mysql_global_status_threads_connected) / avg by (instance) (mysql_global_variables_max_connections)  > 0.8",
-        InstanceId = fooTmpInstance.Id,
+        InstanceId = foo.Id,
         Receivers = new[]
         {
             "notice-f2svbu3w",
@@ -189,101 +314,17 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		cfg := config.New(ctx, "")
-		availabilityZone := "ap-guangzhou-4"
-		if param := cfg.Get("availabilityZone"); param != "" {
-			availabilityZone = param
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			VpcId:            vpc.ID(),
-			AvailabilityZone: pulumi.String(availabilityZone),
-			CidrBlock:        pulumi.String("10.0.1.0/24"),
-		})
-		if err != nil {
-			return err
-		}
-		fooTmpInstance, err := Monitor.NewTmpInstance(ctx, "fooTmpInstance", &Monitor.TmpInstanceArgs{
-			InstanceName:      pulumi.String("tf-tmp-instance"),
-			VpcId:             vpc.ID(),
-			SubnetId:          subnet.ID(),
-			DataRetentionTime: pulumi.Int(30),
-			Zone:              pulumi.String(availabilityZone),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Monitor.NewTmpCvmAgent(ctx, "fooTmpCvmAgent", &Monitor.TmpCvmAgentArgs{
-			InstanceId: fooTmpInstance.ID(),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Monitor.NewTmpAlertRule(ctx, "fooTmpAlertRule", &Monitor.TmpAlertRuleArgs{
-			Duration:   pulumi.String("2m"),
-			Expr:       pulumi.String("avg by (instance) (mysql_global_status_threads_connected) / avg by (instance) (mysql_global_variables_max_connections)  > 0.8"),
-			InstanceId: fooTmpInstance.ID(),
-			Receivers: pulumi.StringArray{
-				pulumi.String("notice-f2svbu3w"),
-			},
-			RuleName:  pulumi.String("MySQL 连接数过多"),
-			RuleState: pulumi.Int(2),
-			Type:      pulumi.String("MySQL/MySQL 连接数过多"),
-			Annotations: monitor.TmpAlertRuleAnnotationArray{
-				&monitor.TmpAlertRuleAnnotationArgs{
-					Key:   pulumi.String("description"),
-					Value: pulumi.String("MySQL 连接数过多, 实例: {{$labels.instance}}，当前值: {{ $value | humanizePercentage }}。"),
-				},
-				&monitor.TmpAlertRuleAnnotationArgs{
-					Key:   pulumi.String("summary"),
-					Value: pulumi.String("MySQL 连接数过多(>80%)"),
-				},
-			},
-			Labels: monitor.TmpAlertRuleLabelArray{
-				&monitor.TmpAlertRuleLabelArgs{
-					Key:   pulumi.String("severity"),
-					Value: pulumi.String("warning"),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
 import com.pulumi.tencentcloud.Monitor.TmpInstance;
 import com.pulumi.tencentcloud.Monitor.TmpInstanceArgs;
 import com.pulumi.tencentcloud.Monitor.TmpCvmAgent;
@@ -292,8 +333,8 @@ import com.pulumi.tencentcloud.Monitor.TmpAlertRule;
 import com.pulumi.tencentcloud.Monitor.TmpAlertRuleArgs;
 import com.pulumi.tencentcloud.Monitor.inputs.TmpAlertRuleAnnotationArgs;
 import com.pulumi.tencentcloud.Monitor.inputs.TmpAlertRuleLabelArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -307,17 +348,19 @@ public class App {
     public static void stack(Context ctx) {
         final var config = ctx.config();
         final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-4");
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
             .cidrBlock("10.0.0.0/16")
+            .name("tf_monitor_vpc")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
             .vpcId(vpc.id())
             .availabilityZone(availabilityZone)
+            .name("tf_monitor_subnet")
             .cidrBlock("10.0.1.0/24")
             .build());
 
-        var fooTmpInstance = new TmpInstance("fooTmpInstance", TmpInstanceArgs.builder()        
+        var foo = new TmpInstance("foo", TmpInstanceArgs.builder()
             .instanceName("tf-tmp-instance")
             .vpcId(vpc.id())
             .subnetId(subnet.id())
@@ -326,14 +369,15 @@ public class App {
             .tags(Map.of("createdBy", "terraform"))
             .build());
 
-        var fooTmpCvmAgent = new TmpCvmAgent("fooTmpCvmAgent", TmpCvmAgentArgs.builder()        
-            .instanceId(fooTmpInstance.id())
+        var fooTmpCvmAgent = new TmpCvmAgent("fooTmpCvmAgent", TmpCvmAgentArgs.builder()
+            .instanceId(foo.id())
+            .name("tf-agent")
             .build());
 
-        var fooTmpAlertRule = new TmpAlertRule("fooTmpAlertRule", TmpAlertRuleArgs.builder()        
+        var fooTmpAlertRule = new TmpAlertRule("fooTmpAlertRule", TmpAlertRuleArgs.builder()
             .duration("2m")
             .expr("avg by (instance) (mysql_global_status_threads_connected) / avg by (instance) (mysql_global_variables_max_connections)  > 0.8")
-            .instanceId(fooTmpInstance.id())
+            .instanceId(foo.id())
             .receivers("notice-f2svbu3w")
             .ruleName("MySQL 连接数过多")
             .ruleState(2)
@@ -356,6 +400,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 configuration:
   availabilityZone:
@@ -366,13 +415,15 @@ resources:
     type: tencentcloud:Vpc:Instance
     properties:
       cidrBlock: 10.0.0.0/16
+      name: tf_monitor_vpc
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       vpcId: ${vpc.id}
       availabilityZone: ${availabilityZone}
+      name: tf_monitor_subnet
       cidrBlock: 10.0.1.0/24
-  fooTmpInstance:
+  foo:
     type: tencentcloud:Monitor:TmpInstance
     properties:
       instanceName: tf-tmp-instance
@@ -384,14 +435,17 @@ resources:
         createdBy: terraform
   fooTmpCvmAgent:
     type: tencentcloud:Monitor:TmpCvmAgent
+    name: foo
     properties:
-      instanceId: ${fooTmpInstance.id}
+      instanceId: ${foo.id}
+      name: tf-agent
   fooTmpAlertRule:
     type: tencentcloud:Monitor:TmpAlertRule
+    name: foo
     properties:
       duration: 2m
       expr: avg by (instance) (mysql_global_status_threads_connected) / avg by (instance) (mysql_global_variables_max_connections)  > 0.8
-      instanceId: ${fooTmpInstance.id}
+      instanceId: ${foo.id}
       receivers:
         - notice-f2svbu3w
       ruleName: MySQL 连接数过多
@@ -406,73 +460,162 @@ resources:
         - key: severity
           value: warning
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "tf_monitor_vpc"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = var.availabilityZone
+  name              = "tf_monitor_subnet"
+  cidr_block        = "10.0.1.0/24"
+}
+resource "tencentcloud_monitor_tmpinstance" "foo" {
+  instance_name       = "tf-tmp-instance"
+  vpc_id              = tencentcloud_vpc_instance.vpc.id
+  subnet_id           = tencentcloud_subnet_instance.subnet.id
+  data_retention_time = 30
+  zone                = var.availabilityZone
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+resource "tencentcloud_monitor_tmpcvmagent" "foo" {
+  instance_id = tencentcloud_monitor_tmpinstance.foo.id
+  name        = "tf-agent"
+}
+resource "tencentcloud_monitor_tmpalertrule" "foo" {
+  duration    = "2m"
+  expr        = "avg by (instance) (mysql_global_status_threads_connected) / avg by (instance) (mysql_global_variables_max_connections)  > 0.8"
+  instance_id = tencentcloud_monitor_tmpinstance.foo.id
+  receivers   = ["notice-f2svbu3w"]
+  rule_name   = "MySQL 连接数过多"
+  rule_state  = 2
+  type        = "MySQL/MySQL 连接数过多"
+  annotations {
+    key   = "description"
+    value = "MySQL 连接数过多, 实例: {{$labels.instance}}，当前值: {{ $value | humanizePercentage }}。"
+  }
+  annotations {
+    key   = "summary"
+    value = "MySQL 连接数过多(>80%)"
+  }
+  labels {
+    key   = "severity"
+    value = "warning"
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-4"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateAlertRule](https://www.tencentcloud.com/document/api/248/48767)
+* Read: [DescribeAlertRules](https://www.tencentcloud.com/document/api/248/48756)
+* Update: [UpdateAlertRule](https://www.tencentcloud.com/document/api/248/48743)
+* Delete: [DeleteAlertRules](https://www.tencentcloud.com/document/api/248/48760)
 
 
 ## Create TmpAlertRule Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">TmpAlertRule</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TmpAlertRuleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">TmpAlertRule</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TmpAlertRuleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">TmpAlertRule</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                 <span class="nx">annotations</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.TmpAlertRuleAnnotationArgs]]</span> = None<span class="p">,</span>
-                 <span class="nx">duration</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">expr</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">labels</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.TmpAlertRuleLabelArgs]]</span> = None<span class="p">,</span>
-                 <span class="nx">receivers</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">rule_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">rule_state</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                 <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">TmpAlertRule</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TmpAlertRuleArgs</a></span><span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">TmpAlertRule</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                 <span class="nx">expr</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">receivers</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">rule_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">annotations</span><span class="p">:</span> <span class="nx">Optional[Sequence[TmpAlertRuleAnnotationArgs]]</span> = None<span class="p">,</span>
+                 <span class="nx">duration</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">labels</span><span class="p">:</span> <span class="nx">Optional[Sequence[TmpAlertRuleLabelArgs]]</span> = None<span class="p">,</span>
+                 <span class="nx">rule_state</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                 <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTmpAlertRule</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TmpAlertRuleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TmpAlertRule</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTmpAlertRule</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TmpAlertRuleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TmpAlertRule</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">TmpAlertRule</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TmpAlertRuleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">TmpAlertRule</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TmpAlertRuleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">TmpAlertRule</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TmpAlertRuleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">TmpAlertRule</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TmpAlertRuleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Monitor:TmpAlertRule</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Monitor:TmpAlertRule</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_monitor_tmp_alert_rule&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -493,7 +636,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -610,11 +753,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## TmpAlertRule Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -630,8 +781,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</p>
-</dd><dt class="property-required"
+    <dd>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -639,8 +789,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="receivers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_csharp" style="color: inherit; text-decoration: inherit;">Receivers</a>
@@ -648,8 +797,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Alarm notification template id list.</p>
-</dd><dt class="property-required"
+    <dd>Alarm notification template id list.</dd><dt class="property-required"
             title="Required">
         <span id="rulename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulename_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Name</a>
@@ -657,17 +805,15 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule name.</p>
-</dd><dt class="property-optional"
+    <dd>Rule name.</dd><dt class="property-optional"
             title="Optional">
         <span id="annotations_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_csharp" style="color: inherit; text-decoration: inherit;">Annotations</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmpalertruleannotation">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Alert<wbr>Rule<wbr>Annotation<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmpalertruleannotation">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Alert<wbr>Rule<wbr>Annotation&gt;</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="duration_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_csharp" style="color: inherit; text-decoration: inherit;">Duration</a>
@@ -675,17 +821,15 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="labels_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_csharp" style="color: inherit; text-decoration: inherit;">Labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmpalertrulelabel">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Alert<wbr>Rule<wbr>Label<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmpalertrulelabel">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Alert<wbr>Rule<wbr>Label&gt;</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="rulestate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulestate_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>State</a>
@@ -693,8 +837,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rule state code.</p>
-</dd><dt class="property-optional"
+    <dd>Rule state code.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -702,8 +845,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alarm Policy Template Classification.</p>
-</dd></dl>
+    <dd>Alarm Policy Template Classification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -717,8 +859,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</p>
-</dd><dt class="property-required"
+    <dd>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -726,8 +867,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="receivers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_go" style="color: inherit; text-decoration: inherit;">Receivers</a>
@@ -735,8 +875,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Alarm notification template id list.</p>
-</dd><dt class="property-required"
+    <dd>Alarm notification template id list.</dd><dt class="property-required"
             title="Required">
         <span id="rulename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulename_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Name</a>
@@ -744,8 +883,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule name.</p>
-</dd><dt class="property-optional"
+    <dd>Rule name.</dd><dt class="property-optional"
             title="Optional">
         <span id="annotations_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_go" style="color: inherit; text-decoration: inherit;">Annotations</a>
@@ -753,8 +891,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmpalertruleannotation">[]Tmp<wbr>Alert<wbr>Rule<wbr>Annotation<wbr>Args</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="duration_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_go" style="color: inherit; text-decoration: inherit;">Duration</a>
@@ -762,8 +899,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="labels_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_go" style="color: inherit; text-decoration: inherit;">Labels</a>
@@ -771,8 +907,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmpalertrulelabel">[]Tmp<wbr>Alert<wbr>Rule<wbr>Label<wbr>Args</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="rulestate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulestate_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>State</a>
@@ -780,8 +915,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rule state code.</p>
-</dd><dt class="property-optional"
+    <dd>Rule state code.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -789,8 +923,85 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alarm Policy Template Classification.</p>
-</dd></dl>
+    <dd>Alarm Policy Template Classification.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="expr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expr_hcl" style="color: inherit; text-decoration: inherit;">expr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id.</dd><dt class="property-required"
+            title="Required">
+        <span id="receivers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_hcl" style="color: inherit; text-decoration: inherit;">receivers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Alarm notification template id list.</dd><dt class="property-required"
+            title="Required">
+        <span id="rule_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_name_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="annotations_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_hcl" style="color: inherit; text-decoration: inherit;">annotations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tmpalertruleannotation">list(object)</a></span>
+    </dt>
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_hcl" style="color: inherit; text-decoration: inherit;">duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="labels_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_hcl" style="color: inherit; text-decoration: inherit;">labels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tmpalertrulelabel">list(object)</a></span>
+    </dt>
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_state_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Rule state code.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alarm Policy Template Classification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -804,8 +1015,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</p>
-</dd><dt class="property-required"
+    <dd>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -813,8 +1023,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="receivers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_java" style="color: inherit; text-decoration: inherit;">receivers</a>
@@ -822,8 +1031,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Alarm notification template id list.</p>
-</dd><dt class="property-required"
+    <dd>Alarm notification template id list.</dd><dt class="property-required"
             title="Required">
         <span id="rulename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulename_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Name</a>
@@ -831,17 +1039,15 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule name.</p>
-</dd><dt class="property-optional"
+    <dd>Rule name.</dd><dt class="property-optional"
             title="Optional">
         <span id="annotations_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_java" style="color: inherit; text-decoration: inherit;">annotations</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmpalertruleannotation">List&lt;Tmp<wbr>Alert<wbr>Rule<wbr>Annotation<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmpalertruleannotation">List&lt;Tmp<wbr>Alert<wbr>Rule<wbr>Annotation&gt;</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="duration_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_java" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -849,17 +1055,15 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="labels_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_java" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmpalertrulelabel">List&lt;Tmp<wbr>Alert<wbr>Rule<wbr>Label<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmpalertrulelabel">List&lt;Tmp<wbr>Alert<wbr>Rule<wbr>Label&gt;</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="rulestate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulestate_java" style="color: inherit; text-decoration: inherit;">rule<wbr>State</a>
@@ -867,8 +1071,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Rule state code.</p>
-</dd><dt class="property-optional"
+    <dd>Rule state code.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -876,8 +1079,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alarm Policy Template Classification.</p>
-</dd></dl>
+    <dd>Alarm Policy Template Classification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -891,8 +1093,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</p>
-</dd><dt class="property-required"
+    <dd>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -900,8 +1101,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="receivers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_nodejs" style="color: inherit; text-decoration: inherit;">receivers</a>
@@ -909,8 +1109,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Alarm notification template id list.</p>
-</dd><dt class="property-required"
+    <dd>Alarm notification template id list.</dd><dt class="property-required"
             title="Required">
         <span id="rulename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulename_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Name</a>
@@ -918,17 +1117,15 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule name.</p>
-</dd><dt class="property-optional"
+    <dd>Rule name.</dd><dt class="property-optional"
             title="Optional">
         <span id="annotations_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_nodejs" style="color: inherit; text-decoration: inherit;">annotations</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmpalertruleannotation">Tmp<wbr>Alert<wbr>Rule<wbr>Annotation<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#tmpalertruleannotation">Tmp<wbr>Alert<wbr>Rule<wbr>Annotation[]</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="duration_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_nodejs" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -936,17 +1133,15 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="labels_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_nodejs" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmpalertrulelabel">Tmp<wbr>Alert<wbr>Rule<wbr>Label<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#tmpalertrulelabel">Tmp<wbr>Alert<wbr>Rule<wbr>Label[]</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="rulestate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulestate_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>State</a>
@@ -954,8 +1149,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Rule state code.</p>
-</dd><dt class="property-optional"
+    <dd>Rule state code.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -963,8 +1157,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alarm Policy Template Classification.</p>
-</dd></dl>
+    <dd>Alarm Policy Template Classification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -978,8 +1171,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</p>
-</dd><dt class="property-required"
+    <dd>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -987,8 +1179,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="receivers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_python" style="color: inherit; text-decoration: inherit;">receivers</a>
@@ -996,8 +1187,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Alarm notification template id list.</p>
-</dd><dt class="property-required"
+    <dd>Alarm notification template id list.</dd><dt class="property-required"
             title="Required">
         <span id="rule_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_name_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>name</a>
@@ -1005,17 +1195,15 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule name.</p>
-</dd><dt class="property-optional"
+    <dd>Rule name.</dd><dt class="property-optional"
             title="Optional">
         <span id="annotations_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_python" style="color: inherit; text-decoration: inherit;">annotations</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmpalertruleannotation">Tmp<wbr>Alert<wbr>Rule<wbr>Annotation<wbr>Args]</a></span>
+        <span class="property-type"><a href="#tmpalertruleannotation">Sequence[Tmp<wbr>Alert<wbr>Rule<wbr>Annotation<wbr>Args]</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="duration_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_python" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -1023,17 +1211,15 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="labels_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_python" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmpalertrulelabel">Tmp<wbr>Alert<wbr>Rule<wbr>Label<wbr>Args]</a></span>
+        <span class="property-type"><a href="#tmpalertrulelabel">Sequence[Tmp<wbr>Alert<wbr>Rule<wbr>Label<wbr>Args]</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="rule_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_state_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>state</a>
@@ -1041,8 +1227,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rule state code.</p>
-</dd><dt class="property-optional"
+    <dd>Rule state code.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1050,8 +1235,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Alarm Policy Template Classification.</p>
-</dd></dl>
+    <dd>Alarm Policy Template Classification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1065,8 +1249,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</p>
-</dd><dt class="property-required"
+    <dd>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1074,8 +1257,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="receivers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_yaml" style="color: inherit; text-decoration: inherit;">receivers</a>
@@ -1083,8 +1265,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Alarm notification template id list.</p>
-</dd><dt class="property-required"
+    <dd>Alarm notification template id list.</dd><dt class="property-required"
             title="Required">
         <span id="rulename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulename_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Name</a>
@@ -1092,8 +1273,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule name.</p>
-</dd><dt class="property-optional"
+    <dd>Rule name.</dd><dt class="property-optional"
             title="Optional">
         <span id="annotations_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_yaml" style="color: inherit; text-decoration: inherit;">annotations</a>
@@ -1101,8 +1281,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmpalertruleannotation">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="duration_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_yaml" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -1110,8 +1289,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="labels_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_yaml" style="color: inherit; text-decoration: inherit;">labels</a>
@@ -1119,8 +1297,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmpalertrulelabel">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="rulestate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulestate_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>State</a>
@@ -1128,8 +1305,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Rule state code.</p>
-</dd><dt class="property-optional"
+    <dd>Rule state code.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1137,8 +1313,7 @@ The TmpAlertRule resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alarm Policy Template Classification.</p>
-</dd></dl>
+    <dd>Alarm Policy Template Classification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1159,8 +1334,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1174,8 +1348,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1189,8 +1376,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1204,8 +1390,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1219,8 +1404,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1234,8 +1418,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1245,128 +1428,167 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing TmpAlertRule resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TmpAlertRuleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">TmpAlertRule</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TmpAlertRuleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">TmpAlertRule</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">annotations</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.TmpAlertRuleAnnotationArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">annotations</span><span class="p">:</span> <span class="nx">Optional[Sequence[TmpAlertRuleAnnotationArgs]]</span> = None<span class="p">,</span>
         <span class="nx">duration</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">expr</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">labels</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.TmpAlertRuleLabelArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">labels</span><span class="p">:</span> <span class="nx">Optional[Sequence[TmpAlertRuleLabelArgs]]</span> = None<span class="p">,</span>
         <span class="nx">receivers</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">rule_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">rule_state</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> TmpAlertRule</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTmpAlertRule<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TmpAlertRuleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TmpAlertRule</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTmpAlertRule<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TmpAlertRuleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TmpAlertRule</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">TmpAlertRule</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TmpAlertRuleState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">TmpAlertRule</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TmpAlertRuleState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">TmpAlertRule</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TmpAlertRuleState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">TmpAlertRule</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TmpAlertRuleState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingTmpAlertRule</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Monitor:TmpAlertRule</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_monitor_tmp_alert_rule</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TmpAlertRuleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TmpAlertRuleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1374,28 +1596,31 @@ Get an existing TmpAlertRule resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TmpAlertRuleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1403,28 +1628,31 @@ Get an existing TmpAlertRule resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TmpAlertRuleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1442,10 +1670,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_annotations_csharp" style="color: inherit; text-decoration: inherit;">Annotations</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmpalertruleannotation">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Alert<wbr>Rule<wbr>Annotation<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmpalertruleannotation">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Alert<wbr>Rule<wbr>Annotation&gt;</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_duration_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_duration_csharp" style="color: inherit; text-decoration: inherit;">Duration</a>
@@ -1453,8 +1680,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expr_csharp" style="color: inherit; text-decoration: inherit;">Expr</a>
@@ -1462,8 +1688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1471,17 +1696,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_labels_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_csharp" style="color: inherit; text-decoration: inherit;">Labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmpalertrulelabel">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Alert<wbr>Rule<wbr>Label<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmpalertrulelabel">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Alert<wbr>Rule<wbr>Label&gt;</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_receivers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receivers_csharp" style="color: inherit; text-decoration: inherit;">Receivers</a>
@@ -1489,8 +1712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Alarm notification template id list.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm notification template id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulename_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Name</a>
@@ -1498,8 +1720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule name.</p>
-</dd><dt class="property-optional"
+    <dd>Rule name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulestate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulestate_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>State</a>
@@ -1507,8 +1728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rule state code.</p>
-</dd><dt class="property-optional"
+    <dd>Rule state code.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1516,8 +1736,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alarm Policy Template Classification.</p>
-</dd></dl>
+    <dd>Alarm Policy Template Classification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1531,8 +1750,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmpalertruleannotation">[]Tmp<wbr>Alert<wbr>Rule<wbr>Annotation<wbr>Args</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_duration_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_duration_go" style="color: inherit; text-decoration: inherit;">Duration</a>
@@ -1540,8 +1758,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expr_go" style="color: inherit; text-decoration: inherit;">Expr</a>
@@ -1549,8 +1766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1558,8 +1774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_labels_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_go" style="color: inherit; text-decoration: inherit;">Labels</a>
@@ -1567,8 +1782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmpalertrulelabel">[]Tmp<wbr>Alert<wbr>Rule<wbr>Label<wbr>Args</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_receivers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receivers_go" style="color: inherit; text-decoration: inherit;">Receivers</a>
@@ -1576,8 +1790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Alarm notification template id list.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm notification template id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulename_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Name</a>
@@ -1585,8 +1798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule name.</p>
-</dd><dt class="property-optional"
+    <dd>Rule name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulestate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulestate_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>State</a>
@@ -1594,8 +1806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rule state code.</p>
-</dd><dt class="property-optional"
+    <dd>Rule state code.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1603,8 +1814,85 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alarm Policy Template Classification.</p>
-</dd></dl>
+    <dd>Alarm Policy Template Classification.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_annotations_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_annotations_hcl" style="color: inherit; text-decoration: inherit;">annotations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tmpalertruleannotation">list(object)</a></span>
+    </dt>
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_duration_hcl" style="color: inherit; text-decoration: inherit;">duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_expr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expr_hcl" style="color: inherit; text-decoration: inherit;">expr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_labels_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_hcl" style="color: inherit; text-decoration: inherit;">labels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tmpalertrulelabel">list(object)</a></span>
+    </dt>
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_receivers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receivers_hcl" style="color: inherit; text-decoration: inherit;">receivers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Alarm notification template id list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rule_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_name_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rule_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_state_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Rule state code.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alarm Policy Template Classification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1616,10 +1904,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_annotations_java" style="color: inherit; text-decoration: inherit;">annotations</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmpalertruleannotation">List&lt;Tmp<wbr>Alert<wbr>Rule<wbr>Annotation<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmpalertruleannotation">List&lt;Tmp<wbr>Alert<wbr>Rule<wbr>Annotation&gt;</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_duration_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_duration_java" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -1627,8 +1914,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expr_java" style="color: inherit; text-decoration: inherit;">expr</a>
@@ -1636,8 +1922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1645,17 +1930,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_labels_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_java" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmpalertrulelabel">List&lt;Tmp<wbr>Alert<wbr>Rule<wbr>Label<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#tmpalertrulelabel">List&lt;Tmp<wbr>Alert<wbr>Rule<wbr>Label&gt;</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_receivers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receivers_java" style="color: inherit; text-decoration: inherit;">receivers</a>
@@ -1663,8 +1946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Alarm notification template id list.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm notification template id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulename_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Name</a>
@@ -1672,8 +1954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule name.</p>
-</dd><dt class="property-optional"
+    <dd>Rule name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulestate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulestate_java" style="color: inherit; text-decoration: inherit;">rule<wbr>State</a>
@@ -1681,8 +1962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Rule state code.</p>
-</dd><dt class="property-optional"
+    <dd>Rule state code.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1690,8 +1970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alarm Policy Template Classification.</p>
-</dd></dl>
+    <dd>Alarm Policy Template Classification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1703,10 +1982,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_annotations_nodejs" style="color: inherit; text-decoration: inherit;">annotations</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmpalertruleannotation">Tmp<wbr>Alert<wbr>Rule<wbr>Annotation<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#tmpalertruleannotation">Tmp<wbr>Alert<wbr>Rule<wbr>Annotation[]</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_duration_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_duration_nodejs" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -1714,8 +1992,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expr_nodejs" style="color: inherit; text-decoration: inherit;">expr</a>
@@ -1723,8 +2000,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1732,17 +2008,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_labels_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_nodejs" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmpalertrulelabel">Tmp<wbr>Alert<wbr>Rule<wbr>Label<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#tmpalertrulelabel">Tmp<wbr>Alert<wbr>Rule<wbr>Label[]</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_receivers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receivers_nodejs" style="color: inherit; text-decoration: inherit;">receivers</a>
@@ -1750,8 +2024,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Alarm notification template id list.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm notification template id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulename_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Name</a>
@@ -1759,8 +2032,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule name.</p>
-</dd><dt class="property-optional"
+    <dd>Rule name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulestate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulestate_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>State</a>
@@ -1768,8 +2040,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Rule state code.</p>
-</dd><dt class="property-optional"
+    <dd>Rule state code.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1777,8 +2048,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alarm Policy Template Classification.</p>
-</dd></dl>
+    <dd>Alarm Policy Template Classification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1790,10 +2060,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_annotations_python" style="color: inherit; text-decoration: inherit;">annotations</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmpalertruleannotation">Tmp<wbr>Alert<wbr>Rule<wbr>Annotation<wbr>Args]</a></span>
+        <span class="property-type"><a href="#tmpalertruleannotation">Sequence[Tmp<wbr>Alert<wbr>Rule<wbr>Annotation<wbr>Args]</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_duration_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_duration_python" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -1801,8 +2070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expr_python" style="color: inherit; text-decoration: inherit;">expr</a>
@@ -1810,8 +2078,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1819,17 +2086,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_labels_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_python" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmpalertrulelabel">Tmp<wbr>Alert<wbr>Rule<wbr>Label<wbr>Args]</a></span>
+        <span class="property-type"><a href="#tmpalertrulelabel">Sequence[Tmp<wbr>Alert<wbr>Rule<wbr>Label<wbr>Args]</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_receivers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receivers_python" style="color: inherit; text-decoration: inherit;">receivers</a>
@@ -1837,8 +2102,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Alarm notification template id list.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm notification template id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rule_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_name_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>name</a>
@@ -1846,8 +2110,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule name.</p>
-</dd><dt class="property-optional"
+    <dd>Rule name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rule_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_state_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>state</a>
@@ -1855,8 +2118,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rule state code.</p>
-</dd><dt class="property-optional"
+    <dd>Rule state code.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1864,8 +2126,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Alarm Policy Template Classification.</p>
-</dd></dl>
+    <dd>Alarm Policy Template Classification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1879,8 +2140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmpalertruleannotation">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_duration_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_duration_yaml" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -1888,8 +2148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_expr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_expr_yaml" style="color: inherit; text-decoration: inherit;">expr</a>
@@ -1897,8 +2156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule expression, reference documentation: <code>https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1906,8 +2164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_labels_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_yaml" style="color: inherit; text-decoration: inherit;">labels</a>
@@ -1915,8 +2172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmpalertrulelabel">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Rule alarm duration.</p>
-</dd><dt class="property-optional"
+    <dd>Rule alarm duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_receivers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receivers_yaml" style="color: inherit; text-decoration: inherit;">receivers</a>
@@ -1924,8 +2180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Alarm notification template id list.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm notification template id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulename_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Name</a>
@@ -1933,8 +2188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule name.</p>
-</dd><dt class="property-optional"
+    <dd>Rule name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rulestate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rulestate_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>State</a>
@@ -1942,8 +2196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Rule state code.</p>
-</dd><dt class="property-optional"
+    <dd>Rule state code.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1951,8 +2204,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alarm Policy Template Classification.</p>
-</dd></dl>
+    <dd>Alarm Policy Template Classification.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1967,7 +2219,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="tmpalertruleannotation">Tmp<wbr>Alert<wbr>Rule<wbr>Annotation</h4>
+<h4 id="tmpalertruleannotation">
+Tmp<wbr>Alert<wbr>Rule<wbr>Annotation<pulumi-choosable type="language" values="python,go" class="inline">, Tmp<wbr>Alert<wbr>Rule<wbr>Annotation<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1979,8 +2233,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1988,8 +2241,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2003,8 +2255,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2012,8 +2263,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2027,8 +2299,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2036,8 +2307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2051,8 +2321,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2060,8 +2329,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2075,8 +2343,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2084,8 +2351,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2099,8 +2365,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2108,12 +2373,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="tmpalertrulelabel">Tmp<wbr>Alert<wbr>Rule<wbr>Label</h4>
+<h4 id="tmpalertrulelabel">
+Tmp<wbr>Alert<wbr>Rule<wbr>Label<pulumi-choosable type="language" values="python,go" class="inline">, Tmp<wbr>Alert<wbr>Rule<wbr>Label<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2125,8 +2391,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2134,8 +2399,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2149,8 +2413,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2158,8 +2421,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2173,8 +2457,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2182,8 +2465,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2197,8 +2479,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2206,8 +2487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2221,8 +2501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2230,8 +2509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2245,8 +2523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2254,8 +2531,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2264,11 +2540,13 @@ The following state arguments are supported:
 
 
 monitor tmpAlertRule can be imported using the id, e.g.
-
 ```sh
 $ pulumi import tencentcloud:Monitor/tmpAlertRule:TmpAlertRule tmpAlertRule instanceId#Rule_id
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2280,7 +2558,6 @@ $ pulumi import tencentcloud:Monitor/tmpAlertRule:TmpAlertRule tmpAlertRule inst
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getZoneConfig"
 title_tag: "tencentcloud.Sqlserver.getZoneConfig"
-meta_desc: "Documentation for the tencentcloud.Sqlserver.getZoneConfig function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query purchasable specification configuration for each availability zone in this specific region."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,42 +18,45 @@ Use this data source to query purchasable specification configuration for each a
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Sqlserver.getZoneConfig({});
+const example = tencentcloud.sqlserver.getZoneConfig({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Sqlserver.get_zone_config()
+example = tencentcloud.sqlserver.get_zone_config()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var example = Tencentcloud.Sqlserver.GetZoneConfig.Invoke();
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/sqlserver"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Sqlserver.GetZoneConfig(ctx, nil, nil)
+		_, err := sqlserver.GetZoneConfig(ctx, &sqlserver.GetZoneConfigArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -59,6 +64,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Sqlserver.GetZoneConfig.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -67,8 +94,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Sqlserver.SqlserverFunctions;
 import com.pulumi.tencentcloud.Sqlserver.inputs.GetZoneConfigArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -80,20 +107,52 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var example = SqlserverFunctions.getZoneConfig();
+        final var example = SqlserverFunctions.getZoneConfig(GetZoneConfigArgs.builder()
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Sqlserver:getZoneConfig
-      Arguments: {}
+      function: tencentcloud:Sqlserver:getZoneConfig
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_sqlserver_getzoneconfig" "example" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeProductConfig](https://www.tencentcloud.com/document/api/238/32112)
+  - [DescribeZones](https://www.tencentcloud.com/document/api/238/32109)
 
 
 
@@ -105,7 +164,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -113,9 +172,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getZoneConfig<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneConfigArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>></span
+><span class="k">function </span>getZoneConfig<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneConfigArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>></span
 ><span class="k">
-function </span>getZoneConfigOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneConfigOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>></span
+function </span>getZoneConfigOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneConfigOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -127,8 +186,8 @@ function </span>getZoneConfigOutput<span class="p">(</span><span class="nx">args
 ><span class="k">def </span>get_zone_config<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetZoneConfigResult</span
 ><span class="k">
-def </span>get_zone_config_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetZoneConfigResult]</span
+def </span>get_zone_config_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetZoneConfigResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -153,7 +212,8 @@ func </span>GetZoneConfigOutput<span class="p">(</span><span class="nx">ctx</spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetZoneConfig </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetZoneConfigArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneConfigInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneConfigInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneConfigInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -162,7 +222,8 @@ func </span>GetZoneConfigOutput<span class="p">(</span><span class="nx">ctx</spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> </span>getZoneConfig<span class="p">(</span><span class="nx">GetZoneConfigArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> </span>getZoneConfig<span class="p">(</span><span class="nx">GetZoneConfigArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> </span>getZoneConfig<span class="p">(</span><span class="nx">GetZoneConfigArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,6 +235,15 @@ func </span>GetZoneConfigOutput<span class="p">(</span><span class="nx">ctx</spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Sqlserver/getZoneConfig:getZoneConfig
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_sqlserver_get_zone_config&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -192,8 +262,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -207,8 +276,21 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -222,8 +304,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -237,8 +318,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +332,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -267,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -291,8 +369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="zonelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonelists_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Lists</a>
@@ -300,8 +377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfigzonelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Outputs.<wbr>Get<wbr>Zone<wbr>Config<wbr>Zone<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of availability zones. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of availability zones. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -323,8 +399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="zonelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonelists_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Lists</a>
@@ -332,11 +407,40 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfigzonelist">[]Get<wbr>Zone<wbr>Config<wbr>Zone<wbr>List</a></span>
     </dt>
-    <dd><p>A list of availability zones. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of availability zones. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="zone_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_lists_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getzoneconfigzonelist">list(object)</a></span>
+    </dt>
+    <dd>A list of availability zones. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -355,8 +459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="zonelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonelists_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Lists</a>
@@ -364,8 +467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfigzonelist">List&lt;Get<wbr>Zone<wbr>Config<wbr>Zone<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of availability zones. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of availability zones. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -387,8 +489,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="zonelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonelists_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Lists</a>
@@ -396,8 +497,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfigzonelist">Get<wbr>Zone<wbr>Config<wbr>Zone<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of availability zones. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of availability zones. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -419,17 +519,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="zone_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_lists_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getzoneconfigzonelist">Get<wbr>Zone<wbr>Config<wbr>Zone<wbr>List]</a></span>
+        <span class="property-type"><a href="#getzoneconfigzonelist">Sequence[Get<wbr>Zone<wbr>Config<wbr>Zone<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of availability zones. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of availability zones. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -451,8 +549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="zonelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonelists_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Lists</a>
@@ -460,8 +557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfigzonelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of availability zones. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of availability zones. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -493,8 +589,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alphabet ID of availability zone.</p>
-</dd><dt class="property-required"
+    <dd>Alphabet ID of availability zone.</dd><dt class="property-required"
             title="Required">
         <span id="specinfolists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specinfolists_csharp" style="color: inherit; text-decoration: inherit;">Specinfo<wbr>Lists</a>
@@ -502,8 +597,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfigzonelistspecinfolist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Get<wbr>Zone<wbr>Config<wbr>Zone<wbr>List<wbr>Specinfo<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of specinfo configurations for the specific availability zone. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of specinfo configurations for the specific availability zone. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -511,8 +605,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number ID of availability zone.</p>
-</dd></dl>
+    <dd>Number ID of availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -526,8 +619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alphabet ID of availability zone.</p>
-</dd><dt class="property-required"
+    <dd>Alphabet ID of availability zone.</dd><dt class="property-required"
             title="Required">
         <span id="specinfolists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specinfolists_go" style="color: inherit; text-decoration: inherit;">Specinfo<wbr>Lists</a>
@@ -535,8 +627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfigzonelistspecinfolist">[]Get<wbr>Zone<wbr>Config<wbr>Zone<wbr>List<wbr>Specinfo<wbr>List</a></span>
     </dt>
-    <dd><p>A list of specinfo configurations for the specific availability zone. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of specinfo configurations for the specific availability zone. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -544,8 +635,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number ID of availability zone.</p>
-</dd></dl>
+    <dd>Number ID of availability zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alphabet ID of availability zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="specinfo_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specinfo_lists_hcl" style="color: inherit; text-decoration: inherit;">specinfo_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getzoneconfigzonelistspecinfolist">list(object)</a></span>
+    </dt>
+    <dd>A list of specinfo configurations for the specific availability zone. Each element contains the following attributes:</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number ID of availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -559,8 +679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alphabet ID of availability zone.</p>
-</dd><dt class="property-required"
+    <dd>Alphabet ID of availability zone.</dd><dt class="property-required"
             title="Required">
         <span id="specinfolists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specinfolists_java" style="color: inherit; text-decoration: inherit;">specinfo<wbr>Lists</a>
@@ -568,8 +687,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfigzonelistspecinfolist">List&lt;Get<wbr>Zone<wbr>Config<wbr>Zone<wbr>List<wbr>Specinfo<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of specinfo configurations for the specific availability zone. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of specinfo configurations for the specific availability zone. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -577,8 +695,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number ID of availability zone.</p>
-</dd></dl>
+    <dd>Number ID of availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -592,8 +709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alphabet ID of availability zone.</p>
-</dd><dt class="property-required"
+    <dd>Alphabet ID of availability zone.</dd><dt class="property-required"
             title="Required">
         <span id="specinfolists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specinfolists_nodejs" style="color: inherit; text-decoration: inherit;">specinfo<wbr>Lists</a>
@@ -601,8 +717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfigzonelistspecinfolist">Get<wbr>Zone<wbr>Config<wbr>Zone<wbr>List<wbr>Specinfo<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of specinfo configurations for the specific availability zone. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of specinfo configurations for the specific availability zone. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -610,8 +725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number ID of availability zone.</p>
-</dd></dl>
+    <dd>Number ID of availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -625,17 +739,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Alphabet ID of availability zone.</p>
-</dd><dt class="property-required"
+    <dd>Alphabet ID of availability zone.</dd><dt class="property-required"
             title="Required">
         <span id="specinfo_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specinfo_lists_python" style="color: inherit; text-decoration: inherit;">specinfo_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getzoneconfigzonelistspecinfolist">Get<wbr>Zone<wbr>Config<wbr>Zone<wbr>List<wbr>Specinfo<wbr>List]</a></span>
+        <span class="property-type"><a href="#getzoneconfigzonelistspecinfolist">Sequence[Get<wbr>Zone<wbr>Config<wbr>Zone<wbr>List<wbr>Specinfo<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of specinfo configurations for the specific availability zone. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of specinfo configurations for the specific availability zone. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
@@ -643,8 +755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number ID of availability zone.</p>
-</dd></dl>
+    <dd>Number ID of availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -658,8 +769,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alphabet ID of availability zone.</p>
-</dd><dt class="property-required"
+    <dd>Alphabet ID of availability zone.</dd><dt class="property-required"
             title="Required">
         <span id="specinfolists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specinfolists_yaml" style="color: inherit; text-decoration: inherit;">specinfo<wbr>Lists</a>
@@ -667,8 +777,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfigzonelistspecinfolist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of specinfo configurations for the specific availability zone. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of specinfo configurations for the specific availability zone. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -676,8 +785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number ID of availability zone.</p>
-</dd></dl>
+    <dd>Number ID of availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -695,8 +803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing mode under this specification. Valid values are <code>POSTPAID_BY_HOUR</code>, <code>PREPAID</code> and <code>ALL</code>. <code>ALL</code> means both POSTPAID_BY_HOUR and PREPAID.</p>
-</dd><dt class="property-required"
+    <dd>Billing mode under this specification. Valid values are <code>POSTPAID_BY_HOUR</code>, <code>PREPAID</code> and <code>ALL</code>. <code>ALL</code> means both POSTPAID_BY_HOUR and PREPAID.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_csharp" style="color: inherit; text-decoration: inherit;">Cpu</a>
@@ -704,8 +811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of CPU cores.</p>
-</dd><dt class="property-required"
+    <dd>Number of CPU cores.</dd><dt class="property-required"
             title="Required">
         <span id="dbversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversion_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Version</a>
@@ -713,8 +819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database version information. Valid values: <code>2008R2 (SQL Server 2008 Enterprise)</code>, <code>2012SP3 (SQL Server 2012 Enterprise)</code>, <code>2016SP1 (SQL Server 2016 Enterprise)</code>, <code>201602 (SQL Server 2016 Standard)</code>, <code>2017 (SQL Server 2017 Enterprise)</code>.</p>
-</dd><dt class="property-required"
+    <dd>Database version information. Valid values: <code>2008R2 (SQL Server 2008 Enterprise)</code>, <code>2012SP3 (SQL Server 2012 Enterprise)</code>, <code>2016SP1 (SQL Server 2016 Enterprise)</code>, <code>201602 (SQL Server 2016 Standard)</code>, <code>2017 (SQL Server 2017 Enterprise)</code>.</dd><dt class="property-required"
             title="Required">
         <span id="dbversionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversionname_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Version<wbr>Name</a>
@@ -722,8 +827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version name corresponding to the <code>db_version</code> field.</p>
-</dd><dt class="property-required"
+    <dd>Version name corresponding to the <code>dbVersion</code> field.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_csharp" style="color: inherit; text-decoration: inherit;">Machine<wbr>Type</a>
@@ -731,8 +835,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Model ID.</p>
-</dd><dt class="property-required"
+    <dd>Model ID.</dd><dt class="property-required"
             title="Required">
         <span id="maxstoragesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstoragesize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Storage<wbr>Size</a>
@@ -740,8 +843,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum disk size under this specification in GB.</p>
-</dd><dt class="property-required"
+    <dd>Maximum disk size under this specification in GB.</dd><dt class="property-required"
             title="Required">
         <span id="memory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_csharp" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -749,8 +851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size in GB.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in GB.</dd><dt class="property-required"
             title="Required">
         <span id="minstoragesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minstoragesize_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Storage<wbr>Size</a>
@@ -758,8 +859,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum disk size under this specification in GB.</p>
-</dd><dt class="property-required"
+    <dd>Minimum disk size under this specification in GB.</dd><dt class="property-required"
             title="Required">
         <span id="qps_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_csharp" style="color: inherit; text-decoration: inherit;">Qps</a>
@@ -767,8 +867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>QPS of this specification.</p>
-</dd><dt class="property-required"
+    <dd>QPS of this specification.</dd><dt class="property-required"
             title="Required">
         <span id="specid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specid_csharp" style="color: inherit; text-decoration: inherit;">Spec<wbr>Id</a>
@@ -776,8 +875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance specification ID.</p>
-</dd></dl>
+    <dd>Instance specification ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -791,8 +889,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing mode under this specification. Valid values are <code>POSTPAID_BY_HOUR</code>, <code>PREPAID</code> and <code>ALL</code>. <code>ALL</code> means both POSTPAID_BY_HOUR and PREPAID.</p>
-</dd><dt class="property-required"
+    <dd>Billing mode under this specification. Valid values are <code>POSTPAID_BY_HOUR</code>, <code>PREPAID</code> and <code>ALL</code>. <code>ALL</code> means both POSTPAID_BY_HOUR and PREPAID.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_go" style="color: inherit; text-decoration: inherit;">Cpu</a>
@@ -800,8 +897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of CPU cores.</p>
-</dd><dt class="property-required"
+    <dd>Number of CPU cores.</dd><dt class="property-required"
             title="Required">
         <span id="dbversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversion_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Version</a>
@@ -809,8 +905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database version information. Valid values: <code>2008R2 (SQL Server 2008 Enterprise)</code>, <code>2012SP3 (SQL Server 2012 Enterprise)</code>, <code>2016SP1 (SQL Server 2016 Enterprise)</code>, <code>201602 (SQL Server 2016 Standard)</code>, <code>2017 (SQL Server 2017 Enterprise)</code>.</p>
-</dd><dt class="property-required"
+    <dd>Database version information. Valid values: <code>2008R2 (SQL Server 2008 Enterprise)</code>, <code>2012SP3 (SQL Server 2012 Enterprise)</code>, <code>2016SP1 (SQL Server 2016 Enterprise)</code>, <code>201602 (SQL Server 2016 Standard)</code>, <code>2017 (SQL Server 2017 Enterprise)</code>.</dd><dt class="property-required"
             title="Required">
         <span id="dbversionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversionname_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Version<wbr>Name</a>
@@ -818,8 +913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version name corresponding to the <code>db_version</code> field.</p>
-</dd><dt class="property-required"
+    <dd>Version name corresponding to the <code>dbVersion</code> field.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_go" style="color: inherit; text-decoration: inherit;">Machine<wbr>Type</a>
@@ -827,8 +921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Model ID.</p>
-</dd><dt class="property-required"
+    <dd>Model ID.</dd><dt class="property-required"
             title="Required">
         <span id="maxstoragesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstoragesize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Storage<wbr>Size</a>
@@ -836,8 +929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum disk size under this specification in GB.</p>
-</dd><dt class="property-required"
+    <dd>Maximum disk size under this specification in GB.</dd><dt class="property-required"
             title="Required">
         <span id="memory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_go" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -845,8 +937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size in GB.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in GB.</dd><dt class="property-required"
             title="Required">
         <span id="minstoragesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minstoragesize_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Storage<wbr>Size</a>
@@ -854,8 +945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum disk size under this specification in GB.</p>
-</dd><dt class="property-required"
+    <dd>Minimum disk size under this specification in GB.</dd><dt class="property-required"
             title="Required">
         <span id="qps_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_go" style="color: inherit; text-decoration: inherit;">Qps</a>
@@ -863,8 +953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>QPS of this specification.</p>
-</dd><dt class="property-required"
+    <dd>QPS of this specification.</dd><dt class="property-required"
             title="Required">
         <span id="specid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specid_go" style="color: inherit; text-decoration: inherit;">Spec<wbr>Id</a>
@@ -872,8 +961,93 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance specification ID.</p>
-</dd></dl>
+    <dd>Instance specification ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Billing mode under this specification. Valid values are <code>POSTPAID_BY_HOUR</code>, <code>PREPAID</code> and <code>ALL</code>. <code>ALL</code> means both POSTPAID_BY_HOUR and PREPAID.</dd><dt class="property-required"
+            title="Required">
+        <span id="cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_hcl" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of CPU cores.</dd><dt class="property-required"
+            title="Required">
+        <span id="db_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_version_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database version information. Valid values: <code>2008R2 (SQL Server 2008 Enterprise)</code>, <code>2012SP3 (SQL Server 2012 Enterprise)</code>, <code>2016SP1 (SQL Server 2016 Enterprise)</code>, <code>201602 (SQL Server 2016 Standard)</code>, <code>2017 (SQL Server 2017 Enterprise)</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="db_version_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_version_name_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>version_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version name corresponding to the <code>dbVersion</code> field.</dd><dt class="property-required"
+            title="Required">
+        <span id="machine_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machine_type_hcl" style="color: inherit; text-decoration: inherit;">machine_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Model ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_storage_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_storage_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>storage_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum disk size under this specification in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_hcl" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory size in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_storage_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_storage_size_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>storage_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum disk size under this specification in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="qps_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_hcl" style="color: inherit; text-decoration: inherit;">qps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>QPS of this specification.</dd><dt class="property-required"
+            title="Required">
+        <span id="spec_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spec_id_hcl" style="color: inherit; text-decoration: inherit;">spec_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance specification ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -887,8 +1061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing mode under this specification. Valid values are <code>POSTPAID_BY_HOUR</code>, <code>PREPAID</code> and <code>ALL</code>. <code>ALL</code> means both POSTPAID_BY_HOUR and PREPAID.</p>
-</dd><dt class="property-required"
+    <dd>Billing mode under this specification. Valid values are <code>POSTPAID_BY_HOUR</code>, <code>PREPAID</code> and <code>ALL</code>. <code>ALL</code> means both POSTPAID_BY_HOUR and PREPAID.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_java" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -896,8 +1069,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of CPU cores.</p>
-</dd><dt class="property-required"
+    <dd>Number of CPU cores.</dd><dt class="property-required"
             title="Required">
         <span id="dbversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversion_java" style="color: inherit; text-decoration: inherit;">db<wbr>Version</a>
@@ -905,8 +1077,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database version information. Valid values: <code>2008R2 (SQL Server 2008 Enterprise)</code>, <code>2012SP3 (SQL Server 2012 Enterprise)</code>, <code>2016SP1 (SQL Server 2016 Enterprise)</code>, <code>201602 (SQL Server 2016 Standard)</code>, <code>2017 (SQL Server 2017 Enterprise)</code>.</p>
-</dd><dt class="property-required"
+    <dd>Database version information. Valid values: <code>2008R2 (SQL Server 2008 Enterprise)</code>, <code>2012SP3 (SQL Server 2012 Enterprise)</code>, <code>2016SP1 (SQL Server 2016 Enterprise)</code>, <code>201602 (SQL Server 2016 Standard)</code>, <code>2017 (SQL Server 2017 Enterprise)</code>.</dd><dt class="property-required"
             title="Required">
         <span id="dbversionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversionname_java" style="color: inherit; text-decoration: inherit;">db<wbr>Version<wbr>Name</a>
@@ -914,8 +1085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version name corresponding to the <code>db_version</code> field.</p>
-</dd><dt class="property-required"
+    <dd>Version name corresponding to the <code>dbVersion</code> field.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_java" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -923,8 +1093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Model ID.</p>
-</dd><dt class="property-required"
+    <dd>Model ID.</dd><dt class="property-required"
             title="Required">
         <span id="maxstoragesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstoragesize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Storage<wbr>Size</a>
@@ -932,8 +1101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum disk size under this specification in GB.</p>
-</dd><dt class="property-required"
+    <dd>Maximum disk size under this specification in GB.</dd><dt class="property-required"
             title="Required">
         <span id="memory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_java" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -941,8 +1109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory size in GB.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in GB.</dd><dt class="property-required"
             title="Required">
         <span id="minstoragesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minstoragesize_java" style="color: inherit; text-decoration: inherit;">min<wbr>Storage<wbr>Size</a>
@@ -950,8 +1117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Minimum disk size under this specification in GB.</p>
-</dd><dt class="property-required"
+    <dd>Minimum disk size under this specification in GB.</dd><dt class="property-required"
             title="Required">
         <span id="qps_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_java" style="color: inherit; text-decoration: inherit;">qps</a>
@@ -959,8 +1125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>QPS of this specification.</p>
-</dd><dt class="property-required"
+    <dd>QPS of this specification.</dd><dt class="property-required"
             title="Required">
         <span id="specid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specid_java" style="color: inherit; text-decoration: inherit;">spec<wbr>Id</a>
@@ -968,8 +1133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance specification ID.</p>
-</dd></dl>
+    <dd>Instance specification ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -983,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing mode under this specification. Valid values are <code>POSTPAID_BY_HOUR</code>, <code>PREPAID</code> and <code>ALL</code>. <code>ALL</code> means both POSTPAID_BY_HOUR and PREPAID.</p>
-</dd><dt class="property-required"
+    <dd>Billing mode under this specification. Valid values are <code>POSTPAID_BY_HOUR</code>, <code>PREPAID</code> and <code>ALL</code>. <code>ALL</code> means both POSTPAID_BY_HOUR and PREPAID.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_nodejs" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -992,8 +1155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of CPU cores.</p>
-</dd><dt class="property-required"
+    <dd>Number of CPU cores.</dd><dt class="property-required"
             title="Required">
         <span id="dbversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversion_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Version</a>
@@ -1001,8 +1163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database version information. Valid values: <code>2008R2 (SQL Server 2008 Enterprise)</code>, <code>2012SP3 (SQL Server 2012 Enterprise)</code>, <code>2016SP1 (SQL Server 2016 Enterprise)</code>, <code>201602 (SQL Server 2016 Standard)</code>, <code>2017 (SQL Server 2017 Enterprise)</code>.</p>
-</dd><dt class="property-required"
+    <dd>Database version information. Valid values: <code>2008R2 (SQL Server 2008 Enterprise)</code>, <code>2012SP3 (SQL Server 2012 Enterprise)</code>, <code>2016SP1 (SQL Server 2016 Enterprise)</code>, <code>201602 (SQL Server 2016 Standard)</code>, <code>2017 (SQL Server 2017 Enterprise)</code>.</dd><dt class="property-required"
             title="Required">
         <span id="dbversionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversionname_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Version<wbr>Name</a>
@@ -1010,8 +1171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version name corresponding to the <code>db_version</code> field.</p>
-</dd><dt class="property-required"
+    <dd>Version name corresponding to the <code>dbVersion</code> field.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_nodejs" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -1019,8 +1179,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Model ID.</p>
-</dd><dt class="property-required"
+    <dd>Model ID.</dd><dt class="property-required"
             title="Required">
         <span id="maxstoragesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstoragesize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Storage<wbr>Size</a>
@@ -1028,8 +1187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum disk size under this specification in GB.</p>
-</dd><dt class="property-required"
+    <dd>Maximum disk size under this specification in GB.</dd><dt class="property-required"
             title="Required">
         <span id="memory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_nodejs" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1037,8 +1195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory size in GB.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in GB.</dd><dt class="property-required"
             title="Required">
         <span id="minstoragesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minstoragesize_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Storage<wbr>Size</a>
@@ -1046,8 +1203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Minimum disk size under this specification in GB.</p>
-</dd><dt class="property-required"
+    <dd>Minimum disk size under this specification in GB.</dd><dt class="property-required"
             title="Required">
         <span id="qps_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_nodejs" style="color: inherit; text-decoration: inherit;">qps</a>
@@ -1055,8 +1211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>QPS of this specification.</p>
-</dd><dt class="property-required"
+    <dd>QPS of this specification.</dd><dt class="property-required"
             title="Required">
         <span id="specid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specid_nodejs" style="color: inherit; text-decoration: inherit;">spec<wbr>Id</a>
@@ -1064,8 +1219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance specification ID.</p>
-</dd></dl>
+    <dd>Instance specification ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1079,8 +1233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Billing mode under this specification. Valid values are <code>POSTPAID_BY_HOUR</code>, <code>PREPAID</code> and <code>ALL</code>. <code>ALL</code> means both POSTPAID_BY_HOUR and PREPAID.</p>
-</dd><dt class="property-required"
+    <dd>Billing mode under this specification. Valid values are <code>POSTPAID_BY_HOUR</code>, <code>PREPAID</code> and <code>ALL</code>. <code>ALL</code> means both POSTPAID_BY_HOUR and PREPAID.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_python" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -1088,8 +1241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of CPU cores.</p>
-</dd><dt class="property-required"
+    <dd>Number of CPU cores.</dd><dt class="property-required"
             title="Required">
         <span id="db_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_version_python" style="color: inherit; text-decoration: inherit;">db_<wbr>version</a>
@@ -1097,8 +1249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database version information. Valid values: <code>2008R2 (SQL Server 2008 Enterprise)</code>, <code>2012SP3 (SQL Server 2012 Enterprise)</code>, <code>2016SP1 (SQL Server 2016 Enterprise)</code>, <code>201602 (SQL Server 2016 Standard)</code>, <code>2017 (SQL Server 2017 Enterprise)</code>.</p>
-</dd><dt class="property-required"
+    <dd>Database version information. Valid values: <code>2008R2 (SQL Server 2008 Enterprise)</code>, <code>2012SP3 (SQL Server 2012 Enterprise)</code>, <code>2016SP1 (SQL Server 2016 Enterprise)</code>, <code>201602 (SQL Server 2016 Standard)</code>, <code>2017 (SQL Server 2017 Enterprise)</code>.</dd><dt class="property-required"
             title="Required">
         <span id="db_version_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_version_name_python" style="color: inherit; text-decoration: inherit;">db_<wbr>version_<wbr>name</a>
@@ -1106,8 +1257,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version name corresponding to the <code>db_version</code> field.</p>
-</dd><dt class="property-required"
+    <dd>Version name corresponding to the <code>dbVersion</code> field.</dd><dt class="property-required"
             title="Required">
         <span id="machine_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machine_type_python" style="color: inherit; text-decoration: inherit;">machine_<wbr>type</a>
@@ -1115,8 +1265,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Model ID.</p>
-</dd><dt class="property-required"
+    <dd>Model ID.</dd><dt class="property-required"
             title="Required">
         <span id="max_storage_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_storage_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>storage_<wbr>size</a>
@@ -1124,8 +1273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum disk size under this specification in GB.</p>
-</dd><dt class="property-required"
+    <dd>Maximum disk size under this specification in GB.</dd><dt class="property-required"
             title="Required">
         <span id="memory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_python" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1133,8 +1281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size in GB.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in GB.</dd><dt class="property-required"
             title="Required">
         <span id="min_storage_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_storage_size_python" style="color: inherit; text-decoration: inherit;">min_<wbr>storage_<wbr>size</a>
@@ -1142,8 +1289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum disk size under this specification in GB.</p>
-</dd><dt class="property-required"
+    <dd>Minimum disk size under this specification in GB.</dd><dt class="property-required"
             title="Required">
         <span id="qps_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_python" style="color: inherit; text-decoration: inherit;">qps</a>
@@ -1151,8 +1297,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>QPS of this specification.</p>
-</dd><dt class="property-required"
+    <dd>QPS of this specification.</dd><dt class="property-required"
             title="Required">
         <span id="spec_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spec_id_python" style="color: inherit; text-decoration: inherit;">spec_<wbr>id</a>
@@ -1160,8 +1305,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance specification ID.</p>
-</dd></dl>
+    <dd>Instance specification ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1175,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing mode under this specification. Valid values are <code>POSTPAID_BY_HOUR</code>, <code>PREPAID</code> and <code>ALL</code>. <code>ALL</code> means both POSTPAID_BY_HOUR and PREPAID.</p>
-</dd><dt class="property-required"
+    <dd>Billing mode under this specification. Valid values are <code>POSTPAID_BY_HOUR</code>, <code>PREPAID</code> and <code>ALL</code>. <code>ALL</code> means both POSTPAID_BY_HOUR and PREPAID.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_yaml" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -1184,8 +1327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of CPU cores.</p>
-</dd><dt class="property-required"
+    <dd>Number of CPU cores.</dd><dt class="property-required"
             title="Required">
         <span id="dbversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversion_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Version</a>
@@ -1193,8 +1335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database version information. Valid values: <code>2008R2 (SQL Server 2008 Enterprise)</code>, <code>2012SP3 (SQL Server 2012 Enterprise)</code>, <code>2016SP1 (SQL Server 2016 Enterprise)</code>, <code>201602 (SQL Server 2016 Standard)</code>, <code>2017 (SQL Server 2017 Enterprise)</code>.</p>
-</dd><dt class="property-required"
+    <dd>Database version information. Valid values: <code>2008R2 (SQL Server 2008 Enterprise)</code>, <code>2012SP3 (SQL Server 2012 Enterprise)</code>, <code>2016SP1 (SQL Server 2016 Enterprise)</code>, <code>201602 (SQL Server 2016 Standard)</code>, <code>2017 (SQL Server 2017 Enterprise)</code>.</dd><dt class="property-required"
             title="Required">
         <span id="dbversionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversionname_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Version<wbr>Name</a>
@@ -1202,8 +1343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version name corresponding to the <code>db_version</code> field.</p>
-</dd><dt class="property-required"
+    <dd>Version name corresponding to the <code>dbVersion</code> field.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_yaml" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -1211,8 +1351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Model ID.</p>
-</dd><dt class="property-required"
+    <dd>Model ID.</dd><dt class="property-required"
             title="Required">
         <span id="maxstoragesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstoragesize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Storage<wbr>Size</a>
@@ -1220,8 +1359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum disk size under this specification in GB.</p>
-</dd><dt class="property-required"
+    <dd>Maximum disk size under this specification in GB.</dd><dt class="property-required"
             title="Required">
         <span id="memory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_yaml" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1229,8 +1367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory size in GB.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in GB.</dd><dt class="property-required"
             title="Required">
         <span id="minstoragesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minstoragesize_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Storage<wbr>Size</a>
@@ -1238,8 +1375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Minimum disk size under this specification in GB.</p>
-</dd><dt class="property-required"
+    <dd>Minimum disk size under this specification in GB.</dd><dt class="property-required"
             title="Required">
         <span id="qps_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#qps_yaml" style="color: inherit; text-decoration: inherit;">qps</a>
@@ -1247,8 +1383,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>QPS of this specification.</p>
-</dd><dt class="property-required"
+    <dd>QPS of this specification.</dd><dt class="property-required"
             title="Required">
         <span id="specid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specid_yaml" style="color: inherit; text-decoration: inherit;">spec<wbr>Id</a>
@@ -1256,8 +1391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance specification ID.</p>
-</dd></dl>
+    <dd>Instance specification ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1272,7 +1406,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

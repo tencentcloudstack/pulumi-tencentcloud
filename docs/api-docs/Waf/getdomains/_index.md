@@ -2,9 +2,11 @@
 ---
 title: "getDomains"
 title_tag: "tencentcloud.Waf.getDomains"
-meta_desc: "Documentation for the tencentcloud.Waf.getDomains function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of waf domains"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,24 +20,62 @@ Use this data source to query detailed information of waf domains
 
 ### Find all domains
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Waf.getDomains({});
+const example = tencentcloud.waf.getDomains({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Waf.get_domains()
+example = tencentcloud.waf.get_domains()
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/waf"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := waf.GetDomains(ctx, &waf.GetDomainsArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -43,24 +83,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Waf.GetDomains(ctx, nil, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -69,99 +96,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Waf.WafFunctions;
 import com.pulumi.tencentcloud.Waf.inputs.GetDomainsArgs;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-public class App {
-    public static void main(String[] args) {
-        Pulumi.run(App::stack);
-    }
-
-    public static void stack(Context ctx) {
-        final var example = WafFunctions.getDomains();
-
-    }
-}
-```
-```yaml
-variables:
-  example:
-    fn::invoke:
-      Function: tencentcloud:Waf:getDomains
-      Arguments: {}
-```
-<!--End PulumiCodeChooser -->
-
-### Find domains by filter
-
-<!--Start PulumiCodeChooser -->
-```typescript
-import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
-
-const example = tencentcloud.Waf.getDomains({
-    domain: "tf.example.com",
-    instanceId: "waf_2kxtlbky01b3wceb",
-});
-```
-```python
-import pulumi
-import pulumi_tencentcloud as tencentcloud
-
-example = tencentcloud.Waf.get_domains(domain="tf.example.com",
-    instance_id="waf_2kxtlbky01b3wceb")
-```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-
-return await Deployment.RunAsync(() => 
-{
-    var example = Tencentcloud.Waf.GetDomains.Invoke(new()
-    {
-        Domain = "tf.example.com",
-        InstanceId = "waf_2kxtlbky01b3wceb",
-    });
-
-});
-```
-```go
-package main
-
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Waf.GetDomains(ctx, &waf.GetDomainsArgs{
-			Domain:     pulumi.StringRef("tf.example.com"),
-			InstanceId: pulumi.StringRef("waf_2kxtlbky01b3wceb"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
-```java
-package generated_program;
-
-import com.pulumi.Context;
-import com.pulumi.Pulumi;
-import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Waf.WafFunctions;
-import com.pulumi.tencentcloud.Waf.inputs.GetDomainsArgs;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -174,24 +110,196 @@ public class App {
 
     public static void stack(Context ctx) {
         final var example = WafFunctions.getDomains(GetDomainsArgs.builder()
-            .domain("tf.example.com")
-            .instanceId("waf_2kxtlbky01b3wceb")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Waf:getDomains
-      Arguments:
-        domain: tf.example.com
-        instanceId: waf_2kxtlbky01b3wceb
+      function: tencentcloud:Waf:getDomains
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_waf_getdomains" "example" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Find domains by filter
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = tencentcloud.waf.getDomains({
+    instanceId: "waf_2kxtlbky01b3wceb",
+    domain: "tf.example.com",
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+
+example = tencentcloud.waf.get_domains(instance_id="waf_2kxtlbky01b3wceb",
+    domain="tf.example.com")
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/waf"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := waf.GetDomains(ctx, &waf.GetDomainsArgs{
+			InstanceId: pulumi.StringRef("waf_2kxtlbky01b3wceb"),
+			Domain:     pulumi.StringRef("tf.example.com"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Waf.GetDomains.Invoke(new()
+    {
+        InstanceId = "waf_2kxtlbky01b3wceb",
+        Domain = "tf.example.com",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Waf.WafFunctions;
+import com.pulumi.tencentcloud.Waf.inputs.GetDomainsArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var example = WafFunctions.getDomains(GetDomainsArgs.builder()
+            .instanceId("waf_2kxtlbky01b3wceb")
+            .domain("tf.example.com")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+variables:
+  example:
+    fn::invoke:
+      function: tencentcloud:Waf:getDomains
+      arguments:
+        instanceId: waf_2kxtlbky01b3wceb
+        domain: tf.example.com
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_waf_getdomains" "example" {
+  instance_id = "waf_2kxtlbky01b3wceb"
+  domain      = "tf.example.com"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeDomains](https://www.tencentcloud.com/document/api/627/64580)
 
 
 
@@ -203,7 +311,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -211,9 +319,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getDomains<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>></span
+><span class="k">function </span>getDomains<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>></span
 ><span class="k">
-function </span>getDomainsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>></span
+function </span>getDomainsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -227,10 +335,10 @@ function </span>getDomainsOutput<span class="p">(</span><span class="nx">args</s
                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetDomainsResult</span
 ><span class="k">
-def </span>get_domains_output<span class="p">(</span><span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDomainsResult]</span
+def </span>get_domains_output<span class="p">(</span><span class="nx">domain</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDomainsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -255,7 +363,8 @@ func </span>GetDomainsOutput<span class="p">(</span><span class="nx">ctx</span><
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetDomains </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDomainsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDomainsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDomainsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -264,7 +373,8 @@ func </span>GetDomainsOutput<span class="p">(</span><span class="nx">ctx</span><
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> </span>getDomains<span class="p">(</span><span class="nx">GetDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> </span>getDomains<span class="p">(</span><span class="nx">GetDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDomainsResult</a></span>> </span>getDomains<span class="p">(</span><span class="nx">GetDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -276,6 +386,15 @@ func </span>GetDomainsOutput<span class="p">(</span><span class="nx">ctx</span><
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Waf/getDomains:getDomains
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_waf_get_domains&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -294,8 +413,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -303,8 +421,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique ID of Instance.</p>
-</dd><dt class="property-optional"
+    <dd>Unique ID of Instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -312,8 +429,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -327,8 +443,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -336,8 +451,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique ID of Instance.</p>
-</dd><dt class="property-optional"
+    <dd>Unique ID of Instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -345,8 +459,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique ID of Instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -360,8 +503,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -369,8 +511,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique ID of Instance.</p>
-</dd><dt class="property-optional"
+    <dd>Unique ID of Instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -378,8 +519,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -393,8 +533,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -402,8 +541,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique ID of Instance.</p>
-</dd><dt class="property-optional"
+    <dd>Unique ID of Instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -411,8 +549,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -426,8 +563,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -435,8 +571,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Unique ID of Instance.</p>
-</dd><dt class="property-optional"
+    <dd>Unique ID of Instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -444,8 +579,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -459,8 +593,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -468,8 +601,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique ID of Instance.</p>
-</dd><dt class="property-optional"
+    <dd>Unique ID of Instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -477,8 +609,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -501,8 +632,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="wafdomains_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wafdomains_csharp" style="color: inherit; text-decoration: inherit;">Waf<wbr>Domains</a>
@@ -510,8 +640,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomain">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Waf.<wbr>Outputs.<wbr>Get<wbr>Domains<wbr>Domain&gt;</a></span>
     </dt>
-    <dd><p>Domain info list.</p>
-</dd><dt class="property-"
+    <dd>Domain info list.</dd><dt class="property-"
             title="">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -519,8 +648,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-"
+    <dd>Domain name.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -528,8 +656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance unique ID.</p>
-</dd><dt class="property-"
+    <dd>Instance unique ID.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -551,8 +678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomain">[]Get<wbr>Domains<wbr>Domain</a></span>
     </dt>
-    <dd><p>Domain info list.</p>
-</dd><dt class="property-"
+    <dd>Domain info list.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -560,8 +686,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -569,8 +694,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-"
+    <dd>Domain name.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -578,11 +702,56 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance unique ID.</p>
-</dd><dt class="property-"
+    <dd>Instance unique ID.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="domains_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domains_hcl" style="color: inherit; text-decoration: inherit;">domains</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdomainsdomain">list(object)</a></span>
+    </dt>
+    <dd>Domain info list.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance unique ID.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -601,8 +770,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomain">List&lt;Get<wbr>Domains<wbr>Domain&gt;</a></span>
     </dt>
-    <dd><p>Domain info list.</p>
-</dd><dt class="property-"
+    <dd>Domain info list.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -610,8 +778,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -619,8 +786,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-"
+    <dd>Domain name.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -628,8 +794,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance unique ID.</p>
-</dd><dt class="property-"
+    <dd>Instance unique ID.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -651,8 +816,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomain">Get<wbr>Domains<wbr>Domain[]</a></span>
     </dt>
-    <dd><p>Domain info list.</p>
-</dd><dt class="property-"
+    <dd>Domain info list.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -660,8 +824,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -669,8 +832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-"
+    <dd>Domain name.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -678,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance unique ID.</p>
-</dd><dt class="property-"
+    <dd>Instance unique ID.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -699,10 +860,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domains_python" style="color: inherit; text-decoration: inherit;">domains</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdomainsdomain">Get<wbr>Domains<wbr>Domain]</a></span>
+        <span class="property-type"><a href="#getdomainsdomain">Sequence[Get<wbr>Domains<wbr>Domain]</a></span>
     </dt>
-    <dd><p>Domain info list.</p>
-</dd><dt class="property-"
+    <dd>Domain info list.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -710,8 +870,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -719,8 +878,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-"
+    <dd>Domain name.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -728,8 +886,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance unique ID.</p>
-</dd><dt class="property-"
+    <dd>Instance unique ID.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -751,8 +908,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomain">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Domain info list.</p>
-</dd><dt class="property-"
+    <dd>Domain info list.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -760,8 +916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -769,8 +924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-"
+    <dd>Domain name.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -778,8 +932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance unique ID.</p>
-</dd><dt class="property-"
+    <dd>Instance unique ID.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -811,8 +964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Traffic Source: clb represents Tencent Cloud clb, apisix represents apisix gateway, tsegw represents Tencent Cloud API gateway, default clbNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Traffic Source: clb represents Tencent Cloud clb, apisix represents apisix gateway, tsegw represents Tencent Cloud API gateway, default clbNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="apistatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apistatus_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Status</a>
@@ -820,8 +972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API security switch status, 0 off, 1 onNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>API security switch status, 0 off, 1 onNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="appid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#appid_csharp" style="color: inherit; text-decoration: inherit;">App<wbr>Id</a>
@@ -829,8 +980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>User appid.</p>
-</dd><dt class="property-required"
+    <dd>User appid.</dd><dt class="property-required"
             title="Required">
         <span id="botstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#botstatus_csharp" style="color: inherit; text-decoration: inherit;">Bot<wbr>Status</a>
@@ -838,8 +988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>BOT switch status, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>BOT switch status, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="cclists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cclists_csharp" style="color: inherit; text-decoration: inherit;">Cc<wbr>Lists</a>
@@ -847,8 +996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Waf sandbox export addresses, should be added to the whitelist by the upstreams.</p>
-</dd><dt class="property-required"
+    <dd>Waf sandbox export addresses, should be added to the whitelist by the upstreams.</dd><dt class="property-required"
             title="Required">
         <span id="cdcclusters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcclusters_csharp" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Clusters</a>
@@ -856,8 +1004,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cdc clustersNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Cdc clustersNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clsstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clsstatus_csharp" style="color: inherit; text-decoration: inherit;">Cls<wbr>Status</a>
@@ -865,8 +1012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable access logs, 1 enable, 0 disable.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable access logs, 1 enable, 0 disable.</dd><dt class="property-required"
             title="Required">
         <span id="cname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cname_csharp" style="color: inherit; text-decoration: inherit;">Cname</a>
@@ -874,8 +1020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cname address, used for dns access.</p>
-</dd><dt class="property-required"
+    <dd>Cname address, used for dns access.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -883,8 +1028,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -892,8 +1036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-required"
+    <dd>Domain name.</dd><dt class="property-required"
             title="Required">
         <span id="domainid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainid_csharp" style="color: inherit; text-decoration: inherit;">Domain<wbr>Id</a>
@@ -901,8 +1044,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain unique ID.</p>
-</dd><dt class="property-required"
+    <dd>Domain unique ID.</dd><dt class="property-required"
             title="Required">
         <span id="edition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#edition_csharp" style="color: inherit; text-decoration: inherit;">Edition</a>
@@ -910,8 +1052,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type, sparta-waf represents SAAS WAF, clb-waf represents CLB WAF.</p>
-</dd><dt class="property-required"
+    <dd>Instance type, sparta-waf represents SAAS WAF, clb-waf represents CLB WAF.</dd><dt class="property-required"
             title="Required">
         <span id="engine_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_csharp" style="color: inherit; text-decoration: inherit;">Engine</a>
@@ -919,8 +1060,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rule and AI Defense Mode, 10 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Shutdown Mode 11 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Observation Mode 12 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Interception Mode 20 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Shutdown Mode 21 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Observation Mode 22 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Interception Mode.</p>
-</dd><dt class="property-required"
+    <dd>Rule and AI Defense Mode, 10 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Shutdown Mode 11 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Observation Mode 12 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Interception Mode 20 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Shutdown Mode 21 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Observation Mode 22 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Interception Mode.</dd><dt class="property-required"
             title="Required">
         <span id="flowmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flowmode_csharp" style="color: inherit; text-decoration: inherit;">Flow<wbr>Mode</a>
@@ -928,8 +1068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>CLBWAF traffic mode, 1 cleaning mode, 0 mirroring mode.</p>
-</dd><dt class="property-required"
+    <dd>CLBWAF traffic mode, 1 cleaning mode, 0 mirroring mode.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -937,8 +1076,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique ID of Instance.</p>
-</dd><dt class="property-required"
+    <dd>Unique ID of Instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -946,8 +1084,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance name.</p>
-</dd><dt class="property-required"
+    <dd>Instance name.</dd><dt class="property-required"
             title="Required">
         <span id="ipv6status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6status_csharp" style="color: inherit; text-decoration: inherit;">Ipv6Status</a>
@@ -955,8 +1092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Ipv6 switch status, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>Ipv6 switch status, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="level_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_csharp" style="color: inherit; text-decoration: inherit;">Level</a>
@@ -964,8 +1100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance level.</p>
-</dd><dt class="property-required"
+    <dd>Instance level.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancersets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancersets_csharp" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Sets</a>
@@ -973,8 +1108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainloadbalancerset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Waf.<wbr>Inputs.<wbr>Get<wbr>Domains<wbr>Domain<wbr>Load<wbr>Balancer<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of bound LB.</p>
-</dd><dt class="property-required"
+    <dd>List of bound LB.</dd><dt class="property-required"
             title="Required">
         <span id="mode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_csharp" style="color: inherit; text-decoration: inherit;">Mode</a>
@@ -982,8 +1116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rule defense mode, 0 observation mode, 1 interception mode.</p>
-</dd><dt class="property-required"
+    <dd>Rule defense mode, 0 observation mode, 1 interception mode.</dd><dt class="property-required"
             title="Required">
         <span id="ports_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_csharp" style="color: inherit; text-decoration: inherit;">Ports</a>
@@ -991,8 +1124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainport">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Waf.<wbr>Inputs.<wbr>Get<wbr>Domains<wbr>Domain<wbr>Port&gt;</a></span>
     </dt>
-    <dd><p>Listening ports.</p>
-</dd><dt class="property-required"
+    <dd>Listening ports.</dd><dt class="property-required"
             title="Required">
         <span id="postckafkastatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#postckafkastatus_csharp" style="color: inherit; text-decoration: inherit;">Post<wbr>Ckafka<wbr>Status</a>
@@ -1000,8 +1132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable the delivery of CKafka function, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the delivery of CKafka function, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="postclsstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#postclsstatus_csharp" style="color: inherit; text-decoration: inherit;">Post<wbr>Cls<wbr>Status</a>
@@ -1009,8 +1140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable the delivery CLS function, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the delivery CLS function, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -1018,8 +1148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="rslists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rslists_csharp" style="color: inherit; text-decoration: inherit;">Rs<wbr>Lists</a>
@@ -1027,8 +1156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Waf engine export addresses, should be added to the whitelist by the upstreams.</p>
-</dd><dt class="property-required"
+    <dd>Waf engine export addresses, should be added to the whitelist by the upstreams.</dd><dt class="property-required"
             title="Required">
         <span id="sgdetail_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sgdetail_csharp" style="color: inherit; text-decoration: inherit;">Sg<wbr>Detail</a>
@@ -1036,8 +1164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detailed explanation of security group statusNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Detailed explanation of security group statusNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="sgstate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sgstate_csharp" style="color: inherit; text-decoration: inherit;">Sg<wbr>State</a>
@@ -1045,8 +1172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Security group status, 0 does not display, 1 non Tencent cloud source site, 2 security group binding failed, 3 security group changedNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Security group status, 0 does not display, 1 non Tencent cloud source site, 2 security group binding failed, 3 security group changedNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1054,8 +1180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Clbwaf domain name listener status, 0 operation successful, 4 binding LB, 6 unbinding LB, 7 unbinding LB failed, 8 binding LB failed, 10 internal error.</p>
-</dd><dt class="property-required"
+    <dd>Clbwaf domain name listener status, 0 operation successful, 4 binding LB, 6 unbinding LB, 7 unbinding LB failed, 8 binding LB failed, 10 internal error.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1063,8 +1188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Waf switch,0 off 1 on.</p>
-</dd></dl>
+    <dd>Waf switch,0 off 1 on.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1078,8 +1202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Traffic Source: clb represents Tencent Cloud clb, apisix represents apisix gateway, tsegw represents Tencent Cloud API gateway, default clbNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Traffic Source: clb represents Tencent Cloud clb, apisix represents apisix gateway, tsegw represents Tencent Cloud API gateway, default clbNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="apistatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apistatus_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Status</a>
@@ -1087,8 +1210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API security switch status, 0 off, 1 onNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>API security switch status, 0 off, 1 onNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="appid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#appid_go" style="color: inherit; text-decoration: inherit;">App<wbr>Id</a>
@@ -1096,8 +1218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>User appid.</p>
-</dd><dt class="property-required"
+    <dd>User appid.</dd><dt class="property-required"
             title="Required">
         <span id="botstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#botstatus_go" style="color: inherit; text-decoration: inherit;">Bot<wbr>Status</a>
@@ -1105,8 +1226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>BOT switch status, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>BOT switch status, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="cclists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cclists_go" style="color: inherit; text-decoration: inherit;">Cc<wbr>Lists</a>
@@ -1114,8 +1234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Waf sandbox export addresses, should be added to the whitelist by the upstreams.</p>
-</dd><dt class="property-required"
+    <dd>Waf sandbox export addresses, should be added to the whitelist by the upstreams.</dd><dt class="property-required"
             title="Required">
         <span id="cdcclusters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcclusters_go" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Clusters</a>
@@ -1123,8 +1242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cdc clustersNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Cdc clustersNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clsstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clsstatus_go" style="color: inherit; text-decoration: inherit;">Cls<wbr>Status</a>
@@ -1132,8 +1250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable access logs, 1 enable, 0 disable.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable access logs, 1 enable, 0 disable.</dd><dt class="property-required"
             title="Required">
         <span id="cname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cname_go" style="color: inherit; text-decoration: inherit;">Cname</a>
@@ -1141,8 +1258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cname address, used for dns access.</p>
-</dd><dt class="property-required"
+    <dd>Cname address, used for dns access.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1150,8 +1266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1159,8 +1274,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-required"
+    <dd>Domain name.</dd><dt class="property-required"
             title="Required">
         <span id="domainid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainid_go" style="color: inherit; text-decoration: inherit;">Domain<wbr>Id</a>
@@ -1168,8 +1282,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain unique ID.</p>
-</dd><dt class="property-required"
+    <dd>Domain unique ID.</dd><dt class="property-required"
             title="Required">
         <span id="edition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#edition_go" style="color: inherit; text-decoration: inherit;">Edition</a>
@@ -1177,8 +1290,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type, sparta-waf represents SAAS WAF, clb-waf represents CLB WAF.</p>
-</dd><dt class="property-required"
+    <dd>Instance type, sparta-waf represents SAAS WAF, clb-waf represents CLB WAF.</dd><dt class="property-required"
             title="Required">
         <span id="engine_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_go" style="color: inherit; text-decoration: inherit;">Engine</a>
@@ -1186,8 +1298,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rule and AI Defense Mode, 10 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Shutdown Mode 11 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Observation Mode 12 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Interception Mode 20 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Shutdown Mode 21 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Observation Mode 22 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Interception Mode.</p>
-</dd><dt class="property-required"
+    <dd>Rule and AI Defense Mode, 10 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Shutdown Mode 11 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Observation Mode 12 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Interception Mode 20 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Shutdown Mode 21 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Observation Mode 22 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Interception Mode.</dd><dt class="property-required"
             title="Required">
         <span id="flowmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flowmode_go" style="color: inherit; text-decoration: inherit;">Flow<wbr>Mode</a>
@@ -1195,8 +1306,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>CLBWAF traffic mode, 1 cleaning mode, 0 mirroring mode.</p>
-</dd><dt class="property-required"
+    <dd>CLBWAF traffic mode, 1 cleaning mode, 0 mirroring mode.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1204,8 +1314,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique ID of Instance.</p>
-</dd><dt class="property-required"
+    <dd>Unique ID of Instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1213,8 +1322,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance name.</p>
-</dd><dt class="property-required"
+    <dd>Instance name.</dd><dt class="property-required"
             title="Required">
         <span id="ipv6status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6status_go" style="color: inherit; text-decoration: inherit;">Ipv6Status</a>
@@ -1222,8 +1330,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Ipv6 switch status, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>Ipv6 switch status, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="level_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_go" style="color: inherit; text-decoration: inherit;">Level</a>
@@ -1231,8 +1338,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance level.</p>
-</dd><dt class="property-required"
+    <dd>Instance level.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancersets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancersets_go" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Sets</a>
@@ -1240,8 +1346,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainloadbalancerset">[]Get<wbr>Domains<wbr>Domain<wbr>Load<wbr>Balancer<wbr>Set</a></span>
     </dt>
-    <dd><p>List of bound LB.</p>
-</dd><dt class="property-required"
+    <dd>List of bound LB.</dd><dt class="property-required"
             title="Required">
         <span id="mode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_go" style="color: inherit; text-decoration: inherit;">Mode</a>
@@ -1249,8 +1354,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rule defense mode, 0 observation mode, 1 interception mode.</p>
-</dd><dt class="property-required"
+    <dd>Rule defense mode, 0 observation mode, 1 interception mode.</dd><dt class="property-required"
             title="Required">
         <span id="ports_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_go" style="color: inherit; text-decoration: inherit;">Ports</a>
@@ -1258,8 +1362,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainport">[]Get<wbr>Domains<wbr>Domain<wbr>Port</a></span>
     </dt>
-    <dd><p>Listening ports.</p>
-</dd><dt class="property-required"
+    <dd>Listening ports.</dd><dt class="property-required"
             title="Required">
         <span id="postckafkastatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#postckafkastatus_go" style="color: inherit; text-decoration: inherit;">Post<wbr>Ckafka<wbr>Status</a>
@@ -1267,8 +1370,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable the delivery of CKafka function, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the delivery of CKafka function, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="postclsstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#postclsstatus_go" style="color: inherit; text-decoration: inherit;">Post<wbr>Cls<wbr>Status</a>
@@ -1276,8 +1378,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable the delivery CLS function, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the delivery CLS function, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -1285,8 +1386,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="rslists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rslists_go" style="color: inherit; text-decoration: inherit;">Rs<wbr>Lists</a>
@@ -1294,8 +1394,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Waf engine export addresses, should be added to the whitelist by the upstreams.</p>
-</dd><dt class="property-required"
+    <dd>Waf engine export addresses, should be added to the whitelist by the upstreams.</dd><dt class="property-required"
             title="Required">
         <span id="sgdetail_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sgdetail_go" style="color: inherit; text-decoration: inherit;">Sg<wbr>Detail</a>
@@ -1303,8 +1402,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detailed explanation of security group statusNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Detailed explanation of security group statusNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="sgstate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sgstate_go" style="color: inherit; text-decoration: inherit;">Sg<wbr>State</a>
@@ -1312,8 +1410,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Security group status, 0 does not display, 1 non Tencent cloud source site, 2 security group binding failed, 3 security group changedNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Security group status, 0 does not display, 1 non Tencent cloud source site, 2 security group binding failed, 3 security group changedNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1321,8 +1418,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Clbwaf domain name listener status, 0 operation successful, 4 binding LB, 6 unbinding LB, 7 unbinding LB failed, 8 binding LB failed, 10 internal error.</p>
-</dd><dt class="property-required"
+    <dd>Clbwaf domain name listener status, 0 operation successful, 4 binding LB, 6 unbinding LB, 7 unbinding LB failed, 8 binding LB failed, 10 internal error.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1330,8 +1426,245 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Waf switch,0 off 1 on.</p>
-</dd></dl>
+    <dd>Waf switch,0 off 1 on.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="alb_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alb_type_hcl" style="color: inherit; text-decoration: inherit;">alb_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Traffic Source: clb represents Tencent Cloud clb, apisix represents apisix gateway, tsegw represents Tencent Cloud API gateway, default clbNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="api_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_status_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>API security switch status, 0 off, 1 onNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#app_id_hcl" style="color: inherit; text-decoration: inherit;">app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>User appid.</dd><dt class="property-required"
+            title="Required">
+        <span id="bot_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bot_status_hcl" style="color: inherit; text-decoration: inherit;">bot_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>BOT switch status, 0 off, 1 on.</dd><dt class="property-required"
+            title="Required">
+        <span id="cc_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cc_lists_hcl" style="color: inherit; text-decoration: inherit;">cc_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Waf sandbox export addresses, should be added to the whitelist by the upstreams.</dd><dt class="property-required"
+            title="Required">
+        <span id="cdc_clusters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_clusters_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>clusters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cdc clustersNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="cls_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cls_status_hcl" style="color: inherit; text-decoration: inherit;">cls_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable access logs, 1 enable, 0 disable.</dd><dt class="property-required"
+            title="Required">
+        <span id="cname_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cname_hcl" style="color: inherit; text-decoration: inherit;">cname</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cname address, used for dns access.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_id_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain unique ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="edition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#edition_hcl" style="color: inherit; text-decoration: inherit;">edition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance type, sparta-waf represents SAAS WAF, clb-waf represents CLB WAF.</dd><dt class="property-required"
+            title="Required">
+        <span id="engine_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_hcl" style="color: inherit; text-decoration: inherit;">engine</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Rule and AI Defense Mode, 10 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Shutdown Mode 11 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Observation Mode 12 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Interception Mode 20 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Shutdown Mode 21 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Observation Mode 22 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Interception Mode.</dd><dt class="property-required"
+            title="Required">
+        <span id="flow_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flow_mode_hcl" style="color: inherit; text-decoration: inherit;">flow_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>CLBWAF traffic mode, 1 cleaning mode, 0 mirroring mode.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique ID of Instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance name.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipv6_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_status_hcl" style="color: inherit; text-decoration: inherit;">ipv6_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Ipv6 switch status, 0 off, 1 on.</dd><dt class="property-required"
+            title="Required">
+        <span id="level_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_hcl" style="color: inherit; text-decoration: inherit;">level</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance level.</dd><dt class="property-required"
+            title="Required">
+        <span id="load_balancer_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_sets_hcl" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdomainsdomainloadbalancerset">list(object)</a></span>
+    </dt>
+    <dd>List of bound LB.</dd><dt class="property-required"
+            title="Required">
+        <span id="mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_hcl" style="color: inherit; text-decoration: inherit;">mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Rule defense mode, 0 observation mode, 1 interception mode.</dd><dt class="property-required"
+            title="Required">
+        <span id="ports_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_hcl" style="color: inherit; text-decoration: inherit;">ports</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdomainsdomainport">list(object)</a></span>
+    </dt>
+    <dd>Listening ports.</dd><dt class="property-required"
+            title="Required">
+        <span id="post_ckafka_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#post_ckafka_status_hcl" style="color: inherit; text-decoration: inherit;">post_<wbr>ckafka_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable the delivery of CKafka function, 0 off, 1 on.</dd><dt class="property-required"
+            title="Required">
+        <span id="post_cls_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#post_cls_status_hcl" style="color: inherit; text-decoration: inherit;">post_<wbr>cls_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable the delivery CLS function, 0 off, 1 on.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region.</dd><dt class="property-required"
+            title="Required">
+        <span id="rs_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rs_lists_hcl" style="color: inherit; text-decoration: inherit;">rs_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Waf engine export addresses, should be added to the whitelist by the upstreams.</dd><dt class="property-required"
+            title="Required">
+        <span id="sg_detail_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sg_detail_hcl" style="color: inherit; text-decoration: inherit;">sg_<wbr>detail</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Detailed explanation of security group statusNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="sg_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sg_state_hcl" style="color: inherit; text-decoration: inherit;">sg_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Security group status, 0 does not display, 1 non Tencent cloud source site, 2 security group binding failed, 3 security group changedNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Clbwaf domain name listener status, 0 operation successful, 4 binding LB, 6 unbinding LB, 7 unbinding LB failed, 8 binding LB failed, 10 internal error.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Waf switch,0 off 1 on.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1345,8 +1678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Traffic Source: clb represents Tencent Cloud clb, apisix represents apisix gateway, tsegw represents Tencent Cloud API gateway, default clbNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Traffic Source: clb represents Tencent Cloud clb, apisix represents apisix gateway, tsegw represents Tencent Cloud API gateway, default clbNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="apistatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apistatus_java" style="color: inherit; text-decoration: inherit;">api<wbr>Status</a>
@@ -1354,8 +1686,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>API security switch status, 0 off, 1 onNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>API security switch status, 0 off, 1 onNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="appid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#appid_java" style="color: inherit; text-decoration: inherit;">app<wbr>Id</a>
@@ -1363,8 +1694,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>User appid.</p>
-</dd><dt class="property-required"
+    <dd>User appid.</dd><dt class="property-required"
             title="Required">
         <span id="botstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#botstatus_java" style="color: inherit; text-decoration: inherit;">bot<wbr>Status</a>
@@ -1372,8 +1702,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>BOT switch status, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>BOT switch status, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="cclists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cclists_java" style="color: inherit; text-decoration: inherit;">cc<wbr>Lists</a>
@@ -1381,8 +1710,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Waf sandbox export addresses, should be added to the whitelist by the upstreams.</p>
-</dd><dt class="property-required"
+    <dd>Waf sandbox export addresses, should be added to the whitelist by the upstreams.</dd><dt class="property-required"
             title="Required">
         <span id="cdcclusters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcclusters_java" style="color: inherit; text-decoration: inherit;">cdc<wbr>Clusters</a>
@@ -1390,8 +1718,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cdc clustersNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Cdc clustersNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clsstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clsstatus_java" style="color: inherit; text-decoration: inherit;">cls<wbr>Status</a>
@@ -1399,8 +1726,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable access logs, 1 enable, 0 disable.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable access logs, 1 enable, 0 disable.</dd><dt class="property-required"
             title="Required">
         <span id="cname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cname_java" style="color: inherit; text-decoration: inherit;">cname</a>
@@ -1408,8 +1734,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cname address, used for dns access.</p>
-</dd><dt class="property-required"
+    <dd>Cname address, used for dns access.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1417,8 +1742,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1426,8 +1750,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-required"
+    <dd>Domain name.</dd><dt class="property-required"
             title="Required">
         <span id="domainid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainid_java" style="color: inherit; text-decoration: inherit;">domain<wbr>Id</a>
@@ -1435,8 +1758,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain unique ID.</p>
-</dd><dt class="property-required"
+    <dd>Domain unique ID.</dd><dt class="property-required"
             title="Required">
         <span id="edition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#edition_java" style="color: inherit; text-decoration: inherit;">edition</a>
@@ -1444,8 +1766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance type, sparta-waf represents SAAS WAF, clb-waf represents CLB WAF.</p>
-</dd><dt class="property-required"
+    <dd>Instance type, sparta-waf represents SAAS WAF, clb-waf represents CLB WAF.</dd><dt class="property-required"
             title="Required">
         <span id="engine_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_java" style="color: inherit; text-decoration: inherit;">engine</a>
@@ -1453,8 +1774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Rule and AI Defense Mode, 10 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Shutdown Mode 11 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Observation Mode 12 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Interception Mode 20 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Shutdown Mode 21 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Observation Mode 22 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Interception Mode.</p>
-</dd><dt class="property-required"
+    <dd>Rule and AI Defense Mode, 10 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Shutdown Mode 11 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Observation Mode 12 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Interception Mode 20 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Shutdown Mode 21 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Observation Mode 22 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Interception Mode.</dd><dt class="property-required"
             title="Required">
         <span id="flowmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flowmode_java" style="color: inherit; text-decoration: inherit;">flow<wbr>Mode</a>
@@ -1462,8 +1782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>CLBWAF traffic mode, 1 cleaning mode, 0 mirroring mode.</p>
-</dd><dt class="property-required"
+    <dd>CLBWAF traffic mode, 1 cleaning mode, 0 mirroring mode.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1471,8 +1790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique ID of Instance.</p>
-</dd><dt class="property-required"
+    <dd>Unique ID of Instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1480,8 +1798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance name.</p>
-</dd><dt class="property-required"
+    <dd>Instance name.</dd><dt class="property-required"
             title="Required">
         <span id="ipv6status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6status_java" style="color: inherit; text-decoration: inherit;">ipv6Status</a>
@@ -1489,8 +1806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Ipv6 switch status, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>Ipv6 switch status, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="level_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_java" style="color: inherit; text-decoration: inherit;">level</a>
@@ -1498,8 +1814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance level.</p>
-</dd><dt class="property-required"
+    <dd>Instance level.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancersets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancersets_java" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Sets</a>
@@ -1507,8 +1822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainloadbalancerset">List&lt;Get<wbr>Domains<wbr>Domain<wbr>Load<wbr>Balancer<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of bound LB.</p>
-</dd><dt class="property-required"
+    <dd>List of bound LB.</dd><dt class="property-required"
             title="Required">
         <span id="mode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_java" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -1516,8 +1830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Rule defense mode, 0 observation mode, 1 interception mode.</p>
-</dd><dt class="property-required"
+    <dd>Rule defense mode, 0 observation mode, 1 interception mode.</dd><dt class="property-required"
             title="Required">
         <span id="ports_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_java" style="color: inherit; text-decoration: inherit;">ports</a>
@@ -1525,8 +1838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainport">List&lt;Get<wbr>Domains<wbr>Domain<wbr>Port&gt;</a></span>
     </dt>
-    <dd><p>Listening ports.</p>
-</dd><dt class="property-required"
+    <dd>Listening ports.</dd><dt class="property-required"
             title="Required">
         <span id="postckafkastatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#postckafkastatus_java" style="color: inherit; text-decoration: inherit;">post<wbr>Ckafka<wbr>Status</a>
@@ -1534,8 +1846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable the delivery of CKafka function, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the delivery of CKafka function, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="postclsstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#postclsstatus_java" style="color: inherit; text-decoration: inherit;">post<wbr>Cls<wbr>Status</a>
@@ -1543,8 +1854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable the delivery CLS function, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the delivery CLS function, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1552,8 +1862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="rslists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rslists_java" style="color: inherit; text-decoration: inherit;">rs<wbr>Lists</a>
@@ -1561,8 +1870,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Waf engine export addresses, should be added to the whitelist by the upstreams.</p>
-</dd><dt class="property-required"
+    <dd>Waf engine export addresses, should be added to the whitelist by the upstreams.</dd><dt class="property-required"
             title="Required">
         <span id="sgdetail_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sgdetail_java" style="color: inherit; text-decoration: inherit;">sg<wbr>Detail</a>
@@ -1570,8 +1878,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detailed explanation of security group statusNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Detailed explanation of security group statusNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="sgstate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sgstate_java" style="color: inherit; text-decoration: inherit;">sg<wbr>State</a>
@@ -1579,8 +1886,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Security group status, 0 does not display, 1 non Tencent cloud source site, 2 security group binding failed, 3 security group changedNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Security group status, 0 does not display, 1 non Tencent cloud source site, 2 security group binding failed, 3 security group changedNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1588,8 +1894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Clbwaf domain name listener status, 0 operation successful, 4 binding LB, 6 unbinding LB, 7 unbinding LB failed, 8 binding LB failed, 10 internal error.</p>
-</dd><dt class="property-required"
+    <dd>Clbwaf domain name listener status, 0 operation successful, 4 binding LB, 6 unbinding LB, 7 unbinding LB failed, 8 binding LB failed, 10 internal error.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1597,8 +1902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Waf switch,0 off 1 on.</p>
-</dd></dl>
+    <dd>Waf switch,0 off 1 on.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1612,8 +1916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Traffic Source: clb represents Tencent Cloud clb, apisix represents apisix gateway, tsegw represents Tencent Cloud API gateway, default clbNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Traffic Source: clb represents Tencent Cloud clb, apisix represents apisix gateway, tsegw represents Tencent Cloud API gateway, default clbNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="apistatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apistatus_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Status</a>
@@ -1621,8 +1924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>API security switch status, 0 off, 1 onNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>API security switch status, 0 off, 1 onNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="appid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#appid_nodejs" style="color: inherit; text-decoration: inherit;">app<wbr>Id</a>
@@ -1630,8 +1932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>User appid.</p>
-</dd><dt class="property-required"
+    <dd>User appid.</dd><dt class="property-required"
             title="Required">
         <span id="botstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#botstatus_nodejs" style="color: inherit; text-decoration: inherit;">bot<wbr>Status</a>
@@ -1639,8 +1940,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>BOT switch status, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>BOT switch status, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="cclists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cclists_nodejs" style="color: inherit; text-decoration: inherit;">cc<wbr>Lists</a>
@@ -1648,8 +1948,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Waf sandbox export addresses, should be added to the whitelist by the upstreams.</p>
-</dd><dt class="property-required"
+    <dd>Waf sandbox export addresses, should be added to the whitelist by the upstreams.</dd><dt class="property-required"
             title="Required">
         <span id="cdcclusters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcclusters_nodejs" style="color: inherit; text-decoration: inherit;">cdc<wbr>Clusters</a>
@@ -1657,8 +1956,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cdc clustersNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Cdc clustersNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clsstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clsstatus_nodejs" style="color: inherit; text-decoration: inherit;">cls<wbr>Status</a>
@@ -1666,8 +1964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable access logs, 1 enable, 0 disable.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable access logs, 1 enable, 0 disable.</dd><dt class="property-required"
             title="Required">
         <span id="cname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cname_nodejs" style="color: inherit; text-decoration: inherit;">cname</a>
@@ -1675,8 +1972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cname address, used for dns access.</p>
-</dd><dt class="property-required"
+    <dd>Cname address, used for dns access.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1684,8 +1980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1693,8 +1988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-required"
+    <dd>Domain name.</dd><dt class="property-required"
             title="Required">
         <span id="domainid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainid_nodejs" style="color: inherit; text-decoration: inherit;">domain<wbr>Id</a>
@@ -1702,8 +1996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain unique ID.</p>
-</dd><dt class="property-required"
+    <dd>Domain unique ID.</dd><dt class="property-required"
             title="Required">
         <span id="edition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#edition_nodejs" style="color: inherit; text-decoration: inherit;">edition</a>
@@ -1711,8 +2004,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type, sparta-waf represents SAAS WAF, clb-waf represents CLB WAF.</p>
-</dd><dt class="property-required"
+    <dd>Instance type, sparta-waf represents SAAS WAF, clb-waf represents CLB WAF.</dd><dt class="property-required"
             title="Required">
         <span id="engine_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_nodejs" style="color: inherit; text-decoration: inherit;">engine</a>
@@ -1720,8 +2012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Rule and AI Defense Mode, 10 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Shutdown Mode 11 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Observation Mode 12 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Interception Mode 20 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Shutdown Mode 21 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Observation Mode 22 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Interception Mode.</p>
-</dd><dt class="property-required"
+    <dd>Rule and AI Defense Mode, 10 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Shutdown Mode 11 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Observation Mode 12 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Interception Mode 20 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Shutdown Mode 21 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Observation Mode 22 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Interception Mode.</dd><dt class="property-required"
             title="Required">
         <span id="flowmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flowmode_nodejs" style="color: inherit; text-decoration: inherit;">flow<wbr>Mode</a>
@@ -1729,8 +2020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>CLBWAF traffic mode, 1 cleaning mode, 0 mirroring mode.</p>
-</dd><dt class="property-required"
+    <dd>CLBWAF traffic mode, 1 cleaning mode, 0 mirroring mode.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1738,8 +2028,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique ID of Instance.</p>
-</dd><dt class="property-required"
+    <dd>Unique ID of Instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1747,8 +2036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance name.</p>
-</dd><dt class="property-required"
+    <dd>Instance name.</dd><dt class="property-required"
             title="Required">
         <span id="ipv6status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6status_nodejs" style="color: inherit; text-decoration: inherit;">ipv6Status</a>
@@ -1756,8 +2044,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Ipv6 switch status, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>Ipv6 switch status, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="level_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_nodejs" style="color: inherit; text-decoration: inherit;">level</a>
@@ -1765,8 +2052,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance level.</p>
-</dd><dt class="property-required"
+    <dd>Instance level.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancersets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancersets_nodejs" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Sets</a>
@@ -1774,8 +2060,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainloadbalancerset">Get<wbr>Domains<wbr>Domain<wbr>Load<wbr>Balancer<wbr>Set[]</a></span>
     </dt>
-    <dd><p>List of bound LB.</p>
-</dd><dt class="property-required"
+    <dd>List of bound LB.</dd><dt class="property-required"
             title="Required">
         <span id="mode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_nodejs" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -1783,8 +2068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Rule defense mode, 0 observation mode, 1 interception mode.</p>
-</dd><dt class="property-required"
+    <dd>Rule defense mode, 0 observation mode, 1 interception mode.</dd><dt class="property-required"
             title="Required">
         <span id="ports_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_nodejs" style="color: inherit; text-decoration: inherit;">ports</a>
@@ -1792,8 +2076,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainport">Get<wbr>Domains<wbr>Domain<wbr>Port[]</a></span>
     </dt>
-    <dd><p>Listening ports.</p>
-</dd><dt class="property-required"
+    <dd>Listening ports.</dd><dt class="property-required"
             title="Required">
         <span id="postckafkastatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#postckafkastatus_nodejs" style="color: inherit; text-decoration: inherit;">post<wbr>Ckafka<wbr>Status</a>
@@ -1801,8 +2084,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable the delivery of CKafka function, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the delivery of CKafka function, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="postclsstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#postclsstatus_nodejs" style="color: inherit; text-decoration: inherit;">post<wbr>Cls<wbr>Status</a>
@@ -1810,8 +2092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable the delivery CLS function, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the delivery CLS function, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1819,8 +2100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="rslists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rslists_nodejs" style="color: inherit; text-decoration: inherit;">rs<wbr>Lists</a>
@@ -1828,8 +2108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Waf engine export addresses, should be added to the whitelist by the upstreams.</p>
-</dd><dt class="property-required"
+    <dd>Waf engine export addresses, should be added to the whitelist by the upstreams.</dd><dt class="property-required"
             title="Required">
         <span id="sgdetail_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sgdetail_nodejs" style="color: inherit; text-decoration: inherit;">sg<wbr>Detail</a>
@@ -1837,8 +2116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detailed explanation of security group statusNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Detailed explanation of security group statusNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="sgstate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sgstate_nodejs" style="color: inherit; text-decoration: inherit;">sg<wbr>State</a>
@@ -1846,8 +2124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Security group status, 0 does not display, 1 non Tencent cloud source site, 2 security group binding failed, 3 security group changedNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Security group status, 0 does not display, 1 non Tencent cloud source site, 2 security group binding failed, 3 security group changedNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1855,8 +2132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Clbwaf domain name listener status, 0 operation successful, 4 binding LB, 6 unbinding LB, 7 unbinding LB failed, 8 binding LB failed, 10 internal error.</p>
-</dd><dt class="property-required"
+    <dd>Clbwaf domain name listener status, 0 operation successful, 4 binding LB, 6 unbinding LB, 7 unbinding LB failed, 8 binding LB failed, 10 internal error.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1864,8 +2140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Waf switch,0 off 1 on.</p>
-</dd></dl>
+    <dd>Waf switch,0 off 1 on.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1879,8 +2154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Traffic Source: clb represents Tencent Cloud clb, apisix represents apisix gateway, tsegw represents Tencent Cloud API gateway, default clbNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Traffic Source: clb represents Tencent Cloud clb, apisix represents apisix gateway, tsegw represents Tencent Cloud API gateway, default clbNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="api_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_status_python" style="color: inherit; text-decoration: inherit;">api_<wbr>status</a>
@@ -1888,8 +2162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API security switch status, 0 off, 1 onNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>API security switch status, 0 off, 1 onNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="app_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#app_id_python" style="color: inherit; text-decoration: inherit;">app_<wbr>id</a>
@@ -1897,8 +2170,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>User appid.</p>
-</dd><dt class="property-required"
+    <dd>User appid.</dd><dt class="property-required"
             title="Required">
         <span id="bot_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bot_status_python" style="color: inherit; text-decoration: inherit;">bot_<wbr>status</a>
@@ -1906,8 +2178,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>BOT switch status, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>BOT switch status, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="cc_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cc_lists_python" style="color: inherit; text-decoration: inherit;">cc_<wbr>lists</a>
@@ -1915,8 +2186,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Waf sandbox export addresses, should be added to the whitelist by the upstreams.</p>
-</dd><dt class="property-required"
+    <dd>Waf sandbox export addresses, should be added to the whitelist by the upstreams.</dd><dt class="property-required"
             title="Required">
         <span id="cdc_clusters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_clusters_python" style="color: inherit; text-decoration: inherit;">cdc_<wbr>clusters</a>
@@ -1924,8 +2194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cdc clustersNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Cdc clustersNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="cls_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cls_status_python" style="color: inherit; text-decoration: inherit;">cls_<wbr>status</a>
@@ -1933,8 +2202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable access logs, 1 enable, 0 disable.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable access logs, 1 enable, 0 disable.</dd><dt class="property-required"
             title="Required">
         <span id="cname_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cname_python" style="color: inherit; text-decoration: inherit;">cname</a>
@@ -1942,8 +2210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cname address, used for dns access.</p>
-</dd><dt class="property-required"
+    <dd>Cname address, used for dns access.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1951,8 +2218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1960,8 +2226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-required"
+    <dd>Domain name.</dd><dt class="property-required"
             title="Required">
         <span id="domain_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_id_python" style="color: inherit; text-decoration: inherit;">domain_<wbr>id</a>
@@ -1969,8 +2234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain unique ID.</p>
-</dd><dt class="property-required"
+    <dd>Domain unique ID.</dd><dt class="property-required"
             title="Required">
         <span id="edition_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#edition_python" style="color: inherit; text-decoration: inherit;">edition</a>
@@ -1978,8 +2242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance type, sparta-waf represents SAAS WAF, clb-waf represents CLB WAF.</p>
-</dd><dt class="property-required"
+    <dd>Instance type, sparta-waf represents SAAS WAF, clb-waf represents CLB WAF.</dd><dt class="property-required"
             title="Required">
         <span id="engine_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_python" style="color: inherit; text-decoration: inherit;">engine</a>
@@ -1987,8 +2250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rule and AI Defense Mode, 10 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Shutdown Mode 11 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Observation Mode 12 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Interception Mode 20 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Shutdown Mode 21 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Observation Mode 22 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Interception Mode.</p>
-</dd><dt class="property-required"
+    <dd>Rule and AI Defense Mode, 10 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Shutdown Mode 11 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Observation Mode 12 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Interception Mode 20 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Shutdown Mode 21 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Observation Mode 22 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Interception Mode.</dd><dt class="property-required"
             title="Required">
         <span id="flow_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flow_mode_python" style="color: inherit; text-decoration: inherit;">flow_<wbr>mode</a>
@@ -1996,8 +2258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>CLBWAF traffic mode, 1 cleaning mode, 0 mirroring mode.</p>
-</dd><dt class="property-required"
+    <dd>CLBWAF traffic mode, 1 cleaning mode, 0 mirroring mode.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -2005,8 +2266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Unique ID of Instance.</p>
-</dd><dt class="property-required"
+    <dd>Unique ID of Instance.</dd><dt class="property-required"
             title="Required">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -2014,8 +2274,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance name.</p>
-</dd><dt class="property-required"
+    <dd>Instance name.</dd><dt class="property-required"
             title="Required">
         <span id="ipv6_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_status_python" style="color: inherit; text-decoration: inherit;">ipv6_<wbr>status</a>
@@ -2023,8 +2282,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Ipv6 switch status, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>Ipv6 switch status, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="level_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_python" style="color: inherit; text-decoration: inherit;">level</a>
@@ -2032,17 +2290,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance level.</p>
-</dd><dt class="property-required"
+    <dd>Instance level.</dd><dt class="property-required"
             title="Required">
         <span id="load_balancer_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_sets_python" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdomainsdomainloadbalancerset">Get<wbr>Domains<wbr>Domain<wbr>Load<wbr>Balancer<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getdomainsdomainloadbalancerset">Sequence[Get<wbr>Domains<wbr>Domain<wbr>Load<wbr>Balancer<wbr>Set]</a></span>
     </dt>
-    <dd><p>List of bound LB.</p>
-</dd><dt class="property-required"
+    <dd>List of bound LB.</dd><dt class="property-required"
             title="Required">
         <span id="mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_python" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -2050,17 +2306,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rule defense mode, 0 observation mode, 1 interception mode.</p>
-</dd><dt class="property-required"
+    <dd>Rule defense mode, 0 observation mode, 1 interception mode.</dd><dt class="property-required"
             title="Required">
         <span id="ports_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_python" style="color: inherit; text-decoration: inherit;">ports</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdomainsdomainport">Get<wbr>Domains<wbr>Domain<wbr>Port]</a></span>
+        <span class="property-type"><a href="#getdomainsdomainport">Sequence[Get<wbr>Domains<wbr>Domain<wbr>Port]</a></span>
     </dt>
-    <dd><p>Listening ports.</p>
-</dd><dt class="property-required"
+    <dd>Listening ports.</dd><dt class="property-required"
             title="Required">
         <span id="post_ckafka_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#post_ckafka_status_python" style="color: inherit; text-decoration: inherit;">post_<wbr>ckafka_<wbr>status</a>
@@ -2068,8 +2322,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable the delivery of CKafka function, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the delivery of CKafka function, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="post_cls_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#post_cls_status_python" style="color: inherit; text-decoration: inherit;">post_<wbr>cls_<wbr>status</a>
@@ -2077,8 +2330,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable the delivery CLS function, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the delivery CLS function, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -2086,8 +2338,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="rs_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rs_lists_python" style="color: inherit; text-decoration: inherit;">rs_<wbr>lists</a>
@@ -2095,8 +2346,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Waf engine export addresses, should be added to the whitelist by the upstreams.</p>
-</dd><dt class="property-required"
+    <dd>Waf engine export addresses, should be added to the whitelist by the upstreams.</dd><dt class="property-required"
             title="Required">
         <span id="sg_detail_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sg_detail_python" style="color: inherit; text-decoration: inherit;">sg_<wbr>detail</a>
@@ -2104,8 +2354,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Detailed explanation of security group statusNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Detailed explanation of security group statusNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="sg_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sg_state_python" style="color: inherit; text-decoration: inherit;">sg_<wbr>state</a>
@@ -2113,8 +2362,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Security group status, 0 does not display, 1 non Tencent cloud source site, 2 security group binding failed, 3 security group changedNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Security group status, 0 does not display, 1 non Tencent cloud source site, 2 security group binding failed, 3 security group changedNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -2122,8 +2370,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Clbwaf domain name listener status, 0 operation successful, 4 binding LB, 6 unbinding LB, 7 unbinding LB failed, 8 binding LB failed, 10 internal error.</p>
-</dd><dt class="property-required"
+    <dd>Clbwaf domain name listener status, 0 operation successful, 4 binding LB, 6 unbinding LB, 7 unbinding LB failed, 8 binding LB failed, 10 internal error.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2131,8 +2378,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Waf switch,0 off 1 on.</p>
-</dd></dl>
+    <dd>Waf switch,0 off 1 on.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2146,8 +2392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Traffic Source: clb represents Tencent Cloud clb, apisix represents apisix gateway, tsegw represents Tencent Cloud API gateway, default clbNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Traffic Source: clb represents Tencent Cloud clb, apisix represents apisix gateway, tsegw represents Tencent Cloud API gateway, default clbNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="apistatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apistatus_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Status</a>
@@ -2155,8 +2400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>API security switch status, 0 off, 1 onNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>API security switch status, 0 off, 1 onNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="appid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#appid_yaml" style="color: inherit; text-decoration: inherit;">app<wbr>Id</a>
@@ -2164,8 +2408,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>User appid.</p>
-</dd><dt class="property-required"
+    <dd>User appid.</dd><dt class="property-required"
             title="Required">
         <span id="botstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#botstatus_yaml" style="color: inherit; text-decoration: inherit;">bot<wbr>Status</a>
@@ -2173,8 +2416,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>BOT switch status, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>BOT switch status, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="cclists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cclists_yaml" style="color: inherit; text-decoration: inherit;">cc<wbr>Lists</a>
@@ -2182,8 +2424,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Waf sandbox export addresses, should be added to the whitelist by the upstreams.</p>
-</dd><dt class="property-required"
+    <dd>Waf sandbox export addresses, should be added to the whitelist by the upstreams.</dd><dt class="property-required"
             title="Required">
         <span id="cdcclusters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcclusters_yaml" style="color: inherit; text-decoration: inherit;">cdc<wbr>Clusters</a>
@@ -2191,8 +2432,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cdc clustersNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Cdc clustersNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clsstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clsstatus_yaml" style="color: inherit; text-decoration: inherit;">cls<wbr>Status</a>
@@ -2200,8 +2440,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable access logs, 1 enable, 0 disable.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable access logs, 1 enable, 0 disable.</dd><dt class="property-required"
             title="Required">
         <span id="cname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cname_yaml" style="color: inherit; text-decoration: inherit;">cname</a>
@@ -2209,8 +2448,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cname address, used for dns access.</p>
-</dd><dt class="property-required"
+    <dd>Cname address, used for dns access.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2218,8 +2456,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2227,8 +2464,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-required"
+    <dd>Domain name.</dd><dt class="property-required"
             title="Required">
         <span id="domainid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainid_yaml" style="color: inherit; text-decoration: inherit;">domain<wbr>Id</a>
@@ -2236,8 +2472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain unique ID.</p>
-</dd><dt class="property-required"
+    <dd>Domain unique ID.</dd><dt class="property-required"
             title="Required">
         <span id="edition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#edition_yaml" style="color: inherit; text-decoration: inherit;">edition</a>
@@ -2245,8 +2480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance type, sparta-waf represents SAAS WAF, clb-waf represents CLB WAF.</p>
-</dd><dt class="property-required"
+    <dd>Instance type, sparta-waf represents SAAS WAF, clb-waf represents CLB WAF.</dd><dt class="property-required"
             title="Required">
         <span id="engine_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_yaml" style="color: inherit; text-decoration: inherit;">engine</a>
@@ -2254,8 +2488,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Rule and AI Defense Mode, 10 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Shutdown Mode 11 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Observation Mode 12 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Interception Mode 20 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Shutdown Mode 21 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Observation Mode 22 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Interception Mode.</p>
-</dd><dt class="property-required"
+    <dd>Rule and AI Defense Mode, 10 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Shutdown Mode 11 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Observation Mode 12 Rule Engine Observation&amp;amp;&amp;amp;AI Engine Interception Mode 20 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Shutdown Mode 21 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Observation Mode 22 Rule Engine Interception&amp;amp;&amp;amp;AI Engine Interception Mode.</dd><dt class="property-required"
             title="Required">
         <span id="flowmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flowmode_yaml" style="color: inherit; text-decoration: inherit;">flow<wbr>Mode</a>
@@ -2263,8 +2496,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>CLBWAF traffic mode, 1 cleaning mode, 0 mirroring mode.</p>
-</dd><dt class="property-required"
+    <dd>CLBWAF traffic mode, 1 cleaning mode, 0 mirroring mode.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2272,8 +2504,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique ID of Instance.</p>
-</dd><dt class="property-required"
+    <dd>Unique ID of Instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2281,8 +2512,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance name.</p>
-</dd><dt class="property-required"
+    <dd>Instance name.</dd><dt class="property-required"
             title="Required">
         <span id="ipv6status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6status_yaml" style="color: inherit; text-decoration: inherit;">ipv6Status</a>
@@ -2290,8 +2520,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Ipv6 switch status, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>Ipv6 switch status, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="level_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_yaml" style="color: inherit; text-decoration: inherit;">level</a>
@@ -2299,8 +2528,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance level.</p>
-</dd><dt class="property-required"
+    <dd>Instance level.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancersets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancersets_yaml" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Sets</a>
@@ -2308,8 +2536,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainloadbalancerset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of bound LB.</p>
-</dd><dt class="property-required"
+    <dd>List of bound LB.</dd><dt class="property-required"
             title="Required">
         <span id="mode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_yaml" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -2317,8 +2544,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Rule defense mode, 0 observation mode, 1 interception mode.</p>
-</dd><dt class="property-required"
+    <dd>Rule defense mode, 0 observation mode, 1 interception mode.</dd><dt class="property-required"
             title="Required">
         <span id="ports_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ports_yaml" style="color: inherit; text-decoration: inherit;">ports</a>
@@ -2326,8 +2552,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainsdomainport">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Listening ports.</p>
-</dd><dt class="property-required"
+    <dd>Listening ports.</dd><dt class="property-required"
             title="Required">
         <span id="postckafkastatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#postckafkastatus_yaml" style="color: inherit; text-decoration: inherit;">post<wbr>Ckafka<wbr>Status</a>
@@ -2335,8 +2560,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable the delivery of CKafka function, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the delivery of CKafka function, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="postclsstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#postclsstatus_yaml" style="color: inherit; text-decoration: inherit;">post<wbr>Cls<wbr>Status</a>
@@ -2344,8 +2568,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable the delivery CLS function, 0 off, 1 on.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the delivery CLS function, 0 off, 1 on.</dd><dt class="property-required"
             title="Required">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -2353,8 +2576,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="rslists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rslists_yaml" style="color: inherit; text-decoration: inherit;">rs<wbr>Lists</a>
@@ -2362,8 +2584,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Waf engine export addresses, should be added to the whitelist by the upstreams.</p>
-</dd><dt class="property-required"
+    <dd>Waf engine export addresses, should be added to the whitelist by the upstreams.</dd><dt class="property-required"
             title="Required">
         <span id="sgdetail_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sgdetail_yaml" style="color: inherit; text-decoration: inherit;">sg<wbr>Detail</a>
@@ -2371,8 +2592,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detailed explanation of security group statusNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Detailed explanation of security group statusNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="sgstate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sgstate_yaml" style="color: inherit; text-decoration: inherit;">sg<wbr>State</a>
@@ -2380,8 +2600,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Security group status, 0 does not display, 1 non Tencent cloud source site, 2 security group binding failed, 3 security group changedNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Security group status, 0 does not display, 1 non Tencent cloud source site, 2 security group binding failed, 3 security group changedNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -2389,8 +2608,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Clbwaf domain name listener status, 0 operation successful, 4 binding LB, 6 unbinding LB, 7 unbinding LB failed, 8 binding LB failed, 10 internal error.</p>
-</dd><dt class="property-required"
+    <dd>Clbwaf domain name listener status, 0 operation successful, 4 binding LB, 6 unbinding LB, 7 unbinding LB failed, 8 binding LB failed, 10 internal error.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2398,8 +2616,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Waf switch,0 off 1 on.</p>
-</dd></dl>
+    <dd>Waf switch,0 off 1 on.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2417,8 +2634,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listener unique IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Listener unique IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="listenername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Name</a>
@@ -2426,8 +2642,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listener nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Listener nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerid_csharp" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Id</a>
@@ -2435,8 +2650,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>LoadBalancer IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>LoadBalancer IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancername_csharp" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Name</a>
@@ -2444,8 +2658,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>LoadBalancer nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>LoadBalancer nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancertype_csharp" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Type</a>
@@ -2453,8 +2666,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Loadbalancer typeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Loadbalancer typeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="numericalvpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numericalvpcid_csharp" style="color: inherit; text-decoration: inherit;">Numerical<wbr>Vpc<wbr>Id</a>
@@ -2462,8 +2674,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditionsNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditionsNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -2471,8 +2682,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The listening protocol of listening port.</p>
-</dd><dt class="property-required"
+    <dd>The listening protocol of listening port.</dd><dt class="property-required"
             title="Required">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -2480,8 +2690,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="vip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_csharp" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -2489,8 +2698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>LoadBalancer ipNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>LoadBalancer ipNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="vport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_csharp" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -2498,8 +2706,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Listener portNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Listener portNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -2507,8 +2714,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Loadbalancer zoneNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Loadbalancer zoneNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2522,8 +2728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listener unique IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Listener unique IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="listenername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Name</a>
@@ -2531,8 +2736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listener nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Listener nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerid_go" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Id</a>
@@ -2540,8 +2744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>LoadBalancer IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>LoadBalancer IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancername_go" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Name</a>
@@ -2549,8 +2752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>LoadBalancer nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>LoadBalancer nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancertype_go" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Type</a>
@@ -2558,8 +2760,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Loadbalancer typeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Loadbalancer typeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="numericalvpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numericalvpcid_go" style="color: inherit; text-decoration: inherit;">Numerical<wbr>Vpc<wbr>Id</a>
@@ -2567,8 +2768,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditionsNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditionsNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -2576,8 +2776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The listening protocol of listening port.</p>
-</dd><dt class="property-required"
+    <dd>The listening protocol of listening port.</dd><dt class="property-required"
             title="Required">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -2585,8 +2784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="vip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_go" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -2594,8 +2792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>LoadBalancer ipNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>LoadBalancer ipNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="vport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_go" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -2603,8 +2800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Listener portNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Listener portNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -2612,8 +2808,101 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Loadbalancer zoneNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Loadbalancer zoneNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Listener unique IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="listener_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_name_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Listener nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="load_balancer_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_id_hcl" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>LoadBalancer IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="load_balancer_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_name_hcl" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>LoadBalancer nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="load_balancer_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_type_hcl" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Loadbalancer typeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="numerical_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numerical_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">numerical_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditionsNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The listening protocol of listening port.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region.</dd><dt class="property-required"
+            title="Required">
+        <span id="vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>LoadBalancer ipNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="vport_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_hcl" style="color: inherit; text-decoration: inherit;">vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Listener portNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Loadbalancer zoneNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2627,8 +2916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Listener unique IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Listener unique IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="listenername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Name</a>
@@ -2636,8 +2924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Listener nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Listener nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerid_java" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Id</a>
@@ -2645,8 +2932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>LoadBalancer IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>LoadBalancer IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancername_java" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Name</a>
@@ -2654,8 +2940,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>LoadBalancer nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>LoadBalancer nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancertype_java" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Type</a>
@@ -2663,8 +2948,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Loadbalancer typeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Loadbalancer typeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="numericalvpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numericalvpcid_java" style="color: inherit; text-decoration: inherit;">numerical<wbr>Vpc<wbr>Id</a>
@@ -2672,8 +2956,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditionsNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditionsNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2681,8 +2964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The listening protocol of listening port.</p>
-</dd><dt class="property-required"
+    <dd>The listening protocol of listening port.</dd><dt class="property-required"
             title="Required">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -2690,8 +2972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="vip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_java" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2699,8 +2980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>LoadBalancer ipNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>LoadBalancer ipNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="vport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_java" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2708,8 +2988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Listener portNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Listener portNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2717,8 +2996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Loadbalancer zoneNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Loadbalancer zoneNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2732,8 +3010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listener unique IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Listener unique IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="listenername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Name</a>
@@ -2741,8 +3018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listener nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Listener nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerid_nodejs" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Id</a>
@@ -2750,8 +3026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>LoadBalancer IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>LoadBalancer IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancername_nodejs" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Name</a>
@@ -2759,8 +3034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>LoadBalancer nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>LoadBalancer nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancertype_nodejs" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Type</a>
@@ -2768,8 +3042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Loadbalancer typeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Loadbalancer typeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="numericalvpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numericalvpcid_nodejs" style="color: inherit; text-decoration: inherit;">numerical<wbr>Vpc<wbr>Id</a>
@@ -2777,8 +3050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditionsNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditionsNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2786,8 +3058,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The listening protocol of listening port.</p>
-</dd><dt class="property-required"
+    <dd>The listening protocol of listening port.</dd><dt class="property-required"
             title="Required">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -2795,8 +3066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="vip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_nodejs" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2804,8 +3074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>LoadBalancer ipNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>LoadBalancer ipNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="vport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_nodejs" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2813,8 +3082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Listener portNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Listener portNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2822,8 +3090,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Loadbalancer zoneNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Loadbalancer zoneNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2837,8 +3104,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Listener unique IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Listener unique IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="listener_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_name_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>name</a>
@@ -2846,8 +3112,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Listener nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Listener nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="load_balancer_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_id_python" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>id</a>
@@ -2855,8 +3120,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>LoadBalancer IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>LoadBalancer IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="load_balancer_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_name_python" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>name</a>
@@ -2864,8 +3128,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>LoadBalancer nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>LoadBalancer nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="load_balancer_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_type_python" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>type</a>
@@ -2873,8 +3136,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Loadbalancer typeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Loadbalancer typeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="numerical_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numerical_vpc_id_python" style="color: inherit; text-decoration: inherit;">numerical_<wbr>vpc_<wbr>id</a>
@@ -2882,8 +3144,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditionsNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditionsNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2891,8 +3152,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The listening protocol of listening port.</p>
-</dd><dt class="property-required"
+    <dd>The listening protocol of listening port.</dd><dt class="property-required"
             title="Required">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -2900,8 +3160,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_python" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2909,8 +3168,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>LoadBalancer ipNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>LoadBalancer ipNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="vport_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_python" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2918,8 +3176,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Listener portNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Listener portNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2927,8 +3184,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Loadbalancer zoneNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Loadbalancer zoneNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2942,8 +3198,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Listener unique IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Listener unique IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="listenername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Name</a>
@@ -2951,8 +3206,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Listener nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Listener nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerid_yaml" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Id</a>
@@ -2960,8 +3214,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>LoadBalancer IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>LoadBalancer IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancername_yaml" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Name</a>
@@ -2969,8 +3222,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>LoadBalancer nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>LoadBalancer nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancertype_yaml" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Type</a>
@@ -2978,8 +3230,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Loadbalancer typeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Loadbalancer typeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="numericalvpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numericalvpcid_yaml" style="color: inherit; text-decoration: inherit;">numerical<wbr>Vpc<wbr>Id</a>
@@ -2987,8 +3238,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditionsNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditionsNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2996,8 +3246,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The listening protocol of listening port.</p>
-</dd><dt class="property-required"
+    <dd>The listening protocol of listening port.</dd><dt class="property-required"
             title="Required">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -3005,8 +3254,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="vip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_yaml" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -3014,8 +3262,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>LoadBalancer ipNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>LoadBalancer ipNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="vport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_yaml" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -3023,8 +3270,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Listener portNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Listener portNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -3032,8 +3278,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Loadbalancer zoneNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Loadbalancer zoneNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3051,8 +3296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Nginx server ID.</p>
-</dd><dt class="property-required"
+    <dd>Nginx server ID.</dd><dt class="property-required"
             title="Required">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -3060,8 +3304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listening port.</p>
-</dd><dt class="property-required"
+    <dd>Listening port.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -3069,8 +3312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The listening protocol of listening port.</p>
-</dd><dt class="property-required"
+    <dd>The listening protocol of listening port.</dd><dt class="property-required"
             title="Required">
         <span id="upstreamport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamport_csharp" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Port</a>
@@ -3078,8 +3320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The upstream port for listening port.</p>
-</dd><dt class="property-required"
+    <dd>The upstream port for listening port.</dd><dt class="property-required"
             title="Required">
         <span id="upstreamprotocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamprotocol_csharp" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Protocol</a>
@@ -3087,8 +3328,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The upstream protocol for listening port.</p>
-</dd></dl>
+    <dd>The upstream protocol for listening port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3102,8 +3342,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Nginx server ID.</p>
-</dd><dt class="property-required"
+    <dd>Nginx server ID.</dd><dt class="property-required"
             title="Required">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -3111,8 +3350,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listening port.</p>
-</dd><dt class="property-required"
+    <dd>Listening port.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -3120,8 +3358,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The listening protocol of listening port.</p>
-</dd><dt class="property-required"
+    <dd>The listening protocol of listening port.</dd><dt class="property-required"
             title="Required">
         <span id="upstreamport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamport_go" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Port</a>
@@ -3129,8 +3366,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The upstream port for listening port.</p>
-</dd><dt class="property-required"
+    <dd>The upstream port for listening port.</dd><dt class="property-required"
             title="Required">
         <span id="upstreamprotocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamprotocol_go" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Protocol</a>
@@ -3138,8 +3374,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The upstream protocol for listening port.</p>
-</dd></dl>
+    <dd>The upstream protocol for listening port.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="nginx_server_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nginx_server_id_hcl" style="color: inherit; text-decoration: inherit;">nginx_<wbr>server_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Nginx server ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Listening port.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The listening protocol of listening port.</dd><dt class="property-required"
+            title="Required">
+        <span id="upstream_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstream_port_hcl" style="color: inherit; text-decoration: inherit;">upstream_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The upstream port for listening port.</dd><dt class="property-required"
+            title="Required">
+        <span id="upstream_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstream_protocol_hcl" style="color: inherit; text-decoration: inherit;">upstream_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The upstream protocol for listening port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3153,8 +3434,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Nginx server ID.</p>
-</dd><dt class="property-required"
+    <dd>Nginx server ID.</dd><dt class="property-required"
             title="Required">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -3162,8 +3442,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Listening port.</p>
-</dd><dt class="property-required"
+    <dd>Listening port.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3171,8 +3450,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The listening protocol of listening port.</p>
-</dd><dt class="property-required"
+    <dd>The listening protocol of listening port.</dd><dt class="property-required"
             title="Required">
         <span id="upstreamport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamport_java" style="color: inherit; text-decoration: inherit;">upstream<wbr>Port</a>
@@ -3180,8 +3458,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The upstream port for listening port.</p>
-</dd><dt class="property-required"
+    <dd>The upstream port for listening port.</dd><dt class="property-required"
             title="Required">
         <span id="upstreamprotocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamprotocol_java" style="color: inherit; text-decoration: inherit;">upstream<wbr>Protocol</a>
@@ -3189,8 +3466,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The upstream protocol for listening port.</p>
-</dd></dl>
+    <dd>The upstream protocol for listening port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3204,8 +3480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Nginx server ID.</p>
-</dd><dt class="property-required"
+    <dd>Nginx server ID.</dd><dt class="property-required"
             title="Required">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -3213,8 +3488,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listening port.</p>
-</dd><dt class="property-required"
+    <dd>Listening port.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3222,8 +3496,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The listening protocol of listening port.</p>
-</dd><dt class="property-required"
+    <dd>The listening protocol of listening port.</dd><dt class="property-required"
             title="Required">
         <span id="upstreamport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamport_nodejs" style="color: inherit; text-decoration: inherit;">upstream<wbr>Port</a>
@@ -3231,8 +3504,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The upstream port for listening port.</p>
-</dd><dt class="property-required"
+    <dd>The upstream port for listening port.</dd><dt class="property-required"
             title="Required">
         <span id="upstreamprotocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamprotocol_nodejs" style="color: inherit; text-decoration: inherit;">upstream<wbr>Protocol</a>
@@ -3240,8 +3512,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The upstream protocol for listening port.</p>
-</dd></dl>
+    <dd>The upstream protocol for listening port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3255,8 +3526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Nginx server ID.</p>
-</dd><dt class="property-required"
+    <dd>Nginx server ID.</dd><dt class="property-required"
             title="Required">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -3264,8 +3534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Listening port.</p>
-</dd><dt class="property-required"
+    <dd>Listening port.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3273,8 +3542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The listening protocol of listening port.</p>
-</dd><dt class="property-required"
+    <dd>The listening protocol of listening port.</dd><dt class="property-required"
             title="Required">
         <span id="upstream_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstream_port_python" style="color: inherit; text-decoration: inherit;">upstream_<wbr>port</a>
@@ -3282,8 +3550,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The upstream port for listening port.</p>
-</dd><dt class="property-required"
+    <dd>The upstream port for listening port.</dd><dt class="property-required"
             title="Required">
         <span id="upstream_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstream_protocol_python" style="color: inherit; text-decoration: inherit;">upstream_<wbr>protocol</a>
@@ -3291,8 +3558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The upstream protocol for listening port.</p>
-</dd></dl>
+    <dd>The upstream protocol for listening port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3306,8 +3572,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Nginx server ID.</p>
-</dd><dt class="property-required"
+    <dd>Nginx server ID.</dd><dt class="property-required"
             title="Required">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -3315,8 +3580,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Listening port.</p>
-</dd><dt class="property-required"
+    <dd>Listening port.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3324,8 +3588,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The listening protocol of listening port.</p>
-</dd><dt class="property-required"
+    <dd>The listening protocol of listening port.</dd><dt class="property-required"
             title="Required">
         <span id="upstreamport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamport_yaml" style="color: inherit; text-decoration: inherit;">upstream<wbr>Port</a>
@@ -3333,8 +3596,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The upstream port for listening port.</p>
-</dd><dt class="property-required"
+    <dd>The upstream port for listening port.</dd><dt class="property-required"
             title="Required">
         <span id="upstreamprotocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamprotocol_yaml" style="color: inherit; text-decoration: inherit;">upstream<wbr>Protocol</a>
@@ -3342,8 +3604,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The upstream protocol for listening port.</p>
-</dd></dl>
+    <dd>The upstream protocol for listening port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3358,7 +3619,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

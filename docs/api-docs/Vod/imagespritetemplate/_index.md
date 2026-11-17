@@ -2,9 +2,11 @@
 ---
 title: "ImageSpriteTemplate"
 title_tag: "tencentcloud.Vod.ImageSpriteTemplate"
-meta_desc: "Documentation for the tencentcloud.Vod.ImageSpriteTemplate resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a VOD image sprite template."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -17,71 +19,86 @@ Provide a resource to create a VOD image sprite template.
 
 
 ## Create ImageSpriteTemplate Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ImageSpriteTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ImageSpriteTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ImageSpriteTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ImageSpriteTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ImageSpriteTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ImageSpriteTemplateArgs</a></span><span class="p">,</span>
+                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ImageSpriteTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                         <span class="nx">column_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                        <span class="nx">row_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                        <span class="nx">sample_interval</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                        <span class="nx">sample_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                         <span class="nx">comment</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                         <span class="nx">fill_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                         <span class="nx">format</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                         <span class="nx">height</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                         <span class="nx">resolution_adaptive</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-                        <span class="nx">row_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                        <span class="nx">sample_interval</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                        <span class="nx">sample_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                         <span class="nx">sub_app_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                        <span class="nx">width</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ImageSpriteTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ImageSpriteTemplateArgs</a></span><span class="p">,</span>
-                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                        <span class="nx">width</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewImageSpriteTemplate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ImageSpriteTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ImageSpriteTemplate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewImageSpriteTemplate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ImageSpriteTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ImageSpriteTemplate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ImageSpriteTemplate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ImageSpriteTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ImageSpriteTemplate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ImageSpriteTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ImageSpriteTemplate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ImageSpriteTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ImageSpriteTemplate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ImageSpriteTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vod:ImageSpriteTemplate</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vod:ImageSpriteTemplate</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_vod_image_sprite_template&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -102,7 +119,7 @@ Provide a resource to create a VOD image sprite template.
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -219,11 +236,19 @@ Provide a resource to create a VOD image sprite template.
 </pulumi-choosable>
 </div>
 
+
+
 ## ImageSpriteTemplate Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ImageSpriteTemplate resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -239,8 +264,7 @@ The ImageSpriteTemplate resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subimage column count of an image sprite.</p>
-</dd><dt class="property-required"
+    <dd>Subimage column count of an image sprite.</dd><dt class="property-required"
             title="Required">
         <span id="rowcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rowcount_csharp" style="color: inherit; text-decoration: inherit;">Row<wbr>Count</a>
@@ -248,8 +272,7 @@ The ImageSpriteTemplate resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subimage row count of an image sprite.</p>
-</dd><dt class="property-required"
+    <dd>Subimage row count of an image sprite.</dd><dt class="property-required"
             title="Required">
         <span id="sampleinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampleinterval_csharp" style="color: inherit; text-decoration: inherit;">Sample<wbr>Interval</a>
@@ -257,8 +280,7 @@ The ImageSpriteTemplate resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sampling interval. If <code>sample_type</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sample_type</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</p>
-</dd><dt class="property-required"
+    <dd>Sampling interval. If <code>sampleType</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sampleType</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="sampletype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampletype_csharp" style="color: inherit; text-decoration: inherit;">Sample<wbr>Type</a>
@@ -266,8 +288,7 @@ The ImageSpriteTemplate resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_csharp" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -275,8 +296,7 @@ The ImageSpriteTemplate resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="filltype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filltype_csharp" style="color: inherit; text-decoration: inherit;">Fill<wbr>Type</a>
@@ -284,8 +304,7 @@ The ImageSpriteTemplate resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="format_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_csharp" style="color: inherit; text-decoration: inherit;">Format</a>
@@ -293,14 +312,13 @@ The ImageSpriteTemplate resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image format, Valid values:</p>
+    <dd>Image format, Valid values:</p>
 <ul>
 <li>jpg: jpg format;</li>
 <li>png: png format;</li>
 <li>webp: webp format;
 Default value: jpg.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="height_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_csharp" style="color: inherit; text-decoration: inherit;">Height</a>
@@ -308,8 +326,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -317,8 +334,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a time point screen capturing template. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a time point screen capturing template. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="resolutionadaptive_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolutionadaptive_csharp" style="color: inherit; text-decoration: inherit;">Resolution<wbr>Adaptive</a>
@@ -326,8 +342,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_csharp" style="color: inherit; text-decoration: inherit;">Sub<wbr>App<wbr>Id</a>
@@ -335,8 +350,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_csharp" style="color: inherit; text-decoration: inherit;">Width</a>
@@ -344,8 +358,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd></dl>
+    <dd>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -359,8 +372,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subimage column count of an image sprite.</p>
-</dd><dt class="property-required"
+    <dd>Subimage column count of an image sprite.</dd><dt class="property-required"
             title="Required">
         <span id="rowcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rowcount_go" style="color: inherit; text-decoration: inherit;">Row<wbr>Count</a>
@@ -368,8 +380,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subimage row count of an image sprite.</p>
-</dd><dt class="property-required"
+    <dd>Subimage row count of an image sprite.</dd><dt class="property-required"
             title="Required">
         <span id="sampleinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampleinterval_go" style="color: inherit; text-decoration: inherit;">Sample<wbr>Interval</a>
@@ -377,8 +388,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sampling interval. If <code>sample_type</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sample_type</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</p>
-</dd><dt class="property-required"
+    <dd>Sampling interval. If <code>sampleType</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sampleType</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="sampletype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampletype_go" style="color: inherit; text-decoration: inherit;">Sample<wbr>Type</a>
@@ -386,8 +396,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_go" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -395,8 +404,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="filltype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filltype_go" style="color: inherit; text-decoration: inherit;">Fill<wbr>Type</a>
@@ -404,8 +412,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="format_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_go" style="color: inherit; text-decoration: inherit;">Format</a>
@@ -413,14 +420,13 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image format, Valid values:</p>
+    <dd>Image format, Valid values:</p>
 <ul>
 <li>jpg: jpg format;</li>
 <li>png: png format;</li>
 <li>webp: webp format;
 Default value: jpg.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="height_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_go" style="color: inherit; text-decoration: inherit;">Height</a>
@@ -428,8 +434,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -437,8 +442,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a time point screen capturing template. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a time point screen capturing template. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="resolutionadaptive_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolutionadaptive_go" style="color: inherit; text-decoration: inherit;">Resolution<wbr>Adaptive</a>
@@ -446,8 +450,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_go" style="color: inherit; text-decoration: inherit;">Sub<wbr>App<wbr>Id</a>
@@ -455,8 +458,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_go" style="color: inherit; text-decoration: inherit;">Width</a>
@@ -464,8 +466,115 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd></dl>
+    <dd>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="column_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#column_count_hcl" style="color: inherit; text-decoration: inherit;">column_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Subimage column count of an image sprite.</dd><dt class="property-required"
+            title="Required">
+        <span id="row_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#row_count_hcl" style="color: inherit; text-decoration: inherit;">row_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Subimage row count of an image sprite.</dd><dt class="property-required"
+            title="Required">
+        <span id="sample_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sample_interval_hcl" style="color: inherit; text-decoration: inherit;">sample_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Sampling interval. If <code>sampleType</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sampleType</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</dd><dt class="property-required"
+            title="Required">
+        <span id="sample_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sample_type_hcl" style="color: inherit; text-decoration: inherit;">sample_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="comment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_hcl" style="color: inherit; text-decoration: inherit;">comment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="fill_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fill_type_hcl" style="color: inherit; text-decoration: inherit;">fill_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="format_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_hcl" style="color: inherit; text-decoration: inherit;">format</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Image format, Valid values:</p>
+<ul>
+<li>jpg: jpg format;</li>
+<li>png: png format;</li>
+<li>webp: webp format;
+Default value: jpg.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="height_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_hcl" style="color: inherit; text-decoration: inherit;">height</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of a time point screen capturing template. Length limit: 64 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="resolution_adaptive_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolution_adaptive_hcl" style="color: inherit; text-decoration: inherit;">resolution_<wbr>adaptive</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sub_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_app_id_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="width_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_hcl" style="color: inherit; text-decoration: inherit;">width</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -479,8 +588,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Subimage column count of an image sprite.</p>
-</dd><dt class="property-required"
+    <dd>Subimage column count of an image sprite.</dd><dt class="property-required"
             title="Required">
         <span id="rowcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rowcount_java" style="color: inherit; text-decoration: inherit;">row<wbr>Count</a>
@@ -488,8 +596,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Subimage row count of an image sprite.</p>
-</dd><dt class="property-required"
+    <dd>Subimage row count of an image sprite.</dd><dt class="property-required"
             title="Required">
         <span id="sampleinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampleinterval_java" style="color: inherit; text-decoration: inherit;">sample<wbr>Interval</a>
@@ -497,8 +604,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Sampling interval. If <code>sample_type</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sample_type</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</p>
-</dd><dt class="property-required"
+    <dd>Sampling interval. If <code>sampleType</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sampleType</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="sampletype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampletype_java" style="color: inherit; text-decoration: inherit;">sample<wbr>Type</a>
@@ -506,8 +612,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_java" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -515,8 +620,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="filltype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filltype_java" style="color: inherit; text-decoration: inherit;">fill<wbr>Type</a>
@@ -524,8 +628,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="format_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_java" style="color: inherit; text-decoration: inherit;">format</a>
@@ -533,14 +636,13 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Image format, Valid values:</p>
+    <dd>Image format, Valid values:</p>
 <ul>
 <li>jpg: jpg format;</li>
 <li>png: png format;</li>
 <li>webp: webp format;
 Default value: jpg.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="height_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_java" style="color: inherit; text-decoration: inherit;">height</a>
@@ -548,8 +650,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -557,8 +658,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a time point screen capturing template. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a time point screen capturing template. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="resolutionadaptive_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolutionadaptive_java" style="color: inherit; text-decoration: inherit;">resolution<wbr>Adaptive</a>
@@ -566,8 +666,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_java" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -575,8 +674,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_java" style="color: inherit; text-decoration: inherit;">width</a>
@@ -584,8 +682,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd></dl>
+    <dd>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -599,8 +696,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Subimage column count of an image sprite.</p>
-</dd><dt class="property-required"
+    <dd>Subimage column count of an image sprite.</dd><dt class="property-required"
             title="Required">
         <span id="rowcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rowcount_nodejs" style="color: inherit; text-decoration: inherit;">row<wbr>Count</a>
@@ -608,8 +704,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Subimage row count of an image sprite.</p>
-</dd><dt class="property-required"
+    <dd>Subimage row count of an image sprite.</dd><dt class="property-required"
             title="Required">
         <span id="sampleinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampleinterval_nodejs" style="color: inherit; text-decoration: inherit;">sample<wbr>Interval</a>
@@ -617,8 +712,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Sampling interval. If <code>sample_type</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sample_type</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</p>
-</dd><dt class="property-required"
+    <dd>Sampling interval. If <code>sampleType</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sampleType</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="sampletype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampletype_nodejs" style="color: inherit; text-decoration: inherit;">sample<wbr>Type</a>
@@ -626,8 +720,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_nodejs" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -635,8 +728,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="filltype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filltype_nodejs" style="color: inherit; text-decoration: inherit;">fill<wbr>Type</a>
@@ -644,8 +736,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="format_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_nodejs" style="color: inherit; text-decoration: inherit;">format</a>
@@ -653,14 +744,13 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image format, Valid values:</p>
+    <dd>Image format, Valid values:</p>
 <ul>
 <li>jpg: jpg format;</li>
 <li>png: png format;</li>
 <li>webp: webp format;
 Default value: jpg.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="height_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_nodejs" style="color: inherit; text-decoration: inherit;">height</a>
@@ -668,8 +758,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -677,8 +766,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a time point screen capturing template. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a time point screen capturing template. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="resolutionadaptive_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolutionadaptive_nodejs" style="color: inherit; text-decoration: inherit;">resolution<wbr>Adaptive</a>
@@ -686,8 +774,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_nodejs" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -695,8 +782,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_nodejs" style="color: inherit; text-decoration: inherit;">width</a>
@@ -704,8 +790,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd></dl>
+    <dd>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -719,8 +804,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subimage column count of an image sprite.</p>
-</dd><dt class="property-required"
+    <dd>Subimage column count of an image sprite.</dd><dt class="property-required"
             title="Required">
         <span id="row_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#row_count_python" style="color: inherit; text-decoration: inherit;">row_<wbr>count</a>
@@ -728,8 +812,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subimage row count of an image sprite.</p>
-</dd><dt class="property-required"
+    <dd>Subimage row count of an image sprite.</dd><dt class="property-required"
             title="Required">
         <span id="sample_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sample_interval_python" style="color: inherit; text-decoration: inherit;">sample_<wbr>interval</a>
@@ -737,8 +820,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sampling interval. If <code>sample_type</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sample_type</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</p>
-</dd><dt class="property-required"
+    <dd>Sampling interval. If <code>sampleType</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sampleType</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="sample_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sample_type_python" style="color: inherit; text-decoration: inherit;">sample_<wbr>type</a>
@@ -746,8 +828,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_python" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -755,8 +836,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="fill_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fill_type_python" style="color: inherit; text-decoration: inherit;">fill_<wbr>type</a>
@@ -764,8 +844,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="format_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_python" style="color: inherit; text-decoration: inherit;">format</a>
@@ -773,14 +852,13 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Image format, Valid values:</p>
+    <dd>Image format, Valid values:</p>
 <ul>
 <li>jpg: jpg format;</li>
 <li>png: png format;</li>
 <li>webp: webp format;
 Default value: jpg.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="height_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_python" style="color: inherit; text-decoration: inherit;">height</a>
@@ -788,8 +866,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -797,8 +874,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of a time point screen capturing template. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a time point screen capturing template. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="resolution_adaptive_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolution_adaptive_python" style="color: inherit; text-decoration: inherit;">resolution_<wbr>adaptive</a>
@@ -806,8 +882,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sub_app_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_app_id_python" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
@@ -815,8 +890,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_python" style="color: inherit; text-decoration: inherit;">width</a>
@@ -824,8 +898,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd></dl>
+    <dd>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -839,8 +912,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Subimage column count of an image sprite.</p>
-</dd><dt class="property-required"
+    <dd>Subimage column count of an image sprite.</dd><dt class="property-required"
             title="Required">
         <span id="rowcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rowcount_yaml" style="color: inherit; text-decoration: inherit;">row<wbr>Count</a>
@@ -848,8 +920,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Subimage row count of an image sprite.</p>
-</dd><dt class="property-required"
+    <dd>Subimage row count of an image sprite.</dd><dt class="property-required"
             title="Required">
         <span id="sampleinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampleinterval_yaml" style="color: inherit; text-decoration: inherit;">sample<wbr>Interval</a>
@@ -857,8 +928,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Sampling interval. If <code>sample_type</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sample_type</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</p>
-</dd><dt class="property-required"
+    <dd>Sampling interval. If <code>sampleType</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sampleType</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="sampletype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sampletype_yaml" style="color: inherit; text-decoration: inherit;">sample<wbr>Type</a>
@@ -866,8 +936,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_yaml" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -875,8 +944,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="filltype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filltype_yaml" style="color: inherit; text-decoration: inherit;">fill<wbr>Type</a>
@@ -884,8 +952,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="format_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_yaml" style="color: inherit; text-decoration: inherit;">format</a>
@@ -893,14 +960,13 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Image format, Valid values:</p>
+    <dd>Image format, Valid values:</p>
 <ul>
 <li>jpg: jpg format;</li>
 <li>png: png format;</li>
 <li>webp: webp format;
 Default value: jpg.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="height_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_yaml" style="color: inherit; text-decoration: inherit;">height</a>
@@ -908,8 +974,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -917,8 +982,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a time point screen capturing template. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a time point screen capturing template. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="resolutionadaptive_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolutionadaptive_yaml" style="color: inherit; text-decoration: inherit;">resolution<wbr>Adaptive</a>
@@ -926,8 +990,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_yaml" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -935,8 +998,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_yaml" style="color: inherit; text-decoration: inherit;">width</a>
@@ -944,8 +1006,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd></dl>
+    <dd>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -966,8 +1027,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -975,8 +1035,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -984,12 +1043,11 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-"
+</ul></dd><dt class="property-"
             title="">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -997,8 +1055,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1012,8 +1069,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1021,8 +1077,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1030,12 +1085,11 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-"
+</ul></dd><dt class="property-"
             title="">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1043,8 +1097,49 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Template type, value range:</p>
+<ul>
+<li>Preset: system preset template;</li>
+<li>Custom: user-defined templates.</li>
+</ul></dd><dt class="property-"
+            title="">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1058,8 +1153,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1067,8 +1161,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1076,12 +1169,11 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-"
+</ul></dd><dt class="property-"
             title="">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1089,8 +1181,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1104,8 +1195,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1113,8 +1203,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1122,12 +1211,11 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-"
+</ul></dd><dt class="property-"
             title="">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1135,8 +1223,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1150,8 +1237,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1159,8 +1245,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1168,12 +1253,11 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-"
+</ul></dd><dt class="property-"
             title="">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -1181,8 +1265,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1196,8 +1279,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1205,8 +1287,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1214,12 +1295,11 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-"
+</ul></dd><dt class="property-"
             title="">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1227,8 +1307,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1238,18 +1317,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ImageSpriteTemplate resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ImageSpriteTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ImageSpriteTemplate</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ImageSpriteTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ImageSpriteTemplate</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1268,104 +1347,143 @@ Get an existing ImageSpriteTemplate resource's state with the given name, ID, an
         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">update_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">width</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> ImageSpriteTemplate</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetImageSpriteTemplate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ImageSpriteTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ImageSpriteTemplate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetImageSpriteTemplate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ImageSpriteTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ImageSpriteTemplate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ImageSpriteTemplate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ImageSpriteTemplateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ImageSpriteTemplate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ImageSpriteTemplateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ImageSpriteTemplate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ImageSpriteTemplateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ImageSpriteTemplate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ImageSpriteTemplateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingImageSpriteTemplate</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Vod:ImageSpriteTemplate</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_vod_image_sprite_template</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ImageSpriteTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ImageSpriteTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1373,28 +1491,31 @@ Get an existing ImageSpriteTemplate resource's state with the given name, ID, an
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ImageSpriteTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1402,28 +1523,31 @@ Get an existing ImageSpriteTemplate resource's state with the given name, ID, an
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ImageSpriteTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1443,8 +1567,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subimage column count of an image sprite.</p>
-</dd><dt class="property-optional"
+    <dd>Subimage column count of an image sprite.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_csharp" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -1452,8 +1575,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1461,8 +1583,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filltype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filltype_csharp" style="color: inherit; text-decoration: inherit;">Fill<wbr>Type</a>
@@ -1470,8 +1591,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_format_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_format_csharp" style="color: inherit; text-decoration: inherit;">Format</a>
@@ -1479,14 +1599,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image format, Valid values:</p>
+    <dd>Image format, Valid values:</p>
 <ul>
 <li>jpg: jpg format;</li>
 <li>png: png format;</li>
 <li>webp: webp format;
 Default value: jpg.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_height_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_height_csharp" style="color: inherit; text-decoration: inherit;">Height</a>
@@ -1494,8 +1613,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1503,8 +1621,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a time point screen capturing template. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a time point screen capturing template. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resolutionadaptive_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resolutionadaptive_csharp" style="color: inherit; text-decoration: inherit;">Resolution<wbr>Adaptive</a>
@@ -1512,8 +1629,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rowcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rowcount_csharp" style="color: inherit; text-decoration: inherit;">Row<wbr>Count</a>
@@ -1521,8 +1637,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subimage row count of an image sprite.</p>
-</dd><dt class="property-optional"
+    <dd>Subimage row count of an image sprite.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sampleinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sampleinterval_csharp" style="color: inherit; text-decoration: inherit;">Sample<wbr>Interval</a>
@@ -1530,8 +1645,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sampling interval. If <code>sample_type</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sample_type</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Sampling interval. If <code>sampleType</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sampleType</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sampletype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sampletype_csharp" style="color: inherit; text-decoration: inherit;">Sample<wbr>Type</a>
@@ -1539,8 +1653,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_csharp" style="color: inherit; text-decoration: inherit;">Sub<wbr>App<wbr>Id</a>
@@ -1548,8 +1661,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1557,12 +1669,11 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1570,8 +1681,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd><dt class="property-optional"
+    <dd>Last modified time of template in ISO date format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_width_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_width_csharp" style="color: inherit; text-decoration: inherit;">Width</a>
@@ -1579,8 +1689,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd></dl>
+    <dd>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1594,8 +1703,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subimage column count of an image sprite.</p>
-</dd><dt class="property-optional"
+    <dd>Subimage column count of an image sprite.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_go" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -1603,8 +1711,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1612,8 +1719,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filltype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filltype_go" style="color: inherit; text-decoration: inherit;">Fill<wbr>Type</a>
@@ -1621,8 +1727,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_format_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_format_go" style="color: inherit; text-decoration: inherit;">Format</a>
@@ -1630,14 +1735,13 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image format, Valid values:</p>
+    <dd>Image format, Valid values:</p>
 <ul>
 <li>jpg: jpg format;</li>
 <li>png: png format;</li>
 <li>webp: webp format;
 Default value: jpg.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_height_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_height_go" style="color: inherit; text-decoration: inherit;">Height</a>
@@ -1645,8 +1749,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1654,8 +1757,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a time point screen capturing template. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a time point screen capturing template. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resolutionadaptive_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resolutionadaptive_go" style="color: inherit; text-decoration: inherit;">Resolution<wbr>Adaptive</a>
@@ -1663,8 +1765,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rowcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rowcount_go" style="color: inherit; text-decoration: inherit;">Row<wbr>Count</a>
@@ -1672,8 +1773,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subimage row count of an image sprite.</p>
-</dd><dt class="property-optional"
+    <dd>Subimage row count of an image sprite.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sampleinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sampleinterval_go" style="color: inherit; text-decoration: inherit;">Sample<wbr>Interval</a>
@@ -1681,8 +1781,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sampling interval. If <code>sample_type</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sample_type</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Sampling interval. If <code>sampleType</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sampleType</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sampletype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sampletype_go" style="color: inherit; text-decoration: inherit;">Sample<wbr>Type</a>
@@ -1690,8 +1789,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_go" style="color: inherit; text-decoration: inherit;">Sub<wbr>App<wbr>Id</a>
@@ -1699,8 +1797,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1708,12 +1805,11 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1721,8 +1817,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd><dt class="property-optional"
+    <dd>Last modified time of template in ISO date format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_width_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_width_go" style="color: inherit; text-decoration: inherit;">Width</a>
@@ -1730,8 +1825,143 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd></dl>
+    <dd>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_column_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_column_count_hcl" style="color: inherit; text-decoration: inherit;">column_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Subimage column count of an image sprite.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_comment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_hcl" style="color: inherit; text-decoration: inherit;">comment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_fill_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fill_type_hcl" style="color: inherit; text-decoration: inherit;">fill_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_format_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_format_hcl" style="color: inherit; text-decoration: inherit;">format</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Image format, Valid values:</p>
+<ul>
+<li>jpg: jpg format;</li>
+<li>png: png format;</li>
+<li>webp: webp format;
+Default value: jpg.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_height_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_height_hcl" style="color: inherit; text-decoration: inherit;">height</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of a time point screen capturing template. Length limit: 64 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resolution_adaptive_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resolution_adaptive_hcl" style="color: inherit; text-decoration: inherit;">resolution_<wbr>adaptive</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_row_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_row_count_hcl" style="color: inherit; text-decoration: inherit;">row_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Subimage row count of an image sprite.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sample_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sample_interval_hcl" style="color: inherit; text-decoration: inherit;">sample_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Sampling interval. If <code>sampleType</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sampleType</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sample_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sample_type_hcl" style="color: inherit; text-decoration: inherit;">sample_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sub_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sub_app_id_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Template type, value range:</p>
+<ul>
+<li>Preset: system preset template;</li>
+<li>Custom: user-defined templates.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last modified time of template in ISO date format.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_width_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_width_hcl" style="color: inherit; text-decoration: inherit;">width</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1745,8 +1975,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Subimage column count of an image sprite.</p>
-</dd><dt class="property-optional"
+    <dd>Subimage column count of an image sprite.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_java" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -1754,8 +1983,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1763,8 +1991,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filltype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filltype_java" style="color: inherit; text-decoration: inherit;">fill<wbr>Type</a>
@@ -1772,8 +1999,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_format_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_format_java" style="color: inherit; text-decoration: inherit;">format</a>
@@ -1781,14 +2007,13 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Image format, Valid values:</p>
+    <dd>Image format, Valid values:</p>
 <ul>
 <li>jpg: jpg format;</li>
 <li>png: png format;</li>
 <li>webp: webp format;
 Default value: jpg.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_height_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_height_java" style="color: inherit; text-decoration: inherit;">height</a>
@@ -1796,8 +2021,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1805,8 +2029,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a time point screen capturing template. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a time point screen capturing template. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resolutionadaptive_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resolutionadaptive_java" style="color: inherit; text-decoration: inherit;">resolution<wbr>Adaptive</a>
@@ -1814,8 +2037,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rowcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rowcount_java" style="color: inherit; text-decoration: inherit;">row<wbr>Count</a>
@@ -1823,8 +2045,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Subimage row count of an image sprite.</p>
-</dd><dt class="property-optional"
+    <dd>Subimage row count of an image sprite.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sampleinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sampleinterval_java" style="color: inherit; text-decoration: inherit;">sample<wbr>Interval</a>
@@ -1832,8 +2053,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Sampling interval. If <code>sample_type</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sample_type</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Sampling interval. If <code>sampleType</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sampleType</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sampletype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sampletype_java" style="color: inherit; text-decoration: inherit;">sample<wbr>Type</a>
@@ -1841,8 +2061,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_java" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -1850,8 +2069,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1859,12 +2077,11 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1872,8 +2089,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd><dt class="property-optional"
+    <dd>Last modified time of template in ISO date format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_width_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_width_java" style="color: inherit; text-decoration: inherit;">width</a>
@@ -1881,8 +2097,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd></dl>
+    <dd>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1896,8 +2111,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Subimage column count of an image sprite.</p>
-</dd><dt class="property-optional"
+    <dd>Subimage column count of an image sprite.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_nodejs" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -1905,8 +2119,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1914,8 +2127,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filltype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filltype_nodejs" style="color: inherit; text-decoration: inherit;">fill<wbr>Type</a>
@@ -1923,8 +2135,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_format_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_format_nodejs" style="color: inherit; text-decoration: inherit;">format</a>
@@ -1932,14 +2143,13 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image format, Valid values:</p>
+    <dd>Image format, Valid values:</p>
 <ul>
 <li>jpg: jpg format;</li>
 <li>png: png format;</li>
 <li>webp: webp format;
 Default value: jpg.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_height_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_height_nodejs" style="color: inherit; text-decoration: inherit;">height</a>
@@ -1947,8 +2157,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1956,8 +2165,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a time point screen capturing template. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a time point screen capturing template. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resolutionadaptive_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resolutionadaptive_nodejs" style="color: inherit; text-decoration: inherit;">resolution<wbr>Adaptive</a>
@@ -1965,8 +2173,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rowcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rowcount_nodejs" style="color: inherit; text-decoration: inherit;">row<wbr>Count</a>
@@ -1974,8 +2181,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Subimage row count of an image sprite.</p>
-</dd><dt class="property-optional"
+    <dd>Subimage row count of an image sprite.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sampleinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sampleinterval_nodejs" style="color: inherit; text-decoration: inherit;">sample<wbr>Interval</a>
@@ -1983,8 +2189,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Sampling interval. If <code>sample_type</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sample_type</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Sampling interval. If <code>sampleType</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sampleType</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sampletype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sampletype_nodejs" style="color: inherit; text-decoration: inherit;">sample<wbr>Type</a>
@@ -1992,8 +2197,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_nodejs" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -2001,8 +2205,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2010,12 +2213,11 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2023,8 +2225,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd><dt class="property-optional"
+    <dd>Last modified time of template in ISO date format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_width_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_width_nodejs" style="color: inherit; text-decoration: inherit;">width</a>
@@ -2032,8 +2233,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd></dl>
+    <dd>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2047,8 +2247,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subimage column count of an image sprite.</p>
-</dd><dt class="property-optional"
+    <dd>Subimage column count of an image sprite.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_python" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -2056,8 +2255,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2065,8 +2263,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_fill_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fill_type_python" style="color: inherit; text-decoration: inherit;">fill_<wbr>type</a>
@@ -2074,8 +2271,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_format_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_format_python" style="color: inherit; text-decoration: inherit;">format</a>
@@ -2083,14 +2279,13 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Image format, Valid values:</p>
+    <dd>Image format, Valid values:</p>
 <ul>
 <li>jpg: jpg format;</li>
 <li>png: png format;</li>
 <li>webp: webp format;
 Default value: jpg.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_height_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_height_python" style="color: inherit; text-decoration: inherit;">height</a>
@@ -2098,8 +2293,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2107,8 +2301,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of a time point screen capturing template. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a time point screen capturing template. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resolution_adaptive_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resolution_adaptive_python" style="color: inherit; text-decoration: inherit;">resolution_<wbr>adaptive</a>
@@ -2116,8 +2309,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_row_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_row_count_python" style="color: inherit; text-decoration: inherit;">row_<wbr>count</a>
@@ -2125,8 +2317,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subimage row count of an image sprite.</p>
-</dd><dt class="property-optional"
+    <dd>Subimage row count of an image sprite.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sample_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sample_interval_python" style="color: inherit; text-decoration: inherit;">sample_<wbr>interval</a>
@@ -2134,8 +2325,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sampling interval. If <code>sample_type</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sample_type</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Sampling interval. If <code>sampleType</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sampleType</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sample_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sample_type_python" style="color: inherit; text-decoration: inherit;">sample_<wbr>type</a>
@@ -2143,8 +2333,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sub_app_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sub_app_id_python" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
@@ -2152,8 +2341,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2161,12 +2349,11 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -2174,8 +2361,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd><dt class="property-optional"
+    <dd>Last modified time of template in ISO date format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_width_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_width_python" style="color: inherit; text-decoration: inherit;">width</a>
@@ -2183,8 +2369,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd></dl>
+    <dd>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2198,8 +2383,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Subimage column count of an image sprite.</p>
-</dd><dt class="property-optional"
+    <dd>Subimage column count of an image sprite.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_yaml" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -2207,8 +2391,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2216,8 +2399,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filltype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filltype_yaml" style="color: inherit; text-decoration: inherit;">fill<wbr>Type</a>
@@ -2225,8 +2407,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: <code>stretch</code>: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; <code>black</code>: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: <code>black</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_format_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_format_yaml" style="color: inherit; text-decoration: inherit;">format</a>
@@ -2234,14 +2415,13 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Image format, Valid values:</p>
+    <dd>Image format, Valid values:</p>
 <ul>
 <li>jpg: jpg format;</li>
 <li>png: png format;</li>
 <li>webp: webp format;
 Default value: jpg.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_height_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_height_yaml" style="color: inherit; text-decoration: inherit;">height</a>
@@ -2249,8 +2429,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum value of the <code>height</code> (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, <code>width</code> will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2258,8 +2437,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a time point screen capturing template. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a time point screen capturing template. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resolutionadaptive_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resolutionadaptive_yaml" style="color: inherit; text-decoration: inherit;">resolution<wbr>Adaptive</a>
@@ -2267,8 +2445,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Resolution adaption. Valid values: <code>true</code>,<code>false</code>. <code>true</code>: enabled. In this case, <code>width</code> represents the long side of a video, while <code>height</code> the short side; <code>false</code>: disabled. In this case, <code>width</code> represents the width of a video, while <code>height</code> the height. Default value: <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rowcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rowcount_yaml" style="color: inherit; text-decoration: inherit;">row<wbr>Count</a>
@@ -2276,8 +2453,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Subimage row count of an image sprite.</p>
-</dd><dt class="property-optional"
+    <dd>Subimage row count of an image sprite.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sampleinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sampleinterval_yaml" style="color: inherit; text-decoration: inherit;">sample<wbr>Interval</a>
@@ -2285,8 +2461,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Sampling interval. If <code>sample_type</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sample_type</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Sampling interval. If <code>sampleType</code> is <code>Percent</code>, sampling will be performed at an interval of the specified percentage. If <code>sampleType</code> is <code>Time</code>, sampling will be performed at the specified time interval in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sampletype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sampletype_yaml" style="color: inherit; text-decoration: inherit;">sample<wbr>Type</a>
@@ -2294,8 +2469,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</p>
-</dd><dt class="property-optional"
+    <dd>Sampling type. Valid values: <code>Percent</code>, <code>Time</code>. <code>Percent</code>: by percent. <code>Time</code>: by time interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_yaml" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -2303,8 +2477,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2312,12 +2485,11 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2325,8 +2497,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd><dt class="property-optional"
+    <dd>Last modified time of template in ISO date format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_width_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_width_yaml" style="color: inherit; text-decoration: inherit;">width</a>
@@ -2334,8 +2505,7 @@ Default value: jpg.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</p>
-</dd></dl>
+    <dd>Maximum value of the <code>width</code> (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both <code>width</code> and <code>height</code> are <code>0</code>, the resolution will be the same as that of the source video; If <code>width</code> is <code>0</code>, but <code>height</code> is not <code>0</code>, width will be proportionally scaled; If <code>width</code> is not <code>0</code>, but <code>height</code> is <code>0</code>, <code>height</code> will be proportionally scaled; If both <code>width</code> and <code>height</code> are not <code>0</code>, the custom resolution will be used. Default value: <code>0</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2357,6 +2527,8 @@ $ pulumi import tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate foo $su
 ```
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
 
 
 
@@ -2367,7 +2539,6 @@ $ pulumi import tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate foo $su
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

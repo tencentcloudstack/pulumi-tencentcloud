@@ -2,9 +2,11 @@
 ---
 title: "getStorages"
 title_tag: "tencentcloud.Cbs.getStorages"
-meta_desc: "Documentation for the tencentcloud.Cbs.getStorages function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of CBS storages."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,53 +18,47 @@ Use this data source to query detailed information of CBS storages.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Query all CBS storages
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const storages = tencentcloud.Cbs.getStorages({
-    resultOutputFile: "mytestpath",
-    storageId: "disk-kdt0sq6m",
-});
+const example = tencentcloud.cbs.getStorages({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-storages = tencentcloud.Cbs.get_storages(result_output_file="mytestpath",
-    storage_id="disk-kdt0sq6m")
+example = tencentcloud.cbs.get_storages()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var storages = Tencentcloud.Cbs.GetStorages.Invoke(new()
-    {
-        ResultOutputFile = "mytestpath",
-        StorageId = "disk-kdt0sq6m",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cbs"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cbs.GetStorages(ctx, &cbs.GetStoragesArgs{
-			ResultOutputFile: pulumi.StringRef("mytestpath"),
-			StorageId:        pulumi.StringRef("disk-kdt0sq6m"),
-		}, nil)
+		_, err := cbs.GetStorages(ctx, &cbs.GetStoragesArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -70,6 +66,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Cbs.GetStorages.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -78,8 +96,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cbs.CbsFunctions;
 import com.pulumi.tencentcloud.Cbs.inputs.GetStoragesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -91,80 +109,459 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var storages = CbsFunctions.getStorages(GetStoragesArgs.builder()
-            .resultOutputFile("mytestpath")
-            .storageId("disk-kdt0sq6m")
+        final var example = CbsFunctions.getStorages(GetStoragesArgs.builder()
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
-  storages:
+  example:
     fn::invoke:
-      Function: tencentcloud:Cbs:getStorages
-      Arguments:
-        resultOutputFile: mytestpath
-        storageId: disk-kdt0sq6m
+      function: tencentcloud:Cbs:getStorages
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### The following snippet shows the new supported query params
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+data "tencentcloud_cbs_getstorages" "example" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Query CBS by storage id
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const whatsNew = tencentcloud.Cbs.getStorages({
-    chargeTypes: [
-        "POSTPAID_BY_HOUR",
-        "PREPAID",
-    ],
-    instanceIps: ["10.0.0.2"],
-    instanceNames: ["my-instance"],
-    portable: true,
-    storageStates: ["ATTACHED"],
-    tagKeys: ["foo"],
-    tagValues: [
-        "bar",
-        "baz",
-    ],
+const example = tencentcloud.cbs.getStorages({
+    storageId: "disk-6goq404g",
+    resultOutputFile: "my-test-path",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-whats_new = tencentcloud.Cbs.get_storages(charge_types=[
-        "POSTPAID_BY_HOUR",
-        "PREPAID",
-    ],
-    instance_ips=["10.0.0.2"],
-    instance_names=["my-instance"],
-    portable=True,
-    storage_states=["ATTACHED"],
-    tag_keys=["foo"],
-    tag_values=[
-        "bar",
-        "baz",
-    ])
+example = tencentcloud.cbs.get_storages(storage_id="disk-6goq404g",
+    result_output_file="my-test-path")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cbs"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cbs.GetStorages(ctx, &cbs.GetStoragesArgs{
+			StorageId:        pulumi.StringRef("disk-6goq404g"),
+			ResultOutputFile: pulumi.StringRef("my-test-path"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var whatsNew = Tencentcloud.Cbs.GetStorages.Invoke(new()
+    var example = Tencentcloud.Cbs.GetStorages.Invoke(new()
+    {
+        StorageId = "disk-6goq404g",
+        ResultOutputFile = "my-test-path",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Cbs.CbsFunctions;
+import com.pulumi.tencentcloud.Cbs.inputs.GetStoragesArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var example = CbsFunctions.getStorages(GetStoragesArgs.builder()
+            .storageId("disk-6goq404g")
+            .resultOutputFile("my-test-path")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+variables:
+  example:
+    fn::invoke:
+      function: tencentcloud:Cbs:getStorages
+      arguments:
+        storageId: disk-6goq404g
+        resultOutputFile: my-test-path
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cbs_getstorages" "example" {
+  storage_id         = "disk-6goq404g"
+  result_output_file = "my-test-path"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Query CBS by dedicated cluster id
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = tencentcloud.cbs.getStorages({
+    dedicatedClusterId: "cluster-262n63e8",
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+
+example = tencentcloud.cbs.get_storages(dedicated_cluster_id="cluster-262n63e8")
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cbs"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cbs.GetStorages(ctx, &cbs.GetStoragesArgs{
+			DedicatedClusterId: pulumi.StringRef("cluster-262n63e8"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Cbs.GetStorages.Invoke(new()
+    {
+        DedicatedClusterId = "cluster-262n63e8",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Cbs.CbsFunctions;
+import com.pulumi.tencentcloud.Cbs.inputs.GetStoragesArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var example = CbsFunctions.getStorages(GetStoragesArgs.builder()
+            .dedicatedClusterId("cluster-262n63e8")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+variables:
+  example:
+    fn::invoke:
+      function: tencentcloud:Cbs:getStorages
+      arguments:
+        dedicatedClusterId: cluster-262n63e8
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cbs_getstorages" "example" {
+  dedicated_cluster_id = "cluster-262n63e8"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### The following snippet shows the new supported query params
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = tencentcloud.cbs.getStorages({
+    chargeTypes: [
+        "POSTPAID_BY_HOUR",
+        "PREPAID",
+        "CDCPAID",
+        "DEDICATED_CLUSTER_PAID",
+    ],
+    storageStates: ["ATTACHED"],
+    instanceIps: ["10.0.0.2"],
+    instanceNames: ["my-instance"],
+    tagKeys: ["example"],
+    tagValues: [
+        "bar",
+        "baz",
+    ],
+    portable: true,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+
+example = tencentcloud.cbs.get_storages(charge_types=[
+        "POSTPAID_BY_HOUR",
+        "PREPAID",
+        "CDCPAID",
+        "DEDICATED_CLUSTER_PAID",
+    ],
+    storage_states=["ATTACHED"],
+    instance_ips=["10.0.0.2"],
+    instance_names=["my-instance"],
+    tag_keys=["example"],
+    tag_values=[
+        "bar",
+        "baz",
+    ],
+    portable=True)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cbs"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cbs.GetStorages(ctx, &cbs.GetStoragesArgs{
+			ChargeTypes: []string{
+				"POSTPAID_BY_HOUR",
+				"PREPAID",
+				"CDCPAID",
+				"DEDICATED_CLUSTER_PAID",
+			},
+			StorageStates: []string{
+				"ATTACHED",
+			},
+			InstanceIps: []string{
+				"10.0.0.2",
+			},
+			InstanceNames: []string{
+				"my-instance",
+			},
+			TagKeys: []string{
+				"example",
+			},
+			TagValues: []string{
+				"bar",
+				"baz",
+			},
+			Portable: pulumi.BoolRef(true),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Cbs.GetStorages.Invoke(new()
     {
         ChargeTypes = new[]
         {
             "POSTPAID_BY_HOUR",
             "PREPAID",
+            "CDCPAID",
+            "DEDICATED_CLUSTER_PAID",
+        },
+        StorageStates = new[]
+        {
+            "ATTACHED",
         },
         InstanceIps = new[]
         {
@@ -174,64 +571,25 @@ return await Deployment.RunAsync(() =>
         {
             "my-instance",
         },
-        Portable = true,
-        StorageStates = new[]
-        {
-            "ATTACHED",
-        },
         TagKeys = new[]
         {
-            "foo",
+            "example",
         },
         TagValues = new[]
         {
             "bar",
             "baz",
         },
+        Portable = true,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cbs.GetStorages(ctx, &cbs.GetStoragesArgs{
-			ChargeTypes: []string{
-				"POSTPAID_BY_HOUR",
-				"PREPAID",
-			},
-			InstanceIps: []string{
-				"10.0.0.2",
-			},
-			InstanceNames: []string{
-				"my-instance",
-			},
-			Portable: pulumi.BoolRef(true),
-			StorageStates: []string{
-				"ATTACHED",
-			},
-			TagKeys: []string{
-				"foo",
-			},
-			TagValues: []string{
-				"bar",
-				"baz",
-			},
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -240,8 +598,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cbs.CbsFunctions;
 import com.pulumi.tencentcloud.Cbs.inputs.GetStoragesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -253,47 +611,87 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var whatsNew = CbsFunctions.getStorages(GetStoragesArgs.builder()
+        final var example = CbsFunctions.getStorages(GetStoragesArgs.builder()
             .chargeTypes(            
                 "POSTPAID_BY_HOUR",
-                "PREPAID")
+                "PREPAID",
+                "CDCPAID",
+                "DEDICATED_CLUSTER_PAID")
+            .storageStates("ATTACHED")
             .instanceIps("10.0.0.2")
             .instanceNames("my-instance")
-            .portable(true)
-            .storageStates("ATTACHED")
-            .tagKeys("foo")
+            .tagKeys("example")
             .tagValues(            
                 "bar",
                 "baz")
+            .portable(true)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
-  whatsNew:
+  example:
     fn::invoke:
-      Function: tencentcloud:Cbs:getStorages
-      Arguments:
+      function: tencentcloud:Cbs:getStorages
+      arguments:
         chargeTypes:
           - POSTPAID_BY_HOUR
           - PREPAID
+          - CDCPAID
+          - DEDICATED_CLUSTER_PAID
+        storageStates:
+          - ATTACHED
         instanceIps:
           - 10.0.0.2
         instanceNames:
           - my-instance
-        portable: true
-        storageStates:
-          - ATTACHED
         tagKeys:
-          - foo
+          - example
         tagValues:
           - bar
           - baz
+        portable: true
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cbs_getstorages" "example" {
+  charge_types   = ["POSTPAID_BY_HOUR", "PREPAID", "CDCPAID", "DEDICATED_CLUSTER_PAID"]
+  storage_states = ["ATTACHED"]
+  instance_ips   = ["10.0.0.2"]
+  instance_names = ["my-instance"]
+  tag_keys       = ["example"]
+  tag_values     = ["bar", "baz"]
+  portable       = true
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
 
 
 
@@ -305,7 +703,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -313,9 +711,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getStorages<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetStoragesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetStoragesResult</a></span>></span
+><span class="k">function </span>getStorages<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetStoragesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetStoragesResult</a></span>></span
 ><span class="k">
-function </span>getStoragesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetStoragesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetStoragesResult</a></span>></span
+function </span>getStoragesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetStoragesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetStoragesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -326,6 +724,7 @@ function </span>getStoragesOutput<span class="p">(</span><span class="nx">args</
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
 ><span class="k">def </span>get_storages<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">charge_types</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">dedicated_cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">instance_ips</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                  <span class="nx">instance_names</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                  <span class="nx">portable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
@@ -340,21 +739,22 @@ function </span>getStoragesOutput<span class="p">(</span><span class="nx">args</
                  <span class="nx">tag_values</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetStoragesResult</span
 ><span class="k">
-def </span>get_storages_output<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">charge_types</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                 <span class="nx">instance_ips</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                 <span class="nx">instance_names</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                 <span class="nx">portable</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[bool]]</span> = None<span class="p">,</span>
-                 <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">storage_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">storage_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">storage_states</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                 <span class="nx">storage_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">storage_usage</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">tag_keys</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                 <span class="nx">tag_values</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetStoragesResult]</span
+def </span>get_storages_output<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">charge_types</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">dedicated_cluster_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">instance_ips</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">instance_names</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">portable</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[bool]]</span> = None<span class="p">,</span>
+                 <span class="nx">project_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">storage_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">storage_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">storage_states</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">storage_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">storage_usage</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">tag_keys</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">tag_values</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetStoragesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -379,7 +779,8 @@ func </span>GetStoragesOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetStorages </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetStoragesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetStoragesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetStoragesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetStoragesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetStoragesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetStoragesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetStoragesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetStoragesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -388,7 +789,8 @@ func </span>GetStoragesOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetStoragesResult</a></span>> </span>getStorages<span class="p">(</span><span class="nx">GetStoragesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetStoragesResult</a></span>> </span>getStorages<span class="p">(</span><span class="nx">GetStoragesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetStoragesResult</a></span>> </span>getStorages<span class="p">(</span><span class="nx">GetStoragesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -400,6 +802,15 @@ func </span>GetStoragesOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cbs/getStorages:getStorages
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cbs_get_storages&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -418,8 +829,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetypes_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Types</a>
@@ -427,8 +837,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code>).</p>
-</dd><dt class="property-optional"
+    <dd>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code> | <code>CDCPAID</code> | <code>DEDICATED_CLUSTER_PAID</code>).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicatedclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_csharp" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceips_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ips</a>
@@ -436,8 +853,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List filter by attached instance public or private IPs.</p>
-</dd><dt class="property-optional"
+    <dd>List filter by attached instance public or private IPs.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancenames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenames_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Names</a>
@@ -445,8 +861,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List filter by attached instance name.</p>
-</dd><dt class="property-optional"
+    <dd>List filter by attached instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="portable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portable_csharp" style="color: inherit; text-decoration: inherit;">Portable</a>
@@ -454,8 +869,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Filter by whether the disk is portable (Boolean <code>true</code> or <code>false</code>).</p>
-</dd><dt class="property-optional"
+    <dd>Filter by whether the disk is portable (Boolean <code>true</code> or <code>false</code>).</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -463,8 +877,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project with which the CBS is associated.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project with which the CBS is associated.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -472,8 +885,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Id</a>
@@ -481,8 +893,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CBS to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CBS to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Name</a>
@@ -490,8 +901,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CBS to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CBS to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagestates_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagestates_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>States</a>
@@ -499,8 +909,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List filter by disk state (<code>UNATTACHED</code> | <code>ATTACHING</code> | <code>ATTACHED</code> | <code>DETACHING</code> | <code>EXPANDING</code> | <code>ROLLBACKING</code> | <code>TORECYCLE</code>).</p>
-</dd><dt class="property-optional"
+    <dd>List filter by disk state (<code>UNATTACHED</code> | <code>ATTACHING</code> | <code>ATTACHED</code> | <code>DETACHING</code> | <code>EXPANDING</code> | <code>ROLLBACKING</code> | <code>TORECYCLE</code>).</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
@@ -508,8 +917,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</p>
-</dd><dt class="property-optional"
+    <dd>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</dd><dt class="property-optional"
             title="Optional">
         <span id="storageusage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Usage</a>
@@ -517,8 +925,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</p>
-</dd><dt class="property-optional"
+    <dd>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkeys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkeys_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Keys</a>
@@ -526,8 +933,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List filter by tag keys.</p>
-</dd><dt class="property-optional"
+    <dd>List filter by tag keys.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagvalues_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalues_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Values</a>
@@ -535,8 +941,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List filter by tag values.</p>
-</dd></dl>
+    <dd>List filter by tag values.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -550,8 +955,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetypes_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Types</a>
@@ -559,8 +963,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code>).</p>
-</dd><dt class="property-optional"
+    <dd>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code> | <code>CDCPAID</code> | <code>DEDICATED_CLUSTER_PAID</code>).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicatedclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_go" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceips_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ips</a>
@@ -568,8 +979,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List filter by attached instance public or private IPs.</p>
-</dd><dt class="property-optional"
+    <dd>List filter by attached instance public or private IPs.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancenames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenames_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Names</a>
@@ -577,8 +987,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List filter by attached instance name.</p>
-</dd><dt class="property-optional"
+    <dd>List filter by attached instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="portable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portable_go" style="color: inherit; text-decoration: inherit;">Portable</a>
@@ -586,8 +995,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Filter by whether the disk is portable (Boolean <code>true</code> or <code>false</code>).</p>
-</dd><dt class="property-optional"
+    <dd>Filter by whether the disk is portable (Boolean <code>true</code> or <code>false</code>).</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -595,8 +1003,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project with which the CBS is associated.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project with which the CBS is associated.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -604,8 +1011,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Id</a>
@@ -613,8 +1019,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CBS to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CBS to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Name</a>
@@ -622,8 +1027,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CBS to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CBS to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagestates_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagestates_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>States</a>
@@ -631,8 +1035,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List filter by disk state (<code>UNATTACHED</code> | <code>ATTACHING</code> | <code>ATTACHED</code> | <code>DETACHING</code> | <code>EXPANDING</code> | <code>ROLLBACKING</code> | <code>TORECYCLE</code>).</p>
-</dd><dt class="property-optional"
+    <dd>List filter by disk state (<code>UNATTACHED</code> | <code>ATTACHING</code> | <code>ATTACHED</code> | <code>DETACHING</code> | <code>EXPANDING</code> | <code>ROLLBACKING</code> | <code>TORECYCLE</code>).</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
@@ -640,8 +1043,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</p>
-</dd><dt class="property-optional"
+    <dd>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</dd><dt class="property-optional"
             title="Optional">
         <span id="storageusage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Usage</a>
@@ -649,8 +1051,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</p>
-</dd><dt class="property-optional"
+    <dd>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkeys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkeys_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Keys</a>
@@ -658,8 +1059,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List filter by tag keys.</p>
-</dd><dt class="property-optional"
+    <dd>List filter by tag keys.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagvalues_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalues_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Values</a>
@@ -667,8 +1067,133 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List filter by tag values.</p>
-</dd></dl>
+    <dd>List filter by tag values.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="charge_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_types_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code> | <code>CDCPAID</code> | <code>DEDICATED_CLUSTER_PAID</code>).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicated_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicated_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_ips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ips_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List filter by attached instance public or private IPs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_names_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List filter by attached instance name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="portable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portable_hcl" style="color: inherit; text-decoration: inherit;">portable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Filter by whether the disk is portable (Boolean <code>true</code> or <code>false</code>).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project with which the CBS is associated.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_id_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CBS to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_name_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CBS to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_states_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_states_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>states</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List filter by disk state (<code>UNATTACHED</code> | <code>ATTACHING</code> | <code>ATTACHED</code> | <code>DETACHING</code> | <code>EXPANDING</code> | <code>ROLLBACKING</code> | <code>TORECYCLE</code>).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_usage_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tag_keys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_keys_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>keys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List filter by tag keys.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tag_values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_values_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List filter by tag values.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -682,8 +1207,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetypes_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Types</a>
@@ -691,8 +1215,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code>).</p>
-</dd><dt class="property-optional"
+    <dd>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code> | <code>CDCPAID</code> | <code>DEDICATED_CLUSTER_PAID</code>).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicatedclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_java" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceips_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Ips</a>
@@ -700,8 +1231,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List filter by attached instance public or private IPs.</p>
-</dd><dt class="property-optional"
+    <dd>List filter by attached instance public or private IPs.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancenames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenames_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Names</a>
@@ -709,8 +1239,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List filter by attached instance name.</p>
-</dd><dt class="property-optional"
+    <dd>List filter by attached instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="portable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portable_java" style="color: inherit; text-decoration: inherit;">portable</a>
@@ -718,8 +1247,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Filter by whether the disk is portable (Boolean <code>true</code> or <code>false</code>).</p>
-</dd><dt class="property-optional"
+    <dd>Filter by whether the disk is portable (Boolean <code>true</code> or <code>false</code>).</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -727,8 +1255,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project with which the CBS is associated.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project with which the CBS is associated.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -736,8 +1263,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
@@ -745,8 +1271,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CBS to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CBS to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Name</a>
@@ -754,8 +1279,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CBS to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CBS to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagestates_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagestates_java" style="color: inherit; text-decoration: inherit;">storage<wbr>States</a>
@@ -763,8 +1287,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List filter by disk state (<code>UNATTACHED</code> | <code>ATTACHING</code> | <code>ATTACHED</code> | <code>DETACHING</code> | <code>EXPANDING</code> | <code>ROLLBACKING</code> | <code>TORECYCLE</code>).</p>
-</dd><dt class="property-optional"
+    <dd>List filter by disk state (<code>UNATTACHED</code> | <code>ATTACHING</code> | <code>ATTACHED</code> | <code>DETACHING</code> | <code>EXPANDING</code> | <code>ROLLBACKING</code> | <code>TORECYCLE</code>).</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -772,8 +1295,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</p>
-</dd><dt class="property-optional"
+    <dd>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</dd><dt class="property-optional"
             title="Optional">
         <span id="storageusage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -781,8 +1303,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</p>
-</dd><dt class="property-optional"
+    <dd>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkeys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkeys_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Keys</a>
@@ -790,8 +1311,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List filter by tag keys.</p>
-</dd><dt class="property-optional"
+    <dd>List filter by tag keys.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagvalues_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalues_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Values</a>
@@ -799,8 +1319,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List filter by tag values.</p>
-</dd></dl>
+    <dd>List filter by tag values.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -814,8 +1333,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetypes_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Types</a>
@@ -823,8 +1341,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code>).</p>
-</dd><dt class="property-optional"
+    <dd>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code> | <code>CDCPAID</code> | <code>DEDICATED_CLUSTER_PAID</code>).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicatedclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_nodejs" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceips_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Ips</a>
@@ -832,8 +1357,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List filter by attached instance public or private IPs.</p>
-</dd><dt class="property-optional"
+    <dd>List filter by attached instance public or private IPs.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancenames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenames_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Names</a>
@@ -841,8 +1365,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List filter by attached instance name.</p>
-</dd><dt class="property-optional"
+    <dd>List filter by attached instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="portable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portable_nodejs" style="color: inherit; text-decoration: inherit;">portable</a>
@@ -850,8 +1373,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Filter by whether the disk is portable (Boolean <code>true</code> or <code>false</code>).</p>
-</dd><dt class="property-optional"
+    <dd>Filter by whether the disk is portable (Boolean <code>true</code> or <code>false</code>).</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -859,8 +1381,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project with which the CBS is associated.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project with which the CBS is associated.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -868,8 +1389,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
@@ -877,8 +1397,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CBS to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CBS to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Name</a>
@@ -886,8 +1405,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CBS to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CBS to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagestates_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagestates_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>States</a>
@@ -895,8 +1413,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List filter by disk state (<code>UNATTACHED</code> | <code>ATTACHING</code> | <code>ATTACHED</code> | <code>DETACHING</code> | <code>EXPANDING</code> | <code>ROLLBACKING</code> | <code>TORECYCLE</code>).</p>
-</dd><dt class="property-optional"
+    <dd>List filter by disk state (<code>UNATTACHED</code> | <code>ATTACHING</code> | <code>ATTACHED</code> | <code>DETACHING</code> | <code>EXPANDING</code> | <code>ROLLBACKING</code> | <code>TORECYCLE</code>).</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -904,8 +1421,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</p>
-</dd><dt class="property-optional"
+    <dd>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</dd><dt class="property-optional"
             title="Optional">
         <span id="storageusage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -913,8 +1429,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</p>
-</dd><dt class="property-optional"
+    <dd>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkeys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkeys_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Keys</a>
@@ -922,8 +1437,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List filter by tag keys.</p>
-</dd><dt class="property-optional"
+    <dd>List filter by tag keys.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagvalues_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalues_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Values</a>
@@ -931,8 +1445,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List filter by tag values.</p>
-</dd></dl>
+    <dd>List filter by tag values.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -946,8 +1459,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="charge_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_types_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>types</a>
@@ -955,8 +1467,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code>).</p>
-</dd><dt class="property-optional"
+    <dd>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code> | <code>CDCPAID</code> | <code>DEDICATED_CLUSTER_PAID</code>).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicated_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicated_cluster_id_python" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_ips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ips_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>ips</a>
@@ -964,8 +1483,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List filter by attached instance public or private IPs.</p>
-</dd><dt class="property-optional"
+    <dd>List filter by attached instance public or private IPs.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_names_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>names</a>
@@ -973,8 +1491,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List filter by attached instance name.</p>
-</dd><dt class="property-optional"
+    <dd>List filter by attached instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="portable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portable_python" style="color: inherit; text-decoration: inherit;">portable</a>
@@ -982,8 +1499,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Filter by whether the disk is portable (Boolean <code>true</code> or <code>false</code>).</p>
-</dd><dt class="property-optional"
+    <dd>Filter by whether the disk is portable (Boolean <code>true</code> or <code>false</code>).</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -991,8 +1507,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project with which the CBS is associated.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project with which the CBS is associated.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1000,8 +1515,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_id_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>id</a>
@@ -1009,8 +1523,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CBS to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CBS to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_name_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>name</a>
@@ -1018,8 +1531,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CBS to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CBS to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_states_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_states_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>states</a>
@@ -1027,8 +1539,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List filter by disk state (<code>UNATTACHED</code> | <code>ATTACHING</code> | <code>ATTACHED</code> | <code>DETACHING</code> | <code>EXPANDING</code> | <code>ROLLBACKING</code> | <code>TORECYCLE</code>).</p>
-</dd><dt class="property-optional"
+    <dd>List filter by disk state (<code>UNATTACHED</code> | <code>ATTACHING</code> | <code>ATTACHED</code> | <code>DETACHING</code> | <code>EXPANDING</code> | <code>ROLLBACKING</code> | <code>TORECYCLE</code>).</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
@@ -1036,8 +1547,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</p>
-</dd><dt class="property-optional"
+    <dd>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_usage_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>usage</a>
@@ -1045,8 +1555,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</p>
-</dd><dt class="property-optional"
+    <dd>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</dd><dt class="property-optional"
             title="Optional">
         <span id="tag_keys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_keys_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>keys</a>
@@ -1054,8 +1563,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List filter by tag keys.</p>
-</dd><dt class="property-optional"
+    <dd>List filter by tag keys.</dd><dt class="property-optional"
             title="Optional">
         <span id="tag_values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_values_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>values</a>
@@ -1063,8 +1571,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List filter by tag values.</p>
-</dd></dl>
+    <dd>List filter by tag values.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1078,8 +1585,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetypes_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Types</a>
@@ -1087,8 +1593,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code>).</p>
-</dd><dt class="property-optional"
+    <dd>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code> | <code>CDCPAID</code> | <code>DEDICATED_CLUSTER_PAID</code>).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicatedclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_yaml" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceips_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Ips</a>
@@ -1096,8 +1609,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List filter by attached instance public or private IPs.</p>
-</dd><dt class="property-optional"
+    <dd>List filter by attached instance public or private IPs.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancenames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenames_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Names</a>
@@ -1105,8 +1617,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List filter by attached instance name.</p>
-</dd><dt class="property-optional"
+    <dd>List filter by attached instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="portable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portable_yaml" style="color: inherit; text-decoration: inherit;">portable</a>
@@ -1114,8 +1625,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Filter by whether the disk is portable (Boolean <code>true</code> or <code>false</code>).</p>
-</dd><dt class="property-optional"
+    <dd>Filter by whether the disk is portable (Boolean <code>true</code> or <code>false</code>).</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1123,8 +1633,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project with which the CBS is associated.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project with which the CBS is associated.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1132,8 +1641,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
@@ -1141,8 +1649,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CBS to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CBS to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Name</a>
@@ -1150,8 +1657,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CBS to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CBS to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagestates_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagestates_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>States</a>
@@ -1159,8 +1665,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List filter by disk state (<code>UNATTACHED</code> | <code>ATTACHING</code> | <code>ATTACHED</code> | <code>DETACHING</code> | <code>EXPANDING</code> | <code>ROLLBACKING</code> | <code>TORECYCLE</code>).</p>
-</dd><dt class="property-optional"
+    <dd>List filter by disk state (<code>UNATTACHED</code> | <code>ATTACHING</code> | <code>ATTACHED</code> | <code>DETACHING</code> | <code>EXPANDING</code> | <code>ROLLBACKING</code> | <code>TORECYCLE</code>).</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -1168,8 +1673,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</p>
-</dd><dt class="property-optional"
+    <dd>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</dd><dt class="property-optional"
             title="Optional">
         <span id="storageusage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -1177,8 +1681,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</p>
-</dd><dt class="property-optional"
+    <dd>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</dd><dt class="property-optional"
             title="Optional">
         <span id="tagkeys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkeys_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Keys</a>
@@ -1186,8 +1689,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List filter by tag keys.</p>
-</dd><dt class="property-optional"
+    <dd>List filter by tag keys.</dd><dt class="property-optional"
             title="Optional">
         <span id="tagvalues_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalues_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Values</a>
@@ -1195,8 +1697,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List filter by tag values.</p>
-</dd></dl>
+    <dd>List filter by tag values.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1219,8 +1720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="storagelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagelists_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Lists</a>
@@ -1228,8 +1728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstoragesstoragelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cbs.<wbr>Outputs.<wbr>Get<wbr>Storages<wbr>Storage<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of storage. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of storage. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -1237,8 +1736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The zone of CBS.</p>
-</dd><dt class="property-"
+    <dd>The zone of CBS.</dd><dt class="property-"
             title="">
         <span id="chargetypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetypes_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Types</a>
@@ -1246,8 +1744,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Pay type of the CBS instance.</p>
-</dd><dt class="property-"
+    <dd>Pay type of the CBS instance.</dd><dt class="property-"
+            title="">
+        <span id="dedicatedclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_csharp" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-"
             title="">
         <span id="instanceips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceips_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ips</a>
@@ -1279,8 +1784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -1296,8 +1800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CBS.</p>
-</dd><dt class="property-"
+    <dd>ID of CBS.</dd><dt class="property-"
             title="">
         <span id="storagename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Name</a>
@@ -1305,8 +1808,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CBS.</p>
-</dd><dt class="property-"
+    <dd>Name of CBS.</dd><dt class="property-"
             title="">
         <span id="storagestates_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagestates_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>States</a>
@@ -1322,8 +1824,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of storage medium.</p>
-</dd><dt class="property-"
+    <dd>Types of storage medium.</dd><dt class="property-"
             title="">
         <span id="storageusage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Usage</a>
@@ -1331,8 +1832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of CBS.</p>
-</dd><dt class="property-"
+    <dd>Types of CBS.</dd><dt class="property-"
             title="">
         <span id="tagkeys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkeys_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Keys</a>
@@ -1362,8 +1862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="storagelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagelists_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Lists</a>
@@ -1371,8 +1870,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstoragesstoragelist">[]Get<wbr>Storages<wbr>Storage<wbr>List</a></span>
     </dt>
-    <dd><p>A list of storage. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of storage. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -1380,8 +1878,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The zone of CBS.</p>
-</dd><dt class="property-"
+    <dd>The zone of CBS.</dd><dt class="property-"
             title="">
         <span id="chargetypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetypes_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Types</a>
@@ -1389,8 +1886,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Pay type of the CBS instance.</p>
-</dd><dt class="property-"
+    <dd>Pay type of the CBS instance.</dd><dt class="property-"
+            title="">
+        <span id="dedicatedclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_go" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-"
             title="">
         <span id="instanceips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceips_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ips</a>
@@ -1422,8 +1926,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -1439,8 +1942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CBS.</p>
-</dd><dt class="property-"
+    <dd>ID of CBS.</dd><dt class="property-"
             title="">
         <span id="storagename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Name</a>
@@ -1448,8 +1950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CBS.</p>
-</dd><dt class="property-"
+    <dd>Name of CBS.</dd><dt class="property-"
             title="">
         <span id="storagestates_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagestates_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>States</a>
@@ -1465,8 +1966,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of storage medium.</p>
-</dd><dt class="property-"
+    <dd>Types of storage medium.</dd><dt class="property-"
             title="">
         <span id="storageusage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Usage</a>
@@ -1474,8 +1974,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of CBS.</p>
-</dd><dt class="property-"
+    <dd>Types of CBS.</dd><dt class="property-"
             title="">
         <span id="tagkeys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkeys_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Keys</a>
@@ -1496,6 +1995,148 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="storage_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_lists_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getstoragesstoragelist">list(object)</a></span>
+    </dt>
+    <dd>A list of storage. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The zone of CBS.</dd><dt class="property-"
+            title="">
+        <span id="charge_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_types_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Pay type of the CBS instance.</dd><dt class="property-"
+            title="">
+        <span id="dedicated_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicated_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-"
+            title="">
+        <span id="instance_ips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ips_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="instance_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_names_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="portable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portable_hcl" style="color: inherit; text-decoration: inherit;">portable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="storage_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_id_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CBS.</dd><dt class="property-"
+            title="">
+        <span id="storage_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_name_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of CBS.</dd><dt class="property-"
+            title="">
+        <span id="storage_states_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_states_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>states</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="storage_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Types of storage medium.</dd><dt class="property-"
+            title="">
+        <span id="storage_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_usage_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Types of CBS.</dd><dt class="property-"
+            title="">
+        <span id="tag_keys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_keys_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>keys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tag_values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_values_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -1505,8 +2146,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="storagelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagelists_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Lists</a>
@@ -1514,8 +2154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstoragesstoragelist">List&lt;Get<wbr>Storages<wbr>Storage<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of storage. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of storage. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1523,8 +2162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The zone of CBS.</p>
-</dd><dt class="property-"
+    <dd>The zone of CBS.</dd><dt class="property-"
             title="">
         <span id="chargetypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetypes_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Types</a>
@@ -1532,8 +2170,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Pay type of the CBS instance.</p>
-</dd><dt class="property-"
+    <dd>Pay type of the CBS instance.</dd><dt class="property-"
+            title="">
+        <span id="dedicatedclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_java" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-"
             title="">
         <span id="instanceips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceips_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Ips</a>
@@ -1565,8 +2210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1582,8 +2226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CBS.</p>
-</dd><dt class="property-"
+    <dd>ID of CBS.</dd><dt class="property-"
             title="">
         <span id="storagename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Name</a>
@@ -1591,8 +2234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CBS.</p>
-</dd><dt class="property-"
+    <dd>Name of CBS.</dd><dt class="property-"
             title="">
         <span id="storagestates_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagestates_java" style="color: inherit; text-decoration: inherit;">storage<wbr>States</a>
@@ -1608,8 +2250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Types of storage medium.</p>
-</dd><dt class="property-"
+    <dd>Types of storage medium.</dd><dt class="property-"
             title="">
         <span id="storageusage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -1617,8 +2258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Types of CBS.</p>
-</dd><dt class="property-"
+    <dd>Types of CBS.</dd><dt class="property-"
             title="">
         <span id="tagkeys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkeys_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Keys</a>
@@ -1648,8 +2288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="storagelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagelists_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Lists</a>
@@ -1657,8 +2296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstoragesstoragelist">Get<wbr>Storages<wbr>Storage<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of storage. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of storage. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1666,8 +2304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The zone of CBS.</p>
-</dd><dt class="property-"
+    <dd>The zone of CBS.</dd><dt class="property-"
             title="">
         <span id="chargetypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetypes_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Types</a>
@@ -1675,8 +2312,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Pay type of the CBS instance.</p>
-</dd><dt class="property-"
+    <dd>Pay type of the CBS instance.</dd><dt class="property-"
+            title="">
+        <span id="dedicatedclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_nodejs" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-"
             title="">
         <span id="instanceips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceips_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Ips</a>
@@ -1708,8 +2352,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1725,8 +2368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CBS.</p>
-</dd><dt class="property-"
+    <dd>ID of CBS.</dd><dt class="property-"
             title="">
         <span id="storagename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Name</a>
@@ -1734,8 +2376,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CBS.</p>
-</dd><dt class="property-"
+    <dd>Name of CBS.</dd><dt class="property-"
             title="">
         <span id="storagestates_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagestates_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>States</a>
@@ -1751,8 +2392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of storage medium.</p>
-</dd><dt class="property-"
+    <dd>Types of storage medium.</dd><dt class="property-"
             title="">
         <span id="storageusage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -1760,8 +2400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of CBS.</p>
-</dd><dt class="property-"
+    <dd>Types of CBS.</dd><dt class="property-"
             title="">
         <span id="tagkeys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkeys_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Keys</a>
@@ -1791,17 +2430,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="storage_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_lists_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getstoragesstoragelist">Get<wbr>Storages<wbr>Storage<wbr>List]</a></span>
+        <span class="property-type"><a href="#getstoragesstoragelist">Sequence[Get<wbr>Storages<wbr>Storage<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of storage. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of storage. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availability_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
@@ -1809,8 +2446,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The zone of CBS.</p>
-</dd><dt class="property-"
+    <dd>The zone of CBS.</dd><dt class="property-"
             title="">
         <span id="charge_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_types_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>types</a>
@@ -1818,8 +2454,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Pay type of the CBS instance.</p>
-</dd><dt class="property-"
+    <dd>Pay type of the CBS instance.</dd><dt class="property-"
+            title="">
+        <span id="dedicated_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicated_cluster_id_python" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-"
             title="">
         <span id="instance_ips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ips_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>ips</a>
@@ -1851,8 +2494,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1868,8 +2510,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of CBS.</p>
-</dd><dt class="property-"
+    <dd>ID of CBS.</dd><dt class="property-"
             title="">
         <span id="storage_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_name_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>name</a>
@@ -1877,8 +2518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of CBS.</p>
-</dd><dt class="property-"
+    <dd>Name of CBS.</dd><dt class="property-"
             title="">
         <span id="storage_states_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_states_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>states</a>
@@ -1894,8 +2534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Types of storage medium.</p>
-</dd><dt class="property-"
+    <dd>Types of storage medium.</dd><dt class="property-"
             title="">
         <span id="storage_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_usage_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>usage</a>
@@ -1903,8 +2542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Types of CBS.</p>
-</dd><dt class="property-"
+    <dd>Types of CBS.</dd><dt class="property-"
             title="">
         <span id="tag_keys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_keys_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>keys</a>
@@ -1934,8 +2572,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="storagelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagelists_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Lists</a>
@@ -1943,8 +2580,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstoragesstoragelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of storage. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of storage. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1952,8 +2588,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The zone of CBS.</p>
-</dd><dt class="property-"
+    <dd>The zone of CBS.</dd><dt class="property-"
             title="">
         <span id="chargetypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetypes_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Types</a>
@@ -1961,8 +2596,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Pay type of the CBS instance.</p>
-</dd><dt class="property-"
+    <dd>Pay type of the CBS instance.</dd><dt class="property-"
+            title="">
+        <span id="dedicatedclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_yaml" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-"
             title="">
         <span id="instanceips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceips_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Ips</a>
@@ -1994,8 +2636,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -2011,8 +2652,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CBS.</p>
-</dd><dt class="property-"
+    <dd>ID of CBS.</dd><dt class="property-"
             title="">
         <span id="storagename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Name</a>
@@ -2020,8 +2660,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CBS.</p>
-</dd><dt class="property-"
+    <dd>Name of CBS.</dd><dt class="property-"
             title="">
         <span id="storagestates_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagestates_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>States</a>
@@ -2037,8 +2676,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Types of storage medium.</p>
-</dd><dt class="property-"
+    <dd>Types of storage medium.</dd><dt class="property-"
             title="">
         <span id="storageusage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -2046,8 +2684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Types of CBS.</p>
-</dd><dt class="property-"
+    <dd>Types of CBS.</dd><dt class="property-"
             title="">
         <span id="tagkeys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkeys_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Keys</a>
@@ -2087,8 +2724,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the CBS is mounted the CVM.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-required"
             title="Required">
         <span id="availabilityzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -2096,8 +2732,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -2105,8 +2740,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code>).</p>
-</dd><dt class="property-required"
+    <dd>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code> | <code>CDCPAID</code> | <code>DEDICATED_CLUSTER_PAID</code>).</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2114,8 +2748,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of CBS.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of CBS.</dd><dt class="property-required"
+            title="Required">
+        <span id="dedicatedclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_csharp" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-required"
             title="Required">
         <span id="encrypt_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_csharp" style="color: inherit; text-decoration: inherit;">Encrypt</a>
@@ -2123,8 +2764,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether CBS is encrypted.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -2132,8 +2772,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CVM instance that be mounted by this CBS.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CVM instance that be mounted by this CBS.</dd><dt class="property-required"
+            title="Required">
+        <span id="kmskeyid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kms key ID.</dd><dt class="property-required"
             title="Required">
         <span id="prepaidrenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Renew<wbr>Flag</a>
@@ -2141,8 +2788,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The way that CBS instance will be renew automatically or not when it reach the end of the prepaid tenancy.</p>
-</dd><dt class="property-required"
+    <dd>The way that CBS instance will be renew automatically or not when it reach the end of the prepaid tenancy.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2150,8 +2796,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project with which the CBS is associated.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project with which the CBS is associated.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2159,8 +2804,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of CBS.</p>
-</dd><dt class="property-required"
+    <dd>Status of CBS.</dd><dt class="property-required"
             title="Required">
         <span id="storageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Id</a>
@@ -2168,8 +2812,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CBS to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CBS to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="storagename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Name</a>
@@ -2177,8 +2820,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CBS to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CBS to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="storagesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagesize_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Size</a>
@@ -2186,8 +2828,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of CBS.</p>
-</dd><dt class="property-required"
+    <dd>Volume of CBS.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
@@ -2195,8 +2836,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</p>
-</dd><dt class="property-required"
+    <dd>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</dd><dt class="property-required"
             title="Required">
         <span id="storageusage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Usage</a>
@@ -2204,17 +2844,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</p>
-</dd><dt class="property-required"
+    <dd>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The available tags within this CBS.</p>
-</dd><dt class="property-required"
+    <dd>The available tags within this CBS.</dd><dt class="property-required"
             title="Required">
         <span id="throughputperformance_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_csharp" style="color: inherit; text-decoration: inherit;">Throughput<wbr>Performance</a>
@@ -2222,8 +2860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2237,8 +2874,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the CBS is mounted the CVM.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-required"
             title="Required">
         <span id="availabilityzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -2246,8 +2882,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -2255,8 +2890,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code>).</p>
-</dd><dt class="property-required"
+    <dd>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code> | <code>CDCPAID</code> | <code>DEDICATED_CLUSTER_PAID</code>).</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2264,8 +2898,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of CBS.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of CBS.</dd><dt class="property-required"
+            title="Required">
+        <span id="dedicatedclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_go" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-required"
             title="Required">
         <span id="encrypt_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_go" style="color: inherit; text-decoration: inherit;">Encrypt</a>
@@ -2273,8 +2914,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether CBS is encrypted.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -2282,8 +2922,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CVM instance that be mounted by this CBS.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CVM instance that be mounted by this CBS.</dd><dt class="property-required"
+            title="Required">
+        <span id="kmskeyid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kms key ID.</dd><dt class="property-required"
             title="Required">
         <span id="prepaidrenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Renew<wbr>Flag</a>
@@ -2291,8 +2938,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The way that CBS instance will be renew automatically or not when it reach the end of the prepaid tenancy.</p>
-</dd><dt class="property-required"
+    <dd>The way that CBS instance will be renew automatically or not when it reach the end of the prepaid tenancy.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2300,8 +2946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project with which the CBS is associated.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project with which the CBS is associated.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2309,8 +2954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of CBS.</p>
-</dd><dt class="property-required"
+    <dd>Status of CBS.</dd><dt class="property-required"
             title="Required">
         <span id="storageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Id</a>
@@ -2318,8 +2962,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CBS to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CBS to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="storagename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Name</a>
@@ -2327,8 +2970,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CBS to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CBS to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="storagesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagesize_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Size</a>
@@ -2336,8 +2978,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of CBS.</p>
-</dd><dt class="property-required"
+    <dd>Volume of CBS.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
@@ -2345,8 +2986,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</p>
-</dd><dt class="property-required"
+    <dd>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</dd><dt class="property-required"
             title="Required">
         <span id="storageusage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Usage</a>
@@ -2354,17 +2994,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</p>
-</dd><dt class="property-required"
+    <dd>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The available tags within this CBS.</p>
-</dd><dt class="property-required"
+    <dd>The available tags within this CBS.</dd><dt class="property-required"
             title="Required">
         <span id="throughputperformance_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_go" style="color: inherit; text-decoration: inherit;">Throughput<wbr>Performance</a>
@@ -2372,8 +3010,157 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="attached_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attached_hcl" style="color: inherit; text-decoration: inherit;">attached</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-required"
+            title="Required">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
+            title="Required">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code> | <code>CDCPAID</code> | <code>DEDICATED_CLUSTER_PAID</code>).</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of CBS.</dd><dt class="property-required"
+            title="Required">
+        <span id="dedicated_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicated_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-required"
+            title="Required">
+        <span id="encrypt_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_hcl" style="color: inherit; text-decoration: inherit;">encrypt</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CVM instance that be mounted by this CBS.</dd><dt class="property-required"
+            title="Required">
+        <span id="kms_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_key_id_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kms key ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="prepaid_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The way that CBS instance will be renew automatically or not when it reach the end of the prepaid tenancy.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project with which the CBS is associated.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of CBS.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_id_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CBS to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_name_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CBS to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_size_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Volume of CBS.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_usage_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The available tags within this CBS.</dd><dt class="property-required"
+            title="Required">
+        <span id="throughput_performance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughput_performance_hcl" style="color: inherit; text-decoration: inherit;">throughput_<wbr>performance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2387,8 +3174,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the CBS is mounted the CVM.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-required"
             title="Required">
         <span id="availabilityzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -2396,8 +3182,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2405,8 +3190,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code>).</p>
-</dd><dt class="property-required"
+    <dd>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code> | <code>CDCPAID</code> | <code>DEDICATED_CLUSTER_PAID</code>).</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2414,8 +3198,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of CBS.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of CBS.</dd><dt class="property-required"
+            title="Required">
+        <span id="dedicatedclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_java" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-required"
             title="Required">
         <span id="encrypt_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_java" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -2423,8 +3214,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether CBS is encrypted.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2432,8 +3222,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CVM instance that be mounted by this CBS.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CVM instance that be mounted by this CBS.</dd><dt class="property-required"
+            title="Required">
+        <span id="kmskeyid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Kms key ID.</dd><dt class="property-required"
             title="Required">
         <span id="prepaidrenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -2441,8 +3238,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The way that CBS instance will be renew automatically or not when it reach the end of the prepaid tenancy.</p>
-</dd><dt class="property-required"
+    <dd>The way that CBS instance will be renew automatically or not when it reach the end of the prepaid tenancy.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2450,8 +3246,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project with which the CBS is associated.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project with which the CBS is associated.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2459,8 +3254,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of CBS.</p>
-</dd><dt class="property-required"
+    <dd>Status of CBS.</dd><dt class="property-required"
             title="Required">
         <span id="storageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
@@ -2468,8 +3262,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CBS to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CBS to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="storagename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Name</a>
@@ -2477,8 +3270,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CBS to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CBS to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="storagesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagesize_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Size</a>
@@ -2486,8 +3278,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Volume of CBS.</p>
-</dd><dt class="property-required"
+    <dd>Volume of CBS.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -2495,8 +3286,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</p>
-</dd><dt class="property-required"
+    <dd>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</dd><dt class="property-required"
             title="Required">
         <span id="storageusage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -2504,17 +3294,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</p>
-</dd><dt class="property-required"
+    <dd>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The available tags within this CBS.</p>
-</dd><dt class="property-required"
+    <dd>The available tags within this CBS.</dd><dt class="property-required"
             title="Required">
         <span id="throughputperformance_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_java" style="color: inherit; text-decoration: inherit;">throughput<wbr>Performance</a>
@@ -2522,8 +3310,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2537,8 +3324,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the CBS is mounted the CVM.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-required"
             title="Required">
         <span id="availabilityzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -2546,8 +3332,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2555,8 +3340,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code>).</p>
-</dd><dt class="property-required"
+    <dd>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code> | <code>CDCPAID</code> | <code>DEDICATED_CLUSTER_PAID</code>).</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2564,8 +3348,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of CBS.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of CBS.</dd><dt class="property-required"
+            title="Required">
+        <span id="dedicatedclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_nodejs" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-required"
             title="Required">
         <span id="encrypt_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_nodejs" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -2573,8 +3364,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether CBS is encrypted.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2582,8 +3372,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CVM instance that be mounted by this CBS.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CVM instance that be mounted by this CBS.</dd><dt class="property-required"
+            title="Required">
+        <span id="kmskeyid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kms key ID.</dd><dt class="property-required"
             title="Required">
         <span id="prepaidrenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -2591,8 +3388,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The way that CBS instance will be renew automatically or not when it reach the end of the prepaid tenancy.</p>
-</dd><dt class="property-required"
+    <dd>The way that CBS instance will be renew automatically or not when it reach the end of the prepaid tenancy.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2600,8 +3396,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project with which the CBS is associated.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project with which the CBS is associated.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2609,8 +3404,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of CBS.</p>
-</dd><dt class="property-required"
+    <dd>Status of CBS.</dd><dt class="property-required"
             title="Required">
         <span id="storageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
@@ -2618,8 +3412,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CBS to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CBS to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="storagename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Name</a>
@@ -2627,8 +3420,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CBS to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CBS to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="storagesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagesize_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Size</a>
@@ -2636,8 +3428,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Volume of CBS.</p>
-</dd><dt class="property-required"
+    <dd>Volume of CBS.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -2645,8 +3436,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</p>
-</dd><dt class="property-required"
+    <dd>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</dd><dt class="property-required"
             title="Required">
         <span id="storageusage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -2654,17 +3444,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</p>
-</dd><dt class="property-required"
+    <dd>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The available tags within this CBS.</p>
-</dd><dt class="property-required"
+    <dd>The available tags within this CBS.</dd><dt class="property-required"
             title="Required">
         <span id="throughputperformance_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_nodejs" style="color: inherit; text-decoration: inherit;">throughput<wbr>Performance</a>
@@ -2672,8 +3460,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2687,8 +3474,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the CBS is mounted the CVM.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-required"
             title="Required">
         <span id="availability_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
@@ -2696,8 +3482,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -2705,8 +3490,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code>).</p>
-</dd><dt class="property-required"
+    <dd>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code> | <code>CDCPAID</code> | <code>DEDICATED_CLUSTER_PAID</code>).</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2714,8 +3498,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of CBS.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of CBS.</dd><dt class="property-required"
+            title="Required">
+        <span id="dedicated_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicated_cluster_id_python" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-required"
             title="Required">
         <span id="encrypt_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_python" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -2723,8 +3514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether CBS is encrypted.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -2732,8 +3522,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CVM instance that be mounted by this CBS.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CVM instance that be mounted by this CBS.</dd><dt class="property-required"
+            title="Required">
+        <span id="kms_key_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_key_id_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Kms key ID.</dd><dt class="property-required"
             title="Required">
         <span id="prepaid_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_renew_flag_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>renew_<wbr>flag</a>
@@ -2741,8 +3538,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The way that CBS instance will be renew automatically or not when it reach the end of the prepaid tenancy.</p>
-</dd><dt class="property-required"
+    <dd>The way that CBS instance will be renew automatically or not when it reach the end of the prepaid tenancy.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -2750,8 +3546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project with which the CBS is associated.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project with which the CBS is associated.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2759,8 +3554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of CBS.</p>
-</dd><dt class="property-required"
+    <dd>Status of CBS.</dd><dt class="property-required"
             title="Required">
         <span id="storage_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_id_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>id</a>
@@ -2768,8 +3562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CBS to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CBS to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="storage_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_name_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>name</a>
@@ -2777,8 +3570,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CBS to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CBS to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="storage_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_size_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>size</a>
@@ -2786,8 +3578,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of CBS.</p>
-</dd><dt class="property-required"
+    <dd>Volume of CBS.</dd><dt class="property-required"
             title="Required">
         <span id="storage_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
@@ -2795,8 +3586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</p>
-</dd><dt class="property-required"
+    <dd>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</dd><dt class="property-required"
             title="Required">
         <span id="storage_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_usage_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>usage</a>
@@ -2804,17 +3594,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</p>
-</dd><dt class="property-required"
+    <dd>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The available tags within this CBS.</p>
-</dd><dt class="property-required"
+    <dd>The available tags within this CBS.</dd><dt class="property-required"
             title="Required">
         <span id="throughput_performance_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughput_performance_python" style="color: inherit; text-decoration: inherit;">throughput_<wbr>performance</a>
@@ -2822,8 +3610,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2837,8 +3624,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the CBS is mounted the CVM.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the CBS is mounted the CVM.</dd><dt class="property-required"
             title="Required">
         <span id="availabilityzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -2846,8 +3632,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2855,8 +3640,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code>).</p>
-</dd><dt class="property-required"
+    <dd>List filter by disk charge type (<code>POSTPAID_BY_HOUR</code> | <code>PREPAID</code> | <code>CDCPAID</code> | <code>DEDICATED_CLUSTER_PAID</code>).</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2864,8 +3648,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of CBS.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of CBS.</dd><dt class="property-required"
+            title="Required">
+        <span id="dedicatedclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_yaml" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Exclusive cluster id.</dd><dt class="property-required"
             title="Required">
         <span id="encrypt_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_yaml" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -2873,8 +3664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether CBS is encrypted.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether CBS is encrypted.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2882,8 +3672,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CVM instance that be mounted by this CBS.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CVM instance that be mounted by this CBS.</dd><dt class="property-required"
+            title="Required">
+        <span id="kmskeyid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Kms key ID.</dd><dt class="property-required"
             title="Required">
         <span id="prepaidrenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
@@ -2891,8 +3688,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The way that CBS instance will be renew automatically or not when it reach the end of the prepaid tenancy.</p>
-</dd><dt class="property-required"
+    <dd>The way that CBS instance will be renew automatically or not when it reach the end of the prepaid tenancy.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2900,8 +3696,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project with which the CBS is associated.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project with which the CBS is associated.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2909,8 +3704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of CBS.</p>
-</dd><dt class="property-required"
+    <dd>Status of CBS.</dd><dt class="property-required"
             title="Required">
         <span id="storageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
@@ -2918,8 +3712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CBS to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CBS to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="storagename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagename_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Name</a>
@@ -2927,8 +3720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CBS to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CBS to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="storagesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagesize_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Size</a>
@@ -2936,8 +3728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Volume of CBS.</p>
-</dd><dt class="property-required"
+    <dd>Volume of CBS.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -2945,8 +3736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</p>
-</dd><dt class="property-required"
+    <dd>Filter by cloud disk media type (<code>CLOUD_BASIC</code>: HDD cloud disk | <code>CLOUD_PREMIUM</code>: Premium Cloud Storage | <code>CLOUD_SSD</code>: SSD cloud disk).</dd><dt class="property-required"
             title="Required">
         <span id="storageusage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -2954,17 +3744,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</p>
-</dd><dt class="property-required"
+    <dd>Filter by cloud disk type (<code>SYSTEM_DISK</code>: system disk | <code>DATA_DISK</code>: data disk).</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The available tags within this CBS.</p>
-</dd><dt class="property-required"
+    <dd>The available tags within this CBS.</dd><dt class="property-required"
             title="Required">
         <span id="throughputperformance_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_yaml" style="color: inherit; text-decoration: inherit;">throughput<wbr>Performance</a>
@@ -2972,8 +3760,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</p>
-</dd></dl>
+    <dd>Add extra performance to the data disk. Only works when disk type is <code>CLOUD_TSSD</code> or <code>CLOUD_HSSD</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2988,7 +3775,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "Workload"
 title_tag: "tencentcloud.Tem.Workload"
-meta_desc: "Documentation for the tencentcloud.Tem.Workload resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a tem workload"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,38 +18,86 @@ Provides a resource to create a tem workload
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const workload = new tencentcloud.tem.Workload("workload", {
     applicationId: "app-j4d3x6kj",
-    cpuSpec: 1,
-    deployMode: "IMAGE",
-    deployVersion: "hello-world",
     environmentId: "en-85377m6j",
+    deployVersion: "hello-world",
+    deployMode: "IMAGE",
     imgRepo: "tem_demo/tem_demo",
-    initPodNum: 1,
-    memorySpec: 1,
     repoServer: "ccr.ccs.tencentyun.com",
+    initPodNum: 1,
+    cpuSpec: 1,
+    memorySpec: 1,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 workload = tencentcloud.tem.Workload("workload",
     application_id="app-j4d3x6kj",
-    cpu_spec=1,
-    deploy_mode="IMAGE",
-    deploy_version="hello-world",
     environment_id="en-85377m6j",
+    deploy_version="hello-world",
+    deploy_mode="IMAGE",
     img_repo="tem_demo/tem_demo",
+    repo_server="ccr.ccs.tencentyun.com",
     init_pod_num=1,
-    memory_spec=1,
-    repo_server="ccr.ccs.tencentyun.com")
+    cpu_spec=float(1),
+    memory_spec=float(1))
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tem"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tem.NewWorkload(ctx, "workload", &tem.WorkloadArgs{
+			ApplicationId: pulumi.String("app-j4d3x6kj"),
+			EnvironmentId: pulumi.String("en-85377m6j"),
+			DeployVersion: pulumi.String("hello-world"),
+			DeployMode:    pulumi.String("IMAGE"),
+			ImgRepo:       pulumi.String("tem_demo/tem_demo"),
+			RepoServer:    pulumi.String("ccr.ccs.tencentyun.com"),
+			InitPodNum:    pulumi.Int(1),
+			CpuSpec:       pulumi.Float64(1),
+			MemorySpec:    pulumi.Float64(1),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -59,46 +109,23 @@ return await Deployment.RunAsync(() =>
     var workload = new Tencentcloud.Tem.Workload("workload", new()
     {
         ApplicationId = "app-j4d3x6kj",
-        CpuSpec = 1,
-        DeployMode = "IMAGE",
-        DeployVersion = "hello-world",
         EnvironmentId = "en-85377m6j",
+        DeployVersion = "hello-world",
+        DeployMode = "IMAGE",
         ImgRepo = "tem_demo/tem_demo",
-        InitPodNum = 1,
-        MemorySpec = 1,
         RepoServer = "ccr.ccs.tencentyun.com",
+        InitPodNum = 1,
+        CpuSpec = 1,
+        MemorySpec = 1,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tem.NewWorkload(ctx, "workload", &Tem.WorkloadArgs{
-			ApplicationId: pulumi.String("app-j4d3x6kj"),
-			CpuSpec:       pulumi.Float64(1),
-			DeployMode:    pulumi.String("IMAGE"),
-			DeployVersion: pulumi.String("hello-world"),
-			EnvironmentId: pulumi.String("en-85377m6j"),
-			ImgRepo:       pulumi.String("tem_demo/tem_demo"),
-			InitPodNum:    pulumi.Int(1),
-			MemorySpec:    pulumi.Float64(1),
-			RepoServer:    pulumi.String("ccr.ccs.tencentyun.com"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -107,8 +134,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tem.Workload;
 import com.pulumi.tencentcloud.Tem.WorkloadArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -120,115 +147,171 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var workload = new Workload("workload", WorkloadArgs.builder()        
+        var workload = new Workload("workload", WorkloadArgs.builder()
             .applicationId("app-j4d3x6kj")
-            .cpuSpec(1)
-            .deployMode("IMAGE")
-            .deployVersion("hello-world")
             .environmentId("en-85377m6j")
+            .deployVersion("hello-world")
+            .deployMode("IMAGE")
             .imgRepo("tem_demo/tem_demo")
-            .initPodNum(1)
-            .memorySpec(1)
             .repoServer("ccr.ccs.tencentyun.com")
+            .initPodNum(1)
+            .cpuSpec(1.0)
+            .memorySpec(1.0)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   workload:
     type: tencentcloud:Tem:Workload
     properties:
       applicationId: app-j4d3x6kj
-      cpuSpec: 1
-      deployMode: IMAGE
-      deployVersion: hello-world
       environmentId: en-85377m6j
+      deployVersion: hello-world
+      deployMode: IMAGE
       imgRepo: tem_demo/tem_demo
-      initPodNum: 1
-      memorySpec: 1
       repoServer: ccr.ccs.tencentyun.com
+      initPodNum: 1
+      cpuSpec: 1
+      memorySpec: 1 # }
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tem_workload" "workload" {
+  application_id = "app-j4d3x6kj"
+  environment_id = "en-85377m6j"
+  deploy_version = "hello-world"
+  deploy_mode    = "IMAGE"
+  img_repo       = "tem_demo/tem_demo"
+  repo_server    = "ccr.ccs.tencentyun.com"
+  init_pod_num   = 1
+  cpu_spec       = 1
+  memory_spec    = 1
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [DeployApplication](https://www.tencentcloud.com/document/api/1094/42032)
+* Read: [DescribeApplicationInfo](https://www.tencentcloud.com/document/api/1094/52746)
+* Update: [DeployApplication](https://www.tencentcloud.com/document/api/1094/42032)
+* Delete: [DeleteApplication](https://www.tencentcloud.com/document/api/1094/45173)
 
 
 ## Create Workload Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Workload</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">WorkloadArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Workload</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">WorkloadArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Workload</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">WorkloadArgs</a></span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Workload</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-             <span class="nx">application_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">init_pod_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">cpu_spec</span><span class="p">:</span> <span class="nx">Optional[float]</span> = None<span class="p">,</span>
              <span class="nx">deploy_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">deploy_strategy_conf</span><span class="p">:</span> <span class="nx">Optional[_tem.WorkloadDeployStrategyConfArgs]</span> = None<span class="p">,</span>
+             <span class="nx">memory_spec</span><span class="p">:</span> <span class="nx">Optional[float]</span> = None<span class="p">,</span>
              <span class="nx">deploy_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">env_confs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tem.WorkloadEnvConfArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">application_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">environment_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">img_repo</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">init_pod_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">liveness</span><span class="p">:</span> <span class="nx">Optional[_tem.WorkloadLivenessArgs]</span> = None<span class="p">,</span>
-             <span class="nx">memory_spec</span><span class="p">:</span> <span class="nx">Optional[float]</span> = None<span class="p">,</span>
+             <span class="nx">env_confs</span><span class="p">:</span> <span class="nx">Optional[Sequence[WorkloadEnvConfArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">liveness</span><span class="p">:</span> <span class="nx">Optional[WorkloadLivenessArgs]</span> = None<span class="p">,</span>
+             <span class="nx">deploy_strategy_conf</span><span class="p">:</span> <span class="nx">Optional[WorkloadDeployStrategyConfArgs]</span> = None<span class="p">,</span>
              <span class="nx">post_start</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">pre_stop</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">readiness</span><span class="p">:</span> <span class="nx">Optional[_tem.WorkloadReadinessArgs]</span> = None<span class="p">,</span>
+             <span class="nx">readiness</span><span class="p">:</span> <span class="nx">Optional[WorkloadReadinessArgs]</span> = None<span class="p">,</span>
              <span class="nx">repo_server</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">repo_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">security_group_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-             <span class="nx">startup_probe</span><span class="p">:</span> <span class="nx">Optional[_tem.WorkloadStartupProbeArgs]</span> = None<span class="p">,</span>
-             <span class="nx">storage_confs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tem.WorkloadStorageConfArgs]]</span> = None<span class="p">,</span>
-             <span class="nx">storage_mount_confs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tem.WorkloadStorageMountConfArgs]]</span> = None<span class="p">,</span>
-             <span class="nx">tcr_instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Workload</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">WorkloadArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">startup_probe</span><span class="p">:</span> <span class="nx">Optional[WorkloadStartupProbeArgs]</span> = None<span class="p">,</span>
+             <span class="nx">storage_confs</span><span class="p">:</span> <span class="nx">Optional[Sequence[WorkloadStorageConfArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">storage_mount_confs</span><span class="p">:</span> <span class="nx">Optional[Sequence[WorkloadStorageMountConfArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">tcr_instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewWorkload</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">WorkloadArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Workload</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewWorkload</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">WorkloadArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Workload</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Workload</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">WorkloadArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Workload</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">WorkloadArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Workload</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">WorkloadArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Workload</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">WorkloadArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tem:Workload</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tem:Workload</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tem_workload&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -249,7 +332,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -366,11 +449,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Workload Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Workload resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -386,8 +477,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-required"
+    <dd>application ID.</dd><dt class="property-required"
             title="Required">
         <span id="cpuspec_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpuspec_csharp" style="color: inherit; text-decoration: inherit;">Cpu<wbr>Spec</a>
@@ -395,8 +485,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>cpu.</p>
-</dd><dt class="property-required"
+    <dd>cpu.</dd><dt class="property-required"
             title="Required">
         <span id="deploymode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploymode_csharp" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Mode</a>
@@ -404,8 +493,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deploy mode, support IMAGE.</p>
-</dd><dt class="property-required"
+    <dd>deploy mode, support IMAGE.</dd><dt class="property-required"
             title="Required">
         <span id="deployversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployversion_csharp" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Version</a>
@@ -413,8 +501,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deploy version.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>deploy version.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_csharp" style="color: inherit; text-decoration: inherit;">Environment<wbr>Id</a>
@@ -422,8 +509,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-required"
+    <dd>environment ID.</dd><dt class="property-required"
             title="Required">
         <span id="imgrepo_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imgrepo_csharp" style="color: inherit; text-decoration: inherit;">Img<wbr>Repo</a>
@@ -431,8 +517,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd><dt class="property-required"
+    <dd>repository name.</dd><dt class="property-required"
             title="Required">
         <span id="initpodnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initpodnum_csharp" style="color: inherit; text-decoration: inherit;">Init<wbr>Pod<wbr>Num</a>
@@ -440,8 +525,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>initial pod number.</p>
-</dd><dt class="property-required"
+    <dd>initial pod number.</dd><dt class="property-required"
             title="Required">
         <span id="memoryspec_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryspec_csharp" style="color: inherit; text-decoration: inherit;">Memory<wbr>Spec</a>
@@ -449,35 +533,31 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="deploystrategyconf_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploystrategyconf_csharp" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Strategy<wbr>Conf</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloaddeploystrategyconf">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Deploy<wbr>Strategy<wbr>Conf<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloaddeploystrategyconf">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Deploy<wbr>Strategy<wbr>Conf</a></span>
     </dt>
-    <dd><p>deploy strategy.</p>
-</dd><dt class="property-optional"
+    <dd>deploy strategy.</dd><dt class="property-optional"
             title="Optional">
         <span id="envconfs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#envconfs_csharp" style="color: inherit; text-decoration: inherit;">Env<wbr>Confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadenvconf">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Env<wbr>Conf<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#workloadenvconf">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Env<wbr>Conf&gt;</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="liveness_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#liveness_csharp" style="color: inherit; text-decoration: inherit;">Liveness</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadliveness">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Liveness<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloadliveness">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Liveness</a></span>
     </dt>
-    <dd><p>liveness config.</p>
-</dd><dt class="property-optional"
+    <dd>liveness config.</dd><dt class="property-optional"
             title="Optional">
         <span id="poststart_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#poststart_csharp" style="color: inherit; text-decoration: inherit;">Post<wbr>Start</a>
@@ -485,8 +565,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="prestop_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prestop_csharp" style="color: inherit; text-decoration: inherit;">Pre<wbr>Stop</a>
@@ -494,17 +573,15 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="readiness_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readiness_csharp" style="color: inherit; text-decoration: inherit;">Readiness</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadreadiness">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Readiness<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloadreadiness">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Readiness</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="reposerver_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reposerver_csharp" style="color: inherit; text-decoration: inherit;">Repo<wbr>Server</a>
@@ -512,8 +589,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repo server addr when deploy by image.</p>
-</dd><dt class="property-optional"
+    <dd>repo server addr when deploy by image.</dd><dt class="property-optional"
             title="Optional">
         <span id="repotype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repotype_csharp" style="color: inherit; text-decoration: inherit;">Repo<wbr>Type</a>
@@ -521,8 +597,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</p>
-</dd><dt class="property-optional"
+    <dd>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
@@ -530,35 +605,31 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>security groups.</p>
-</dd><dt class="property-optional"
+    <dd>security groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="startupprobe_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startupprobe_csharp" style="color: inherit; text-decoration: inherit;">Startup<wbr>Probe</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstartupprobe">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Startup<wbr>Probe<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloadstartupprobe">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Startup<wbr>Probe</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageconfs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageconfs_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstorageconf">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Storage<wbr>Conf<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#workloadstorageconf">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Storage<wbr>Conf&gt;</a></span>
     </dt>
-    <dd><p>storage configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemountconfs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemountconfs_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Mount<wbr>Confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstoragemountconf">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Storage<wbr>Mount<wbr>Conf<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#workloadstoragemountconf">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Storage<wbr>Mount<wbr>Conf&gt;</a></span>
     </dt>
-    <dd><p>storage mount configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage mount configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="tcrinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcrinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Tcr<wbr>Instance<wbr>Id</a>
@@ -566,8 +637,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tcr instance id when deploy by image.</p>
-</dd></dl>
+    <dd>tcr instance id when deploy by image.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -581,8 +651,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-required"
+    <dd>application ID.</dd><dt class="property-required"
             title="Required">
         <span id="cpuspec_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpuspec_go" style="color: inherit; text-decoration: inherit;">Cpu<wbr>Spec</a>
@@ -590,8 +659,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>cpu.</p>
-</dd><dt class="property-required"
+    <dd>cpu.</dd><dt class="property-required"
             title="Required">
         <span id="deploymode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploymode_go" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Mode</a>
@@ -599,8 +667,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deploy mode, support IMAGE.</p>
-</dd><dt class="property-required"
+    <dd>deploy mode, support IMAGE.</dd><dt class="property-required"
             title="Required">
         <span id="deployversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployversion_go" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Version</a>
@@ -608,8 +675,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deploy version.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>deploy version.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_go" style="color: inherit; text-decoration: inherit;">Environment<wbr>Id</a>
@@ -617,8 +683,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-required"
+    <dd>environment ID.</dd><dt class="property-required"
             title="Required">
         <span id="imgrepo_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imgrepo_go" style="color: inherit; text-decoration: inherit;">Img<wbr>Repo</a>
@@ -626,8 +691,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd><dt class="property-required"
+    <dd>repository name.</dd><dt class="property-required"
             title="Required">
         <span id="initpodnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initpodnum_go" style="color: inherit; text-decoration: inherit;">Init<wbr>Pod<wbr>Num</a>
@@ -635,8 +699,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>initial pod number.</p>
-</dd><dt class="property-required"
+    <dd>initial pod number.</dd><dt class="property-required"
             title="Required">
         <span id="memoryspec_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryspec_go" style="color: inherit; text-decoration: inherit;">Memory<wbr>Spec</a>
@@ -644,8 +707,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="deploystrategyconf_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploystrategyconf_go" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Strategy<wbr>Conf</a>
@@ -653,8 +715,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloaddeploystrategyconf">Workload<wbr>Deploy<wbr>Strategy<wbr>Conf<wbr>Args</a></span>
     </dt>
-    <dd><p>deploy strategy.</p>
-</dd><dt class="property-optional"
+    <dd>deploy strategy.</dd><dt class="property-optional"
             title="Optional">
         <span id="envconfs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#envconfs_go" style="color: inherit; text-decoration: inherit;">Env<wbr>Confs</a>
@@ -662,8 +723,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadenvconf">[]Workload<wbr>Env<wbr>Conf<wbr>Args</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="liveness_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#liveness_go" style="color: inherit; text-decoration: inherit;">Liveness</a>
@@ -671,8 +731,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadliveness">Workload<wbr>Liveness<wbr>Args</a></span>
     </dt>
-    <dd><p>liveness config.</p>
-</dd><dt class="property-optional"
+    <dd>liveness config.</dd><dt class="property-optional"
             title="Optional">
         <span id="poststart_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#poststart_go" style="color: inherit; text-decoration: inherit;">Post<wbr>Start</a>
@@ -680,8 +739,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="prestop_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prestop_go" style="color: inherit; text-decoration: inherit;">Pre<wbr>Stop</a>
@@ -689,8 +747,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="readiness_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readiness_go" style="color: inherit; text-decoration: inherit;">Readiness</a>
@@ -698,8 +755,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadreadiness">Workload<wbr>Readiness<wbr>Args</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="reposerver_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reposerver_go" style="color: inherit; text-decoration: inherit;">Repo<wbr>Server</a>
@@ -707,8 +763,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repo server addr when deploy by image.</p>
-</dd><dt class="property-optional"
+    <dd>repo server addr when deploy by image.</dd><dt class="property-optional"
             title="Optional">
         <span id="repotype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repotype_go" style="color: inherit; text-decoration: inherit;">Repo<wbr>Type</a>
@@ -716,8 +771,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</p>
-</dd><dt class="property-optional"
+    <dd>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
@@ -725,8 +779,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>security groups.</p>
-</dd><dt class="property-optional"
+    <dd>security groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="startupprobe_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startupprobe_go" style="color: inherit; text-decoration: inherit;">Startup<wbr>Probe</a>
@@ -734,8 +787,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadstartupprobe">Workload<wbr>Startup<wbr>Probe<wbr>Args</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageconfs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageconfs_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Confs</a>
@@ -743,8 +795,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadstorageconf">[]Workload<wbr>Storage<wbr>Conf<wbr>Args</a></span>
     </dt>
-    <dd><p>storage configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemountconfs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemountconfs_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Mount<wbr>Confs</a>
@@ -752,8 +803,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadstoragemountconf">[]Workload<wbr>Storage<wbr>Mount<wbr>Conf<wbr>Args</a></span>
     </dt>
-    <dd><p>storage mount configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage mount configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="tcrinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcrinstanceid_go" style="color: inherit; text-decoration: inherit;">Tcr<wbr>Instance<wbr>Id</a>
@@ -761,8 +811,181 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tcr instance id when deploy by image.</p>
-</dd></dl>
+    <dd>tcr instance id when deploy by image.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="application_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_id_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>application ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="cpu_spec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_spec_hcl" style="color: inherit; text-decoration: inherit;">cpu_<wbr>spec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>cpu.</dd><dt class="property-required"
+            title="Required">
+        <span id="deploy_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploy_mode_hcl" style="color: inherit; text-decoration: inherit;">deploy_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>deploy mode, support IMAGE.</dd><dt class="property-required"
+            title="Required">
+        <span id="deploy_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploy_version_hcl" style="color: inherit; text-decoration: inherit;">deploy_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>deploy version.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="environment_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_id_hcl" style="color: inherit; text-decoration: inherit;">environment_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>environment ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="img_repo_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#img_repo_hcl" style="color: inherit; text-decoration: inherit;">img_<wbr>repo</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>repository name.</dd><dt class="property-required"
+            title="Required">
+        <span id="init_pod_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#init_pod_num_hcl" style="color: inherit; text-decoration: inherit;">init_<wbr>pod_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>initial pod number.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_spec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_spec_hcl" style="color: inherit; text-decoration: inherit;">memory_<wbr>spec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>mem.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deploy_strategy_conf_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploy_strategy_conf_hcl" style="color: inherit; text-decoration: inherit;">deploy_<wbr>strategy_<wbr>conf</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#workloaddeploystrategyconf">object</a></span>
+    </dt>
+    <dd>deploy strategy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="env_confs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#env_confs_hcl" style="color: inherit; text-decoration: inherit;">env_<wbr>confs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#workloadenvconf">list(object)</a></span>
+    </dt>
+    <dd>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="liveness_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#liveness_hcl" style="color: inherit; text-decoration: inherit;">liveness</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#workloadliveness">object</a></span>
+    </dt>
+    <dd>liveness config.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="post_start_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#post_start_hcl" style="color: inherit; text-decoration: inherit;">post_<wbr>start</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>mem.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="pre_stop_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pre_stop_hcl" style="color: inherit; text-decoration: inherit;">pre_<wbr>stop</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>mem.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="readiness_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readiness_hcl" style="color: inherit; text-decoration: inherit;">readiness</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#workloadreadiness">object</a></span>
+    </dt>
+    <dd>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="repo_server_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repo_server_hcl" style="color: inherit; text-decoration: inherit;">repo_<wbr>server</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>repo server addr when deploy by image.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="repo_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repo_type_hcl" style="color: inherit; text-decoration: inherit;">repo_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="security_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_ids_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>security groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="startup_probe_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startup_probe_hcl" style="color: inherit; text-decoration: inherit;">startup_<wbr>probe</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#workloadstartupprobe">object</a></span>
+    </dt>
+    <dd>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_confs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_confs_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>confs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#workloadstorageconf">list(object)</a></span>
+    </dt>
+    <dd>storage configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_mount_confs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_mount_confs_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>mount_<wbr>confs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#workloadstoragemountconf">list(object)</a></span>
+    </dt>
+    <dd>storage mount configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tcr_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcr_instance_id_hcl" style="color: inherit; text-decoration: inherit;">tcr_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>tcr instance id when deploy by image.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -776,8 +999,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-required"
+    <dd>application ID.</dd><dt class="property-required"
             title="Required">
         <span id="cpuspec_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpuspec_java" style="color: inherit; text-decoration: inherit;">cpu<wbr>Spec</a>
@@ -785,8 +1007,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>cpu.</p>
-</dd><dt class="property-required"
+    <dd>cpu.</dd><dt class="property-required"
             title="Required">
         <span id="deploymode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploymode_java" style="color: inherit; text-decoration: inherit;">deploy<wbr>Mode</a>
@@ -794,8 +1015,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>deploy mode, support IMAGE.</p>
-</dd><dt class="property-required"
+    <dd>deploy mode, support IMAGE.</dd><dt class="property-required"
             title="Required">
         <span id="deployversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployversion_java" style="color: inherit; text-decoration: inherit;">deploy<wbr>Version</a>
@@ -803,8 +1023,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>deploy version.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>deploy version.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_java" style="color: inherit; text-decoration: inherit;">environment<wbr>Id</a>
@@ -812,8 +1031,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-required"
+    <dd>environment ID.</dd><dt class="property-required"
             title="Required">
         <span id="imgrepo_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imgrepo_java" style="color: inherit; text-decoration: inherit;">img<wbr>Repo</a>
@@ -821,8 +1039,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd><dt class="property-required"
+    <dd>repository name.</dd><dt class="property-required"
             title="Required">
         <span id="initpodnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initpodnum_java" style="color: inherit; text-decoration: inherit;">init<wbr>Pod<wbr>Num</a>
@@ -830,8 +1047,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>initial pod number.</p>
-</dd><dt class="property-required"
+    <dd>initial pod number.</dd><dt class="property-required"
             title="Required">
         <span id="memoryspec_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryspec_java" style="color: inherit; text-decoration: inherit;">memory<wbr>Spec</a>
@@ -839,35 +1055,31 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="deploystrategyconf_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploystrategyconf_java" style="color: inherit; text-decoration: inherit;">deploy<wbr>Strategy<wbr>Conf</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloaddeploystrategyconf">Workload<wbr>Deploy<wbr>Strategy<wbr>Conf<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloaddeploystrategyconf">Workload<wbr>Deploy<wbr>Strategy<wbr>Conf</a></span>
     </dt>
-    <dd><p>deploy strategy.</p>
-</dd><dt class="property-optional"
+    <dd>deploy strategy.</dd><dt class="property-optional"
             title="Optional">
         <span id="envconfs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#envconfs_java" style="color: inherit; text-decoration: inherit;">env<wbr>Confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadenvconf">List&lt;Workload<wbr>Env<wbr>Conf<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#workloadenvconf">List&lt;Workload<wbr>Env<wbr>Conf&gt;</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="liveness_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#liveness_java" style="color: inherit; text-decoration: inherit;">liveness</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadliveness">Workload<wbr>Liveness<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloadliveness">Workload<wbr>Liveness</a></span>
     </dt>
-    <dd><p>liveness config.</p>
-</dd><dt class="property-optional"
+    <dd>liveness config.</dd><dt class="property-optional"
             title="Optional">
         <span id="poststart_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#poststart_java" style="color: inherit; text-decoration: inherit;">post<wbr>Start</a>
@@ -875,8 +1087,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="prestop_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prestop_java" style="color: inherit; text-decoration: inherit;">pre<wbr>Stop</a>
@@ -884,17 +1095,15 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="readiness_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readiness_java" style="color: inherit; text-decoration: inherit;">readiness</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadreadiness">Workload<wbr>Readiness<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloadreadiness">Workload<wbr>Readiness</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="reposerver_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reposerver_java" style="color: inherit; text-decoration: inherit;">repo<wbr>Server</a>
@@ -902,8 +1111,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>repo server addr when deploy by image.</p>
-</dd><dt class="property-optional"
+    <dd>repo server addr when deploy by image.</dd><dt class="property-optional"
             title="Optional">
         <span id="repotype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repotype_java" style="color: inherit; text-decoration: inherit;">repo<wbr>Type</a>
@@ -911,8 +1119,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</p>
-</dd><dt class="property-optional"
+    <dd>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -920,35 +1127,31 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>security groups.</p>
-</dd><dt class="property-optional"
+    <dd>security groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="startupprobe_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startupprobe_java" style="color: inherit; text-decoration: inherit;">startup<wbr>Probe</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstartupprobe">Workload<wbr>Startup<wbr>Probe<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloadstartupprobe">Workload<wbr>Startup<wbr>Probe</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageconfs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageconfs_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstorageconf">List&lt;Workload<wbr>Storage<wbr>Conf<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#workloadstorageconf">List&lt;Workload<wbr>Storage<wbr>Conf&gt;</a></span>
     </dt>
-    <dd><p>storage configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemountconfs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemountconfs_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Mount<wbr>Confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstoragemountconf">List&lt;Workload<wbr>Storage<wbr>Mount<wbr>Conf<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#workloadstoragemountconf">List&lt;Workload<wbr>Storage<wbr>Mount<wbr>Conf&gt;</a></span>
     </dt>
-    <dd><p>storage mount configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage mount configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="tcrinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcrinstanceid_java" style="color: inherit; text-decoration: inherit;">tcr<wbr>Instance<wbr>Id</a>
@@ -956,8 +1159,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>tcr instance id when deploy by image.</p>
-</dd></dl>
+    <dd>tcr instance id when deploy by image.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -971,8 +1173,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-required"
+    <dd>application ID.</dd><dt class="property-required"
             title="Required">
         <span id="cpuspec_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpuspec_nodejs" style="color: inherit; text-decoration: inherit;">cpu<wbr>Spec</a>
@@ -980,8 +1181,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>cpu.</p>
-</dd><dt class="property-required"
+    <dd>cpu.</dd><dt class="property-required"
             title="Required">
         <span id="deploymode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploymode_nodejs" style="color: inherit; text-decoration: inherit;">deploy<wbr>Mode</a>
@@ -989,8 +1189,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deploy mode, support IMAGE.</p>
-</dd><dt class="property-required"
+    <dd>deploy mode, support IMAGE.</dd><dt class="property-required"
             title="Required">
         <span id="deployversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployversion_nodejs" style="color: inherit; text-decoration: inherit;">deploy<wbr>Version</a>
@@ -998,8 +1197,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deploy version.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>deploy version.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_nodejs" style="color: inherit; text-decoration: inherit;">environment<wbr>Id</a>
@@ -1007,8 +1205,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-required"
+    <dd>environment ID.</dd><dt class="property-required"
             title="Required">
         <span id="imgrepo_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imgrepo_nodejs" style="color: inherit; text-decoration: inherit;">img<wbr>Repo</a>
@@ -1016,8 +1213,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd><dt class="property-required"
+    <dd>repository name.</dd><dt class="property-required"
             title="Required">
         <span id="initpodnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initpodnum_nodejs" style="color: inherit; text-decoration: inherit;">init<wbr>Pod<wbr>Num</a>
@@ -1025,8 +1221,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>initial pod number.</p>
-</dd><dt class="property-required"
+    <dd>initial pod number.</dd><dt class="property-required"
             title="Required">
         <span id="memoryspec_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryspec_nodejs" style="color: inherit; text-decoration: inherit;">memory<wbr>Spec</a>
@@ -1034,35 +1229,31 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="deploystrategyconf_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploystrategyconf_nodejs" style="color: inherit; text-decoration: inherit;">deploy<wbr>Strategy<wbr>Conf</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloaddeploystrategyconf">Workload<wbr>Deploy<wbr>Strategy<wbr>Conf<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloaddeploystrategyconf">Workload<wbr>Deploy<wbr>Strategy<wbr>Conf</a></span>
     </dt>
-    <dd><p>deploy strategy.</p>
-</dd><dt class="property-optional"
+    <dd>deploy strategy.</dd><dt class="property-optional"
             title="Optional">
         <span id="envconfs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#envconfs_nodejs" style="color: inherit; text-decoration: inherit;">env<wbr>Confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadenvconf">Workload<wbr>Env<wbr>Conf<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#workloadenvconf">Workload<wbr>Env<wbr>Conf[]</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="liveness_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#liveness_nodejs" style="color: inherit; text-decoration: inherit;">liveness</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadliveness">Workload<wbr>Liveness<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloadliveness">Workload<wbr>Liveness</a></span>
     </dt>
-    <dd><p>liveness config.</p>
-</dd><dt class="property-optional"
+    <dd>liveness config.</dd><dt class="property-optional"
             title="Optional">
         <span id="poststart_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#poststart_nodejs" style="color: inherit; text-decoration: inherit;">post<wbr>Start</a>
@@ -1070,8 +1261,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="prestop_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prestop_nodejs" style="color: inherit; text-decoration: inherit;">pre<wbr>Stop</a>
@@ -1079,17 +1269,15 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="readiness_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readiness_nodejs" style="color: inherit; text-decoration: inherit;">readiness</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadreadiness">Workload<wbr>Readiness<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloadreadiness">Workload<wbr>Readiness</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="reposerver_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reposerver_nodejs" style="color: inherit; text-decoration: inherit;">repo<wbr>Server</a>
@@ -1097,8 +1285,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repo server addr when deploy by image.</p>
-</dd><dt class="property-optional"
+    <dd>repo server addr when deploy by image.</dd><dt class="property-optional"
             title="Optional">
         <span id="repotype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repotype_nodejs" style="color: inherit; text-decoration: inherit;">repo<wbr>Type</a>
@@ -1106,8 +1293,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</p>
-</dd><dt class="property-optional"
+    <dd>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -1115,35 +1301,31 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>security groups.</p>
-</dd><dt class="property-optional"
+    <dd>security groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="startupprobe_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startupprobe_nodejs" style="color: inherit; text-decoration: inherit;">startup<wbr>Probe</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstartupprobe">Workload<wbr>Startup<wbr>Probe<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloadstartupprobe">Workload<wbr>Startup<wbr>Probe</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageconfs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageconfs_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstorageconf">Workload<wbr>Storage<wbr>Conf<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#workloadstorageconf">Workload<wbr>Storage<wbr>Conf[]</a></span>
     </dt>
-    <dd><p>storage configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemountconfs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemountconfs_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Mount<wbr>Confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstoragemountconf">Workload<wbr>Storage<wbr>Mount<wbr>Conf<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#workloadstoragemountconf">Workload<wbr>Storage<wbr>Mount<wbr>Conf[]</a></span>
     </dt>
-    <dd><p>storage mount configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage mount configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="tcrinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcrinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">tcr<wbr>Instance<wbr>Id</a>
@@ -1151,8 +1333,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tcr instance id when deploy by image.</p>
-</dd></dl>
+    <dd>tcr instance id when deploy by image.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1166,8 +1347,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-required"
+    <dd>application ID.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_spec_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_spec_python" style="color: inherit; text-decoration: inherit;">cpu_<wbr>spec</a>
@@ -1175,8 +1355,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>cpu.</p>
-</dd><dt class="property-required"
+    <dd>cpu.</dd><dt class="property-required"
             title="Required">
         <span id="deploy_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploy_mode_python" style="color: inherit; text-decoration: inherit;">deploy_<wbr>mode</a>
@@ -1184,8 +1363,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>deploy mode, support IMAGE.</p>
-</dd><dt class="property-required"
+    <dd>deploy mode, support IMAGE.</dd><dt class="property-required"
             title="Required">
         <span id="deploy_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploy_version_python" style="color: inherit; text-decoration: inherit;">deploy_<wbr>version</a>
@@ -1193,8 +1371,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>deploy version.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>deploy version.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environment_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_id_python" style="color: inherit; text-decoration: inherit;">environment_<wbr>id</a>
@@ -1202,8 +1379,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-required"
+    <dd>environment ID.</dd><dt class="property-required"
             title="Required">
         <span id="img_repo_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#img_repo_python" style="color: inherit; text-decoration: inherit;">img_<wbr>repo</a>
@@ -1211,8 +1387,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd><dt class="property-required"
+    <dd>repository name.</dd><dt class="property-required"
             title="Required">
         <span id="init_pod_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#init_pod_num_python" style="color: inherit; text-decoration: inherit;">init_<wbr>pod_<wbr>num</a>
@@ -1220,8 +1395,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>initial pod number.</p>
-</dd><dt class="property-required"
+    <dd>initial pod number.</dd><dt class="property-required"
             title="Required">
         <span id="memory_spec_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_spec_python" style="color: inherit; text-decoration: inherit;">memory_<wbr>spec</a>
@@ -1229,8 +1403,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="deploy_strategy_conf_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploy_strategy_conf_python" style="color: inherit; text-decoration: inherit;">deploy_<wbr>strategy_<wbr>conf</a>
@@ -1238,17 +1411,15 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloaddeploystrategyconf">Workload<wbr>Deploy<wbr>Strategy<wbr>Conf<wbr>Args</a></span>
     </dt>
-    <dd><p>deploy strategy.</p>
-</dd><dt class="property-optional"
+    <dd>deploy strategy.</dd><dt class="property-optional"
             title="Optional">
         <span id="env_confs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#env_confs_python" style="color: inherit; text-decoration: inherit;">env_<wbr>confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadenvconf">Workload<wbr>Env<wbr>Conf<wbr>Args]</a></span>
+        <span class="property-type"><a href="#workloadenvconf">Sequence[Workload<wbr>Env<wbr>Conf<wbr>Args]</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="liveness_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#liveness_python" style="color: inherit; text-decoration: inherit;">liveness</a>
@@ -1256,8 +1427,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadliveness">Workload<wbr>Liveness<wbr>Args</a></span>
     </dt>
-    <dd><p>liveness config.</p>
-</dd><dt class="property-optional"
+    <dd>liveness config.</dd><dt class="property-optional"
             title="Optional">
         <span id="post_start_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#post_start_python" style="color: inherit; text-decoration: inherit;">post_<wbr>start</a>
@@ -1265,8 +1435,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="pre_stop_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pre_stop_python" style="color: inherit; text-decoration: inherit;">pre_<wbr>stop</a>
@@ -1274,8 +1443,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="readiness_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readiness_python" style="color: inherit; text-decoration: inherit;">readiness</a>
@@ -1283,8 +1451,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadreadiness">Workload<wbr>Readiness<wbr>Args</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="repo_server_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repo_server_python" style="color: inherit; text-decoration: inherit;">repo_<wbr>server</a>
@@ -1292,8 +1459,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>repo server addr when deploy by image.</p>
-</dd><dt class="property-optional"
+    <dd>repo server addr when deploy by image.</dd><dt class="property-optional"
             title="Optional">
         <span id="repo_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repo_type_python" style="color: inherit; text-decoration: inherit;">repo_<wbr>type</a>
@@ -1301,8 +1467,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</p>
-</dd><dt class="property-optional"
+    <dd>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</dd><dt class="property-optional"
             title="Optional">
         <span id="security_group_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_ids_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
@@ -1310,8 +1475,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>security groups.</p>
-</dd><dt class="property-optional"
+    <dd>security groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="startup_probe_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startup_probe_python" style="color: inherit; text-decoration: inherit;">startup_<wbr>probe</a>
@@ -1319,26 +1483,23 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadstartupprobe">Workload<wbr>Startup<wbr>Probe<wbr>Args</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_confs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_confs_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstorageconf">Workload<wbr>Storage<wbr>Conf<wbr>Args]</a></span>
+        <span class="property-type"><a href="#workloadstorageconf">Sequence[Workload<wbr>Storage<wbr>Conf<wbr>Args]</a></span>
     </dt>
-    <dd><p>storage configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_mount_confs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_mount_confs_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>mount_<wbr>confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstoragemountconf">Workload<wbr>Storage<wbr>Mount<wbr>Conf<wbr>Args]</a></span>
+        <span class="property-type"><a href="#workloadstoragemountconf">Sequence[Workload<wbr>Storage<wbr>Mount<wbr>Conf<wbr>Args]</a></span>
     </dt>
-    <dd><p>storage mount configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage mount configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="tcr_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcr_instance_id_python" style="color: inherit; text-decoration: inherit;">tcr_<wbr>instance_<wbr>id</a>
@@ -1346,8 +1507,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>tcr instance id when deploy by image.</p>
-</dd></dl>
+    <dd>tcr instance id when deploy by image.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1361,8 +1521,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-required"
+    <dd>application ID.</dd><dt class="property-required"
             title="Required">
         <span id="cpuspec_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpuspec_yaml" style="color: inherit; text-decoration: inherit;">cpu<wbr>Spec</a>
@@ -1370,8 +1529,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>cpu.</p>
-</dd><dt class="property-required"
+    <dd>cpu.</dd><dt class="property-required"
             title="Required">
         <span id="deploymode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploymode_yaml" style="color: inherit; text-decoration: inherit;">deploy<wbr>Mode</a>
@@ -1379,8 +1537,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>deploy mode, support IMAGE.</p>
-</dd><dt class="property-required"
+    <dd>deploy mode, support IMAGE.</dd><dt class="property-required"
             title="Required">
         <span id="deployversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployversion_yaml" style="color: inherit; text-decoration: inherit;">deploy<wbr>Version</a>
@@ -1388,8 +1545,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>deploy version.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>deploy version.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_yaml" style="color: inherit; text-decoration: inherit;">environment<wbr>Id</a>
@@ -1397,8 +1553,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-required"
+    <dd>environment ID.</dd><dt class="property-required"
             title="Required">
         <span id="imgrepo_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imgrepo_yaml" style="color: inherit; text-decoration: inherit;">img<wbr>Repo</a>
@@ -1406,8 +1561,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd><dt class="property-required"
+    <dd>repository name.</dd><dt class="property-required"
             title="Required">
         <span id="initpodnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initpodnum_yaml" style="color: inherit; text-decoration: inherit;">init<wbr>Pod<wbr>Num</a>
@@ -1415,8 +1569,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>initial pod number.</p>
-</dd><dt class="property-required"
+    <dd>initial pod number.</dd><dt class="property-required"
             title="Required">
         <span id="memoryspec_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memoryspec_yaml" style="color: inherit; text-decoration: inherit;">memory<wbr>Spec</a>
@@ -1424,8 +1577,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="deploystrategyconf_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploystrategyconf_yaml" style="color: inherit; text-decoration: inherit;">deploy<wbr>Strategy<wbr>Conf</a>
@@ -1433,8 +1585,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloaddeploystrategyconf">Property Map</a></span>
     </dt>
-    <dd><p>deploy strategy.</p>
-</dd><dt class="property-optional"
+    <dd>deploy strategy.</dd><dt class="property-optional"
             title="Optional">
         <span id="envconfs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#envconfs_yaml" style="color: inherit; text-decoration: inherit;">env<wbr>Confs</a>
@@ -1442,8 +1593,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadenvconf">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="liveness_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#liveness_yaml" style="color: inherit; text-decoration: inherit;">liveness</a>
@@ -1451,8 +1601,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadliveness">Property Map</a></span>
     </dt>
-    <dd><p>liveness config.</p>
-</dd><dt class="property-optional"
+    <dd>liveness config.</dd><dt class="property-optional"
             title="Optional">
         <span id="poststart_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#poststart_yaml" style="color: inherit; text-decoration: inherit;">post<wbr>Start</a>
@@ -1460,8 +1609,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="prestop_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prestop_yaml" style="color: inherit; text-decoration: inherit;">pre<wbr>Stop</a>
@@ -1469,8 +1617,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="readiness_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readiness_yaml" style="color: inherit; text-decoration: inherit;">readiness</a>
@@ -1478,8 +1625,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadreadiness">Property Map</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="reposerver_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reposerver_yaml" style="color: inherit; text-decoration: inherit;">repo<wbr>Server</a>
@@ -1487,8 +1633,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>repo server addr when deploy by image.</p>
-</dd><dt class="property-optional"
+    <dd>repo server addr when deploy by image.</dd><dt class="property-optional"
             title="Optional">
         <span id="repotype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repotype_yaml" style="color: inherit; text-decoration: inherit;">repo<wbr>Type</a>
@@ -1496,8 +1641,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</p>
-</dd><dt class="property-optional"
+    <dd>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -1505,8 +1649,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>security groups.</p>
-</dd><dt class="property-optional"
+    <dd>security groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="startupprobe_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startupprobe_yaml" style="color: inherit; text-decoration: inherit;">startup<wbr>Probe</a>
@@ -1514,8 +1657,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadstartupprobe">Property Map</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageconfs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageconfs_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Confs</a>
@@ -1523,8 +1665,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadstorageconf">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>storage configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagemountconfs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagemountconfs_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Mount<wbr>Confs</a>
@@ -1532,8 +1673,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadstoragemountconf">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>storage mount configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage mount configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="tcrinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcrinstanceid_yaml" style="color: inherit; text-decoration: inherit;">tcr<wbr>Instance<wbr>Id</a>
@@ -1541,8 +1681,7 @@ The Workload resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>tcr instance id when deploy by image.</p>
-</dd></dl>
+    <dd>tcr instance id when deploy by image.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1563,8 +1702,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1578,8 +1716,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1593,8 +1744,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1608,8 +1758,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1623,8 +1772,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1638,8 +1786,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1649,140 +1796,179 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Workload resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">WorkloadState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Workload</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">WorkloadState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Workload</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">application_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">cpu_spec</span><span class="p">:</span> <span class="nx">Optional[float]</span> = None<span class="p">,</span>
         <span class="nx">deploy_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">deploy_strategy_conf</span><span class="p">:</span> <span class="nx">Optional[_tem.WorkloadDeployStrategyConfArgs]</span> = None<span class="p">,</span>
+        <span class="nx">deploy_strategy_conf</span><span class="p">:</span> <span class="nx">Optional[WorkloadDeployStrategyConfArgs]</span> = None<span class="p">,</span>
         <span class="nx">deploy_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">env_confs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tem.WorkloadEnvConfArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">env_confs</span><span class="p">:</span> <span class="nx">Optional[Sequence[WorkloadEnvConfArgs]]</span> = None<span class="p">,</span>
         <span class="nx">environment_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">img_repo</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">init_pod_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">liveness</span><span class="p">:</span> <span class="nx">Optional[_tem.WorkloadLivenessArgs]</span> = None<span class="p">,</span>
+        <span class="nx">liveness</span><span class="p">:</span> <span class="nx">Optional[WorkloadLivenessArgs]</span> = None<span class="p">,</span>
         <span class="nx">memory_spec</span><span class="p">:</span> <span class="nx">Optional[float]</span> = None<span class="p">,</span>
         <span class="nx">post_start</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">pre_stop</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">readiness</span><span class="p">:</span> <span class="nx">Optional[_tem.WorkloadReadinessArgs]</span> = None<span class="p">,</span>
+        <span class="nx">readiness</span><span class="p">:</span> <span class="nx">Optional[WorkloadReadinessArgs]</span> = None<span class="p">,</span>
         <span class="nx">repo_server</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">repo_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">security_group_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-        <span class="nx">startup_probe</span><span class="p">:</span> <span class="nx">Optional[_tem.WorkloadStartupProbeArgs]</span> = None<span class="p">,</span>
-        <span class="nx">storage_confs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tem.WorkloadStorageConfArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">storage_mount_confs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tem.WorkloadStorageMountConfArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">startup_probe</span><span class="p">:</span> <span class="nx">Optional[WorkloadStartupProbeArgs]</span> = None<span class="p">,</span>
+        <span class="nx">storage_confs</span><span class="p">:</span> <span class="nx">Optional[Sequence[WorkloadStorageConfArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">storage_mount_confs</span><span class="p">:</span> <span class="nx">Optional[Sequence[WorkloadStorageMountConfArgs]]</span> = None<span class="p">,</span>
         <span class="nx">tcr_instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Workload</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetWorkload<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">WorkloadState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Workload</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetWorkload<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">WorkloadState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Workload</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Workload</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">WorkloadState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Workload</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">WorkloadState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Workload</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">WorkloadState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Workload</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">WorkloadState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingWorkload</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tem:Workload</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tem_workload</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">WorkloadState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">WorkloadState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1790,28 +1976,31 @@ Get an existing Workload resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">WorkloadState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1819,28 +2008,31 @@ Get an existing Workload resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">WorkloadState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1860,8 +2052,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-optional"
+    <dd>application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpuspec_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpuspec_csharp" style="color: inherit; text-decoration: inherit;">Cpu<wbr>Spec</a>
@@ -1869,8 +2060,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>cpu.</p>
-</dd><dt class="property-optional"
+    <dd>cpu.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploymode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploymode_csharp" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Mode</a>
@@ -1878,17 +2068,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deploy mode, support IMAGE.</p>
-</dd><dt class="property-optional"
+    <dd>deploy mode, support IMAGE.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploystrategyconf_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploystrategyconf_csharp" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Strategy<wbr>Conf</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloaddeploystrategyconf">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Deploy<wbr>Strategy<wbr>Conf<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloaddeploystrategyconf">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Deploy<wbr>Strategy<wbr>Conf</a></span>
     </dt>
-    <dd><p>deploy strategy.</p>
-</dd><dt class="property-optional"
+    <dd>deploy strategy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployversion_csharp" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Version</a>
@@ -1896,17 +2084,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deploy version.</p>
-</dd><dt class="property-optional"
+    <dd>deploy version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_envconfs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_envconfs_csharp" style="color: inherit; text-decoration: inherit;">Env<wbr>Confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadenvconf">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Env<wbr>Conf<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#workloadenvconf">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Env<wbr>Conf&gt;</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environmentid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentid_csharp" style="color: inherit; text-decoration: inherit;">Environment<wbr>Id</a>
@@ -1914,8 +2100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-optional"
+    <dd>environment ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imgrepo_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imgrepo_csharp" style="color: inherit; text-decoration: inherit;">Img<wbr>Repo</a>
@@ -1923,8 +2108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd><dt class="property-optional"
+    <dd>repository name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_initpodnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_initpodnum_csharp" style="color: inherit; text-decoration: inherit;">Init<wbr>Pod<wbr>Num</a>
@@ -1932,17 +2116,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>initial pod number.</p>
-</dd><dt class="property-optional"
+    <dd>initial pod number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_liveness_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_liveness_csharp" style="color: inherit; text-decoration: inherit;">Liveness</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadliveness">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Liveness<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloadliveness">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Liveness</a></span>
     </dt>
-    <dd><p>liveness config.</p>
-</dd><dt class="property-optional"
+    <dd>liveness config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memoryspec_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memoryspec_csharp" style="color: inherit; text-decoration: inherit;">Memory<wbr>Spec</a>
@@ -1950,8 +2132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_poststart_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_poststart_csharp" style="color: inherit; text-decoration: inherit;">Post<wbr>Start</a>
@@ -1959,8 +2140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prestop_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prestop_csharp" style="color: inherit; text-decoration: inherit;">Pre<wbr>Stop</a>
@@ -1968,17 +2148,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_readiness_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_readiness_csharp" style="color: inherit; text-decoration: inherit;">Readiness</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadreadiness">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Readiness<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloadreadiness">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Readiness</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_reposerver_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reposerver_csharp" style="color: inherit; text-decoration: inherit;">Repo<wbr>Server</a>
@@ -1986,8 +2164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repo server addr when deploy by image.</p>
-</dd><dt class="property-optional"
+    <dd>repo server addr when deploy by image.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_repotype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_repotype_csharp" style="color: inherit; text-decoration: inherit;">Repo<wbr>Type</a>
@@ -1995,8 +2172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</p>
-</dd><dt class="property-optional"
+    <dd>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroupids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
@@ -2004,35 +2180,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>security groups.</p>
-</dd><dt class="property-optional"
+    <dd>security groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_startupprobe_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_startupprobe_csharp" style="color: inherit; text-decoration: inherit;">Startup<wbr>Probe</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstartupprobe">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Startup<wbr>Probe<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloadstartupprobe">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Startup<wbr>Probe</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storageconfs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageconfs_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstorageconf">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Storage<wbr>Conf<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#workloadstorageconf">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Storage<wbr>Conf&gt;</a></span>
     </dt>
-    <dd><p>storage configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagemountconfs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagemountconfs_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Mount<wbr>Confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstoragemountconf">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Storage<wbr>Mount<wbr>Conf<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#workloadstoragemountconf">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Workload<wbr>Storage<wbr>Mount<wbr>Conf&gt;</a></span>
     </dt>
-    <dd><p>storage mount configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage mount configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcrinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcrinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Tcr<wbr>Instance<wbr>Id</a>
@@ -2040,8 +2212,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tcr instance id when deploy by image.</p>
-</dd></dl>
+    <dd>tcr instance id when deploy by image.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2055,8 +2226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-optional"
+    <dd>application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpuspec_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpuspec_go" style="color: inherit; text-decoration: inherit;">Cpu<wbr>Spec</a>
@@ -2064,8 +2234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>cpu.</p>
-</dd><dt class="property-optional"
+    <dd>cpu.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploymode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploymode_go" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Mode</a>
@@ -2073,8 +2242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deploy mode, support IMAGE.</p>
-</dd><dt class="property-optional"
+    <dd>deploy mode, support IMAGE.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploystrategyconf_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploystrategyconf_go" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Strategy<wbr>Conf</a>
@@ -2082,8 +2250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloaddeploystrategyconf">Workload<wbr>Deploy<wbr>Strategy<wbr>Conf<wbr>Args</a></span>
     </dt>
-    <dd><p>deploy strategy.</p>
-</dd><dt class="property-optional"
+    <dd>deploy strategy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployversion_go" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Version</a>
@@ -2091,8 +2258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deploy version.</p>
-</dd><dt class="property-optional"
+    <dd>deploy version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_envconfs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_envconfs_go" style="color: inherit; text-decoration: inherit;">Env<wbr>Confs</a>
@@ -2100,8 +2266,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadenvconf">[]Workload<wbr>Env<wbr>Conf<wbr>Args</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environmentid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentid_go" style="color: inherit; text-decoration: inherit;">Environment<wbr>Id</a>
@@ -2109,8 +2274,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-optional"
+    <dd>environment ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imgrepo_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imgrepo_go" style="color: inherit; text-decoration: inherit;">Img<wbr>Repo</a>
@@ -2118,8 +2282,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd><dt class="property-optional"
+    <dd>repository name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_initpodnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_initpodnum_go" style="color: inherit; text-decoration: inherit;">Init<wbr>Pod<wbr>Num</a>
@@ -2127,8 +2290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>initial pod number.</p>
-</dd><dt class="property-optional"
+    <dd>initial pod number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_liveness_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_liveness_go" style="color: inherit; text-decoration: inherit;">Liveness</a>
@@ -2136,8 +2298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadliveness">Workload<wbr>Liveness<wbr>Args</a></span>
     </dt>
-    <dd><p>liveness config.</p>
-</dd><dt class="property-optional"
+    <dd>liveness config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memoryspec_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memoryspec_go" style="color: inherit; text-decoration: inherit;">Memory<wbr>Spec</a>
@@ -2145,8 +2306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_poststart_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_poststart_go" style="color: inherit; text-decoration: inherit;">Post<wbr>Start</a>
@@ -2154,8 +2314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prestop_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prestop_go" style="color: inherit; text-decoration: inherit;">Pre<wbr>Stop</a>
@@ -2163,8 +2322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_readiness_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_readiness_go" style="color: inherit; text-decoration: inherit;">Readiness</a>
@@ -2172,8 +2330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadreadiness">Workload<wbr>Readiness<wbr>Args</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_reposerver_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reposerver_go" style="color: inherit; text-decoration: inherit;">Repo<wbr>Server</a>
@@ -2181,8 +2338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repo server addr when deploy by image.</p>
-</dd><dt class="property-optional"
+    <dd>repo server addr when deploy by image.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_repotype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_repotype_go" style="color: inherit; text-decoration: inherit;">Repo<wbr>Type</a>
@@ -2190,8 +2346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</p>
-</dd><dt class="property-optional"
+    <dd>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroupids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
@@ -2199,8 +2354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>security groups.</p>
-</dd><dt class="property-optional"
+    <dd>security groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_startupprobe_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_startupprobe_go" style="color: inherit; text-decoration: inherit;">Startup<wbr>Probe</a>
@@ -2208,8 +2362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadstartupprobe">Workload<wbr>Startup<wbr>Probe<wbr>Args</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storageconfs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageconfs_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Confs</a>
@@ -2217,8 +2370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadstorageconf">[]Workload<wbr>Storage<wbr>Conf<wbr>Args</a></span>
     </dt>
-    <dd><p>storage configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagemountconfs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagemountconfs_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Mount<wbr>Confs</a>
@@ -2226,8 +2378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadstoragemountconf">[]Workload<wbr>Storage<wbr>Mount<wbr>Conf<wbr>Args</a></span>
     </dt>
-    <dd><p>storage mount configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage mount configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcrinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcrinstanceid_go" style="color: inherit; text-decoration: inherit;">Tcr<wbr>Instance<wbr>Id</a>
@@ -2235,8 +2386,181 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tcr instance id when deploy by image.</p>
-</dd></dl>
+    <dd>tcr instance id when deploy by image.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_application_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_application_id_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>application ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cpu_spec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_spec_hcl" style="color: inherit; text-decoration: inherit;">cpu_<wbr>spec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>cpu.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deploy_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploy_mode_hcl" style="color: inherit; text-decoration: inherit;">deploy_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>deploy mode, support IMAGE.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deploy_strategy_conf_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploy_strategy_conf_hcl" style="color: inherit; text-decoration: inherit;">deploy_<wbr>strategy_<wbr>conf</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#workloaddeploystrategyconf">object</a></span>
+    </dt>
+    <dd>deploy strategy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deploy_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploy_version_hcl" style="color: inherit; text-decoration: inherit;">deploy_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>deploy version.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_env_confs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_env_confs_hcl" style="color: inherit; text-decoration: inherit;">env_<wbr>confs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#workloadenvconf">list(object)</a></span>
+    </dt>
+    <dd>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_environment_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_id_hcl" style="color: inherit; text-decoration: inherit;">environment_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>environment ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_img_repo_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_img_repo_hcl" style="color: inherit; text-decoration: inherit;">img_<wbr>repo</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>repository name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_init_pod_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_init_pod_num_hcl" style="color: inherit; text-decoration: inherit;">init_<wbr>pod_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>initial pod number.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_liveness_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_liveness_hcl" style="color: inherit; text-decoration: inherit;">liveness</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#workloadliveness">object</a></span>
+    </dt>
+    <dd>liveness config.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_memory_spec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_spec_hcl" style="color: inherit; text-decoration: inherit;">memory_<wbr>spec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>mem.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_post_start_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_post_start_hcl" style="color: inherit; text-decoration: inherit;">post_<wbr>start</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>mem.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_pre_stop_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pre_stop_hcl" style="color: inherit; text-decoration: inherit;">pre_<wbr>stop</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>mem.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_readiness_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_readiness_hcl" style="color: inherit; text-decoration: inherit;">readiness</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#workloadreadiness">object</a></span>
+    </dt>
+    <dd>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_repo_server_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_repo_server_hcl" style="color: inherit; text-decoration: inherit;">repo_<wbr>server</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>repo server addr when deploy by image.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_repo_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_repo_type_hcl" style="color: inherit; text-decoration: inherit;">repo_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_security_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_group_ids_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>security groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_startup_probe_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_startup_probe_hcl" style="color: inherit; text-decoration: inherit;">startup_<wbr>probe</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#workloadstartupprobe">object</a></span>
+    </dt>
+    <dd>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storage_confs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_confs_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>confs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#workloadstorageconf">list(object)</a></span>
+    </dt>
+    <dd>storage configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storage_mount_confs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_mount_confs_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>mount_<wbr>confs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#workloadstoragemountconf">list(object)</a></span>
+    </dt>
+    <dd>storage mount configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tcr_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcr_instance_id_hcl" style="color: inherit; text-decoration: inherit;">tcr_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>tcr instance id when deploy by image.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2250,8 +2574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-optional"
+    <dd>application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpuspec_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpuspec_java" style="color: inherit; text-decoration: inherit;">cpu<wbr>Spec</a>
@@ -2259,8 +2582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>cpu.</p>
-</dd><dt class="property-optional"
+    <dd>cpu.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploymode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploymode_java" style="color: inherit; text-decoration: inherit;">deploy<wbr>Mode</a>
@@ -2268,17 +2590,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>deploy mode, support IMAGE.</p>
-</dd><dt class="property-optional"
+    <dd>deploy mode, support IMAGE.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploystrategyconf_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploystrategyconf_java" style="color: inherit; text-decoration: inherit;">deploy<wbr>Strategy<wbr>Conf</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloaddeploystrategyconf">Workload<wbr>Deploy<wbr>Strategy<wbr>Conf<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloaddeploystrategyconf">Workload<wbr>Deploy<wbr>Strategy<wbr>Conf</a></span>
     </dt>
-    <dd><p>deploy strategy.</p>
-</dd><dt class="property-optional"
+    <dd>deploy strategy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployversion_java" style="color: inherit; text-decoration: inherit;">deploy<wbr>Version</a>
@@ -2286,17 +2606,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>deploy version.</p>
-</dd><dt class="property-optional"
+    <dd>deploy version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_envconfs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_envconfs_java" style="color: inherit; text-decoration: inherit;">env<wbr>Confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadenvconf">List&lt;Workload<wbr>Env<wbr>Conf<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#workloadenvconf">List&lt;Workload<wbr>Env<wbr>Conf&gt;</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environmentid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentid_java" style="color: inherit; text-decoration: inherit;">environment<wbr>Id</a>
@@ -2304,8 +2622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-optional"
+    <dd>environment ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imgrepo_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imgrepo_java" style="color: inherit; text-decoration: inherit;">img<wbr>Repo</a>
@@ -2313,8 +2630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd><dt class="property-optional"
+    <dd>repository name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_initpodnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_initpodnum_java" style="color: inherit; text-decoration: inherit;">init<wbr>Pod<wbr>Num</a>
@@ -2322,17 +2638,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>initial pod number.</p>
-</dd><dt class="property-optional"
+    <dd>initial pod number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_liveness_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_liveness_java" style="color: inherit; text-decoration: inherit;">liveness</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadliveness">Workload<wbr>Liveness<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloadliveness">Workload<wbr>Liveness</a></span>
     </dt>
-    <dd><p>liveness config.</p>
-</dd><dt class="property-optional"
+    <dd>liveness config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memoryspec_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memoryspec_java" style="color: inherit; text-decoration: inherit;">memory<wbr>Spec</a>
@@ -2340,8 +2654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_poststart_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_poststart_java" style="color: inherit; text-decoration: inherit;">post<wbr>Start</a>
@@ -2349,8 +2662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prestop_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prestop_java" style="color: inherit; text-decoration: inherit;">pre<wbr>Stop</a>
@@ -2358,17 +2670,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_readiness_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_readiness_java" style="color: inherit; text-decoration: inherit;">readiness</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadreadiness">Workload<wbr>Readiness<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloadreadiness">Workload<wbr>Readiness</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_reposerver_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reposerver_java" style="color: inherit; text-decoration: inherit;">repo<wbr>Server</a>
@@ -2376,8 +2686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>repo server addr when deploy by image.</p>
-</dd><dt class="property-optional"
+    <dd>repo server addr when deploy by image.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_repotype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_repotype_java" style="color: inherit; text-decoration: inherit;">repo<wbr>Type</a>
@@ -2385,8 +2694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</p>
-</dd><dt class="property-optional"
+    <dd>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroupids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -2394,35 +2702,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>security groups.</p>
-</dd><dt class="property-optional"
+    <dd>security groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_startupprobe_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_startupprobe_java" style="color: inherit; text-decoration: inherit;">startup<wbr>Probe</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstartupprobe">Workload<wbr>Startup<wbr>Probe<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloadstartupprobe">Workload<wbr>Startup<wbr>Probe</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storageconfs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageconfs_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstorageconf">List&lt;Workload<wbr>Storage<wbr>Conf<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#workloadstorageconf">List&lt;Workload<wbr>Storage<wbr>Conf&gt;</a></span>
     </dt>
-    <dd><p>storage configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagemountconfs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagemountconfs_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Mount<wbr>Confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstoragemountconf">List&lt;Workload<wbr>Storage<wbr>Mount<wbr>Conf<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#workloadstoragemountconf">List&lt;Workload<wbr>Storage<wbr>Mount<wbr>Conf&gt;</a></span>
     </dt>
-    <dd><p>storage mount configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage mount configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcrinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcrinstanceid_java" style="color: inherit; text-decoration: inherit;">tcr<wbr>Instance<wbr>Id</a>
@@ -2430,8 +2734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>tcr instance id when deploy by image.</p>
-</dd></dl>
+    <dd>tcr instance id when deploy by image.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2445,8 +2748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-optional"
+    <dd>application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpuspec_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpuspec_nodejs" style="color: inherit; text-decoration: inherit;">cpu<wbr>Spec</a>
@@ -2454,8 +2756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>cpu.</p>
-</dd><dt class="property-optional"
+    <dd>cpu.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploymode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploymode_nodejs" style="color: inherit; text-decoration: inherit;">deploy<wbr>Mode</a>
@@ -2463,17 +2764,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deploy mode, support IMAGE.</p>
-</dd><dt class="property-optional"
+    <dd>deploy mode, support IMAGE.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploystrategyconf_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploystrategyconf_nodejs" style="color: inherit; text-decoration: inherit;">deploy<wbr>Strategy<wbr>Conf</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloaddeploystrategyconf">Workload<wbr>Deploy<wbr>Strategy<wbr>Conf<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloaddeploystrategyconf">Workload<wbr>Deploy<wbr>Strategy<wbr>Conf</a></span>
     </dt>
-    <dd><p>deploy strategy.</p>
-</dd><dt class="property-optional"
+    <dd>deploy strategy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployversion_nodejs" style="color: inherit; text-decoration: inherit;">deploy<wbr>Version</a>
@@ -2481,17 +2780,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deploy version.</p>
-</dd><dt class="property-optional"
+    <dd>deploy version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_envconfs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_envconfs_nodejs" style="color: inherit; text-decoration: inherit;">env<wbr>Confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadenvconf">Workload<wbr>Env<wbr>Conf<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#workloadenvconf">Workload<wbr>Env<wbr>Conf[]</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environmentid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentid_nodejs" style="color: inherit; text-decoration: inherit;">environment<wbr>Id</a>
@@ -2499,8 +2796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-optional"
+    <dd>environment ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imgrepo_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imgrepo_nodejs" style="color: inherit; text-decoration: inherit;">img<wbr>Repo</a>
@@ -2508,8 +2804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd><dt class="property-optional"
+    <dd>repository name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_initpodnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_initpodnum_nodejs" style="color: inherit; text-decoration: inherit;">init<wbr>Pod<wbr>Num</a>
@@ -2517,17 +2812,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>initial pod number.</p>
-</dd><dt class="property-optional"
+    <dd>initial pod number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_liveness_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_liveness_nodejs" style="color: inherit; text-decoration: inherit;">liveness</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadliveness">Workload<wbr>Liveness<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloadliveness">Workload<wbr>Liveness</a></span>
     </dt>
-    <dd><p>liveness config.</p>
-</dd><dt class="property-optional"
+    <dd>liveness config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memoryspec_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memoryspec_nodejs" style="color: inherit; text-decoration: inherit;">memory<wbr>Spec</a>
@@ -2535,8 +2828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_poststart_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_poststart_nodejs" style="color: inherit; text-decoration: inherit;">post<wbr>Start</a>
@@ -2544,8 +2836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prestop_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prestop_nodejs" style="color: inherit; text-decoration: inherit;">pre<wbr>Stop</a>
@@ -2553,17 +2844,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_readiness_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_readiness_nodejs" style="color: inherit; text-decoration: inherit;">readiness</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadreadiness">Workload<wbr>Readiness<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloadreadiness">Workload<wbr>Readiness</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_reposerver_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reposerver_nodejs" style="color: inherit; text-decoration: inherit;">repo<wbr>Server</a>
@@ -2571,8 +2860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repo server addr when deploy by image.</p>
-</dd><dt class="property-optional"
+    <dd>repo server addr when deploy by image.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_repotype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_repotype_nodejs" style="color: inherit; text-decoration: inherit;">repo<wbr>Type</a>
@@ -2580,8 +2868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</p>
-</dd><dt class="property-optional"
+    <dd>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroupids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -2589,35 +2876,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>security groups.</p>
-</dd><dt class="property-optional"
+    <dd>security groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_startupprobe_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_startupprobe_nodejs" style="color: inherit; text-decoration: inherit;">startup<wbr>Probe</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstartupprobe">Workload<wbr>Startup<wbr>Probe<wbr>Args</a></span>
+        <span class="property-type"><a href="#workloadstartupprobe">Workload<wbr>Startup<wbr>Probe</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storageconfs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageconfs_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstorageconf">Workload<wbr>Storage<wbr>Conf<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#workloadstorageconf">Workload<wbr>Storage<wbr>Conf[]</a></span>
     </dt>
-    <dd><p>storage configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagemountconfs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagemountconfs_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Mount<wbr>Confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstoragemountconf">Workload<wbr>Storage<wbr>Mount<wbr>Conf<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#workloadstoragemountconf">Workload<wbr>Storage<wbr>Mount<wbr>Conf[]</a></span>
     </dt>
-    <dd><p>storage mount configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage mount configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcrinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcrinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">tcr<wbr>Instance<wbr>Id</a>
@@ -2625,8 +2908,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tcr instance id when deploy by image.</p>
-</dd></dl>
+    <dd>tcr instance id when deploy by image.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2640,8 +2922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-optional"
+    <dd>application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_spec_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_spec_python" style="color: inherit; text-decoration: inherit;">cpu_<wbr>spec</a>
@@ -2649,8 +2930,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>cpu.</p>
-</dd><dt class="property-optional"
+    <dd>cpu.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploy_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploy_mode_python" style="color: inherit; text-decoration: inherit;">deploy_<wbr>mode</a>
@@ -2658,8 +2938,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>deploy mode, support IMAGE.</p>
-</dd><dt class="property-optional"
+    <dd>deploy mode, support IMAGE.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploy_strategy_conf_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploy_strategy_conf_python" style="color: inherit; text-decoration: inherit;">deploy_<wbr>strategy_<wbr>conf</a>
@@ -2667,8 +2946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloaddeploystrategyconf">Workload<wbr>Deploy<wbr>Strategy<wbr>Conf<wbr>Args</a></span>
     </dt>
-    <dd><p>deploy strategy.</p>
-</dd><dt class="property-optional"
+    <dd>deploy strategy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploy_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploy_version_python" style="color: inherit; text-decoration: inherit;">deploy_<wbr>version</a>
@@ -2676,17 +2954,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>deploy version.</p>
-</dd><dt class="property-optional"
+    <dd>deploy version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_env_confs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_env_confs_python" style="color: inherit; text-decoration: inherit;">env_<wbr>confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadenvconf">Workload<wbr>Env<wbr>Conf<wbr>Args]</a></span>
+        <span class="property-type"><a href="#workloadenvconf">Sequence[Workload<wbr>Env<wbr>Conf<wbr>Args]</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environment_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_id_python" style="color: inherit; text-decoration: inherit;">environment_<wbr>id</a>
@@ -2694,8 +2970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-optional"
+    <dd>environment ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_img_repo_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_img_repo_python" style="color: inherit; text-decoration: inherit;">img_<wbr>repo</a>
@@ -2703,8 +2978,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd><dt class="property-optional"
+    <dd>repository name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_init_pod_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_init_pod_num_python" style="color: inherit; text-decoration: inherit;">init_<wbr>pod_<wbr>num</a>
@@ -2712,8 +2986,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>initial pod number.</p>
-</dd><dt class="property-optional"
+    <dd>initial pod number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_liveness_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_liveness_python" style="color: inherit; text-decoration: inherit;">liveness</a>
@@ -2721,8 +2994,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadliveness">Workload<wbr>Liveness<wbr>Args</a></span>
     </dt>
-    <dd><p>liveness config.</p>
-</dd><dt class="property-optional"
+    <dd>liveness config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_spec_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_spec_python" style="color: inherit; text-decoration: inherit;">memory_<wbr>spec</a>
@@ -2730,8 +3002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_post_start_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_post_start_python" style="color: inherit; text-decoration: inherit;">post_<wbr>start</a>
@@ -2739,8 +3010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pre_stop_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pre_stop_python" style="color: inherit; text-decoration: inherit;">pre_<wbr>stop</a>
@@ -2748,8 +3018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_readiness_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_readiness_python" style="color: inherit; text-decoration: inherit;">readiness</a>
@@ -2757,8 +3026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadreadiness">Workload<wbr>Readiness<wbr>Args</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_repo_server_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_repo_server_python" style="color: inherit; text-decoration: inherit;">repo_<wbr>server</a>
@@ -2766,8 +3034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>repo server addr when deploy by image.</p>
-</dd><dt class="property-optional"
+    <dd>repo server addr when deploy by image.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_repo_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_repo_type_python" style="color: inherit; text-decoration: inherit;">repo_<wbr>type</a>
@@ -2775,8 +3042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</p>
-</dd><dt class="property-optional"
+    <dd>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_security_group_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_group_ids_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
@@ -2784,8 +3050,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>security groups.</p>
-</dd><dt class="property-optional"
+    <dd>security groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_startup_probe_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_startup_probe_python" style="color: inherit; text-decoration: inherit;">startup_<wbr>probe</a>
@@ -2793,26 +3058,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadstartupprobe">Workload<wbr>Startup<wbr>Probe<wbr>Args</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_confs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_confs_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstorageconf">Workload<wbr>Storage<wbr>Conf<wbr>Args]</a></span>
+        <span class="property-type"><a href="#workloadstorageconf">Sequence[Workload<wbr>Storage<wbr>Conf<wbr>Args]</a></span>
     </dt>
-    <dd><p>storage configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_mount_confs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_mount_confs_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>mount_<wbr>confs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#workloadstoragemountconf">Workload<wbr>Storage<wbr>Mount<wbr>Conf<wbr>Args]</a></span>
+        <span class="property-type"><a href="#workloadstoragemountconf">Sequence[Workload<wbr>Storage<wbr>Mount<wbr>Conf<wbr>Args]</a></span>
     </dt>
-    <dd><p>storage mount configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage mount configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcr_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcr_instance_id_python" style="color: inherit; text-decoration: inherit;">tcr_<wbr>instance_<wbr>id</a>
@@ -2820,8 +3082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>tcr instance id when deploy by image.</p>
-</dd></dl>
+    <dd>tcr instance id when deploy by image.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2835,8 +3096,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>application ID.</p>
-</dd><dt class="property-optional"
+    <dd>application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpuspec_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpuspec_yaml" style="color: inherit; text-decoration: inherit;">cpu<wbr>Spec</a>
@@ -2844,8 +3104,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>cpu.</p>
-</dd><dt class="property-optional"
+    <dd>cpu.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploymode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploymode_yaml" style="color: inherit; text-decoration: inherit;">deploy<wbr>Mode</a>
@@ -2853,8 +3112,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>deploy mode, support IMAGE.</p>
-</dd><dt class="property-optional"
+    <dd>deploy mode, support IMAGE.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploystrategyconf_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploystrategyconf_yaml" style="color: inherit; text-decoration: inherit;">deploy<wbr>Strategy<wbr>Conf</a>
@@ -2862,8 +3120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloaddeploystrategyconf">Property Map</a></span>
     </dt>
-    <dd><p>deploy strategy.</p>
-</dd><dt class="property-optional"
+    <dd>deploy strategy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployversion_yaml" style="color: inherit; text-decoration: inherit;">deploy<wbr>Version</a>
@@ -2871,8 +3128,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>deploy version.</p>
-</dd><dt class="property-optional"
+    <dd>deploy version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_envconfs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_envconfs_yaml" style="color: inherit; text-decoration: inherit;">env<wbr>Confs</a>
@@ -2880,8 +3136,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadenvconf">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environmentid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environmentid_yaml" style="color: inherit; text-decoration: inherit;">environment<wbr>Id</a>
@@ -2889,8 +3144,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-optional"
+    <dd>environment ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imgrepo_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imgrepo_yaml" style="color: inherit; text-decoration: inherit;">img<wbr>Repo</a>
@@ -2898,8 +3152,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd><dt class="property-optional"
+    <dd>repository name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_initpodnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_initpodnum_yaml" style="color: inherit; text-decoration: inherit;">init<wbr>Pod<wbr>Num</a>
@@ -2907,8 +3160,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>initial pod number.</p>
-</dd><dt class="property-optional"
+    <dd>initial pod number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_liveness_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_liveness_yaml" style="color: inherit; text-decoration: inherit;">liveness</a>
@@ -2916,8 +3168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadliveness">Property Map</a></span>
     </dt>
-    <dd><p>liveness config.</p>
-</dd><dt class="property-optional"
+    <dd>liveness config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memoryspec_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memoryspec_yaml" style="color: inherit; text-decoration: inherit;">memory<wbr>Spec</a>
@@ -2925,8 +3176,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_poststart_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_poststart_yaml" style="color: inherit; text-decoration: inherit;">post<wbr>Start</a>
@@ -2934,8 +3184,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prestop_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prestop_yaml" style="color: inherit; text-decoration: inherit;">pre<wbr>Stop</a>
@@ -2943,8 +3192,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>mem.</p>
-</dd><dt class="property-optional"
+    <dd>mem.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_readiness_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_readiness_yaml" style="color: inherit; text-decoration: inherit;">readiness</a>
@@ -2952,8 +3200,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadreadiness">Property Map</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_reposerver_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reposerver_yaml" style="color: inherit; text-decoration: inherit;">repo<wbr>Server</a>
@@ -2961,8 +3208,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>repo server addr when deploy by image.</p>
-</dd><dt class="property-optional"
+    <dd>repo server addr when deploy by image.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_repotype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_repotype_yaml" style="color: inherit; text-decoration: inherit;">repo<wbr>Type</a>
@@ -2970,8 +3216,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</p>
-</dd><dt class="property-optional"
+    <dd>repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroupids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -2979,8 +3224,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>security groups.</p>
-</dd><dt class="property-optional"
+    <dd>security groups.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_startupprobe_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_startupprobe_yaml" style="color: inherit; text-decoration: inherit;">startup<wbr>Probe</a>
@@ -2988,8 +3232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadstartupprobe">Property Map</a></span>
     </dt>
-    <dd><p>.</p>
-</dd><dt class="property-optional"
+    <dd>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storageconfs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageconfs_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Confs</a>
@@ -2997,8 +3240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadstorageconf">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>storage configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagemountconfs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagemountconfs_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Mount<wbr>Confs</a>
@@ -3006,8 +3248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#workloadstoragemountconf">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>storage mount configuration.</p>
-</dd><dt class="property-optional"
+    <dd>storage mount configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tcrinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tcrinstanceid_yaml" style="color: inherit; text-decoration: inherit;">tcr<wbr>Instance<wbr>Id</a>
@@ -3015,8 +3256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>tcr instance id when deploy by image.</p>
-</dd></dl>
+    <dd>tcr instance id when deploy by image.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -3031,7 +3271,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="workloaddeploystrategyconf">Workload<wbr>Deploy<wbr>Strategy<wbr>Conf</h4>
+<h4 id="workloaddeploystrategyconf">
+Workload<wbr>Deploy<wbr>Strategy<wbr>Conf<pulumi-choosable type="language" values="python,go" class="inline">, Workload<wbr>Deploy<wbr>Strategy<wbr>Conf<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3043,8 +3285,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>strategy type, 0 means auto, 1 means manual, 2 means manual with beta batch.</p>
-</dd><dt class="property-required"
+    <dd>strategy type, 0 means auto, 1 means manual, 2 means manual with beta batch.</dd><dt class="property-required"
             title="Required">
         <span id="totalbatchcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalbatchcount_csharp" style="color: inherit; text-decoration: inherit;">Total<wbr>Batch<wbr>Count</a>
@@ -3052,8 +3293,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>total batch number.</p>
-</dd><dt class="property-optional"
+    <dd>total batch number.</dd><dt class="property-optional"
             title="Optional">
         <span id="batchinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#batchinterval_csharp" style="color: inherit; text-decoration: inherit;">Batch<wbr>Interval</a>
@@ -3061,8 +3301,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>interval between batches.</p>
-</dd><dt class="property-optional"
+    <dd>interval between batches.</dd><dt class="property-optional"
             title="Optional">
         <span id="betabatchnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#betabatchnum_csharp" style="color: inherit; text-decoration: inherit;">Beta<wbr>Batch<wbr>Num</a>
@@ -3070,8 +3309,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>beta batch number.</p>
-</dd><dt class="property-optional"
+    <dd>beta batch number.</dd><dt class="property-optional"
             title="Optional">
         <span id="force_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_csharp" style="color: inherit; text-decoration: inherit;">Force</a>
@@ -3079,8 +3317,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>force update.</p>
-</dd><dt class="property-optional"
+    <dd>force update.</dd><dt class="property-optional"
             title="Optional">
         <span id="minavailable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minavailable_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Available</a>
@@ -3088,8 +3325,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>minimal available instances duration deployment.</p>
-</dd></dl>
+    <dd>minimal available instances duration deployment.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3103,8 +3339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>strategy type, 0 means auto, 1 means manual, 2 means manual with beta batch.</p>
-</dd><dt class="property-required"
+    <dd>strategy type, 0 means auto, 1 means manual, 2 means manual with beta batch.</dd><dt class="property-required"
             title="Required">
         <span id="totalbatchcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalbatchcount_go" style="color: inherit; text-decoration: inherit;">Total<wbr>Batch<wbr>Count</a>
@@ -3112,8 +3347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>total batch number.</p>
-</dd><dt class="property-optional"
+    <dd>total batch number.</dd><dt class="property-optional"
             title="Optional">
         <span id="batchinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#batchinterval_go" style="color: inherit; text-decoration: inherit;">Batch<wbr>Interval</a>
@@ -3121,8 +3355,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>interval between batches.</p>
-</dd><dt class="property-optional"
+    <dd>interval between batches.</dd><dt class="property-optional"
             title="Optional">
         <span id="betabatchnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#betabatchnum_go" style="color: inherit; text-decoration: inherit;">Beta<wbr>Batch<wbr>Num</a>
@@ -3130,8 +3363,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>beta batch number.</p>
-</dd><dt class="property-optional"
+    <dd>beta batch number.</dd><dt class="property-optional"
             title="Optional">
         <span id="force_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_go" style="color: inherit; text-decoration: inherit;">Force</a>
@@ -3139,8 +3371,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>force update.</p>
-</dd><dt class="property-optional"
+    <dd>force update.</dd><dt class="property-optional"
             title="Optional">
         <span id="minavailable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minavailable_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Available</a>
@@ -3148,8 +3379,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>minimal available instances duration deployment.</p>
-</dd></dl>
+    <dd>minimal available instances duration deployment.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="deploy_strategy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploy_strategy_type_hcl" style="color: inherit; text-decoration: inherit;">deploy_<wbr>strategy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>strategy type, 0 means auto, 1 means manual, 2 means manual with beta batch.</dd><dt class="property-required"
+            title="Required">
+        <span id="total_batch_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_batch_count_hcl" style="color: inherit; text-decoration: inherit;">total_<wbr>batch_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>total batch number.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="batch_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#batch_interval_hcl" style="color: inherit; text-decoration: inherit;">batch_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>interval between batches.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="beta_batch_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#beta_batch_num_hcl" style="color: inherit; text-decoration: inherit;">beta_<wbr>batch_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>beta batch number.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="force_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_hcl" style="color: inherit; text-decoration: inherit;">force</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>force update.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="min_available_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_available_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>available</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>minimal available instances duration deployment.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3163,8 +3447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>strategy type, 0 means auto, 1 means manual, 2 means manual with beta batch.</p>
-</dd><dt class="property-required"
+    <dd>strategy type, 0 means auto, 1 means manual, 2 means manual with beta batch.</dd><dt class="property-required"
             title="Required">
         <span id="totalbatchcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalbatchcount_java" style="color: inherit; text-decoration: inherit;">total<wbr>Batch<wbr>Count</a>
@@ -3172,8 +3455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>total batch number.</p>
-</dd><dt class="property-optional"
+    <dd>total batch number.</dd><dt class="property-optional"
             title="Optional">
         <span id="batchinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#batchinterval_java" style="color: inherit; text-decoration: inherit;">batch<wbr>Interval</a>
@@ -3181,8 +3463,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>interval between batches.</p>
-</dd><dt class="property-optional"
+    <dd>interval between batches.</dd><dt class="property-optional"
             title="Optional">
         <span id="betabatchnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#betabatchnum_java" style="color: inherit; text-decoration: inherit;">beta<wbr>Batch<wbr>Num</a>
@@ -3190,8 +3471,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>beta batch number.</p>
-</dd><dt class="property-optional"
+    <dd>beta batch number.</dd><dt class="property-optional"
             title="Optional">
         <span id="force_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_java" style="color: inherit; text-decoration: inherit;">force</a>
@@ -3199,8 +3479,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>force update.</p>
-</dd><dt class="property-optional"
+    <dd>force update.</dd><dt class="property-optional"
             title="Optional">
         <span id="minavailable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minavailable_java" style="color: inherit; text-decoration: inherit;">min<wbr>Available</a>
@@ -3208,8 +3487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>minimal available instances duration deployment.</p>
-</dd></dl>
+    <dd>minimal available instances duration deployment.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3223,8 +3501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>strategy type, 0 means auto, 1 means manual, 2 means manual with beta batch.</p>
-</dd><dt class="property-required"
+    <dd>strategy type, 0 means auto, 1 means manual, 2 means manual with beta batch.</dd><dt class="property-required"
             title="Required">
         <span id="totalbatchcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalbatchcount_nodejs" style="color: inherit; text-decoration: inherit;">total<wbr>Batch<wbr>Count</a>
@@ -3232,8 +3509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>total batch number.</p>
-</dd><dt class="property-optional"
+    <dd>total batch number.</dd><dt class="property-optional"
             title="Optional">
         <span id="batchinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#batchinterval_nodejs" style="color: inherit; text-decoration: inherit;">batch<wbr>Interval</a>
@@ -3241,8 +3517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>interval between batches.</p>
-</dd><dt class="property-optional"
+    <dd>interval between batches.</dd><dt class="property-optional"
             title="Optional">
         <span id="betabatchnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#betabatchnum_nodejs" style="color: inherit; text-decoration: inherit;">beta<wbr>Batch<wbr>Num</a>
@@ -3250,8 +3525,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>beta batch number.</p>
-</dd><dt class="property-optional"
+    <dd>beta batch number.</dd><dt class="property-optional"
             title="Optional">
         <span id="force_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_nodejs" style="color: inherit; text-decoration: inherit;">force</a>
@@ -3259,8 +3533,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>force update.</p>
-</dd><dt class="property-optional"
+    <dd>force update.</dd><dt class="property-optional"
             title="Optional">
         <span id="minavailable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minavailable_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Available</a>
@@ -3268,8 +3541,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>minimal available instances duration deployment.</p>
-</dd></dl>
+    <dd>minimal available instances duration deployment.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3283,8 +3555,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>strategy type, 0 means auto, 1 means manual, 2 means manual with beta batch.</p>
-</dd><dt class="property-required"
+    <dd>strategy type, 0 means auto, 1 means manual, 2 means manual with beta batch.</dd><dt class="property-required"
             title="Required">
         <span id="total_batch_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_batch_count_python" style="color: inherit; text-decoration: inherit;">total_<wbr>batch_<wbr>count</a>
@@ -3292,8 +3563,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>total batch number.</p>
-</dd><dt class="property-optional"
+    <dd>total batch number.</dd><dt class="property-optional"
             title="Optional">
         <span id="batch_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#batch_interval_python" style="color: inherit; text-decoration: inherit;">batch_<wbr>interval</a>
@@ -3301,8 +3571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>interval between batches.</p>
-</dd><dt class="property-optional"
+    <dd>interval between batches.</dd><dt class="property-optional"
             title="Optional">
         <span id="beta_batch_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#beta_batch_num_python" style="color: inherit; text-decoration: inherit;">beta_<wbr>batch_<wbr>num</a>
@@ -3310,8 +3579,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>beta batch number.</p>
-</dd><dt class="property-optional"
+    <dd>beta batch number.</dd><dt class="property-optional"
             title="Optional">
         <span id="force_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_python" style="color: inherit; text-decoration: inherit;">force</a>
@@ -3319,8 +3587,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>force update.</p>
-</dd><dt class="property-optional"
+    <dd>force update.</dd><dt class="property-optional"
             title="Optional">
         <span id="min_available_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_available_python" style="color: inherit; text-decoration: inherit;">min_<wbr>available</a>
@@ -3328,8 +3595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>minimal available instances duration deployment.</p>
-</dd></dl>
+    <dd>minimal available instances duration deployment.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3343,8 +3609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>strategy type, 0 means auto, 1 means manual, 2 means manual with beta batch.</p>
-</dd><dt class="property-required"
+    <dd>strategy type, 0 means auto, 1 means manual, 2 means manual with beta batch.</dd><dt class="property-required"
             title="Required">
         <span id="totalbatchcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalbatchcount_yaml" style="color: inherit; text-decoration: inherit;">total<wbr>Batch<wbr>Count</a>
@@ -3352,8 +3617,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>total batch number.</p>
-</dd><dt class="property-optional"
+    <dd>total batch number.</dd><dt class="property-optional"
             title="Optional">
         <span id="batchinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#batchinterval_yaml" style="color: inherit; text-decoration: inherit;">batch<wbr>Interval</a>
@@ -3361,8 +3625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>interval between batches.</p>
-</dd><dt class="property-optional"
+    <dd>interval between batches.</dd><dt class="property-optional"
             title="Optional">
         <span id="betabatchnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#betabatchnum_yaml" style="color: inherit; text-decoration: inherit;">beta<wbr>Batch<wbr>Num</a>
@@ -3370,8 +3633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>beta batch number.</p>
-</dd><dt class="property-optional"
+    <dd>beta batch number.</dd><dt class="property-optional"
             title="Optional">
         <span id="force_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_yaml" style="color: inherit; text-decoration: inherit;">force</a>
@@ -3379,8 +3641,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>force update.</p>
-</dd><dt class="property-optional"
+    <dd>force update.</dd><dt class="property-optional"
             title="Optional">
         <span id="minavailable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minavailable_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Available</a>
@@ -3388,12 +3649,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>minimal available instances duration deployment.</p>
-</dd></dl>
+    <dd>minimal available instances duration deployment.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="workloadenvconf">Workload<wbr>Env<wbr>Conf</h4>
+<h4 id="workloadenvconf">
+Workload<wbr>Env<wbr>Conf<pulumi-choosable type="language" values="python,go" class="inline">, Workload<wbr>Env<wbr>Conf<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3405,8 +3667,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>env key.</p>
-</dd><dt class="property-required"
+    <dd>env key.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -3414,8 +3675,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>env value.</p>
-</dd><dt class="property-optional"
+    <dd>env value.</dd><dt class="property-optional"
             title="Optional">
         <span id="config_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_csharp" style="color: inherit; text-decoration: inherit;">Config</a>
@@ -3423,8 +3683,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>referenced config name when type=referenced.</p>
-</dd><dt class="property-optional"
+    <dd>referenced config name when type=referenced.</dd><dt class="property-optional"
             title="Optional">
         <span id="secret_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_csharp" style="color: inherit; text-decoration: inherit;">Secret</a>
@@ -3432,8 +3691,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>referenced secret name when type=referenced.</p>
-</dd><dt class="property-optional"
+    <dd>referenced secret name when type=referenced.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -3441,8 +3699,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>env type, support default, referenced.</p>
-</dd></dl>
+    <dd>env type, support default, referenced.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3456,8 +3713,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>env key.</p>
-</dd><dt class="property-required"
+    <dd>env key.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -3465,8 +3721,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>env value.</p>
-</dd><dt class="property-optional"
+    <dd>env value.</dd><dt class="property-optional"
             title="Optional">
         <span id="config_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_go" style="color: inherit; text-decoration: inherit;">Config</a>
@@ -3474,8 +3729,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>referenced config name when type=referenced.</p>
-</dd><dt class="property-optional"
+    <dd>referenced config name when type=referenced.</dd><dt class="property-optional"
             title="Optional">
         <span id="secret_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_go" style="color: inherit; text-decoration: inherit;">Secret</a>
@@ -3483,8 +3737,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>referenced secret name when type=referenced.</p>
-</dd><dt class="property-optional"
+    <dd>referenced secret name when type=referenced.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -3492,8 +3745,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>env type, support default, referenced.</p>
-</dd></dl>
+    <dd>env type, support default, referenced.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>env key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>env value.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_hcl" style="color: inherit; text-decoration: inherit;">config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>referenced config name when type=referenced.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="secret_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_hcl" style="color: inherit; text-decoration: inherit;">secret</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>referenced secret name when type=referenced.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>env type, support default, referenced.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3507,8 +3805,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>env key.</p>
-</dd><dt class="property-required"
+    <dd>env key.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3516,8 +3813,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>env value.</p>
-</dd><dt class="property-optional"
+    <dd>env value.</dd><dt class="property-optional"
             title="Optional">
         <span id="config_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_java" style="color: inherit; text-decoration: inherit;">config</a>
@@ -3525,8 +3821,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>referenced config name when type=referenced.</p>
-</dd><dt class="property-optional"
+    <dd>referenced config name when type=referenced.</dd><dt class="property-optional"
             title="Optional">
         <span id="secret_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_java" style="color: inherit; text-decoration: inherit;">secret</a>
@@ -3534,8 +3829,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>referenced secret name when type=referenced.</p>
-</dd><dt class="property-optional"
+    <dd>referenced secret name when type=referenced.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3543,8 +3837,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>env type, support default, referenced.</p>
-</dd></dl>
+    <dd>env type, support default, referenced.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3558,8 +3851,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>env key.</p>
-</dd><dt class="property-required"
+    <dd>env key.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3567,8 +3859,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>env value.</p>
-</dd><dt class="property-optional"
+    <dd>env value.</dd><dt class="property-optional"
             title="Optional">
         <span id="config_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_nodejs" style="color: inherit; text-decoration: inherit;">config</a>
@@ -3576,8 +3867,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>referenced config name when type=referenced.</p>
-</dd><dt class="property-optional"
+    <dd>referenced config name when type=referenced.</dd><dt class="property-optional"
             title="Optional">
         <span id="secret_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_nodejs" style="color: inherit; text-decoration: inherit;">secret</a>
@@ -3585,8 +3875,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>referenced secret name when type=referenced.</p>
-</dd><dt class="property-optional"
+    <dd>referenced secret name when type=referenced.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3594,8 +3883,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>env type, support default, referenced.</p>
-</dd></dl>
+    <dd>env type, support default, referenced.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3609,8 +3897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>env key.</p>
-</dd><dt class="property-required"
+    <dd>env key.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3618,8 +3905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>env value.</p>
-</dd><dt class="property-optional"
+    <dd>env value.</dd><dt class="property-optional"
             title="Optional">
         <span id="config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_python" style="color: inherit; text-decoration: inherit;">config</a>
@@ -3627,8 +3913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>referenced config name when type=referenced.</p>
-</dd><dt class="property-optional"
+    <dd>referenced config name when type=referenced.</dd><dt class="property-optional"
             title="Optional">
         <span id="secret_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_python" style="color: inherit; text-decoration: inherit;">secret</a>
@@ -3636,8 +3921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>referenced secret name when type=referenced.</p>
-</dd><dt class="property-optional"
+    <dd>referenced secret name when type=referenced.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3645,8 +3929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>env type, support default, referenced.</p>
-</dd></dl>
+    <dd>env type, support default, referenced.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3660,8 +3943,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>env key.</p>
-</dd><dt class="property-required"
+    <dd>env key.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3669,8 +3951,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>env value.</p>
-</dd><dt class="property-optional"
+    <dd>env value.</dd><dt class="property-optional"
             title="Optional">
         <span id="config_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_yaml" style="color: inherit; text-decoration: inherit;">config</a>
@@ -3678,8 +3959,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>referenced config name when type=referenced.</p>
-</dd><dt class="property-optional"
+    <dd>referenced config name when type=referenced.</dd><dt class="property-optional"
             title="Optional">
         <span id="secret_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_yaml" style="color: inherit; text-decoration: inherit;">secret</a>
@@ -3687,8 +3967,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>referenced secret name when type=referenced.</p>
-</dd><dt class="property-optional"
+    <dd>referenced secret name when type=referenced.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3696,12 +3975,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>env type, support default, referenced.</p>
-</dd></dl>
+    <dd>env type, support default, referenced.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="workloadliveness">Workload<wbr>Liveness</h4>
+<h4 id="workloadliveness">
+Workload<wbr>Liveness<pulumi-choosable type="language" values="python,go" class="inline">, Workload<wbr>Liveness<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3713,8 +3993,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>check type, support HttpGet, TcpSocket and Exec.</p>
-</dd><dt class="property-optional"
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
             title="Optional">
         <span id="exec_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec_csharp" style="color: inherit; text-decoration: inherit;">Exec</a>
@@ -3722,8 +4001,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>script.</p>
-</dd><dt class="property-optional"
+    <dd>script.</dd><dt class="property-optional"
             title="Optional">
         <span id="initialdelayseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initialdelayseconds_csharp" style="color: inherit; text-decoration: inherit;">Initial<wbr>Delay<wbr>Seconds</a>
@@ -3731,8 +4009,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>initial delay seconds for liveness check.</p>
-</dd><dt class="property-optional"
+    <dd>initial delay seconds for liveness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_csharp" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -3740,8 +4017,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>path.</p>
-</dd><dt class="property-optional"
+    <dd>path.</dd><dt class="property-optional"
             title="Optional">
         <span id="periodseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodseconds_csharp" style="color: inherit; text-decoration: inherit;">Period<wbr>Seconds</a>
@@ -3749,8 +4025,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>period seconds for liveness check.</p>
-</dd><dt class="property-optional"
+    <dd>period seconds for liveness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -3758,8 +4033,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>liveness check port.</p>
-</dd><dt class="property-optional"
+    <dd>liveness check port.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -3767,8 +4041,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional"
+    <dd>protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoutseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutseconds_csharp" style="color: inherit; text-decoration: inherit;">Timeout<wbr>Seconds</a>
@@ -3776,8 +4049,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>timeout seconds for liveness check.</p>
-</dd></dl>
+    <dd>timeout seconds for liveness check.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3791,8 +4063,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>check type, support HttpGet, TcpSocket and Exec.</p>
-</dd><dt class="property-optional"
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
             title="Optional">
         <span id="exec_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec_go" style="color: inherit; text-decoration: inherit;">Exec</a>
@@ -3800,8 +4071,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>script.</p>
-</dd><dt class="property-optional"
+    <dd>script.</dd><dt class="property-optional"
             title="Optional">
         <span id="initialdelayseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initialdelayseconds_go" style="color: inherit; text-decoration: inherit;">Initial<wbr>Delay<wbr>Seconds</a>
@@ -3809,8 +4079,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>initial delay seconds for liveness check.</p>
-</dd><dt class="property-optional"
+    <dd>initial delay seconds for liveness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_go" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -3818,8 +4087,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>path.</p>
-</dd><dt class="property-optional"
+    <dd>path.</dd><dt class="property-optional"
             title="Optional">
         <span id="periodseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodseconds_go" style="color: inherit; text-decoration: inherit;">Period<wbr>Seconds</a>
@@ -3827,8 +4095,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>period seconds for liveness check.</p>
-</dd><dt class="property-optional"
+    <dd>period seconds for liveness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -3836,8 +4103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>liveness check port.</p>
-</dd><dt class="property-optional"
+    <dd>liveness check port.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -3845,8 +4111,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional"
+    <dd>protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoutseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutseconds_go" style="color: inherit; text-decoration: inherit;">Timeout<wbr>Seconds</a>
@@ -3854,8 +4119,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>timeout seconds for liveness check.</p>
-</dd></dl>
+    <dd>timeout seconds for liveness check.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="exec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec_hcl" style="color: inherit; text-decoration: inherit;">exec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>script.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="initial_delay_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initial_delay_seconds_hcl" style="color: inherit; text-decoration: inherit;">initial_<wbr>delay_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>initial delay seconds for liveness check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_hcl" style="color: inherit; text-decoration: inherit;">path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>path.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="period_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_seconds_hcl" style="color: inherit; text-decoration: inherit;">period_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>period seconds for liveness check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>liveness check port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="timeout_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_seconds_hcl" style="color: inherit; text-decoration: inherit;">timeout_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>timeout seconds for liveness check.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3869,8 +4203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>check type, support HttpGet, TcpSocket and Exec.</p>
-</dd><dt class="property-optional"
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
             title="Optional">
         <span id="exec_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec_java" style="color: inherit; text-decoration: inherit;">exec</a>
@@ -3878,8 +4211,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>script.</p>
-</dd><dt class="property-optional"
+    <dd>script.</dd><dt class="property-optional"
             title="Optional">
         <span id="initialdelayseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initialdelayseconds_java" style="color: inherit; text-decoration: inherit;">initial<wbr>Delay<wbr>Seconds</a>
@@ -3887,8 +4219,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>initial delay seconds for liveness check.</p>
-</dd><dt class="property-optional"
+    <dd>initial delay seconds for liveness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_java" style="color: inherit; text-decoration: inherit;">path</a>
@@ -3896,8 +4227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>path.</p>
-</dd><dt class="property-optional"
+    <dd>path.</dd><dt class="property-optional"
             title="Optional">
         <span id="periodseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodseconds_java" style="color: inherit; text-decoration: inherit;">period<wbr>Seconds</a>
@@ -3905,8 +4235,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>period seconds for liveness check.</p>
-</dd><dt class="property-optional"
+    <dd>period seconds for liveness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -3914,8 +4243,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>liveness check port.</p>
-</dd><dt class="property-optional"
+    <dd>liveness check port.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3923,8 +4251,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional"
+    <dd>protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoutseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutseconds_java" style="color: inherit; text-decoration: inherit;">timeout<wbr>Seconds</a>
@@ -3932,8 +4259,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>timeout seconds for liveness check.</p>
-</dd></dl>
+    <dd>timeout seconds for liveness check.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3947,8 +4273,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>check type, support HttpGet, TcpSocket and Exec.</p>
-</dd><dt class="property-optional"
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
             title="Optional">
         <span id="exec_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec_nodejs" style="color: inherit; text-decoration: inherit;">exec</a>
@@ -3956,8 +4281,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>script.</p>
-</dd><dt class="property-optional"
+    <dd>script.</dd><dt class="property-optional"
             title="Optional">
         <span id="initialdelayseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initialdelayseconds_nodejs" style="color: inherit; text-decoration: inherit;">initial<wbr>Delay<wbr>Seconds</a>
@@ -3965,8 +4289,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>initial delay seconds for liveness check.</p>
-</dd><dt class="property-optional"
+    <dd>initial delay seconds for liveness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_nodejs" style="color: inherit; text-decoration: inherit;">path</a>
@@ -3974,8 +4297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>path.</p>
-</dd><dt class="property-optional"
+    <dd>path.</dd><dt class="property-optional"
             title="Optional">
         <span id="periodseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodseconds_nodejs" style="color: inherit; text-decoration: inherit;">period<wbr>Seconds</a>
@@ -3983,8 +4305,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>period seconds for liveness check.</p>
-</dd><dt class="property-optional"
+    <dd>period seconds for liveness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -3992,8 +4313,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>liveness check port.</p>
-</dd><dt class="property-optional"
+    <dd>liveness check port.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -4001,8 +4321,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional"
+    <dd>protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoutseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutseconds_nodejs" style="color: inherit; text-decoration: inherit;">timeout<wbr>Seconds</a>
@@ -4010,8 +4329,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>timeout seconds for liveness check.</p>
-</dd></dl>
+    <dd>timeout seconds for liveness check.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4025,8 +4343,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>check type, support HttpGet, TcpSocket and Exec.</p>
-</dd><dt class="property-optional"
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
             title="Optional">
         <span id="exec__python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec__python" style="color: inherit; text-decoration: inherit;">exec_</a>
@@ -4034,8 +4351,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>script.</p>
-</dd><dt class="property-optional"
+    <dd>script.</dd><dt class="property-optional"
             title="Optional">
         <span id="initial_delay_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initial_delay_seconds_python" style="color: inherit; text-decoration: inherit;">initial_<wbr>delay_<wbr>seconds</a>
@@ -4043,8 +4359,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>initial delay seconds for liveness check.</p>
-</dd><dt class="property-optional"
+    <dd>initial delay seconds for liveness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_python" style="color: inherit; text-decoration: inherit;">path</a>
@@ -4052,8 +4367,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>path.</p>
-</dd><dt class="property-optional"
+    <dd>path.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_seconds_python" style="color: inherit; text-decoration: inherit;">period_<wbr>seconds</a>
@@ -4061,8 +4375,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>period seconds for liveness check.</p>
-</dd><dt class="property-optional"
+    <dd>period seconds for liveness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4070,8 +4383,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>liveness check port.</p>
-</dd><dt class="property-optional"
+    <dd>liveness check port.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -4079,8 +4391,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional"
+    <dd>protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeout_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_seconds_python" style="color: inherit; text-decoration: inherit;">timeout_<wbr>seconds</a>
@@ -4088,8 +4399,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>timeout seconds for liveness check.</p>
-</dd></dl>
+    <dd>timeout seconds for liveness check.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4103,8 +4413,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>check type, support HttpGet, TcpSocket and Exec.</p>
-</dd><dt class="property-optional"
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
             title="Optional">
         <span id="exec_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec_yaml" style="color: inherit; text-decoration: inherit;">exec</a>
@@ -4112,8 +4421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>script.</p>
-</dd><dt class="property-optional"
+    <dd>script.</dd><dt class="property-optional"
             title="Optional">
         <span id="initialdelayseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initialdelayseconds_yaml" style="color: inherit; text-decoration: inherit;">initial<wbr>Delay<wbr>Seconds</a>
@@ -4121,8 +4429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>initial delay seconds for liveness check.</p>
-</dd><dt class="property-optional"
+    <dd>initial delay seconds for liveness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_yaml" style="color: inherit; text-decoration: inherit;">path</a>
@@ -4130,8 +4437,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>path.</p>
-</dd><dt class="property-optional"
+    <dd>path.</dd><dt class="property-optional"
             title="Optional">
         <span id="periodseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodseconds_yaml" style="color: inherit; text-decoration: inherit;">period<wbr>Seconds</a>
@@ -4139,8 +4445,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>period seconds for liveness check.</p>
-</dd><dt class="property-optional"
+    <dd>period seconds for liveness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4148,8 +4453,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>liveness check port.</p>
-</dd><dt class="property-optional"
+    <dd>liveness check port.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -4157,8 +4461,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional"
+    <dd>protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoutseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutseconds_yaml" style="color: inherit; text-decoration: inherit;">timeout<wbr>Seconds</a>
@@ -4166,12 +4469,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>timeout seconds for liveness check.</p>
-</dd></dl>
+    <dd>timeout seconds for liveness check.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="workloadreadiness">Workload<wbr>Readiness</h4>
+<h4 id="workloadreadiness">
+Workload<wbr>Readiness<pulumi-choosable type="language" values="python,go" class="inline">, Workload<wbr>Readiness<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4183,8 +4487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>check type, support HttpGet, TcpSocket and Exec.</p>
-</dd><dt class="property-optional"
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
             title="Optional">
         <span id="exec_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec_csharp" style="color: inherit; text-decoration: inherit;">Exec</a>
@@ -4192,8 +4495,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>script.</p>
-</dd><dt class="property-optional"
+    <dd>script.</dd><dt class="property-optional"
             title="Optional">
         <span id="initialdelayseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initialdelayseconds_csharp" style="color: inherit; text-decoration: inherit;">Initial<wbr>Delay<wbr>Seconds</a>
@@ -4201,8 +4503,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>initial delay seconds for readiness check.</p>
-</dd><dt class="property-optional"
+    <dd>initial delay seconds for readiness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_csharp" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -4210,8 +4511,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>path.</p>
-</dd><dt class="property-optional"
+    <dd>path.</dd><dt class="property-optional"
             title="Optional">
         <span id="periodseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodseconds_csharp" style="color: inherit; text-decoration: inherit;">Period<wbr>Seconds</a>
@@ -4219,8 +4519,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>period seconds for readiness check.</p>
-</dd><dt class="property-optional"
+    <dd>period seconds for readiness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -4228,8 +4527,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>readiness check port.</p>
-</dd><dt class="property-optional"
+    <dd>readiness check port.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -4237,8 +4535,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional"
+    <dd>protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoutseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutseconds_csharp" style="color: inherit; text-decoration: inherit;">Timeout<wbr>Seconds</a>
@@ -4246,8 +4543,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>timeout seconds for readiness check.</p>
-</dd></dl>
+    <dd>timeout seconds for readiness check.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4261,8 +4557,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>check type, support HttpGet, TcpSocket and Exec.</p>
-</dd><dt class="property-optional"
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
             title="Optional">
         <span id="exec_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec_go" style="color: inherit; text-decoration: inherit;">Exec</a>
@@ -4270,8 +4565,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>script.</p>
-</dd><dt class="property-optional"
+    <dd>script.</dd><dt class="property-optional"
             title="Optional">
         <span id="initialdelayseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initialdelayseconds_go" style="color: inherit; text-decoration: inherit;">Initial<wbr>Delay<wbr>Seconds</a>
@@ -4279,8 +4573,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>initial delay seconds for readiness check.</p>
-</dd><dt class="property-optional"
+    <dd>initial delay seconds for readiness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_go" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -4288,8 +4581,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>path.</p>
-</dd><dt class="property-optional"
+    <dd>path.</dd><dt class="property-optional"
             title="Optional">
         <span id="periodseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodseconds_go" style="color: inherit; text-decoration: inherit;">Period<wbr>Seconds</a>
@@ -4297,8 +4589,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>period seconds for readiness check.</p>
-</dd><dt class="property-optional"
+    <dd>period seconds for readiness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -4306,8 +4597,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>readiness check port.</p>
-</dd><dt class="property-optional"
+    <dd>readiness check port.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -4315,8 +4605,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional"
+    <dd>protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoutseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutseconds_go" style="color: inherit; text-decoration: inherit;">Timeout<wbr>Seconds</a>
@@ -4324,8 +4613,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>timeout seconds for readiness check.</p>
-</dd></dl>
+    <dd>timeout seconds for readiness check.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="exec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec_hcl" style="color: inherit; text-decoration: inherit;">exec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>script.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="initial_delay_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initial_delay_seconds_hcl" style="color: inherit; text-decoration: inherit;">initial_<wbr>delay_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>initial delay seconds for readiness check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_hcl" style="color: inherit; text-decoration: inherit;">path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>path.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="period_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_seconds_hcl" style="color: inherit; text-decoration: inherit;">period_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>period seconds for readiness check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>readiness check port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="timeout_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_seconds_hcl" style="color: inherit; text-decoration: inherit;">timeout_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>timeout seconds for readiness check.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4339,8 +4697,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>check type, support HttpGet, TcpSocket and Exec.</p>
-</dd><dt class="property-optional"
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
             title="Optional">
         <span id="exec_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec_java" style="color: inherit; text-decoration: inherit;">exec</a>
@@ -4348,8 +4705,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>script.</p>
-</dd><dt class="property-optional"
+    <dd>script.</dd><dt class="property-optional"
             title="Optional">
         <span id="initialdelayseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initialdelayseconds_java" style="color: inherit; text-decoration: inherit;">initial<wbr>Delay<wbr>Seconds</a>
@@ -4357,8 +4713,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>initial delay seconds for readiness check.</p>
-</dd><dt class="property-optional"
+    <dd>initial delay seconds for readiness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_java" style="color: inherit; text-decoration: inherit;">path</a>
@@ -4366,8 +4721,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>path.</p>
-</dd><dt class="property-optional"
+    <dd>path.</dd><dt class="property-optional"
             title="Optional">
         <span id="periodseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodseconds_java" style="color: inherit; text-decoration: inherit;">period<wbr>Seconds</a>
@@ -4375,8 +4729,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>period seconds for readiness check.</p>
-</dd><dt class="property-optional"
+    <dd>period seconds for readiness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4384,8 +4737,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>readiness check port.</p>
-</dd><dt class="property-optional"
+    <dd>readiness check port.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -4393,8 +4745,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional"
+    <dd>protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoutseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutseconds_java" style="color: inherit; text-decoration: inherit;">timeout<wbr>Seconds</a>
@@ -4402,8 +4753,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>timeout seconds for readiness check.</p>
-</dd></dl>
+    <dd>timeout seconds for readiness check.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4417,8 +4767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>check type, support HttpGet, TcpSocket and Exec.</p>
-</dd><dt class="property-optional"
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
             title="Optional">
         <span id="exec_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec_nodejs" style="color: inherit; text-decoration: inherit;">exec</a>
@@ -4426,8 +4775,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>script.</p>
-</dd><dt class="property-optional"
+    <dd>script.</dd><dt class="property-optional"
             title="Optional">
         <span id="initialdelayseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initialdelayseconds_nodejs" style="color: inherit; text-decoration: inherit;">initial<wbr>Delay<wbr>Seconds</a>
@@ -4435,8 +4783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>initial delay seconds for readiness check.</p>
-</dd><dt class="property-optional"
+    <dd>initial delay seconds for readiness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_nodejs" style="color: inherit; text-decoration: inherit;">path</a>
@@ -4444,8 +4791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>path.</p>
-</dd><dt class="property-optional"
+    <dd>path.</dd><dt class="property-optional"
             title="Optional">
         <span id="periodseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodseconds_nodejs" style="color: inherit; text-decoration: inherit;">period<wbr>Seconds</a>
@@ -4453,8 +4799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>period seconds for readiness check.</p>
-</dd><dt class="property-optional"
+    <dd>period seconds for readiness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4462,8 +4807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>readiness check port.</p>
-</dd><dt class="property-optional"
+    <dd>readiness check port.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -4471,8 +4815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional"
+    <dd>protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoutseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutseconds_nodejs" style="color: inherit; text-decoration: inherit;">timeout<wbr>Seconds</a>
@@ -4480,8 +4823,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>timeout seconds for readiness check.</p>
-</dd></dl>
+    <dd>timeout seconds for readiness check.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4495,8 +4837,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>check type, support HttpGet, TcpSocket and Exec.</p>
-</dd><dt class="property-optional"
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
             title="Optional">
         <span id="exec__python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec__python" style="color: inherit; text-decoration: inherit;">exec_</a>
@@ -4504,8 +4845,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>script.</p>
-</dd><dt class="property-optional"
+    <dd>script.</dd><dt class="property-optional"
             title="Optional">
         <span id="initial_delay_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initial_delay_seconds_python" style="color: inherit; text-decoration: inherit;">initial_<wbr>delay_<wbr>seconds</a>
@@ -4513,8 +4853,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>initial delay seconds for readiness check.</p>
-</dd><dt class="property-optional"
+    <dd>initial delay seconds for readiness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_python" style="color: inherit; text-decoration: inherit;">path</a>
@@ -4522,8 +4861,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>path.</p>
-</dd><dt class="property-optional"
+    <dd>path.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_seconds_python" style="color: inherit; text-decoration: inherit;">period_<wbr>seconds</a>
@@ -4531,8 +4869,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>period seconds for readiness check.</p>
-</dd><dt class="property-optional"
+    <dd>period seconds for readiness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4540,8 +4877,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>readiness check port.</p>
-</dd><dt class="property-optional"
+    <dd>readiness check port.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -4549,8 +4885,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional"
+    <dd>protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeout_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_seconds_python" style="color: inherit; text-decoration: inherit;">timeout_<wbr>seconds</a>
@@ -4558,8 +4893,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>timeout seconds for readiness check.</p>
-</dd></dl>
+    <dd>timeout seconds for readiness check.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4573,8 +4907,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>check type, support HttpGet, TcpSocket and Exec.</p>
-</dd><dt class="property-optional"
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
             title="Optional">
         <span id="exec_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec_yaml" style="color: inherit; text-decoration: inherit;">exec</a>
@@ -4582,8 +4915,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>script.</p>
-</dd><dt class="property-optional"
+    <dd>script.</dd><dt class="property-optional"
             title="Optional">
         <span id="initialdelayseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initialdelayseconds_yaml" style="color: inherit; text-decoration: inherit;">initial<wbr>Delay<wbr>Seconds</a>
@@ -4591,8 +4923,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>initial delay seconds for readiness check.</p>
-</dd><dt class="property-optional"
+    <dd>initial delay seconds for readiness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_yaml" style="color: inherit; text-decoration: inherit;">path</a>
@@ -4600,8 +4931,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>path.</p>
-</dd><dt class="property-optional"
+    <dd>path.</dd><dt class="property-optional"
             title="Optional">
         <span id="periodseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodseconds_yaml" style="color: inherit; text-decoration: inherit;">period<wbr>Seconds</a>
@@ -4609,8 +4939,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>period seconds for readiness check.</p>
-</dd><dt class="property-optional"
+    <dd>period seconds for readiness check.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4618,8 +4947,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>readiness check port.</p>
-</dd><dt class="property-optional"
+    <dd>readiness check port.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -4627,8 +4955,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional"
+    <dd>protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoutseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutseconds_yaml" style="color: inherit; text-decoration: inherit;">timeout<wbr>Seconds</a>
@@ -4636,12 +4963,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>timeout seconds for readiness check.</p>
-</dd></dl>
+    <dd>timeout seconds for readiness check.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="workloadstartupprobe">Workload<wbr>Startup<wbr>Probe</h4>
+<h4 id="workloadstartupprobe">
+Workload<wbr>Startup<wbr>Probe<pulumi-choosable type="language" values="python,go" class="inline">, Workload<wbr>Startup<wbr>Probe<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4653,8 +4981,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>check type, support HttpGet, TcpSocket and Exec.</p>
-</dd><dt class="property-optional"
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
             title="Optional">
         <span id="exec_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec_csharp" style="color: inherit; text-decoration: inherit;">Exec</a>
@@ -4662,8 +4989,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>script.</p>
-</dd><dt class="property-optional"
+    <dd>script.</dd><dt class="property-optional"
             title="Optional">
         <span id="initialdelayseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initialdelayseconds_csharp" style="color: inherit; text-decoration: inherit;">Initial<wbr>Delay<wbr>Seconds</a>
@@ -4671,8 +4997,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>initial delay seconds for startup check.</p>
-</dd><dt class="property-optional"
+    <dd>initial delay seconds for startup check.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_csharp" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -4680,8 +5005,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>path.</p>
-</dd><dt class="property-optional"
+    <dd>path.</dd><dt class="property-optional"
             title="Optional">
         <span id="periodseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodseconds_csharp" style="color: inherit; text-decoration: inherit;">Period<wbr>Seconds</a>
@@ -4689,8 +5013,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>period seconds for startup check.</p>
-</dd><dt class="property-optional"
+    <dd>period seconds for startup check.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -4698,8 +5021,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>startup check port.</p>
-</dd><dt class="property-optional"
+    <dd>startup check port.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -4707,8 +5029,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional"
+    <dd>protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoutseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutseconds_csharp" style="color: inherit; text-decoration: inherit;">Timeout<wbr>Seconds</a>
@@ -4716,8 +5037,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>timeout seconds for startup check.</p>
-</dd></dl>
+    <dd>timeout seconds for startup check.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4731,8 +5051,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>check type, support HttpGet, TcpSocket and Exec.</p>
-</dd><dt class="property-optional"
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
             title="Optional">
         <span id="exec_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec_go" style="color: inherit; text-decoration: inherit;">Exec</a>
@@ -4740,8 +5059,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>script.</p>
-</dd><dt class="property-optional"
+    <dd>script.</dd><dt class="property-optional"
             title="Optional">
         <span id="initialdelayseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initialdelayseconds_go" style="color: inherit; text-decoration: inherit;">Initial<wbr>Delay<wbr>Seconds</a>
@@ -4749,8 +5067,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>initial delay seconds for startup check.</p>
-</dd><dt class="property-optional"
+    <dd>initial delay seconds for startup check.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_go" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -4758,8 +5075,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>path.</p>
-</dd><dt class="property-optional"
+    <dd>path.</dd><dt class="property-optional"
             title="Optional">
         <span id="periodseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodseconds_go" style="color: inherit; text-decoration: inherit;">Period<wbr>Seconds</a>
@@ -4767,8 +5083,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>period seconds for startup check.</p>
-</dd><dt class="property-optional"
+    <dd>period seconds for startup check.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -4776,8 +5091,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>startup check port.</p>
-</dd><dt class="property-optional"
+    <dd>startup check port.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -4785,8 +5099,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional"
+    <dd>protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoutseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutseconds_go" style="color: inherit; text-decoration: inherit;">Timeout<wbr>Seconds</a>
@@ -4794,8 +5107,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>timeout seconds for startup check.</p>
-</dd></dl>
+    <dd>timeout seconds for startup check.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="exec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec_hcl" style="color: inherit; text-decoration: inherit;">exec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>script.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="initial_delay_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initial_delay_seconds_hcl" style="color: inherit; text-decoration: inherit;">initial_<wbr>delay_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>initial delay seconds for startup check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_hcl" style="color: inherit; text-decoration: inherit;">path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>path.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="period_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_seconds_hcl" style="color: inherit; text-decoration: inherit;">period_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>period seconds for startup check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>startup check port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="timeout_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_seconds_hcl" style="color: inherit; text-decoration: inherit;">timeout_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>timeout seconds for startup check.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4809,8 +5191,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>check type, support HttpGet, TcpSocket and Exec.</p>
-</dd><dt class="property-optional"
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
             title="Optional">
         <span id="exec_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec_java" style="color: inherit; text-decoration: inherit;">exec</a>
@@ -4818,8 +5199,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>script.</p>
-</dd><dt class="property-optional"
+    <dd>script.</dd><dt class="property-optional"
             title="Optional">
         <span id="initialdelayseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initialdelayseconds_java" style="color: inherit; text-decoration: inherit;">initial<wbr>Delay<wbr>Seconds</a>
@@ -4827,8 +5207,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>initial delay seconds for startup check.</p>
-</dd><dt class="property-optional"
+    <dd>initial delay seconds for startup check.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_java" style="color: inherit; text-decoration: inherit;">path</a>
@@ -4836,8 +5215,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>path.</p>
-</dd><dt class="property-optional"
+    <dd>path.</dd><dt class="property-optional"
             title="Optional">
         <span id="periodseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodseconds_java" style="color: inherit; text-decoration: inherit;">period<wbr>Seconds</a>
@@ -4845,8 +5223,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>period seconds for startup check.</p>
-</dd><dt class="property-optional"
+    <dd>period seconds for startup check.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4854,8 +5231,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>startup check port.</p>
-</dd><dt class="property-optional"
+    <dd>startup check port.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -4863,8 +5239,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional"
+    <dd>protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoutseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutseconds_java" style="color: inherit; text-decoration: inherit;">timeout<wbr>Seconds</a>
@@ -4872,8 +5247,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>timeout seconds for startup check.</p>
-</dd></dl>
+    <dd>timeout seconds for startup check.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4887,8 +5261,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>check type, support HttpGet, TcpSocket and Exec.</p>
-</dd><dt class="property-optional"
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
             title="Optional">
         <span id="exec_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec_nodejs" style="color: inherit; text-decoration: inherit;">exec</a>
@@ -4896,8 +5269,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>script.</p>
-</dd><dt class="property-optional"
+    <dd>script.</dd><dt class="property-optional"
             title="Optional">
         <span id="initialdelayseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initialdelayseconds_nodejs" style="color: inherit; text-decoration: inherit;">initial<wbr>Delay<wbr>Seconds</a>
@@ -4905,8 +5277,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>initial delay seconds for startup check.</p>
-</dd><dt class="property-optional"
+    <dd>initial delay seconds for startup check.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_nodejs" style="color: inherit; text-decoration: inherit;">path</a>
@@ -4914,8 +5285,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>path.</p>
-</dd><dt class="property-optional"
+    <dd>path.</dd><dt class="property-optional"
             title="Optional">
         <span id="periodseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodseconds_nodejs" style="color: inherit; text-decoration: inherit;">period<wbr>Seconds</a>
@@ -4923,8 +5293,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>period seconds for startup check.</p>
-</dd><dt class="property-optional"
+    <dd>period seconds for startup check.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4932,8 +5301,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>startup check port.</p>
-</dd><dt class="property-optional"
+    <dd>startup check port.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -4941,8 +5309,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional"
+    <dd>protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoutseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutseconds_nodejs" style="color: inherit; text-decoration: inherit;">timeout<wbr>Seconds</a>
@@ -4950,8 +5317,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>timeout seconds for startup check.</p>
-</dd></dl>
+    <dd>timeout seconds for startup check.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4965,8 +5331,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>check type, support HttpGet, TcpSocket and Exec.</p>
-</dd><dt class="property-optional"
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
             title="Optional">
         <span id="exec__python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec__python" style="color: inherit; text-decoration: inherit;">exec_</a>
@@ -4974,8 +5339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>script.</p>
-</dd><dt class="property-optional"
+    <dd>script.</dd><dt class="property-optional"
             title="Optional">
         <span id="initial_delay_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initial_delay_seconds_python" style="color: inherit; text-decoration: inherit;">initial_<wbr>delay_<wbr>seconds</a>
@@ -4983,8 +5347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>initial delay seconds for startup check.</p>
-</dd><dt class="property-optional"
+    <dd>initial delay seconds for startup check.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_python" style="color: inherit; text-decoration: inherit;">path</a>
@@ -4992,8 +5355,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>path.</p>
-</dd><dt class="property-optional"
+    <dd>path.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_seconds_python" style="color: inherit; text-decoration: inherit;">period_<wbr>seconds</a>
@@ -5001,8 +5363,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>period seconds for startup check.</p>
-</dd><dt class="property-optional"
+    <dd>period seconds for startup check.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -5010,8 +5371,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>startup check port.</p>
-</dd><dt class="property-optional"
+    <dd>startup check port.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -5019,8 +5379,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional"
+    <dd>protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeout_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_seconds_python" style="color: inherit; text-decoration: inherit;">timeout_<wbr>seconds</a>
@@ -5028,8 +5387,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>timeout seconds for startup check.</p>
-</dd></dl>
+    <dd>timeout seconds for startup check.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5043,8 +5401,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>check type, support HttpGet, TcpSocket and Exec.</p>
-</dd><dt class="property-optional"
+    <dd>check type, support HttpGet, TcpSocket and Exec.</dd><dt class="property-optional"
             title="Optional">
         <span id="exec_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exec_yaml" style="color: inherit; text-decoration: inherit;">exec</a>
@@ -5052,8 +5409,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>script.</p>
-</dd><dt class="property-optional"
+    <dd>script.</dd><dt class="property-optional"
             title="Optional">
         <span id="initialdelayseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initialdelayseconds_yaml" style="color: inherit; text-decoration: inherit;">initial<wbr>Delay<wbr>Seconds</a>
@@ -5061,8 +5417,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>initial delay seconds for startup check.</p>
-</dd><dt class="property-optional"
+    <dd>initial delay seconds for startup check.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_yaml" style="color: inherit; text-decoration: inherit;">path</a>
@@ -5070,8 +5425,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>path.</p>
-</dd><dt class="property-optional"
+    <dd>path.</dd><dt class="property-optional"
             title="Optional">
         <span id="periodseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodseconds_yaml" style="color: inherit; text-decoration: inherit;">period<wbr>Seconds</a>
@@ -5079,8 +5433,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>period seconds for startup check.</p>
-</dd><dt class="property-optional"
+    <dd>period seconds for startup check.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -5088,8 +5441,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>startup check port.</p>
-</dd><dt class="property-optional"
+    <dd>startup check port.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -5097,8 +5449,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd><dt class="property-optional"
+    <dd>protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoutseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutseconds_yaml" style="color: inherit; text-decoration: inherit;">timeout<wbr>Seconds</a>
@@ -5106,12 +5457,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>timeout seconds for startup check.</p>
-</dd></dl>
+    <dd>timeout seconds for startup check.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="workloadstorageconf">Workload<wbr>Storage<wbr>Conf</h4>
+<h4 id="workloadstorageconf">
+Workload<wbr>Storage<wbr>Conf<pulumi-choosable type="language" values="python,go" class="inline">, Workload<wbr>Storage<wbr>Conf<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5123,8 +5475,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>volume ip.</p>
-</dd><dt class="property-required"
+    <dd>volume ip.</dd><dt class="property-required"
             title="Required">
         <span id="storagevolname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagevolname_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Vol<wbr>Name</a>
@@ -5132,8 +5483,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>volume name.</p>
-</dd><dt class="property-required"
+    <dd>volume name.</dd><dt class="property-required"
             title="Required">
         <span id="storagevolpath_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagevolpath_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Vol<wbr>Path</a>
@@ -5141,8 +5491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>volume path.</p>
-</dd></dl>
+    <dd>volume path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5156,8 +5505,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>volume ip.</p>
-</dd><dt class="property-required"
+    <dd>volume ip.</dd><dt class="property-required"
             title="Required">
         <span id="storagevolname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagevolname_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Vol<wbr>Name</a>
@@ -5165,8 +5513,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>volume name.</p>
-</dd><dt class="property-required"
+    <dd>volume name.</dd><dt class="property-required"
             title="Required">
         <span id="storagevolpath_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagevolpath_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Vol<wbr>Path</a>
@@ -5174,8 +5521,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>volume path.</p>
-</dd></dl>
+    <dd>volume path.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="storage_vol_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_vol_ip_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>vol_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>volume ip.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_vol_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_vol_name_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>vol_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>volume name.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_vol_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_vol_path_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>vol_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>volume path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5189,8 +5565,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>volume ip.</p>
-</dd><dt class="property-required"
+    <dd>volume ip.</dd><dt class="property-required"
             title="Required">
         <span id="storagevolname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagevolname_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Vol<wbr>Name</a>
@@ -5198,8 +5573,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>volume name.</p>
-</dd><dt class="property-required"
+    <dd>volume name.</dd><dt class="property-required"
             title="Required">
         <span id="storagevolpath_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagevolpath_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Vol<wbr>Path</a>
@@ -5207,8 +5581,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>volume path.</p>
-</dd></dl>
+    <dd>volume path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5222,8 +5595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>volume ip.</p>
-</dd><dt class="property-required"
+    <dd>volume ip.</dd><dt class="property-required"
             title="Required">
         <span id="storagevolname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagevolname_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Vol<wbr>Name</a>
@@ -5231,8 +5603,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>volume name.</p>
-</dd><dt class="property-required"
+    <dd>volume name.</dd><dt class="property-required"
             title="Required">
         <span id="storagevolpath_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagevolpath_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Vol<wbr>Path</a>
@@ -5240,8 +5611,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>volume path.</p>
-</dd></dl>
+    <dd>volume path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5255,8 +5625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>volume ip.</p>
-</dd><dt class="property-required"
+    <dd>volume ip.</dd><dt class="property-required"
             title="Required">
         <span id="storage_vol_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_vol_name_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>vol_<wbr>name</a>
@@ -5264,8 +5633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>volume name.</p>
-</dd><dt class="property-required"
+    <dd>volume name.</dd><dt class="property-required"
             title="Required">
         <span id="storage_vol_path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_vol_path_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>vol_<wbr>path</a>
@@ -5273,8 +5641,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>volume path.</p>
-</dd></dl>
+    <dd>volume path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5288,8 +5655,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>volume ip.</p>
-</dd><dt class="property-required"
+    <dd>volume ip.</dd><dt class="property-required"
             title="Required">
         <span id="storagevolname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagevolname_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Vol<wbr>Name</a>
@@ -5297,8 +5663,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>volume name.</p>
-</dd><dt class="property-required"
+    <dd>volume name.</dd><dt class="property-required"
             title="Required">
         <span id="storagevolpath_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagevolpath_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Vol<wbr>Path</a>
@@ -5306,12 +5671,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>volume path.</p>
-</dd></dl>
+    <dd>volume path.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="workloadstoragemountconf">Workload<wbr>Storage<wbr>Mount<wbr>Conf</h4>
+<h4 id="workloadstoragemountconf">
+Workload<wbr>Storage<wbr>Mount<wbr>Conf<pulumi-choosable type="language" values="python,go" class="inline">, Workload<wbr>Storage<wbr>Mount<wbr>Conf<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5323,8 +5689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>mount path.</p>
-</dd><dt class="property-required"
+    <dd>mount path.</dd><dt class="property-required"
             title="Required">
         <span id="volumename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumename_csharp" style="color: inherit; text-decoration: inherit;">Volume<wbr>Name</a>
@@ -5332,8 +5697,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>volume name.</p>
-</dd></dl>
+    <dd>volume name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5347,8 +5711,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>mount path.</p>
-</dd><dt class="property-required"
+    <dd>mount path.</dd><dt class="property-required"
             title="Required">
         <span id="volumename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumename_go" style="color: inherit; text-decoration: inherit;">Volume<wbr>Name</a>
@@ -5356,8 +5719,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>volume name.</p>
-</dd></dl>
+    <dd>volume name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="mount_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mount_path_hcl" style="color: inherit; text-decoration: inherit;">mount_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>mount path.</dd><dt class="property-required"
+            title="Required">
+        <span id="volume_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volume_name_hcl" style="color: inherit; text-decoration: inherit;">volume_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>volume name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5371,8 +5755,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>mount path.</p>
-</dd><dt class="property-required"
+    <dd>mount path.</dd><dt class="property-required"
             title="Required">
         <span id="volumename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumename_java" style="color: inherit; text-decoration: inherit;">volume<wbr>Name</a>
@@ -5380,8 +5763,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>volume name.</p>
-</dd></dl>
+    <dd>volume name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5395,8 +5777,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>mount path.</p>
-</dd><dt class="property-required"
+    <dd>mount path.</dd><dt class="property-required"
             title="Required">
         <span id="volumename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumename_nodejs" style="color: inherit; text-decoration: inherit;">volume<wbr>Name</a>
@@ -5404,8 +5785,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>volume name.</p>
-</dd></dl>
+    <dd>volume name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5419,8 +5799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>mount path.</p>
-</dd><dt class="property-required"
+    <dd>mount path.</dd><dt class="property-required"
             title="Required">
         <span id="volume_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volume_name_python" style="color: inherit; text-decoration: inherit;">volume_<wbr>name</a>
@@ -5428,8 +5807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>volume name.</p>
-</dd></dl>
+    <dd>volume name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5443,8 +5821,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>mount path.</p>
-</dd><dt class="property-required"
+    <dd>mount path.</dd><dt class="property-required"
             title="Required">
         <span id="volumename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumename_yaml" style="color: inherit; text-decoration: inherit;">volume<wbr>Name</a>
@@ -5452,8 +5829,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>volume name.</p>
-</dd></dl>
+    <dd>volume name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5462,11 +5838,13 @@ The following state arguments are supported:
 
 
 tem workload can be imported using the id, e.g.
-
 ```sh
 $ pulumi import tencentcloud:Tem/workload:Workload workload envirnomentId#applicationId
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -5478,7 +5856,6 @@ $ pulumi import tencentcloud:Tem/workload:Workload workload envirnomentId#applic
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

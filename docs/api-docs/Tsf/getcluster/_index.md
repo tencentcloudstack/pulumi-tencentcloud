@@ -2,9 +2,11 @@
 ---
 title: "getCluster"
 title_tag: "tencentcloud.Tsf.getCluster"
-meta_desc: "Documentation for the tencentcloud.Tsf.getCluster function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of tsf cluster"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,30 +18,74 @@ Use this data source to query detailed information of tsf cluster
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const cluster = tencentcloud.Tsf.getCluster({
+const cluster = tencentcloud.tsf.getCluster({
     clusterIdLists: ["cluster-vwgj5e6y"],
     clusterType: "V",
     disableProgramAuthCheck: true,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-cluster = tencentcloud.Tsf.get_cluster(cluster_id_lists=["cluster-vwgj5e6y"],
+cluster = tencentcloud.tsf.get_cluster(cluster_id_lists=["cluster-vwgj5e6y"],
     cluster_type="V",
     disable_program_auth_check=True)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tsf"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tsf.GetCluster(ctx, &tsf.GetClusterArgs{
+			ClusterIdLists: []string{
+				"cluster-vwgj5e6y",
+			},
+			ClusterType:             pulumi.StringRef("V"),
+			DisableProgramAuthCheck: pulumi.BoolRef(true),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -55,30 +101,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tsf.GetCluster(ctx, &tsf.GetClusterArgs{
-			ClusterIdLists: []string{
-				"cluster-vwgj5e6y",
-			},
-			ClusterType:             pulumi.StringRef("V"),
-			DisableProgramAuthCheck: pulumi.BoolRef(true),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -87,8 +114,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tsf.TsfFunctions;
 import com.pulumi.tencentcloud.Tsf.inputs.GetClusterArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -109,19 +136,51 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   cluster:
     fn::invoke:
-      Function: tencentcloud:Tsf:getCluster
-      Arguments:
+      function: tencentcloud:Tsf:getCluster
+      arguments:
         clusterIdLists:
           - cluster-vwgj5e6y
         clusterType: V
         disableProgramAuthCheck: true
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_tsf_getcluster" "cluster" {
+  cluster_id_lists           = ["cluster-vwgj5e6y"]
+  cluster_type               = "V"
+  disable_program_auth_check = true
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeSimpleClusters](https://www.tencentcloud.com/search/?wd=DescribeSimpleClusters&type=document&lang=en)
 
 
 
@@ -133,7 +192,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -141,9 +200,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getCluster<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClusterArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>></span
+><span class="k">function </span>getCluster<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClusterArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>></span
 ><span class="k">
-function </span>getClusterOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClusterOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>></span
+function </span>getClusterOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClusterOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -159,12 +218,12 @@ function </span>getClusterOutput<span class="p">(</span><span class="nx">args</s
                 <span class="nx">search_word</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetClusterResult</span
 ><span class="k">
-def </span>get_cluster_output<span class="p">(</span><span class="nx">cluster_id_lists</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                <span class="nx">cluster_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">disable_program_auth_check</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[bool]]</span> = None<span class="p">,</span>
-                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">search_word</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetClusterResult]</span
+def </span>get_cluster_output<span class="p">(</span><span class="nx">cluster_id_lists</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                <span class="nx">cluster_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">disable_program_auth_check</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[bool]]</span> = None<span class="p">,</span>
+                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">search_word</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetClusterResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,12 +232,12 @@ def </span>get_cluster_output<span class="p">(</span><span class="nx">cluster_id
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetCluster<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetClusterArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetClusterResult</a></span>, error)</span
+><span class="k">func </span>LookupCluster<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupClusterArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupClusterResult</a></span>, error)</span
 ><span class="k">
-func </span>GetClusterOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetClusterOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetClusterResultOutput</span
+func </span>LookupClusterOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupClusterOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupClusterResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetCluster` in the Go SDK.
+&gt; Note: This function is named `LookupCluster` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -189,7 +248,8 @@ func </span>GetClusterOutput<span class="p">(</span><span class="nx">ctx</span><
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetCluster </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetClusterArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetClusterInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetClusterInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetClusterInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -198,7 +258,8 @@ func </span>GetClusterOutput<span class="p">(</span><span class="nx">ctx</span><
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>> </span>getCluster<span class="p">(</span><span class="nx">GetClusterArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>> </span>getCluster<span class="p">(</span><span class="nx">GetClusterArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>> </span>getCluster<span class="p">(</span><span class="nx">GetClusterArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -210,6 +271,15 @@ func </span>GetClusterOutput<span class="p">(</span><span class="nx">ctx</span><
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tsf/getCluster:getCluster
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tsf_get_cluster&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +298,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Cluster ID list to be queried, if not filled in or passed, all content will be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID list to be queried, if not filled in or passed, all content will be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -237,8 +306,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</p>
-</dd><dt class="property-optional"
+    <dd>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</dd><dt class="property-optional"
             title="Optional">
         <span id="disableprogramauthcheck_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disableprogramauthcheck_csharp" style="color: inherit; text-decoration: inherit;">Disable<wbr>Program<wbr>Auth<wbr>Check</a>
@@ -246,8 +314,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to disable dataset authentication.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to disable dataset authentication.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -255,8 +322,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_csharp" style="color: inherit; text-decoration: inherit;">Search<wbr>Word</a>
@@ -264,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by keywords for Cluster Id or name.</p>
-</dd></dl>
+    <dd>Filter by keywords for Cluster Id or name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -279,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Cluster ID list to be queried, if not filled in or passed, all content will be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID list to be queried, if not filled in or passed, all content will be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -288,8 +352,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</p>
-</dd><dt class="property-optional"
+    <dd>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</dd><dt class="property-optional"
             title="Optional">
         <span id="disableprogramauthcheck_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disableprogramauthcheck_go" style="color: inherit; text-decoration: inherit;">Disable<wbr>Program<wbr>Auth<wbr>Check</a>
@@ -297,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to disable dataset authentication.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to disable dataset authentication.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -306,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_go" style="color: inherit; text-decoration: inherit;">Search<wbr>Word</a>
@@ -315,8 +376,53 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by keywords for Cluster Id or name.</p>
-</dd></dl>
+    <dd>Filter by keywords for Cluster Id or name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_lists_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Cluster ID list to be queried, if not filled in or passed, all content will be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_type_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disable_program_auth_check_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_program_auth_check_hcl" style="color: inherit; text-decoration: inherit;">disable_<wbr>program_<wbr>auth_<wbr>check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to disable dataset authentication.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="search_word_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_word_hcl" style="color: inherit; text-decoration: inherit;">search_<wbr>word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter by keywords for Cluster Id or name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -330,8 +436,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Cluster ID list to be queried, if not filled in or passed, all content will be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID list to be queried, if not filled in or passed, all content will be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -339,8 +444,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</p>
-</dd><dt class="property-optional"
+    <dd>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</dd><dt class="property-optional"
             title="Optional">
         <span id="disableprogramauthcheck_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disableprogramauthcheck_java" style="color: inherit; text-decoration: inherit;">disable<wbr>Program<wbr>Auth<wbr>Check</a>
@@ -348,8 +452,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to disable dataset authentication.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to disable dataset authentication.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -357,8 +460,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_java" style="color: inherit; text-decoration: inherit;">search<wbr>Word</a>
@@ -366,8 +468,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by keywords for Cluster Id or name.</p>
-</dd></dl>
+    <dd>Filter by keywords for Cluster Id or name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -381,8 +482,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Cluster ID list to be queried, if not filled in or passed, all content will be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID list to be queried, if not filled in or passed, all content will be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -390,8 +490,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</p>
-</dd><dt class="property-optional"
+    <dd>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</dd><dt class="property-optional"
             title="Optional">
         <span id="disableprogramauthcheck_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disableprogramauthcheck_nodejs" style="color: inherit; text-decoration: inherit;">disable<wbr>Program<wbr>Auth<wbr>Check</a>
@@ -399,8 +498,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to disable dataset authentication.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to disable dataset authentication.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -408,8 +506,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_nodejs" style="color: inherit; text-decoration: inherit;">search<wbr>Word</a>
@@ -417,8 +514,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter by keywords for Cluster Id or name.</p>
-</dd></dl>
+    <dd>Filter by keywords for Cluster Id or name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -432,8 +528,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Cluster ID list to be queried, if not filled in or passed, all content will be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID list to be queried, if not filled in or passed, all content will be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="cluster_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_type_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
@@ -441,8 +536,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</p>
-</dd><dt class="property-optional"
+    <dd>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</dd><dt class="property-optional"
             title="Optional">
         <span id="disable_program_auth_check_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_program_auth_check_python" style="color: inherit; text-decoration: inherit;">disable_<wbr>program_<wbr>auth_<wbr>check</a>
@@ -450,8 +544,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to disable dataset authentication.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to disable dataset authentication.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -459,8 +552,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="search_word_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_word_python" style="color: inherit; text-decoration: inherit;">search_<wbr>word</a>
@@ -468,8 +560,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter by keywords for Cluster Id or name.</p>
-</dd></dl>
+    <dd>Filter by keywords for Cluster Id or name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -483,8 +574,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Cluster ID list to be queried, if not filled in or passed, all content will be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID list to be queried, if not filled in or passed, all content will be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -492,8 +582,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</p>
-</dd><dt class="property-optional"
+    <dd>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</dd><dt class="property-optional"
             title="Optional">
         <span id="disableprogramauthcheck_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disableprogramauthcheck_yaml" style="color: inherit; text-decoration: inherit;">disable<wbr>Program<wbr>Auth<wbr>Check</a>
@@ -501,8 +590,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to disable dataset authentication.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to disable dataset authentication.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -510,8 +598,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_yaml" style="color: inherit; text-decoration: inherit;">search<wbr>Word</a>
@@ -519,8 +606,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter by keywords for Cluster Id or name.</p>
-</dd></dl>
+    <dd>Filter by keywords for Cluster Id or name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -543,8 +629,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_csharp" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -552,8 +637,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresult">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Outputs.<wbr>Get<wbr>Cluster<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>TSF cluster pagination object. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-"
+    <dd>TSF cluster pagination object. Note: This field may return null, indicating no valid value.</dd><dt class="property-"
             title="">
         <span id="clusteridlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteridlists_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id<wbr>Lists</a>
@@ -569,8 +653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster type. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-"
+    <dd>Cluster type. Note: This field may return null, indicating no valid value.</dd><dt class="property-"
             title="">
         <span id="disableprogramauthcheck_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disableprogramauthcheck_csharp" style="color: inherit; text-decoration: inherit;">Disable<wbr>Program<wbr>Auth<wbr>Check</a>
@@ -608,8 +691,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_go" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -617,8 +699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresult">[]Get<wbr>Cluster<wbr>Result</a></span>
     </dt>
-    <dd><p>TSF cluster pagination object. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-"
+    <dd>TSF cluster pagination object. Note: This field may return null, indicating no valid value.</dd><dt class="property-"
             title="">
         <span id="clusteridlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteridlists_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id<wbr>Lists</a>
@@ -634,8 +715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster type. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-"
+    <dd>Cluster type. Note: This field may return null, indicating no valid value.</dd><dt class="property-"
             title="">
         <span id="disableprogramauthcheck_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disableprogramauthcheck_go" style="color: inherit; text-decoration: inherit;">Disable<wbr>Program<wbr>Auth<wbr>Check</a>
@@ -664,6 +744,68 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="results_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_hcl" style="color: inherit; text-decoration: inherit;">results</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getclusterresult">list(object)</a></span>
+    </dt>
+    <dd>TSF cluster pagination object. Note: This field may return null, indicating no valid value.</dd><dt class="property-"
+            title="">
+        <span id="cluster_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_lists_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="cluster_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_type_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster type. Note: This field may return null, indicating no valid value.</dd><dt class="property-"
+            title="">
+        <span id="disable_program_auth_check_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_program_auth_check_hcl" style="color: inherit; text-decoration: inherit;">disable_<wbr>program_<wbr>auth_<wbr>check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="search_word_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_word_hcl" style="color: inherit; text-decoration: inherit;">search_<wbr>word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -673,8 +815,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_java" style="color: inherit; text-decoration: inherit;">results</a>
@@ -682,8 +823,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresult">List&lt;Get<wbr>Cluster<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>TSF cluster pagination object. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-"
+    <dd>TSF cluster pagination object. Note: This field may return null, indicating no valid value.</dd><dt class="property-"
             title="">
         <span id="clusteridlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteridlists_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id<wbr>Lists</a>
@@ -699,8 +839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster type. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-"
+    <dd>Cluster type. Note: This field may return null, indicating no valid value.</dd><dt class="property-"
             title="">
         <span id="disableprogramauthcheck_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disableprogramauthcheck_java" style="color: inherit; text-decoration: inherit;">disable<wbr>Program<wbr>Auth<wbr>Check</a>
@@ -738,8 +877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_nodejs" style="color: inherit; text-decoration: inherit;">results</a>
@@ -747,8 +885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresult">Get<wbr>Cluster<wbr>Result[]</a></span>
     </dt>
-    <dd><p>TSF cluster pagination object. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-"
+    <dd>TSF cluster pagination object. Note: This field may return null, indicating no valid value.</dd><dt class="property-"
             title="">
         <span id="clusteridlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteridlists_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id<wbr>Lists</a>
@@ -764,8 +901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster type. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-"
+    <dd>Cluster type. Note: This field may return null, indicating no valid value.</dd><dt class="property-"
             title="">
         <span id="disableprogramauthcheck_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disableprogramauthcheck_nodejs" style="color: inherit; text-decoration: inherit;">disable<wbr>Program<wbr>Auth<wbr>Check</a>
@@ -803,17 +939,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_python" style="color: inherit; text-decoration: inherit;">results</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getclusterresult">Get<wbr>Cluster<wbr>Result]</a></span>
+        <span class="property-type"><a href="#getclusterresult">Sequence[Get<wbr>Cluster<wbr>Result]</a></span>
     </dt>
-    <dd><p>TSF cluster pagination object. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-"
+    <dd>TSF cluster pagination object. Note: This field may return null, indicating no valid value.</dd><dt class="property-"
             title="">
         <span id="cluster_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_lists_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id_<wbr>lists</a>
@@ -829,8 +963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster type. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-"
+    <dd>Cluster type. Note: This field may return null, indicating no valid value.</dd><dt class="property-"
             title="">
         <span id="disable_program_auth_check_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disable_program_auth_check_python" style="color: inherit; text-decoration: inherit;">disable_<wbr>program_<wbr>auth_<wbr>check</a>
@@ -868,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_yaml" style="color: inherit; text-decoration: inherit;">results</a>
@@ -877,8 +1009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresult">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>TSF cluster pagination object. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-"
+    <dd>TSF cluster pagination object. Note: This field may return null, indicating no valid value.</dd><dt class="property-"
             title="">
         <span id="clusteridlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusteridlists_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id<wbr>Lists</a>
@@ -894,8 +1025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster type. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-"
+    <dd>Cluster type. Note: This field may return null, indicating no valid value.</dd><dt class="property-"
             title="">
         <span id="disableprogramauthcheck_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disableprogramauthcheck_yaml" style="color: inherit; text-decoration: inherit;">disable<wbr>Program<wbr>Auth<wbr>Check</a>
@@ -943,8 +1073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontent">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Get<wbr>Cluster<wbr>Result<wbr>Content&gt;</a></span>
     </dt>
-    <dd><p>Cluster list. Note: This field may return null, indicating no valid values.</p>
-</dd><dt class="property-required"
+    <dd>Cluster list. Note: This field may return null, indicating no valid values.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_csharp" style="color: inherit; text-decoration: inherit;">Total<wbr>Count</a>
@@ -952,8 +1081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of items. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Total number of items. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -967,8 +1095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontent">[]Get<wbr>Cluster<wbr>Result<wbr>Content</a></span>
     </dt>
-    <dd><p>Cluster list. Note: This field may return null, indicating no valid values.</p>
-</dd><dt class="property-required"
+    <dd>Cluster list. Note: This field may return null, indicating no valid values.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_go" style="color: inherit; text-decoration: inherit;">Total<wbr>Count</a>
@@ -976,8 +1103,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of items. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Total number of items. Note: This field may return null, indicating that no valid value was found.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="contents_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contents_hcl" style="color: inherit; text-decoration: inherit;">contents</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getclusterresultcontent">list(object)</a></span>
+    </dt>
+    <dd>Cluster list. Note: This field may return null, indicating no valid values.</dd><dt class="property-required"
+            title="Required">
+        <span id="total_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_count_hcl" style="color: inherit; text-decoration: inherit;">total_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total number of items. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -991,8 +1139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontent">List&lt;Get<wbr>Cluster<wbr>Result<wbr>Content&gt;</a></span>
     </dt>
-    <dd><p>Cluster list. Note: This field may return null, indicating no valid values.</p>
-</dd><dt class="property-required"
+    <dd>Cluster list. Note: This field may return null, indicating no valid values.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_java" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -1000,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total number of items. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Total number of items. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1015,8 +1161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontent">Get<wbr>Cluster<wbr>Result<wbr>Content[]</a></span>
     </dt>
-    <dd><p>Cluster list. Note: This field may return null, indicating no valid values.</p>
-</dd><dt class="property-required"
+    <dd>Cluster list. Note: This field may return null, indicating no valid values.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_nodejs" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -1024,8 +1169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total number of items. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Total number of items. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1037,10 +1181,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contents_python" style="color: inherit; text-decoration: inherit;">contents</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getclusterresultcontent">Get<wbr>Cluster<wbr>Result<wbr>Content]</a></span>
+        <span class="property-type"><a href="#getclusterresultcontent">Sequence[Get<wbr>Cluster<wbr>Result<wbr>Content]</a></span>
     </dt>
-    <dd><p>Cluster list. Note: This field may return null, indicating no valid values.</p>
-</dd><dt class="property-required"
+    <dd>Cluster list. Note: This field may return null, indicating no valid values.</dd><dt class="property-required"
             title="Required">
         <span id="total_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_count_python" style="color: inherit; text-decoration: inherit;">total_<wbr>count</a>
@@ -1048,8 +1191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of items. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Total number of items. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1063,8 +1205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontent">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Cluster list. Note: This field may return null, indicating no valid values.</p>
-</dd><dt class="property-required"
+    <dd>Cluster list. Note: This field may return null, indicating no valid values.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_yaml" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -1072,8 +1213,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total number of items. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Total number of items. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1091,8 +1231,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster CIDR. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>cluster CIDR. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterdesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdesc_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Desc</a>
@@ -1100,8 +1239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster description. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster description. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1109,8 +1247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterlimitcpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitcpu_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Limit<wbr>Cpu</a>
@@ -1118,8 +1255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Maximum CPU limit of the cluster, in cores. This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Maximum CPU limit of the cluster, in cores. This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clusterlimitmem_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitmem_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Limit<wbr>Mem</a>
@@ -1127,8 +1263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Cluster maximum memory limit in GB. This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Cluster maximum memory limit in GB. This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -1136,8 +1271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster name. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Status</a>
@@ -1145,8 +1279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster status. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>cluster status. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clustertotalcpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalcpu_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Total<wbr>Cpu</a>
@@ -1154,8 +1287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Total CPU of the cluster, unit: cores. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Total CPU of the cluster, unit: cores. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clustertotalmem_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalmem_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Total<wbr>Mem</a>
@@ -1163,8 +1295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Total memory of the cluster, unit: G. Note: This field may return null, indicating that no valid value is obtained.</p>
-</dd><dt class="property-required"
+    <dd>Total memory of the cluster, unit: G. Note: This field may return null, indicating that no valid value is obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clustertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -1172,8 +1303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</p>
-</dd><dt class="property-required"
+    <dd>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</dd><dt class="property-required"
             title="Required">
         <span id="clusterusedcpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedcpu_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Used<wbr>Cpu</a>
@@ -1181,8 +1311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Used CPU of the cluster, in cores. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Used CPU of the cluster, in cores. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterusedmem_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedmem_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Used<wbr>Mem</a>
@@ -1190,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Cluster used memory in GB. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster used memory in GB. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Version</a>
@@ -1199,8 +1327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The cluster version, may return null if not applicable.</p>
-</dd><dt class="property-required"
+    <dd>The cluster version, may return null if not applicable.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1208,8 +1335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="deleteflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflag_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Flag</a>
@@ -1217,8 +1343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Deletion tag: true means it can be deleted, false means it cannot be deleted. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Deletion tag: true means it can be deleted, false means it cannot be deleted. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="deleteflagreason_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflagreason_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>Flag<wbr>Reason</a>
@@ -1226,8 +1351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason why the cluster cannot be deleted.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Reason why the cluster cannot be deleted.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="instancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -1235,8 +1359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster instance number. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="normalinstancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#normalinstancecount_csharp" style="color: inherit; text-decoration: inherit;">Normal<wbr>Instance<wbr>Count</a>
@@ -1244,8 +1367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster normal instance number. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster normal instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="operationinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationinfos_csharp" style="color: inherit; text-decoration: inherit;">Operation<wbr>Infos</a>
@@ -1253,8 +1375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Control information returned to the frontend. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Control information returned to the frontend. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="runinstancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runinstancecount_csharp" style="color: inherit; text-decoration: inherit;">Run<wbr>Instance<wbr>Count</a>
@@ -1262,8 +1383,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster running instance number. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster running instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="runserviceinstancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runserviceinstancecount_csharp" style="color: inherit; text-decoration: inherit;">Run<wbr>Service<wbr>Instance<wbr>Count</a>
@@ -1271,8 +1391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of available service instances in the cluster. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Number of available service instances in the cluster. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1280,8 +1399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster subnet ID. Note: This field may return null, indicating no valid values.</p>
-</dd><dt class="property-required"
+    <dd>Cluster subnet ID. Note: This field may return null, indicating no valid values.</dd><dt class="property-required"
             title="Required">
         <span id="tsfregionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionid_csharp" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Region<wbr>Id</a>
@@ -1289,8 +1407,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>region ID of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>region ID of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="tsfregionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionname_csharp" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Region<wbr>Name</a>
@@ -1298,8 +1415,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>region name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>region name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="tsfzoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzoneid_csharp" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Zone<wbr>Id</a>
@@ -1307,8 +1423,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone Id of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Zone Id of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="tsfzonename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzonename_csharp" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Zone<wbr>Name</a>
@@ -1316,8 +1431,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Zone name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1325,8 +1439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1334,8 +1447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private network ID of the cluster. Note: This field may return null, indicating no valid value.</p>
-</dd></dl>
+    <dd>Private network ID of the cluster. Note: This field may return null, indicating no valid value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1349,8 +1461,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster CIDR. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>cluster CIDR. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterdesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdesc_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Desc</a>
@@ -1358,8 +1469,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster description. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster description. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1367,8 +1477,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterlimitcpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitcpu_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Limit<wbr>Cpu</a>
@@ -1376,8 +1485,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Maximum CPU limit of the cluster, in cores. This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Maximum CPU limit of the cluster, in cores. This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clusterlimitmem_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitmem_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Limit<wbr>Mem</a>
@@ -1385,8 +1493,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Cluster maximum memory limit in GB. This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Cluster maximum memory limit in GB. This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -1394,8 +1501,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster name. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Status</a>
@@ -1403,8 +1509,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster status. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>cluster status. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clustertotalcpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalcpu_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Total<wbr>Cpu</a>
@@ -1412,8 +1517,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Total CPU of the cluster, unit: cores. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Total CPU of the cluster, unit: cores. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clustertotalmem_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalmem_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Total<wbr>Mem</a>
@@ -1421,8 +1525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Total memory of the cluster, unit: G. Note: This field may return null, indicating that no valid value is obtained.</p>
-</dd><dt class="property-required"
+    <dd>Total memory of the cluster, unit: G. Note: This field may return null, indicating that no valid value is obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clustertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -1430,8 +1533,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</p>
-</dd><dt class="property-required"
+    <dd>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</dd><dt class="property-required"
             title="Required">
         <span id="clusterusedcpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedcpu_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Used<wbr>Cpu</a>
@@ -1439,8 +1541,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Used CPU of the cluster, in cores. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Used CPU of the cluster, in cores. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterusedmem_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedmem_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Used<wbr>Mem</a>
@@ -1448,8 +1549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Cluster used memory in GB. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster used memory in GB. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Version</a>
@@ -1457,8 +1557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The cluster version, may return null if not applicable.</p>
-</dd><dt class="property-required"
+    <dd>The cluster version, may return null if not applicable.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1466,8 +1565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="deleteflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflag_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Flag</a>
@@ -1475,8 +1573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Deletion tag: true means it can be deleted, false means it cannot be deleted. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Deletion tag: true means it can be deleted, false means it cannot be deleted. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="deleteflagreason_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflagreason_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>Flag<wbr>Reason</a>
@@ -1484,8 +1581,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason why the cluster cannot be deleted.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Reason why the cluster cannot be deleted.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="instancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -1493,8 +1589,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster instance number. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="normalinstancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#normalinstancecount_go" style="color: inherit; text-decoration: inherit;">Normal<wbr>Instance<wbr>Count</a>
@@ -1502,8 +1597,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster normal instance number. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster normal instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="operationinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationinfos_go" style="color: inherit; text-decoration: inherit;">Operation<wbr>Infos</a>
@@ -1511,8 +1605,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfo">[]Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info</a></span>
     </dt>
-    <dd><p>Control information returned to the frontend. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Control information returned to the frontend. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="runinstancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runinstancecount_go" style="color: inherit; text-decoration: inherit;">Run<wbr>Instance<wbr>Count</a>
@@ -1520,8 +1613,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster running instance number. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster running instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="runserviceinstancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runserviceinstancecount_go" style="color: inherit; text-decoration: inherit;">Run<wbr>Service<wbr>Instance<wbr>Count</a>
@@ -1529,8 +1621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of available service instances in the cluster. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Number of available service instances in the cluster. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1538,8 +1629,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster subnet ID. Note: This field may return null, indicating no valid values.</p>
-</dd><dt class="property-required"
+    <dd>Cluster subnet ID. Note: This field may return null, indicating no valid values.</dd><dt class="property-required"
             title="Required">
         <span id="tsfregionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionid_go" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Region<wbr>Id</a>
@@ -1547,8 +1637,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>region ID of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>region ID of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="tsfregionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionname_go" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Region<wbr>Name</a>
@@ -1556,8 +1645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>region name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>region name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="tsfzoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzoneid_go" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Zone<wbr>Id</a>
@@ -1565,8 +1653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone Id of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Zone Id of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="tsfzonename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzonename_go" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Zone<wbr>Name</a>
@@ -1574,8 +1661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Zone name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1583,8 +1669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1592,8 +1677,237 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private network ID of the cluster. Note: This field may return null, indicating no valid value.</p>
-</dd></dl>
+    <dd>Private network ID of the cluster. Note: This field may return null, indicating no valid value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cluster_cidr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_cidr_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>cidr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cluster CIDR. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_desc_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster description. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_limit_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_limit_cpu_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>limit_<wbr>cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum CPU limit of the cluster, in cores. This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_limit_mem_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_limit_mem_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>limit_<wbr>mem</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cluster maximum memory limit in GB. This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster name. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_status_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cluster status. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_total_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_total_cpu_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>total_<wbr>cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total CPU of the cluster, unit: cores. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_total_mem_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_total_mem_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>total_<wbr>mem</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total memory of the cluster, unit: G. Note: This field may return null, indicating that no valid value is obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_type_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_used_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_used_cpu_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>used_<wbr>cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Used CPU of the cluster, in cores. This field may return null, indicating no valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_used_mem_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_used_mem_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>used_<wbr>mem</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cluster used memory in GB. This field may return null, indicating no valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_version_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The cluster version, may return null if not applicable.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="delete_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_flag_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Deletion tag: true means it can be deleted, false means it cannot be deleted. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="delete_flag_reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_flag_reason_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>flag_<wbr>reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reason why the cluster cannot be deleted.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_count_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cluster instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="normal_instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#normal_instance_count_hcl" style="color: inherit; text-decoration: inherit;">normal_<wbr>instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cluster normal instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="operation_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_infos_hcl" style="color: inherit; text-decoration: inherit;">operation_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getclusterresultcontentoperationinfo">list(object)</a></span>
+    </dt>
+    <dd>Control information returned to the frontend. This field may return null, indicating no valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="run_instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#run_instance_count_hcl" style="color: inherit; text-decoration: inherit;">run_<wbr>instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cluster running instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="run_service_instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#run_service_instance_count_hcl" style="color: inherit; text-decoration: inherit;">run_<wbr>service_<wbr>instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of available service instances in the cluster. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster subnet ID. Note: This field may return null, indicating no valid values.</dd><dt class="property-required"
+            title="Required">
+        <span id="tsf_region_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsf_region_id_hcl" style="color: inherit; text-decoration: inherit;">tsf_<wbr>region_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>region ID of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="tsf_region_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsf_region_name_hcl" style="color: inherit; text-decoration: inherit;">tsf_<wbr>region_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>region name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="tsf_zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsf_zone_id_hcl" style="color: inherit; text-decoration: inherit;">tsf_<wbr>zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Zone Id of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="tsf_zone_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsf_zone_name_hcl" style="color: inherit; text-decoration: inherit;">tsf_<wbr>zone_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Zone name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Private network ID of the cluster. Note: This field may return null, indicating no valid value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1607,8 +1921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster CIDR. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>cluster CIDR. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterdesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdesc_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Desc</a>
@@ -1616,8 +1929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster description. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster description. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1625,8 +1937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterlimitcpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitcpu_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit<wbr>Cpu</a>
@@ -1634,8 +1945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Maximum CPU limit of the cluster, in cores. This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Maximum CPU limit of the cluster, in cores. This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clusterlimitmem_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitmem_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit<wbr>Mem</a>
@@ -1643,8 +1953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Cluster maximum memory limit in GB. This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Cluster maximum memory limit in GB. This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -1652,8 +1961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster name. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Status</a>
@@ -1661,8 +1969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster status. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>cluster status. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clustertotalcpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalcpu_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Total<wbr>Cpu</a>
@@ -1670,8 +1977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Total CPU of the cluster, unit: cores. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Total CPU of the cluster, unit: cores. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clustertotalmem_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalmem_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Total<wbr>Mem</a>
@@ -1679,8 +1985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Total memory of the cluster, unit: G. Note: This field may return null, indicating that no valid value is obtained.</p>
-</dd><dt class="property-required"
+    <dd>Total memory of the cluster, unit: G. Note: This field may return null, indicating that no valid value is obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clustertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -1688,8 +1993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</p>
-</dd><dt class="property-required"
+    <dd>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</dd><dt class="property-required"
             title="Required">
         <span id="clusterusedcpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedcpu_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Used<wbr>Cpu</a>
@@ -1697,8 +2001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Used CPU of the cluster, in cores. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Used CPU of the cluster, in cores. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterusedmem_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedmem_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Used<wbr>Mem</a>
@@ -1706,8 +2009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Cluster used memory in GB. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster used memory in GB. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Version</a>
@@ -1715,8 +2017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The cluster version, may return null if not applicable.</p>
-</dd><dt class="property-required"
+    <dd>The cluster version, may return null if not applicable.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1724,8 +2025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="deleteflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflag_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag</a>
@@ -1733,8 +2033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Deletion tag: true means it can be deleted, false means it cannot be deleted. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Deletion tag: true means it can be deleted, false means it cannot be deleted. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="deleteflagreason_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflagreason_java" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag<wbr>Reason</a>
@@ -1742,8 +2041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reason why the cluster cannot be deleted.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Reason why the cluster cannot be deleted.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="instancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -1751,8 +2049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Cluster instance number. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="normalinstancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#normalinstancecount_java" style="color: inherit; text-decoration: inherit;">normal<wbr>Instance<wbr>Count</a>
@@ -1760,8 +2057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Cluster normal instance number. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster normal instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="operationinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationinfos_java" style="color: inherit; text-decoration: inherit;">operation<wbr>Infos</a>
@@ -1769,8 +2065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfo">List&lt;Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Control information returned to the frontend. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Control information returned to the frontend. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="runinstancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runinstancecount_java" style="color: inherit; text-decoration: inherit;">run<wbr>Instance<wbr>Count</a>
@@ -1778,8 +2073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Cluster running instance number. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster running instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="runserviceinstancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runserviceinstancecount_java" style="color: inherit; text-decoration: inherit;">run<wbr>Service<wbr>Instance<wbr>Count</a>
@@ -1787,8 +2081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of available service instances in the cluster. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Number of available service instances in the cluster. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1796,8 +2089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster subnet ID. Note: This field may return null, indicating no valid values.</p>
-</dd><dt class="property-required"
+    <dd>Cluster subnet ID. Note: This field may return null, indicating no valid values.</dd><dt class="property-required"
             title="Required">
         <span id="tsfregionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionid_java" style="color: inherit; text-decoration: inherit;">tsf<wbr>Region<wbr>Id</a>
@@ -1805,8 +2097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>region ID of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>region ID of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="tsfregionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionname_java" style="color: inherit; text-decoration: inherit;">tsf<wbr>Region<wbr>Name</a>
@@ -1814,8 +2105,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>region name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>region name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="tsfzoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzoneid_java" style="color: inherit; text-decoration: inherit;">tsf<wbr>Zone<wbr>Id</a>
@@ -1823,8 +2113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone Id of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Zone Id of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="tsfzonename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzonename_java" style="color: inherit; text-decoration: inherit;">tsf<wbr>Zone<wbr>Name</a>
@@ -1832,8 +2121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Zone name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1841,8 +2129,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1850,8 +2137,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private network ID of the cluster. Note: This field may return null, indicating no valid value.</p>
-</dd></dl>
+    <dd>Private network ID of the cluster. Note: This field may return null, indicating no valid value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1865,8 +2151,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster CIDR. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>cluster CIDR. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterdesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdesc_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Desc</a>
@@ -1874,8 +2159,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster description. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster description. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1883,8 +2167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterlimitcpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitcpu_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit<wbr>Cpu</a>
@@ -1892,8 +2175,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum CPU limit of the cluster, in cores. This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Maximum CPU limit of the cluster, in cores. This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clusterlimitmem_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitmem_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit<wbr>Mem</a>
@@ -1901,8 +2183,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cluster maximum memory limit in GB. This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Cluster maximum memory limit in GB. This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -1910,8 +2191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster name. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Status</a>
@@ -1919,8 +2199,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster status. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>cluster status. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clustertotalcpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalcpu_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Total<wbr>Cpu</a>
@@ -1928,8 +2207,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total CPU of the cluster, unit: cores. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Total CPU of the cluster, unit: cores. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clustertotalmem_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalmem_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Total<wbr>Mem</a>
@@ -1937,8 +2215,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total memory of the cluster, unit: G. Note: This field may return null, indicating that no valid value is obtained.</p>
-</dd><dt class="property-required"
+    <dd>Total memory of the cluster, unit: G. Note: This field may return null, indicating that no valid value is obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clustertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -1946,8 +2223,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</p>
-</dd><dt class="property-required"
+    <dd>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</dd><dt class="property-required"
             title="Required">
         <span id="clusterusedcpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedcpu_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Used<wbr>Cpu</a>
@@ -1955,8 +2231,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Used CPU of the cluster, in cores. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Used CPU of the cluster, in cores. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterusedmem_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedmem_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Used<wbr>Mem</a>
@@ -1964,8 +2239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cluster used memory in GB. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster used memory in GB. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Version</a>
@@ -1973,8 +2247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The cluster version, may return null if not applicable.</p>
-</dd><dt class="property-required"
+    <dd>The cluster version, may return null if not applicable.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1982,8 +2255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="deleteflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflag_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag</a>
@@ -1991,8 +2263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Deletion tag: true means it can be deleted, false means it cannot be deleted. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Deletion tag: true means it can be deleted, false means it cannot be deleted. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="deleteflagreason_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflagreason_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag<wbr>Reason</a>
@@ -2000,8 +2271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason why the cluster cannot be deleted.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Reason why the cluster cannot be deleted.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="instancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -2009,8 +2279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cluster instance number. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="normalinstancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#normalinstancecount_nodejs" style="color: inherit; text-decoration: inherit;">normal<wbr>Instance<wbr>Count</a>
@@ -2018,8 +2287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cluster normal instance number. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster normal instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="operationinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationinfos_nodejs" style="color: inherit; text-decoration: inherit;">operation<wbr>Infos</a>
@@ -2027,8 +2295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfo">Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Control information returned to the frontend. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Control information returned to the frontend. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="runinstancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runinstancecount_nodejs" style="color: inherit; text-decoration: inherit;">run<wbr>Instance<wbr>Count</a>
@@ -2036,8 +2303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cluster running instance number. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster running instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="runserviceinstancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runserviceinstancecount_nodejs" style="color: inherit; text-decoration: inherit;">run<wbr>Service<wbr>Instance<wbr>Count</a>
@@ -2045,8 +2311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of available service instances in the cluster. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Number of available service instances in the cluster. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2054,8 +2319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster subnet ID. Note: This field may return null, indicating no valid values.</p>
-</dd><dt class="property-required"
+    <dd>Cluster subnet ID. Note: This field may return null, indicating no valid values.</dd><dt class="property-required"
             title="Required">
         <span id="tsfregionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionid_nodejs" style="color: inherit; text-decoration: inherit;">tsf<wbr>Region<wbr>Id</a>
@@ -2063,8 +2327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>region ID of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>region ID of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="tsfregionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionname_nodejs" style="color: inherit; text-decoration: inherit;">tsf<wbr>Region<wbr>Name</a>
@@ -2072,8 +2335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>region name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>region name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="tsfzoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzoneid_nodejs" style="color: inherit; text-decoration: inherit;">tsf<wbr>Zone<wbr>Id</a>
@@ -2081,8 +2343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone Id of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Zone Id of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="tsfzonename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzonename_nodejs" style="color: inherit; text-decoration: inherit;">tsf<wbr>Zone<wbr>Name</a>
@@ -2090,8 +2351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Zone name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2099,8 +2359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2108,8 +2367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private network ID of the cluster. Note: This field may return null, indicating no valid value.</p>
-</dd></dl>
+    <dd>Private network ID of the cluster. Note: This field may return null, indicating no valid value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2123,8 +2381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cluster CIDR. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>cluster CIDR. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_desc_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>desc</a>
@@ -2132,8 +2389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster description. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster description. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -2141,8 +2397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster ID. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_limit_cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_limit_cpu_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>limit_<wbr>cpu</a>
@@ -2150,8 +2405,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Maximum CPU limit of the cluster, in cores. This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Maximum CPU limit of the cluster, in cores. This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_limit_mem_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_limit_mem_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>limit_<wbr>mem</a>
@@ -2159,8 +2413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Cluster maximum memory limit in GB. This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Cluster maximum memory limit in GB. This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
@@ -2168,8 +2421,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster name. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_status_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>status</a>
@@ -2177,8 +2429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cluster status. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>cluster status. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_total_cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_total_cpu_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>total_<wbr>cpu</a>
@@ -2186,8 +2437,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Total CPU of the cluster, unit: cores. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Total CPU of the cluster, unit: cores. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_total_mem_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_total_mem_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>total_<wbr>mem</a>
@@ -2195,8 +2445,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Total memory of the cluster, unit: G. Note: This field may return null, indicating that no valid value is obtained.</p>
-</dd><dt class="property-required"
+    <dd>Total memory of the cluster, unit: G. Note: This field may return null, indicating that no valid value is obtained.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_type_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
@@ -2204,8 +2453,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</p>
-</dd><dt class="property-required"
+    <dd>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_used_cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_used_cpu_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>used_<wbr>cpu</a>
@@ -2213,8 +2461,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Used CPU of the cluster, in cores. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Used CPU of the cluster, in cores. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_used_mem_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_used_mem_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>used_<wbr>mem</a>
@@ -2222,8 +2469,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Cluster used memory in GB. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster used memory in GB. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_version_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>version</a>
@@ -2231,8 +2477,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The cluster version, may return null if not applicable.</p>
-</dd><dt class="property-required"
+    <dd>The cluster version, may return null if not applicable.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2240,8 +2485,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="delete_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_flag_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>flag</a>
@@ -2249,8 +2493,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Deletion tag: true means it can be deleted, false means it cannot be deleted. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Deletion tag: true means it can be deleted, false means it cannot be deleted. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="delete_flag_reason_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_flag_reason_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>flag_<wbr>reason</a>
@@ -2258,8 +2501,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Reason why the cluster cannot be deleted.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Reason why the cluster cannot be deleted.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_count_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
@@ -2267,8 +2509,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster instance number. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="normal_instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#normal_instance_count_python" style="color: inherit; text-decoration: inherit;">normal_<wbr>instance_<wbr>count</a>
@@ -2276,17 +2517,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster normal instance number. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster normal instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="operation_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_infos_python" style="color: inherit; text-decoration: inherit;">operation_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getclusterresultcontentoperationinfo">Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info]</a></span>
+        <span class="property-type"><a href="#getclusterresultcontentoperationinfo">Sequence[Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info]</a></span>
     </dt>
-    <dd><p>Control information returned to the frontend. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Control information returned to the frontend. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="run_instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#run_instance_count_python" style="color: inherit; text-decoration: inherit;">run_<wbr>instance_<wbr>count</a>
@@ -2294,8 +2533,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster running instance number. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster running instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="run_service_instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#run_service_instance_count_python" style="color: inherit; text-decoration: inherit;">run_<wbr>service_<wbr>instance_<wbr>count</a>
@@ -2303,8 +2541,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of available service instances in the cluster. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Number of available service instances in the cluster. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -2312,8 +2549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster subnet ID. Note: This field may return null, indicating no valid values.</p>
-</dd><dt class="property-required"
+    <dd>Cluster subnet ID. Note: This field may return null, indicating no valid values.</dd><dt class="property-required"
             title="Required">
         <span id="tsf_region_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsf_region_id_python" style="color: inherit; text-decoration: inherit;">tsf_<wbr>region_<wbr>id</a>
@@ -2321,8 +2557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>region ID of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>region ID of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="tsf_region_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsf_region_name_python" style="color: inherit; text-decoration: inherit;">tsf_<wbr>region_<wbr>name</a>
@@ -2330,8 +2565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>region name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>region name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="tsf_zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsf_zone_id_python" style="color: inherit; text-decoration: inherit;">tsf_<wbr>zone_<wbr>id</a>
@@ -2339,8 +2573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Zone Id of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Zone Id of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="tsf_zone_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsf_zone_name_python" style="color: inherit; text-decoration: inherit;">tsf_<wbr>zone_<wbr>name</a>
@@ -2348,8 +2581,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Zone name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Zone name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -2357,8 +2589,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2366,8 +2597,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Private network ID of the cluster. Note: This field may return null, indicating no valid value.</p>
-</dd></dl>
+    <dd>Private network ID of the cluster. Note: This field may return null, indicating no valid value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2381,8 +2611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster CIDR. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>cluster CIDR. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterdesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterdesc_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Desc</a>
@@ -2390,8 +2619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster description. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster description. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -2399,8 +2627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterlimitcpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitcpu_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit<wbr>Cpu</a>
@@ -2408,8 +2635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum CPU limit of the cluster, in cores. This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Maximum CPU limit of the cluster, in cores. This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clusterlimitmem_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterlimitmem_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Limit<wbr>Mem</a>
@@ -2417,8 +2643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cluster maximum memory limit in GB. This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Cluster maximum memory limit in GB. This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -2426,8 +2651,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster name. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Status</a>
@@ -2435,8 +2659,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster status. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>cluster status. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clustertotalcpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalcpu_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Total<wbr>Cpu</a>
@@ -2444,8 +2667,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total CPU of the cluster, unit: cores. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Total CPU of the cluster, unit: cores. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clustertotalmem_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertotalmem_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Total<wbr>Mem</a>
@@ -2453,8 +2675,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total memory of the cluster, unit: G. Note: This field may return null, indicating that no valid value is obtained.</p>
-</dd><dt class="property-required"
+    <dd>Total memory of the cluster, unit: G. Note: This field may return null, indicating that no valid value is obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clustertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -2462,8 +2683,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</p>
-</dd><dt class="property-required"
+    <dd>The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.</dd><dt class="property-required"
             title="Required">
         <span id="clusterusedcpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedcpu_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Used<wbr>Cpu</a>
@@ -2471,8 +2691,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Used CPU of the cluster, in cores. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Used CPU of the cluster, in cores. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterusedmem_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterusedmem_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Used<wbr>Mem</a>
@@ -2480,8 +2699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cluster used memory in GB. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster used memory in GB. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="clusterversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterversion_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Version</a>
@@ -2489,8 +2707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The cluster version, may return null if not applicable.</p>
-</dd><dt class="property-required"
+    <dd>The cluster version, may return null if not applicable.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2498,8 +2715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>CreationTime. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="deleteflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflag_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag</a>
@@ -2507,8 +2723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Deletion tag: true means it can be deleted, false means it cannot be deleted. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Deletion tag: true means it can be deleted, false means it cannot be deleted. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="deleteflagreason_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deleteflagreason_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>Flag<wbr>Reason</a>
@@ -2516,8 +2731,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reason why the cluster cannot be deleted.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Reason why the cluster cannot be deleted.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="instancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -2525,8 +2739,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cluster instance number. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="normalinstancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#normalinstancecount_yaml" style="color: inherit; text-decoration: inherit;">normal<wbr>Instance<wbr>Count</a>
@@ -2534,8 +2747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cluster normal instance number. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster normal instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="operationinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationinfos_yaml" style="color: inherit; text-decoration: inherit;">operation<wbr>Infos</a>
@@ -2543,8 +2755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Control information returned to the frontend. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Control information returned to the frontend. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="runinstancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runinstancecount_yaml" style="color: inherit; text-decoration: inherit;">run<wbr>Instance<wbr>Count</a>
@@ -2552,8 +2763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cluster running instance number. This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Cluster running instance number. This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="runserviceinstancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runserviceinstancecount_yaml" style="color: inherit; text-decoration: inherit;">run<wbr>Service<wbr>Instance<wbr>Count</a>
@@ -2561,8 +2771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of available service instances in the cluster. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Number of available service instances in the cluster. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2570,8 +2779,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster subnet ID. Note: This field may return null, indicating no valid values.</p>
-</dd><dt class="property-required"
+    <dd>Cluster subnet ID. Note: This field may return null, indicating no valid values.</dd><dt class="property-required"
             title="Required">
         <span id="tsfregionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionid_yaml" style="color: inherit; text-decoration: inherit;">tsf<wbr>Region<wbr>Id</a>
@@ -2579,8 +2787,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>region ID of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>region ID of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="tsfregionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfregionname_yaml" style="color: inherit; text-decoration: inherit;">tsf<wbr>Region<wbr>Name</a>
@@ -2588,8 +2795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>region name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>region name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="tsfzoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzoneid_yaml" style="color: inherit; text-decoration: inherit;">tsf<wbr>Zone<wbr>Id</a>
@@ -2597,8 +2803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone Id of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Zone Id of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="tsfzonename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsfzonename_yaml" style="color: inherit; text-decoration: inherit;">tsf<wbr>Zone<wbr>Name</a>
@@ -2606,8 +2811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Zone name of TSF.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2615,8 +2819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>last update time.  Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2624,8 +2827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private network ID of the cluster. Note: This field may return null, indicating no valid value.</p>
-</dd></dl>
+    <dd>Private network ID of the cluster. Note: This field may return null, indicating no valid value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2643,8 +2845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfoaddinstance">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info<wbr>Add<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>Add instance button control information, Note: This field may return null, indicating that no valid value is obtained.</p>
-</dd><dt class="property-required"
+    <dd>Add instance button control information, Note: This field may return null, indicating that no valid value is obtained.</dd><dt class="property-required"
             title="Required">
         <span id="destroys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroys_csharp" style="color: inherit; text-decoration: inherit;">Destroys</a>
@@ -2652,8 +2853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfodestroy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info<wbr>Destroy&gt;</a></span>
     </dt>
-    <dd><p>Control information for destroying machine, may return null if no valid value is obtained.</p>
-</dd><dt class="property-required"
+    <dd>Control information for destroying machine, may return null if no valid value is obtained.</dd><dt class="property-required"
             title="Required">
         <span id="inits_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inits_csharp" style="color: inherit; text-decoration: inherit;">Inits</a>
@@ -2661,8 +2861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfoinit">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info<wbr>Init&gt;</a></span>
     </dt>
-    <dd><p>Control information of the initialization button returned to the front end. Note: This field may return null, indicating no valid value.</p>
-</dd></dl>
+    <dd>Control information of the initialization button returned to the front end. Note: This field may return null, indicating no valid value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2676,8 +2875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfoaddinstance">[]Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info<wbr>Add<wbr>Instance</a></span>
     </dt>
-    <dd><p>Add instance button control information, Note: This field may return null, indicating that no valid value is obtained.</p>
-</dd><dt class="property-required"
+    <dd>Add instance button control information, Note: This field may return null, indicating that no valid value is obtained.</dd><dt class="property-required"
             title="Required">
         <span id="destroys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroys_go" style="color: inherit; text-decoration: inherit;">Destroys</a>
@@ -2685,8 +2883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfodestroy">[]Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info<wbr>Destroy</a></span>
     </dt>
-    <dd><p>Control information for destroying machine, may return null if no valid value is obtained.</p>
-</dd><dt class="property-required"
+    <dd>Control information for destroying machine, may return null if no valid value is obtained.</dd><dt class="property-required"
             title="Required">
         <span id="inits_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inits_go" style="color: inherit; text-decoration: inherit;">Inits</a>
@@ -2694,8 +2891,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfoinit">[]Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info<wbr>Init</a></span>
     </dt>
-    <dd><p>Control information of the initialization button returned to the front end. Note: This field may return null, indicating no valid value.</p>
-</dd></dl>
+    <dd>Control information of the initialization button returned to the front end. Note: This field may return null, indicating no valid value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="add_instances_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#add_instances_hcl" style="color: inherit; text-decoration: inherit;">add_<wbr>instances</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getclusterresultcontentoperationinfoaddinstance">list(object)</a></span>
+    </dt>
+    <dd>Add instance button control information, Note: This field may return null, indicating that no valid value is obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="destroys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroys_hcl" style="color: inherit; text-decoration: inherit;">destroys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getclusterresultcontentoperationinfodestroy">list(object)</a></span>
+    </dt>
+    <dd>Control information for destroying machine, may return null if no valid value is obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="inits_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inits_hcl" style="color: inherit; text-decoration: inherit;">inits</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getclusterresultcontentoperationinfoinit">list(object)</a></span>
+    </dt>
+    <dd>Control information of the initialization button returned to the front end. Note: This field may return null, indicating no valid value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2709,8 +2935,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfoaddinstance">List&lt;Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info<wbr>Add<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>Add instance button control information, Note: This field may return null, indicating that no valid value is obtained.</p>
-</dd><dt class="property-required"
+    <dd>Add instance button control information, Note: This field may return null, indicating that no valid value is obtained.</dd><dt class="property-required"
             title="Required">
         <span id="destroys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroys_java" style="color: inherit; text-decoration: inherit;">destroys</a>
@@ -2718,8 +2943,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfodestroy">List&lt;Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info<wbr>Destroy&gt;</a></span>
     </dt>
-    <dd><p>Control information for destroying machine, may return null if no valid value is obtained.</p>
-</dd><dt class="property-required"
+    <dd>Control information for destroying machine, may return null if no valid value is obtained.</dd><dt class="property-required"
             title="Required">
         <span id="inits_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inits_java" style="color: inherit; text-decoration: inherit;">inits</a>
@@ -2727,8 +2951,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfoinit">List&lt;Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info<wbr>Init&gt;</a></span>
     </dt>
-    <dd><p>Control information of the initialization button returned to the front end. Note: This field may return null, indicating no valid value.</p>
-</dd></dl>
+    <dd>Control information of the initialization button returned to the front end. Note: This field may return null, indicating no valid value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2742,8 +2965,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfoaddinstance">Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info<wbr>Add<wbr>Instance[]</a></span>
     </dt>
-    <dd><p>Add instance button control information, Note: This field may return null, indicating that no valid value is obtained.</p>
-</dd><dt class="property-required"
+    <dd>Add instance button control information, Note: This field may return null, indicating that no valid value is obtained.</dd><dt class="property-required"
             title="Required">
         <span id="destroys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroys_nodejs" style="color: inherit; text-decoration: inherit;">destroys</a>
@@ -2751,8 +2973,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfodestroy">Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info<wbr>Destroy[]</a></span>
     </dt>
-    <dd><p>Control information for destroying machine, may return null if no valid value is obtained.</p>
-</dd><dt class="property-required"
+    <dd>Control information for destroying machine, may return null if no valid value is obtained.</dd><dt class="property-required"
             title="Required">
         <span id="inits_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inits_nodejs" style="color: inherit; text-decoration: inherit;">inits</a>
@@ -2760,8 +2981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfoinit">Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info<wbr>Init[]</a></span>
     </dt>
-    <dd><p>Control information of the initialization button returned to the front end. Note: This field may return null, indicating no valid value.</p>
-</dd></dl>
+    <dd>Control information of the initialization button returned to the front end. Note: This field may return null, indicating no valid value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2773,28 +2993,25 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#add_instances_python" style="color: inherit; text-decoration: inherit;">add_<wbr>instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getclusterresultcontentoperationinfoaddinstance">Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info<wbr>Add<wbr>Instance]</a></span>
+        <span class="property-type"><a href="#getclusterresultcontentoperationinfoaddinstance">Sequence[Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info<wbr>Add<wbr>Instance]</a></span>
     </dt>
-    <dd><p>Add instance button control information, Note: This field may return null, indicating that no valid value is obtained.</p>
-</dd><dt class="property-required"
+    <dd>Add instance button control information, Note: This field may return null, indicating that no valid value is obtained.</dd><dt class="property-required"
             title="Required">
         <span id="destroys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroys_python" style="color: inherit; text-decoration: inherit;">destroys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getclusterresultcontentoperationinfodestroy">Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info<wbr>Destroy]</a></span>
+        <span class="property-type"><a href="#getclusterresultcontentoperationinfodestroy">Sequence[Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info<wbr>Destroy]</a></span>
     </dt>
-    <dd><p>Control information for destroying machine, may return null if no valid value is obtained.</p>
-</dd><dt class="property-required"
+    <dd>Control information for destroying machine, may return null if no valid value is obtained.</dd><dt class="property-required"
             title="Required">
         <span id="inits_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inits_python" style="color: inherit; text-decoration: inherit;">inits</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getclusterresultcontentoperationinfoinit">Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info<wbr>Init]</a></span>
+        <span class="property-type"><a href="#getclusterresultcontentoperationinfoinit">Sequence[Get<wbr>Cluster<wbr>Result<wbr>Content<wbr>Operation<wbr>Info<wbr>Init]</a></span>
     </dt>
-    <dd><p>Control information of the initialization button returned to the front end. Note: This field may return null, indicating no valid value.</p>
-</dd></dl>
+    <dd>Control information of the initialization button returned to the front end. Note: This field may return null, indicating no valid value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2808,8 +3025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfoaddinstance">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Add instance button control information, Note: This field may return null, indicating that no valid value is obtained.</p>
-</dd><dt class="property-required"
+    <dd>Add instance button control information, Note: This field may return null, indicating that no valid value is obtained.</dd><dt class="property-required"
             title="Required">
         <span id="destroys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroys_yaml" style="color: inherit; text-decoration: inherit;">destroys</a>
@@ -2817,8 +3033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfodestroy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Control information for destroying machine, may return null if no valid value is obtained.</p>
-</dd><dt class="property-required"
+    <dd>Control information for destroying machine, may return null if no valid value is obtained.</dd><dt class="property-required"
             title="Required">
         <span id="inits_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inits_yaml" style="color: inherit; text-decoration: inherit;">inits</a>
@@ -2826,8 +3041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclusterresultcontentoperationinfoinit">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Control information of the initialization button returned to the front end. Note: This field may return null, indicating no valid value.</p>
-</dd></dl>
+    <dd>Control information of the initialization button returned to the front end. Note: This field may return null, indicating no valid value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2845,8 +3059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason for not displaying. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_csharp" style="color: inherit; text-decoration: inherit;">Enabled</a>
@@ -2854,8 +3067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</p>
-</dd><dt class="property-required"
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
             title="Required">
         <span id="supported_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_csharp" style="color: inherit; text-decoration: inherit;">Supported</a>
@@ -2863,8 +3075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2878,8 +3089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason for not displaying. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_go" style="color: inherit; text-decoration: inherit;">Enabled</a>
@@ -2887,8 +3097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</p>
-</dd><dt class="property-required"
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
             title="Required">
         <span id="supported_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_go" style="color: inherit; text-decoration: inherit;">Supported</a>
@@ -2896,8 +3105,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="disabled_reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disabled_reason_hcl" style="color: inherit; text-decoration: inherit;">disabled_<wbr>reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_hcl" style="color: inherit; text-decoration: inherit;">enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
+            title="Required">
+        <span id="supported_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_hcl" style="color: inherit; text-decoration: inherit;">supported</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2911,8 +3149,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reason for not displaying. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_java" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -2920,8 +3157,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</p>
-</dd><dt class="property-required"
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
             title="Required">
         <span id="supported_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_java" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -2929,8 +3165,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2944,8 +3179,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason for not displaying. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_nodejs" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -2953,8 +3187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</p>
-</dd><dt class="property-required"
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
             title="Required">
         <span id="supported_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_nodejs" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -2962,8 +3195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2977,8 +3209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Reason for not displaying. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_python" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -2986,8 +3217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</p>
-</dd><dt class="property-required"
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
             title="Required">
         <span id="supported_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_python" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -2995,8 +3225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3010,8 +3239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reason for not displaying. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_yaml" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -3019,8 +3247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</p>
-</dd><dt class="property-required"
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
             title="Required">
         <span id="supported_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_yaml" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -3028,8 +3255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3047,8 +3273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason for not displaying. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_csharp" style="color: inherit; text-decoration: inherit;">Enabled</a>
@@ -3056,8 +3281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</p>
-</dd><dt class="property-required"
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
             title="Required">
         <span id="supported_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_csharp" style="color: inherit; text-decoration: inherit;">Supported</a>
@@ -3065,8 +3289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3080,8 +3303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason for not displaying. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_go" style="color: inherit; text-decoration: inherit;">Enabled</a>
@@ -3089,8 +3311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</p>
-</dd><dt class="property-required"
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
             title="Required">
         <span id="supported_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_go" style="color: inherit; text-decoration: inherit;">Supported</a>
@@ -3098,8 +3319,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="disabled_reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disabled_reason_hcl" style="color: inherit; text-decoration: inherit;">disabled_<wbr>reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_hcl" style="color: inherit; text-decoration: inherit;">enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
+            title="Required">
+        <span id="supported_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_hcl" style="color: inherit; text-decoration: inherit;">supported</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3113,8 +3363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reason for not displaying. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_java" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -3122,8 +3371,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</p>
-</dd><dt class="property-required"
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
             title="Required">
         <span id="supported_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_java" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -3131,8 +3379,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3146,8 +3393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason for not displaying. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_nodejs" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -3155,8 +3401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</p>
-</dd><dt class="property-required"
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
             title="Required">
         <span id="supported_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_nodejs" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -3164,8 +3409,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3179,8 +3423,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Reason for not displaying. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_python" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -3188,8 +3431,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</p>
-</dd><dt class="property-required"
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
             title="Required">
         <span id="supported_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_python" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -3197,8 +3439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3212,8 +3453,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reason for not displaying. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_yaml" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -3221,8 +3461,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</p>
-</dd><dt class="property-required"
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
             title="Required">
         <span id="supported_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_yaml" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -3230,8 +3469,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3249,8 +3487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason for not displaying. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_csharp" style="color: inherit; text-decoration: inherit;">Enabled</a>
@@ -3258,8 +3495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</p>
-</dd><dt class="property-required"
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
             title="Required">
         <span id="supported_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_csharp" style="color: inherit; text-decoration: inherit;">Supported</a>
@@ -3267,8 +3503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3282,8 +3517,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason for not displaying. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_go" style="color: inherit; text-decoration: inherit;">Enabled</a>
@@ -3291,8 +3525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</p>
-</dd><dt class="property-required"
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
             title="Required">
         <span id="supported_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_go" style="color: inherit; text-decoration: inherit;">Supported</a>
@@ -3300,8 +3533,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="disabled_reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disabled_reason_hcl" style="color: inherit; text-decoration: inherit;">disabled_<wbr>reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_hcl" style="color: inherit; text-decoration: inherit;">enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
+            title="Required">
+        <span id="supported_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_hcl" style="color: inherit; text-decoration: inherit;">supported</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3315,8 +3577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reason for not displaying. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_java" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -3324,8 +3585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</p>
-</dd><dt class="property-required"
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
             title="Required">
         <span id="supported_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_java" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -3333,8 +3593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3348,8 +3607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Reason for not displaying. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_nodejs" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -3357,8 +3615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</p>
-</dd><dt class="property-required"
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
             title="Required">
         <span id="supported_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_nodejs" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -3366,8 +3623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3381,8 +3637,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Reason for not displaying. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_python" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -3390,8 +3645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</p>
-</dd><dt class="property-required"
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
             title="Required">
         <span id="supported_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_python" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -3399,8 +3653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3414,8 +3667,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Reason for not displaying. Note: This field may return null, indicating no valid value.</p>
-</dd><dt class="property-required"
+    <dd>Reason for not displaying. Note: This field may return null, indicating no valid value.</dd><dt class="property-required"
             title="Required">
         <span id="enabled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_yaml" style="color: inherit; text-decoration: inherit;">enabled</a>
@@ -3423,8 +3675,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</p>
-</dd><dt class="property-required"
+    <dd>The availability of the button (whether it is clickable) may return null indicating that the information is not available.</dd><dt class="property-required"
             title="Required">
         <span id="supported_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supported_yaml" style="color: inherit; text-decoration: inherit;">supported</a>
@@ -3432,8 +3683,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Whether to display the button. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3448,7 +3698,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

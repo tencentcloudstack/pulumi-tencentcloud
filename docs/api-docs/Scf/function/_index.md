@@ -2,9 +2,11 @@
 ---
 title: "Function"
 title_tag: "tencentcloud.Scf.Function"
-meta_desc: "Documentation for the tencentcloud.Scf.Function resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a SCF function. NOTE: The use of trigger is no longer recommended; tencentcloud.Scf.Trigger is recommended instead."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,67 +16,68 @@ no_edit_this_page: true
 
 Provide a resource to create a SCF function.
 
+> **NOTE:** The use of `trigger` is no longer recommended; `tencentcloud.Scf.Trigger` is recommended instead.
+
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = new tencentcloud.scf.Function("foo", {
-    cosBucketName: "scf-code-1234567890",
-    cosBucketRegion: "ap-guangzhou",
-    cosObjectName: "code.zip",
+const example = new tencentcloud.scf.Function("example", {
+    name: "ci-test-function",
     handler: "main.do_it",
     runtime: "Python3.6",
+    cosBucketName: "scf-code-1234567890",
+    cosObjectName: "/path/to/code.zip",
+    cosBucketRegion: "ap-guangzhou",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.scf.Function("foo",
-    cos_bucket_name="scf-code-1234567890",
-    cos_bucket_region="ap-guangzhou",
-    cos_object_name="code.zip",
+example = tencentcloud.scf.Function("example",
+    name="ci-test-function",
     handler="main.do_it",
-    runtime="Python3.6")
+    runtime="Python3.6",
+    cos_bucket_name="scf-code-1234567890",
+    cos_object_name="/path/to/code.zip",
+    cos_bucket_region="ap-guangzhou")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Scf.Function("foo", new()
-    {
-        CosBucketName = "scf-code-1234567890",
-        CosBucketRegion = "ap-guangzhou",
-        CosObjectName = "code.zip",
-        Handler = "main.do_it",
-        Runtime = "Python3.6",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/scf"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
-			CosBucketName:   pulumi.String("scf-code-1234567890"),
-			CosBucketRegion: pulumi.String("ap-guangzhou"),
-			CosObjectName:   pulumi.String("code.zip"),
+		_, err := scf.NewFunction(ctx, "example", &scf.FunctionArgs{
+			Name:            pulumi.String("ci-test-function"),
 			Handler:         pulumi.String("main.do_it"),
 			Runtime:         pulumi.String("Python3.6"),
+			CosBucketName:   pulumi.String("scf-code-1234567890"),
+			CosObjectName:   pulumi.String("/path/to/code.zip"),
+			CosBucketRegion: pulumi.String("ap-guangzhou"),
 		})
 		if err != nil {
 			return err
@@ -83,6 +86,36 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Scf.Function("example", new()
+    {
+        Name = "ci-test-function",
+        Handler = "main.do_it",
+        Runtime = "Python3.6",
+        CosBucketName = "scf-code-1234567890",
+        CosObjectName = "/path/to/code.zip",
+        CosBucketRegion = "ap-guangzhou",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -91,8 +124,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Scf.Function;
 import com.pulumi.tencentcloud.Scf.FunctionArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -104,125 +137,146 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Function("foo", FunctionArgs.builder()        
-            .cosBucketName("scf-code-1234567890")
-            .cosBucketRegion("ap-guangzhou")
-            .cosObjectName("code.zip")
+        var example = new Function("example", FunctionArgs.builder()
+            .name("ci-test-function")
             .handler("main.do_it")
             .runtime("Python3.6")
+            .cosBucketName("scf-code-1234567890")
+            .cosObjectName("/path/to/code.zip")
+            .cosBucketRegion("ap-guangzhou")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  foo:
+  example:
     type: tencentcloud:Scf:Function
     properties:
-      cosBucketName: scf-code-1234567890
-      cosBucketRegion: ap-guangzhou
-      cosObjectName: code.zip
+      name: ci-test-function
       handler: main.do_it
       runtime: Python3.6
+      cosBucketName: scf-code-1234567890
+      cosObjectName: /path/to/code.zip
+      cosBucketRegion: ap-guangzhou
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_scf_function" "example" {
+  name              = "ci-test-function"
+  handler           = "main.do_it"
+  runtime           = "Python3.6"
+  cos_bucket_name   = "scf-code-1234567890"
+  cos_object_name   = "/path/to/code.zip"
+  cos_bucket_region = "ap-guangzhou"
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Using Zip file
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = new tencentcloud.scf.Function("foo", {
-    dnsCache: true,
-    enablePublicNet: true,
+const example = new tencentcloud.scf.Function("example", {
+    name: "ci-test-function",
     handler: "first.do_it_first",
+    runtime: "Python3.6",
+    enablePublicNet: true,
+    dnsCache: true,
+    vpcId: "vpc-391sv4w3",
+    subnetId: "subnet-ljyn7h30",
+    zipFile: "/scf/first.zip",
     intranetConfig: {
         ipFixed: "ENABLE",
     },
-    runtime: "Python3.6",
-    subnetId: "subnet-ljyn7h30",
     tags: {
         env: "test",
     },
-    vpcId: "vpc-391sv4w3",
-    zipFile: "/scf/first.zip",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.scf.Function("foo",
-    dns_cache=True,
-    enable_public_net=True,
+example = tencentcloud.scf.Function("example",
+    name="ci-test-function",
     handler="first.do_it_first",
-    intranet_config=tencentcloud.scf.FunctionIntranetConfigArgs(
-        ip_fixed="ENABLE",
-    ),
     runtime="Python3.6",
+    enable_public_net=True,
+    dns_cache=True,
+    vpc_id="vpc-391sv4w3",
     subnet_id="subnet-ljyn7h30",
+    zip_file="/scf/first.zip",
+    intranet_config={
+        "ip_fixed": "ENABLE",
+    },
     tags={
         "env": "test",
-    },
-    vpc_id="vpc-391sv4w3",
-    zip_file="/scf/first.zip")
+    })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Scf.Function("foo", new()
-    {
-        DnsCache = true,
-        EnablePublicNet = true,
-        Handler = "first.do_it_first",
-        IntranetConfig = new Tencentcloud.Scf.Inputs.FunctionIntranetConfigArgs
-        {
-            IpFixed = "ENABLE",
-        },
-        Runtime = "Python3.6",
-        SubnetId = "subnet-ljyn7h30",
-        Tags = 
-        {
-            { "env", "test" },
-        },
-        VpcId = "vpc-391sv4w3",
-        ZipFile = "/scf/first.zip",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/scf"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
-			DnsCache:        pulumi.Bool(true),
-			EnablePublicNet: pulumi.Bool(true),
+		_, err := scf.NewFunction(ctx, "example", &scf.FunctionArgs{
+			Name:            pulumi.String("ci-test-function"),
 			Handler:         pulumi.String("first.do_it_first"),
+			Runtime:         pulumi.String("Python3.6"),
+			EnablePublicNet: pulumi.Bool(true),
+			DnsCache:        pulumi.Bool(true),
+			VpcId:           pulumi.String("vpc-391sv4w3"),
+			SubnetId:        pulumi.String("subnet-ljyn7h30"),
+			ZipFile:         pulumi.String("/scf/first.zip"),
 			IntranetConfig: &scf.FunctionIntranetConfigArgs{
 				IpFixed: pulumi.String("ENABLE"),
 			},
-			Runtime:  pulumi.String("Python3.6"),
-			SubnetId: pulumi.String("subnet-ljyn7h30"),
-			Tags: pulumi.Map{
-				"env": pulumi.Any("test"),
+			Tags: pulumi.StringMap{
+				"env": pulumi.String("test"),
 			},
-			VpcId:   pulumi.String("vpc-391sv4w3"),
-			ZipFile: pulumi.String("/scf/first.zip"),
 		})
 		if err != nil {
 			return err
@@ -231,6 +285,46 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Scf.Function("example", new()
+    {
+        Name = "ci-test-function",
+        Handler = "first.do_it_first",
+        Runtime = "Python3.6",
+        EnablePublicNet = true,
+        DnsCache = true,
+        VpcId = "vpc-391sv4w3",
+        SubnetId = "subnet-ljyn7h30",
+        ZipFile = "/scf/first.zip",
+        IntranetConfig = new Tencentcloud.Scf.Inputs.FunctionIntranetConfigArgs
+        {
+            IpFixed = "ENABLE",
+        },
+        Tags = 
+        {
+            { "env", "test" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -240,8 +334,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Scf.Function;
 import com.pulumi.tencentcloud.Scf.FunctionArgs;
 import com.pulumi.tencentcloud.Scf.inputs.FunctionIntranetConfigArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -253,129 +347,159 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Function("foo", FunctionArgs.builder()        
-            .dnsCache(true)
-            .enablePublicNet(true)
+        var example = new Function("example", FunctionArgs.builder()
+            .name("ci-test-function")
             .handler("first.do_it_first")
+            .runtime("Python3.6")
+            .enablePublicNet(true)
+            .dnsCache(true)
+            .vpcId("vpc-391sv4w3")
+            .subnetId("subnet-ljyn7h30")
+            .zipFile("/scf/first.zip")
             .intranetConfig(FunctionIntranetConfigArgs.builder()
                 .ipFixed("ENABLE")
                 .build())
-            .runtime("Python3.6")
-            .subnetId("subnet-ljyn7h30")
             .tags(Map.of("env", "test"))
-            .vpcId("vpc-391sv4w3")
-            .zipFile("/scf/first.zip")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  foo:
+  example:
     type: tencentcloud:Scf:Function
     properties:
-      dnsCache: true
-      enablePublicNet: true
+      name: ci-test-function
       handler: first.do_it_first
+      runtime: Python3.6
+      enablePublicNet: true
+      dnsCache: true
+      vpcId: vpc-391sv4w3
+      subnetId: subnet-ljyn7h30
+      zipFile: /scf/first.zip
       intranetConfig:
         ipFixed: ENABLE
-      runtime: Python3.6
-      subnetId: subnet-ljyn7h30
       tags:
         env: test
-      vpcId: vpc-391sv4w3
-      zipFile: /scf/first.zip
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_scf_function" "example" {
+  name              = "ci-test-function"
+  handler           = "first.do_it_first"
+  runtime           = "Python3.6"
+  enable_public_net = true
+  dns_cache         = true
+  vpc_id            = "vpc-391sv4w3"
+  subnet_id         = "subnet-ljyn7h30"
+  zip_file          = "/scf/first.zip"
+  intranet_config = {
+    ip_fixed = "ENABLE"
+  }
+  tags = {
+    "env" = "test"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Using CFS config
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = new tencentcloud.scf.Function("foo", {
-    cfsConfigs: [{
-        cfsId: "cfs-xxxxxxxx",
-        localMountDir: "/mnt",
-        mountInsId: "cfs-xxxxxxxx",
-        remoteMountDir: "/",
-        userGroupId: "10000",
-        userId: "10000",
-    }],
+const example = new tencentcloud.scf.Function("example", {
+    name: "ci-test-function",
     handler: "main.do_it",
     runtime: "Python3.6",
+    cfsConfigs: [{
+        userId: "10000",
+        userGroupId: "10000",
+        cfsId: "cfs-xxxxxxxx",
+        mountInsId: "cfs-xxxxxxxx",
+        localMountDir: "/mnt",
+        remoteMountDir: "/",
+    }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.scf.Function("foo",
-    cfs_configs=[tencentcloud.scf.FunctionCfsConfigArgs(
-        cfs_id="cfs-xxxxxxxx",
-        local_mount_dir="/mnt",
-        mount_ins_id="cfs-xxxxxxxx",
-        remote_mount_dir="/",
-        user_group_id="10000",
-        user_id="10000",
-    )],
+example = tencentcloud.scf.Function("example",
+    name="ci-test-function",
     handler="main.do_it",
-    runtime="Python3.6")
+    runtime="Python3.6",
+    cfs_configs=[{
+        "user_id": "10000",
+        "user_group_id": "10000",
+        "cfs_id": "cfs-xxxxxxxx",
+        "mount_ins_id": "cfs-xxxxxxxx",
+        "local_mount_dir": "/mnt",
+        "remote_mount_dir": "/",
+    }])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Scf.Function("foo", new()
-    {
-        CfsConfigs = new[]
-        {
-            new Tencentcloud.Scf.Inputs.FunctionCfsConfigArgs
-            {
-                CfsId = "cfs-xxxxxxxx",
-                LocalMountDir = "/mnt",
-                MountInsId = "cfs-xxxxxxxx",
-                RemoteMountDir = "/",
-                UserGroupId = "10000",
-                UserId = "10000",
-            },
-        },
-        Handler = "main.do_it",
-        Runtime = "Python3.6",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/scf"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
-			CfsConfigs: scf.FunctionCfsConfigArray{
-				&scf.FunctionCfsConfigArgs{
-					CfsId:          pulumi.String("cfs-xxxxxxxx"),
-					LocalMountDir:  pulumi.String("/mnt"),
-					MountInsId:     pulumi.String("cfs-xxxxxxxx"),
-					RemoteMountDir: pulumi.String("/"),
-					UserGroupId:    pulumi.String("10000"),
-					UserId:         pulumi.String("10000"),
-				},
-			},
+		_, err := scf.NewFunction(ctx, "example", &scf.FunctionArgs{
+			Name:    pulumi.String("ci-test-function"),
 			Handler: pulumi.String("main.do_it"),
 			Runtime: pulumi.String("Python3.6"),
+			CfsConfigs: scf.FunctionCfsConfigArray{
+				&scf.FunctionCfsConfigArgs{
+					UserId:         pulumi.String("10000"),
+					UserGroupId:    pulumi.String("10000"),
+					CfsId:          pulumi.String("cfs-xxxxxxxx"),
+					MountInsId:     pulumi.String("cfs-xxxxxxxx"),
+					LocalMountDir:  pulumi.String("/mnt"),
+					RemoteMountDir: pulumi.String("/"),
+				},
+			},
 		})
 		if err != nil {
 			return err
@@ -384,6 +508,45 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Scf.Function("example", new()
+    {
+        Name = "ci-test-function",
+        Handler = "main.do_it",
+        Runtime = "Python3.6",
+        CfsConfigs = new[]
+        {
+            new Tencentcloud.Scf.Inputs.FunctionCfsConfigArgs
+            {
+                UserId = "10000",
+                UserGroupId = "10000",
+                CfsId = "cfs-xxxxxxxx",
+                MountInsId = "cfs-xxxxxxxx",
+                LocalMountDir = "/mnt",
+                RemoteMountDir = "/",
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -393,8 +556,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Scf.Function;
 import com.pulumi.tencentcloud.Scf.FunctionArgs;
 import com.pulumi.tencentcloud.Scf.inputs.FunctionCfsConfigArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -406,151 +569,213 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Function("foo", FunctionArgs.builder()        
-            .cfsConfigs(FunctionCfsConfigArgs.builder()
-                .cfsId("cfs-xxxxxxxx")
-                .localMountDir("/mnt")
-                .mountInsId("cfs-xxxxxxxx")
-                .remoteMountDir("/")
-                .userGroupId("10000")
-                .userId("10000")
-                .build())
+        var example = new Function("example", FunctionArgs.builder()
+            .name("ci-test-function")
             .handler("main.do_it")
             .runtime("Python3.6")
+            .cfsConfigs(FunctionCfsConfigArgs.builder()
+                .userId("10000")
+                .userGroupId("10000")
+                .cfsId("cfs-xxxxxxxx")
+                .mountInsId("cfs-xxxxxxxx")
+                .localMountDir("/mnt")
+                .remoteMountDir("/")
+                .build())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  foo:
+  example:
     type: tencentcloud:Scf:Function
     properties:
-      cfsConfigs:
-        - cfsId: cfs-xxxxxxxx
-          localMountDir: /mnt
-          mountInsId: cfs-xxxxxxxx
-          remoteMountDir: /
-          userGroupId: '10000'
-          userId: '10000'
+      name: ci-test-function
       handler: main.do_it
       runtime: Python3.6
+      cfsConfigs:
+        - userId: '10000'
+          userGroupId: '10000'
+          cfsId: cfs-xxxxxxxx
+          mountInsId: cfs-xxxxxxxx
+          localMountDir: /mnt
+          remoteMountDir: /
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_scf_function" "example" {
+  name    = "ci-test-function"
+  handler = "main.do_it"
+  runtime = "Python3.6"
+  cfs_configs {
+    user_id          = "10000"
+    user_group_id    = "10000"
+    cfs_id           = "cfs-xxxxxxxx"
+    mount_ins_id     = "cfs-xxxxxxxx"
+    local_mount_dir  = "/mnt"
+    remote_mount_dir = "/"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Using triggers
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = new tencentcloud.scf.Function("foo", {
-    enablePublicNet: true,
+const example = new tencentcloud.scf.Function("example", {
+    name: "ci-test-function",
     handler: "first.do_it_first",
     runtime: "Python3.6",
+    enablePublicNet: true,
+    zipFile: "/scf/first.zip",
     triggers: [
         {
             name: "tf-test-fn-trigger",
-            triggerDesc: "*/5 * * * * * *",
             type: "timer",
+            triggerDesc: "*/5 * * * * * *",
         },
         {
-            cosRegion: "ap-guangzhou",
             name: "scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com",
-            triggerDesc: "{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}",
+            cosRegion: "ap-guangzhou",
             type: "cos",
+            triggerDesc: "{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}",
+        },
+        {
+            name: "tf-test-fn-trigger",
+            type: "http",
+            triggerDesc: JSON.stringify({
+                AuthType: "NONE",
+                NetConfig: {
+                    EnableIntranet: true,
+                    EnableExtranet: false,
+                },
+            }),
         },
     ],
-    zipFile: "/scf/first.zip",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
+import json
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.scf.Function("foo",
-    enable_public_net=True,
+example = tencentcloud.scf.Function("example",
+    name="ci-test-function",
     handler="first.do_it_first",
     runtime="Python3.6",
+    enable_public_net=True,
+    zip_file="/scf/first.zip",
     triggers=[
-        tencentcloud.scf.FunctionTriggerArgs(
-            name="tf-test-fn-trigger",
-            trigger_desc="*/5 * * * * * *",
-            type="timer",
-        ),
-        tencentcloud.scf.FunctionTriggerArgs(
-            cos_region="ap-guangzhou",
-            name="scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com",
-            trigger_desc="{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}",
-            type="cos",
-        ),
-    ],
-    zip_file="/scf/first.zip")
-```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Scf.Function("foo", new()
-    {
-        EnablePublicNet = true,
-        Handler = "first.do_it_first",
-        Runtime = "Python3.6",
-        Triggers = new[]
         {
-            new Tencentcloud.Scf.Inputs.FunctionTriggerArgs
-            {
-                Name = "tf-test-fn-trigger",
-                TriggerDesc = "*/5 * * * * * *",
-                Type = "timer",
-            },
-            new Tencentcloud.Scf.Inputs.FunctionTriggerArgs
-            {
-                CosRegion = "ap-guangzhou",
-                Name = "scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com",
-                TriggerDesc = "{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}",
-                Type = "cos",
-            },
+            "name": "tf-test-fn-trigger",
+            "type": "timer",
+            "trigger_desc": "*/5 * * * * * *",
         },
-        ZipFile = "/scf/first.zip",
-    });
-
-});
+        {
+            "name": "scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com",
+            "cos_region": "ap-guangzhou",
+            "type": "cos",
+            "trigger_desc": "{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}",
+        },
+        {
+            "name": "tf-test-fn-trigger",
+            "type": "http",
+            "trigger_desc": json.dumps({
+                "AuthType": "NONE",
+                "NetConfig": {
+                    "EnableIntranet": True,
+                    "EnableExtranet": False,
+                },
+            }),
+        },
+    ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
 ```go
 package main
 
 import (
+	"encoding/json"
+
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/scf"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
-			EnablePublicNet: pulumi.Bool(true),
+		tmpJSON0, err := json.Marshal(map[string]interface{}{
+			"AuthType": "NONE",
+			"NetConfig": map[string]bool{
+				"EnableIntranet": true,
+				"EnableExtranet": false,
+			},
+		})
+		if err != nil {
+			return err
+		}
+		json0 := string(tmpJSON0)
+		_, err = scf.NewFunction(ctx, "example", &scf.FunctionArgs{
+			Name:            pulumi.String("ci-test-function"),
 			Handler:         pulumi.String("first.do_it_first"),
 			Runtime:         pulumi.String("Python3.6"),
+			EnablePublicNet: pulumi.Bool(true),
+			ZipFile:         pulumi.String("/scf/first.zip"),
 			Triggers: scf.FunctionTriggerArray{
 				&scf.FunctionTriggerArgs{
 					Name:        pulumi.String("tf-test-fn-trigger"),
-					TriggerDesc: pulumi.String("*/5 * * * * * *"),
 					Type:        pulumi.String("timer"),
+					TriggerDesc: pulumi.String("*/5 * * * * * *"),
 				},
 				&scf.FunctionTriggerArgs{
-					CosRegion:   pulumi.String("ap-guangzhou"),
 					Name:        pulumi.String("scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com"),
-					TriggerDesc: pulumi.String("{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}"),
+					CosRegion:   pulumi.String("ap-guangzhou"),
 					Type:        pulumi.String("cos"),
+					TriggerDesc: pulumi.String("{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}"),
+				},
+				&scf.FunctionTriggerArgs{
+					Name:        pulumi.String("tf-test-fn-trigger"),
+					Type:        pulumi.String("http"),
+					TriggerDesc: pulumi.String(json0),
 				},
 			},
-			ZipFile: pulumi.String("/scf/first.zip"),
 		})
 		if err != nil {
 			return err
@@ -559,6 +784,66 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Scf.Function("example", new()
+    {
+        Name = "ci-test-function",
+        Handler = "first.do_it_first",
+        Runtime = "Python3.6",
+        EnablePublicNet = true,
+        ZipFile = "/scf/first.zip",
+        Triggers = new[]
+        {
+            new Tencentcloud.Scf.Inputs.FunctionTriggerArgs
+            {
+                Name = "tf-test-fn-trigger",
+                Type = "timer",
+                TriggerDesc = "*/5 * * * * * *",
+            },
+            new Tencentcloud.Scf.Inputs.FunctionTriggerArgs
+            {
+                Name = "scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com",
+                CosRegion = "ap-guangzhou",
+                Type = "cos",
+                TriggerDesc = "{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}",
+            },
+            new Tencentcloud.Scf.Inputs.FunctionTriggerArgs
+            {
+                Name = "tf-test-fn-trigger",
+                Type = "http",
+                TriggerDesc = JsonSerializer.Serialize(new Dictionary<string, object?>
+                {
+                    ["AuthType"] = "NONE",
+                    ["NetConfig"] = new Dictionary<string, object?>
+                    {
+                        ["EnableIntranet"] = true,
+                        ["EnableExtranet"] = false,
+                    },
+                }),
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -568,8 +853,9 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Scf.Function;
 import com.pulumi.tencentcloud.Scf.FunctionArgs;
 import com.pulumi.tencentcloud.Scf.inputs.FunctionTriggerArgs;
-import java.util.List;
+import static com.pulumi.codegen.internal.Serialization.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -581,69 +867,475 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Function("foo", FunctionArgs.builder()        
-            .enablePublicNet(true)
+        var example = new Function("example", FunctionArgs.builder()
+            .name("ci-test-function")
             .handler("first.do_it_first")
             .runtime("Python3.6")
+            .enablePublicNet(true)
+            .zipFile("/scf/first.zip")
             .triggers(            
                 FunctionTriggerArgs.builder()
                     .name("tf-test-fn-trigger")
-                    .triggerDesc("*/5 * * * * * *")
                     .type("timer")
+                    .triggerDesc("*/5 * * * * * *")
                     .build(),
                 FunctionTriggerArgs.builder()
-                    .cosRegion("ap-guangzhou")
                     .name("scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com")
-                    .triggerDesc("{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}")
+                    .cosRegion("ap-guangzhou")
                     .type("cos")
+                    .triggerDesc("{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}")
+                    .build(),
+                FunctionTriggerArgs.builder()
+                    .name("tf-test-fn-trigger")
+                    .type("http")
+                    .triggerDesc(serializeJson(
+                        jsonObject(
+                            jsonProperty("AuthType", "NONE"),
+                            jsonProperty("NetConfig", jsonObject(
+                                jsonProperty("EnableIntranet", true),
+                                jsonProperty("EnableExtranet", false)
+                            ))
+                        )))
                     .build())
-            .zipFile("/scf/first.zip")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  foo:
+  example:
     type: tencentcloud:Scf:Function
     properties:
-      enablePublicNet: true
+      name: ci-test-function
       handler: first.do_it_first
       runtime: Python3.6
+      enablePublicNet: true
+      zipFile: /scf/first.zip
       triggers:
         - name: tf-test-fn-trigger
-          triggerDesc: '*/5 * * * * * *'
           type: timer
-        - cosRegion: ap-guangzhou
-          name: scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com
-          triggerDesc: '{"event":"cos:ObjectCreated:Put","filter":{"Prefix":"","Suffix":""}}'
+          triggerDesc: '*/5 * * * * * *'
+        - name: scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com
+          cosRegion: ap-guangzhou
           type: cos
-      zipFile: /scf/first.zip
+          triggerDesc: '{"event":"cos:ObjectCreated:Put","filter":{"Prefix":"","Suffix":""}}'
+        - name: tf-test-fn-trigger
+          type: http
+          triggerDesc:
+            fn::toJSON:
+              AuthType: NONE
+              NetConfig:
+                EnableIntranet: true
+                EnableExtranet: false
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_scf_function" "example" {
+  name              = "ci-test-function"
+  handler           = "first.do_it_first"
+  runtime           = "Python3.6"
+  enable_public_net = true
+  zip_file          = "/scf/first.zip"
+  triggers {
+    name         = "tf-test-fn-trigger"
+    type         = "timer"
+    trigger_desc = "*/5 * * * * * *"
+  }
+  triggers {
+    name         = "scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com"
+    cos_region   = "ap-guangzhou"
+    type         = "cos"
+    trigger_desc = "{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}"
+  }
+  triggers {
+    name = "tf-test-fn-trigger"
+    type = "http"
+    trigger_desc = jsonencode({
+      "AuthType" = "NONE"
+      "NetConfig" = {
+        "EnableIntranet" = true
+        "EnableExtranet" = false
+      }
+    })
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### If funcType is Event
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.scf.Function("example", {
+    name: "test",
+    namespace: "default",
+    asyncRunEnable: "FALSE",
+    description: "terraform demo",
+    enablePublicNet: true,
+    funcType: "Event",
+    l5Enable: false,
+    memSize: 128,
+    runtime: "CustomImage",
+    timeout: 3,
+    imageConfigs: [{
+        containerImageAccelerate: false,
+        imagePort: -1,
+        imageType: "personal",
+        imageUri: "ccr.ccs.tencentyun.com/tsf_100023201586/quickstart-gateway-service:v1-20250313124040@sha256:b8821639168*********************d33aadee54d81c",
+    }],
+    instanceConcurrencyConfig: {
+        dynamicEnabled: "FALSE",
+        maxConcurrency: 1,
+    },
+    intranetConfig: {
+        ipFixed: "DISABLE",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.scf.Function("example",
+    name="test",
+    namespace="default",
+    async_run_enable="FALSE",
+    description="terraform demo",
+    enable_public_net=True,
+    func_type="Event",
+    l5_enable=False,
+    mem_size=128,
+    runtime="CustomImage",
+    timeout=3,
+    image_configs=[{
+        "container_image_accelerate": False,
+        "image_port": -1,
+        "image_type": "personal",
+        "image_uri": "ccr.ccs.tencentyun.com/tsf_100023201586/quickstart-gateway-service:v1-20250313124040@sha256:b8821639168*********************d33aadee54d81c",
+    }],
+    instance_concurrency_config={
+        "dynamic_enabled": "FALSE",
+        "max_concurrency": 1,
+    },
+    intranet_config={
+        "ip_fixed": "DISABLE",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/scf"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := scf.NewFunction(ctx, "example", &scf.FunctionArgs{
+			Name:            pulumi.String("test"),
+			Namespace:       pulumi.String("default"),
+			AsyncRunEnable:  pulumi.String("FALSE"),
+			Description:     pulumi.String("terraform demo"),
+			EnablePublicNet: pulumi.Bool(true),
+			FuncType:        pulumi.String("Event"),
+			L5Enable:        pulumi.Bool(false),
+			MemSize:         pulumi.Int(128),
+			Runtime:         pulumi.String("CustomImage"),
+			Timeout:         pulumi.Int(3),
+			ImageConfigs: scf.FunctionImageConfigArray{
+				&scf.FunctionImageConfigArgs{
+					ContainerImageAccelerate: pulumi.Bool(false),
+					ImagePort:                pulumi.Int(-1),
+					ImageType:                pulumi.String("personal"),
+					ImageUri:                 pulumi.String("ccr.ccs.tencentyun.com/tsf_100023201586/quickstart-gateway-service:v1-20250313124040@sha256:b8821639168*********************d33aadee54d81c"),
+				},
+			},
+			InstanceConcurrencyConfig: &scf.FunctionInstanceConcurrencyConfigArgs{
+				DynamicEnabled: pulumi.String("FALSE"),
+				MaxConcurrency: pulumi.Int(1),
+			},
+			IntranetConfig: &scf.FunctionIntranetConfigArgs{
+				IpFixed: pulumi.String("DISABLE"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Scf.Function("example", new()
+    {
+        Name = "test",
+        Namespace = "default",
+        AsyncRunEnable = "FALSE",
+        Description = "terraform demo",
+        EnablePublicNet = true,
+        FuncType = "Event",
+        L5Enable = false,
+        MemSize = 128,
+        Runtime = "CustomImage",
+        Timeout = 3,
+        ImageConfigs = new[]
+        {
+            new Tencentcloud.Scf.Inputs.FunctionImageConfigArgs
+            {
+                ContainerImageAccelerate = false,
+                ImagePort = -1,
+                ImageType = "personal",
+                ImageUri = "ccr.ccs.tencentyun.com/tsf_100023201586/quickstart-gateway-service:v1-20250313124040@sha256:b8821639168*********************d33aadee54d81c",
+            },
+        },
+        InstanceConcurrencyConfig = new Tencentcloud.Scf.Inputs.FunctionInstanceConcurrencyConfigArgs
+        {
+            DynamicEnabled = "FALSE",
+            MaxConcurrency = 1,
+        },
+        IntranetConfig = new Tencentcloud.Scf.Inputs.FunctionIntranetConfigArgs
+        {
+            IpFixed = "DISABLE",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Scf.Function;
+import com.pulumi.tencentcloud.Scf.FunctionArgs;
+import com.pulumi.tencentcloud.Scf.inputs.FunctionImageConfigArgs;
+import com.pulumi.tencentcloud.Scf.inputs.FunctionInstanceConcurrencyConfigArgs;
+import com.pulumi.tencentcloud.Scf.inputs.FunctionIntranetConfigArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Function("example", FunctionArgs.builder()
+            .name("test")
+            .namespace("default")
+            .asyncRunEnable("FALSE")
+            .description("terraform demo")
+            .enablePublicNet(true)
+            .funcType("Event")
+            .l5Enable(false)
+            .memSize(128)
+            .runtime("CustomImage")
+            .timeout(3)
+            .imageConfigs(FunctionImageConfigArgs.builder()
+                .containerImageAccelerate(false)
+                .imagePort(-1)
+                .imageType("personal")
+                .imageUri("ccr.ccs.tencentyun.com/tsf_100023201586/quickstart-gateway-service:v1-20250313124040@sha256:b8821639168*********************d33aadee54d81c")
+                .build())
+            .instanceConcurrencyConfig(FunctionInstanceConcurrencyConfigArgs.builder()
+                .dynamicEnabled("FALSE")
+                .maxConcurrency(1)
+                .build())
+            .intranetConfig(FunctionIntranetConfigArgs.builder()
+                .ipFixed("DISABLE")
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Scf:Function
+    properties:
+      name: test
+      namespace: default
+      asyncRunEnable: FALSE
+      description: terraform demo
+      enablePublicNet: true
+      funcType: Event
+      l5Enable: false
+      memSize: 128
+      runtime: CustomImage
+      timeout: 3
+      imageConfigs:
+        - containerImageAccelerate: false
+          imagePort: -1
+          imageType: personal
+          imageUri: ccr.ccs.tencentyun.com/tsf_100023201586/quickstart-gateway-service:v1-20250313124040@sha256:b8821639168*********************d33aadee54d81c
+      instanceConcurrencyConfig:
+        dynamicEnabled: FALSE
+        maxConcurrency: 1
+      intranetConfig:
+        ipFixed: DISABLE
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_scf_function" "example" {
+  name              = "test"
+  namespace         = "default"
+  async_run_enable  = "FALSE"
+  description       = "terraform demo"
+  enable_public_net = true
+  func_type         = "Event"
+  l5_enable         = false
+  mem_size          = 128
+  runtime           = "CustomImage"
+  timeout           = 3
+  image_configs {
+    container_image_accelerate = false
+    image_port                 = -1
+    image_type                 = "personal"
+    image_uri                  = "ccr.ccs.tencentyun.com/tsf_100023201586/quickstart-gateway-service:v1-20250313124040@sha256:b8821639168*********************d33aadee54d81c"
+  }
+  instance_concurrency_config = {
+    dynamic_enabled = "FALSE"
+    max_concurrency = 1
+  }
+  intranet_config = {
+    ip_fixed = "DISABLE"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateFunction](https://www.tencentcloud.com/search/?wd=CreateFunction&type=document&lang=en)
+  - [CreateTrigger](https://www.tencentcloud.com/document/api/583/18589)
+  - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+  - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+  - [UpdateFunctionConfiguration](https://www.tencentcloud.com/search/?wd=UpdateFunctionConfiguration&type=document&lang=en)
+* Read: [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+* Update:
+  - [CreateTrigger](https://www.tencentcloud.com/document/api/583/18589)
+  - [DeleteTrigger](https://www.tencentcloud.com/document/api/583/18588)
+  - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+  - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [UpdateFunctionCode](https://www.tencentcloud.com/document/api/583/18581)
+  - [UpdateFunctionConfiguration](https://www.tencentcloud.com/search/?wd=UpdateFunctionConfiguration&type=document&lang=en)
+* Delete:
+  - [DeleteFunction](https://www.tencentcloud.com/document/api/583/18585)
+  - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
 
 
 ## Create Function Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Function</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">FunctionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Function</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">FunctionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Function</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[FunctionArgs]</a></span> = None<span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Function</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
              <span class="nx">async_run_enable</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">cfs_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_scf.FunctionCfsConfigArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">cfs_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[FunctionCfsConfigArgs]]</span> = None<span class="p">,</span>
              <span class="nx">cls_logset_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">cls_topic_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">cos_bucket_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -653,61 +1345,68 @@ resources:
              <span class="nx">dns_cache</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">enable_eip_config</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">enable_public_net</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-             <span class="nx">environment</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+             <span class="nx">environment</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
              <span class="nx">func_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">handler</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">image_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_scf.FunctionImageConfigArgs]]</span> = None<span class="p">,</span>
-             <span class="nx">intranet_config</span><span class="p">:</span> <span class="nx">Optional[_scf.FunctionIntranetConfigArgs]</span> = None<span class="p">,</span>
+             <span class="nx">image_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[FunctionImageConfigArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">instance_concurrency_config</span><span class="p">:</span> <span class="nx">Optional[FunctionInstanceConcurrencyConfigArgs]</span> = None<span class="p">,</span>
+             <span class="nx">intranet_config</span><span class="p">:</span> <span class="nx">Optional[FunctionIntranetConfigArgs]</span> = None<span class="p">,</span>
              <span class="nx">l5_enable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-             <span class="nx">layers</span><span class="p">:</span> <span class="nx">Optional[Sequence[_scf.FunctionLayerArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">layers</span><span class="p">:</span> <span class="nx">Optional[Sequence[FunctionLayerArgs]]</span> = None<span class="p">,</span>
              <span class="nx">mem_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">namespace</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">role</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">runtime</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
              <span class="nx">timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">triggers</span><span class="p">:</span> <span class="nx">Optional[Sequence[_scf.FunctionTriggerArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">triggers</span><span class="p">:</span> <span class="nx">Optional[Sequence[FunctionTriggerArgs]]</span> = None<span class="p">,</span>
              <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">zip_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Function</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[FunctionArgs]</a></span> = None<span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">zip_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewFunction</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">FunctionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Function</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewFunction</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">FunctionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Function</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Function</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">FunctionArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Function</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">FunctionArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Function</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">FunctionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Function</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">FunctionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Scf:Function</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Scf:Function</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_scf_function&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -728,7 +1427,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -845,11 +1544,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Function Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Function resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -865,17 +1572,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</dd><dt class="property-optional"
             title="Optional">
         <span id="cfsconfigs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cfsconfigs_csharp" style="color: inherit; text-decoration: inherit;">Cfs<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functioncfsconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Cfs<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functioncfsconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Cfs<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>List of CFS configurations.</p>
-</dd><dt class="property-optional"
+    <dd>List of CFS configurations.</dd><dt class="property-optional"
             title="Optional">
         <span id="clslogsetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clslogsetid_csharp" style="color: inherit; text-decoration: inherit;">Cls<wbr>Logset<wbr>Id</a>
@@ -883,8 +1588,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cls logset id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls logset id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="clstopicid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clstopicid_csharp" style="color: inherit; text-decoration: inherit;">Cls<wbr>Topic<wbr>Id</a>
@@ -892,8 +1596,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cls topic id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls topic id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosbucketname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbucketname_csharp" style="color: inherit; text-decoration: inherit;">Cos<wbr>Bucket<wbr>Name</a>
@@ -901,8 +1604,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosbucketregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbucketregion_csharp" style="color: inherit; text-decoration: inherit;">Cos<wbr>Bucket<wbr>Region</a>
@@ -910,8 +1612,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos bucket region of the SCF function, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket region of the SCF function, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosobjectname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosobjectname_csharp" style="color: inherit; text-decoration: inherit;">Cos<wbr>Object<wbr>Name</a>
@@ -919,8 +1620,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -928,8 +1628,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="dnscache_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnscache_csharp" style="color: inherit; text-decoration: inherit;">Dns<wbr>Cache</a>
@@ -937,8 +1636,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="enableeipconfig_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableeipconfig_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Eip<wbr>Config</a>
@@ -946,8 +1644,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether EIP config set to <code>ENABLE</code> when <code>enable_public_net</code> was true. Default <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether EIP config set to <code>ENABLE</code> when <code>enablePublicNet</code> was true. Default <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablepublicnet_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepublicnet_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Public<wbr>Net</a>
@@ -955,17 +1652,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpc_id</code> specified can disable public net config.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpcId</code> specified can disable public net config.</dd><dt class="property-optional"
             title="Optional">
         <span id="environment_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_csharp" style="color: inherit; text-decoration: inherit;">Environment</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Environment of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Environment of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="functype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#functype_csharp" style="color: inherit; text-decoration: inherit;">Func<wbr>Type</a>
@@ -973,8 +1668,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</p>
-</dd><dt class="property-optional"
+    <dd>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</dd><dt class="property-optional"
             title="Optional">
         <span id="handler_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#handler_csharp" style="color: inherit; text-decoration: inherit;">Handler</a>
@@ -982,26 +1676,31 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="imageconfigs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageconfigs_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionimageconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Image<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functionimageconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Image<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Image of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>, <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>, <code>zipFile</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instanceconcurrencyconfig_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceconcurrencyconfig_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Concurrency<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Instance<wbr>Concurrency<wbr>Config</a></span>
+    </dt>
+    <dd>Instance concurrency configuration for the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="intranetconfig_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetconfig_csharp" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionintranetconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Intranet<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#functionintranetconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Intranet<wbr>Config</a></span>
     </dt>
-    <dd><p>Intranet access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="l5enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l5enable_csharp" style="color: inherit; text-decoration: inherit;">L5Enable</a>
@@ -1009,17 +1708,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable L5 for SCF function, default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable L5 for SCF function, default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="layers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layers_csharp" style="color: inherit; text-decoration: inherit;">Layers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionlayer">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Layer<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functionlayer">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Layer&gt;</a></span>
     </dt>
-    <dd><p>The list of association layers.</p>
-</dd><dt class="property-optional"
+    <dd>The list of association layers.</dd><dt class="property-optional"
             title="Optional">
         <span id="memsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_csharp" style="color: inherit; text-decoration: inherit;">Mem<wbr>Size</a>
@@ -1027,8 +1724,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1036,8 +1732,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="namespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_csharp" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -1045,8 +1740,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace of the SCF function, default is <code>default</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace of the SCF function, default is <code>default</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_csharp" style="color: inherit; text-decoration: inherit;">Role</a>
@@ -1054,8 +1748,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Role of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Role of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="runtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runtime_csharp" style="color: inherit; text-decoration: inherit;">Runtime</a>
@@ -1063,8 +1756,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, and <code>CustomRuntime</code>, default is <code>Python2.7</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, <code>CustomRuntime</code> and <code>CustomImage</code>, default is <code>Python2.7</code>. When deploying images using <code>imageComfig</code>, please explicitly specify the runtime as <code>CustomImage</code>. After creating a mirror function, it is not supported to modify the <code>runtime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1072,17 +1764,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_csharp" style="color: inherit; text-decoration: inherit;">Timeout</a>
@@ -1090,17 +1780,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</dd><dt class="property-optional"
             title="Optional">
         <span id="triggers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggers_csharp" style="color: inherit; text-decoration: inherit;">Triggers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functiontrigger">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Trigger<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functiontrigger">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Trigger&gt;</a></span>
     </dt>
-    <dd><p>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1108,8 +1796,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="zipfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipfile_csharp" style="color: inherit; text-decoration: inherit;">Zip<wbr>File</a>
@@ -1117,8 +1804,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zip file of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>.</p>
-</dd></dl>
+    <dd>Zip file of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1132,8 +1818,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</dd><dt class="property-optional"
             title="Optional">
         <span id="cfsconfigs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cfsconfigs_go" style="color: inherit; text-decoration: inherit;">Cfs<wbr>Configs</a>
@@ -1141,8 +1826,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functioncfsconfig">[]Function<wbr>Cfs<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>List of CFS configurations.</p>
-</dd><dt class="property-optional"
+    <dd>List of CFS configurations.</dd><dt class="property-optional"
             title="Optional">
         <span id="clslogsetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clslogsetid_go" style="color: inherit; text-decoration: inherit;">Cls<wbr>Logset<wbr>Id</a>
@@ -1150,8 +1834,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cls logset id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls logset id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="clstopicid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clstopicid_go" style="color: inherit; text-decoration: inherit;">Cls<wbr>Topic<wbr>Id</a>
@@ -1159,8 +1842,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cls topic id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls topic id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosbucketname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbucketname_go" style="color: inherit; text-decoration: inherit;">Cos<wbr>Bucket<wbr>Name</a>
@@ -1168,8 +1850,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosbucketregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbucketregion_go" style="color: inherit; text-decoration: inherit;">Cos<wbr>Bucket<wbr>Region</a>
@@ -1177,8 +1858,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos bucket region of the SCF function, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket region of the SCF function, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosobjectname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosobjectname_go" style="color: inherit; text-decoration: inherit;">Cos<wbr>Object<wbr>Name</a>
@@ -1186,8 +1866,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1195,8 +1874,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="dnscache_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnscache_go" style="color: inherit; text-decoration: inherit;">Dns<wbr>Cache</a>
@@ -1204,8 +1882,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="enableeipconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableeipconfig_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Eip<wbr>Config</a>
@@ -1213,8 +1890,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether EIP config set to <code>ENABLE</code> when <code>enable_public_net</code> was true. Default <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether EIP config set to <code>ENABLE</code> when <code>enablePublicNet</code> was true. Default <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablepublicnet_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepublicnet_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Public<wbr>Net</a>
@@ -1222,17 +1898,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpc_id</code> specified can disable public net config.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpcId</code> specified can disable public net config.</dd><dt class="property-optional"
             title="Optional">
         <span id="environment_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_go" style="color: inherit; text-decoration: inherit;">Environment</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Environment of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Environment of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="functype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#functype_go" style="color: inherit; text-decoration: inherit;">Func<wbr>Type</a>
@@ -1240,8 +1914,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</p>
-</dd><dt class="property-optional"
+    <dd>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</dd><dt class="property-optional"
             title="Optional">
         <span id="handler_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#handler_go" style="color: inherit; text-decoration: inherit;">Handler</a>
@@ -1249,8 +1922,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="imageconfigs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageconfigs_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Configs</a>
@@ -1258,8 +1930,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functionimageconfig">[]Function<wbr>Image<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Image of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>, <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>, <code>zipFile</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instanceconcurrencyconfig_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceconcurrencyconfig_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Concurrency<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfig">Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Args</a></span>
+    </dt>
+    <dd>Instance concurrency configuration for the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="intranetconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetconfig_go" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Config</a>
@@ -1267,8 +1946,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functionintranetconfig">Function<wbr>Intranet<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Intranet access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="l5enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l5enable_go" style="color: inherit; text-decoration: inherit;">L5Enable</a>
@@ -1276,8 +1954,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable L5 for SCF function, default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable L5 for SCF function, default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="layers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layers_go" style="color: inherit; text-decoration: inherit;">Layers</a>
@@ -1285,8 +1962,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functionlayer">[]Function<wbr>Layer<wbr>Args</a></span>
     </dt>
-    <dd><p>The list of association layers.</p>
-</dd><dt class="property-optional"
+    <dd>The list of association layers.</dd><dt class="property-optional"
             title="Optional">
         <span id="memsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_go" style="color: inherit; text-decoration: inherit;">Mem<wbr>Size</a>
@@ -1294,8 +1970,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1303,8 +1978,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="namespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_go" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -1312,8 +1986,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace of the SCF function, default is <code>default</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace of the SCF function, default is <code>default</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_go" style="color: inherit; text-decoration: inherit;">Role</a>
@@ -1321,8 +1994,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Role of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Role of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="runtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runtime_go" style="color: inherit; text-decoration: inherit;">Runtime</a>
@@ -1330,8 +2002,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, and <code>CustomRuntime</code>, default is <code>Python2.7</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, <code>CustomRuntime</code> and <code>CustomImage</code>, default is <code>Python2.7</code>. When deploying images using <code>imageComfig</code>, please explicitly specify the runtime as <code>CustomImage</code>. After creating a mirror function, it is not supported to modify the <code>runtime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1339,17 +2010,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_go" style="color: inherit; text-decoration: inherit;">Timeout</a>
@@ -1357,8 +2026,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</dd><dt class="property-optional"
             title="Optional">
         <span id="triggers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggers_go" style="color: inherit; text-decoration: inherit;">Triggers</a>
@@ -1366,8 +2034,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functiontrigger">[]Function<wbr>Trigger<wbr>Args</a></span>
     </dt>
-    <dd><p>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1375,8 +2042,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="zipfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipfile_go" style="color: inherit; text-decoration: inherit;">Zip<wbr>File</a>
@@ -1384,8 +2050,253 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zip file of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>.</p>
-</dd></dl>
+    <dd>Zip file of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="async_run_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#async_run_enable_hcl" style="color: inherit; text-decoration: inherit;">async_<wbr>run_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cfs_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cfs_configs_hcl" style="color: inherit; text-decoration: inherit;">cfs_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioncfsconfig">list(object)</a></span>
+    </dt>
+    <dd>List of CFS configurations.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cls_logset_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cls_logset_id_hcl" style="color: inherit; text-decoration: inherit;">cls_<wbr>logset_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cls logset id of the SCF function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cls_topic_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cls_topic_id_hcl" style="color: inherit; text-decoration: inherit;">cls_<wbr>topic_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cls topic id of the SCF function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cos_bucket_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_bucket_name_hcl" style="color: inherit; text-decoration: inherit;">cos_<wbr>bucket_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cos_bucket_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_bucket_region_hcl" style="color: inherit; text-decoration: inherit;">cos_<wbr>bucket_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cos bucket region of the SCF function, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cos_object_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_object_name_hcl" style="color: inherit; text-decoration: inherit;">cos_<wbr>object_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dns_cache_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dns_cache_hcl" style="color: inherit; text-decoration: inherit;">dns_<wbr>cache</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_eip_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_eip_config_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>eip_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether EIP config set to <code>ENABLE</code> when <code>enablePublicNet</code> was true. Default <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_public_net_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_public_net_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>public_<wbr>net</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpcId</code> specified can disable public net config.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="environment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_hcl" style="color: inherit; text-decoration: inherit;">environment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Environment of the SCF function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="func_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#func_type_hcl" style="color: inherit; text-decoration: inherit;">func_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="handler_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#handler_hcl" style="color: inherit; text-decoration: inherit;">handler</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="image_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_configs_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functionimageconfig">list(object)</a></span>
+    </dt>
+    <dd>Image of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>, <code>zipFile</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_concurrency_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_concurrency_config_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>concurrency_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfig">object</a></span>
+    </dt>
+    <dd>Instance concurrency configuration for the function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="intranet_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranet_config_hcl" style="color: inherit; text-decoration: inherit;">intranet_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functionintranetconfig">object</a></span>
+    </dt>
+    <dd>Intranet access configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="l5_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l5_enable_hcl" style="color: inherit; text-decoration: inherit;">l5_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable L5 for SCF function, default is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="layers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layers_hcl" style="color: inherit; text-decoration: inherit;">layers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functionlayer">list(object)</a></span>
+    </dt>
+    <dd>The list of association layers.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mem_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mem_size_hcl" style="color: inherit; text-decoration: inherit;">mem_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Namespace of the SCF function, default is <code>default</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="role_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_hcl" style="color: inherit; text-decoration: inherit;">role</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Role of the SCF function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="runtime_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runtime_hcl" style="color: inherit; text-decoration: inherit;">runtime</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, <code>CustomRuntime</code> and <code>CustomImage</code>, default is <code>Python2.7</code>. When deploying images using <code>imageComfig</code>, please explicitly specify the runtime as <code>CustomImage</code>. After creating a mirror function, it is not supported to modify the <code>runtime</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet ID of the SCF function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the SCF function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_hcl" style="color: inherit; text-decoration: inherit;">timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="triggers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggers_hcl" style="color: inherit; text-decoration: inherit;">triggers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functiontrigger">list(object)</a></span>
+    </dt>
+    <dd>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC ID of the SCF function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zip_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zip_file_hcl" style="color: inherit; text-decoration: inherit;">zip_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Zip file of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1399,17 +2310,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</dd><dt class="property-optional"
             title="Optional">
         <span id="cfsconfigs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cfsconfigs_java" style="color: inherit; text-decoration: inherit;">cfs<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functioncfsconfig">List&lt;Function<wbr>Cfs<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functioncfsconfig">List&lt;Function<wbr>Cfs<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>List of CFS configurations.</p>
-</dd><dt class="property-optional"
+    <dd>List of CFS configurations.</dd><dt class="property-optional"
             title="Optional">
         <span id="clslogsetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clslogsetid_java" style="color: inherit; text-decoration: inherit;">cls<wbr>Logset<wbr>Id</a>
@@ -1417,8 +2326,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cls logset id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls logset id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="clstopicid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clstopicid_java" style="color: inherit; text-decoration: inherit;">cls<wbr>Topic<wbr>Id</a>
@@ -1426,8 +2334,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cls topic id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls topic id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosbucketname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbucketname_java" style="color: inherit; text-decoration: inherit;">cos<wbr>Bucket<wbr>Name</a>
@@ -1435,8 +2342,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosbucketregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbucketregion_java" style="color: inherit; text-decoration: inherit;">cos<wbr>Bucket<wbr>Region</a>
@@ -1444,8 +2350,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos bucket region of the SCF function, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket region of the SCF function, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosobjectname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosobjectname_java" style="color: inherit; text-decoration: inherit;">cos<wbr>Object<wbr>Name</a>
@@ -1453,8 +2358,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1462,8 +2366,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="dnscache_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnscache_java" style="color: inherit; text-decoration: inherit;">dns<wbr>Cache</a>
@@ -1471,8 +2374,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="enableeipconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableeipconfig_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Eip<wbr>Config</a>
@@ -1480,8 +2382,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether EIP config set to <code>ENABLE</code> when <code>enable_public_net</code> was true. Default <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether EIP config set to <code>ENABLE</code> when <code>enablePublicNet</code> was true. Default <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablepublicnet_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepublicnet_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Public<wbr>Net</a>
@@ -1489,17 +2390,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpc_id</code> specified can disable public net config.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpcId</code> specified can disable public net config.</dd><dt class="property-optional"
             title="Optional">
         <span id="environment_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_java" style="color: inherit; text-decoration: inherit;">environment</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Environment of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Environment of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="functype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#functype_java" style="color: inherit; text-decoration: inherit;">func<wbr>Type</a>
@@ -1507,8 +2406,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</p>
-</dd><dt class="property-optional"
+    <dd>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</dd><dt class="property-optional"
             title="Optional">
         <span id="handler_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#handler_java" style="color: inherit; text-decoration: inherit;">handler</a>
@@ -1516,26 +2414,31 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="imageconfigs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageconfigs_java" style="color: inherit; text-decoration: inherit;">image<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionimageconfig">List&lt;Function<wbr>Image<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functionimageconfig">List&lt;Function<wbr>Image<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Image of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>, <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>, <code>zipFile</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instanceconcurrencyconfig_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceconcurrencyconfig_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Concurrency<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfig">Function<wbr>Instance<wbr>Concurrency<wbr>Config</a></span>
+    </dt>
+    <dd>Instance concurrency configuration for the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="intranetconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetconfig_java" style="color: inherit; text-decoration: inherit;">intranet<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionintranetconfig">Function<wbr>Intranet<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#functionintranetconfig">Function<wbr>Intranet<wbr>Config</a></span>
     </dt>
-    <dd><p>Intranet access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="l5enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l5enable_java" style="color: inherit; text-decoration: inherit;">l5Enable</a>
@@ -1543,17 +2446,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable L5 for SCF function, default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable L5 for SCF function, default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="layers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layers_java" style="color: inherit; text-decoration: inherit;">layers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionlayer">List&lt;Function<wbr>Layer<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functionlayer">List&lt;Function<wbr>Layer&gt;</a></span>
     </dt>
-    <dd><p>The list of association layers.</p>
-</dd><dt class="property-optional"
+    <dd>The list of association layers.</dd><dt class="property-optional"
             title="Optional">
         <span id="memsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_java" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -1561,8 +2462,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1570,8 +2470,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="namespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_java" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -1579,8 +2478,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace of the SCF function, default is <code>default</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace of the SCF function, default is <code>default</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_java" style="color: inherit; text-decoration: inherit;">role</a>
@@ -1588,8 +2486,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Role of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Role of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="runtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runtime_java" style="color: inherit; text-decoration: inherit;">runtime</a>
@@ -1597,8 +2494,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, and <code>CustomRuntime</code>, default is <code>Python2.7</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, <code>CustomRuntime</code> and <code>CustomImage</code>, default is <code>Python2.7</code>. When deploying images using <code>imageComfig</code>, please explicitly specify the runtime as <code>CustomImage</code>. After creating a mirror function, it is not supported to modify the <code>runtime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1606,17 +2502,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_java" style="color: inherit; text-decoration: inherit;">timeout</a>
@@ -1624,17 +2518,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</dd><dt class="property-optional"
             title="Optional">
         <span id="triggers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggers_java" style="color: inherit; text-decoration: inherit;">triggers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functiontrigger">List&lt;Function<wbr>Trigger<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functiontrigger">List&lt;Function<wbr>Trigger&gt;</a></span>
     </dt>
-    <dd><p>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1642,8 +2534,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="zipfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipfile_java" style="color: inherit; text-decoration: inherit;">zip<wbr>File</a>
@@ -1651,8 +2542,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zip file of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>.</p>
-</dd></dl>
+    <dd>Zip file of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1666,17 +2556,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</dd><dt class="property-optional"
             title="Optional">
         <span id="cfsconfigs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cfsconfigs_nodejs" style="color: inherit; text-decoration: inherit;">cfs<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functioncfsconfig">Function<wbr>Cfs<wbr>Config<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#functioncfsconfig">Function<wbr>Cfs<wbr>Config[]</a></span>
     </dt>
-    <dd><p>List of CFS configurations.</p>
-</dd><dt class="property-optional"
+    <dd>List of CFS configurations.</dd><dt class="property-optional"
             title="Optional">
         <span id="clslogsetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clslogsetid_nodejs" style="color: inherit; text-decoration: inherit;">cls<wbr>Logset<wbr>Id</a>
@@ -1684,8 +2572,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cls logset id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls logset id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="clstopicid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clstopicid_nodejs" style="color: inherit; text-decoration: inherit;">cls<wbr>Topic<wbr>Id</a>
@@ -1693,8 +2580,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cls topic id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls topic id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosbucketname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbucketname_nodejs" style="color: inherit; text-decoration: inherit;">cos<wbr>Bucket<wbr>Name</a>
@@ -1702,8 +2588,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosbucketregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbucketregion_nodejs" style="color: inherit; text-decoration: inherit;">cos<wbr>Bucket<wbr>Region</a>
@@ -1711,8 +2596,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos bucket region of the SCF function, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket region of the SCF function, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosobjectname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosobjectname_nodejs" style="color: inherit; text-decoration: inherit;">cos<wbr>Object<wbr>Name</a>
@@ -1720,8 +2604,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1729,8 +2612,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="dnscache_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnscache_nodejs" style="color: inherit; text-decoration: inherit;">dns<wbr>Cache</a>
@@ -1738,8 +2620,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="enableeipconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableeipconfig_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Eip<wbr>Config</a>
@@ -1747,8 +2628,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether EIP config set to <code>ENABLE</code> when <code>enable_public_net</code> was true. Default <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether EIP config set to <code>ENABLE</code> when <code>enablePublicNet</code> was true. Default <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablepublicnet_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepublicnet_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Public<wbr>Net</a>
@@ -1756,17 +2636,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpc_id</code> specified can disable public net config.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpcId</code> specified can disable public net config.</dd><dt class="property-optional"
             title="Optional">
         <span id="environment_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_nodejs" style="color: inherit; text-decoration: inherit;">environment</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Environment of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Environment of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="functype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#functype_nodejs" style="color: inherit; text-decoration: inherit;">func<wbr>Type</a>
@@ -1774,8 +2652,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</p>
-</dd><dt class="property-optional"
+    <dd>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</dd><dt class="property-optional"
             title="Optional">
         <span id="handler_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#handler_nodejs" style="color: inherit; text-decoration: inherit;">handler</a>
@@ -1783,26 +2660,31 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="imageconfigs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageconfigs_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionimageconfig">Function<wbr>Image<wbr>Config<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#functionimageconfig">Function<wbr>Image<wbr>Config[]</a></span>
     </dt>
-    <dd><p>Image of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>, <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>, <code>zipFile</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instanceconcurrencyconfig_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceconcurrencyconfig_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Concurrency<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfig">Function<wbr>Instance<wbr>Concurrency<wbr>Config</a></span>
+    </dt>
+    <dd>Instance concurrency configuration for the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="intranetconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetconfig_nodejs" style="color: inherit; text-decoration: inherit;">intranet<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionintranetconfig">Function<wbr>Intranet<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#functionintranetconfig">Function<wbr>Intranet<wbr>Config</a></span>
     </dt>
-    <dd><p>Intranet access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="l5enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l5enable_nodejs" style="color: inherit; text-decoration: inherit;">l5Enable</a>
@@ -1810,17 +2692,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enable L5 for SCF function, default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable L5 for SCF function, default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="layers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layers_nodejs" style="color: inherit; text-decoration: inherit;">layers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionlayer">Function<wbr>Layer<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#functionlayer">Function<wbr>Layer[]</a></span>
     </dt>
-    <dd><p>The list of association layers.</p>
-</dd><dt class="property-optional"
+    <dd>The list of association layers.</dd><dt class="property-optional"
             title="Optional">
         <span id="memsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_nodejs" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -1828,8 +2708,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1837,8 +2716,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="namespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_nodejs" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -1846,8 +2724,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace of the SCF function, default is <code>default</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace of the SCF function, default is <code>default</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_nodejs" style="color: inherit; text-decoration: inherit;">role</a>
@@ -1855,8 +2732,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Role of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Role of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="runtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runtime_nodejs" style="color: inherit; text-decoration: inherit;">runtime</a>
@@ -1864,8 +2740,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, and <code>CustomRuntime</code>, default is <code>Python2.7</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, <code>CustomRuntime</code> and <code>CustomImage</code>, default is <code>Python2.7</code>. When deploying images using <code>imageComfig</code>, please explicitly specify the runtime as <code>CustomImage</code>. After creating a mirror function, it is not supported to modify the <code>runtime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1873,17 +2748,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_nodejs" style="color: inherit; text-decoration: inherit;">timeout</a>
@@ -1891,17 +2764,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</dd><dt class="property-optional"
             title="Optional">
         <span id="triggers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggers_nodejs" style="color: inherit; text-decoration: inherit;">triggers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functiontrigger">Function<wbr>Trigger<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#functiontrigger">Function<wbr>Trigger[]</a></span>
     </dt>
-    <dd><p>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1909,8 +2780,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="zipfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipfile_nodejs" style="color: inherit; text-decoration: inherit;">zip<wbr>File</a>
@@ -1918,8 +2788,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zip file of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>.</p>
-</dd></dl>
+    <dd>Zip file of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1933,17 +2802,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</dd><dt class="property-optional"
             title="Optional">
         <span id="cfs_configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cfs_configs_python" style="color: inherit; text-decoration: inherit;">cfs_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functioncfsconfig">Function<wbr>Cfs<wbr>Config<wbr>Args]</a></span>
+        <span class="property-type"><a href="#functioncfsconfig">Sequence[Function<wbr>Cfs<wbr>Config<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of CFS configurations.</p>
-</dd><dt class="property-optional"
+    <dd>List of CFS configurations.</dd><dt class="property-optional"
             title="Optional">
         <span id="cls_logset_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cls_logset_id_python" style="color: inherit; text-decoration: inherit;">cls_<wbr>logset_<wbr>id</a>
@@ -1951,8 +2818,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cls logset id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls logset id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="cls_topic_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cls_topic_id_python" style="color: inherit; text-decoration: inherit;">cls_<wbr>topic_<wbr>id</a>
@@ -1960,8 +2826,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cls topic id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls topic id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="cos_bucket_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_bucket_name_python" style="color: inherit; text-decoration: inherit;">cos_<wbr>bucket_<wbr>name</a>
@@ -1969,8 +2834,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cos_bucket_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_bucket_region_python" style="color: inherit; text-decoration: inherit;">cos_<wbr>bucket_<wbr>region</a>
@@ -1978,8 +2842,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cos bucket region of the SCF function, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket region of the SCF function, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cos_object_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_object_name_python" style="color: inherit; text-decoration: inherit;">cos_<wbr>object_<wbr>name</a>
@@ -1987,8 +2850,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1996,8 +2858,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="dns_cache_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dns_cache_python" style="color: inherit; text-decoration: inherit;">dns_<wbr>cache</a>
@@ -2005,8 +2866,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_eip_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_eip_config_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>eip_<wbr>config</a>
@@ -2014,8 +2874,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether EIP config set to <code>ENABLE</code> when <code>enable_public_net</code> was true. Default <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether EIP config set to <code>ENABLE</code> when <code>enablePublicNet</code> was true. Default <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_public_net_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_public_net_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>public_<wbr>net</a>
@@ -2023,17 +2882,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpc_id</code> specified can disable public net config.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpcId</code> specified can disable public net config.</dd><dt class="property-optional"
             title="Optional">
         <span id="environment_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_python" style="color: inherit; text-decoration: inherit;">environment</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Environment of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Environment of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="func_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#func_type_python" style="color: inherit; text-decoration: inherit;">func_<wbr>type</a>
@@ -2041,8 +2898,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</p>
-</dd><dt class="property-optional"
+    <dd>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</dd><dt class="property-optional"
             title="Optional">
         <span id="handler_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#handler_python" style="color: inherit; text-decoration: inherit;">handler</a>
@@ -2050,17 +2906,23 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="image_configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_configs_python" style="color: inherit; text-decoration: inherit;">image_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionimageconfig">Function<wbr>Image<wbr>Config<wbr>Args]</a></span>
+        <span class="property-type"><a href="#functionimageconfig">Sequence[Function<wbr>Image<wbr>Config<wbr>Args]</a></span>
     </dt>
-    <dd><p>Image of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>, <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>, <code>zipFile</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_concurrency_config_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_concurrency_config_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>concurrency_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfig">Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Args</a></span>
+    </dt>
+    <dd>Instance concurrency configuration for the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="intranet_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranet_config_python" style="color: inherit; text-decoration: inherit;">intranet_<wbr>config</a>
@@ -2068,8 +2930,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functionintranetconfig">Function<wbr>Intranet<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Intranet access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="l5_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l5_enable_python" style="color: inherit; text-decoration: inherit;">l5_<wbr>enable</a>
@@ -2077,17 +2938,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable L5 for SCF function, default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable L5 for SCF function, default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="layers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layers_python" style="color: inherit; text-decoration: inherit;">layers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionlayer">Function<wbr>Layer<wbr>Args]</a></span>
+        <span class="property-type"><a href="#functionlayer">Sequence[Function<wbr>Layer<wbr>Args]</a></span>
     </dt>
-    <dd><p>The list of association layers.</p>
-</dd><dt class="property-optional"
+    <dd>The list of association layers.</dd><dt class="property-optional"
             title="Optional">
         <span id="mem_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mem_size_python" style="color: inherit; text-decoration: inherit;">mem_<wbr>size</a>
@@ -2095,8 +2954,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2104,8 +2962,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_python" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -2113,8 +2970,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespace of the SCF function, default is <code>default</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace of the SCF function, default is <code>default</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_python" style="color: inherit; text-decoration: inherit;">role</a>
@@ -2122,8 +2978,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Role of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Role of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="runtime_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runtime_python" style="color: inherit; text-decoration: inherit;">runtime</a>
@@ -2131,8 +2986,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, and <code>CustomRuntime</code>, default is <code>Python2.7</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, <code>CustomRuntime</code> and <code>CustomImage</code>, default is <code>Python2.7</code>. When deploying images using <code>imageComfig</code>, please explicitly specify the runtime as <code>CustomImage</code>. After creating a mirror function, it is not supported to modify the <code>runtime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -2140,17 +2994,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_python" style="color: inherit; text-decoration: inherit;">timeout</a>
@@ -2158,17 +3010,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</dd><dt class="property-optional"
             title="Optional">
         <span id="triggers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggers_python" style="color: inherit; text-decoration: inherit;">triggers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functiontrigger">Function<wbr>Trigger<wbr>Args]</a></span>
+        <span class="property-type"><a href="#functiontrigger">Sequence[Function<wbr>Trigger<wbr>Args]</a></span>
     </dt>
-    <dd><p>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2176,8 +3026,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="zip_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zip_file_python" style="color: inherit; text-decoration: inherit;">zip_<wbr>file</a>
@@ -2185,8 +3034,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Zip file of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>.</p>
-</dd></dl>
+    <dd>Zip file of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2200,8 +3048,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</dd><dt class="property-optional"
             title="Optional">
         <span id="cfsconfigs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cfsconfigs_yaml" style="color: inherit; text-decoration: inherit;">cfs<wbr>Configs</a>
@@ -2209,8 +3056,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functioncfsconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of CFS configurations.</p>
-</dd><dt class="property-optional"
+    <dd>List of CFS configurations.</dd><dt class="property-optional"
             title="Optional">
         <span id="clslogsetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clslogsetid_yaml" style="color: inherit; text-decoration: inherit;">cls<wbr>Logset<wbr>Id</a>
@@ -2218,8 +3064,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cls logset id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls logset id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="clstopicid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clstopicid_yaml" style="color: inherit; text-decoration: inherit;">cls<wbr>Topic<wbr>Id</a>
@@ -2227,8 +3072,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cls topic id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls topic id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosbucketname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbucketname_yaml" style="color: inherit; text-decoration: inherit;">cos<wbr>Bucket<wbr>Name</a>
@@ -2236,8 +3080,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosbucketregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosbucketregion_yaml" style="color: inherit; text-decoration: inherit;">cos<wbr>Bucket<wbr>Region</a>
@@ -2245,8 +3088,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos bucket region of the SCF function, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket region of the SCF function, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosobjectname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosobjectname_yaml" style="color: inherit; text-decoration: inherit;">cos<wbr>Object<wbr>Name</a>
@@ -2254,8 +3096,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2263,8 +3104,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="dnscache_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnscache_yaml" style="color: inherit; text-decoration: inherit;">dns<wbr>Cache</a>
@@ -2272,8 +3112,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="enableeipconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableeipconfig_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Eip<wbr>Config</a>
@@ -2281,8 +3120,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether EIP config set to <code>ENABLE</code> when <code>enable_public_net</code> was true. Default <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether EIP config set to <code>ENABLE</code> when <code>enablePublicNet</code> was true. Default <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablepublicnet_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepublicnet_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Public<wbr>Net</a>
@@ -2290,17 +3128,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpc_id</code> specified can disable public net config.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpcId</code> specified can disable public net config.</dd><dt class="property-optional"
             title="Optional">
         <span id="environment_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_yaml" style="color: inherit; text-decoration: inherit;">environment</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Environment of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Environment of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="functype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#functype_yaml" style="color: inherit; text-decoration: inherit;">func<wbr>Type</a>
@@ -2308,8 +3144,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</p>
-</dd><dt class="property-optional"
+    <dd>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</dd><dt class="property-optional"
             title="Optional">
         <span id="handler_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#handler_yaml" style="color: inherit; text-decoration: inherit;">handler</a>
@@ -2317,8 +3152,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="imageconfigs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageconfigs_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Configs</a>
@@ -2326,8 +3160,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functionimageconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Image of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>, <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>, <code>zipFile</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instanceconcurrencyconfig_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceconcurrencyconfig_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Concurrency<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfig">Property Map</a></span>
+    </dt>
+    <dd>Instance concurrency configuration for the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="intranetconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetconfig_yaml" style="color: inherit; text-decoration: inherit;">intranet<wbr>Config</a>
@@ -2335,8 +3176,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functionintranetconfig">Property Map</a></span>
     </dt>
-    <dd><p>Intranet access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="l5enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#l5enable_yaml" style="color: inherit; text-decoration: inherit;">l5Enable</a>
@@ -2344,8 +3184,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable L5 for SCF function, default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable L5 for SCF function, default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="layers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layers_yaml" style="color: inherit; text-decoration: inherit;">layers</a>
@@ -2353,8 +3192,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functionlayer">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>The list of association layers.</p>
-</dd><dt class="property-optional"
+    <dd>The list of association layers.</dd><dt class="property-optional"
             title="Optional">
         <span id="memsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_yaml" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -2362,8 +3200,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2371,8 +3208,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="namespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_yaml" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -2380,8 +3216,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace of the SCF function, default is <code>default</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace of the SCF function, default is <code>default</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_yaml" style="color: inherit; text-decoration: inherit;">role</a>
@@ -2389,8 +3224,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Role of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Role of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="runtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#runtime_yaml" style="color: inherit; text-decoration: inherit;">runtime</a>
@@ -2398,8 +3232,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, and <code>CustomRuntime</code>, default is <code>Python2.7</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, <code>CustomRuntime</code> and <code>CustomImage</code>, default is <code>Python2.7</code>. When deploying images using <code>imageComfig</code>, please explicitly specify the runtime as <code>CustomImage</code>. After creating a mirror function, it is not supported to modify the <code>runtime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2407,17 +3240,15 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_yaml" style="color: inherit; text-decoration: inherit;">timeout</a>
@@ -2425,8 +3256,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</dd><dt class="property-optional"
             title="Optional">
         <span id="triggers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggers_yaml" style="color: inherit; text-decoration: inherit;">triggers</a>
@@ -2434,8 +3264,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functiontrigger">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2443,8 +3272,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="zipfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zipfile_yaml" style="color: inherit; text-decoration: inherit;">zip<wbr>File</a>
@@ -2452,8 +3280,7 @@ The Function resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zip file of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>.</p>
-</dd></dl>
+    <dd>Zip file of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2474,8 +3301,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function code error message.</p>
-</dd><dt class="property-"
+    <dd>SCF function code error message.</dd><dt class="property-"
             title="">
         <span id="coderesult_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coderesult_csharp" style="color: inherit; text-decoration: inherit;">Code<wbr>Result</a>
@@ -2483,8 +3309,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function code is correct.</p>
-</dd><dt class="property-"
+    <dd>SCF function code is correct.</dd><dt class="property-"
             title="">
         <span id="codesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codesize_csharp" style="color: inherit; text-decoration: inherit;">Code<wbr>Size</a>
@@ -2492,8 +3317,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SCF function code size, unit is M.</p>
-</dd><dt class="property-"
+    <dd>SCF function code size, unit is M.</dd><dt class="property-"
             title="">
         <span id="eipfixed_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipfixed_csharp" style="color: inherit; text-decoration: inherit;">Eip<wbr>Fixed</a>
@@ -2501,8 +3325,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether EIP is a fixed IP.</p>
-</dd><dt class="property-"
+    <dd>Whether EIP is a fixed IP.</dd><dt class="property-"
             title="">
         <span id="eips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eips_csharp" style="color: inherit; text-decoration: inherit;">Eips</a>
@@ -2510,8 +3333,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>SCF function EIP list.</p>
-</dd><dt class="property-"
+    <dd>SCF function EIP list.</dd><dt class="property-"
             title="">
         <span id="errno_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errno_csharp" style="color: inherit; text-decoration: inherit;">Err<wbr>No</a>
@@ -2519,8 +3341,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SCF function code error code.</p>
-</dd><dt class="property-"
+    <dd>SCF function code error code.</dd><dt class="property-"
             title="">
         <span id="functionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#functionid_csharp" style="color: inherit; text-decoration: inherit;">Function<wbr>Id</a>
@@ -2528,8 +3349,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>function ID.</p>
-</dd><dt class="property-"
+    <dd>function ID.</dd><dt class="property-"
             title="">
         <span id="host_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_csharp" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -2537,8 +3357,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function domain name.</p>
-</dd><dt class="property-"
+    <dd>SCF function domain name.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2546,8 +3365,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="installdependency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#installdependency_csharp" style="color: inherit; text-decoration: inherit;">Install<wbr>Dependency</a>
@@ -2555,8 +3373,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to automatically install dependencies.</p>
-</dd><dt class="property-"
+    <dd>Whether to automatically install dependencies.</dd><dt class="property-"
             title="">
         <span id="modifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_csharp" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -2564,8 +3381,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modify time of SCF function trigger.</p>
-</dd><dt class="property-"
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2573,8 +3389,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function status.</p>
-</dd><dt class="property-"
+    <dd>SCF function status.</dd><dt class="property-"
             title="">
         <span id="statusdesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusdesc_csharp" style="color: inherit; text-decoration: inherit;">Status<wbr>Desc</a>
@@ -2582,8 +3397,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF status description.</p>
-</dd><dt class="property-"
+    <dd>SCF status description.</dd><dt class="property-"
             title="">
         <span id="triggerinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerinfos_csharp" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Infos</a>
@@ -2591,8 +3405,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functiontriggerinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Outputs.<wbr>Function<wbr>Trigger<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>SCF trigger details list. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>SCF trigger details list. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="vip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_csharp" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -2600,8 +3413,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function vip.</p>
-</dd></dl>
+    <dd>SCF function vip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2615,8 +3427,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function code error message.</p>
-</dd><dt class="property-"
+    <dd>SCF function code error message.</dd><dt class="property-"
             title="">
         <span id="coderesult_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coderesult_go" style="color: inherit; text-decoration: inherit;">Code<wbr>Result</a>
@@ -2624,8 +3435,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function code is correct.</p>
-</dd><dt class="property-"
+    <dd>SCF function code is correct.</dd><dt class="property-"
             title="">
         <span id="codesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codesize_go" style="color: inherit; text-decoration: inherit;">Code<wbr>Size</a>
@@ -2633,8 +3443,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SCF function code size, unit is M.</p>
-</dd><dt class="property-"
+    <dd>SCF function code size, unit is M.</dd><dt class="property-"
             title="">
         <span id="eipfixed_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipfixed_go" style="color: inherit; text-decoration: inherit;">Eip<wbr>Fixed</a>
@@ -2642,8 +3451,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether EIP is a fixed IP.</p>
-</dd><dt class="property-"
+    <dd>Whether EIP is a fixed IP.</dd><dt class="property-"
             title="">
         <span id="eips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eips_go" style="color: inherit; text-decoration: inherit;">Eips</a>
@@ -2651,8 +3459,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>SCF function EIP list.</p>
-</dd><dt class="property-"
+    <dd>SCF function EIP list.</dd><dt class="property-"
             title="">
         <span id="errno_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errno_go" style="color: inherit; text-decoration: inherit;">Err<wbr>No</a>
@@ -2660,8 +3467,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SCF function code error code.</p>
-</dd><dt class="property-"
+    <dd>SCF function code error code.</dd><dt class="property-"
             title="">
         <span id="functionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#functionid_go" style="color: inherit; text-decoration: inherit;">Function<wbr>Id</a>
@@ -2669,8 +3475,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>function ID.</p>
-</dd><dt class="property-"
+    <dd>function ID.</dd><dt class="property-"
             title="">
         <span id="host_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_go" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -2678,8 +3483,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function domain name.</p>
-</dd><dt class="property-"
+    <dd>SCF function domain name.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2687,8 +3491,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="installdependency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#installdependency_go" style="color: inherit; text-decoration: inherit;">Install<wbr>Dependency</a>
@@ -2696,8 +3499,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to automatically install dependencies.</p>
-</dd><dt class="property-"
+    <dd>Whether to automatically install dependencies.</dd><dt class="property-"
             title="">
         <span id="modifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_go" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -2705,8 +3507,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modify time of SCF function trigger.</p>
-</dd><dt class="property-"
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2714,8 +3515,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function status.</p>
-</dd><dt class="property-"
+    <dd>SCF function status.</dd><dt class="property-"
             title="">
         <span id="statusdesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusdesc_go" style="color: inherit; text-decoration: inherit;">Status<wbr>Desc</a>
@@ -2723,8 +3523,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF status description.</p>
-</dd><dt class="property-"
+    <dd>SCF status description.</dd><dt class="property-"
             title="">
         <span id="triggerinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerinfos_go" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Infos</a>
@@ -2732,8 +3531,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functiontriggerinfo">[]Function<wbr>Trigger<wbr>Info</a></span>
     </dt>
-    <dd><p>SCF trigger details list. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>SCF trigger details list. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="vip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_go" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -2741,8 +3539,133 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function vip.</p>
-</dd></dl>
+    <dd>SCF function vip.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="code_error_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#code_error_hcl" style="color: inherit; text-decoration: inherit;">code_<wbr>error</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SCF function code error message.</dd><dt class="property-"
+            title="">
+        <span id="code_result_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#code_result_hcl" style="color: inherit; text-decoration: inherit;">code_<wbr>result</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SCF function code is correct.</dd><dt class="property-"
+            title="">
+        <span id="code_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#code_size_hcl" style="color: inherit; text-decoration: inherit;">code_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>SCF function code size, unit is M.</dd><dt class="property-"
+            title="">
+        <span id="eip_fixed_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_fixed_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>fixed</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether EIP is a fixed IP.</dd><dt class="property-"
+            title="">
+        <span id="eips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eips_hcl" style="color: inherit; text-decoration: inherit;">eips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>SCF function EIP list.</dd><dt class="property-"
+            title="">
+        <span id="err_no_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#err_no_hcl" style="color: inherit; text-decoration: inherit;">err_<wbr>no</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>SCF function code error code.</dd><dt class="property-"
+            title="">
+        <span id="function_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#function_id_hcl" style="color: inherit; text-decoration: inherit;">function_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>function ID.</dd><dt class="property-"
+            title="">
+        <span id="host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_hcl" style="color: inherit; text-decoration: inherit;">host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SCF function domain name.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="install_dependency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#install_dependency_hcl" style="color: inherit; text-decoration: inherit;">install_<wbr>dependency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to automatically install dependencies.</dd><dt class="property-"
+            title="">
+        <span id="modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_hcl" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SCF function status.</dd><dt class="property-"
+            title="">
+        <span id="status_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_desc_hcl" style="color: inherit; text-decoration: inherit;">status_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SCF status description.</dd><dt class="property-"
+            title="">
+        <span id="trigger_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_infos_hcl" style="color: inherit; text-decoration: inherit;">trigger_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functiontriggerinfo">list(object)</a></span>
+    </dt>
+    <dd>SCF trigger details list. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SCF function vip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2756,8 +3679,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function code error message.</p>
-</dd><dt class="property-"
+    <dd>SCF function code error message.</dd><dt class="property-"
             title="">
         <span id="coderesult_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coderesult_java" style="color: inherit; text-decoration: inherit;">code<wbr>Result</a>
@@ -2765,8 +3687,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function code is correct.</p>
-</dd><dt class="property-"
+    <dd>SCF function code is correct.</dd><dt class="property-"
             title="">
         <span id="codesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codesize_java" style="color: inherit; text-decoration: inherit;">code<wbr>Size</a>
@@ -2774,8 +3695,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>SCF function code size, unit is M.</p>
-</dd><dt class="property-"
+    <dd>SCF function code size, unit is M.</dd><dt class="property-"
             title="">
         <span id="eipfixed_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipfixed_java" style="color: inherit; text-decoration: inherit;">eip<wbr>Fixed</a>
@@ -2783,8 +3703,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether EIP is a fixed IP.</p>
-</dd><dt class="property-"
+    <dd>Whether EIP is a fixed IP.</dd><dt class="property-"
             title="">
         <span id="eips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eips_java" style="color: inherit; text-decoration: inherit;">eips</a>
@@ -2792,8 +3711,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>SCF function EIP list.</p>
-</dd><dt class="property-"
+    <dd>SCF function EIP list.</dd><dt class="property-"
             title="">
         <span id="errno_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errno_java" style="color: inherit; text-decoration: inherit;">err<wbr>No</a>
@@ -2801,8 +3719,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>SCF function code error code.</p>
-</dd><dt class="property-"
+    <dd>SCF function code error code.</dd><dt class="property-"
             title="">
         <span id="functionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#functionid_java" style="color: inherit; text-decoration: inherit;">function<wbr>Id</a>
@@ -2810,8 +3727,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>function ID.</p>
-</dd><dt class="property-"
+    <dd>function ID.</dd><dt class="property-"
             title="">
         <span id="host_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_java" style="color: inherit; text-decoration: inherit;">host</a>
@@ -2819,8 +3735,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function domain name.</p>
-</dd><dt class="property-"
+    <dd>SCF function domain name.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2828,8 +3743,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="installdependency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#installdependency_java" style="color: inherit; text-decoration: inherit;">install<wbr>Dependency</a>
@@ -2837,8 +3751,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to automatically install dependencies.</p>
-</dd><dt class="property-"
+    <dd>Whether to automatically install dependencies.</dd><dt class="property-"
             title="">
         <span id="modifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_java" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -2846,8 +3759,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Modify time of SCF function trigger.</p>
-</dd><dt class="property-"
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2855,8 +3767,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function status.</p>
-</dd><dt class="property-"
+    <dd>SCF function status.</dd><dt class="property-"
             title="">
         <span id="statusdesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusdesc_java" style="color: inherit; text-decoration: inherit;">status<wbr>Desc</a>
@@ -2864,8 +3775,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF status description.</p>
-</dd><dt class="property-"
+    <dd>SCF status description.</dd><dt class="property-"
             title="">
         <span id="triggerinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerinfos_java" style="color: inherit; text-decoration: inherit;">trigger<wbr>Infos</a>
@@ -2873,8 +3783,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functiontriggerinfo">List&lt;Function<wbr>Trigger<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>SCF trigger details list. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>SCF trigger details list. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="vip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_java" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2882,8 +3791,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function vip.</p>
-</dd></dl>
+    <dd>SCF function vip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2897,8 +3805,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function code error message.</p>
-</dd><dt class="property-"
+    <dd>SCF function code error message.</dd><dt class="property-"
             title="">
         <span id="coderesult_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coderesult_nodejs" style="color: inherit; text-decoration: inherit;">code<wbr>Result</a>
@@ -2906,8 +3813,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function code is correct.</p>
-</dd><dt class="property-"
+    <dd>SCF function code is correct.</dd><dt class="property-"
             title="">
         <span id="codesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codesize_nodejs" style="color: inherit; text-decoration: inherit;">code<wbr>Size</a>
@@ -2915,8 +3821,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>SCF function code size, unit is M.</p>
-</dd><dt class="property-"
+    <dd>SCF function code size, unit is M.</dd><dt class="property-"
             title="">
         <span id="eipfixed_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipfixed_nodejs" style="color: inherit; text-decoration: inherit;">eip<wbr>Fixed</a>
@@ -2924,8 +3829,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether EIP is a fixed IP.</p>
-</dd><dt class="property-"
+    <dd>Whether EIP is a fixed IP.</dd><dt class="property-"
             title="">
         <span id="eips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eips_nodejs" style="color: inherit; text-decoration: inherit;">eips</a>
@@ -2933,8 +3837,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>SCF function EIP list.</p>
-</dd><dt class="property-"
+    <dd>SCF function EIP list.</dd><dt class="property-"
             title="">
         <span id="errno_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errno_nodejs" style="color: inherit; text-decoration: inherit;">err<wbr>No</a>
@@ -2942,8 +3845,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>SCF function code error code.</p>
-</dd><dt class="property-"
+    <dd>SCF function code error code.</dd><dt class="property-"
             title="">
         <span id="functionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#functionid_nodejs" style="color: inherit; text-decoration: inherit;">function<wbr>Id</a>
@@ -2951,8 +3853,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>function ID.</p>
-</dd><dt class="property-"
+    <dd>function ID.</dd><dt class="property-"
             title="">
         <span id="host_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_nodejs" style="color: inherit; text-decoration: inherit;">host</a>
@@ -2960,8 +3861,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function domain name.</p>
-</dd><dt class="property-"
+    <dd>SCF function domain name.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2969,8 +3869,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="installdependency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#installdependency_nodejs" style="color: inherit; text-decoration: inherit;">install<wbr>Dependency</a>
@@ -2978,8 +3877,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to automatically install dependencies.</p>
-</dd><dt class="property-"
+    <dd>Whether to automatically install dependencies.</dd><dt class="property-"
             title="">
         <span id="modifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_nodejs" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -2987,8 +3885,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modify time of SCF function trigger.</p>
-</dd><dt class="property-"
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2996,8 +3893,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function status.</p>
-</dd><dt class="property-"
+    <dd>SCF function status.</dd><dt class="property-"
             title="">
         <span id="statusdesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusdesc_nodejs" style="color: inherit; text-decoration: inherit;">status<wbr>Desc</a>
@@ -3005,8 +3901,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF status description.</p>
-</dd><dt class="property-"
+    <dd>SCF status description.</dd><dt class="property-"
             title="">
         <span id="triggerinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerinfos_nodejs" style="color: inherit; text-decoration: inherit;">trigger<wbr>Infos</a>
@@ -3014,8 +3909,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functiontriggerinfo">Function<wbr>Trigger<wbr>Info[]</a></span>
     </dt>
-    <dd><p>SCF trigger details list. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>SCF trigger details list. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="vip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_nodejs" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -3023,8 +3917,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function vip.</p>
-</dd></dl>
+    <dd>SCF function vip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3038,8 +3931,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SCF function code error message.</p>
-</dd><dt class="property-"
+    <dd>SCF function code error message.</dd><dt class="property-"
             title="">
         <span id="code_result_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#code_result_python" style="color: inherit; text-decoration: inherit;">code_<wbr>result</a>
@@ -3047,8 +3939,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SCF function code is correct.</p>
-</dd><dt class="property-"
+    <dd>SCF function code is correct.</dd><dt class="property-"
             title="">
         <span id="code_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#code_size_python" style="color: inherit; text-decoration: inherit;">code_<wbr>size</a>
@@ -3056,8 +3947,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SCF function code size, unit is M.</p>
-</dd><dt class="property-"
+    <dd>SCF function code size, unit is M.</dd><dt class="property-"
             title="">
         <span id="eip_fixed_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eip_fixed_python" style="color: inherit; text-decoration: inherit;">eip_<wbr>fixed</a>
@@ -3065,8 +3955,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether EIP is a fixed IP.</p>
-</dd><dt class="property-"
+    <dd>Whether EIP is a fixed IP.</dd><dt class="property-"
             title="">
         <span id="eips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eips_python" style="color: inherit; text-decoration: inherit;">eips</a>
@@ -3074,8 +3963,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>SCF function EIP list.</p>
-</dd><dt class="property-"
+    <dd>SCF function EIP list.</dd><dt class="property-"
             title="">
         <span id="err_no_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#err_no_python" style="color: inherit; text-decoration: inherit;">err_<wbr>no</a>
@@ -3083,8 +3971,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SCF function code error code.</p>
-</dd><dt class="property-"
+    <dd>SCF function code error code.</dd><dt class="property-"
             title="">
         <span id="function_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#function_id_python" style="color: inherit; text-decoration: inherit;">function_<wbr>id</a>
@@ -3092,8 +3979,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>function ID.</p>
-</dd><dt class="property-"
+    <dd>function ID.</dd><dt class="property-"
             title="">
         <span id="host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_python" style="color: inherit; text-decoration: inherit;">host</a>
@@ -3101,8 +3987,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SCF function domain name.</p>
-</dd><dt class="property-"
+    <dd>SCF function domain name.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -3110,8 +3995,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="install_dependency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#install_dependency_python" style="color: inherit; text-decoration: inherit;">install_<wbr>dependency</a>
@@ -3119,8 +4003,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to automatically install dependencies.</p>
-</dd><dt class="property-"
+    <dd>Whether to automatically install dependencies.</dd><dt class="property-"
             title="">
         <span id="modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_python" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
@@ -3128,8 +4011,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Modify time of SCF function trigger.</p>
-</dd><dt class="property-"
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3137,8 +4019,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SCF function status.</p>
-</dd><dt class="property-"
+    <dd>SCF function status.</dd><dt class="property-"
             title="">
         <span id="status_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_desc_python" style="color: inherit; text-decoration: inherit;">status_<wbr>desc</a>
@@ -3146,17 +4027,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SCF status description.</p>
-</dd><dt class="property-"
+    <dd>SCF status description.</dd><dt class="property-"
             title="">
         <span id="trigger_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_infos_python" style="color: inherit; text-decoration: inherit;">trigger_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functiontriggerinfo">Function<wbr>Trigger<wbr>Info]</a></span>
+        <span class="property-type"><a href="#functiontriggerinfo">Sequence[Function<wbr>Trigger<wbr>Info]</a></span>
     </dt>
-    <dd><p>SCF trigger details list. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>SCF trigger details list. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_python" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -3164,8 +4043,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SCF function vip.</p>
-</dd></dl>
+    <dd>SCF function vip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3179,8 +4057,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function code error message.</p>
-</dd><dt class="property-"
+    <dd>SCF function code error message.</dd><dt class="property-"
             title="">
         <span id="coderesult_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coderesult_yaml" style="color: inherit; text-decoration: inherit;">code<wbr>Result</a>
@@ -3188,8 +4065,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function code is correct.</p>
-</dd><dt class="property-"
+    <dd>SCF function code is correct.</dd><dt class="property-"
             title="">
         <span id="codesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codesize_yaml" style="color: inherit; text-decoration: inherit;">code<wbr>Size</a>
@@ -3197,8 +4073,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>SCF function code size, unit is M.</p>
-</dd><dt class="property-"
+    <dd>SCF function code size, unit is M.</dd><dt class="property-"
             title="">
         <span id="eipfixed_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eipfixed_yaml" style="color: inherit; text-decoration: inherit;">eip<wbr>Fixed</a>
@@ -3206,8 +4081,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether EIP is a fixed IP.</p>
-</dd><dt class="property-"
+    <dd>Whether EIP is a fixed IP.</dd><dt class="property-"
             title="">
         <span id="eips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eips_yaml" style="color: inherit; text-decoration: inherit;">eips</a>
@@ -3215,8 +4089,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>SCF function EIP list.</p>
-</dd><dt class="property-"
+    <dd>SCF function EIP list.</dd><dt class="property-"
             title="">
         <span id="errno_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errno_yaml" style="color: inherit; text-decoration: inherit;">err<wbr>No</a>
@@ -3224,8 +4097,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>SCF function code error code.</p>
-</dd><dt class="property-"
+    <dd>SCF function code error code.</dd><dt class="property-"
             title="">
         <span id="functionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#functionid_yaml" style="color: inherit; text-decoration: inherit;">function<wbr>Id</a>
@@ -3233,8 +4105,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>function ID.</p>
-</dd><dt class="property-"
+    <dd>function ID.</dd><dt class="property-"
             title="">
         <span id="host_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_yaml" style="color: inherit; text-decoration: inherit;">host</a>
@@ -3242,8 +4113,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function domain name.</p>
-</dd><dt class="property-"
+    <dd>SCF function domain name.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -3251,8 +4121,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="installdependency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#installdependency_yaml" style="color: inherit; text-decoration: inherit;">install<wbr>Dependency</a>
@@ -3260,8 +4129,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to automatically install dependencies.</p>
-</dd><dt class="property-"
+    <dd>Whether to automatically install dependencies.</dd><dt class="property-"
             title="">
         <span id="modifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_yaml" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -3269,8 +4137,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Modify time of SCF function trigger.</p>
-</dd><dt class="property-"
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3278,8 +4145,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function status.</p>
-</dd><dt class="property-"
+    <dd>SCF function status.</dd><dt class="property-"
             title="">
         <span id="statusdesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statusdesc_yaml" style="color: inherit; text-decoration: inherit;">status<wbr>Desc</a>
@@ -3287,8 +4153,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF status description.</p>
-</dd><dt class="property-"
+    <dd>SCF status description.</dd><dt class="property-"
             title="">
         <span id="triggerinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerinfos_yaml" style="color: inherit; text-decoration: inherit;">trigger<wbr>Infos</a>
@@ -3296,8 +4161,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functiontriggerinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>SCF trigger details list. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>SCF trigger details list. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="vip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_yaml" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -3305,8 +4169,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function vip.</p>
-</dd></dl>
+    <dd>SCF function vip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3316,23 +4179,23 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Function resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">FunctionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Function</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">FunctionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Function</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">async_run_enable</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">cfs_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_scf.FunctionCfsConfigArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">cfs_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[FunctionCfsConfigArgs]]</span> = None<span class="p">,</span>
         <span class="nx">cls_logset_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">cls_topic_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">code_error</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -3347,17 +4210,18 @@ Get an existing Function resource's state with the given name, ID, and optional 
         <span class="nx">eips</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">enable_eip_config</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">enable_public_net</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-        <span class="nx">environment</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">environment</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">err_no</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">func_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">function_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">handler</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">host</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">image_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_scf.FunctionImageConfigArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">image_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[FunctionImageConfigArgs]]</span> = None<span class="p">,</span>
         <span class="nx">install_dependency</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-        <span class="nx">intranet_config</span><span class="p">:</span> <span class="nx">Optional[_scf.FunctionIntranetConfigArgs]</span> = None<span class="p">,</span>
+        <span class="nx">instance_concurrency_config</span><span class="p">:</span> <span class="nx">Optional[FunctionInstanceConcurrencyConfigArgs]</span> = None<span class="p">,</span>
+        <span class="nx">intranet_config</span><span class="p">:</span> <span class="nx">Optional[FunctionIntranetConfigArgs]</span> = None<span class="p">,</span>
         <span class="nx">l5_enable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-        <span class="nx">layers</span><span class="p">:</span> <span class="nx">Optional[Sequence[_scf.FunctionLayerArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">layers</span><span class="p">:</span> <span class="nx">Optional[Sequence[FunctionLayerArgs]]</span> = None<span class="p">,</span>
         <span class="nx">mem_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">modify_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -3367,111 +4231,150 @@ Get an existing Function resource's state with the given name, ID, and optional 
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">status_desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">trigger_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[_scf.FunctionTriggerInfoArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">triggers</span><span class="p">:</span> <span class="nx">Optional[Sequence[_scf.FunctionTriggerArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">trigger_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[FunctionTriggerInfoArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">triggers</span><span class="p">:</span> <span class="nx">Optional[Sequence[FunctionTriggerArgs]]</span> = None<span class="p">,</span>
         <span class="nx">vip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">zip_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Function</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetFunction<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">FunctionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Function</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetFunction<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">FunctionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Function</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Function</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">FunctionState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Function</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">FunctionState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Function</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">FunctionState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Function</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">FunctionState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingFunction</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Scf:Function</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_scf_function</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">FunctionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">FunctionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3479,28 +4382,31 @@ Get an existing Function resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">FunctionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3508,28 +4414,31 @@ Get an existing Function resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">FunctionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3549,17 +4458,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cfsconfigs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cfsconfigs_csharp" style="color: inherit; text-decoration: inherit;">Cfs<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functioncfsconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Cfs<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functioncfsconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Cfs<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>List of CFS configurations.</p>
-</dd><dt class="property-optional"
+    <dd>List of CFS configurations.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clslogsetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clslogsetid_csharp" style="color: inherit; text-decoration: inherit;">Cls<wbr>Logset<wbr>Id</a>
@@ -3567,8 +4474,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cls logset id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls logset id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clstopicid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clstopicid_csharp" style="color: inherit; text-decoration: inherit;">Cls<wbr>Topic<wbr>Id</a>
@@ -3576,8 +4482,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cls topic id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls topic id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_codeerror_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_codeerror_csharp" style="color: inherit; text-decoration: inherit;">Code<wbr>Error</a>
@@ -3585,8 +4490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function code error message.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code error message.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_coderesult_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_coderesult_csharp" style="color: inherit; text-decoration: inherit;">Code<wbr>Result</a>
@@ -3594,8 +4498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function code is correct.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code is correct.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_codesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_codesize_csharp" style="color: inherit; text-decoration: inherit;">Code<wbr>Size</a>
@@ -3603,8 +4506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SCF function code size, unit is M.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code size, unit is M.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosbucketname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbucketname_csharp" style="color: inherit; text-decoration: inherit;">Cos<wbr>Bucket<wbr>Name</a>
@@ -3612,8 +4514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosbucketregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbucketregion_csharp" style="color: inherit; text-decoration: inherit;">Cos<wbr>Bucket<wbr>Region</a>
@@ -3621,8 +4522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos bucket region of the SCF function, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket region of the SCF function, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosobjectname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosobjectname_csharp" style="color: inherit; text-decoration: inherit;">Cos<wbr>Object<wbr>Name</a>
@@ -3630,8 +4530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -3639,8 +4538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dnscache_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnscache_csharp" style="color: inherit; text-decoration: inherit;">Dns<wbr>Cache</a>
@@ -3648,8 +4546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eipfixed_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eipfixed_csharp" style="color: inherit; text-decoration: inherit;">Eip<wbr>Fixed</a>
@@ -3657,8 +4554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether EIP is a fixed IP.</p>
-</dd><dt class="property-optional"
+    <dd>Whether EIP is a fixed IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eips_csharp" style="color: inherit; text-decoration: inherit;">Eips</a>
@@ -3666,8 +4562,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>SCF function EIP list.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function EIP list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enableeipconfig_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableeipconfig_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Eip<wbr>Config</a>
@@ -3675,8 +4570,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether EIP config set to <code>ENABLE</code> when <code>enable_public_net</code> was true. Default <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether EIP config set to <code>ENABLE</code> when <code>enablePublicNet</code> was true. Default <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablepublicnet_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablepublicnet_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Public<wbr>Net</a>
@@ -3684,17 +4578,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpc_id</code> specified can disable public net config.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpcId</code> specified can disable public net config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environment_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_csharp" style="color: inherit; text-decoration: inherit;">Environment</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Environment of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Environment of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_errno_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_errno_csharp" style="color: inherit; text-decoration: inherit;">Err<wbr>No</a>
@@ -3702,8 +4594,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SCF function code error code.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code error code.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_functype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_functype_csharp" style="color: inherit; text-decoration: inherit;">Func<wbr>Type</a>
@@ -3711,8 +4602,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</p>
-</dd><dt class="property-optional"
+    <dd>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_functionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_functionid_csharp" style="color: inherit; text-decoration: inherit;">Function<wbr>Id</a>
@@ -3720,8 +4610,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>function ID.</p>
-</dd><dt class="property-optional"
+    <dd>function ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_handler_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_handler_csharp" style="color: inherit; text-decoration: inherit;">Handler</a>
@@ -3729,8 +4618,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_csharp" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -3738,17 +4626,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function domain name.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imageconfigs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imageconfigs_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionimageconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Image<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functionimageconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Image<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Image of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>, <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>, <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_installdependency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_installdependency_csharp" style="color: inherit; text-decoration: inherit;">Install<wbr>Dependency</a>
@@ -3756,17 +4642,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to automatically install dependencies.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to automatically install dependencies.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instanceconcurrencyconfig_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceconcurrencyconfig_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Concurrency<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Instance<wbr>Concurrency<wbr>Config</a></span>
+    </dt>
+    <dd>Instance concurrency configuration for the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intranetconfig_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranetconfig_csharp" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionintranetconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Intranet<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#functionintranetconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Intranet<wbr>Config</a></span>
     </dt>
-    <dd><p>Intranet access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_l5enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_l5enable_csharp" style="color: inherit; text-decoration: inherit;">L5Enable</a>
@@ -3774,17 +4666,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable L5 for SCF function, default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable L5 for SCF function, default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_layers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_layers_csharp" style="color: inherit; text-decoration: inherit;">Layers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionlayer">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Layer<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functionlayer">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Layer&gt;</a></span>
     </dt>
-    <dd><p>The list of association layers.</p>
-</dd><dt class="property-optional"
+    <dd>The list of association layers.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memsize_csharp" style="color: inherit; text-decoration: inherit;">Mem<wbr>Size</a>
@@ -3792,8 +4682,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_modifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modifytime_csharp" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -3801,8 +4690,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modify time of SCF function trigger.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -3810,8 +4698,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_namespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_csharp" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -3819,8 +4706,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace of the SCF function, default is <code>default</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace of the SCF function, default is <code>default</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_role_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_role_csharp" style="color: inherit; text-decoration: inherit;">Role</a>
@@ -3828,8 +4714,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Role of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Role of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_runtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_runtime_csharp" style="color: inherit; text-decoration: inherit;">Runtime</a>
@@ -3837,8 +4722,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, and <code>CustomRuntime</code>, default is <code>Python2.7</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, <code>CustomRuntime</code> and <code>CustomImage</code>, default is <code>Python2.7</code>. When deploying images using <code>imageComfig</code>, please explicitly specify the runtime as <code>CustomImage</code>. After creating a mirror function, it is not supported to modify the <code>runtime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -3846,8 +4730,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function status.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statusdesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statusdesc_csharp" style="color: inherit; text-decoration: inherit;">Status<wbr>Desc</a>
@@ -3855,8 +4738,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF status description.</p>
-</dd><dt class="property-optional"
+    <dd>SCF status description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -3864,17 +4746,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeout_csharp" style="color: inherit; text-decoration: inherit;">Timeout</a>
@@ -3882,26 +4762,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggerinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggerinfos_csharp" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functiontriggerinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Trigger<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functiontriggerinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Trigger<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>SCF trigger details list. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>SCF trigger details list. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggers_csharp" style="color: inherit; text-decoration: inherit;">Triggers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functiontrigger">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Trigger<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functiontrigger">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Trigger&gt;</a></span>
     </dt>
-    <dd><p>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_csharp" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -3909,8 +4786,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function vip.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function vip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -3918,8 +4794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zipfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zipfile_csharp" style="color: inherit; text-decoration: inherit;">Zip<wbr>File</a>
@@ -3927,8 +4802,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zip file of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>.</p>
-</dd></dl>
+    <dd>Zip file of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3942,8 +4816,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cfsconfigs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cfsconfigs_go" style="color: inherit; text-decoration: inherit;">Cfs<wbr>Configs</a>
@@ -3951,8 +4824,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functioncfsconfig">[]Function<wbr>Cfs<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>List of CFS configurations.</p>
-</dd><dt class="property-optional"
+    <dd>List of CFS configurations.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clslogsetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clslogsetid_go" style="color: inherit; text-decoration: inherit;">Cls<wbr>Logset<wbr>Id</a>
@@ -3960,8 +4832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cls logset id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls logset id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clstopicid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clstopicid_go" style="color: inherit; text-decoration: inherit;">Cls<wbr>Topic<wbr>Id</a>
@@ -3969,8 +4840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cls topic id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls topic id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_codeerror_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_codeerror_go" style="color: inherit; text-decoration: inherit;">Code<wbr>Error</a>
@@ -3978,8 +4848,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function code error message.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code error message.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_coderesult_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_coderesult_go" style="color: inherit; text-decoration: inherit;">Code<wbr>Result</a>
@@ -3987,8 +4856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function code is correct.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code is correct.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_codesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_codesize_go" style="color: inherit; text-decoration: inherit;">Code<wbr>Size</a>
@@ -3996,8 +4864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SCF function code size, unit is M.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code size, unit is M.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosbucketname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbucketname_go" style="color: inherit; text-decoration: inherit;">Cos<wbr>Bucket<wbr>Name</a>
@@ -4005,8 +4872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosbucketregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbucketregion_go" style="color: inherit; text-decoration: inherit;">Cos<wbr>Bucket<wbr>Region</a>
@@ -4014,8 +4880,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos bucket region of the SCF function, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket region of the SCF function, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosobjectname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosobjectname_go" style="color: inherit; text-decoration: inherit;">Cos<wbr>Object<wbr>Name</a>
@@ -4023,8 +4888,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -4032,8 +4896,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dnscache_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnscache_go" style="color: inherit; text-decoration: inherit;">Dns<wbr>Cache</a>
@@ -4041,8 +4904,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eipfixed_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eipfixed_go" style="color: inherit; text-decoration: inherit;">Eip<wbr>Fixed</a>
@@ -4050,8 +4912,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether EIP is a fixed IP.</p>
-</dd><dt class="property-optional"
+    <dd>Whether EIP is a fixed IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eips_go" style="color: inherit; text-decoration: inherit;">Eips</a>
@@ -4059,8 +4920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>SCF function EIP list.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function EIP list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enableeipconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableeipconfig_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Eip<wbr>Config</a>
@@ -4068,8 +4928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether EIP config set to <code>ENABLE</code> when <code>enable_public_net</code> was true. Default <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether EIP config set to <code>ENABLE</code> when <code>enablePublicNet</code> was true. Default <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablepublicnet_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablepublicnet_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Public<wbr>Net</a>
@@ -4077,17 +4936,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpc_id</code> specified can disable public net config.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpcId</code> specified can disable public net config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environment_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_go" style="color: inherit; text-decoration: inherit;">Environment</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Environment of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Environment of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_errno_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_errno_go" style="color: inherit; text-decoration: inherit;">Err<wbr>No</a>
@@ -4095,8 +4952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SCF function code error code.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code error code.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_functype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_functype_go" style="color: inherit; text-decoration: inherit;">Func<wbr>Type</a>
@@ -4104,8 +4960,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</p>
-</dd><dt class="property-optional"
+    <dd>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_functionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_functionid_go" style="color: inherit; text-decoration: inherit;">Function<wbr>Id</a>
@@ -4113,8 +4968,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>function ID.</p>
-</dd><dt class="property-optional"
+    <dd>function ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_handler_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_handler_go" style="color: inherit; text-decoration: inherit;">Handler</a>
@@ -4122,8 +4976,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_go" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -4131,8 +4984,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function domain name.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imageconfigs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imageconfigs_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Configs</a>
@@ -4140,8 +4992,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functionimageconfig">[]Function<wbr>Image<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Image of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>, <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>, <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_installdependency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_installdependency_go" style="color: inherit; text-decoration: inherit;">Install<wbr>Dependency</a>
@@ -4149,8 +5000,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to automatically install dependencies.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to automatically install dependencies.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instanceconcurrencyconfig_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceconcurrencyconfig_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Concurrency<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfig">Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Args</a></span>
+    </dt>
+    <dd>Instance concurrency configuration for the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intranetconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranetconfig_go" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Config</a>
@@ -4158,8 +5016,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functionintranetconfig">Function<wbr>Intranet<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Intranet access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_l5enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_l5enable_go" style="color: inherit; text-decoration: inherit;">L5Enable</a>
@@ -4167,8 +5024,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable L5 for SCF function, default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable L5 for SCF function, default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_layers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_layers_go" style="color: inherit; text-decoration: inherit;">Layers</a>
@@ -4176,8 +5032,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functionlayer">[]Function<wbr>Layer<wbr>Args</a></span>
     </dt>
-    <dd><p>The list of association layers.</p>
-</dd><dt class="property-optional"
+    <dd>The list of association layers.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memsize_go" style="color: inherit; text-decoration: inherit;">Mem<wbr>Size</a>
@@ -4185,8 +5040,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_modifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modifytime_go" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -4194,8 +5048,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modify time of SCF function trigger.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -4203,8 +5056,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_namespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_go" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -4212,8 +5064,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace of the SCF function, default is <code>default</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace of the SCF function, default is <code>default</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_role_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_role_go" style="color: inherit; text-decoration: inherit;">Role</a>
@@ -4221,8 +5072,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Role of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Role of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_runtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_runtime_go" style="color: inherit; text-decoration: inherit;">Runtime</a>
@@ -4230,8 +5080,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, and <code>CustomRuntime</code>, default is <code>Python2.7</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, <code>CustomRuntime</code> and <code>CustomImage</code>, default is <code>Python2.7</code>. When deploying images using <code>imageComfig</code>, please explicitly specify the runtime as <code>CustomImage</code>. After creating a mirror function, it is not supported to modify the <code>runtime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -4239,8 +5088,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function status.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statusdesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statusdesc_go" style="color: inherit; text-decoration: inherit;">Status<wbr>Desc</a>
@@ -4248,8 +5096,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF status description.</p>
-</dd><dt class="property-optional"
+    <dd>SCF status description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -4257,17 +5104,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeout_go" style="color: inherit; text-decoration: inherit;">Timeout</a>
@@ -4275,8 +5120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggerinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggerinfos_go" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Infos</a>
@@ -4284,8 +5128,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functiontriggerinfo">[]Function<wbr>Trigger<wbr>Info<wbr>Args</a></span>
     </dt>
-    <dd><p>SCF trigger details list. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>SCF trigger details list. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggers_go" style="color: inherit; text-decoration: inherit;">Triggers</a>
@@ -4293,8 +5136,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functiontrigger">[]Function<wbr>Trigger<wbr>Args</a></span>
     </dt>
-    <dd><p>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_go" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -4302,8 +5144,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function vip.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function vip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -4311,8 +5152,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zipfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zipfile_go" style="color: inherit; text-decoration: inherit;">Zip<wbr>File</a>
@@ -4320,8 +5160,365 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zip file of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>.</p>
-</dd></dl>
+    <dd>Zip file of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_async_run_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_async_run_enable_hcl" style="color: inherit; text-decoration: inherit;">async_<wbr>run_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cfs_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cfs_configs_hcl" style="color: inherit; text-decoration: inherit;">cfs_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioncfsconfig">list(object)</a></span>
+    </dt>
+    <dd>List of CFS configurations.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cls_logset_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cls_logset_id_hcl" style="color: inherit; text-decoration: inherit;">cls_<wbr>logset_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cls logset id of the SCF function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cls_topic_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cls_topic_id_hcl" style="color: inherit; text-decoration: inherit;">cls_<wbr>topic_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cls topic id of the SCF function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_code_error_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_code_error_hcl" style="color: inherit; text-decoration: inherit;">code_<wbr>error</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SCF function code error message.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_code_result_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_code_result_hcl" style="color: inherit; text-decoration: inherit;">code_<wbr>result</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SCF function code is correct.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_code_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_code_size_hcl" style="color: inherit; text-decoration: inherit;">code_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>SCF function code size, unit is M.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cos_bucket_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cos_bucket_name_hcl" style="color: inherit; text-decoration: inherit;">cos_<wbr>bucket_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cos_bucket_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cos_bucket_region_hcl" style="color: inherit; text-decoration: inherit;">cos_<wbr>bucket_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cos bucket region of the SCF function, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cos_object_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cos_object_name_hcl" style="color: inherit; text-decoration: inherit;">cos_<wbr>object_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dns_cache_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dns_cache_hcl" style="color: inherit; text-decoration: inherit;">dns_<wbr>cache</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_eip_fixed_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eip_fixed_hcl" style="color: inherit; text-decoration: inherit;">eip_<wbr>fixed</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether EIP is a fixed IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_eips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eips_hcl" style="color: inherit; text-decoration: inherit;">eips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>SCF function EIP list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_eip_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_eip_config_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>eip_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether EIP config set to <code>ENABLE</code> when <code>enablePublicNet</code> was true. Default <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_public_net_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_public_net_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>public_<wbr>net</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpcId</code> specified can disable public net config.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_environment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_hcl" style="color: inherit; text-decoration: inherit;">environment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Environment of the SCF function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_err_no_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_err_no_hcl" style="color: inherit; text-decoration: inherit;">err_<wbr>no</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>SCF function code error code.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_func_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_func_type_hcl" style="color: inherit; text-decoration: inherit;">func_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_function_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_function_id_hcl" style="color: inherit; text-decoration: inherit;">function_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>function ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_handler_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_handler_hcl" style="color: inherit; text-decoration: inherit;">handler</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_hcl" style="color: inherit; text-decoration: inherit;">host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SCF function domain name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_image_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_image_configs_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functionimageconfig">list(object)</a></span>
+    </dt>
+    <dd>Image of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>, <code>zipFile</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_install_dependency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_install_dependency_hcl" style="color: inherit; text-decoration: inherit;">install_<wbr>dependency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to automatically install dependencies.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_concurrency_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_concurrency_config_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>concurrency_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfig">object</a></span>
+    </dt>
+    <dd>Instance concurrency configuration for the function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_intranet_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranet_config_hcl" style="color: inherit; text-decoration: inherit;">intranet_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functionintranetconfig">object</a></span>
+    </dt>
+    <dd>Intranet access configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_l5_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_l5_enable_hcl" style="color: inherit; text-decoration: inherit;">l5_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable L5 for SCF function, default is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_layers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_layers_hcl" style="color: inherit; text-decoration: inherit;">layers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functionlayer">list(object)</a></span>
+    </dt>
+    <dd>The list of association layers.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_mem_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mem_size_hcl" style="color: inherit; text-decoration: inherit;">mem_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modify_time_hcl" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Namespace of the SCF function, default is <code>default</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_role_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_role_hcl" style="color: inherit; text-decoration: inherit;">role</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Role of the SCF function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_runtime_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_runtime_hcl" style="color: inherit; text-decoration: inherit;">runtime</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, <code>CustomRuntime</code> and <code>CustomImage</code>, default is <code>Python2.7</code>. When deploying images using <code>imageComfig</code>, please explicitly specify the runtime as <code>CustomImage</code>. After creating a mirror function, it is not supported to modify the <code>runtime</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SCF function status.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_desc_hcl" style="color: inherit; text-decoration: inherit;">status_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SCF status description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet ID of the SCF function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the SCF function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeout_hcl" style="color: inherit; text-decoration: inherit;">timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_trigger_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trigger_infos_hcl" style="color: inherit; text-decoration: inherit;">trigger_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functiontriggerinfo">list(object)</a></span>
+    </dt>
+    <dd>SCF trigger details list. Each element contains the following attributes:</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_triggers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggers_hcl" style="color: inherit; text-decoration: inherit;">triggers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functiontrigger">list(object)</a></span>
+    </dt>
+    <dd>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SCF function vip.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC ID of the SCF function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_zip_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zip_file_hcl" style="color: inherit; text-decoration: inherit;">zip_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Zip file of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4335,17 +5532,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cfsconfigs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cfsconfigs_java" style="color: inherit; text-decoration: inherit;">cfs<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functioncfsconfig">List&lt;Function<wbr>Cfs<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functioncfsconfig">List&lt;Function<wbr>Cfs<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>List of CFS configurations.</p>
-</dd><dt class="property-optional"
+    <dd>List of CFS configurations.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clslogsetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clslogsetid_java" style="color: inherit; text-decoration: inherit;">cls<wbr>Logset<wbr>Id</a>
@@ -4353,8 +5548,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cls logset id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls logset id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clstopicid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clstopicid_java" style="color: inherit; text-decoration: inherit;">cls<wbr>Topic<wbr>Id</a>
@@ -4362,8 +5556,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cls topic id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls topic id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_codeerror_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_codeerror_java" style="color: inherit; text-decoration: inherit;">code<wbr>Error</a>
@@ -4371,8 +5564,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function code error message.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code error message.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_coderesult_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_coderesult_java" style="color: inherit; text-decoration: inherit;">code<wbr>Result</a>
@@ -4380,8 +5572,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function code is correct.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code is correct.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_codesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_codesize_java" style="color: inherit; text-decoration: inherit;">code<wbr>Size</a>
@@ -4389,8 +5580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>SCF function code size, unit is M.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code size, unit is M.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosbucketname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbucketname_java" style="color: inherit; text-decoration: inherit;">cos<wbr>Bucket<wbr>Name</a>
@@ -4398,8 +5588,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosbucketregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbucketregion_java" style="color: inherit; text-decoration: inherit;">cos<wbr>Bucket<wbr>Region</a>
@@ -4407,8 +5596,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos bucket region of the SCF function, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket region of the SCF function, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosobjectname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosobjectname_java" style="color: inherit; text-decoration: inherit;">cos<wbr>Object<wbr>Name</a>
@@ -4416,8 +5604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -4425,8 +5612,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dnscache_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnscache_java" style="color: inherit; text-decoration: inherit;">dns<wbr>Cache</a>
@@ -4434,8 +5620,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eipfixed_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eipfixed_java" style="color: inherit; text-decoration: inherit;">eip<wbr>Fixed</a>
@@ -4443,8 +5628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether EIP is a fixed IP.</p>
-</dd><dt class="property-optional"
+    <dd>Whether EIP is a fixed IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eips_java" style="color: inherit; text-decoration: inherit;">eips</a>
@@ -4452,8 +5636,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>SCF function EIP list.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function EIP list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enableeipconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableeipconfig_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Eip<wbr>Config</a>
@@ -4461,8 +5644,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether EIP config set to <code>ENABLE</code> when <code>enable_public_net</code> was true. Default <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether EIP config set to <code>ENABLE</code> when <code>enablePublicNet</code> was true. Default <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablepublicnet_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablepublicnet_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Public<wbr>Net</a>
@@ -4470,17 +5652,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpc_id</code> specified can disable public net config.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpcId</code> specified can disable public net config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environment_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_java" style="color: inherit; text-decoration: inherit;">environment</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Environment of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Environment of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_errno_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_errno_java" style="color: inherit; text-decoration: inherit;">err<wbr>No</a>
@@ -4488,8 +5668,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>SCF function code error code.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code error code.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_functype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_functype_java" style="color: inherit; text-decoration: inherit;">func<wbr>Type</a>
@@ -4497,8 +5676,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</p>
-</dd><dt class="property-optional"
+    <dd>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_functionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_functionid_java" style="color: inherit; text-decoration: inherit;">function<wbr>Id</a>
@@ -4506,8 +5684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>function ID.</p>
-</dd><dt class="property-optional"
+    <dd>function ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_handler_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_handler_java" style="color: inherit; text-decoration: inherit;">handler</a>
@@ -4515,8 +5692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_java" style="color: inherit; text-decoration: inherit;">host</a>
@@ -4524,17 +5700,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function domain name.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imageconfigs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imageconfigs_java" style="color: inherit; text-decoration: inherit;">image<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionimageconfig">List&lt;Function<wbr>Image<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functionimageconfig">List&lt;Function<wbr>Image<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Image of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>, <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>, <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_installdependency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_installdependency_java" style="color: inherit; text-decoration: inherit;">install<wbr>Dependency</a>
@@ -4542,17 +5716,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to automatically install dependencies.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to automatically install dependencies.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instanceconcurrencyconfig_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceconcurrencyconfig_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Concurrency<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfig">Function<wbr>Instance<wbr>Concurrency<wbr>Config</a></span>
+    </dt>
+    <dd>Instance concurrency configuration for the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intranetconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranetconfig_java" style="color: inherit; text-decoration: inherit;">intranet<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionintranetconfig">Function<wbr>Intranet<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#functionintranetconfig">Function<wbr>Intranet<wbr>Config</a></span>
     </dt>
-    <dd><p>Intranet access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_l5enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_l5enable_java" style="color: inherit; text-decoration: inherit;">l5Enable</a>
@@ -4560,17 +5740,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable L5 for SCF function, default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable L5 for SCF function, default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_layers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_layers_java" style="color: inherit; text-decoration: inherit;">layers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionlayer">List&lt;Function<wbr>Layer<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functionlayer">List&lt;Function<wbr>Layer&gt;</a></span>
     </dt>
-    <dd><p>The list of association layers.</p>
-</dd><dt class="property-optional"
+    <dd>The list of association layers.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memsize_java" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -4578,8 +5756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_modifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modifytime_java" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -4587,8 +5764,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Modify time of SCF function trigger.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -4596,8 +5772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_namespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_java" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -4605,8 +5780,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace of the SCF function, default is <code>default</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace of the SCF function, default is <code>default</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_role_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_role_java" style="color: inherit; text-decoration: inherit;">role</a>
@@ -4614,8 +5788,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Role of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Role of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_runtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_runtime_java" style="color: inherit; text-decoration: inherit;">runtime</a>
@@ -4623,8 +5796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, and <code>CustomRuntime</code>, default is <code>Python2.7</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, <code>CustomRuntime</code> and <code>CustomImage</code>, default is <code>Python2.7</code>. When deploying images using <code>imageComfig</code>, please explicitly specify the runtime as <code>CustomImage</code>. After creating a mirror function, it is not supported to modify the <code>runtime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -4632,8 +5804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function status.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statusdesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statusdesc_java" style="color: inherit; text-decoration: inherit;">status<wbr>Desc</a>
@@ -4641,8 +5812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF status description.</p>
-</dd><dt class="property-optional"
+    <dd>SCF status description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -4650,17 +5820,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeout_java" style="color: inherit; text-decoration: inherit;">timeout</a>
@@ -4668,26 +5836,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggerinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggerinfos_java" style="color: inherit; text-decoration: inherit;">trigger<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functiontriggerinfo">List&lt;Function<wbr>Trigger<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functiontriggerinfo">List&lt;Function<wbr>Trigger<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>SCF trigger details list. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>SCF trigger details list. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggers_java" style="color: inherit; text-decoration: inherit;">triggers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functiontrigger">List&lt;Function<wbr>Trigger<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#functiontrigger">List&lt;Function<wbr>Trigger&gt;</a></span>
     </dt>
-    <dd><p>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_java" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -4695,8 +5860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function vip.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function vip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -4704,8 +5868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zipfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zipfile_java" style="color: inherit; text-decoration: inherit;">zip<wbr>File</a>
@@ -4713,8 +5876,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zip file of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>.</p>
-</dd></dl>
+    <dd>Zip file of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4728,17 +5890,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cfsconfigs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cfsconfigs_nodejs" style="color: inherit; text-decoration: inherit;">cfs<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functioncfsconfig">Function<wbr>Cfs<wbr>Config<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#functioncfsconfig">Function<wbr>Cfs<wbr>Config[]</a></span>
     </dt>
-    <dd><p>List of CFS configurations.</p>
-</dd><dt class="property-optional"
+    <dd>List of CFS configurations.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clslogsetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clslogsetid_nodejs" style="color: inherit; text-decoration: inherit;">cls<wbr>Logset<wbr>Id</a>
@@ -4746,8 +5906,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cls logset id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls logset id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clstopicid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clstopicid_nodejs" style="color: inherit; text-decoration: inherit;">cls<wbr>Topic<wbr>Id</a>
@@ -4755,8 +5914,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cls topic id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls topic id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_codeerror_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_codeerror_nodejs" style="color: inherit; text-decoration: inherit;">code<wbr>Error</a>
@@ -4764,8 +5922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function code error message.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code error message.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_coderesult_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_coderesult_nodejs" style="color: inherit; text-decoration: inherit;">code<wbr>Result</a>
@@ -4773,8 +5930,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function code is correct.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code is correct.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_codesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_codesize_nodejs" style="color: inherit; text-decoration: inherit;">code<wbr>Size</a>
@@ -4782,8 +5938,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>SCF function code size, unit is M.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code size, unit is M.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosbucketname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbucketname_nodejs" style="color: inherit; text-decoration: inherit;">cos<wbr>Bucket<wbr>Name</a>
@@ -4791,8 +5946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosbucketregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbucketregion_nodejs" style="color: inherit; text-decoration: inherit;">cos<wbr>Bucket<wbr>Region</a>
@@ -4800,8 +5954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos bucket region of the SCF function, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket region of the SCF function, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosobjectname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosobjectname_nodejs" style="color: inherit; text-decoration: inherit;">cos<wbr>Object<wbr>Name</a>
@@ -4809,8 +5962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -4818,8 +5970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dnscache_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnscache_nodejs" style="color: inherit; text-decoration: inherit;">dns<wbr>Cache</a>
@@ -4827,8 +5978,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eipfixed_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eipfixed_nodejs" style="color: inherit; text-decoration: inherit;">eip<wbr>Fixed</a>
@@ -4836,8 +5986,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether EIP is a fixed IP.</p>
-</dd><dt class="property-optional"
+    <dd>Whether EIP is a fixed IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eips_nodejs" style="color: inherit; text-decoration: inherit;">eips</a>
@@ -4845,8 +5994,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>SCF function EIP list.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function EIP list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enableeipconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableeipconfig_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Eip<wbr>Config</a>
@@ -4854,8 +6002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether EIP config set to <code>ENABLE</code> when <code>enable_public_net</code> was true. Default <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether EIP config set to <code>ENABLE</code> when <code>enablePublicNet</code> was true. Default <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablepublicnet_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablepublicnet_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Public<wbr>Net</a>
@@ -4863,17 +6010,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpc_id</code> specified can disable public net config.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpcId</code> specified can disable public net config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environment_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_nodejs" style="color: inherit; text-decoration: inherit;">environment</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Environment of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Environment of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_errno_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_errno_nodejs" style="color: inherit; text-decoration: inherit;">err<wbr>No</a>
@@ -4881,8 +6026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>SCF function code error code.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code error code.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_functype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_functype_nodejs" style="color: inherit; text-decoration: inherit;">func<wbr>Type</a>
@@ -4890,8 +6034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</p>
-</dd><dt class="property-optional"
+    <dd>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_functionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_functionid_nodejs" style="color: inherit; text-decoration: inherit;">function<wbr>Id</a>
@@ -4899,8 +6042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>function ID.</p>
-</dd><dt class="property-optional"
+    <dd>function ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_handler_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_handler_nodejs" style="color: inherit; text-decoration: inherit;">handler</a>
@@ -4908,8 +6050,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_nodejs" style="color: inherit; text-decoration: inherit;">host</a>
@@ -4917,17 +6058,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function domain name.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imageconfigs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imageconfigs_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionimageconfig">Function<wbr>Image<wbr>Config<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#functionimageconfig">Function<wbr>Image<wbr>Config[]</a></span>
     </dt>
-    <dd><p>Image of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>, <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>, <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_installdependency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_installdependency_nodejs" style="color: inherit; text-decoration: inherit;">install<wbr>Dependency</a>
@@ -4935,17 +6074,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to automatically install dependencies.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to automatically install dependencies.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instanceconcurrencyconfig_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceconcurrencyconfig_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Concurrency<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfig">Function<wbr>Instance<wbr>Concurrency<wbr>Config</a></span>
+    </dt>
+    <dd>Instance concurrency configuration for the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intranetconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranetconfig_nodejs" style="color: inherit; text-decoration: inherit;">intranet<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionintranetconfig">Function<wbr>Intranet<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#functionintranetconfig">Function<wbr>Intranet<wbr>Config</a></span>
     </dt>
-    <dd><p>Intranet access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_l5enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_l5enable_nodejs" style="color: inherit; text-decoration: inherit;">l5Enable</a>
@@ -4953,17 +6098,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enable L5 for SCF function, default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable L5 for SCF function, default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_layers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_layers_nodejs" style="color: inherit; text-decoration: inherit;">layers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionlayer">Function<wbr>Layer<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#functionlayer">Function<wbr>Layer[]</a></span>
     </dt>
-    <dd><p>The list of association layers.</p>
-</dd><dt class="property-optional"
+    <dd>The list of association layers.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memsize_nodejs" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -4971,8 +6114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_modifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modifytime_nodejs" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -4980,8 +6122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modify time of SCF function trigger.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -4989,8 +6130,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_namespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_nodejs" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -4998,8 +6138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace of the SCF function, default is <code>default</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace of the SCF function, default is <code>default</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_role_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_role_nodejs" style="color: inherit; text-decoration: inherit;">role</a>
@@ -5007,8 +6146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Role of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Role of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_runtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_runtime_nodejs" style="color: inherit; text-decoration: inherit;">runtime</a>
@@ -5016,8 +6154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, and <code>CustomRuntime</code>, default is <code>Python2.7</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, <code>CustomRuntime</code> and <code>CustomImage</code>, default is <code>Python2.7</code>. When deploying images using <code>imageComfig</code>, please explicitly specify the runtime as <code>CustomImage</code>. After creating a mirror function, it is not supported to modify the <code>runtime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -5025,8 +6162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function status.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statusdesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statusdesc_nodejs" style="color: inherit; text-decoration: inherit;">status<wbr>Desc</a>
@@ -5034,8 +6170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF status description.</p>
-</dd><dt class="property-optional"
+    <dd>SCF status description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -5043,17 +6178,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeout_nodejs" style="color: inherit; text-decoration: inherit;">timeout</a>
@@ -5061,26 +6194,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggerinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggerinfos_nodejs" style="color: inherit; text-decoration: inherit;">trigger<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functiontriggerinfo">Function<wbr>Trigger<wbr>Info<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#functiontriggerinfo">Function<wbr>Trigger<wbr>Info[]</a></span>
     </dt>
-    <dd><p>SCF trigger details list. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>SCF trigger details list. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggers_nodejs" style="color: inherit; text-decoration: inherit;">triggers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functiontrigger">Function<wbr>Trigger<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#functiontrigger">Function<wbr>Trigger[]</a></span>
     </dt>
-    <dd><p>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_nodejs" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -5088,8 +6218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SCF function vip.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function vip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -5097,8 +6226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zipfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zipfile_nodejs" style="color: inherit; text-decoration: inherit;">zip<wbr>File</a>
@@ -5106,8 +6234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zip file of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>.</p>
-</dd></dl>
+    <dd>Zip file of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5121,17 +6248,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cfs_configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cfs_configs_python" style="color: inherit; text-decoration: inherit;">cfs_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functioncfsconfig">Function<wbr>Cfs<wbr>Config<wbr>Args]</a></span>
+        <span class="property-type"><a href="#functioncfsconfig">Sequence[Function<wbr>Cfs<wbr>Config<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of CFS configurations.</p>
-</dd><dt class="property-optional"
+    <dd>List of CFS configurations.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cls_logset_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cls_logset_id_python" style="color: inherit; text-decoration: inherit;">cls_<wbr>logset_<wbr>id</a>
@@ -5139,8 +6264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cls logset id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls logset id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cls_topic_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cls_topic_id_python" style="color: inherit; text-decoration: inherit;">cls_<wbr>topic_<wbr>id</a>
@@ -5148,8 +6272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cls topic id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls topic id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_code_error_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_code_error_python" style="color: inherit; text-decoration: inherit;">code_<wbr>error</a>
@@ -5157,8 +6280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SCF function code error message.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code error message.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_code_result_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_code_result_python" style="color: inherit; text-decoration: inherit;">code_<wbr>result</a>
@@ -5166,8 +6288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SCF function code is correct.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code is correct.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_code_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_code_size_python" style="color: inherit; text-decoration: inherit;">code_<wbr>size</a>
@@ -5175,8 +6296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SCF function code size, unit is M.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code size, unit is M.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cos_bucket_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cos_bucket_name_python" style="color: inherit; text-decoration: inherit;">cos_<wbr>bucket_<wbr>name</a>
@@ -5184,8 +6304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cos_bucket_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cos_bucket_region_python" style="color: inherit; text-decoration: inherit;">cos_<wbr>bucket_<wbr>region</a>
@@ -5193,8 +6312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cos bucket region of the SCF function, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket region of the SCF function, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cos_object_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cos_object_name_python" style="color: inherit; text-decoration: inherit;">cos_<wbr>object_<wbr>name</a>
@@ -5202,8 +6320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -5211,8 +6328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dns_cache_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dns_cache_python" style="color: inherit; text-decoration: inherit;">dns_<wbr>cache</a>
@@ -5220,8 +6336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eip_fixed_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eip_fixed_python" style="color: inherit; text-decoration: inherit;">eip_<wbr>fixed</a>
@@ -5229,8 +6344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether EIP is a fixed IP.</p>
-</dd><dt class="property-optional"
+    <dd>Whether EIP is a fixed IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eips_python" style="color: inherit; text-decoration: inherit;">eips</a>
@@ -5238,8 +6352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>SCF function EIP list.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function EIP list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_eip_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_eip_config_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>eip_<wbr>config</a>
@@ -5247,8 +6360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether EIP config set to <code>ENABLE</code> when <code>enable_public_net</code> was true. Default <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether EIP config set to <code>ENABLE</code> when <code>enablePublicNet</code> was true. Default <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_public_net_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_public_net_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>public_<wbr>net</a>
@@ -5256,17 +6368,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpc_id</code> specified can disable public net config.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpcId</code> specified can disable public net config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environment_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_python" style="color: inherit; text-decoration: inherit;">environment</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Environment of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Environment of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_err_no_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_err_no_python" style="color: inherit; text-decoration: inherit;">err_<wbr>no</a>
@@ -5274,8 +6384,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>SCF function code error code.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code error code.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_func_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_func_type_python" style="color: inherit; text-decoration: inherit;">func_<wbr>type</a>
@@ -5283,8 +6392,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</p>
-</dd><dt class="property-optional"
+    <dd>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_function_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_function_id_python" style="color: inherit; text-decoration: inherit;">function_<wbr>id</a>
@@ -5292,8 +6400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>function ID.</p>
-</dd><dt class="property-optional"
+    <dd>function ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_handler_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_handler_python" style="color: inherit; text-decoration: inherit;">handler</a>
@@ -5301,8 +6408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_python" style="color: inherit; text-decoration: inherit;">host</a>
@@ -5310,17 +6416,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SCF function domain name.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_image_configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_image_configs_python" style="color: inherit; text-decoration: inherit;">image_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionimageconfig">Function<wbr>Image<wbr>Config<wbr>Args]</a></span>
+        <span class="property-type"><a href="#functionimageconfig">Sequence[Function<wbr>Image<wbr>Config<wbr>Args]</a></span>
     </dt>
-    <dd><p>Image of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>, <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>, <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_install_dependency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_install_dependency_python" style="color: inherit; text-decoration: inherit;">install_<wbr>dependency</a>
@@ -5328,8 +6432,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to automatically install dependencies.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to automatically install dependencies.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_concurrency_config_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_concurrency_config_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>concurrency_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfig">Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Args</a></span>
+    </dt>
+    <dd>Instance concurrency configuration for the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intranet_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranet_config_python" style="color: inherit; text-decoration: inherit;">intranet_<wbr>config</a>
@@ -5337,8 +6448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functionintranetconfig">Function<wbr>Intranet<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Intranet access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_l5_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_l5_enable_python" style="color: inherit; text-decoration: inherit;">l5_<wbr>enable</a>
@@ -5346,17 +6456,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable L5 for SCF function, default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable L5 for SCF function, default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_layers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_layers_python" style="color: inherit; text-decoration: inherit;">layers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functionlayer">Function<wbr>Layer<wbr>Args]</a></span>
+        <span class="property-type"><a href="#functionlayer">Sequence[Function<wbr>Layer<wbr>Args]</a></span>
     </dt>
-    <dd><p>The list of association layers.</p>
-</dd><dt class="property-optional"
+    <dd>The list of association layers.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mem_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mem_size_python" style="color: inherit; text-decoration: inherit;">mem_<wbr>size</a>
@@ -5364,8 +6472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modify_time_python" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
@@ -5373,8 +6480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Modify time of SCF function trigger.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -5382,8 +6488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_python" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -5391,8 +6496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespace of the SCF function, default is <code>default</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace of the SCF function, default is <code>default</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_role_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_role_python" style="color: inherit; text-decoration: inherit;">role</a>
@@ -5400,8 +6504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Role of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Role of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_runtime_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_runtime_python" style="color: inherit; text-decoration: inherit;">runtime</a>
@@ -5409,8 +6512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, and <code>CustomRuntime</code>, default is <code>Python2.7</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, <code>CustomRuntime</code> and <code>CustomImage</code>, default is <code>Python2.7</code>. When deploying images using <code>imageComfig</code>, please explicitly specify the runtime as <code>CustomImage</code>. After creating a mirror function, it is not supported to modify the <code>runtime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -5418,8 +6520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SCF function status.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_desc_python" style="color: inherit; text-decoration: inherit;">status_<wbr>desc</a>
@@ -5427,8 +6528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SCF status description.</p>
-</dd><dt class="property-optional"
+    <dd>SCF status description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -5436,17 +6536,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeout_python" style="color: inherit; text-decoration: inherit;">timeout</a>
@@ -5454,26 +6552,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_trigger_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trigger_infos_python" style="color: inherit; text-decoration: inherit;">trigger_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functiontriggerinfo">Function<wbr>Trigger<wbr>Info<wbr>Args]</a></span>
+        <span class="property-type"><a href="#functiontriggerinfo">Sequence[Function<wbr>Trigger<wbr>Info<wbr>Args]</a></span>
     </dt>
-    <dd><p>SCF trigger details list. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>SCF trigger details list. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggers_python" style="color: inherit; text-decoration: inherit;">triggers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#functiontrigger">Function<wbr>Trigger<wbr>Args]</a></span>
+        <span class="property-type"><a href="#functiontrigger">Sequence[Function<wbr>Trigger<wbr>Args]</a></span>
     </dt>
-    <dd><p>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_python" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -5481,8 +6576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SCF function vip.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function vip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -5490,8 +6584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zip_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zip_file_python" style="color: inherit; text-decoration: inherit;">zip_<wbr>file</a>
@@ -5499,8 +6592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Zip file of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>.</p>
-</dd></dl>
+    <dd>Zip file of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5514,8 +6606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether SCF function asynchronous attribute is enabled. <code>TRUE</code> is open, <code>FALSE</code> is close.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cfsconfigs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cfsconfigs_yaml" style="color: inherit; text-decoration: inherit;">cfs<wbr>Configs</a>
@@ -5523,8 +6614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functioncfsconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of CFS configurations.</p>
-</dd><dt class="property-optional"
+    <dd>List of CFS configurations.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clslogsetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clslogsetid_yaml" style="color: inherit; text-decoration: inherit;">cls<wbr>Logset<wbr>Id</a>
@@ -5532,8 +6622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cls logset id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls logset id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clstopicid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clstopicid_yaml" style="color: inherit; text-decoration: inherit;">cls<wbr>Topic<wbr>Id</a>
@@ -5541,8 +6630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cls topic id of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>cls topic id of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_codeerror_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_codeerror_yaml" style="color: inherit; text-decoration: inherit;">code<wbr>Error</a>
@@ -5550,8 +6638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function code error message.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code error message.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_coderesult_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_coderesult_yaml" style="color: inherit; text-decoration: inherit;">code<wbr>Result</a>
@@ -5559,8 +6646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function code is correct.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code is correct.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_codesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_codesize_yaml" style="color: inherit; text-decoration: inherit;">code<wbr>Size</a>
@@ -5568,8 +6654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>SCF function code size, unit is M.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code size, unit is M.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosbucketname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbucketname_yaml" style="color: inherit; text-decoration: inherit;">cos<wbr>Bucket<wbr>Name</a>
@@ -5577,8 +6662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket name of the SCF function, such as <code>cos-1234567890</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosbucketregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosbucketregion_yaml" style="color: inherit; text-decoration: inherit;">cos<wbr>Bucket<wbr>Region</a>
@@ -5586,8 +6670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos bucket region of the SCF function, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos bucket region of the SCF function, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cosobjectname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosobjectname_yaml" style="color: inherit; text-decoration: inherit;">cos<wbr>Object<wbr>Name</a>
@@ -5595,8 +6678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Cos object name of the SCF function, should have suffix <code>.zip</code> or <code>.jar</code>, conflict with <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -5604,8 +6686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dnscache_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnscache_yaml" style="color: inherit; text-decoration: inherit;">dns<wbr>Cache</a>
@@ -5613,8 +6694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eipfixed_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eipfixed_yaml" style="color: inherit; text-decoration: inherit;">eip<wbr>Fixed</a>
@@ -5622,8 +6702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether EIP is a fixed IP.</p>
-</dd><dt class="property-optional"
+    <dd>Whether EIP is a fixed IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eips_yaml" style="color: inherit; text-decoration: inherit;">eips</a>
@@ -5631,8 +6710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>SCF function EIP list.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function EIP list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enableeipconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enableeipconfig_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Eip<wbr>Config</a>
@@ -5640,8 +6718,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether EIP config set to <code>ENABLE</code> when <code>enable_public_net</code> was true. Default <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether EIP config set to <code>ENABLE</code> when <code>enablePublicNet</code> was true. Default <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablepublicnet_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablepublicnet_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Public<wbr>Net</a>
@@ -5649,17 +6726,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpc_id</code> specified can disable public net config.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether public net config enabled. Default <code>false</code>. NOTE: only <code>vpcId</code> specified can disable public net config.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environment_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environment_yaml" style="color: inherit; text-decoration: inherit;">environment</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Environment of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Environment of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_errno_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_errno_yaml" style="color: inherit; text-decoration: inherit;">err<wbr>No</a>
@@ -5667,8 +6742,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>SCF function code error code.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function code error code.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_functype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_functype_yaml" style="color: inherit; text-decoration: inherit;">func<wbr>Type</a>
@@ -5676,8 +6750,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</p>
-</dd><dt class="property-optional"
+    <dd>Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_functionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_functionid_yaml" style="color: inherit; text-decoration: inherit;">function<wbr>Id</a>
@@ -5685,8 +6758,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>function ID.</p>
-</dd><dt class="property-optional"
+    <dd>function ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_handler_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_handler_yaml" style="color: inherit; text-decoration: inherit;">handler</a>
@@ -5694,8 +6766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>Handler of the SCF function. The format of name is <code>&lt;filename&gt;.&lt;method_name&gt;</code>, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_yaml" style="color: inherit; text-decoration: inherit;">host</a>
@@ -5703,8 +6774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function domain name.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imageconfigs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imageconfigs_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Configs</a>
@@ -5712,8 +6782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functionimageconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Image of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>, <code>zip_file</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Image of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>, <code>zipFile</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_installdependency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_installdependency_yaml" style="color: inherit; text-decoration: inherit;">install<wbr>Dependency</a>
@@ -5721,8 +6790,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to automatically install dependencies.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to automatically install dependencies.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instanceconcurrencyconfig_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceconcurrencyconfig_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Concurrency<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfig">Property Map</a></span>
+    </dt>
+    <dd>Instance concurrency configuration for the function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intranetconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranetconfig_yaml" style="color: inherit; text-decoration: inherit;">intranet<wbr>Config</a>
@@ -5730,8 +6806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functionintranetconfig">Property Map</a></span>
     </dt>
-    <dd><p>Intranet access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Intranet access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_l5enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_l5enable_yaml" style="color: inherit; text-decoration: inherit;">l5Enable</a>
@@ -5739,8 +6814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable L5 for SCF function, default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable L5 for SCF function, default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_layers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_layers_yaml" style="color: inherit; text-decoration: inherit;">layers</a>
@@ -5748,8 +6822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functionlayer">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>The list of association layers.</p>
-</dd><dt class="property-optional"
+    <dd>The list of association layers.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memsize_yaml" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -5757,8 +6830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size of the SCF function, unit is MB. The default is <code>128</code>MB. The ladder is 128M.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_modifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modifytime_yaml" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -5766,8 +6838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Modify time of SCF function trigger.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -5775,8 +6846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_namespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_yaml" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -5784,8 +6854,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace of the SCF function, default is <code>default</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace of the SCF function, default is <code>default</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_role_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_role_yaml" style="color: inherit; text-decoration: inherit;">role</a>
@@ -5793,8 +6862,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Role of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Role of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_runtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_runtime_yaml" style="color: inherit; text-decoration: inherit;">runtime</a>
@@ -5802,8 +6870,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, and <code>CustomRuntime</code>, default is <code>Python2.7</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Runtime of the SCF function, only supports <code>Python2.7</code>, <code>Python3.6</code>, <code>Nodejs6.10</code>, <code>Nodejs8.9</code>, <code>Nodejs10.15</code>, <code>Nodejs12.16</code>, <code>Php5.2</code>, <code>Php7.4</code>, <code>Go1</code>, <code>Java8</code>, <code>CustomRuntime</code> and <code>CustomImage</code>, default is <code>Python2.7</code>. When deploying images using <code>imageComfig</code>, please explicitly specify the runtime as <code>CustomImage</code>. After creating a mirror function, it is not supported to modify the <code>runtime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -5811,8 +6878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function status.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_statusdesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_statusdesc_yaml" style="color: inherit; text-decoration: inherit;">status<wbr>Desc</a>
@@ -5820,8 +6886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF status description.</p>
-</dd><dt class="property-optional"
+    <dd>SCF status description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -5829,17 +6894,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeout_yaml" style="color: inherit; text-decoration: inherit;">timeout</a>
@@ -5847,8 +6910,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</p>
-</dd><dt class="property-optional"
+    <dd>Timeout of the SCF function, unit is second. Default <code>3</code>. Available value is 1-900.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggerinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggerinfos_yaml" style="color: inherit; text-decoration: inherit;">trigger<wbr>Infos</a>
@@ -5856,8 +6918,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functiontriggerinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>SCF trigger details list. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>SCF trigger details list. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggers_yaml" style="color: inherit; text-decoration: inherit;">triggers</a>
@@ -5865,8 +6926,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#functiontrigger">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_yaml" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -5874,8 +6934,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SCF function vip.</p>
-</dd><dt class="property-optional"
+    <dd>SCF function vip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -5883,8 +6942,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID of the SCF function.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID of the SCF function.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zipfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zipfile_yaml" style="color: inherit; text-decoration: inherit;">zip<wbr>File</a>
@@ -5892,8 +6950,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zip file of the SCF function, conflict with <code>cos_bucket_name</code>, <code>cos_object_name</code>, <code>cos_bucket_region</code>.</p>
-</dd></dl>
+    <dd>Zip file of the SCF function, conflict with <code>cosBucketName</code>, <code>cosObjectName</code>, <code>cosBucketRegion</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -5908,7 +6965,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="functioncfsconfig">Function<wbr>Cfs<wbr>Config</h4>
+<h4 id="functioncfsconfig">
+Function<wbr>Cfs<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Function<wbr>Cfs<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5920,8 +6979,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File system instance ID.</p>
-</dd><dt class="property-required"
+    <dd>File system instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="localmountdir_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localmountdir_csharp" style="color: inherit; text-decoration: inherit;">Local<wbr>Mount<wbr>Dir</a>
@@ -5929,8 +6987,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local mount directory.</p>
-</dd><dt class="property-required"
+    <dd>Local mount directory.</dd><dt class="property-required"
             title="Required">
         <span id="mountinsid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountinsid_csharp" style="color: inherit; text-decoration: inherit;">Mount<wbr>Ins<wbr>Id</a>
@@ -5938,8 +6995,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File system mount instance ID.</p>
-</dd><dt class="property-required"
+    <dd>File system mount instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="remotemountdir_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotemountdir_csharp" style="color: inherit; text-decoration: inherit;">Remote<wbr>Mount<wbr>Dir</a>
@@ -5947,8 +7003,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote mount directory.</p>
-</dd><dt class="property-required"
+    <dd>Remote mount directory.</dd><dt class="property-required"
             title="Required">
         <span id="usergroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usergroupid_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Group<wbr>Id</a>
@@ -5956,8 +7011,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of user group.</p>
-</dd><dt class="property-required"
+    <dd>ID of user group.</dd><dt class="property-required"
             title="Required">
         <span id="userid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Id</a>
@@ -5965,8 +7019,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of user.</p>
-</dd><dt class="property-optional"
+    <dd>ID of user.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddress_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Address</a>
@@ -5974,8 +7027,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(Readonly) File system ip address.</p>
-</dd><dt class="property-optional"
+    <dd>If fixed intranet IP is enabled, this field returns the IP list used.</dd><dt class="property-optional"
             title="Optional">
         <span id="mountsubnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountsubnetid_csharp" style="color: inherit; text-decoration: inherit;">Mount<wbr>Subnet<wbr>Id</a>
@@ -5983,8 +7035,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(Readonly) File system subnet ID.</p>
-</dd><dt class="property-optional"
+    <dd>(Readonly) File system subnet ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="mountvpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountvpcid_csharp" style="color: inherit; text-decoration: inherit;">Mount<wbr>Vpc<wbr>Id</a>
@@ -5992,8 +7043,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(Readonly) File system virtual private network ID.</p>
-</dd></dl>
+    <dd>(Readonly) File system virtual private network ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6007,8 +7057,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File system instance ID.</p>
-</dd><dt class="property-required"
+    <dd>File system instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="localmountdir_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localmountdir_go" style="color: inherit; text-decoration: inherit;">Local<wbr>Mount<wbr>Dir</a>
@@ -6016,8 +7065,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local mount directory.</p>
-</dd><dt class="property-required"
+    <dd>Local mount directory.</dd><dt class="property-required"
             title="Required">
         <span id="mountinsid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountinsid_go" style="color: inherit; text-decoration: inherit;">Mount<wbr>Ins<wbr>Id</a>
@@ -6025,8 +7073,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File system mount instance ID.</p>
-</dd><dt class="property-required"
+    <dd>File system mount instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="remotemountdir_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotemountdir_go" style="color: inherit; text-decoration: inherit;">Remote<wbr>Mount<wbr>Dir</a>
@@ -6034,8 +7081,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote mount directory.</p>
-</dd><dt class="property-required"
+    <dd>Remote mount directory.</dd><dt class="property-required"
             title="Required">
         <span id="usergroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usergroupid_go" style="color: inherit; text-decoration: inherit;">User<wbr>Group<wbr>Id</a>
@@ -6043,8 +7089,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of user group.</p>
-</dd><dt class="property-required"
+    <dd>ID of user group.</dd><dt class="property-required"
             title="Required">
         <span id="userid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_go" style="color: inherit; text-decoration: inherit;">User<wbr>Id</a>
@@ -6052,8 +7097,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of user.</p>
-</dd><dt class="property-optional"
+    <dd>ID of user.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddress_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Address</a>
@@ -6061,8 +7105,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(Readonly) File system ip address.</p>
-</dd><dt class="property-optional"
+    <dd>If fixed intranet IP is enabled, this field returns the IP list used.</dd><dt class="property-optional"
             title="Optional">
         <span id="mountsubnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountsubnetid_go" style="color: inherit; text-decoration: inherit;">Mount<wbr>Subnet<wbr>Id</a>
@@ -6070,8 +7113,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(Readonly) File system subnet ID.</p>
-</dd><dt class="property-optional"
+    <dd>(Readonly) File system subnet ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="mountvpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountvpcid_go" style="color: inherit; text-decoration: inherit;">Mount<wbr>Vpc<wbr>Id</a>
@@ -6079,8 +7121,85 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(Readonly) File system virtual private network ID.</p>
-</dd></dl>
+    <dd>(Readonly) File system virtual private network ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cfs_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cfs_id_hcl" style="color: inherit; text-decoration: inherit;">cfs_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File system instance ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="local_mount_dir_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#local_mount_dir_hcl" style="color: inherit; text-decoration: inherit;">local_<wbr>mount_<wbr>dir</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Local mount directory.</dd><dt class="property-required"
+            title="Required">
+        <span id="mount_ins_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mount_ins_id_hcl" style="color: inherit; text-decoration: inherit;">mount_<wbr>ins_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File system mount instance ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="remote_mount_dir_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remote_mount_dir_hcl" style="color: inherit; text-decoration: inherit;">remote_<wbr>mount_<wbr>dir</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remote mount directory.</dd><dt class="property-required"
+            title="Required">
+        <span id="user_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_group_id_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of user group.</dd><dt class="property-required"
+            title="Required">
+        <span id="user_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_id_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of user.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_address_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>If fixed intranet IP is enabled, this field returns the IP list used.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mount_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mount_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">mount_<wbr>subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>(Readonly) File system subnet ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mount_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mount_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">mount_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>(Readonly) File system virtual private network ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6094,8 +7213,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File system instance ID.</p>
-</dd><dt class="property-required"
+    <dd>File system instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="localmountdir_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localmountdir_java" style="color: inherit; text-decoration: inherit;">local<wbr>Mount<wbr>Dir</a>
@@ -6103,8 +7221,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local mount directory.</p>
-</dd><dt class="property-required"
+    <dd>Local mount directory.</dd><dt class="property-required"
             title="Required">
         <span id="mountinsid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountinsid_java" style="color: inherit; text-decoration: inherit;">mount<wbr>Ins<wbr>Id</a>
@@ -6112,8 +7229,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File system mount instance ID.</p>
-</dd><dt class="property-required"
+    <dd>File system mount instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="remotemountdir_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotemountdir_java" style="color: inherit; text-decoration: inherit;">remote<wbr>Mount<wbr>Dir</a>
@@ -6121,8 +7237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote mount directory.</p>
-</dd><dt class="property-required"
+    <dd>Remote mount directory.</dd><dt class="property-required"
             title="Required">
         <span id="usergroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usergroupid_java" style="color: inherit; text-decoration: inherit;">user<wbr>Group<wbr>Id</a>
@@ -6130,8 +7245,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of user group.</p>
-</dd><dt class="property-required"
+    <dd>ID of user group.</dd><dt class="property-required"
             title="Required">
         <span id="userid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_java" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -6139,8 +7253,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of user.</p>
-</dd><dt class="property-optional"
+    <dd>ID of user.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddress_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Address</a>
@@ -6148,8 +7261,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(Readonly) File system ip address.</p>
-</dd><dt class="property-optional"
+    <dd>If fixed intranet IP is enabled, this field returns the IP list used.</dd><dt class="property-optional"
             title="Optional">
         <span id="mountsubnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountsubnetid_java" style="color: inherit; text-decoration: inherit;">mount<wbr>Subnet<wbr>Id</a>
@@ -6157,8 +7269,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(Readonly) File system subnet ID.</p>
-</dd><dt class="property-optional"
+    <dd>(Readonly) File system subnet ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="mountvpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountvpcid_java" style="color: inherit; text-decoration: inherit;">mount<wbr>Vpc<wbr>Id</a>
@@ -6166,8 +7277,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(Readonly) File system virtual private network ID.</p>
-</dd></dl>
+    <dd>(Readonly) File system virtual private network ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6181,8 +7291,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File system instance ID.</p>
-</dd><dt class="property-required"
+    <dd>File system instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="localmountdir_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localmountdir_nodejs" style="color: inherit; text-decoration: inherit;">local<wbr>Mount<wbr>Dir</a>
@@ -6190,8 +7299,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Local mount directory.</p>
-</dd><dt class="property-required"
+    <dd>Local mount directory.</dd><dt class="property-required"
             title="Required">
         <span id="mountinsid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountinsid_nodejs" style="color: inherit; text-decoration: inherit;">mount<wbr>Ins<wbr>Id</a>
@@ -6199,8 +7307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File system mount instance ID.</p>
-</dd><dt class="property-required"
+    <dd>File system mount instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="remotemountdir_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotemountdir_nodejs" style="color: inherit; text-decoration: inherit;">remote<wbr>Mount<wbr>Dir</a>
@@ -6208,8 +7315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote mount directory.</p>
-</dd><dt class="property-required"
+    <dd>Remote mount directory.</dd><dt class="property-required"
             title="Required">
         <span id="usergroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usergroupid_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Group<wbr>Id</a>
@@ -6217,8 +7323,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of user group.</p>
-</dd><dt class="property-required"
+    <dd>ID of user group.</dd><dt class="property-required"
             title="Required">
         <span id="userid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -6226,8 +7331,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of user.</p>
-</dd><dt class="property-optional"
+    <dd>ID of user.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddress_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Address</a>
@@ -6235,8 +7339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(Readonly) File system ip address.</p>
-</dd><dt class="property-optional"
+    <dd>If fixed intranet IP is enabled, this field returns the IP list used.</dd><dt class="property-optional"
             title="Optional">
         <span id="mountsubnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountsubnetid_nodejs" style="color: inherit; text-decoration: inherit;">mount<wbr>Subnet<wbr>Id</a>
@@ -6244,8 +7347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(Readonly) File system subnet ID.</p>
-</dd><dt class="property-optional"
+    <dd>(Readonly) File system subnet ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="mountvpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountvpcid_nodejs" style="color: inherit; text-decoration: inherit;">mount<wbr>Vpc<wbr>Id</a>
@@ -6253,8 +7355,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(Readonly) File system virtual private network ID.</p>
-</dd></dl>
+    <dd>(Readonly) File system virtual private network ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6268,8 +7369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File system instance ID.</p>
-</dd><dt class="property-required"
+    <dd>File system instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="local_mount_dir_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#local_mount_dir_python" style="color: inherit; text-decoration: inherit;">local_<wbr>mount_<wbr>dir</a>
@@ -6277,8 +7377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Local mount directory.</p>
-</dd><dt class="property-required"
+    <dd>Local mount directory.</dd><dt class="property-required"
             title="Required">
         <span id="mount_ins_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mount_ins_id_python" style="color: inherit; text-decoration: inherit;">mount_<wbr>ins_<wbr>id</a>
@@ -6286,8 +7385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File system mount instance ID.</p>
-</dd><dt class="property-required"
+    <dd>File system mount instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="remote_mount_dir_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remote_mount_dir_python" style="color: inherit; text-decoration: inherit;">remote_<wbr>mount_<wbr>dir</a>
@@ -6295,8 +7393,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remote mount directory.</p>
-</dd><dt class="property-required"
+    <dd>Remote mount directory.</dd><dt class="property-required"
             title="Required">
         <span id="user_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_group_id_python" style="color: inherit; text-decoration: inherit;">user_<wbr>group_<wbr>id</a>
@@ -6304,8 +7401,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of user group.</p>
-</dd><dt class="property-required"
+    <dd>ID of user group.</dd><dt class="property-required"
             title="Required">
         <span id="user_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_id_python" style="color: inherit; text-decoration: inherit;">user_<wbr>id</a>
@@ -6313,8 +7409,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of user.</p>
-</dd><dt class="property-optional"
+    <dd>ID of user.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_address_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>address</a>
@@ -6322,8 +7417,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>(Readonly) File system ip address.</p>
-</dd><dt class="property-optional"
+    <dd>If fixed intranet IP is enabled, this field returns the IP list used.</dd><dt class="property-optional"
             title="Optional">
         <span id="mount_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mount_subnet_id_python" style="color: inherit; text-decoration: inherit;">mount_<wbr>subnet_<wbr>id</a>
@@ -6331,8 +7425,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>(Readonly) File system subnet ID.</p>
-</dd><dt class="property-optional"
+    <dd>(Readonly) File system subnet ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="mount_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mount_vpc_id_python" style="color: inherit; text-decoration: inherit;">mount_<wbr>vpc_<wbr>id</a>
@@ -6340,8 +7433,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>(Readonly) File system virtual private network ID.</p>
-</dd></dl>
+    <dd>(Readonly) File system virtual private network ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6355,8 +7447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File system instance ID.</p>
-</dd><dt class="property-required"
+    <dd>File system instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="localmountdir_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localmountdir_yaml" style="color: inherit; text-decoration: inherit;">local<wbr>Mount<wbr>Dir</a>
@@ -6364,8 +7455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Local mount directory.</p>
-</dd><dt class="property-required"
+    <dd>Local mount directory.</dd><dt class="property-required"
             title="Required">
         <span id="mountinsid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountinsid_yaml" style="color: inherit; text-decoration: inherit;">mount<wbr>Ins<wbr>Id</a>
@@ -6373,8 +7463,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File system mount instance ID.</p>
-</dd><dt class="property-required"
+    <dd>File system mount instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="remotemountdir_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remotemountdir_yaml" style="color: inherit; text-decoration: inherit;">remote<wbr>Mount<wbr>Dir</a>
@@ -6382,8 +7471,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote mount directory.</p>
-</dd><dt class="property-required"
+    <dd>Remote mount directory.</dd><dt class="property-required"
             title="Required">
         <span id="usergroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usergroupid_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Group<wbr>Id</a>
@@ -6391,8 +7479,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of user group.</p>
-</dd><dt class="property-required"
+    <dd>ID of user group.</dd><dt class="property-required"
             title="Required">
         <span id="userid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -6400,8 +7487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of user.</p>
-</dd><dt class="property-optional"
+    <dd>ID of user.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddress_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Address</a>
@@ -6409,8 +7495,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(Readonly) File system ip address.</p>
-</dd><dt class="property-optional"
+    <dd>If fixed intranet IP is enabled, this field returns the IP list used.</dd><dt class="property-optional"
             title="Optional">
         <span id="mountsubnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountsubnetid_yaml" style="color: inherit; text-decoration: inherit;">mount<wbr>Subnet<wbr>Id</a>
@@ -6418,8 +7503,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(Readonly) File system subnet ID.</p>
-</dd><dt class="property-optional"
+    <dd>(Readonly) File system subnet ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="mountvpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountvpcid_yaml" style="color: inherit; text-decoration: inherit;">mount<wbr>Vpc<wbr>Id</a>
@@ -6427,12 +7511,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(Readonly) File system virtual private network ID.</p>
-</dd></dl>
+    <dd>(Readonly) File system virtual private network ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="functionimageconfig">Function<wbr>Image<wbr>Config</h4>
+<h4 id="functionimageconfig">
+Function<wbr>Image<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Function<wbr>Image<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -6444,8 +7529,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The image type. personal or enterprise.</p>
-</dd><dt class="property-required"
+    <dd>The image type. personal or enterprise.</dd><dt class="property-required"
             title="Required">
         <span id="imageuri_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageuri_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Uri</a>
@@ -6453,8 +7537,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The uri of image.</p>
-</dd><dt class="property-optional"
+    <dd>The uri of image. Supports three formats:</p>
+<ul>
+<li>Format A: registry/repo:tag</li>
+<li>Format B: registry/repo@sha256:digest</li>
+<li>Format C: registry/repo:tag@sha256:digest.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="args_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#args_csharp" style="color: inherit; text-decoration: inherit;">Args</a>
@@ -6462,8 +7550,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>the parameters of command.</p>
-</dd><dt class="property-optional"
+    <dd>the parameters of command.</dd><dt class="property-optional"
             title="Optional">
         <span id="command_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_csharp" style="color: inherit; text-decoration: inherit;">Command</a>
@@ -6471,8 +7558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The command of entrypoint.</p>
-</dd><dt class="property-optional"
+    <dd>The command of entrypoint.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerimageaccelerate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerimageaccelerate_csharp" style="color: inherit; text-decoration: inherit;">Container<wbr>Image<wbr>Accelerate</a>
@@ -6480,8 +7566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Image accelerate switch.</p>
-</dd><dt class="property-optional"
+    <dd>Image accelerate switch.</dd><dt class="property-optional"
             title="Optional">
         <span id="entrypoint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#entrypoint_csharp" style="color: inherit; text-decoration: inherit;">Entry<wbr>Point</a>
@@ -6489,8 +7574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The entrypoint of app.</p>
-</dd><dt class="property-optional"
+    <dd>The entrypoint of app.</dd><dt class="property-optional"
             title="Optional">
         <span id="imageport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageport_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Port</a>
@@ -6498,8 +7582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Image function port setting. Default is <code>9000</code>, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.</p>
-</dd><dt class="property-optional"
+    <dd>Image function port setting. Default is <code>9000</code>, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.</dd><dt class="property-optional"
             title="Optional">
         <span id="registryid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_csharp" style="color: inherit; text-decoration: inherit;">Registry<wbr>Id</a>
@@ -6507,8 +7590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The registry id of TCR. When image type is enterprise, it must be set.</p>
-</dd></dl>
+    <dd>The registry id of TCR. When image type is enterprise, it must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6522,8 +7604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The image type. personal or enterprise.</p>
-</dd><dt class="property-required"
+    <dd>The image type. personal or enterprise.</dd><dt class="property-required"
             title="Required">
         <span id="imageuri_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageuri_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Uri</a>
@@ -6531,8 +7612,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The uri of image.</p>
-</dd><dt class="property-optional"
+    <dd>The uri of image. Supports three formats:</p>
+<ul>
+<li>Format A: registry/repo:tag</li>
+<li>Format B: registry/repo@sha256:digest</li>
+<li>Format C: registry/repo:tag@sha256:digest.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="args_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#args_go" style="color: inherit; text-decoration: inherit;">Args</a>
@@ -6540,8 +7625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>the parameters of command.</p>
-</dd><dt class="property-optional"
+    <dd>the parameters of command.</dd><dt class="property-optional"
             title="Optional">
         <span id="command_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_go" style="color: inherit; text-decoration: inherit;">Command</a>
@@ -6549,8 +7633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The command of entrypoint.</p>
-</dd><dt class="property-optional"
+    <dd>The command of entrypoint.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerimageaccelerate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerimageaccelerate_go" style="color: inherit; text-decoration: inherit;">Container<wbr>Image<wbr>Accelerate</a>
@@ -6558,8 +7641,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Image accelerate switch.</p>
-</dd><dt class="property-optional"
+    <dd>Image accelerate switch.</dd><dt class="property-optional"
             title="Optional">
         <span id="entrypoint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#entrypoint_go" style="color: inherit; text-decoration: inherit;">Entry<wbr>Point</a>
@@ -6567,8 +7649,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The entrypoint of app.</p>
-</dd><dt class="property-optional"
+    <dd>The entrypoint of app.</dd><dt class="property-optional"
             title="Optional">
         <span id="imageport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageport_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Port</a>
@@ -6576,8 +7657,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Image function port setting. Default is <code>9000</code>, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.</p>
-</dd><dt class="property-optional"
+    <dd>Image function port setting. Default is <code>9000</code>, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.</dd><dt class="property-optional"
             title="Optional">
         <span id="registryid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_go" style="color: inherit; text-decoration: inherit;">Registry<wbr>Id</a>
@@ -6585,8 +7665,82 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The registry id of TCR. When image type is enterprise, it must be set.</p>
-</dd></dl>
+    <dd>The registry id of TCR. When image type is enterprise, it must be set.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="image_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_type_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The image type. personal or enterprise.</dd><dt class="property-required"
+            title="Required">
+        <span id="image_uri_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_uri_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>uri</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The uri of image. Supports three formats:</p>
+<ul>
+<li>Format A: registry/repo:tag</li>
+<li>Format B: registry/repo@sha256:digest</li>
+<li>Format C: registry/repo:tag@sha256:digest.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="args_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#args_hcl" style="color: inherit; text-decoration: inherit;">args</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>the parameters of command.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="command_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_hcl" style="color: inherit; text-decoration: inherit;">command</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The command of entrypoint.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="container_image_accelerate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_image_accelerate_hcl" style="color: inherit; text-decoration: inherit;">container_<wbr>image_<wbr>accelerate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Image accelerate switch.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="entry_point_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#entry_point_hcl" style="color: inherit; text-decoration: inherit;">entry_<wbr>point</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The entrypoint of app.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="image_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_port_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Image function port setting. Default is <code>9000</code>, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="registry_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registry_id_hcl" style="color: inherit; text-decoration: inherit;">registry_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The registry id of TCR. When image type is enterprise, it must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6600,8 +7754,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The image type. personal or enterprise.</p>
-</dd><dt class="property-required"
+    <dd>The image type. personal or enterprise.</dd><dt class="property-required"
             title="Required">
         <span id="imageuri_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageuri_java" style="color: inherit; text-decoration: inherit;">image<wbr>Uri</a>
@@ -6609,8 +7762,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The uri of image.</p>
-</dd><dt class="property-optional"
+    <dd>The uri of image. Supports three formats:</p>
+<ul>
+<li>Format A: registry/repo:tag</li>
+<li>Format B: registry/repo@sha256:digest</li>
+<li>Format C: registry/repo:tag@sha256:digest.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="args_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#args_java" style="color: inherit; text-decoration: inherit;">args</a>
@@ -6618,8 +7775,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>the parameters of command.</p>
-</dd><dt class="property-optional"
+    <dd>the parameters of command.</dd><dt class="property-optional"
             title="Optional">
         <span id="command_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_java" style="color: inherit; text-decoration: inherit;">command</a>
@@ -6627,8 +7783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The command of entrypoint.</p>
-</dd><dt class="property-optional"
+    <dd>The command of entrypoint.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerimageaccelerate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerimageaccelerate_java" style="color: inherit; text-decoration: inherit;">container<wbr>Image<wbr>Accelerate</a>
@@ -6636,8 +7791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Image accelerate switch.</p>
-</dd><dt class="property-optional"
+    <dd>Image accelerate switch.</dd><dt class="property-optional"
             title="Optional">
         <span id="entrypoint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#entrypoint_java" style="color: inherit; text-decoration: inherit;">entry<wbr>Point</a>
@@ -6645,8 +7799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The entrypoint of app.</p>
-</dd><dt class="property-optional"
+    <dd>The entrypoint of app.</dd><dt class="property-optional"
             title="Optional">
         <span id="imageport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageport_java" style="color: inherit; text-decoration: inherit;">image<wbr>Port</a>
@@ -6654,8 +7807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Image function port setting. Default is <code>9000</code>, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.</p>
-</dd><dt class="property-optional"
+    <dd>Image function port setting. Default is <code>9000</code>, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.</dd><dt class="property-optional"
             title="Optional">
         <span id="registryid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_java" style="color: inherit; text-decoration: inherit;">registry<wbr>Id</a>
@@ -6663,8 +7815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The registry id of TCR. When image type is enterprise, it must be set.</p>
-</dd></dl>
+    <dd>The registry id of TCR. When image type is enterprise, it must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6678,8 +7829,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The image type. personal or enterprise.</p>
-</dd><dt class="property-required"
+    <dd>The image type. personal or enterprise.</dd><dt class="property-required"
             title="Required">
         <span id="imageuri_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageuri_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Uri</a>
@@ -6687,8 +7837,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The uri of image.</p>
-</dd><dt class="property-optional"
+    <dd>The uri of image. Supports three formats:</p>
+<ul>
+<li>Format A: registry/repo:tag</li>
+<li>Format B: registry/repo@sha256:digest</li>
+<li>Format C: registry/repo:tag@sha256:digest.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="args_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#args_nodejs" style="color: inherit; text-decoration: inherit;">args</a>
@@ -6696,8 +7850,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>the parameters of command.</p>
-</dd><dt class="property-optional"
+    <dd>the parameters of command.</dd><dt class="property-optional"
             title="Optional">
         <span id="command_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_nodejs" style="color: inherit; text-decoration: inherit;">command</a>
@@ -6705,8 +7858,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The command of entrypoint.</p>
-</dd><dt class="property-optional"
+    <dd>The command of entrypoint.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerimageaccelerate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerimageaccelerate_nodejs" style="color: inherit; text-decoration: inherit;">container<wbr>Image<wbr>Accelerate</a>
@@ -6714,8 +7866,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Image accelerate switch.</p>
-</dd><dt class="property-optional"
+    <dd>Image accelerate switch.</dd><dt class="property-optional"
             title="Optional">
         <span id="entrypoint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#entrypoint_nodejs" style="color: inherit; text-decoration: inherit;">entry<wbr>Point</a>
@@ -6723,8 +7874,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The entrypoint of app.</p>
-</dd><dt class="property-optional"
+    <dd>The entrypoint of app.</dd><dt class="property-optional"
             title="Optional">
         <span id="imageport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageport_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Port</a>
@@ -6732,8 +7882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Image function port setting. Default is <code>9000</code>, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.</p>
-</dd><dt class="property-optional"
+    <dd>Image function port setting. Default is <code>9000</code>, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.</dd><dt class="property-optional"
             title="Optional">
         <span id="registryid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_nodejs" style="color: inherit; text-decoration: inherit;">registry<wbr>Id</a>
@@ -6741,8 +7890,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The registry id of TCR. When image type is enterprise, it must be set.</p>
-</dd></dl>
+    <dd>The registry id of TCR. When image type is enterprise, it must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6756,8 +7904,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The image type. personal or enterprise.</p>
-</dd><dt class="property-required"
+    <dd>The image type. personal or enterprise.</dd><dt class="property-required"
             title="Required">
         <span id="image_uri_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_uri_python" style="color: inherit; text-decoration: inherit;">image_<wbr>uri</a>
@@ -6765,8 +7912,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The uri of image.</p>
-</dd><dt class="property-optional"
+    <dd>The uri of image. Supports three formats:</p>
+<ul>
+<li>Format A: registry/repo:tag</li>
+<li>Format B: registry/repo@sha256:digest</li>
+<li>Format C: registry/repo:tag@sha256:digest.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="args_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#args_python" style="color: inherit; text-decoration: inherit;">args</a>
@@ -6774,8 +7925,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>the parameters of command.</p>
-</dd><dt class="property-optional"
+    <dd>the parameters of command.</dd><dt class="property-optional"
             title="Optional">
         <span id="command_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_python" style="color: inherit; text-decoration: inherit;">command</a>
@@ -6783,8 +7933,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The command of entrypoint.</p>
-</dd><dt class="property-optional"
+    <dd>The command of entrypoint.</dd><dt class="property-optional"
             title="Optional">
         <span id="container_image_accelerate_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_image_accelerate_python" style="color: inherit; text-decoration: inherit;">container_<wbr>image_<wbr>accelerate</a>
@@ -6792,8 +7941,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Image accelerate switch.</p>
-</dd><dt class="property-optional"
+    <dd>Image accelerate switch.</dd><dt class="property-optional"
             title="Optional">
         <span id="entry_point_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#entry_point_python" style="color: inherit; text-decoration: inherit;">entry_<wbr>point</a>
@@ -6801,8 +7949,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The entrypoint of app.</p>
-</dd><dt class="property-optional"
+    <dd>The entrypoint of app.</dd><dt class="property-optional"
             title="Optional">
         <span id="image_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_port_python" style="color: inherit; text-decoration: inherit;">image_<wbr>port</a>
@@ -6810,8 +7957,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Image function port setting. Default is <code>9000</code>, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.</p>
-</dd><dt class="property-optional"
+    <dd>Image function port setting. Default is <code>9000</code>, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.</dd><dt class="property-optional"
             title="Optional">
         <span id="registry_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registry_id_python" style="color: inherit; text-decoration: inherit;">registry_<wbr>id</a>
@@ -6819,8 +7965,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The registry id of TCR. When image type is enterprise, it must be set.</p>
-</dd></dl>
+    <dd>The registry id of TCR. When image type is enterprise, it must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6834,8 +7979,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The image type. personal or enterprise.</p>
-</dd><dt class="property-required"
+    <dd>The image type. personal or enterprise.</dd><dt class="property-required"
             title="Required">
         <span id="imageuri_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageuri_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Uri</a>
@@ -6843,8 +7987,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The uri of image.</p>
-</dd><dt class="property-optional"
+    <dd>The uri of image. Supports three formats:</p>
+<ul>
+<li>Format A: registry/repo:tag</li>
+<li>Format B: registry/repo@sha256:digest</li>
+<li>Format C: registry/repo:tag@sha256:digest.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="args_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#args_yaml" style="color: inherit; text-decoration: inherit;">args</a>
@@ -6852,8 +8000,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>the parameters of command.</p>
-</dd><dt class="property-optional"
+    <dd>the parameters of command.</dd><dt class="property-optional"
             title="Optional">
         <span id="command_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#command_yaml" style="color: inherit; text-decoration: inherit;">command</a>
@@ -6861,8 +8008,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The command of entrypoint.</p>
-</dd><dt class="property-optional"
+    <dd>The command of entrypoint.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerimageaccelerate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerimageaccelerate_yaml" style="color: inherit; text-decoration: inherit;">container<wbr>Image<wbr>Accelerate</a>
@@ -6870,8 +8016,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Image accelerate switch.</p>
-</dd><dt class="property-optional"
+    <dd>Image accelerate switch.</dd><dt class="property-optional"
             title="Optional">
         <span id="entrypoint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#entrypoint_yaml" style="color: inherit; text-decoration: inherit;">entry<wbr>Point</a>
@@ -6879,8 +8024,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The entrypoint of app.</p>
-</dd><dt class="property-optional"
+    <dd>The entrypoint of app.</dd><dt class="property-optional"
             title="Optional">
         <span id="imageport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageport_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Port</a>
@@ -6888,8 +8032,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Image function port setting. Default is <code>9000</code>, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.</p>
-</dd><dt class="property-optional"
+    <dd>Image function port setting. Default is <code>9000</code>, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.</dd><dt class="property-optional"
             title="Optional">
         <span id="registryid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_yaml" style="color: inherit; text-decoration: inherit;">registry<wbr>Id</a>
@@ -6897,12 +8040,991 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The registry id of TCR. When image type is enterprise, it must be set.</p>
-</dd></dl>
+    <dd>The registry id of TCR. When image type is enterprise, it must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="functionintranetconfig">Function<wbr>Intranet<wbr>Config</h4>
+<h4 id="functioninstanceconcurrencyconfig">
+Function<wbr>Instance<wbr>Concurrency<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dynamicenabled_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dynamicenabled_csharp" style="color: inherit; text-decoration: inherit;">Dynamic<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable intelligent dynamic concurrency. Valid values: 'TRUE', 'FALSE'. 'FALSE' means static concurrency.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instanceisolationenabled_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceisolationenabled_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Isolation<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Security isolation switch. Valid values: 'TRUE', 'FALSE'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maxconcurrency_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrency_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Concurrency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Maximum single-instance concurrency, range: 1-100.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mixnodeconfigs_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mixnodeconfigs_csharp" style="color: inherit; text-decoration: inherit;">Mix<wbr>Node<wbr>Configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfigmixnodeconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Mix<wbr>Node<wbr>Config&gt;</a></span>
+    </dt>
+    <dd>Dynamic concurrency configuration parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionconfig_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionconfig_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfigsessionconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Inputs.<wbr>Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Session<wbr>Config</a></span>
+    </dt>
+    <dd>Session configuration parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Concurrency mode, valid values: 'Session-Based' or 'Request-Based'.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dynamicenabled_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dynamicenabled_go" style="color: inherit; text-decoration: inherit;">Dynamic<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable intelligent dynamic concurrency. Valid values: 'TRUE', 'FALSE'. 'FALSE' means static concurrency.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instanceisolationenabled_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceisolationenabled_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Isolation<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Security isolation switch. Valid values: 'TRUE', 'FALSE'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maxconcurrency_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrency_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Concurrency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Maximum single-instance concurrency, range: 1-100.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mixnodeconfigs_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mixnodeconfigs_go" style="color: inherit; text-decoration: inherit;">Mix<wbr>Node<wbr>Configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfigmixnodeconfig">[]Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Mix<wbr>Node<wbr>Config</a></span>
+    </dt>
+    <dd>Dynamic concurrency configuration parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionconfig_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionconfig_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfigsessionconfig">Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Session<wbr>Config</a></span>
+    </dt>
+    <dd>Session configuration parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Concurrency mode, valid values: 'Session-Based' or 'Request-Based'.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dynamic_enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dynamic_enabled_hcl" style="color: inherit; text-decoration: inherit;">dynamic_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable intelligent dynamic concurrency. Valid values: 'TRUE', 'FALSE'. 'FALSE' means static concurrency.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_isolation_enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_isolation_enabled_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>isolation_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Security isolation switch. Valid values: 'TRUE', 'FALSE'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_concurrency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_concurrency_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>concurrency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum single-instance concurrency, range: 1-100.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mix_node_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mix_node_configs_hcl" style="color: inherit; text-decoration: inherit;">mix_<wbr>node_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfigmixnodeconfig">list(object)</a></span>
+    </dt>
+    <dd>Dynamic concurrency configuration parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="session_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_config_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfigsessionconfig">object</a></span>
+    </dt>
+    <dd>Session configuration parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Concurrency mode, valid values: 'Session-Based' or 'Request-Based'.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dynamicenabled_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dynamicenabled_java" style="color: inherit; text-decoration: inherit;">dynamic<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Whether to enable intelligent dynamic concurrency. Valid values: 'TRUE', 'FALSE'. 'FALSE' means static concurrency.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instanceisolationenabled_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceisolationenabled_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Isolation<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Security isolation switch. Valid values: 'TRUE', 'FALSE'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maxconcurrency_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrency_java" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Maximum single-instance concurrency, range: 1-100.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mixnodeconfigs_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mixnodeconfigs_java" style="color: inherit; text-decoration: inherit;">mix<wbr>Node<wbr>Configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfigmixnodeconfig">List&lt;Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Mix<wbr>Node<wbr>Config&gt;</a></span>
+    </dt>
+    <dd>Dynamic concurrency configuration parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionconfig_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionconfig_java" style="color: inherit; text-decoration: inherit;">session<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfigsessionconfig">Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Session<wbr>Config</a></span>
+    </dt>
+    <dd>Session configuration parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Concurrency mode, valid values: 'Session-Based' or 'Request-Based'.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dynamicenabled_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dynamicenabled_nodejs" style="color: inherit; text-decoration: inherit;">dynamic<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable intelligent dynamic concurrency. Valid values: 'TRUE', 'FALSE'. 'FALSE' means static concurrency.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instanceisolationenabled_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceisolationenabled_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Isolation<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Security isolation switch. Valid values: 'TRUE', 'FALSE'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maxconcurrency_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrency_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum single-instance concurrency, range: 1-100.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mixnodeconfigs_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mixnodeconfigs_nodejs" style="color: inherit; text-decoration: inherit;">mix<wbr>Node<wbr>Configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfigmixnodeconfig">Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Mix<wbr>Node<wbr>Config[]</a></span>
+    </dt>
+    <dd>Dynamic concurrency configuration parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionconfig_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionconfig_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfigsessionconfig">Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Session<wbr>Config</a></span>
+    </dt>
+    <dd>Session configuration parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Concurrency mode, valid values: 'Session-Based' or 'Request-Based'.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dynamic_enabled_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dynamic_enabled_python" style="color: inherit; text-decoration: inherit;">dynamic_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Whether to enable intelligent dynamic concurrency. Valid values: 'TRUE', 'FALSE'. 'FALSE' means static concurrency.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_isolation_enabled_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_isolation_enabled_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>isolation_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Security isolation switch. Valid values: 'TRUE', 'FALSE'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_concurrency_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_concurrency_python" style="color: inherit; text-decoration: inherit;">max_<wbr>concurrency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Maximum single-instance concurrency, range: 1-100.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mix_node_configs_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mix_node_configs_python" style="color: inherit; text-decoration: inherit;">mix_<wbr>node_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfigmixnodeconfig">Sequence[Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Mix<wbr>Node<wbr>Config]</a></span>
+    </dt>
+    <dd>Dynamic concurrency configuration parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="session_config_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_config_python" style="color: inherit; text-decoration: inherit;">session_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfigsessionconfig">Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Session<wbr>Config</a></span>
+    </dt>
+    <dd>Session configuration parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Concurrency mode, valid values: 'Session-Based' or 'Request-Based'.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dynamicenabled_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dynamicenabled_yaml" style="color: inherit; text-decoration: inherit;">dynamic<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Whether to enable intelligent dynamic concurrency. Valid values: 'TRUE', 'FALSE'. 'FALSE' means static concurrency.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instanceisolationenabled_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceisolationenabled_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Isolation<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Security isolation switch. Valid values: 'TRUE', 'FALSE'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maxconcurrency_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrency_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Maximum single-instance concurrency, range: 1-100.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mixnodeconfigs_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mixnodeconfigs_yaml" style="color: inherit; text-decoration: inherit;">mix<wbr>Node<wbr>Configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfigmixnodeconfig">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Dynamic concurrency configuration parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionconfig_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionconfig_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#functioninstanceconcurrencyconfigsessionconfig">Property Map</a></span>
+    </dt>
+    <dd>Session configuration parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Concurrency mode, valid values: 'Session-Based' or 'Request-Based'.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="functioninstanceconcurrencyconfigmixnodeconfig">
+Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Mix<wbr>Node<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Mix<wbr>Node<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="nodespec_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodespec_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Spec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>GPU model name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="num_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#num_csharp" style="color: inherit; text-decoration: inherit;">Num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Number of concurrent instances.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="nodespec_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodespec_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Spec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>GPU model name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="num_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#num_go" style="color: inherit; text-decoration: inherit;">Num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Number of concurrent instances.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="node_spec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_spec_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>spec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>GPU model name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#num_hcl" style="color: inherit; text-decoration: inherit;">num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of concurrent instances.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="nodespec_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodespec_java" style="color: inherit; text-decoration: inherit;">node<wbr>Spec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>GPU model name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="num_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#num_java" style="color: inherit; text-decoration: inherit;">num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Number of concurrent instances.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="nodespec_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodespec_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Spec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>GPU model name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="num_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#num_nodejs" style="color: inherit; text-decoration: inherit;">num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of concurrent instances.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="node_spec_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_spec_python" style="color: inherit; text-decoration: inherit;">node_<wbr>spec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>GPU model name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="num_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#num_python" style="color: inherit; text-decoration: inherit;">num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Number of concurrent instances.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="nodespec_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodespec_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Spec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>GPU model name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="num_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#num_yaml" style="color: inherit; text-decoration: inherit;">num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Number of concurrent instances.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="functioninstanceconcurrencyconfigsessionconfig">
+Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Session<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Function<wbr>Instance<wbr>Concurrency<wbr>Config<wbr>Session<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="idletimeoutstrategy_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idletimeoutstrategy_csharp" style="color: inherit; text-decoration: inherit;">Idle<wbr>Timeout<wbr>Strategy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Idle timeout strategy. Valid values: 'FATAL' for auto destroy, 'PAUSE' for auto pause. Only available when security isolation is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximumconcurrencysessionperinstance_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximumconcurrencysessionperinstance_csharp" style="color: inherit; text-decoration: inherit;">Maximum<wbr>Concurrency<wbr>Session<wbr>Per<wbr>Instance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Maximum number of concurrent sessions per instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximumidletimeinseconds_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximumidletimeinseconds_csharp" style="color: inherit; text-decoration: inherit;">Maximum<wbr>Idle<wbr>Time<wbr>In<wbr>Seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Session idle timeout in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximumttlinseconds_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximumttlinseconds_csharp" style="color: inherit; text-decoration: inherit;">Maximum<wbr>Ttl<wbr>In<wbr>Seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Session lifecycle in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionname_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Session name, starts with a letter, length 5-40 characters, can contain letters, digits, underscores, and hyphens.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionpath_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionpath_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Session path information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionsource_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionsource_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Session source. Valid values: 'HEADER', 'COOKIE', 'QUERY_STRING'.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="idletimeoutstrategy_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idletimeoutstrategy_go" style="color: inherit; text-decoration: inherit;">Idle<wbr>Timeout<wbr>Strategy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Idle timeout strategy. Valid values: 'FATAL' for auto destroy, 'PAUSE' for auto pause. Only available when security isolation is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximumconcurrencysessionperinstance_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximumconcurrencysessionperinstance_go" style="color: inherit; text-decoration: inherit;">Maximum<wbr>Concurrency<wbr>Session<wbr>Per<wbr>Instance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Maximum number of concurrent sessions per instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximumidletimeinseconds_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximumidletimeinseconds_go" style="color: inherit; text-decoration: inherit;">Maximum<wbr>Idle<wbr>Time<wbr>In<wbr>Seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Session idle timeout in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximumttlinseconds_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximumttlinseconds_go" style="color: inherit; text-decoration: inherit;">Maximum<wbr>Ttl<wbr>In<wbr>Seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Session lifecycle in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionname_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Session name, starts with a letter, length 5-40 characters, can contain letters, digits, underscores, and hyphens.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionpath_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionpath_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Session path information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionsource_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionsource_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Session source. Valid values: 'HEADER', 'COOKIE', 'QUERY_STRING'.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="idle_timeout_strategy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idle_timeout_strategy_hcl" style="color: inherit; text-decoration: inherit;">idle_<wbr>timeout_<wbr>strategy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Idle timeout strategy. Valid values: 'FATAL' for auto destroy, 'PAUSE' for auto pause. Only available when security isolation is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximum_concurrency_session_per_instance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximum_concurrency_session_per_instance_hcl" style="color: inherit; text-decoration: inherit;">maximum_<wbr>concurrency_<wbr>session_<wbr>per_<wbr>instance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of concurrent sessions per instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximum_idle_time_in_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximum_idle_time_in_seconds_hcl" style="color: inherit; text-decoration: inherit;">maximum_<wbr>idle_<wbr>time_<wbr>in_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Session idle timeout in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximum_ttl_in_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximum_ttl_in_seconds_hcl" style="color: inherit; text-decoration: inherit;">maximum_<wbr>ttl_<wbr>in_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Session lifecycle in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="session_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_name_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Session name, starts with a letter, length 5-40 characters, can contain letters, digits, underscores, and hyphens.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="session_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_path_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Session path information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="session_source_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_source_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Session source. Valid values: 'HEADER', 'COOKIE', 'QUERY_STRING'.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="idletimeoutstrategy_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idletimeoutstrategy_java" style="color: inherit; text-decoration: inherit;">idle<wbr>Timeout<wbr>Strategy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Idle timeout strategy. Valid values: 'FATAL' for auto destroy, 'PAUSE' for auto pause. Only available when security isolation is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximumconcurrencysessionperinstance_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximumconcurrencysessionperinstance_java" style="color: inherit; text-decoration: inherit;">maximum<wbr>Concurrency<wbr>Session<wbr>Per<wbr>Instance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Maximum number of concurrent sessions per instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximumidletimeinseconds_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximumidletimeinseconds_java" style="color: inherit; text-decoration: inherit;">maximum<wbr>Idle<wbr>Time<wbr>In<wbr>Seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Session idle timeout in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximumttlinseconds_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximumttlinseconds_java" style="color: inherit; text-decoration: inherit;">maximum<wbr>Ttl<wbr>In<wbr>Seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Session lifecycle in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionname_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_java" style="color: inherit; text-decoration: inherit;">session<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Session name, starts with a letter, length 5-40 characters, can contain letters, digits, underscores, and hyphens.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionpath_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionpath_java" style="color: inherit; text-decoration: inherit;">session<wbr>Path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Session path information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionsource_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionsource_java" style="color: inherit; text-decoration: inherit;">session<wbr>Source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Session source. Valid values: 'HEADER', 'COOKIE', 'QUERY_STRING'.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="idletimeoutstrategy_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idletimeoutstrategy_nodejs" style="color: inherit; text-decoration: inherit;">idle<wbr>Timeout<wbr>Strategy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Idle timeout strategy. Valid values: 'FATAL' for auto destroy, 'PAUSE' for auto pause. Only available when security isolation is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximumconcurrencysessionperinstance_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximumconcurrencysessionperinstance_nodejs" style="color: inherit; text-decoration: inherit;">maximum<wbr>Concurrency<wbr>Session<wbr>Per<wbr>Instance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of concurrent sessions per instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximumidletimeinseconds_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximumidletimeinseconds_nodejs" style="color: inherit; text-decoration: inherit;">maximum<wbr>Idle<wbr>Time<wbr>In<wbr>Seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Session idle timeout in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximumttlinseconds_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximumttlinseconds_nodejs" style="color: inherit; text-decoration: inherit;">maximum<wbr>Ttl<wbr>In<wbr>Seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Session lifecycle in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionname_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Session name, starts with a letter, length 5-40 characters, can contain letters, digits, underscores, and hyphens.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionpath_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionpath_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Session path information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionsource_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionsource_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Session source. Valid values: 'HEADER', 'COOKIE', 'QUERY_STRING'.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="idle_timeout_strategy_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idle_timeout_strategy_python" style="color: inherit; text-decoration: inherit;">idle_<wbr>timeout_<wbr>strategy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Idle timeout strategy. Valid values: 'FATAL' for auto destroy, 'PAUSE' for auto pause. Only available when security isolation is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximum_concurrency_session_per_instance_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximum_concurrency_session_per_instance_python" style="color: inherit; text-decoration: inherit;">maximum_<wbr>concurrency_<wbr>session_<wbr>per_<wbr>instance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Maximum number of concurrent sessions per instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximum_idle_time_in_seconds_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximum_idle_time_in_seconds_python" style="color: inherit; text-decoration: inherit;">maximum_<wbr>idle_<wbr>time_<wbr>in_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Session idle timeout in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximum_ttl_in_seconds_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximum_ttl_in_seconds_python" style="color: inherit; text-decoration: inherit;">maximum_<wbr>ttl_<wbr>in_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Session lifecycle in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="session_name_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_name_python" style="color: inherit; text-decoration: inherit;">session_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Session name, starts with a letter, length 5-40 characters, can contain letters, digits, underscores, and hyphens.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="session_path_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_path_python" style="color: inherit; text-decoration: inherit;">session_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Session path information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="session_source_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_source_python" style="color: inherit; text-decoration: inherit;">session_<wbr>source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Session source. Valid values: 'HEADER', 'COOKIE', 'QUERY_STRING'.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="idletimeoutstrategy_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idletimeoutstrategy_yaml" style="color: inherit; text-decoration: inherit;">idle<wbr>Timeout<wbr>Strategy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Idle timeout strategy. Valid values: 'FATAL' for auto destroy, 'PAUSE' for auto pause. Only available when security isolation is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximumconcurrencysessionperinstance_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximumconcurrencysessionperinstance_yaml" style="color: inherit; text-decoration: inherit;">maximum<wbr>Concurrency<wbr>Session<wbr>Per<wbr>Instance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Maximum number of concurrent sessions per instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximumidletimeinseconds_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximumidletimeinseconds_yaml" style="color: inherit; text-decoration: inherit;">maximum<wbr>Idle<wbr>Time<wbr>In<wbr>Seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Session idle timeout in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maximumttlinseconds_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maximumttlinseconds_yaml" style="color: inherit; text-decoration: inherit;">maximum<wbr>Ttl<wbr>In<wbr>Seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Session lifecycle in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionname_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionname_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Session name, starts with a letter, length 5-40 characters, can contain letters, digits, underscores, and hyphens.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionpath_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionpath_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Session path information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionsource_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionsource_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Session source. Valid values: 'HEADER', 'COOKIE', 'QUERY_STRING'.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="functionintranetconfig">
+Function<wbr>Intranet<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Function<wbr>Intranet<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -6914,8 +9036,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddresses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddresses_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Addresses</a>
@@ -6923,8 +9044,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>If fixed intranet IP is enabled, this field returns the IP list used.</p>
-</dd></dl>
+    <dd>If fixed intranet IP is enabled, this field returns the IP list used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6938,8 +9058,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddresses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddresses_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Addresses</a>
@@ -6947,8 +9066,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>If fixed intranet IP is enabled, this field returns the IP list used.</p>
-</dd></dl>
+    <dd>If fixed intranet IP is enabled, this field returns the IP list used.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="ip_fixed_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_fixed_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>fixed</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_addresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_addresses_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>addresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>If fixed intranet IP is enabled, this field returns the IP list used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6962,8 +9102,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddresses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddresses_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Addresses</a>
@@ -6971,8 +9110,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>If fixed intranet IP is enabled, this field returns the IP list used.</p>
-</dd></dl>
+    <dd>If fixed intranet IP is enabled, this field returns the IP list used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6986,8 +9124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddresses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddresses_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Addresses</a>
@@ -6995,8 +9132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>If fixed intranet IP is enabled, this field returns the IP list used.</p>
-</dd></dl>
+    <dd>If fixed intranet IP is enabled, this field returns the IP list used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7010,8 +9146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_addresses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_addresses_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>addresses</a>
@@ -7019,8 +9154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>If fixed intranet IP is enabled, this field returns the IP list used.</p>
-</dd></dl>
+    <dd>If fixed intranet IP is enabled, this field returns the IP list used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7034,8 +9168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipaddresses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipaddresses_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Addresses</a>
@@ -7043,12 +9176,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>If fixed intranet IP is enabled, this field returns the IP list used.</p>
-</dd></dl>
+    <dd>If fixed intranet IP is enabled, this field returns the IP list used.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="functionlayer">Function<wbr>Layer</h4>
+<h4 id="functionlayer">
+Function<wbr>Layer<pulumi-choosable type="language" values="python,go" class="inline">, Function<wbr>Layer<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -7060,8 +9194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of Layer.</p>
-</dd><dt class="property-required"
+    <dd>The name of Layer.</dd><dt class="property-required"
             title="Required">
         <span id="layerversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layerversion_csharp" style="color: inherit; text-decoration: inherit;">Layer<wbr>Version</a>
@@ -7069,8 +9202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The version of layer.</p>
-</dd></dl>
+    <dd>The version of layer.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7084,8 +9216,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of Layer.</p>
-</dd><dt class="property-required"
+    <dd>The name of Layer.</dd><dt class="property-required"
             title="Required">
         <span id="layerversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layerversion_go" style="color: inherit; text-decoration: inherit;">Layer<wbr>Version</a>
@@ -7093,8 +9224,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The version of layer.</p>
-</dd></dl>
+    <dd>The version of layer.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="layer_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layer_name_hcl" style="color: inherit; text-decoration: inherit;">layer_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of Layer.</dd><dt class="property-required"
+            title="Required">
+        <span id="layer_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layer_version_hcl" style="color: inherit; text-decoration: inherit;">layer_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The version of layer.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7108,8 +9260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of Layer.</p>
-</dd><dt class="property-required"
+    <dd>The name of Layer.</dd><dt class="property-required"
             title="Required">
         <span id="layerversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layerversion_java" style="color: inherit; text-decoration: inherit;">layer<wbr>Version</a>
@@ -7117,8 +9268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The version of layer.</p>
-</dd></dl>
+    <dd>The version of layer.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7132,8 +9282,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of Layer.</p>
-</dd><dt class="property-required"
+    <dd>The name of Layer.</dd><dt class="property-required"
             title="Required">
         <span id="layerversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layerversion_nodejs" style="color: inherit; text-decoration: inherit;">layer<wbr>Version</a>
@@ -7141,8 +9290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The version of layer.</p>
-</dd></dl>
+    <dd>The version of layer.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7156,8 +9304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of Layer.</p>
-</dd><dt class="property-required"
+    <dd>The name of Layer.</dd><dt class="property-required"
             title="Required">
         <span id="layer_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layer_version_python" style="color: inherit; text-decoration: inherit;">layer_<wbr>version</a>
@@ -7165,8 +9312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The version of layer.</p>
-</dd></dl>
+    <dd>The version of layer.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7180,8 +9326,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of Layer.</p>
-</dd><dt class="property-required"
+    <dd>The name of Layer.</dd><dt class="property-required"
             title="Required">
         <span id="layerversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#layerversion_yaml" style="color: inherit; text-decoration: inherit;">layer<wbr>Version</a>
@@ -7189,12 +9334,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The version of layer.</p>
-</dd></dl>
+    <dd>The version of layer.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="functiontrigger">Function<wbr>Trigger</h4>
+<h4 id="functiontrigger">
+Function<wbr>Trigger<pulumi-choosable type="language" values="python,go" class="inline">, Function<wbr>Trigger<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -7206,8 +9352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function trigger, if <code>type</code> is <code>ckafka</code>, the format of name must be <code>&lt;ckafkaInstanceId&gt;-&lt;topicId&gt;</code>; if <code>type</code> is <code>cos</code>, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SCF function trigger, if <code>type</code> is <code>ckafka</code>, the format of name must be <code>&lt;ckafkaInstanceId&gt;-&lt;topicId&gt;</code>; if <code>type</code> is <code>cos</code>, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.</dd><dt class="property-required"
             title="Required">
         <span id="triggerdesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerdesc_csharp" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Desc</a>
@@ -7215,8 +9360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</p>
-</dd><dt class="property-required"
+    <dd>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -7224,8 +9368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the SCF function trigger, support <code>cos</code>, <code>cmq</code>, <code>timer</code>, <code>ckafka</code>, <code>apigw</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the SCF function trigger, support <code>timer</code>, <code>ckafka</code>, <code>customKafka</code>, <code>apigw</code>, <code>cmq</code>, <code>cos</code>, <code>mqtt</code>, <code>cls</code>, <code>clb</code>, <code>mps</code>, <code>vod</code>, <code>cm</code>, <code>eb</code>, <code>http</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosregion_csharp" style="color: inherit; text-decoration: inherit;">Cos<wbr>Region</a>
@@ -7233,8 +9376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of cos bucket. if <code>type</code> is <code>cos</code>, <code>cos_region</code> is required.</p>
-</dd></dl>
+    <dd>Region of cos bucket. if <code>type</code> is <code>cos</code>, <code>cosRegion</code> is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7248,8 +9390,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function trigger, if <code>type</code> is <code>ckafka</code>, the format of name must be <code>&lt;ckafkaInstanceId&gt;-&lt;topicId&gt;</code>; if <code>type</code> is <code>cos</code>, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SCF function trigger, if <code>type</code> is <code>ckafka</code>, the format of name must be <code>&lt;ckafkaInstanceId&gt;-&lt;topicId&gt;</code>; if <code>type</code> is <code>cos</code>, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.</dd><dt class="property-required"
             title="Required">
         <span id="triggerdesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerdesc_go" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Desc</a>
@@ -7257,8 +9398,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</p>
-</dd><dt class="property-required"
+    <dd>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -7266,8 +9406,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the SCF function trigger, support <code>cos</code>, <code>cmq</code>, <code>timer</code>, <code>ckafka</code>, <code>apigw</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the SCF function trigger, support <code>timer</code>, <code>ckafka</code>, <code>customKafka</code>, <code>apigw</code>, <code>cmq</code>, <code>cos</code>, <code>mqtt</code>, <code>cls</code>, <code>clb</code>, <code>mps</code>, <code>vod</code>, <code>cm</code>, <code>eb</code>, <code>http</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosregion_go" style="color: inherit; text-decoration: inherit;">Cos<wbr>Region</a>
@@ -7275,8 +9414,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of cos bucket. if <code>type</code> is <code>cos</code>, <code>cos_region</code> is required.</p>
-</dd></dl>
+    <dd>Region of cos bucket. if <code>type</code> is <code>cos</code>, <code>cosRegion</code> is required.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SCF function trigger, if <code>type</code> is <code>ckafka</code>, the format of name must be <code>&lt;ckafkaInstanceId&gt;-&lt;topicId&gt;</code>; if <code>type</code> is <code>cos</code>, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.</dd><dt class="property-required"
+            title="Required">
+        <span id="trigger_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_desc_hcl" style="color: inherit; text-decoration: inherit;">trigger_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the SCF function trigger, support <code>timer</code>, <code>ckafka</code>, <code>customKafka</code>, <code>apigw</code>, <code>cmq</code>, <code>cos</code>, <code>mqtt</code>, <code>cls</code>, <code>clb</code>, <code>mps</code>, <code>vod</code>, <code>cm</code>, <code>eb</code>, <code>http</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cos_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_region_hcl" style="color: inherit; text-decoration: inherit;">cos_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region of cos bucket. if <code>type</code> is <code>cos</code>, <code>cosRegion</code> is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7290,8 +9466,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF function trigger, if <code>type</code> is <code>ckafka</code>, the format of name must be <code>&lt;ckafkaInstanceId&gt;-&lt;topicId&gt;</code>; if <code>type</code> is <code>cos</code>, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SCF function trigger, if <code>type</code> is <code>ckafka</code>, the format of name must be <code>&lt;ckafkaInstanceId&gt;-&lt;topicId&gt;</code>; if <code>type</code> is <code>cos</code>, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.</dd><dt class="property-required"
             title="Required">
         <span id="triggerdesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerdesc_java" style="color: inherit; text-decoration: inherit;">trigger<wbr>Desc</a>
@@ -7299,8 +9474,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</p>
-</dd><dt class="property-required"
+    <dd>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7308,8 +9482,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the SCF function trigger, support <code>cos</code>, <code>cmq</code>, <code>timer</code>, <code>ckafka</code>, <code>apigw</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the SCF function trigger, support <code>timer</code>, <code>ckafka</code>, <code>customKafka</code>, <code>apigw</code>, <code>cmq</code>, <code>cos</code>, <code>mqtt</code>, <code>cls</code>, <code>clb</code>, <code>mps</code>, <code>vod</code>, <code>cm</code>, <code>eb</code>, <code>http</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosregion_java" style="color: inherit; text-decoration: inherit;">cos<wbr>Region</a>
@@ -7317,8 +9490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of cos bucket. if <code>type</code> is <code>cos</code>, <code>cos_region</code> is required.</p>
-</dd></dl>
+    <dd>Region of cos bucket. if <code>type</code> is <code>cos</code>, <code>cosRegion</code> is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7332,8 +9504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function trigger, if <code>type</code> is <code>ckafka</code>, the format of name must be <code>&lt;ckafkaInstanceId&gt;-&lt;topicId&gt;</code>; if <code>type</code> is <code>cos</code>, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SCF function trigger, if <code>type</code> is <code>ckafka</code>, the format of name must be <code>&lt;ckafkaInstanceId&gt;-&lt;topicId&gt;</code>; if <code>type</code> is <code>cos</code>, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.</dd><dt class="property-required"
             title="Required">
         <span id="triggerdesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerdesc_nodejs" style="color: inherit; text-decoration: inherit;">trigger<wbr>Desc</a>
@@ -7341,8 +9512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</p>
-</dd><dt class="property-required"
+    <dd>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7350,8 +9520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the SCF function trigger, support <code>cos</code>, <code>cmq</code>, <code>timer</code>, <code>ckafka</code>, <code>apigw</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the SCF function trigger, support <code>timer</code>, <code>ckafka</code>, <code>customKafka</code>, <code>apigw</code>, <code>cmq</code>, <code>cos</code>, <code>mqtt</code>, <code>cls</code>, <code>clb</code>, <code>mps</code>, <code>vod</code>, <code>cm</code>, <code>eb</code>, <code>http</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosregion_nodejs" style="color: inherit; text-decoration: inherit;">cos<wbr>Region</a>
@@ -7359,8 +9528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of cos bucket. if <code>type</code> is <code>cos</code>, <code>cos_region</code> is required.</p>
-</dd></dl>
+    <dd>Region of cos bucket. if <code>type</code> is <code>cos</code>, <code>cosRegion</code> is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7374,8 +9542,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SCF function trigger, if <code>type</code> is <code>ckafka</code>, the format of name must be <code>&lt;ckafkaInstanceId&gt;-&lt;topicId&gt;</code>; if <code>type</code> is <code>cos</code>, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SCF function trigger, if <code>type</code> is <code>ckafka</code>, the format of name must be <code>&lt;ckafkaInstanceId&gt;-&lt;topicId&gt;</code>; if <code>type</code> is <code>cos</code>, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.</dd><dt class="property-required"
             title="Required">
         <span id="trigger_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_desc_python" style="color: inherit; text-decoration: inherit;">trigger_<wbr>desc</a>
@@ -7383,8 +9550,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</p>
-</dd><dt class="property-required"
+    <dd>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7392,8 +9558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the SCF function trigger, support <code>cos</code>, <code>cmq</code>, <code>timer</code>, <code>ckafka</code>, <code>apigw</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the SCF function trigger, support <code>timer</code>, <code>ckafka</code>, <code>customKafka</code>, <code>apigw</code>, <code>cmq</code>, <code>cos</code>, <code>mqtt</code>, <code>cls</code>, <code>clb</code>, <code>mps</code>, <code>vod</code>, <code>cm</code>, <code>eb</code>, <code>http</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cos_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_region_python" style="color: inherit; text-decoration: inherit;">cos_<wbr>region</a>
@@ -7401,8 +9566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region of cos bucket. if <code>type</code> is <code>cos</code>, <code>cos_region</code> is required.</p>
-</dd></dl>
+    <dd>Region of cos bucket. if <code>type</code> is <code>cos</code>, <code>cosRegion</code> is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7416,8 +9580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF function trigger, if <code>type</code> is <code>ckafka</code>, the format of name must be <code>&lt;ckafkaInstanceId&gt;-&lt;topicId&gt;</code>; if <code>type</code> is <code>cos</code>, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SCF function trigger, if <code>type</code> is <code>ckafka</code>, the format of name must be <code>&lt;ckafkaInstanceId&gt;-&lt;topicId&gt;</code>; if <code>type</code> is <code>cos</code>, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.</dd><dt class="property-required"
             title="Required">
         <span id="triggerdesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerdesc_yaml" style="color: inherit; text-decoration: inherit;">trigger<wbr>Desc</a>
@@ -7425,8 +9588,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</p>
-</dd><dt class="property-required"
+    <dd>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7434,8 +9596,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the SCF function trigger, support <code>cos</code>, <code>cmq</code>, <code>timer</code>, <code>ckafka</code>, <code>apigw</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the SCF function trigger, support <code>timer</code>, <code>ckafka</code>, <code>customKafka</code>, <code>apigw</code>, <code>cmq</code>, <code>cos</code>, <code>mqtt</code>, <code>cls</code>, <code>clb</code>, <code>mps</code>, <code>vod</code>, <code>cm</code>, <code>eb</code>, <code>http</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="cosregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosregion_yaml" style="color: inherit; text-decoration: inherit;">cos<wbr>Region</a>
@@ -7443,12 +9604,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of cos bucket. if <code>type</code> is <code>cos</code>, <code>cos_region</code> is required.</p>
-</dd></dl>
+    <dd>Region of cos bucket. if <code>type</code> is <code>cos</code>, <code>cosRegion</code> is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="functiontriggerinfo">Function<wbr>Trigger<wbr>Info</h4>
+<h4 id="functiontriggerinfo">
+Function<wbr>Trigger<wbr>Info<pulumi-choosable type="language" values="python,go" class="inline">, Function<wbr>Trigger<wbr>Info<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -7460,8 +9622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of SCF function trigger.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="customargument_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customargument_csharp" style="color: inherit; text-decoration: inherit;">Custom<wbr>Argument</a>
@@ -7469,8 +9630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User-defined parameters of SCF function trigger.</p>
-</dd><dt class="property-optional"
+    <dd>User-defined parameters of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_csharp" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -7478,8 +9638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether SCF function trigger is enable.</p>
-</dd><dt class="property-optional"
+    <dd>Whether SCF function trigger is enable.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_csharp" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -7487,8 +9646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modify time of SCF function trigger.</p>
-</dd><dt class="property-optional"
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -7496,8 +9654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="triggerdesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerdesc_csharp" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Desc</a>
@@ -7505,8 +9662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</p>
-</dd><dt class="property-optional"
+    <dd>TriggerDesc of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -7514,8 +9670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the SCF function trigger, support <code>cos</code>, <code>cmq</code>, <code>timer</code>, <code>ckafka</code>, <code>apigw</code>.</p>
-</dd></dl>
+    <dd>Type of SCF function trigger.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7529,8 +9684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of SCF function trigger.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="customargument_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customargument_go" style="color: inherit; text-decoration: inherit;">Custom<wbr>Argument</a>
@@ -7538,8 +9692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User-defined parameters of SCF function trigger.</p>
-</dd><dt class="property-optional"
+    <dd>User-defined parameters of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_go" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -7547,8 +9700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether SCF function trigger is enable.</p>
-</dd><dt class="property-optional"
+    <dd>Whether SCF function trigger is enable.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_go" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -7556,8 +9708,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modify time of SCF function trigger.</p>
-</dd><dt class="property-optional"
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -7565,8 +9716,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="triggerdesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerdesc_go" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Desc</a>
@@ -7574,8 +9724,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</p>
-</dd><dt class="property-optional"
+    <dd>TriggerDesc of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -7583,8 +9732,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the SCF function trigger, support <code>cos</code>, <code>cmq</code>, <code>timer</code>, <code>ckafka</code>, <code>apigw</code>.</p>
-</dd></dl>
+    <dd>Type of SCF function trigger.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of SCF function trigger.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="custom_argument_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_argument_hcl" style="color: inherit; text-decoration: inherit;">custom_<wbr>argument</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User-defined parameters of SCF function trigger.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether SCF function trigger is enable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_hcl" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="trigger_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_desc_hcl" style="color: inherit; text-decoration: inherit;">trigger_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>TriggerDesc of SCF function trigger.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of SCF function trigger.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7598,8 +9808,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of SCF function trigger.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="customargument_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customargument_java" style="color: inherit; text-decoration: inherit;">custom<wbr>Argument</a>
@@ -7607,8 +9816,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User-defined parameters of SCF function trigger.</p>
-</dd><dt class="property-optional"
+    <dd>User-defined parameters of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_java" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -7616,8 +9824,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether SCF function trigger is enable.</p>
-</dd><dt class="property-optional"
+    <dd>Whether SCF function trigger is enable.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_java" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -7625,8 +9832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Modify time of SCF function trigger.</p>
-</dd><dt class="property-optional"
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -7634,8 +9840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="triggerdesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerdesc_java" style="color: inherit; text-decoration: inherit;">trigger<wbr>Desc</a>
@@ -7643,8 +9848,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</p>
-</dd><dt class="property-optional"
+    <dd>TriggerDesc of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7652,8 +9856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the SCF function trigger, support <code>cos</code>, <code>cmq</code>, <code>timer</code>, <code>ckafka</code>, <code>apigw</code>.</p>
-</dd></dl>
+    <dd>Type of SCF function trigger.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7667,8 +9870,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of SCF function trigger.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="customargument_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customargument_nodejs" style="color: inherit; text-decoration: inherit;">custom<wbr>Argument</a>
@@ -7676,8 +9878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User-defined parameters of SCF function trigger.</p>
-</dd><dt class="property-optional"
+    <dd>User-defined parameters of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_nodejs" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -7685,8 +9886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether SCF function trigger is enable.</p>
-</dd><dt class="property-optional"
+    <dd>Whether SCF function trigger is enable.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_nodejs" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -7694,8 +9894,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modify time of SCF function trigger.</p>
-</dd><dt class="property-optional"
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -7703,8 +9902,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="triggerdesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerdesc_nodejs" style="color: inherit; text-decoration: inherit;">trigger<wbr>Desc</a>
@@ -7712,8 +9910,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</p>
-</dd><dt class="property-optional"
+    <dd>TriggerDesc of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7721,8 +9918,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the SCF function trigger, support <code>cos</code>, <code>cmq</code>, <code>timer</code>, <code>ckafka</code>, <code>apigw</code>.</p>
-</dd></dl>
+    <dd>Type of SCF function trigger.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7736,8 +9932,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of SCF function trigger.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="custom_argument_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_argument_python" style="color: inherit; text-decoration: inherit;">custom_<wbr>argument</a>
@@ -7745,8 +9940,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User-defined parameters of SCF function trigger.</p>
-</dd><dt class="property-optional"
+    <dd>User-defined parameters of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_python" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -7754,8 +9948,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether SCF function trigger is enable.</p>
-</dd><dt class="property-optional"
+    <dd>Whether SCF function trigger is enable.</dd><dt class="property-optional"
             title="Optional">
         <span id="modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_python" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
@@ -7763,8 +9956,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Modify time of SCF function trigger.</p>
-</dd><dt class="property-optional"
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -7772,8 +9964,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="trigger_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_desc_python" style="color: inherit; text-decoration: inherit;">trigger_<wbr>desc</a>
@@ -7781,8 +9972,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</p>
-</dd><dt class="property-optional"
+    <dd>TriggerDesc of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7790,8 +9980,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the SCF function trigger, support <code>cos</code>, <code>cmq</code>, <code>timer</code>, <code>ckafka</code>, <code>apigw</code>.</p>
-</dd></dl>
+    <dd>Type of SCF function trigger.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7805,8 +9994,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of SCF function trigger.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="customargument_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customargument_yaml" style="color: inherit; text-decoration: inherit;">custom<wbr>Argument</a>
@@ -7814,8 +10002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User-defined parameters of SCF function trigger.</p>
-</dd><dt class="property-optional"
+    <dd>User-defined parameters of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_yaml" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -7823,8 +10010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether SCF function trigger is enable.</p>
-</dd><dt class="property-optional"
+    <dd>Whether SCF function trigger is enable.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_yaml" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -7832,8 +10018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Modify time of SCF function trigger.</p>
-</dd><dt class="property-optional"
+    <dd>Modify time of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -7841,8 +10026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be <code>-</code> or <code>_</code>. Available length is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="triggerdesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggerdesc_yaml" style="color: inherit; text-decoration: inherit;">trigger<wbr>Desc</a>
@@ -7850,8 +10034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>TriggerDesc of the SCF function trigger, parameter format of <code>timer</code> is linux cron expression; parameter of <code>cos</code> type is json string <code>{&quot;bucketUrl&quot;:&quot;&lt;name-appid&gt;.cos.&lt;region&gt;.myqcloud.com&quot;,&quot;event&quot;:&quot;cos:ObjectCreated:*&quot;,&quot;filter&quot;:{&quot;Prefix&quot;:&quot;&quot;,&quot;Suffix&quot;:&quot;&quot;}}</code>, where <code>bucketUrl</code> is cos bucket (optional), <code>event</code> is the cos event trigger, <code>Prefix</code> is the corresponding file prefix filter condition, <code>Suffix</code> is the suffix filter condition, if not need filter condition can not pass; <code>cmq</code> type does not pass this parameter; <code>ckafka</code> type parameter format is json string <code>{&quot;maxMsgNum&quot;:&quot;1&quot;,&quot;offset&quot;:&quot;latest&quot;}</code>; <code>apigw</code> type parameter format is json string <code>{&quot;api&quot;:{&quot;authRequired&quot;:&quot;FALSE&quot;,&quot;requestConfig&quot;:{&quot;method&quot;:&quot;ANY&quot;},&quot;isIntegratedResponse&quot;:&quot;FALSE&quot;},&quot;service&quot;:{&quot;serviceId&quot;:&quot;service-dqzh68sg&quot;},&quot;release&quot;:{&quot;environmentName&quot;:&quot;test&quot;}}</code>.</p>
-</dd><dt class="property-optional"
+    <dd>TriggerDesc of SCF function trigger.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7859,8 +10042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the SCF function trigger, support <code>cos</code>, <code>cmq</code>, <code>timer</code>, <code>ckafka</code>, <code>apigw</code>.</p>
-</dd></dl>
+    <dd>Type of SCF function trigger.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7870,12 +10052,15 @@ The following state arguments are supported:
 
 SCF function can be imported, e.g.
 
--> __NOTE:__ function id is `<function namespace>+<function name>`
+> **NOTE:** resource id is `<function namespace>+<function name>`
 
 ```sh
-$ pulumi import tencentcloud:Scf/function:Function test default+test
+$ pulumi import tencentcloud:Scf/function:Function example default+test
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -7887,7 +10072,6 @@ $ pulumi import tencentcloud:Scf/function:Function test default+test
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

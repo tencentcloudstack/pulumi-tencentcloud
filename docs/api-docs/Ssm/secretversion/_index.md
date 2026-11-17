@@ -2,9 +2,11 @@
 ---
 title: "SecretVersion"
 title_tag: "tencentcloud.Ssm.SecretVersion"
-meta_desc: "Documentation for the tencentcloud.Ssm.SecretVersion resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a SSM secret version. Note: A maximum of 10 versions can be supported under one credential. Only new versions can be added to."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -20,7 +22,12 @@ Provide a resource to create a SSM secret version.
 
 ### Text type credential information plaintext
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -40,6 +47,11 @@ const v1 = new tencentcloud.ssm.SecretVersion("v1", {
     secretString: "this is secret string",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -57,6 +69,50 @@ v1 = tencentcloud.ssm.SecretVersion("v1",
     version_id="v1",
     secret_string="this is secret string")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ssm"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		example, err := ssm.NewSecret(ctx, "example", &ssm.SecretArgs{
+			SecretName:           pulumi.String("tf-example"),
+			Description:          pulumi.String("desc."),
+			RecoveryWindowInDays: pulumi.Int(0),
+			IsEnabled:            pulumi.Bool(true),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = ssm.NewSecretVersion(ctx, "v1", &ssm.SecretVersionArgs{
+			SecretName:   example.SecretName,
+			VersionId:    pulumi.String("v1"),
+			SecretString: pulumi.String("this is secret string"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -86,40 +142,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		example, err := Ssm.NewSecret(ctx, "example", &Ssm.SecretArgs{
-			SecretName:           pulumi.String("tf-example"),
-			Description:          pulumi.String("desc."),
-			RecoveryWindowInDays: pulumi.Int(0),
-			IsEnabled:            pulumi.Bool(true),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Ssm.NewSecretVersion(ctx, "v1", &Ssm.SecretVersionArgs{
-			SecretName:   example.SecretName,
-			VersionId:    pulumi.String("v1"),
-			SecretString: pulumi.String("this is secret string"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -130,8 +157,8 @@ import com.pulumi.tencentcloud.Ssm.Secret;
 import com.pulumi.tencentcloud.Ssm.SecretArgs;
 import com.pulumi.tencentcloud.Ssm.SecretVersion;
 import com.pulumi.tencentcloud.Ssm.SecretVersionArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -143,7 +170,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new Secret("example", SecretArgs.builder()        
+        var example = new Secret("example", SecretArgs.builder()
             .secretName("tf-example")
             .description("desc.")
             .recoveryWindowInDays(0)
@@ -151,7 +178,7 @@ public class App {
             .tags(Map.of("createdBy", "terraform"))
             .build());
 
-        var v1 = new SecretVersion("v1", SecretVersionArgs.builder()        
+        var v1 = new SecretVersion("v1", SecretVersionArgs.builder()
             .secretName(example.secretName())
             .versionId("v1")
             .secretString("this is secret string")
@@ -160,6 +187,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
@@ -178,59 +210,88 @@ resources:
       versionId: v1
       secretString: this is secret string
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_ssm_secret" "example" {
+  secret_name             = "tf-example"
+  description             = "desc."
+  recovery_window_in_days = 0
+  is_enabled              = true
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+resource "tencentcloud_ssm_secretversion" "v1" {
+  secret_name   = tencentcloud_ssm_secret.example.secret_name
+  version_id    = "v1"
+  secret_string = "this is secret string"
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Binary credential information, encoded using base64
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const v2 = new tencentcloud.ssm.SecretVersion("v2", {
-    secretName: tencentcloud_ssm_secret.example.secret_name,
+    secretName: example.secretName,
     versionId: "v2",
     secretBinary: "MTIzMTIzMTIzMTIzMTIzQQ==",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 v2 = tencentcloud.ssm.SecretVersion("v2",
-    secret_name=tencentcloud_ssm_secret["example"]["secret_name"],
+    secret_name=example["secretName"],
     version_id="v2",
     secret_binary="MTIzMTIzMTIzMTIzMTIzQQ==")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var v2 = new Tencentcloud.Ssm.SecretVersion("v2", new()
-    {
-        SecretName = tencentcloud_ssm_secret.Example.Secret_name,
-        VersionId = "v2",
-        SecretBinary = "MTIzMTIzMTIzMTIzMTIzQQ==",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ssm"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ssm.NewSecretVersion(ctx, "v2", &Ssm.SecretVersionArgs{
-			SecretName:   pulumi.Any(tencentcloud_ssm_secret.Example.Secret_name),
+		_, err := ssm.NewSecretVersion(ctx, "v2", &ssm.SecretVersionArgs{
+			SecretName:   pulumi.Any(example.SecretName),
 			VersionId:    pulumi.String("v2"),
 			SecretBinary: pulumi.String("MTIzMTIzMTIzMTIzMTIzQQ=="),
 		})
@@ -241,6 +302,33 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var v2 = new Tencentcloud.Ssm.SecretVersion("v2", new()
+    {
+        SecretName = example.SecretName,
+        VersionId = "v2",
+        SecretBinary = "MTIzMTIzMTIzMTIzMTIzQQ==",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -249,8 +337,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ssm.SecretVersion;
 import com.pulumi.tencentcloud.Ssm.SecretVersionArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -262,8 +350,8 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var v2 = new SecretVersion("v2", SecretVersionArgs.builder()        
-            .secretName(tencentcloud_ssm_secret.example().secret_name())
+        var v2 = new SecretVersion("v2", SecretVersionArgs.builder()
+            .secretName(example.secretName())
             .versionId("v2")
             .secretBinary("MTIzMTIzMTIzMTIzMTIzQQ==")
             .build());
@@ -271,77 +359,134 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   v2:
     type: tencentcloud:Ssm:SecretVersion
     properties:
-      secretName: ${tencentcloud_ssm_secret.example.secret_name}
+      secretName: ${example.secretName}
       versionId: v2
       secretBinary: MTIzMTIzMTIzMTIzMTIzQQ==
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_ssm_secretversion" "v2" {
+  secret_name   = example.secretName
+  version_id    = "v2"
+  secret_binary = "MTIzMTIzMTIzMTIzMTIzQQ=="
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [PutSecretValue](https://www.tencentcloud.com/document/api/1078/38645)
+* Read:
+  - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+  - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+  - [ListSecretVersionIds](https://www.tencentcloud.com/document/api/1078/38647)
+* Update:
+  - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+  - [UpdateSecret](https://www.tencentcloud.com/document/api/1078/38642)
+* Delete:
+  - [DeleteSecretVersion](https://www.tencentcloud.com/document/api/1078/38654)
+  - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
 
 
 ## Create SecretVersion Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">SecretVersion</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SecretVersionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">SecretVersion</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SecretVersionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">SecretVersion</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                  <span class="nx">secret_binary</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">secret_string</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">version_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">SecretVersion</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                   <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SecretVersionArgs</a></span><span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">SecretVersion</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                  <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">version_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">secret_binary</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">secret_string</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSecretVersion</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SecretVersionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SecretVersion</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSecretVersion</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SecretVersionArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SecretVersion</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">SecretVersion</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SecretVersionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">SecretVersion</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SecretVersionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">SecretVersion</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SecretVersionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">SecretVersion</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SecretVersionArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ssm:SecretVersion</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ssm:SecretVersion</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_ssm_secret_version&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -362,7 +507,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -479,11 +624,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## SecretVersion Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The SecretVersion resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -499,8 +652,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Specifies the name of the credential to which the new version is to be added.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="versionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_csharp" style="color: inherit; text-decoration: inherit;">Version<wbr>Id</a>
@@ -508,8 +660,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters <code>-</code>, <code>_</code>, or <code>.</code>, starting with a letter or a number.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretbinary_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretbinary_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Binary</a>
@@ -517,8 +668,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-optional"
+    <dd>Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretstring_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretstring_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>String</a>
@@ -526,8 +676,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd></dl>
+    <dd>Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -541,8 +690,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Specifies the name of the credential to which the new version is to be added.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="versionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_go" style="color: inherit; text-decoration: inherit;">Version<wbr>Id</a>
@@ -550,8 +698,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters <code>-</code>, <code>_</code>, or <code>.</code>, starting with a letter or a number.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretbinary_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretbinary_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Binary</a>
@@ -559,8 +706,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-optional"
+    <dd>Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretstring_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretstring_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>String</a>
@@ -568,8 +714,45 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd></dl>
+    <dd>Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="secret_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_name_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the name of the credential to which the new version is to be added.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="version_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_id_hcl" style="color: inherit; text-decoration: inherit;">version_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters <code>-</code>, <code>_</code>, or <code>.</code>, starting with a letter or a number.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="secret_binary_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_binary_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>binary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="secret_string_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_string_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>string</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -583,8 +766,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Specifies the name of the credential to which the new version is to be added.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="versionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_java" style="color: inherit; text-decoration: inherit;">version<wbr>Id</a>
@@ -592,8 +774,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters <code>-</code>, <code>_</code>, or <code>.</code>, starting with a letter or a number.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretbinary_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretbinary_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Binary</a>
@@ -601,8 +782,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-optional"
+    <dd>Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretstring_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretstring_java" style="color: inherit; text-decoration: inherit;">secret<wbr>String</a>
@@ -610,8 +790,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd></dl>
+    <dd>Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -625,8 +804,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Specifies the name of the credential to which the new version is to be added.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="versionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_nodejs" style="color: inherit; text-decoration: inherit;">version<wbr>Id</a>
@@ -634,8 +812,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters <code>-</code>, <code>_</code>, or <code>.</code>, starting with a letter or a number.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretbinary_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretbinary_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Binary</a>
@@ -643,8 +820,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-optional"
+    <dd>Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretstring_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretstring_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>String</a>
@@ -652,8 +828,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd></dl>
+    <dd>Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -667,8 +842,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Specifies the name of the credential to which the new version is to be added.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="version_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_id_python" style="color: inherit; text-decoration: inherit;">version_<wbr>id</a>
@@ -676,8 +850,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters <code>-</code>, <code>_</code>, or <code>.</code>, starting with a letter or a number.</dd><dt class="property-optional"
             title="Optional">
         <span id="secret_binary_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_binary_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>binary</a>
@@ -685,8 +858,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-optional"
+    <dd>Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional"
             title="Optional">
         <span id="secret_string_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_string_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>string</a>
@@ -694,8 +866,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd></dl>
+    <dd>Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -709,8 +880,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Specifies the name of the credential to which the new version is to be added.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="versionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_yaml" style="color: inherit; text-decoration: inherit;">version<wbr>Id</a>
@@ -718,8 +888,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters <code>-</code>, <code>_</code>, or <code>.</code>, starting with a letter or a number.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretbinary_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretbinary_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Binary</a>
@@ -727,8 +896,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-optional"
+    <dd>Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretstring_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretstring_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>String</a>
@@ -736,8 +904,7 @@ The SecretVersion resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd></dl>
+    <dd>Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -758,8 +925,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -773,8 +939,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -788,8 +967,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -803,8 +981,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -818,8 +995,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -833,8 +1009,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -844,18 +1019,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing SecretVersion resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SecretVersionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">SecretVersion</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SecretVersionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">SecretVersion</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -863,104 +1038,143 @@ Get an existing SecretVersion resource's state with the given name, ID, and opti
         <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">secret_string</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">version_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> SecretVersion</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSecretVersion<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SecretVersionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SecretVersion</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSecretVersion<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SecretVersionState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SecretVersion</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">SecretVersion</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SecretVersionState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">SecretVersion</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SecretVersionState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">SecretVersion</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SecretVersionState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">SecretVersion</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SecretVersionState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingSecretVersion</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Ssm:SecretVersion</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_ssm_secret_version</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SecretVersionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SecretVersionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -968,28 +1182,31 @@ Get an existing SecretVersion resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SecretVersionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -997,28 +1214,31 @@ Get an existing SecretVersion resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SecretVersionState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1038,8 +1258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -1047,8 +1266,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the name of the credential to which the new version is to be added.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_secretstring_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretstring_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>String</a>
@@ -1056,8 +1274,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_versionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_versionid_csharp" style="color: inherit; text-decoration: inherit;">Version<wbr>Id</a>
@@ -1065,8 +1282,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd></dl>
+    <dd>Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters <code>-</code>, <code>_</code>, or <code>.</code>, starting with a letter or a number.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1080,8 +1296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -1089,8 +1304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the name of the credential to which the new version is to be added.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_secretstring_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretstring_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>String</a>
@@ -1098,8 +1312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_versionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_versionid_go" style="color: inherit; text-decoration: inherit;">Version<wbr>Id</a>
@@ -1107,8 +1320,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd></dl>
+    <dd>Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters <code>-</code>, <code>_</code>, or <code>.</code>, starting with a letter or a number.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_secret_binary_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_binary_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>binary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_secret_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_name_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the name of the credential to which the new version is to be added.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_secret_string_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_string_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>string</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_version_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_id_hcl" style="color: inherit; text-decoration: inherit;">version_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters <code>-</code>, <code>_</code>, or <code>.</code>, starting with a letter or a number.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1122,8 +1372,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -1131,8 +1380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the name of the credential to which the new version is to be added.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_secretstring_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretstring_java" style="color: inherit; text-decoration: inherit;">secret<wbr>String</a>
@@ -1140,8 +1388,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_versionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_versionid_java" style="color: inherit; text-decoration: inherit;">version<wbr>Id</a>
@@ -1149,8 +1396,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd></dl>
+    <dd>Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters <code>-</code>, <code>_</code>, or <code>.</code>, starting with a letter or a number.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1164,8 +1410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -1173,8 +1418,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the name of the credential to which the new version is to be added.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_secretstring_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretstring_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>String</a>
@@ -1182,8 +1426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_versionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_versionid_nodejs" style="color: inherit; text-decoration: inherit;">version<wbr>Id</a>
@@ -1191,8 +1434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd></dl>
+    <dd>Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters <code>-</code>, <code>_</code>, or <code>.</code>, starting with a letter or a number.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1206,8 +1448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secret_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_name_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
@@ -1215,8 +1456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the name of the credential to which the new version is to be added.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_secret_string_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_string_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>string</a>
@@ -1224,8 +1464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_version_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_id_python" style="color: inherit; text-decoration: inherit;">version_<wbr>id</a>
@@ -1233,8 +1472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd></dl>
+    <dd>Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters <code>-</code>, <code>_</code>, or <code>.</code>, starting with a letter or a number.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1248,8 +1486,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The base64-encoded binary secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -1257,8 +1494,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies the name of the credential to which the new version is to be added.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_secretstring_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretstring_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>String</a>
@@ -1266,8 +1502,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The string text of secret. secret_binary and secret_string must be set only one, and the maximum support is 4096 bytes. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_versionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_versionid_yaml" style="color: inherit; text-decoration: inherit;">version<wbr>Id</a>
@@ -1275,8 +1510,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of secret. The maximum length is 64 bytes. The version_id can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd></dl>
+    <dd>Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters <code>-</code>, <code>_</code>, or <code>.</code>, starting with a letter or a number.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1292,11 +1526,13 @@ The following state arguments are supported:
 
 
 SSM secret version can be imported using the secretName#versionId, e.g.
-
 ```sh
 $ pulumi import tencentcloud:Ssm/secretVersion:SecretVersion v1 test#v1
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1308,7 +1544,6 @@ $ pulumi import tencentcloud:Ssm/secretVersion:SecretVersion v1 test#v1
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getMachines"
 title_tag: "tencentcloud.Cls.getMachines"
-meta_desc: "Documentation for the tencentcloud.Cls.getMachines function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of cls machines"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,10 +18,14 @@ Use this data source to query detailed information of cls machines
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const group = new tencentcloud.cls.MachineGroup("group", {
@@ -36,10 +42,15 @@ const group = new tencentcloud.cls.MachineGroup("group", {
         ],
     },
 });
-const machines = tencentcloud.Cls.getMachinesOutput({
+const machines = tencentcloud.cls.getMachinesOutput({
     groupId: group.id,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
@@ -51,20 +62,63 @@ group = tencentcloud.cls.MachineGroup("group",
     auto_update=True,
     update_end_time="19:05:00",
     update_start_time="17:05:00",
-    machine_group_type=tencentcloud.cls.MachineGroupMachineGroupTypeArgs(
-        type="ip",
-        values=[
+    machine_group_type={
+        "type": "ip",
+        "values": [
             "192.168.1.1",
             "192.168.1.2",
         ],
-    ))
-machines = tencentcloud.Cls.get_machines_output(group_id=group.id)
+    })
+machines = tencentcloud.cls.get_machines_output(group_id=group.id)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		group, err := cls.NewMachineGroup(ctx, "group", &cls.MachineGroupArgs{
+			GroupName:       pulumi.String("tf-describe-mg-test"),
+			ServiceLogging:  pulumi.Bool(true),
+			AutoUpdate:      pulumi.Bool(true),
+			UpdateEndTime:   pulumi.String("19:05:00"),
+			UpdateStartTime: pulumi.String("17:05:00"),
+			MachineGroupType: &cls.MachineGroupMachineGroupTypeArgs{
+				Type: pulumi.String("ip"),
+				Values: pulumi.StringArray{
+					pulumi.String("192.168.1.1"),
+					pulumi.String("192.168.1.2"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_ = cls.GetMachinesOutput(ctx, cls.GetMachinesOutputArgs{
+			GroupId: group.ID().ToIDOutput().ToStringOutput(),
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -94,40 +148,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		group, err := Cls.NewMachineGroup(ctx, "group", &Cls.MachineGroupArgs{
-			GroupName:       pulumi.String("tf-describe-mg-test"),
-			ServiceLogging:  pulumi.Bool(true),
-			AutoUpdate:      pulumi.Bool(true),
-			UpdateEndTime:   pulumi.String("19:05:00"),
-			UpdateStartTime: pulumi.String("17:05:00"),
-			MachineGroupType: &cls.MachineGroupMachineGroupTypeArgs{
-				Type: pulumi.String("ip"),
-				Values: pulumi.StringArray{
-					pulumi.String("192.168.1.1"),
-					pulumi.String("192.168.1.2"),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_ = Cls.GetMachinesOutput(ctx, cls.GetMachinesOutputArgs{
-			GroupId: group.ID(),
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -139,8 +164,8 @@ import com.pulumi.tencentcloud.Cls.MachineGroupArgs;
 import com.pulumi.tencentcloud.Cls.inputs.MachineGroupMachineGroupTypeArgs;
 import com.pulumi.tencentcloud.Cls.ClsFunctions;
 import com.pulumi.tencentcloud.Cls.inputs.GetMachinesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -152,7 +177,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var group = new MachineGroup("group", MachineGroupArgs.builder()        
+        var group = new MachineGroup("group", MachineGroupArgs.builder()
             .groupName("tf-describe-mg-test")
             .serviceLogging(true)
             .autoUpdate(true)
@@ -173,6 +198,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   group:
@@ -191,12 +221,49 @@ resources:
 variables:
   machines:
     fn::invoke:
-      Function: tencentcloud:Cls:getMachines
-      Arguments:
+      function: tencentcloud:Cls:getMachines
+      arguments:
         groupId: ${group.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cls_getmachines" "machines" {
+  group_id = tencentcloud_cls_machinegroup.group.id
+}
+
+resource "tencentcloud_cls_machinegroup" "group" {
+  group_name        = "tf-describe-mg-test"
+  service_logging   = true
+  auto_update       = true
+  update_end_time   = "19:05:00"
+  update_start_time = "17:05:00"
+  machine_group_type = {
+    type   = "ip"
+    values = ["192.168.1.1", "192.168.1.2"]
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeMachines](https://www.tencentcloud.com/document/api/614/42817)
 
 
 
@@ -208,7 +275,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -216,9 +283,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getMachines<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMachinesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetMachinesResult</a></span>></span
+><span class="k">function </span>getMachines<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMachinesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetMachinesResult</a></span>></span
 ><span class="k">
-function </span>getMachinesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMachinesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetMachinesResult</a></span>></span
+function </span>getMachinesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetMachinesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetMachinesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -231,9 +298,9 @@ function </span>getMachinesOutput<span class="p">(</span><span class="nx">args</
                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetMachinesResult</span
 ><span class="k">
-def </span>get_machines_output<span class="p">(</span><span class="nx">group_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetMachinesResult]</span
+def </span>get_machines_output<span class="p">(</span><span class="nx">group_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetMachinesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -258,7 +325,8 @@ func </span>GetMachinesOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetMachines </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetMachinesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetMachinesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetMachinesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetMachinesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetMachinesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetMachinesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetMachinesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetMachinesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -267,7 +335,8 @@ func </span>GetMachinesOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetMachinesResult</a></span>> </span>getMachines<span class="p">(</span><span class="nx">GetMachinesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetMachinesResult</a></span>> </span>getMachines<span class="p">(</span><span class="nx">GetMachinesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetMachinesResult</a></span>> </span>getMachines<span class="p">(</span><span class="nx">GetMachinesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -279,6 +348,15 @@ func </span>GetMachinesOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cls/getMachines:getMachines
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cls_get_machines&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -297,8 +375,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group id.</p>
-</dd><dt class="property-optional"
+    <dd>Group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -306,8 +383,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -321,8 +397,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group id.</p>
-</dd><dt class="property-optional"
+    <dd>Group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -330,8 +405,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -345,8 +441,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group id.</p>
-</dd><dt class="property-optional"
+    <dd>Group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -354,8 +449,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -369,8 +463,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group id.</p>
-</dd><dt class="property-optional"
+    <dd>Group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -378,8 +471,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -393,8 +485,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Group id.</p>
-</dd><dt class="property-optional"
+    <dd>Group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -402,8 +493,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -417,8 +507,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group id.</p>
-</dd><dt class="property-optional"
+    <dd>Group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -426,8 +515,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -450,8 +538,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmachinesmachine">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Outputs.<wbr>Get<wbr>Machines<wbr>Machine&gt;</a></span>
     </dt>
-    <dd><p>Info of Machines.</p>
-</dd><dt class="property-"
+    <dd>Info of Machines.</dd><dt class="property-"
             title="">
         <span id="groupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -467,8 +554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -498,8 +584,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="machines_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machines_go" style="color: inherit; text-decoration: inherit;">Machines</a>
@@ -507,11 +592,48 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmachinesmachine">[]Get<wbr>Machines<wbr>Machine</a></span>
     </dt>
-    <dd><p>Info of Machines.</p>
-</dd><dt class="property-"
+    <dd>Info of Machines.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="machines_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machines_hcl" style="color: inherit; text-decoration: inherit;">machines</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getmachinesmachine">list(object)</a></span>
+    </dt>
+    <dd>Info of Machines.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -538,8 +660,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="machines_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machines_java" style="color: inherit; text-decoration: inherit;">machines</a>
@@ -547,8 +668,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmachinesmachine">List&lt;Get<wbr>Machines<wbr>Machine&gt;</a></span>
     </dt>
-    <dd><p>Info of Machines.</p>
-</dd><dt class="property-"
+    <dd>Info of Machines.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -578,8 +698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="machines_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machines_nodejs" style="color: inherit; text-decoration: inherit;">machines</a>
@@ -587,8 +706,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmachinesmachine">Get<wbr>Machines<wbr>Machine[]</a></span>
     </dt>
-    <dd><p>Info of Machines.</p>
-</dd><dt class="property-"
+    <dd>Info of Machines.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -618,17 +736,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="machines_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machines_python" style="color: inherit; text-decoration: inherit;">machines</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getmachinesmachine">Get<wbr>Machines<wbr>Machine]</a></span>
+        <span class="property-type"><a href="#getmachinesmachine">Sequence[Get<wbr>Machines<wbr>Machine]</a></span>
     </dt>
-    <dd><p>Info of Machines.</p>
-</dd><dt class="property-"
+    <dd>Info of Machines.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -658,8 +774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="machines_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machines_yaml" style="color: inherit; text-decoration: inherit;">machines</a>
@@ -667,8 +782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getmachinesmachine">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Info of Machines.</p>
-</dd><dt class="property-"
+    <dd>Info of Machines.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -700,8 +814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>if open auto update flag.</p>
-</dd><dt class="property-required"
+    <dd>if open auto update flag.</dd><dt class="property-required"
             title="Required">
         <span id="errcode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errcode_csharp" style="color: inherit; text-decoration: inherit;">Err<wbr>Code</a>
@@ -709,8 +822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>code of update operation.</p>
-</dd><dt class="property-required"
+    <dd>code of update operation.</dd><dt class="property-required"
             title="Required">
         <span id="errmsg_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errmsg_csharp" style="color: inherit; text-decoration: inherit;">Err<wbr>Msg</a>
@@ -718,8 +830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>msg of update operation.</p>
-</dd><dt class="property-required"
+    <dd>msg of update operation.</dd><dt class="property-required"
             title="Required">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -727,8 +838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ip of machine.</p>
-</dd><dt class="property-required"
+    <dd>ip of machine.</dd><dt class="property-required"
             title="Required">
         <span id="offlinetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offlinetime_csharp" style="color: inherit; text-decoration: inherit;">Offline<wbr>Time</a>
@@ -736,8 +846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>offline time of machine.</p>
-</dd><dt class="property-required"
+    <dd>offline time of machine.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -745,8 +854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>status of machine.</p>
-</dd><dt class="property-required"
+    <dd>status of machine.</dd><dt class="property-required"
             title="Required">
         <span id="updatestatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatestatus_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Status</a>
@@ -754,8 +862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>machine update status.</p>
-</dd><dt class="property-required"
+    <dd>machine update status.</dd><dt class="property-required"
             title="Required">
         <span id="version_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_csharp" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -763,8 +870,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>current machine version.</p>
-</dd></dl>
+    <dd>current machine version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -778,8 +884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>if open auto update flag.</p>
-</dd><dt class="property-required"
+    <dd>if open auto update flag.</dd><dt class="property-required"
             title="Required">
         <span id="errcode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errcode_go" style="color: inherit; text-decoration: inherit;">Err<wbr>Code</a>
@@ -787,8 +892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>code of update operation.</p>
-</dd><dt class="property-required"
+    <dd>code of update operation.</dd><dt class="property-required"
             title="Required">
         <span id="errmsg_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errmsg_go" style="color: inherit; text-decoration: inherit;">Err<wbr>Msg</a>
@@ -796,8 +900,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>msg of update operation.</p>
-</dd><dt class="property-required"
+    <dd>msg of update operation.</dd><dt class="property-required"
             title="Required">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -805,8 +908,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ip of machine.</p>
-</dd><dt class="property-required"
+    <dd>ip of machine.</dd><dt class="property-required"
             title="Required">
         <span id="offlinetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offlinetime_go" style="color: inherit; text-decoration: inherit;">Offline<wbr>Time</a>
@@ -814,8 +916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>offline time of machine.</p>
-</dd><dt class="property-required"
+    <dd>offline time of machine.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -823,8 +924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>status of machine.</p>
-</dd><dt class="property-required"
+    <dd>status of machine.</dd><dt class="property-required"
             title="Required">
         <span id="updatestatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatestatus_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Status</a>
@@ -832,8 +932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>machine update status.</p>
-</dd><dt class="property-required"
+    <dd>machine update status.</dd><dt class="property-required"
             title="Required">
         <span id="version_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_go" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -841,8 +940,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>current machine version.</p>
-</dd></dl>
+    <dd>current machine version.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="auto_update_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_update_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>update</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>if open auto update flag.</dd><dt class="property-required"
+            title="Required">
+        <span id="err_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#err_code_hcl" style="color: inherit; text-decoration: inherit;">err_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>code of update operation.</dd><dt class="property-required"
+            title="Required">
+        <span id="err_msg_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#err_msg_hcl" style="color: inherit; text-decoration: inherit;">err_<wbr>msg</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>msg of update operation.</dd><dt class="property-required"
+            title="Required">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ip of machine.</dd><dt class="property-required"
+            title="Required">
+        <span id="offline_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offline_time_hcl" style="color: inherit; text-decoration: inherit;">offline_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>offline time of machine.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>status of machine.</dd><dt class="property-required"
+            title="Required">
+        <span id="update_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_status_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>machine update status.</dd><dt class="property-required"
+            title="Required">
+        <span id="version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_hcl" style="color: inherit; text-decoration: inherit;">version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>current machine version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -856,8 +1024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>if open auto update flag.</p>
-</dd><dt class="property-required"
+    <dd>if open auto update flag.</dd><dt class="property-required"
             title="Required">
         <span id="errcode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errcode_java" style="color: inherit; text-decoration: inherit;">err<wbr>Code</a>
@@ -865,8 +1032,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>code of update operation.</p>
-</dd><dt class="property-required"
+    <dd>code of update operation.</dd><dt class="property-required"
             title="Required">
         <span id="errmsg_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errmsg_java" style="color: inherit; text-decoration: inherit;">err<wbr>Msg</a>
@@ -874,8 +1040,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>msg of update operation.</p>
-</dd><dt class="property-required"
+    <dd>msg of update operation.</dd><dt class="property-required"
             title="Required">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -883,8 +1048,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ip of machine.</p>
-</dd><dt class="property-required"
+    <dd>ip of machine.</dd><dt class="property-required"
             title="Required">
         <span id="offlinetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offlinetime_java" style="color: inherit; text-decoration: inherit;">offline<wbr>Time</a>
@@ -892,8 +1056,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>offline time of machine.</p>
-</dd><dt class="property-required"
+    <dd>offline time of machine.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -901,8 +1064,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>status of machine.</p>
-</dd><dt class="property-required"
+    <dd>status of machine.</dd><dt class="property-required"
             title="Required">
         <span id="updatestatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatestatus_java" style="color: inherit; text-decoration: inherit;">update<wbr>Status</a>
@@ -910,8 +1072,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>machine update status.</p>
-</dd><dt class="property-required"
+    <dd>machine update status.</dd><dt class="property-required"
             title="Required">
         <span id="version_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_java" style="color: inherit; text-decoration: inherit;">version</a>
@@ -919,8 +1080,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>current machine version.</p>
-</dd></dl>
+    <dd>current machine version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -934,8 +1094,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>if open auto update flag.</p>
-</dd><dt class="property-required"
+    <dd>if open auto update flag.</dd><dt class="property-required"
             title="Required">
         <span id="errcode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errcode_nodejs" style="color: inherit; text-decoration: inherit;">err<wbr>Code</a>
@@ -943,8 +1102,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>code of update operation.</p>
-</dd><dt class="property-required"
+    <dd>code of update operation.</dd><dt class="property-required"
             title="Required">
         <span id="errmsg_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errmsg_nodejs" style="color: inherit; text-decoration: inherit;">err<wbr>Msg</a>
@@ -952,8 +1110,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>msg of update operation.</p>
-</dd><dt class="property-required"
+    <dd>msg of update operation.</dd><dt class="property-required"
             title="Required">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -961,8 +1118,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ip of machine.</p>
-</dd><dt class="property-required"
+    <dd>ip of machine.</dd><dt class="property-required"
             title="Required">
         <span id="offlinetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offlinetime_nodejs" style="color: inherit; text-decoration: inherit;">offline<wbr>Time</a>
@@ -970,8 +1126,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>offline time of machine.</p>
-</dd><dt class="property-required"
+    <dd>offline time of machine.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -979,8 +1134,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>status of machine.</p>
-</dd><dt class="property-required"
+    <dd>status of machine.</dd><dt class="property-required"
             title="Required">
         <span id="updatestatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatestatus_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Status</a>
@@ -988,8 +1142,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>machine update status.</p>
-</dd><dt class="property-required"
+    <dd>machine update status.</dd><dt class="property-required"
             title="Required">
         <span id="version_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_nodejs" style="color: inherit; text-decoration: inherit;">version</a>
@@ -997,8 +1150,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>current machine version.</p>
-</dd></dl>
+    <dd>current machine version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1012,8 +1164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>if open auto update flag.</p>
-</dd><dt class="property-required"
+    <dd>if open auto update flag.</dd><dt class="property-required"
             title="Required">
         <span id="err_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#err_code_python" style="color: inherit; text-decoration: inherit;">err_<wbr>code</a>
@@ -1021,8 +1172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>code of update operation.</p>
-</dd><dt class="property-required"
+    <dd>code of update operation.</dd><dt class="property-required"
             title="Required">
         <span id="err_msg_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#err_msg_python" style="color: inherit; text-decoration: inherit;">err_<wbr>msg</a>
@@ -1030,8 +1180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>msg of update operation.</p>
-</dd><dt class="property-required"
+    <dd>msg of update operation.</dd><dt class="property-required"
             title="Required">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1039,8 +1188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ip of machine.</p>
-</dd><dt class="property-required"
+    <dd>ip of machine.</dd><dt class="property-required"
             title="Required">
         <span id="offline_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offline_time_python" style="color: inherit; text-decoration: inherit;">offline_<wbr>time</a>
@@ -1048,8 +1196,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>offline time of machine.</p>
-</dd><dt class="property-required"
+    <dd>offline time of machine.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1057,8 +1204,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>status of machine.</p>
-</dd><dt class="property-required"
+    <dd>status of machine.</dd><dt class="property-required"
             title="Required">
         <span id="update_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_status_python" style="color: inherit; text-decoration: inherit;">update_<wbr>status</a>
@@ -1066,8 +1212,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>machine update status.</p>
-</dd><dt class="property-required"
+    <dd>machine update status.</dd><dt class="property-required"
             title="Required">
         <span id="version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_python" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1075,8 +1220,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>current machine version.</p>
-</dd></dl>
+    <dd>current machine version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1090,8 +1234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>if open auto update flag.</p>
-</dd><dt class="property-required"
+    <dd>if open auto update flag.</dd><dt class="property-required"
             title="Required">
         <span id="errcode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errcode_yaml" style="color: inherit; text-decoration: inherit;">err<wbr>Code</a>
@@ -1099,8 +1242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>code of update operation.</p>
-</dd><dt class="property-required"
+    <dd>code of update operation.</dd><dt class="property-required"
             title="Required">
         <span id="errmsg_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errmsg_yaml" style="color: inherit; text-decoration: inherit;">err<wbr>Msg</a>
@@ -1108,8 +1250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>msg of update operation.</p>
-</dd><dt class="property-required"
+    <dd>msg of update operation.</dd><dt class="property-required"
             title="Required">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1117,8 +1258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ip of machine.</p>
-</dd><dt class="property-required"
+    <dd>ip of machine.</dd><dt class="property-required"
             title="Required">
         <span id="offlinetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offlinetime_yaml" style="color: inherit; text-decoration: inherit;">offline<wbr>Time</a>
@@ -1126,8 +1266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>offline time of machine.</p>
-</dd><dt class="property-required"
+    <dd>offline time of machine.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1135,8 +1274,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>status of machine.</p>
-</dd><dt class="property-required"
+    <dd>status of machine.</dd><dt class="property-required"
             title="Required">
         <span id="updatestatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatestatus_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Status</a>
@@ -1144,8 +1282,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>machine update status.</p>
-</dd><dt class="property-required"
+    <dd>machine update status.</dd><dt class="property-required"
             title="Required">
         <span id="version_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_yaml" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1153,8 +1290,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>current machine version.</p>
-</dd></dl>
+    <dd>current machine version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1169,7 +1305,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "Zone"
 title_tag: "tencentcloud.PrivateDns.Zone"
-meta_desc: "Documentation for the tencentcloud.PrivateDns.Zone resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a Private Dns Zone. NOTE: If you want to unbind all VPCs bound to the current private dns zone, simply clearing the."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,16 +16,26 @@ no_edit_this_page: true
 
 Provide a resource to create a Private Dns Zone.
 
+> **NOTE:** If you want to unbind all VPCs bound to the current private dns zone, simply clearing the declaration will not take effect; you need to set the `region` and `uniqVpcId` in `vpcSet` to an empty string.
+
 ## Example Usage
 
 ### Create a basic Private Dns Zone
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-example",
+    cidrBlock: "10.0.0.0/16",
+});
 const example = new tencentcloud.privatedns.Zone("example", {
     domain: "domain.com",
     remark: "remark.",
@@ -34,28 +46,85 @@ const example = new tencentcloud.privatedns.Zone("example", {
     dnsForwardStatus: "DISABLED",
     cnameSpeedupStatus: "ENABLED",
     tags: {
-        createdBy: "terraform",
+        createdBy: "Terraform",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
-example = tencentcloud.private_dns.Zone("example",
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-example",
+    cidr_block="10.0.0.0/16")
+example = tencentcloud.privatedns.Zone("example",
     domain="domain.com",
     remark="remark.",
-    vpc_sets=[tencentcloud.private_dns.ZoneVpcSetArgs(
-        region="ap-guangzhou",
-        uniq_vpc_id=vpc.id,
-    )],
+    vpc_sets=[{
+        "region": "ap-guangzhou",
+        "uniq_vpc_id": vpc.id,
+    }],
     dns_forward_status="DISABLED",
     cname_speedup_status="ENABLED",
     tags={
-        "createdBy": "terraform",
+        "createdBy": "Terraform",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/privatedns"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-example"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = privatedns.NewZone(ctx, "example", &privatedns.ZoneArgs{
+			Domain: pulumi.String("domain.com"),
+			Remark: pulumi.String("remark."),
+			VpcSets: privatedns.ZoneVpcSetArray{
+				&privatedns.ZoneVpcSetArgs{
+					Region:    pulumi.String("ap-guangzhou"),
+					UniqVpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
+				},
+			},
+			DnsForwardStatus:   pulumi.String("DISABLED"),
+			CnameSpeedupStatus: pulumi.String("ENABLED"),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +135,7 @@ return await Deployment.RunAsync(() =>
 {
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc-example",
         CidrBlock = "10.0.0.0/16",
     });
 
@@ -85,51 +155,17 @@ return await Deployment.RunAsync(() =>
         CnameSpeedupStatus = "ENABLED",
         Tags = 
         {
-            { "createdBy", "terraform" },
+            { "createdBy", "Terraform" },
         },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = PrivateDns.NewZone(ctx, "example", &PrivateDns.ZoneArgs{
-			Domain: pulumi.String("domain.com"),
-			Remark: pulumi.String("remark."),
-			VpcSets: privatedns.ZoneVpcSetArray{
-				&privatedns.ZoneVpcSetArgs{
-					Region:    pulumi.String("ap-guangzhou"),
-					UniqVpcId: vpc.ID(),
-				},
-			},
-			DnsForwardStatus:   pulumi.String("DISABLED"),
-			CnameSpeedupStatus: pulumi.String("ENABLED"),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -141,8 +177,8 @@ import com.pulumi.tencentcloud.Vpc.InstanceArgs;
 import com.pulumi.tencentcloud.PrivateDns.Zone;
 import com.pulumi.tencentcloud.PrivateDns.ZoneArgs;
 import com.pulumi.tencentcloud.PrivateDns.inputs.ZoneVpcSetArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -154,11 +190,12 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new Instance("vpc", InstanceArgs.builder()
+            .name("vpc-example")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var example = new Zone("example", ZoneArgs.builder()        
+        var example = new Zone("example", ZoneArgs.builder()
             .domain("domain.com")
             .remark("remark.")
             .vpcSets(ZoneVpcSetArgs.builder()
@@ -167,17 +204,23 @@ public class App {
                 .build())
             .dnsForwardStatus("DISABLED")
             .cnameSpeedupStatus("ENABLED")
-            .tags(Map.of("createdBy", "terraform"))
+            .tags(Map.of("createdBy", "Terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-example
       cidrBlock: 10.0.0.0/16
   example:
     type: tencentcloud:PrivateDns:Zone
@@ -190,117 +233,139 @@ resources:
       dnsForwardStatus: DISABLED
       cnameSpeedupStatus: ENABLED
       tags:
-        createdBy: terraform
+        createdBy: Terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-example"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_privatedns_zone" "example" {
+  domain = "domain.com"
+  remark = "remark."
+  vpc_sets {
+    region      = "ap-guangzhou"
+    uniq_vpc_id = tencentcloud_vpc_instance.vpc.id
+  }
+  dns_forward_status   = "DISABLED"
+  cname_speedup_status = "ENABLED"
+  tags = {
+    "createdBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Create a Private Dns Zone domain and bind associated accounts'VPC
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-example",
+    cidrBlock: "10.0.0.0/16",
+});
 const example = new tencentcloud.privatedns.Zone("example", {
     domain: "domain.com",
     remark: "remark.",
     vpcSets: [{
         region: "ap-guangzhou",
-        uniqVpcId: tencentcloud_vpc.vpc.id,
+        uniqVpcId: vpc.id,
     }],
     accountVpcSets: [{
         uin: "123456789",
         uniqVpcId: "vpc-adsebmya",
         region: "ap-guangzhou",
-        vpcName: "vpc-name",
     }],
     dnsForwardStatus: "DISABLED",
     cnameSpeedupStatus: "ENABLED",
     tags: {
-        createdBy: "terraform",
+        createdBy: "Terraform",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-example = tencentcloud.private_dns.Zone("example",
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-example",
+    cidr_block="10.0.0.0/16")
+example = tencentcloud.privatedns.Zone("example",
     domain="domain.com",
     remark="remark.",
-    vpc_sets=[tencentcloud.private_dns.ZoneVpcSetArgs(
-        region="ap-guangzhou",
-        uniq_vpc_id=tencentcloud_vpc["vpc"]["id"],
-    )],
-    account_vpc_sets=[tencentcloud.private_dns.ZoneAccountVpcSetArgs(
-        uin="123456789",
-        uniq_vpc_id="vpc-adsebmya",
-        region="ap-guangzhou",
-        vpc_name="vpc-name",
-    )],
+    vpc_sets=[{
+        "region": "ap-guangzhou",
+        "uniq_vpc_id": vpc.id,
+    }],
+    account_vpc_sets=[{
+        "uin": "123456789",
+        "uniq_vpc_id": "vpc-adsebmya",
+        "region": "ap-guangzhou",
+    }],
     dns_forward_status="DISABLED",
     cname_speedup_status="ENABLED",
     tags={
-        "createdBy": "terraform",
+        "createdBy": "Terraform",
     })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var example = new Tencentcloud.PrivateDns.Zone("example", new()
-    {
-        Domain = "domain.com",
-        Remark = "remark.",
-        VpcSets = new[]
-        {
-            new Tencentcloud.PrivateDns.Inputs.ZoneVpcSetArgs
-            {
-                Region = "ap-guangzhou",
-                UniqVpcId = tencentcloud_vpc.Vpc.Id,
-            },
-        },
-        AccountVpcSets = new[]
-        {
-            new Tencentcloud.PrivateDns.Inputs.ZoneAccountVpcSetArgs
-            {
-                Uin = "123456789",
-                UniqVpcId = "vpc-adsebmya",
-                Region = "ap-guangzhou",
-                VpcName = "vpc-name",
-            },
-        },
-        DnsForwardStatus = "DISABLED",
-        CnameSpeedupStatus = "ENABLED",
-        Tags = 
-        {
-            { "createdBy", "terraform" },
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/privatedns"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := PrivateDns.NewZone(ctx, "example", &PrivateDns.ZoneArgs{
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-example"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = privatedns.NewZone(ctx, "example", &privatedns.ZoneArgs{
 			Domain: pulumi.String("domain.com"),
 			Remark: pulumi.String("remark."),
 			VpcSets: privatedns.ZoneVpcSetArray{
 				&privatedns.ZoneVpcSetArgs{
 					Region:    pulumi.String("ap-guangzhou"),
-					UniqVpcId: pulumi.Any(tencentcloud_vpc.Vpc.Id),
+					UniqVpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
 				},
 			},
 			AccountVpcSets: privatedns.ZoneAccountVpcSetArray{
@@ -308,13 +373,12 @@ func main() {
 					Uin:       pulumi.String("123456789"),
 					UniqVpcId: pulumi.String("vpc-adsebmya"),
 					Region:    pulumi.String("ap-guangzhou"),
-					VpcName:   pulumi.String("vpc-name"),
 				},
 			},
 			DnsForwardStatus:   pulumi.String("DISABLED"),
 			CnameSpeedupStatus: pulumi.String("ENABLED"),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("Terraform"),
 			},
 		})
 		if err != nil {
@@ -324,18 +388,75 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        Name = "vpc-example",
+        CidrBlock = "10.0.0.0/16",
+    });
+
+    var example = new Tencentcloud.PrivateDns.Zone("example", new()
+    {
+        Domain = "domain.com",
+        Remark = "remark.",
+        VpcSets = new[]
+        {
+            new Tencentcloud.PrivateDns.Inputs.ZoneVpcSetArgs
+            {
+                Region = "ap-guangzhou",
+                UniqVpcId = vpc.Id,
+            },
+        },
+        AccountVpcSets = new[]
+        {
+            new Tencentcloud.PrivateDns.Inputs.ZoneAccountVpcSetArgs
+            {
+                Uin = "123456789",
+                UniqVpcId = "vpc-adsebmya",
+                Region = "ap-guangzhou",
+            },
+        },
+        DnsForwardStatus = "DISABLED",
+        CnameSpeedupStatus = "ENABLED",
+        Tags = 
+        {
+            { "createdBy", "Terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Vpc.Instance;
+import com.pulumi.tencentcloud.Vpc.InstanceArgs;
 import com.pulumi.tencentcloud.PrivateDns.Zone;
 import com.pulumi.tencentcloud.PrivateDns.ZoneArgs;
 import com.pulumi.tencentcloud.PrivateDns.inputs.ZoneVpcSetArgs;
 import com.pulumi.tencentcloud.PrivateDns.inputs.ZoneAccountVpcSetArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -347,29 +468,43 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new Zone("example", ZoneArgs.builder()        
+        var vpc = new Instance("vpc", InstanceArgs.builder()
+            .name("vpc-example")
+            .cidrBlock("10.0.0.0/16")
+            .build());
+
+        var example = new Zone("example", ZoneArgs.builder()
             .domain("domain.com")
             .remark("remark.")
             .vpcSets(ZoneVpcSetArgs.builder()
                 .region("ap-guangzhou")
-                .uniqVpcId(tencentcloud_vpc.vpc().id())
+                .uniqVpcId(vpc.id())
                 .build())
             .accountVpcSets(ZoneAccountVpcSetArgs.builder()
                 .uin("123456789")
                 .uniqVpcId("vpc-adsebmya")
                 .region("ap-guangzhou")
-                .vpcName("vpc-name")
                 .build())
             .dnsForwardStatus("DISABLED")
             .cnameSpeedupStatus("ENABLED")
-            .tags(Map.of("createdBy", "terraform"))
+            .tags(Map.of("createdBy", "Terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      name: vpc-example
+      cidrBlock: 10.0.0.0/16
   example:
     type: tencentcloud:PrivateDns:Zone
     properties:
@@ -377,83 +512,155 @@ resources:
       remark: remark.
       vpcSets:
         - region: ap-guangzhou
-          uniqVpcId: ${tencentcloud_vpc.vpc.id}
+          uniqVpcId: ${vpc.id}
       accountVpcSets:
         - uin: '123456789'
           uniqVpcId: vpc-adsebmya
           region: ap-guangzhou
-          vpcName: vpc-name
       dnsForwardStatus: DISABLED
       cnameSpeedupStatus: ENABLED
       tags:
-        createdBy: terraform
+        createdBy: Terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-example"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_privatedns_zone" "example" {
+  domain = "domain.com"
+  remark = "remark."
+  vpc_sets {
+    region      = "ap-guangzhou"
+    uniq_vpc_id = tencentcloud_vpc_instance.vpc.id
+  }
+  account_vpc_sets {
+    uin         = "123456789"
+    uniq_vpc_id = "vpc-adsebmya"
+    region      = "ap-guangzhou"
+  }
+  dns_forward_status   = "DISABLED"
+  cname_speedup_status = "ENABLED"
+  tags = {
+    "createdBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreatePrivateZone](https://www.tencentcloud.com/document/api/1097/42123)
+  - [DescribePrivateZone](https://www.tencentcloud.com/document/api/1097/42117)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribePrivateZone](https://www.tencentcloud.com/document/api/1097/42117)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [DescribePrivateZone](https://www.tencentcloud.com/document/api/1097/42117)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [ModifyPrivateZone](https://www.tencentcloud.com/document/api/1097/42112)
+  - [ModifyPrivateZoneVpc](https://www.tencentcloud.com/document/api/1097/42110)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Delete: [DeletePrivateZone](https://www.tencentcloud.com/document/api/1097/42121)
 
 
 ## Create Zone Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Zone</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ZoneArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Zone</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ZoneArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Zone</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-         <span class="nx">account_vpc_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_privatedns.ZoneAccountVpcSetArgs]]</span> = None<span class="p">,</span>
-         <span class="nx">cname_speedup_status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">dns_forward_status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">tag_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_privatedns.ZoneTagSetArgs]]</span> = None<span class="p">,</span>
-         <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-         <span class="nx">vpc_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_privatedns.ZoneVpcSetArgs]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Zone</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ZoneArgs</a></span><span class="p">,</span>
-         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Zone</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+         <span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">account_vpc_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[ZoneAccountVpcSetArgs]]</span> = None<span class="p">,</span>
+         <span class="nx">cname_speedup_status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">dns_forward_status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">tag_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[ZoneTagSetArgs]]</span> = None<span class="p">,</span>
+         <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+         <span class="nx">vpc_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[ZoneVpcSetArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewZone</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ZoneArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Zone</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewZone</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ZoneArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Zone</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Zone</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ZoneArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Zone</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ZoneArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Zone</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ZoneArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Zone</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ZoneArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:PrivateDns:Zone</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:PrivateDns:Zone</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_private_dns_zone&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -474,7 +681,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -591,11 +798,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Zone Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -611,17 +826,15 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name, which must be in the format of standard TLD.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name, which must be in the format of standard TLD.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountvpcsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountvpcsets_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Vpc<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zoneaccountvpcset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Private<wbr>Dns.<wbr>Inputs.<wbr>Zone<wbr>Account<wbr>Vpc<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#zoneaccountvpcset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Private<wbr>Dns.<wbr>Inputs.<wbr>Zone<wbr>Account<wbr>Vpc<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of authorized accounts' VPCs to associate with the private domain.</p>
-</dd><dt class="property-optional"
+    <dd>List of authorized accounts' VPCs to associate with the private domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="cnamespeedupstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnamespeedupstatus_csharp" style="color: inherit; text-decoration: inherit;">Cname<wbr>Speedup<wbr>Status</a>
@@ -629,8 +842,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</p>
-</dd><dt class="property-optional"
+    <dd>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="dnsforwardstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsforwardstatus_csharp" style="color: inherit; text-decoration: inherit;">Dns<wbr>Forward<wbr>Status</a>
@@ -638,8 +850,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -647,36 +858,31 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Remarks.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="tagsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagsets_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zonetagset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Private<wbr>Dns.<wbr>Inputs.<wbr>Zone<wbr>Tag<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#zonetagset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Private<wbr>Dns.<wbr>Inputs.<wbr>Zone<wbr>Tag<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.<p class="property-message">Deprecated: It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the private dns zone.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the private dns zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcsets_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zonevpcset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Private<wbr>Dns.<wbr>Inputs.<wbr>Zone<wbr>Vpc<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#zonevpcset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Private<wbr>Dns.<wbr>Inputs.<wbr>Zone<wbr>Vpc<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Associates the private domain to a VPC when it is created.</p>
-</dd></dl>
+    <dd>Associates the private domain to a VPC when it is created.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -690,8 +896,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name, which must be in the format of standard TLD.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name, which must be in the format of standard TLD.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountvpcsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountvpcsets_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Vpc<wbr>Sets</a>
@@ -699,8 +904,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zoneaccountvpcset">[]Zone<wbr>Account<wbr>Vpc<wbr>Set<wbr>Args</a></span>
     </dt>
-    <dd><p>List of authorized accounts' VPCs to associate with the private domain.</p>
-</dd><dt class="property-optional"
+    <dd>List of authorized accounts' VPCs to associate with the private domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="cnamespeedupstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnamespeedupstatus_go" style="color: inherit; text-decoration: inherit;">Cname<wbr>Speedup<wbr>Status</a>
@@ -708,8 +912,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</p>
-</dd><dt class="property-optional"
+    <dd>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="dnsforwardstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsforwardstatus_go" style="color: inherit; text-decoration: inherit;">Dns<wbr>Forward<wbr>Status</a>
@@ -717,8 +920,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -726,8 +928,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Remarks.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="tagsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagsets_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Sets</a>
@@ -735,18 +936,15 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zonetagset">[]Zone<wbr>Tag<wbr>Set<wbr>Args</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.<p class="property-message">Deprecated: It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the private dns zone.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the private dns zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcsets_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Sets</a>
@@ -754,8 +952,77 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zonevpcset">[]Zone<wbr>Vpc<wbr>Set<wbr>Args</a></span>
     </dt>
-    <dd><p>Associates the private domain to a VPC when it is created.</p>
-</dd></dl>
+    <dd>Associates the private domain to a VPC when it is created.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name, which must be in the format of standard TLD.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="account_vpc_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_vpc_sets_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>vpc_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneaccountvpcset">list(object)</a></span>
+    </dt>
+    <dd>List of authorized accounts' VPCs to associate with the private domain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cname_speedup_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cname_speedup_status_hcl" style="color: inherit; text-decoration: inherit;">cname_<wbr>speedup_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dns_forward_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dns_forward_status_hcl" style="color: inherit; text-decoration: inherit;">dns_<wbr>forward_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remarks.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="tag_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_sets_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zonetagset">list(object)</a></span>
+    </dt>
+    <dd>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.<p class="property-message">Deprecated: It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the private dns zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_sets_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zonevpcset">list(object)</a></span>
+    </dt>
+    <dd>Associates the private domain to a VPC when it is created.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -769,17 +1036,15 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name, which must be in the format of standard TLD.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name, which must be in the format of standard TLD.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountvpcsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountvpcsets_java" style="color: inherit; text-decoration: inherit;">account<wbr>Vpc<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zoneaccountvpcset">List&lt;Zone<wbr>Account<wbr>Vpc<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#zoneaccountvpcset">List&lt;Zone<wbr>Account<wbr>Vpc<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of authorized accounts' VPCs to associate with the private domain.</p>
-</dd><dt class="property-optional"
+    <dd>List of authorized accounts' VPCs to associate with the private domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="cnamespeedupstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnamespeedupstatus_java" style="color: inherit; text-decoration: inherit;">cname<wbr>Speedup<wbr>Status</a>
@@ -787,8 +1052,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</p>
-</dd><dt class="property-optional"
+    <dd>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="dnsforwardstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsforwardstatus_java" style="color: inherit; text-decoration: inherit;">dns<wbr>Forward<wbr>Status</a>
@@ -796,8 +1060,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -805,36 +1068,31 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Remarks.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="tagsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagsets_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zonetagset">List&lt;Zone<wbr>Tag<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#zonetagset">List&lt;Zone<wbr>Tag<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.<p class="property-message">Deprecated: It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the private dns zone.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the private dns zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcsets_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zonevpcset">List&lt;Zone<wbr>Vpc<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#zonevpcset">List&lt;Zone<wbr>Vpc<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Associates the private domain to a VPC when it is created.</p>
-</dd></dl>
+    <dd>Associates the private domain to a VPC when it is created.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -848,17 +1106,15 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name, which must be in the format of standard TLD.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name, which must be in the format of standard TLD.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountvpcsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountvpcsets_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Vpc<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zoneaccountvpcset">Zone<wbr>Account<wbr>Vpc<wbr>Set<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#zoneaccountvpcset">Zone<wbr>Account<wbr>Vpc<wbr>Set[]</a></span>
     </dt>
-    <dd><p>List of authorized accounts' VPCs to associate with the private domain.</p>
-</dd><dt class="property-optional"
+    <dd>List of authorized accounts' VPCs to associate with the private domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="cnamespeedupstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnamespeedupstatus_nodejs" style="color: inherit; text-decoration: inherit;">cname<wbr>Speedup<wbr>Status</a>
@@ -866,8 +1122,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</p>
-</dd><dt class="property-optional"
+    <dd>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="dnsforwardstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsforwardstatus_nodejs" style="color: inherit; text-decoration: inherit;">dns<wbr>Forward<wbr>Status</a>
@@ -875,8 +1130,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -884,36 +1138,31 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Remarks.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="tagsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagsets_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zonetagset">Zone<wbr>Tag<wbr>Set<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#zonetagset">Zone<wbr>Tag<wbr>Set[]</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.<p class="property-message">Deprecated: It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the private dns zone.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the private dns zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcsets_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zonevpcset">Zone<wbr>Vpc<wbr>Set<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#zonevpcset">Zone<wbr>Vpc<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Associates the private domain to a VPC when it is created.</p>
-</dd></dl>
+    <dd>Associates the private domain to a VPC when it is created.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -927,17 +1176,15 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name, which must be in the format of standard TLD.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name, which must be in the format of standard TLD.</dd><dt class="property-optional"
             title="Optional">
         <span id="account_vpc_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_vpc_sets_python" style="color: inherit; text-decoration: inherit;">account_<wbr>vpc_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zoneaccountvpcset">Zone<wbr>Account<wbr>Vpc<wbr>Set<wbr>Args]</a></span>
+        <span class="property-type"><a href="#zoneaccountvpcset">Sequence[Zone<wbr>Account<wbr>Vpc<wbr>Set<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of authorized accounts' VPCs to associate with the private domain.</p>
-</dd><dt class="property-optional"
+    <dd>List of authorized accounts' VPCs to associate with the private domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="cname_speedup_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cname_speedup_status_python" style="color: inherit; text-decoration: inherit;">cname_<wbr>speedup_<wbr>status</a>
@@ -945,8 +1192,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</p>
-</dd><dt class="property-optional"
+    <dd>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="dns_forward_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dns_forward_status_python" style="color: inherit; text-decoration: inherit;">dns_<wbr>forward_<wbr>status</a>
@@ -954,8 +1200,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -963,36 +1208,31 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Remarks.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="tag_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_sets_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zonetagset">Zone<wbr>Tag<wbr>Set<wbr>Args]</a></span>
+        <span class="property-type"><a href="#zonetagset">Sequence[Zone<wbr>Tag<wbr>Set<wbr>Args]</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.<p class="property-message">Deprecated: It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the private dns zone.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the private dns zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_sets_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zonevpcset">Zone<wbr>Vpc<wbr>Set<wbr>Args]</a></span>
+        <span class="property-type"><a href="#zonevpcset">Sequence[Zone<wbr>Vpc<wbr>Set<wbr>Args]</a></span>
     </dt>
-    <dd><p>Associates the private domain to a VPC when it is created.</p>
-</dd></dl>
+    <dd>Associates the private domain to a VPC when it is created.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1006,8 +1246,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name, which must be in the format of standard TLD.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name, which must be in the format of standard TLD.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountvpcsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountvpcsets_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Vpc<wbr>Sets</a>
@@ -1015,8 +1254,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zoneaccountvpcset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of authorized accounts' VPCs to associate with the private domain.</p>
-</dd><dt class="property-optional"
+    <dd>List of authorized accounts' VPCs to associate with the private domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="cnamespeedupstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cnamespeedupstatus_yaml" style="color: inherit; text-decoration: inherit;">cname<wbr>Speedup<wbr>Status</a>
@@ -1024,8 +1262,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</p>
-</dd><dt class="property-optional"
+    <dd>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="dnsforwardstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsforwardstatus_yaml" style="color: inherit; text-decoration: inherit;">dns<wbr>Forward<wbr>Status</a>
@@ -1033,8 +1270,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1042,8 +1278,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Remarks.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="tagsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagsets_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Sets</a>
@@ -1051,18 +1286,15 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zonetagset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.<p class="property-message">Deprecated: It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the private dns zone.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the private dns zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcsets_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Sets</a>
@@ -1070,8 +1302,7 @@ The Zone resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zonevpcset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Associates the private domain to a VPC when it is created.</p>
-</dd></dl>
+    <dd>Associates the private domain to a VPC when it is created.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1092,8 +1323,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1107,8 +1337,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1122,8 +1365,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1137,8 +1379,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1152,8 +1393,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1167,8 +1407,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1178,127 +1417,166 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Zone resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ZoneState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Zone</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ZoneState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Zone</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">account_vpc_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_privatedns.ZoneAccountVpcSetArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">account_vpc_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[ZoneAccountVpcSetArgs]]</span> = None<span class="p">,</span>
         <span class="nx">cname_speedup_status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">dns_forward_status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tag_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_privatedns.ZoneTagSetArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-        <span class="nx">vpc_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_privatedns.ZoneVpcSetArgs]]</span> = None<span class="p">) -&gt;</span> Zone</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">tag_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[ZoneTagSetArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+        <span class="nx">vpc_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[ZoneVpcSetArgs]]</span> = None<span class="p">) -&gt;</span> Zone</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetZone<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ZoneState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Zone</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetZone<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ZoneState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Zone</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Zone</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ZoneState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Zone</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ZoneState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Zone</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ZoneState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Zone</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ZoneState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingZone</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:PrivateDns:Zone</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_private_dns_zone</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ZoneState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ZoneState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1306,28 +1584,31 @@ Get an existing Zone resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ZoneState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1335,28 +1616,31 @@ Get an existing Zone resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ZoneState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1374,10 +1658,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountvpcsets_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Vpc<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zoneaccountvpcset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Private<wbr>Dns.<wbr>Inputs.<wbr>Zone<wbr>Account<wbr>Vpc<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#zoneaccountvpcset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Private<wbr>Dns.<wbr>Inputs.<wbr>Zone<wbr>Account<wbr>Vpc<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of authorized accounts' VPCs to associate with the private domain.</p>
-</dd><dt class="property-optional"
+    <dd>List of authorized accounts' VPCs to associate with the private domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cnamespeedupstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cnamespeedupstatus_csharp" style="color: inherit; text-decoration: inherit;">Cname<wbr>Speedup<wbr>Status</a>
@@ -1385,8 +1668,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</p>
-</dd><dt class="property-optional"
+    <dd>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dnsforwardstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnsforwardstatus_csharp" style="color: inherit; text-decoration: inherit;">Dns<wbr>Forward<wbr>Status</a>
@@ -1394,8 +1676,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1403,8 +1684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name, which must be in the format of standard TLD.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name, which must be in the format of standard TLD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1412,36 +1692,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Remarks.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_tagsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tagsets_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zonetagset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Private<wbr>Dns.<wbr>Inputs.<wbr>Zone<wbr>Tag<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#zonetagset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Private<wbr>Dns.<wbr>Inputs.<wbr>Zone<wbr>Tag<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.<p class="property-message">Deprecated: It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the private dns zone.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the private dns zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcsets_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zonevpcset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Private<wbr>Dns.<wbr>Inputs.<wbr>Zone<wbr>Vpc<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#zonevpcset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Private<wbr>Dns.<wbr>Inputs.<wbr>Zone<wbr>Vpc<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Associates the private domain to a VPC when it is created.</p>
-</dd></dl>
+    <dd>Associates the private domain to a VPC when it is created.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1455,8 +1730,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zoneaccountvpcset">[]Zone<wbr>Account<wbr>Vpc<wbr>Set<wbr>Args</a></span>
     </dt>
-    <dd><p>List of authorized accounts' VPCs to associate with the private domain.</p>
-</dd><dt class="property-optional"
+    <dd>List of authorized accounts' VPCs to associate with the private domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cnamespeedupstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cnamespeedupstatus_go" style="color: inherit; text-decoration: inherit;">Cname<wbr>Speedup<wbr>Status</a>
@@ -1464,8 +1738,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</p>
-</dd><dt class="property-optional"
+    <dd>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dnsforwardstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnsforwardstatus_go" style="color: inherit; text-decoration: inherit;">Dns<wbr>Forward<wbr>Status</a>
@@ -1473,8 +1746,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1482,8 +1754,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name, which must be in the format of standard TLD.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name, which must be in the format of standard TLD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1491,8 +1762,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Remarks.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_tagsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tagsets_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Sets</a>
@@ -1500,18 +1770,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zonetagset">[]Zone<wbr>Tag<wbr>Set<wbr>Args</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.<p class="property-message">Deprecated: It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the private dns zone.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the private dns zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcsets_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Sets</a>
@@ -1519,8 +1786,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zonevpcset">[]Zone<wbr>Vpc<wbr>Set<wbr>Args</a></span>
     </dt>
-    <dd><p>Associates the private domain to a VPC when it is created.</p>
-</dd></dl>
+    <dd>Associates the private domain to a VPC when it is created.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_account_vpc_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_account_vpc_sets_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>vpc_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zoneaccountvpcset">list(object)</a></span>
+    </dt>
+    <dd>List of authorized accounts' VPCs to associate with the private domain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cname_speedup_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cname_speedup_status_hcl" style="color: inherit; text-decoration: inherit;">cname_<wbr>speedup_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dns_forward_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dns_forward_status_hcl" style="color: inherit; text-decoration: inherit;">dns_<wbr>forward_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name, which must be in the format of standard TLD.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remarks.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="state_tag_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tag_sets_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zonetagset">list(object)</a></span>
+    </dt>
+    <dd>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.<p class="property-message">Deprecated: It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the private dns zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_sets_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#zonevpcset">list(object)</a></span>
+    </dt>
+    <dd>Associates the private domain to a VPC when it is created.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1532,10 +1868,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountvpcsets_java" style="color: inherit; text-decoration: inherit;">account<wbr>Vpc<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zoneaccountvpcset">List&lt;Zone<wbr>Account<wbr>Vpc<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#zoneaccountvpcset">List&lt;Zone<wbr>Account<wbr>Vpc<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of authorized accounts' VPCs to associate with the private domain.</p>
-</dd><dt class="property-optional"
+    <dd>List of authorized accounts' VPCs to associate with the private domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cnamespeedupstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cnamespeedupstatus_java" style="color: inherit; text-decoration: inherit;">cname<wbr>Speedup<wbr>Status</a>
@@ -1543,8 +1878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</p>
-</dd><dt class="property-optional"
+    <dd>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dnsforwardstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnsforwardstatus_java" style="color: inherit; text-decoration: inherit;">dns<wbr>Forward<wbr>Status</a>
@@ -1552,8 +1886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1561,8 +1894,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name, which must be in the format of standard TLD.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name, which must be in the format of standard TLD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1570,36 +1902,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Remarks.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_tagsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tagsets_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zonetagset">List&lt;Zone<wbr>Tag<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#zonetagset">List&lt;Zone<wbr>Tag<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.<p class="property-message">Deprecated: It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the private dns zone.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the private dns zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcsets_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zonevpcset">List&lt;Zone<wbr>Vpc<wbr>Set<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#zonevpcset">List&lt;Zone<wbr>Vpc<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Associates the private domain to a VPC when it is created.</p>
-</dd></dl>
+    <dd>Associates the private domain to a VPC when it is created.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1611,10 +1938,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountvpcsets_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Vpc<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zoneaccountvpcset">Zone<wbr>Account<wbr>Vpc<wbr>Set<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#zoneaccountvpcset">Zone<wbr>Account<wbr>Vpc<wbr>Set[]</a></span>
     </dt>
-    <dd><p>List of authorized accounts' VPCs to associate with the private domain.</p>
-</dd><dt class="property-optional"
+    <dd>List of authorized accounts' VPCs to associate with the private domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cnamespeedupstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cnamespeedupstatus_nodejs" style="color: inherit; text-decoration: inherit;">cname<wbr>Speedup<wbr>Status</a>
@@ -1622,8 +1948,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</p>
-</dd><dt class="property-optional"
+    <dd>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dnsforwardstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnsforwardstatus_nodejs" style="color: inherit; text-decoration: inherit;">dns<wbr>Forward<wbr>Status</a>
@@ -1631,8 +1956,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1640,8 +1964,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name, which must be in the format of standard TLD.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name, which must be in the format of standard TLD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1649,36 +1972,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Remarks.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_tagsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tagsets_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zonetagset">Zone<wbr>Tag<wbr>Set<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#zonetagset">Zone<wbr>Tag<wbr>Set[]</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.<p class="property-message">Deprecated: It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the private dns zone.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the private dns zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcsets_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zonevpcset">Zone<wbr>Vpc<wbr>Set<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#zonevpcset">Zone<wbr>Vpc<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Associates the private domain to a VPC when it is created.</p>
-</dd></dl>
+    <dd>Associates the private domain to a VPC when it is created.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1690,10 +2008,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_account_vpc_sets_python" style="color: inherit; text-decoration: inherit;">account_<wbr>vpc_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zoneaccountvpcset">Zone<wbr>Account<wbr>Vpc<wbr>Set<wbr>Args]</a></span>
+        <span class="property-type"><a href="#zoneaccountvpcset">Sequence[Zone<wbr>Account<wbr>Vpc<wbr>Set<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of authorized accounts' VPCs to associate with the private domain.</p>
-</dd><dt class="property-optional"
+    <dd>List of authorized accounts' VPCs to associate with the private domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cname_speedup_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cname_speedup_status_python" style="color: inherit; text-decoration: inherit;">cname_<wbr>speedup_<wbr>status</a>
@@ -1701,8 +2018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</p>
-</dd><dt class="property-optional"
+    <dd>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dns_forward_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dns_forward_status_python" style="color: inherit; text-decoration: inherit;">dns_<wbr>forward_<wbr>status</a>
@@ -1710,8 +2026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1719,8 +2034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name, which must be in the format of standard TLD.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name, which must be in the format of standard TLD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1728,36 +2042,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Remarks.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_tag_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tag_sets_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zonetagset">Zone<wbr>Tag<wbr>Set<wbr>Args]</a></span>
+        <span class="property-type"><a href="#zonetagset">Sequence[Zone<wbr>Tag<wbr>Set<wbr>Args]</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.<p class="property-message">Deprecated: It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the private dns zone.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the private dns zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_sets_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#zonevpcset">Zone<wbr>Vpc<wbr>Set<wbr>Args]</a></span>
+        <span class="property-type"><a href="#zonevpcset">Sequence[Zone<wbr>Vpc<wbr>Set<wbr>Args]</a></span>
     </dt>
-    <dd><p>Associates the private domain to a VPC when it is created.</p>
-</dd></dl>
+    <dd>Associates the private domain to a VPC when it is created.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1771,8 +2080,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zoneaccountvpcset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of authorized accounts' VPCs to associate with the private domain.</p>
-</dd><dt class="property-optional"
+    <dd>List of authorized accounts' VPCs to associate with the private domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cnamespeedupstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cnamespeedupstatus_yaml" style="color: inherit; text-decoration: inherit;">cname<wbr>Speedup<wbr>Status</a>
@@ -1780,8 +2088,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</p>
-</dd><dt class="property-optional"
+    <dd>CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dnsforwardstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnsforwardstatus_yaml" style="color: inherit; text-decoration: inherit;">dns<wbr>Forward<wbr>Status</a>
@@ -1789,8 +2096,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1798,8 +2104,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name, which must be in the format of standard TLD.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name, which must be in the format of standard TLD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1807,8 +2112,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Remarks.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_tagsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tagsets_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Sets</a>
@@ -1816,18 +2120,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zonetagset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.72.4. Use <code>tags</code> instead. Tags the private domain when it is created.<p class="property-message">Deprecated: It has been deprecated from version 1.72.4. Use <code>tags</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the private dns zone.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the private dns zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcsets_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Sets</a>
@@ -1835,8 +2136,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#zonevpcset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Associates the private domain to a VPC when it is created.</p>
-</dd></dl>
+    <dd>Associates the private domain to a VPC when it is created.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1851,7 +2151,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="zoneaccountvpcset">Zone<wbr>Account<wbr>Vpc<wbr>Set</h4>
+<h4 id="zoneaccountvpcset">
+Zone<wbr>Account<wbr>Vpc<wbr>Set<pulumi-choosable type="language" values="python,go" class="inline">, Zone<wbr>Account<wbr>Vpc<wbr>Set<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1863,8 +2165,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="uin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_csharp" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -1872,8 +2173,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>UIN of the VPC account.</p>
-</dd><dt class="property-required"
+    <dd>UIN of the VPC account.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_csharp" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -1881,17 +2181,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-required"
-            title="Required">
+    <dd>VPC ID.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="vpcname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcname_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC NAME.</p>
-</dd></dl>
+    <dd>It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.<p class="property-message">Deprecated: It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1905,8 +2203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="uin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_go" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -1914,8 +2211,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>UIN of the VPC account.</p>
-</dd><dt class="property-required"
+    <dd>UIN of the VPC account.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_go" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -1923,17 +2219,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-required"
-            title="Required">
+    <dd>VPC ID.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="vpcname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcname_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC NAME.</p>
-</dd></dl>
+    <dd>It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.<p class="property-message">Deprecated: It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored.</p></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region.</dd><dt class="property-required"
+            title="Required">
+        <span id="uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_hcl" style="color: inherit; text-decoration: inherit;">uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>UIN of the VPC account.</dd><dt class="property-required"
+            title="Required">
+        <span id="uniq_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniq_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC ID.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="vpc_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_name_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.<p class="property-message">Deprecated: It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1947,8 +2279,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="uin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_java" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1956,8 +2287,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>UIN of the VPC account.</p>
-</dd><dt class="property-required"
+    <dd>UIN of the VPC account.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_java" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -1965,17 +2295,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-required"
-            title="Required">
+    <dd>VPC ID.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="vpcname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcname_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC NAME.</p>
-</dd></dl>
+    <dd>It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.<p class="property-message">Deprecated: It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1989,8 +2317,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="uin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_nodejs" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1998,8 +2325,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>UIN of the VPC account.</p>
-</dd><dt class="property-required"
+    <dd>UIN of the VPC account.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_nodejs" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -2007,17 +2333,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-required"
-            title="Required">
+    <dd>VPC ID.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="vpcname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcname_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC NAME.</p>
-</dd></dl>
+    <dd>It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.<p class="property-message">Deprecated: It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2031,8 +2355,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_python" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -2040,8 +2363,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>UIN of the VPC account.</p>
-</dd><dt class="property-required"
+    <dd>UIN of the VPC account.</dd><dt class="property-required"
             title="Required">
         <span id="uniq_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniq_vpc_id_python" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
@@ -2049,17 +2371,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-required"
-            title="Required">
+    <dd>VPC ID.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="vpc_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_name_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC NAME.</p>
-</dd></dl>
+    <dd>It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.<p class="property-message">Deprecated: It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2073,8 +2393,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="uin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_yaml" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -2082,8 +2401,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>UIN of the VPC account.</p>
-</dd><dt class="property-required"
+    <dd>UIN of the VPC account.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_yaml" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -2091,21 +2409,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-required"
-            title="Required">
+    <dd>VPC ID.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="vpcname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcname_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC NAME.</p>
-</dd></dl>
+    <dd>It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.<p class="property-message">Deprecated: It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="zonetagset">Zone<wbr>Tag<wbr>Set</h4>
+<h4 id="zonetagset">
+Zone<wbr>Tag<wbr>Set<pulumi-choosable type="language" values="python,go" class="inline">, Zone<wbr>Tag<wbr>Set<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2117,8 +2435,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of Tag.</p>
-</dd><dt class="property-required"
+    <dd>Key of Tag.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -2126,8 +2443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of Tag.</p>
-</dd></dl>
+    <dd>Value of Tag.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2141,8 +2457,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of Tag.</p>
-</dd><dt class="property-required"
+    <dd>Key of Tag.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -2150,8 +2465,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of Tag.</p>
-</dd></dl>
+    <dd>Value of Tag.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key of Tag.</dd><dt class="property-required"
+            title="Required">
+        <span id="tag_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value of Tag.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2165,8 +2501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of Tag.</p>
-</dd><dt class="property-required"
+    <dd>Key of Tag.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -2174,8 +2509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of Tag.</p>
-</dd></dl>
+    <dd>Value of Tag.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2189,8 +2523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of Tag.</p>
-</dd><dt class="property-required"
+    <dd>Key of Tag.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -2198,8 +2531,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of Tag.</p>
-</dd></dl>
+    <dd>Value of Tag.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2213,8 +2545,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key of Tag.</p>
-</dd><dt class="property-required"
+    <dd>Key of Tag.</dd><dt class="property-required"
             title="Required">
         <span id="tag_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
@@ -2222,8 +2553,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Value of Tag.</p>
-</dd></dl>
+    <dd>Value of Tag.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2237,8 +2567,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of Tag.</p>
-</dd><dt class="property-required"
+    <dd>Key of Tag.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -2246,12 +2575,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of Tag.</p>
-</dd></dl>
+    <dd>Value of Tag.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="zonevpcset">Zone<wbr>Vpc<wbr>Set</h4>
+<h4 id="zonevpcset">
+Zone<wbr>Vpc<wbr>Set<pulumi-choosable type="language" values="python,go" class="inline">, Zone<wbr>Vpc<wbr>Set<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2263,8 +2593,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC REGION.</p>
-</dd><dt class="property-required"
+    <dd>VPC REGION.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_csharp" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -2272,8 +2601,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2287,8 +2615,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC REGION.</p>
-</dd><dt class="property-required"
+    <dd>VPC REGION.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_go" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -2296,8 +2623,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC REGION.</dd><dt class="property-required"
+            title="Required">
+        <span id="uniq_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniq_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2311,8 +2659,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC REGION.</p>
-</dd><dt class="property-required"
+    <dd>VPC REGION.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_java" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -2320,8 +2667,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2335,8 +2681,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC REGION.</p>
-</dd><dt class="property-required"
+    <dd>VPC REGION.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_nodejs" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -2344,8 +2689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2359,8 +2703,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC REGION.</p>
-</dd><dt class="property-required"
+    <dd>VPC REGION.</dd><dt class="property-required"
             title="Required">
         <span id="uniq_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniq_vpc_id_python" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
@@ -2368,8 +2711,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2383,8 +2725,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC REGION.</p>
-</dd><dt class="property-required"
+    <dd>VPC REGION.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_yaml" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -2392,8 +2733,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2401,12 +2741,15 @@ The following state arguments are supported:
 
 
 
-Private Dns Zone can be imported, e.g.
+Private Dns Zone can be imported by id, e.g.
 
 ```sh
 $ pulumi import tencentcloud:PrivateDns/zone:Zone example zone-6xg5xgky
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2418,7 +2761,6 @@ $ pulumi import tencentcloud:PrivateDns/zone:Zone example zone-6xg5xgky
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

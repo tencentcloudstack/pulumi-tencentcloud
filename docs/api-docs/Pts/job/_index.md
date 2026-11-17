@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Pts.Job"
 meta_desc: "Documentation for the tencentcloud.Pts.Job resource with examples, input properties, output properties, lookup functions, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,28 +18,71 @@ Provides a resource to create a pts job
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const job = new tencentcloud.pts.Job("job", {
-    jobOwner: "username",
-    note: "desc",
-    projectId: "project-45vw7v82",
     scenarioId: "scenario-22q19f3k",
+    jobOwner: "username",
+    projectId: "project-45vw7v82",
+    note: "desc",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 job = tencentcloud.pts.Job("job",
+    scenario_id="scenario-22q19f3k",
     job_owner="username",
-    note="desc",
     project_id="project-45vw7v82",
-    scenario_id="scenario-22q19f3k")
+    note="desc")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/pts"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := pts.NewJob(ctx, "job", &pts.JobArgs{
+			ScenarioId: pulumi.String("scenario-22q19f3k"),
+			JobOwner:   pulumi.String("username"),
+			ProjectId:  pulumi.String("project-45vw7v82"),
+			Note:       pulumi.String("desc"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -48,37 +93,19 @@ return await Deployment.RunAsync(() =>
 {
     var job = new Tencentcloud.Pts.Job("job", new()
     {
-        JobOwner = "username",
-        Note = "desc",
-        ProjectId = "project-45vw7v82",
         ScenarioId = "scenario-22q19f3k",
+        JobOwner = "username",
+        ProjectId = "project-45vw7v82",
+        Note = "desc",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Pts.NewJob(ctx, "job", &Pts.JobArgs{
-			JobOwner:   pulumi.String("username"),
-			Note:       pulumi.String("desc"),
-			ProjectId:  pulumi.String("project-45vw7v82"),
-			ScenarioId: pulumi.String("scenario-22q19f3k"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -87,8 +114,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Pts.Job;
 import com.pulumi.tencentcloud.Pts.JobArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -100,90 +127,140 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var job = new Job("job", JobArgs.builder()        
-            .jobOwner("username")
-            .note("desc")
-            .projectId("project-45vw7v82")
+        var job = new Job("job", JobArgs.builder()
             .scenarioId("scenario-22q19f3k")
+            .jobOwner("username")
+            .projectId("project-45vw7v82")
+            .note("desc")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   job:
     type: tencentcloud:Pts:Job
     properties:
-      jobOwner: username
-      # debug = ""
-      note: desc
-      projectId: project-45vw7v82
       scenarioId: scenario-22q19f3k
+      jobOwner: username
+      projectId: project-45vw7v82
+      note: desc
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_pts_job" "job" {
+  scenario_id = "scenario-22q19f3k"
+  job_owner   = "username"
+  project_id  = "project-45vw7v82"
+  note        = "desc"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [StartJob](https://www.tencentcloud.com/document/api/1249/68499)
+* Read: [DescribeJobs](https://www.tencentcloud.com/document/api/1249/68515)
+* Update: [UpdateJob](https://www.tencentcloud.com/document/api/1249/68495)
+* Delete: [DeleteJobs](https://www.tencentcloud.com/document/api/1249/68526)
 
 
 ## Create Job Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Job</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">JobArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Job</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">JobArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Job</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">debug</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-        <span class="nx">job_owner</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">note</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">scenario_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Job</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">JobArgs</a></span><span class="p">,</span>
-        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Job</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+        <span class="nx">job_owner</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">scenario_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">debug</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">note</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewJob</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">JobArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Job</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewJob</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">JobArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Job</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Job</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">JobArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Job</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">JobArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Job</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">JobArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Job</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">JobArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Pts:Job</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Pts:Job</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_pts_job&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -204,7 +281,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -321,11 +398,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Job Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Job resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -341,8 +426,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job owner.</p>
-</dd><dt class="property-required"
+    <dd>Job owner.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -350,8 +434,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="scenarioid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scenarioid_csharp" style="color: inherit; text-decoration: inherit;">Scenario<wbr>Id</a>
@@ -359,8 +442,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pts scenario id.</p>
-</dd><dt class="property-optional"
+    <dd>Pts scenario id.</dd><dt class="property-optional"
             title="Optional">
         <span id="debug_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#debug_csharp" style="color: inherit; text-decoration: inherit;">Debug</a>
@@ -368,8 +450,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to debug.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to debug.</dd><dt class="property-optional"
             title="Optional">
         <span id="note_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#note_csharp" style="color: inherit; text-decoration: inherit;">Note</a>
@@ -377,8 +458,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Note.</p>
-</dd></dl>
+    <dd>Note.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -392,8 +472,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job owner.</p>
-</dd><dt class="property-required"
+    <dd>Job owner.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -401,8 +480,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="scenarioid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scenarioid_go" style="color: inherit; text-decoration: inherit;">Scenario<wbr>Id</a>
@@ -410,8 +488,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pts scenario id.</p>
-</dd><dt class="property-optional"
+    <dd>Pts scenario id.</dd><dt class="property-optional"
             title="Optional">
         <span id="debug_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#debug_go" style="color: inherit; text-decoration: inherit;">Debug</a>
@@ -419,8 +496,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to debug.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to debug.</dd><dt class="property-optional"
             title="Optional">
         <span id="note_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#note_go" style="color: inherit; text-decoration: inherit;">Note</a>
@@ -428,8 +504,53 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Note.</p>
-</dd></dl>
+    <dd>Note.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="job_owner_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_owner_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>owner</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Job owner.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Project ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="scenario_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scenario_id_hcl" style="color: inherit; text-decoration: inherit;">scenario_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pts scenario id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="debug_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#debug_hcl" style="color: inherit; text-decoration: inherit;">debug</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to debug.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="note_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#note_hcl" style="color: inherit; text-decoration: inherit;">note</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Note.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -443,8 +564,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Job owner.</p>
-</dd><dt class="property-required"
+    <dd>Job owner.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -452,8 +572,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="scenarioid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scenarioid_java" style="color: inherit; text-decoration: inherit;">scenario<wbr>Id</a>
@@ -461,8 +580,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pts scenario id.</p>
-</dd><dt class="property-optional"
+    <dd>Pts scenario id.</dd><dt class="property-optional"
             title="Optional">
         <span id="debug_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#debug_java" style="color: inherit; text-decoration: inherit;">debug</a>
@@ -470,8 +588,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to debug.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to debug.</dd><dt class="property-optional"
             title="Optional">
         <span id="note_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#note_java" style="color: inherit; text-decoration: inherit;">note</a>
@@ -479,8 +596,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Note.</p>
-</dd></dl>
+    <dd>Note.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -494,8 +610,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job owner.</p>
-</dd><dt class="property-required"
+    <dd>Job owner.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -503,8 +618,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="scenarioid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scenarioid_nodejs" style="color: inherit; text-decoration: inherit;">scenario<wbr>Id</a>
@@ -512,8 +626,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pts scenario id.</p>
-</dd><dt class="property-optional"
+    <dd>Pts scenario id.</dd><dt class="property-optional"
             title="Optional">
         <span id="debug_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#debug_nodejs" style="color: inherit; text-decoration: inherit;">debug</a>
@@ -521,8 +634,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to debug.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to debug.</dd><dt class="property-optional"
             title="Optional">
         <span id="note_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#note_nodejs" style="color: inherit; text-decoration: inherit;">note</a>
@@ -530,8 +642,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Note.</p>
-</dd></dl>
+    <dd>Note.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -545,8 +656,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Job owner.</p>
-</dd><dt class="property-required"
+    <dd>Job owner.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -554,8 +664,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="scenario_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scenario_id_python" style="color: inherit; text-decoration: inherit;">scenario_<wbr>id</a>
@@ -563,8 +672,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pts scenario id.</p>
-</dd><dt class="property-optional"
+    <dd>Pts scenario id.</dd><dt class="property-optional"
             title="Optional">
         <span id="debug_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#debug_python" style="color: inherit; text-decoration: inherit;">debug</a>
@@ -572,8 +680,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to debug.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to debug.</dd><dt class="property-optional"
             title="Optional">
         <span id="note_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#note_python" style="color: inherit; text-decoration: inherit;">note</a>
@@ -581,8 +688,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Note.</p>
-</dd></dl>
+    <dd>Note.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -596,8 +702,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Job owner.</p>
-</dd><dt class="property-required"
+    <dd>Job owner.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -605,8 +710,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="scenarioid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scenarioid_yaml" style="color: inherit; text-decoration: inherit;">scenario<wbr>Id</a>
@@ -614,8 +718,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pts scenario id.</p>
-</dd><dt class="property-optional"
+    <dd>Pts scenario id.</dd><dt class="property-optional"
             title="Optional">
         <span id="debug_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#debug_yaml" style="color: inherit; text-decoration: inherit;">debug</a>
@@ -623,8 +726,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to debug.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to debug.</dd><dt class="property-optional"
             title="Optional">
         <span id="note_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#note_yaml" style="color: inherit; text-decoration: inherit;">note</a>
@@ -632,8 +734,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Note.</p>
-</dd></dl>
+    <dd>Note.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -654,8 +755,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cause of interruption.</p>
-</dd><dt class="property-"
+    <dd>Cause of interruption.</dd><dt class="property-"
             title="">
         <span id="createdat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdat_csharp" style="color: inherit; text-decoration: inherit;">Created<wbr>At</a>
@@ -663,8 +763,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the job.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the job.</dd><dt class="property-"
             title="">
         <span id="cronid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cronid_csharp" style="color: inherit; text-decoration: inherit;">Cron<wbr>Id</a>
@@ -672,8 +771,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduled job ID.</p>
-</dd><dt class="property-"
+    <dd>Scheduled job ID.</dd><dt class="property-"
             title="">
         <span id="datasets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datasets_csharp" style="color: inherit; text-decoration: inherit;">Datasets</a>
@@ -681,8 +779,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdataset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Outputs.<wbr>Job<wbr>Dataset&gt;</a></span>
     </dt>
-    <dd><p>Dataset file for the job.</p>
-</dd><dt class="property-"
+    <dd>Dataset file for the job.</dd><dt class="property-"
             title="">
         <span id="domainnameconfigs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainnameconfigs_csharp" style="color: inherit; text-decoration: inherit;">Domain<wbr>Name<wbr>Configs</a>
@@ -690,8 +787,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdomainnameconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Outputs.<wbr>Job<wbr>Domain<wbr>Name<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Domain name binding configuration.</p>
-</dd><dt class="property-"
+    <dd>Domain name binding configuration.</dd><dt class="property-"
             title="">
         <span id="duration_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_csharp" style="color: inherit; text-decoration: inherit;">Duration</a>
@@ -699,8 +795,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Job duration.</p>
-</dd><dt class="property-"
+    <dd>Job duration.</dd><dt class="property-"
             title="">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -708,8 +803,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End time of the job.</p>
-</dd><dt class="property-"
+    <dd>End time of the job.</dd><dt class="property-"
             title="">
         <span id="errorrate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorrate_csharp" style="color: inherit; text-decoration: inherit;">Error<wbr>Rate</a>
@@ -717,8 +811,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Percentage of error rate.</p>
-</dd><dt class="property-"
+    <dd>Percentage of error rate.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -726,8 +819,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -735,8 +827,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job Id.</p>
-</dd><dt class="property-"
+    <dd>Job Id.</dd><dt class="property-"
             title="">
         <span id="loads_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loads_csharp" style="color: inherit; text-decoration: inherit;">Loads</a>
@@ -744,8 +835,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobload">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Outputs.<wbr>Job<wbr>Load&gt;</a></span>
     </dt>
-    <dd><p>Pressure configuration of job.</p>
-</dd><dt class="property-"
+    <dd>Pressure configuration of job.</dd><dt class="property-"
             title="">
         <span id="maxrequestspersecond_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestspersecond_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -753,8 +843,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-"
+    <dd>Maximum requests per second.</dd><dt class="property-"
             title="">
         <span id="maxvirtualusercount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxvirtualusercount_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Virtual<wbr>User<wbr>Count</a>
@@ -762,8 +851,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of VU for the job.</p>
-</dd><dt class="property-"
+    <dd>Maximum number of VU for the job.</dd><dt class="property-"
             title="">
         <span id="plugins_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugins_csharp" style="color: inherit; text-decoration: inherit;">Plugins</a>
@@ -771,8 +859,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobplugin">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Outputs.<wbr>Job<wbr>Plugin&gt;</a></span>
     </dt>
-    <dd><p>Expansion package file information.</p>
-</dd><dt class="property-"
+    <dd>Expansion package file information.</dd><dt class="property-"
             title="">
         <span id="protocols_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocols_csharp" style="color: inherit; text-decoration: inherit;">Protocols</a>
@@ -780,8 +867,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobprotocol">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Outputs.<wbr>Job<wbr>Protocol&gt;</a></span>
     </dt>
-    <dd><p>Protocol script information.</p>
-</dd><dt class="property-"
+    <dd>Protocol script information.</dd><dt class="property-"
             title="">
         <span id="requestfiles_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestfiles_csharp" style="color: inherit; text-decoration: inherit;">Request<wbr>Files</a>
@@ -789,8 +875,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobrequestfile">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Outputs.<wbr>Job<wbr>Request<wbr>File&gt;</a></span>
     </dt>
-    <dd><p>Request file information.</p>
-</dd><dt class="property-"
+    <dd>Request file information.</dd><dt class="property-"
             title="">
         <span id="requesttotal_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requesttotal_csharp" style="color: inherit; text-decoration: inherit;">Request<wbr>Total</a>
@@ -798,8 +883,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Total number of requests.</p>
-</dd><dt class="property-"
+    <dd>Total number of requests.</dd><dt class="property-"
             title="">
         <span id="requestspersecond_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestspersecond_csharp" style="color: inherit; text-decoration: inherit;">Requests<wbr>Per<wbr>Second</a>
@@ -807,8 +891,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Average number of requests per second.</p>
-</dd><dt class="property-"
+    <dd>Average number of requests per second.</dd><dt class="property-"
             title="">
         <span id="responsetimeaverage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimeaverage_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>Average</a>
@@ -816,8 +899,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Average response time.</p>
-</dd><dt class="property-"
+    <dd>Average response time.</dd><dt class="property-"
             title="">
         <span id="responsetimemax_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimemax_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>Max</a>
@@ -825,8 +907,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Maximum response time.</p>
-</dd><dt class="property-"
+    <dd>Maximum response time.</dd><dt class="property-"
             title="">
         <span id="responsetimemin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimemin_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>Min</a>
@@ -834,8 +915,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Minimum response time.</p>
-</dd><dt class="property-"
+    <dd>Minimum response time.</dd><dt class="property-"
             title="">
         <span id="responsetimep90_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimep90_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>P90</a>
@@ -843,8 +923,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>90th percentile response time.</p>
-</dd><dt class="property-"
+    <dd>90th percentile response time.</dd><dt class="property-"
             title="">
         <span id="responsetimep95_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimep95_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>P95</a>
@@ -852,8 +931,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>95th percentile response time.</p>
-</dd><dt class="property-"
+    <dd>95th percentile response time.</dd><dt class="property-"
             title="">
         <span id="responsetimep99_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimep99_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>P99</a>
@@ -861,8 +939,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>99th percentile response time.</p>
-</dd><dt class="property-"
+    <dd>99th percentile response time.</dd><dt class="property-"
             title="">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -870,8 +947,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start time of the job.</p>
-</dd><dt class="property-"
+    <dd>Start time of the job.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -879,8 +955,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</p>
-</dd><dt class="property-"
+    <dd>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</dd><dt class="property-"
             title="">
         <span id="testscripts_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#testscripts_csharp" style="color: inherit; text-decoration: inherit;">Test<wbr>Scripts</a>
@@ -888,8 +963,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobtestscript">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Outputs.<wbr>Job<wbr>Test<wbr>Script&gt;</a></span>
     </dt>
-    <dd><p>Test script information.</p>
-</dd><dt class="property-"
+    <dd>Test script information.</dd><dt class="property-"
             title="">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -897,8 +971,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd></dl>
+    <dd>Scene Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -912,8 +985,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cause of interruption.</p>
-</dd><dt class="property-"
+    <dd>Cause of interruption.</dd><dt class="property-"
             title="">
         <span id="createdat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdat_go" style="color: inherit; text-decoration: inherit;">Created<wbr>At</a>
@@ -921,8 +993,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the job.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the job.</dd><dt class="property-"
             title="">
         <span id="cronid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cronid_go" style="color: inherit; text-decoration: inherit;">Cron<wbr>Id</a>
@@ -930,8 +1001,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduled job ID.</p>
-</dd><dt class="property-"
+    <dd>Scheduled job ID.</dd><dt class="property-"
             title="">
         <span id="datasets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datasets_go" style="color: inherit; text-decoration: inherit;">Datasets</a>
@@ -939,8 +1009,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdataset">[]Job<wbr>Dataset</a></span>
     </dt>
-    <dd><p>Dataset file for the job.</p>
-</dd><dt class="property-"
+    <dd>Dataset file for the job.</dd><dt class="property-"
             title="">
         <span id="domainnameconfigs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainnameconfigs_go" style="color: inherit; text-decoration: inherit;">Domain<wbr>Name<wbr>Configs</a>
@@ -948,8 +1017,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdomainnameconfig">[]Job<wbr>Domain<wbr>Name<wbr>Config</a></span>
     </dt>
-    <dd><p>Domain name binding configuration.</p>
-</dd><dt class="property-"
+    <dd>Domain name binding configuration.</dd><dt class="property-"
             title="">
         <span id="duration_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_go" style="color: inherit; text-decoration: inherit;">Duration</a>
@@ -957,8 +1025,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Job duration.</p>
-</dd><dt class="property-"
+    <dd>Job duration.</dd><dt class="property-"
             title="">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -966,8 +1033,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End time of the job.</p>
-</dd><dt class="property-"
+    <dd>End time of the job.</dd><dt class="property-"
             title="">
         <span id="errorrate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorrate_go" style="color: inherit; text-decoration: inherit;">Error<wbr>Rate</a>
@@ -975,8 +1041,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Percentage of error rate.</p>
-</dd><dt class="property-"
+    <dd>Percentage of error rate.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -984,8 +1049,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -993,8 +1057,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job Id.</p>
-</dd><dt class="property-"
+    <dd>Job Id.</dd><dt class="property-"
             title="">
         <span id="loads_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loads_go" style="color: inherit; text-decoration: inherit;">Loads</a>
@@ -1002,8 +1065,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobload">[]Job<wbr>Load</a></span>
     </dt>
-    <dd><p>Pressure configuration of job.</p>
-</dd><dt class="property-"
+    <dd>Pressure configuration of job.</dd><dt class="property-"
             title="">
         <span id="maxrequestspersecond_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestspersecond_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -1011,8 +1073,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-"
+    <dd>Maximum requests per second.</dd><dt class="property-"
             title="">
         <span id="maxvirtualusercount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxvirtualusercount_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Virtual<wbr>User<wbr>Count</a>
@@ -1020,8 +1081,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of VU for the job.</p>
-</dd><dt class="property-"
+    <dd>Maximum number of VU for the job.</dd><dt class="property-"
             title="">
         <span id="plugins_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugins_go" style="color: inherit; text-decoration: inherit;">Plugins</a>
@@ -1029,8 +1089,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobplugin">[]Job<wbr>Plugin</a></span>
     </dt>
-    <dd><p>Expansion package file information.</p>
-</dd><dt class="property-"
+    <dd>Expansion package file information.</dd><dt class="property-"
             title="">
         <span id="protocols_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocols_go" style="color: inherit; text-decoration: inherit;">Protocols</a>
@@ -1038,8 +1097,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobprotocol">[]Job<wbr>Protocol</a></span>
     </dt>
-    <dd><p>Protocol script information.</p>
-</dd><dt class="property-"
+    <dd>Protocol script information.</dd><dt class="property-"
             title="">
         <span id="requestfiles_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestfiles_go" style="color: inherit; text-decoration: inherit;">Request<wbr>Files</a>
@@ -1047,8 +1105,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobrequestfile">[]Job<wbr>Request<wbr>File</a></span>
     </dt>
-    <dd><p>Request file information.</p>
-</dd><dt class="property-"
+    <dd>Request file information.</dd><dt class="property-"
             title="">
         <span id="requesttotal_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requesttotal_go" style="color: inherit; text-decoration: inherit;">Request<wbr>Total</a>
@@ -1056,8 +1113,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Total number of requests.</p>
-</dd><dt class="property-"
+    <dd>Total number of requests.</dd><dt class="property-"
             title="">
         <span id="requestspersecond_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestspersecond_go" style="color: inherit; text-decoration: inherit;">Requests<wbr>Per<wbr>Second</a>
@@ -1065,8 +1121,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Average number of requests per second.</p>
-</dd><dt class="property-"
+    <dd>Average number of requests per second.</dd><dt class="property-"
             title="">
         <span id="responsetimeaverage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimeaverage_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>Average</a>
@@ -1074,8 +1129,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Average response time.</p>
-</dd><dt class="property-"
+    <dd>Average response time.</dd><dt class="property-"
             title="">
         <span id="responsetimemax_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimemax_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>Max</a>
@@ -1083,8 +1137,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Maximum response time.</p>
-</dd><dt class="property-"
+    <dd>Maximum response time.</dd><dt class="property-"
             title="">
         <span id="responsetimemin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimemin_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>Min</a>
@@ -1092,8 +1145,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Minimum response time.</p>
-</dd><dt class="property-"
+    <dd>Minimum response time.</dd><dt class="property-"
             title="">
         <span id="responsetimep90_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimep90_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>P90</a>
@@ -1101,8 +1153,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>90th percentile response time.</p>
-</dd><dt class="property-"
+    <dd>90th percentile response time.</dd><dt class="property-"
             title="">
         <span id="responsetimep95_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimep95_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>P95</a>
@@ -1110,8 +1161,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>95th percentile response time.</p>
-</dd><dt class="property-"
+    <dd>95th percentile response time.</dd><dt class="property-"
             title="">
         <span id="responsetimep99_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimep99_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>P99</a>
@@ -1119,8 +1169,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>99th percentile response time.</p>
-</dd><dt class="property-"
+    <dd>99th percentile response time.</dd><dt class="property-"
             title="">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -1128,8 +1177,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start time of the job.</p>
-</dd><dt class="property-"
+    <dd>Start time of the job.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1137,8 +1185,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</p>
-</dd><dt class="property-"
+    <dd>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</dd><dt class="property-"
             title="">
         <span id="testscripts_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#testscripts_go" style="color: inherit; text-decoration: inherit;">Test<wbr>Scripts</a>
@@ -1146,8 +1193,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobtestscript">[]Job<wbr>Test<wbr>Script</a></span>
     </dt>
-    <dd><p>Test script information.</p>
-</dd><dt class="property-"
+    <dd>Test script information.</dd><dt class="property-"
             title="">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1155,8 +1201,237 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd></dl>
+    <dd>Scene Type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="abort_reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#abort_reason_hcl" style="color: inherit; text-decoration: inherit;">abort_<wbr>reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cause of interruption.</dd><dt class="property-"
+            title="">
+        <span id="created_at_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_at_hcl" style="color: inherit; text-decoration: inherit;">created_<wbr>at</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the job.</dd><dt class="property-"
+            title="">
+        <span id="cron_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cron_id_hcl" style="color: inherit; text-decoration: inherit;">cron_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduled job ID.</dd><dt class="property-"
+            title="">
+        <span id="datasets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datasets_hcl" style="color: inherit; text-decoration: inherit;">datasets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobdataset">list(object)</a></span>
+    </dt>
+    <dd>Dataset file for the job.</dd><dt class="property-"
+            title="">
+        <span id="domain_name_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_name_configs_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>name_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobdomainnameconfig">list(object)</a></span>
+    </dt>
+    <dd>Domain name binding configuration.</dd><dt class="property-"
+            title="">
+        <span id="duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_hcl" style="color: inherit; text-decoration: inherit;">duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Job duration.</dd><dt class="property-"
+            title="">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>End time of the job.</dd><dt class="property-"
+            title="">
+        <span id="error_rate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_rate_hcl" style="color: inherit; text-decoration: inherit;">error_<wbr>rate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Percentage of error rate.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="job_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_id_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Job Id.</dd><dt class="property-"
+            title="">
+        <span id="loads_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loads_hcl" style="color: inherit; text-decoration: inherit;">loads</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobload">list(object)</a></span>
+    </dt>
+    <dd>Pressure configuration of job.</dd><dt class="property-"
+            title="">
+        <span id="max_requests_per_second_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_requests_per_second_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>requests_<wbr>per_<wbr>second</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum requests per second.</dd><dt class="property-"
+            title="">
+        <span id="max_virtual_user_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_virtual_user_count_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>virtual_<wbr>user_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of VU for the job.</dd><dt class="property-"
+            title="">
+        <span id="plugins_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugins_hcl" style="color: inherit; text-decoration: inherit;">plugins</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobplugin">list(object)</a></span>
+    </dt>
+    <dd>Expansion package file information.</dd><dt class="property-"
+            title="">
+        <span id="protocols_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocols_hcl" style="color: inherit; text-decoration: inherit;">protocols</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobprotocol">list(object)</a></span>
+    </dt>
+    <dd>Protocol script information.</dd><dt class="property-"
+            title="">
+        <span id="request_files_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_files_hcl" style="color: inherit; text-decoration: inherit;">request_<wbr>files</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobrequestfile">list(object)</a></span>
+    </dt>
+    <dd>Request file information.</dd><dt class="property-"
+            title="">
+        <span id="request_total_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_total_hcl" style="color: inherit; text-decoration: inherit;">request_<wbr>total</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total number of requests.</dd><dt class="property-"
+            title="">
+        <span id="requests_per_second_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requests_per_second_hcl" style="color: inherit; text-decoration: inherit;">requests_<wbr>per_<wbr>second</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Average number of requests per second.</dd><dt class="property-"
+            title="">
+        <span id="response_time_average_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_time_average_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>average</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Average response time.</dd><dt class="property-"
+            title="">
+        <span id="response_time_max_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_time_max_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>max</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum response time.</dd><dt class="property-"
+            title="">
+        <span id="response_time_min_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_time_min_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>min</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum response time.</dd><dt class="property-"
+            title="">
+        <span id="response_time_p90_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_time_p90_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>p90</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>90th percentile response time.</dd><dt class="property-"
+            title="">
+        <span id="response_time_p95_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_time_p95_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>p95</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>95th percentile response time.</dd><dt class="property-"
+            title="">
+        <span id="response_time_p99_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_time_p99_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>p99</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>99th percentile response time.</dd><dt class="property-"
+            title="">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Start time of the job.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</dd><dt class="property-"
+            title="">
+        <span id="test_scripts_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#test_scripts_hcl" style="color: inherit; text-decoration: inherit;">test_<wbr>scripts</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobtestscript">list(object)</a></span>
+    </dt>
+    <dd>Test script information.</dd><dt class="property-"
+            title="">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scene Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1170,8 +1445,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Cause of interruption.</p>
-</dd><dt class="property-"
+    <dd>Cause of interruption.</dd><dt class="property-"
             title="">
         <span id="createdat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdat_java" style="color: inherit; text-decoration: inherit;">created<wbr>At</a>
@@ -1179,8 +1453,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the job.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the job.</dd><dt class="property-"
             title="">
         <span id="cronid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cronid_java" style="color: inherit; text-decoration: inherit;">cron<wbr>Id</a>
@@ -1188,8 +1461,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduled job ID.</p>
-</dd><dt class="property-"
+    <dd>Scheduled job ID.</dd><dt class="property-"
             title="">
         <span id="datasets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datasets_java" style="color: inherit; text-decoration: inherit;">datasets</a>
@@ -1197,8 +1469,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdataset">List&lt;Job<wbr>Dataset&gt;</a></span>
     </dt>
-    <dd><p>Dataset file for the job.</p>
-</dd><dt class="property-"
+    <dd>Dataset file for the job.</dd><dt class="property-"
             title="">
         <span id="domainnameconfigs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainnameconfigs_java" style="color: inherit; text-decoration: inherit;">domain<wbr>Name<wbr>Configs</a>
@@ -1206,8 +1477,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdomainnameconfig">List&lt;Job<wbr>Domain<wbr>Name<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Domain name binding configuration.</p>
-</dd><dt class="property-"
+    <dd>Domain name binding configuration.</dd><dt class="property-"
             title="">
         <span id="duration_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_java" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -1215,8 +1485,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Job duration.</p>
-</dd><dt class="property-"
+    <dd>Job duration.</dd><dt class="property-"
             title="">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1224,8 +1493,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End time of the job.</p>
-</dd><dt class="property-"
+    <dd>End time of the job.</dd><dt class="property-"
             title="">
         <span id="errorrate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorrate_java" style="color: inherit; text-decoration: inherit;">error<wbr>Rate</a>
@@ -1233,8 +1501,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Percentage of error rate.</p>
-</dd><dt class="property-"
+    <dd>Percentage of error rate.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1242,8 +1509,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_java" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -1251,8 +1517,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Job Id.</p>
-</dd><dt class="property-"
+    <dd>Job Id.</dd><dt class="property-"
             title="">
         <span id="loads_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loads_java" style="color: inherit; text-decoration: inherit;">loads</a>
@@ -1260,8 +1525,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobload">List&lt;Job<wbr>Load&gt;</a></span>
     </dt>
-    <dd><p>Pressure configuration of job.</p>
-</dd><dt class="property-"
+    <dd>Pressure configuration of job.</dd><dt class="property-"
             title="">
         <span id="maxrequestspersecond_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestspersecond_java" style="color: inherit; text-decoration: inherit;">max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -1269,8 +1533,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-"
+    <dd>Maximum requests per second.</dd><dt class="property-"
             title="">
         <span id="maxvirtualusercount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxvirtualusercount_java" style="color: inherit; text-decoration: inherit;">max<wbr>Virtual<wbr>User<wbr>Count</a>
@@ -1278,8 +1541,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of VU for the job.</p>
-</dd><dt class="property-"
+    <dd>Maximum number of VU for the job.</dd><dt class="property-"
             title="">
         <span id="plugins_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugins_java" style="color: inherit; text-decoration: inherit;">plugins</a>
@@ -1287,8 +1549,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobplugin">List&lt;Job<wbr>Plugin&gt;</a></span>
     </dt>
-    <dd><p>Expansion package file information.</p>
-</dd><dt class="property-"
+    <dd>Expansion package file information.</dd><dt class="property-"
             title="">
         <span id="protocols_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocols_java" style="color: inherit; text-decoration: inherit;">protocols</a>
@@ -1296,8 +1557,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobprotocol">List&lt;Job<wbr>Protocol&gt;</a></span>
     </dt>
-    <dd><p>Protocol script information.</p>
-</dd><dt class="property-"
+    <dd>Protocol script information.</dd><dt class="property-"
             title="">
         <span id="requestfiles_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestfiles_java" style="color: inherit; text-decoration: inherit;">request<wbr>Files</a>
@@ -1305,8 +1565,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobrequestfile">List&lt;Job<wbr>Request<wbr>File&gt;</a></span>
     </dt>
-    <dd><p>Request file information.</p>
-</dd><dt class="property-"
+    <dd>Request file information.</dd><dt class="property-"
             title="">
         <span id="requesttotal_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requesttotal_java" style="color: inherit; text-decoration: inherit;">request<wbr>Total</a>
@@ -1314,8 +1573,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Total number of requests.</p>
-</dd><dt class="property-"
+    <dd>Total number of requests.</dd><dt class="property-"
             title="">
         <span id="requestspersecond_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestspersecond_java" style="color: inherit; text-decoration: inherit;">requests<wbr>Per<wbr>Second</a>
@@ -1323,8 +1581,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Average number of requests per second.</p>
-</dd><dt class="property-"
+    <dd>Average number of requests per second.</dd><dt class="property-"
             title="">
         <span id="responsetimeaverage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimeaverage_java" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>Average</a>
@@ -1332,8 +1589,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Average response time.</p>
-</dd><dt class="property-"
+    <dd>Average response time.</dd><dt class="property-"
             title="">
         <span id="responsetimemax_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimemax_java" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>Max</a>
@@ -1341,8 +1597,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Maximum response time.</p>
-</dd><dt class="property-"
+    <dd>Maximum response time.</dd><dt class="property-"
             title="">
         <span id="responsetimemin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimemin_java" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>Min</a>
@@ -1350,8 +1605,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Minimum response time.</p>
-</dd><dt class="property-"
+    <dd>Minimum response time.</dd><dt class="property-"
             title="">
         <span id="responsetimep90_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimep90_java" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>P90</a>
@@ -1359,8 +1613,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>90th percentile response time.</p>
-</dd><dt class="property-"
+    <dd>90th percentile response time.</dd><dt class="property-"
             title="">
         <span id="responsetimep95_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimep95_java" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>P95</a>
@@ -1368,8 +1621,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>95th percentile response time.</p>
-</dd><dt class="property-"
+    <dd>95th percentile response time.</dd><dt class="property-"
             title="">
         <span id="responsetimep99_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimep99_java" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>P99</a>
@@ -1377,8 +1629,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>99th percentile response time.</p>
-</dd><dt class="property-"
+    <dd>99th percentile response time.</dd><dt class="property-"
             title="">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1386,8 +1637,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start time of the job.</p>
-</dd><dt class="property-"
+    <dd>Start time of the job.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1395,8 +1645,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</p>
-</dd><dt class="property-"
+    <dd>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</dd><dt class="property-"
             title="">
         <span id="testscripts_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#testscripts_java" style="color: inherit; text-decoration: inherit;">test<wbr>Scripts</a>
@@ -1404,8 +1653,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobtestscript">List&lt;Job<wbr>Test<wbr>Script&gt;</a></span>
     </dt>
-    <dd><p>Test script information.</p>
-</dd><dt class="property-"
+    <dd>Test script information.</dd><dt class="property-"
             title="">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1413,8 +1661,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd></dl>
+    <dd>Scene Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1428,8 +1675,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cause of interruption.</p>
-</dd><dt class="property-"
+    <dd>Cause of interruption.</dd><dt class="property-"
             title="">
         <span id="createdat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdat_nodejs" style="color: inherit; text-decoration: inherit;">created<wbr>At</a>
@@ -1437,8 +1683,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the job.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the job.</dd><dt class="property-"
             title="">
         <span id="cronid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cronid_nodejs" style="color: inherit; text-decoration: inherit;">cron<wbr>Id</a>
@@ -1446,8 +1691,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduled job ID.</p>
-</dd><dt class="property-"
+    <dd>Scheduled job ID.</dd><dt class="property-"
             title="">
         <span id="datasets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datasets_nodejs" style="color: inherit; text-decoration: inherit;">datasets</a>
@@ -1455,8 +1699,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdataset">Job<wbr>Dataset[]</a></span>
     </dt>
-    <dd><p>Dataset file for the job.</p>
-</dd><dt class="property-"
+    <dd>Dataset file for the job.</dd><dt class="property-"
             title="">
         <span id="domainnameconfigs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainnameconfigs_nodejs" style="color: inherit; text-decoration: inherit;">domain<wbr>Name<wbr>Configs</a>
@@ -1464,8 +1707,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdomainnameconfig">Job<wbr>Domain<wbr>Name<wbr>Config[]</a></span>
     </dt>
-    <dd><p>Domain name binding configuration.</p>
-</dd><dt class="property-"
+    <dd>Domain name binding configuration.</dd><dt class="property-"
             title="">
         <span id="duration_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_nodejs" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -1473,8 +1715,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Job duration.</p>
-</dd><dt class="property-"
+    <dd>Job duration.</dd><dt class="property-"
             title="">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1482,8 +1723,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End time of the job.</p>
-</dd><dt class="property-"
+    <dd>End time of the job.</dd><dt class="property-"
             title="">
         <span id="errorrate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorrate_nodejs" style="color: inherit; text-decoration: inherit;">error<wbr>Rate</a>
@@ -1491,8 +1731,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Percentage of error rate.</p>
-</dd><dt class="property-"
+    <dd>Percentage of error rate.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1500,8 +1739,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -1509,8 +1747,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job Id.</p>
-</dd><dt class="property-"
+    <dd>Job Id.</dd><dt class="property-"
             title="">
         <span id="loads_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loads_nodejs" style="color: inherit; text-decoration: inherit;">loads</a>
@@ -1518,8 +1755,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobload">Job<wbr>Load[]</a></span>
     </dt>
-    <dd><p>Pressure configuration of job.</p>
-</dd><dt class="property-"
+    <dd>Pressure configuration of job.</dd><dt class="property-"
             title="">
         <span id="maxrequestspersecond_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestspersecond_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -1527,8 +1763,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-"
+    <dd>Maximum requests per second.</dd><dt class="property-"
             title="">
         <span id="maxvirtualusercount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxvirtualusercount_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Virtual<wbr>User<wbr>Count</a>
@@ -1536,8 +1771,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of VU for the job.</p>
-</dd><dt class="property-"
+    <dd>Maximum number of VU for the job.</dd><dt class="property-"
             title="">
         <span id="plugins_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugins_nodejs" style="color: inherit; text-decoration: inherit;">plugins</a>
@@ -1545,8 +1779,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobplugin">Job<wbr>Plugin[]</a></span>
     </dt>
-    <dd><p>Expansion package file information.</p>
-</dd><dt class="property-"
+    <dd>Expansion package file information.</dd><dt class="property-"
             title="">
         <span id="protocols_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocols_nodejs" style="color: inherit; text-decoration: inherit;">protocols</a>
@@ -1554,8 +1787,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobprotocol">Job<wbr>Protocol[]</a></span>
     </dt>
-    <dd><p>Protocol script information.</p>
-</dd><dt class="property-"
+    <dd>Protocol script information.</dd><dt class="property-"
             title="">
         <span id="requestfiles_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestfiles_nodejs" style="color: inherit; text-decoration: inherit;">request<wbr>Files</a>
@@ -1563,8 +1795,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobrequestfile">Job<wbr>Request<wbr>File[]</a></span>
     </dt>
-    <dd><p>Request file information.</p>
-</dd><dt class="property-"
+    <dd>Request file information.</dd><dt class="property-"
             title="">
         <span id="requesttotal_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requesttotal_nodejs" style="color: inherit; text-decoration: inherit;">request<wbr>Total</a>
@@ -1572,8 +1803,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total number of requests.</p>
-</dd><dt class="property-"
+    <dd>Total number of requests.</dd><dt class="property-"
             title="">
         <span id="requestspersecond_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestspersecond_nodejs" style="color: inherit; text-decoration: inherit;">requests<wbr>Per<wbr>Second</a>
@@ -1581,8 +1811,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Average number of requests per second.</p>
-</dd><dt class="property-"
+    <dd>Average number of requests per second.</dd><dt class="property-"
             title="">
         <span id="responsetimeaverage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimeaverage_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>Average</a>
@@ -1590,8 +1819,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Average response time.</p>
-</dd><dt class="property-"
+    <dd>Average response time.</dd><dt class="property-"
             title="">
         <span id="responsetimemax_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimemax_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>Max</a>
@@ -1599,8 +1827,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum response time.</p>
-</dd><dt class="property-"
+    <dd>Maximum response time.</dd><dt class="property-"
             title="">
         <span id="responsetimemin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimemin_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>Min</a>
@@ -1608,8 +1835,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Minimum response time.</p>
-</dd><dt class="property-"
+    <dd>Minimum response time.</dd><dt class="property-"
             title="">
         <span id="responsetimep90_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimep90_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>P90</a>
@@ -1617,8 +1843,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>90th percentile response time.</p>
-</dd><dt class="property-"
+    <dd>90th percentile response time.</dd><dt class="property-"
             title="">
         <span id="responsetimep95_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimep95_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>P95</a>
@@ -1626,8 +1851,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>95th percentile response time.</p>
-</dd><dt class="property-"
+    <dd>95th percentile response time.</dd><dt class="property-"
             title="">
         <span id="responsetimep99_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimep99_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>P99</a>
@@ -1635,8 +1859,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>99th percentile response time.</p>
-</dd><dt class="property-"
+    <dd>99th percentile response time.</dd><dt class="property-"
             title="">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1644,8 +1867,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start time of the job.</p>
-</dd><dt class="property-"
+    <dd>Start time of the job.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1653,8 +1875,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</p>
-</dd><dt class="property-"
+    <dd>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</dd><dt class="property-"
             title="">
         <span id="testscripts_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#testscripts_nodejs" style="color: inherit; text-decoration: inherit;">test<wbr>Scripts</a>
@@ -1662,8 +1883,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobtestscript">Job<wbr>Test<wbr>Script[]</a></span>
     </dt>
-    <dd><p>Test script information.</p>
-</dd><dt class="property-"
+    <dd>Test script information.</dd><dt class="property-"
             title="">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1671,8 +1891,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd></dl>
+    <dd>Scene Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1686,8 +1905,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cause of interruption.</p>
-</dd><dt class="property-"
+    <dd>Cause of interruption.</dd><dt class="property-"
             title="">
         <span id="created_at_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_at_python" style="color: inherit; text-decoration: inherit;">created_<wbr>at</a>
@@ -1695,8 +1913,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the job.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the job.</dd><dt class="property-"
             title="">
         <span id="cron_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cron_id_python" style="color: inherit; text-decoration: inherit;">cron_<wbr>id</a>
@@ -1704,26 +1921,23 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scheduled job ID.</p>
-</dd><dt class="property-"
+    <dd>Scheduled job ID.</dd><dt class="property-"
             title="">
         <span id="datasets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datasets_python" style="color: inherit; text-decoration: inherit;">datasets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobdataset">Job<wbr>Dataset]</a></span>
+        <span class="property-type"><a href="#jobdataset">Sequence[Job<wbr>Dataset]</a></span>
     </dt>
-    <dd><p>Dataset file for the job.</p>
-</dd><dt class="property-"
+    <dd>Dataset file for the job.</dd><dt class="property-"
             title="">
         <span id="domain_name_configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_name_configs_python" style="color: inherit; text-decoration: inherit;">domain_<wbr>name_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobdomainnameconfig">Job<wbr>Domain<wbr>Name<wbr>Config]</a></span>
+        <span class="property-type"><a href="#jobdomainnameconfig">Sequence[Job<wbr>Domain<wbr>Name<wbr>Config]</a></span>
     </dt>
-    <dd><p>Domain name binding configuration.</p>
-</dd><dt class="property-"
+    <dd>Domain name binding configuration.</dd><dt class="property-"
             title="">
         <span id="duration_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_python" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -1731,8 +1945,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Job duration.</p>
-</dd><dt class="property-"
+    <dd>Job duration.</dd><dt class="property-"
             title="">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -1740,8 +1953,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>End time of the job.</p>
-</dd><dt class="property-"
+    <dd>End time of the job.</dd><dt class="property-"
             title="">
         <span id="error_rate_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_rate_python" style="color: inherit; text-decoration: inherit;">error_<wbr>rate</a>
@@ -1749,8 +1961,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Percentage of error rate.</p>
-</dd><dt class="property-"
+    <dd>Percentage of error rate.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1758,8 +1969,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="job_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_id_python" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
@@ -1767,17 +1977,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Job Id.</p>
-</dd><dt class="property-"
+    <dd>Job Id.</dd><dt class="property-"
             title="">
         <span id="loads_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loads_python" style="color: inherit; text-decoration: inherit;">loads</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobload">Job<wbr>Load]</a></span>
+        <span class="property-type"><a href="#jobload">Sequence[Job<wbr>Load]</a></span>
     </dt>
-    <dd><p>Pressure configuration of job.</p>
-</dd><dt class="property-"
+    <dd>Pressure configuration of job.</dd><dt class="property-"
             title="">
         <span id="max_requests_per_second_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_requests_per_second_python" style="color: inherit; text-decoration: inherit;">max_<wbr>requests_<wbr>per_<wbr>second</a>
@@ -1785,8 +1993,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-"
+    <dd>Maximum requests per second.</dd><dt class="property-"
             title="">
         <span id="max_virtual_user_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_virtual_user_count_python" style="color: inherit; text-decoration: inherit;">max_<wbr>virtual_<wbr>user_<wbr>count</a>
@@ -1794,35 +2001,31 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of VU for the job.</p>
-</dd><dt class="property-"
+    <dd>Maximum number of VU for the job.</dd><dt class="property-"
             title="">
         <span id="plugins_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugins_python" style="color: inherit; text-decoration: inherit;">plugins</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobplugin">Job<wbr>Plugin]</a></span>
+        <span class="property-type"><a href="#jobplugin">Sequence[Job<wbr>Plugin]</a></span>
     </dt>
-    <dd><p>Expansion package file information.</p>
-</dd><dt class="property-"
+    <dd>Expansion package file information.</dd><dt class="property-"
             title="">
         <span id="protocols_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocols_python" style="color: inherit; text-decoration: inherit;">protocols</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobprotocol">Job<wbr>Protocol]</a></span>
+        <span class="property-type"><a href="#jobprotocol">Sequence[Job<wbr>Protocol]</a></span>
     </dt>
-    <dd><p>Protocol script information.</p>
-</dd><dt class="property-"
+    <dd>Protocol script information.</dd><dt class="property-"
             title="">
         <span id="request_files_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_files_python" style="color: inherit; text-decoration: inherit;">request_<wbr>files</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobrequestfile">Job<wbr>Request<wbr>File]</a></span>
+        <span class="property-type"><a href="#jobrequestfile">Sequence[Job<wbr>Request<wbr>File]</a></span>
     </dt>
-    <dd><p>Request file information.</p>
-</dd><dt class="property-"
+    <dd>Request file information.</dd><dt class="property-"
             title="">
         <span id="request_total_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_total_python" style="color: inherit; text-decoration: inherit;">request_<wbr>total</a>
@@ -1830,8 +2033,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Total number of requests.</p>
-</dd><dt class="property-"
+    <dd>Total number of requests.</dd><dt class="property-"
             title="">
         <span id="requests_per_second_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requests_per_second_python" style="color: inherit; text-decoration: inherit;">requests_<wbr>per_<wbr>second</a>
@@ -1839,8 +2041,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Average number of requests per second.</p>
-</dd><dt class="property-"
+    <dd>Average number of requests per second.</dd><dt class="property-"
             title="">
         <span id="response_time_average_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_time_average_python" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>average</a>
@@ -1848,8 +2049,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Average response time.</p>
-</dd><dt class="property-"
+    <dd>Average response time.</dd><dt class="property-"
             title="">
         <span id="response_time_max_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_time_max_python" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>max</a>
@@ -1857,8 +2057,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Maximum response time.</p>
-</dd><dt class="property-"
+    <dd>Maximum response time.</dd><dt class="property-"
             title="">
         <span id="response_time_min_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_time_min_python" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>min</a>
@@ -1866,8 +2065,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Minimum response time.</p>
-</dd><dt class="property-"
+    <dd>Minimum response time.</dd><dt class="property-"
             title="">
         <span id="response_time_p90_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_time_p90_python" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>p90</a>
@@ -1875,8 +2073,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>90th percentile response time.</p>
-</dd><dt class="property-"
+    <dd>90th percentile response time.</dd><dt class="property-"
             title="">
         <span id="response_time_p95_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_time_p95_python" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>p95</a>
@@ -1884,8 +2081,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>95th percentile response time.</p>
-</dd><dt class="property-"
+    <dd>95th percentile response time.</dd><dt class="property-"
             title="">
         <span id="response_time_p99_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#response_time_p99_python" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>p99</a>
@@ -1893,8 +2089,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>99th percentile response time.</p>
-</dd><dt class="property-"
+    <dd>99th percentile response time.</dd><dt class="property-"
             title="">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -1902,8 +2097,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Start time of the job.</p>
-</dd><dt class="property-"
+    <dd>Start time of the job.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1911,17 +2105,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</p>
-</dd><dt class="property-"
+    <dd>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</dd><dt class="property-"
             title="">
         <span id="test_scripts_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#test_scripts_python" style="color: inherit; text-decoration: inherit;">test_<wbr>scripts</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobtestscript">Job<wbr>Test<wbr>Script]</a></span>
+        <span class="property-type"><a href="#jobtestscript">Sequence[Job<wbr>Test<wbr>Script]</a></span>
     </dt>
-    <dd><p>Test script information.</p>
-</dd><dt class="property-"
+    <dd>Test script information.</dd><dt class="property-"
             title="">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1929,8 +2121,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd></dl>
+    <dd>Scene Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1944,8 +2135,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cause of interruption.</p>
-</dd><dt class="property-"
+    <dd>Cause of interruption.</dd><dt class="property-"
             title="">
         <span id="createdat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdat_yaml" style="color: inherit; text-decoration: inherit;">created<wbr>At</a>
@@ -1953,8 +2143,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the job.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the job.</dd><dt class="property-"
             title="">
         <span id="cronid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cronid_yaml" style="color: inherit; text-decoration: inherit;">cron<wbr>Id</a>
@@ -1962,8 +2151,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduled job ID.</p>
-</dd><dt class="property-"
+    <dd>Scheduled job ID.</dd><dt class="property-"
             title="">
         <span id="datasets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datasets_yaml" style="color: inherit; text-decoration: inherit;">datasets</a>
@@ -1971,8 +2159,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdataset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Dataset file for the job.</p>
-</dd><dt class="property-"
+    <dd>Dataset file for the job.</dd><dt class="property-"
             title="">
         <span id="domainnameconfigs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainnameconfigs_yaml" style="color: inherit; text-decoration: inherit;">domain<wbr>Name<wbr>Configs</a>
@@ -1980,8 +2167,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdomainnameconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Domain name binding configuration.</p>
-</dd><dt class="property-"
+    <dd>Domain name binding configuration.</dd><dt class="property-"
             title="">
         <span id="duration_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_yaml" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -1989,8 +2175,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Job duration.</p>
-</dd><dt class="property-"
+    <dd>Job duration.</dd><dt class="property-"
             title="">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1998,8 +2183,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End time of the job.</p>
-</dd><dt class="property-"
+    <dd>End time of the job.</dd><dt class="property-"
             title="">
         <span id="errorrate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorrate_yaml" style="color: inherit; text-decoration: inherit;">error<wbr>Rate</a>
@@ -2007,8 +2191,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Percentage of error rate.</p>
-</dd><dt class="property-"
+    <dd>Percentage of error rate.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2016,8 +2199,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -2025,8 +2207,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Job Id.</p>
-</dd><dt class="property-"
+    <dd>Job Id.</dd><dt class="property-"
             title="">
         <span id="loads_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loads_yaml" style="color: inherit; text-decoration: inherit;">loads</a>
@@ -2034,8 +2215,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobload">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Pressure configuration of job.</p>
-</dd><dt class="property-"
+    <dd>Pressure configuration of job.</dd><dt class="property-"
             title="">
         <span id="maxrequestspersecond_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestspersecond_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -2043,8 +2223,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-"
+    <dd>Maximum requests per second.</dd><dt class="property-"
             title="">
         <span id="maxvirtualusercount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxvirtualusercount_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Virtual<wbr>User<wbr>Count</a>
@@ -2052,8 +2231,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of VU for the job.</p>
-</dd><dt class="property-"
+    <dd>Maximum number of VU for the job.</dd><dt class="property-"
             title="">
         <span id="plugins_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugins_yaml" style="color: inherit; text-decoration: inherit;">plugins</a>
@@ -2061,8 +2239,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobplugin">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Expansion package file information.</p>
-</dd><dt class="property-"
+    <dd>Expansion package file information.</dd><dt class="property-"
             title="">
         <span id="protocols_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocols_yaml" style="color: inherit; text-decoration: inherit;">protocols</a>
@@ -2070,8 +2247,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobprotocol">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Protocol script information.</p>
-</dd><dt class="property-"
+    <dd>Protocol script information.</dd><dt class="property-"
             title="">
         <span id="requestfiles_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestfiles_yaml" style="color: inherit; text-decoration: inherit;">request<wbr>Files</a>
@@ -2079,8 +2255,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobrequestfile">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Request file information.</p>
-</dd><dt class="property-"
+    <dd>Request file information.</dd><dt class="property-"
             title="">
         <span id="requesttotal_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requesttotal_yaml" style="color: inherit; text-decoration: inherit;">request<wbr>Total</a>
@@ -2088,8 +2263,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total number of requests.</p>
-</dd><dt class="property-"
+    <dd>Total number of requests.</dd><dt class="property-"
             title="">
         <span id="requestspersecond_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestspersecond_yaml" style="color: inherit; text-decoration: inherit;">requests<wbr>Per<wbr>Second</a>
@@ -2097,8 +2271,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Average number of requests per second.</p>
-</dd><dt class="property-"
+    <dd>Average number of requests per second.</dd><dt class="property-"
             title="">
         <span id="responsetimeaverage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimeaverage_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>Average</a>
@@ -2106,8 +2279,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Average response time.</p>
-</dd><dt class="property-"
+    <dd>Average response time.</dd><dt class="property-"
             title="">
         <span id="responsetimemax_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimemax_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>Max</a>
@@ -2115,8 +2287,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum response time.</p>
-</dd><dt class="property-"
+    <dd>Maximum response time.</dd><dt class="property-"
             title="">
         <span id="responsetimemin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimemin_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>Min</a>
@@ -2124,8 +2295,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Minimum response time.</p>
-</dd><dt class="property-"
+    <dd>Minimum response time.</dd><dt class="property-"
             title="">
         <span id="responsetimep90_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimep90_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>P90</a>
@@ -2133,8 +2303,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>90th percentile response time.</p>
-</dd><dt class="property-"
+    <dd>90th percentile response time.</dd><dt class="property-"
             title="">
         <span id="responsetimep95_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimep95_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>P95</a>
@@ -2142,8 +2311,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>95th percentile response time.</p>
-</dd><dt class="property-"
+    <dd>95th percentile response time.</dd><dt class="property-"
             title="">
         <span id="responsetimep99_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#responsetimep99_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>P99</a>
@@ -2151,8 +2319,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>99th percentile response time.</p>
-</dd><dt class="property-"
+    <dd>99th percentile response time.</dd><dt class="property-"
             title="">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -2160,8 +2327,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start time of the job.</p>
-</dd><dt class="property-"
+    <dd>Start time of the job.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2169,8 +2335,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</p>
-</dd><dt class="property-"
+    <dd>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</dd><dt class="property-"
             title="">
         <span id="testscripts_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#testscripts_yaml" style="color: inherit; text-decoration: inherit;">test<wbr>Scripts</a>
@@ -2178,8 +2343,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobtestscript">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Test script information.</p>
-</dd><dt class="property-"
+    <dd>Test script information.</dd><dt class="property-"
             title="">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2187,8 +2351,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd></dl>
+    <dd>Scene Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2198,40 +2361,40 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Job resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">JobState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Job</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">JobState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Job</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">abort_reason</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">created_at</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">cron_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">datasets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_pts.JobDatasetArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">datasets</span><span class="p">:</span> <span class="nx">Optional[Sequence[JobDatasetArgs]]</span> = None<span class="p">,</span>
         <span class="nx">debug</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-        <span class="nx">domain_name_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_pts.JobDomainNameConfigArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">domain_name_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[JobDomainNameConfigArgs]]</span> = None<span class="p">,</span>
         <span class="nx">duration</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">end_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">error_rate</span><span class="p">:</span> <span class="nx">Optional[float]</span> = None<span class="p">,</span>
         <span class="nx">job_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">job_owner</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">loads</span><span class="p">:</span> <span class="nx">Optional[Sequence[_pts.JobLoadArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">loads</span><span class="p">:</span> <span class="nx">Optional[Sequence[JobLoadArgs]]</span> = None<span class="p">,</span>
         <span class="nx">max_requests_per_second</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">max_virtual_user_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">note</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">plugins</span><span class="p">:</span> <span class="nx">Optional[Sequence[_pts.JobPluginArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">plugins</span><span class="p">:</span> <span class="nx">Optional[Sequence[JobPluginArgs]]</span> = None<span class="p">,</span>
         <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">protocols</span><span class="p">:</span> <span class="nx">Optional[Sequence[_pts.JobProtocolArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">request_files</span><span class="p">:</span> <span class="nx">Optional[Sequence[_pts.JobRequestFileArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">protocols</span><span class="p">:</span> <span class="nx">Optional[Sequence[JobProtocolArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">request_files</span><span class="p">:</span> <span class="nx">Optional[Sequence[JobRequestFileArgs]]</span> = None<span class="p">,</span>
         <span class="nx">request_total</span><span class="p">:</span> <span class="nx">Optional[float]</span> = None<span class="p">,</span>
         <span class="nx">requests_per_second</span><span class="p">:</span> <span class="nx">Optional[float]</span> = None<span class="p">,</span>
         <span class="nx">response_time_average</span><span class="p">:</span> <span class="nx">Optional[float]</span> = None<span class="p">,</span>
@@ -2243,106 +2406,145 @@ Get an existing Job resource's state with the given name, ID, and optional extra
         <span class="nx">scenario_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">test_scripts</span><span class="p">:</span> <span class="nx">Optional[Sequence[_pts.JobTestScriptArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">test_scripts</span><span class="p">:</span> <span class="nx">Optional[Sequence[JobTestScriptArgs]]</span> = None<span class="p">,</span>
         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Job</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetJob<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">JobState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Job</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetJob<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">JobState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Job</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Job</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">JobState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Job</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">JobState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Job</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">JobState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Job</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">JobState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingJob</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Pts:Job</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_pts_job</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">JobState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">JobState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2350,28 +2552,31 @@ Get an existing Job resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">JobState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2379,28 +2584,31 @@ Get an existing Job resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">JobState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2420,8 +2628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cause of interruption.</p>
-</dd><dt class="property-optional"
+    <dd>Cause of interruption.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createdat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdat_csharp" style="color: inherit; text-decoration: inherit;">Created<wbr>At</a>
@@ -2429,8 +2636,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the job.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cronid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cronid_csharp" style="color: inherit; text-decoration: inherit;">Cron<wbr>Id</a>
@@ -2438,17 +2644,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduled job ID.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduled job ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_datasets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datasets_csharp" style="color: inherit; text-decoration: inherit;">Datasets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobdataset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Dataset<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#jobdataset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Dataset&gt;</a></span>
     </dt>
-    <dd><p>Dataset file for the job.</p>
-</dd><dt class="property-optional"
+    <dd>Dataset file for the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_debug_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_debug_csharp" style="color: inherit; text-decoration: inherit;">Debug</a>
@@ -2456,17 +2660,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to debug.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to debug.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domainnameconfigs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domainnameconfigs_csharp" style="color: inherit; text-decoration: inherit;">Domain<wbr>Name<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobdomainnameconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#jobdomainnameconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Domain<wbr>Name<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Domain name binding configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name binding configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_duration_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_duration_csharp" style="color: inherit; text-decoration: inherit;">Duration</a>
@@ -2474,8 +2676,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Job duration.</p>
-</dd><dt class="property-optional"
+    <dd>Job duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -2483,8 +2684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End time of the job.</p>
-</dd><dt class="property-optional"
+    <dd>End time of the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_errorrate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_errorrate_csharp" style="color: inherit; text-decoration: inherit;">Error<wbr>Rate</a>
@@ -2492,8 +2692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Percentage of error rate.</p>
-</dd><dt class="property-optional"
+    <dd>Percentage of error rate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobid_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -2501,8 +2700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job Id.</p>
-</dd><dt class="property-optional"
+    <dd>Job Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobowner_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobowner_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Owner</a>
@@ -2510,17 +2708,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job owner.</p>
-</dd><dt class="property-optional"
+    <dd>Job owner.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loads_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loads_csharp" style="color: inherit; text-decoration: inherit;">Loads</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobload">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Load<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#jobload">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Load&gt;</a></span>
     </dt>
-    <dd><p>Pressure configuration of job.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure configuration of job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxrequestspersecond_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxrequestspersecond_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -2528,8 +2724,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxvirtualusercount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxvirtualusercount_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Virtual<wbr>User<wbr>Count</a>
@@ -2537,8 +2732,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of VU for the job.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of VU for the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_note_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_note_csharp" style="color: inherit; text-decoration: inherit;">Note</a>
@@ -2546,17 +2740,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Note.</p>
-</dd><dt class="property-optional"
+    <dd>Note.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_plugins_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_plugins_csharp" style="color: inherit; text-decoration: inherit;">Plugins</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobplugin">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Plugin<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#jobplugin">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Plugin&gt;</a></span>
     </dt>
-    <dd><p>Expansion package file information.</p>
-</dd><dt class="property-optional"
+    <dd>Expansion package file information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2564,26 +2756,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocols_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocols_csharp" style="color: inherit; text-decoration: inherit;">Protocols</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobprotocol">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Protocol<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#jobprotocol">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Protocol&gt;</a></span>
     </dt>
-    <dd><p>Protocol script information.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol script information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_requestfiles_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_requestfiles_csharp" style="color: inherit; text-decoration: inherit;">Request<wbr>Files</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobrequestfile">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Request<wbr>File<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#jobrequestfile">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Request<wbr>File&gt;</a></span>
     </dt>
-    <dd><p>Request file information.</p>
-</dd><dt class="property-optional"
+    <dd>Request file information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_requesttotal_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_requesttotal_csharp" style="color: inherit; text-decoration: inherit;">Request<wbr>Total</a>
@@ -2591,8 +2780,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Total number of requests.</p>
-</dd><dt class="property-optional"
+    <dd>Total number of requests.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_requestspersecond_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_requestspersecond_csharp" style="color: inherit; text-decoration: inherit;">Requests<wbr>Per<wbr>Second</a>
@@ -2600,8 +2788,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Average number of requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Average number of requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimeaverage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimeaverage_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>Average</a>
@@ -2609,8 +2796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Average response time.</p>
-</dd><dt class="property-optional"
+    <dd>Average response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimemax_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimemax_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>Max</a>
@@ -2618,8 +2804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Maximum response time.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimemin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimemin_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>Min</a>
@@ -2627,8 +2812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Minimum response time.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimep90_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimep90_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>P90</a>
@@ -2636,8 +2820,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>90th percentile response time.</p>
-</dd><dt class="property-optional"
+    <dd>90th percentile response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimep95_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimep95_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>P95</a>
@@ -2645,8 +2828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>95th percentile response time.</p>
-</dd><dt class="property-optional"
+    <dd>95th percentile response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimep99_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimep99_csharp" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>P99</a>
@@ -2654,8 +2836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>99th percentile response time.</p>
-</dd><dt class="property-optional"
+    <dd>99th percentile response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scenarioid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scenarioid_csharp" style="color: inherit; text-decoration: inherit;">Scenario<wbr>Id</a>
@@ -2663,8 +2844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pts scenario id.</p>
-</dd><dt class="property-optional"
+    <dd>Pts scenario id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -2672,8 +2852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start time of the job.</p>
-</dd><dt class="property-optional"
+    <dd>Start time of the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2681,17 +2860,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</p>
-</dd><dt class="property-optional"
+    <dd>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_testscripts_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_testscripts_csharp" style="color: inherit; text-decoration: inherit;">Test<wbr>Scripts</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobtestscript">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Test<wbr>Script<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#jobtestscript">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Test<wbr>Script&gt;</a></span>
     </dt>
-    <dd><p>Test script information.</p>
-</dd><dt class="property-optional"
+    <dd>Test script information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2699,8 +2876,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd></dl>
+    <dd>Scene Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2714,8 +2890,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cause of interruption.</p>
-</dd><dt class="property-optional"
+    <dd>Cause of interruption.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createdat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdat_go" style="color: inherit; text-decoration: inherit;">Created<wbr>At</a>
@@ -2723,8 +2898,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the job.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cronid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cronid_go" style="color: inherit; text-decoration: inherit;">Cron<wbr>Id</a>
@@ -2732,8 +2906,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduled job ID.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduled job ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_datasets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datasets_go" style="color: inherit; text-decoration: inherit;">Datasets</a>
@@ -2741,8 +2914,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdataset">[]Job<wbr>Dataset<wbr>Args</a></span>
     </dt>
-    <dd><p>Dataset file for the job.</p>
-</dd><dt class="property-optional"
+    <dd>Dataset file for the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_debug_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_debug_go" style="color: inherit; text-decoration: inherit;">Debug</a>
@@ -2750,8 +2922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to debug.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to debug.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domainnameconfigs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domainnameconfigs_go" style="color: inherit; text-decoration: inherit;">Domain<wbr>Name<wbr>Configs</a>
@@ -2759,8 +2930,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdomainnameconfig">[]Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Domain name binding configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name binding configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_duration_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_duration_go" style="color: inherit; text-decoration: inherit;">Duration</a>
@@ -2768,8 +2938,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Job duration.</p>
-</dd><dt class="property-optional"
+    <dd>Job duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -2777,8 +2946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End time of the job.</p>
-</dd><dt class="property-optional"
+    <dd>End time of the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_errorrate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_errorrate_go" style="color: inherit; text-decoration: inherit;">Error<wbr>Rate</a>
@@ -2786,8 +2954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Percentage of error rate.</p>
-</dd><dt class="property-optional"
+    <dd>Percentage of error rate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobid_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -2795,8 +2962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job Id.</p>
-</dd><dt class="property-optional"
+    <dd>Job Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobowner_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobowner_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Owner</a>
@@ -2804,8 +2970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job owner.</p>
-</dd><dt class="property-optional"
+    <dd>Job owner.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loads_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loads_go" style="color: inherit; text-decoration: inherit;">Loads</a>
@@ -2813,8 +2978,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobload">[]Job<wbr>Load<wbr>Args</a></span>
     </dt>
-    <dd><p>Pressure configuration of job.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure configuration of job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxrequestspersecond_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxrequestspersecond_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -2822,8 +2986,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxvirtualusercount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxvirtualusercount_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Virtual<wbr>User<wbr>Count</a>
@@ -2831,8 +2994,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of VU for the job.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of VU for the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_note_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_note_go" style="color: inherit; text-decoration: inherit;">Note</a>
@@ -2840,8 +3002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Note.</p>
-</dd><dt class="property-optional"
+    <dd>Note.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_plugins_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_plugins_go" style="color: inherit; text-decoration: inherit;">Plugins</a>
@@ -2849,8 +3010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobplugin">[]Job<wbr>Plugin<wbr>Args</a></span>
     </dt>
-    <dd><p>Expansion package file information.</p>
-</dd><dt class="property-optional"
+    <dd>Expansion package file information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2858,8 +3018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocols_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocols_go" style="color: inherit; text-decoration: inherit;">Protocols</a>
@@ -2867,8 +3026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobprotocol">[]Job<wbr>Protocol<wbr>Args</a></span>
     </dt>
-    <dd><p>Protocol script information.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol script information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_requestfiles_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_requestfiles_go" style="color: inherit; text-decoration: inherit;">Request<wbr>Files</a>
@@ -2876,8 +3034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobrequestfile">[]Job<wbr>Request<wbr>File<wbr>Args</a></span>
     </dt>
-    <dd><p>Request file information.</p>
-</dd><dt class="property-optional"
+    <dd>Request file information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_requesttotal_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_requesttotal_go" style="color: inherit; text-decoration: inherit;">Request<wbr>Total</a>
@@ -2885,8 +3042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Total number of requests.</p>
-</dd><dt class="property-optional"
+    <dd>Total number of requests.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_requestspersecond_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_requestspersecond_go" style="color: inherit; text-decoration: inherit;">Requests<wbr>Per<wbr>Second</a>
@@ -2894,8 +3050,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Average number of requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Average number of requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimeaverage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimeaverage_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>Average</a>
@@ -2903,8 +3058,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Average response time.</p>
-</dd><dt class="property-optional"
+    <dd>Average response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimemax_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimemax_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>Max</a>
@@ -2912,8 +3066,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Maximum response time.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimemin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimemin_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>Min</a>
@@ -2921,8 +3074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Minimum response time.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimep90_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimep90_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>P90</a>
@@ -2930,8 +3082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>90th percentile response time.</p>
-</dd><dt class="property-optional"
+    <dd>90th percentile response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimep95_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimep95_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>P95</a>
@@ -2939,8 +3090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>95th percentile response time.</p>
-</dd><dt class="property-optional"
+    <dd>95th percentile response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimep99_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimep99_go" style="color: inherit; text-decoration: inherit;">Response<wbr>Time<wbr>P99</a>
@@ -2948,8 +3098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>99th percentile response time.</p>
-</dd><dt class="property-optional"
+    <dd>99th percentile response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scenarioid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scenarioid_go" style="color: inherit; text-decoration: inherit;">Scenario<wbr>Id</a>
@@ -2957,8 +3106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pts scenario id.</p>
-</dd><dt class="property-optional"
+    <dd>Pts scenario id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -2966,8 +3114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start time of the job.</p>
-</dd><dt class="property-optional"
+    <dd>Start time of the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2975,8 +3122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</p>
-</dd><dt class="property-optional"
+    <dd>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_testscripts_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_testscripts_go" style="color: inherit; text-decoration: inherit;">Test<wbr>Scripts</a>
@@ -2984,8 +3130,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobtestscript">[]Job<wbr>Test<wbr>Script<wbr>Args</a></span>
     </dt>
-    <dd><p>Test script information.</p>
-</dd><dt class="property-optional"
+    <dd>Test script information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2993,8 +3138,269 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd></dl>
+    <dd>Scene Type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_abort_reason_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_abort_reason_hcl" style="color: inherit; text-decoration: inherit;">abort_<wbr>reason</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cause of interruption.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_created_at_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_created_at_hcl" style="color: inherit; text-decoration: inherit;">created_<wbr>at</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the job.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cron_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cron_id_hcl" style="color: inherit; text-decoration: inherit;">cron_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduled job ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_datasets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datasets_hcl" style="color: inherit; text-decoration: inherit;">datasets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobdataset">list(object)</a></span>
+    </dt>
+    <dd>Dataset file for the job.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_debug_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_debug_hcl" style="color: inherit; text-decoration: inherit;">debug</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to debug.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_domain_name_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_name_configs_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>name_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobdomainnameconfig">list(object)</a></span>
+    </dt>
+    <dd>Domain name binding configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_duration_hcl" style="color: inherit; text-decoration: inherit;">duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Job duration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>End time of the job.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_error_rate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_error_rate_hcl" style="color: inherit; text-decoration: inherit;">error_<wbr>rate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Percentage of error rate.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_job_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_job_id_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Job Id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_job_owner_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_job_owner_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>owner</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Job owner.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_loads_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loads_hcl" style="color: inherit; text-decoration: inherit;">loads</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobload">list(object)</a></span>
+    </dt>
+    <dd>Pressure configuration of job.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_requests_per_second_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_requests_per_second_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>requests_<wbr>per_<wbr>second</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_virtual_user_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_virtual_user_count_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>virtual_<wbr>user_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of VU for the job.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_note_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_note_hcl" style="color: inherit; text-decoration: inherit;">note</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Note.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_plugins_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_plugins_hcl" style="color: inherit; text-decoration: inherit;">plugins</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobplugin">list(object)</a></span>
+    </dt>
+    <dd>Expansion package file information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Project ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_protocols_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocols_hcl" style="color: inherit; text-decoration: inherit;">protocols</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobprotocol">list(object)</a></span>
+    </dt>
+    <dd>Protocol script information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_request_files_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_request_files_hcl" style="color: inherit; text-decoration: inherit;">request_<wbr>files</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobrequestfile">list(object)</a></span>
+    </dt>
+    <dd>Request file information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_request_total_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_request_total_hcl" style="color: inherit; text-decoration: inherit;">request_<wbr>total</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total number of requests.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_requests_per_second_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_requests_per_second_hcl" style="color: inherit; text-decoration: inherit;">requests_<wbr>per_<wbr>second</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Average number of requests per second.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_response_time_average_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_response_time_average_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>average</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Average response time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_response_time_max_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_response_time_max_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>max</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum response time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_response_time_min_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_response_time_min_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>min</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum response time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_response_time_p90_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_response_time_p90_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>p90</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>90th percentile response time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_response_time_p95_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_response_time_p95_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>p95</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>95th percentile response time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_response_time_p99_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_response_time_p99_hcl" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>p99</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>99th percentile response time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scenario_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scenario_id_hcl" style="color: inherit; text-decoration: inherit;">scenario_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pts scenario id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Start time of the job.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_test_scripts_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_test_scripts_hcl" style="color: inherit; text-decoration: inherit;">test_<wbr>scripts</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobtestscript">list(object)</a></span>
+    </dt>
+    <dd>Test script information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scene Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3008,8 +3414,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Cause of interruption.</p>
-</dd><dt class="property-optional"
+    <dd>Cause of interruption.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createdat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdat_java" style="color: inherit; text-decoration: inherit;">created<wbr>At</a>
@@ -3017,8 +3422,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the job.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cronid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cronid_java" style="color: inherit; text-decoration: inherit;">cron<wbr>Id</a>
@@ -3026,17 +3430,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduled job ID.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduled job ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_datasets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datasets_java" style="color: inherit; text-decoration: inherit;">datasets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobdataset">List&lt;Job<wbr>Dataset<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#jobdataset">List&lt;Job<wbr>Dataset&gt;</a></span>
     </dt>
-    <dd><p>Dataset file for the job.</p>
-</dd><dt class="property-optional"
+    <dd>Dataset file for the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_debug_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_debug_java" style="color: inherit; text-decoration: inherit;">debug</a>
@@ -3044,17 +3446,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to debug.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to debug.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domainnameconfigs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domainnameconfigs_java" style="color: inherit; text-decoration: inherit;">domain<wbr>Name<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobdomainnameconfig">List&lt;Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#jobdomainnameconfig">List&lt;Job<wbr>Domain<wbr>Name<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Domain name binding configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name binding configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_duration_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_duration_java" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -3062,8 +3462,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Job duration.</p>
-</dd><dt class="property-optional"
+    <dd>Job duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -3071,8 +3470,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End time of the job.</p>
-</dd><dt class="property-optional"
+    <dd>End time of the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_errorrate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_errorrate_java" style="color: inherit; text-decoration: inherit;">error<wbr>Rate</a>
@@ -3080,8 +3478,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Percentage of error rate.</p>
-</dd><dt class="property-optional"
+    <dd>Percentage of error rate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobid_java" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -3089,8 +3486,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Job Id.</p>
-</dd><dt class="property-optional"
+    <dd>Job Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobowner_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobowner_java" style="color: inherit; text-decoration: inherit;">job<wbr>Owner</a>
@@ -3098,17 +3494,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Job owner.</p>
-</dd><dt class="property-optional"
+    <dd>Job owner.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loads_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loads_java" style="color: inherit; text-decoration: inherit;">loads</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobload">List&lt;Job<wbr>Load<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#jobload">List&lt;Job<wbr>Load&gt;</a></span>
     </dt>
-    <dd><p>Pressure configuration of job.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure configuration of job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxrequestspersecond_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxrequestspersecond_java" style="color: inherit; text-decoration: inherit;">max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -3116,8 +3510,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxvirtualusercount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxvirtualusercount_java" style="color: inherit; text-decoration: inherit;">max<wbr>Virtual<wbr>User<wbr>Count</a>
@@ -3125,8 +3518,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of VU for the job.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of VU for the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_note_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_note_java" style="color: inherit; text-decoration: inherit;">note</a>
@@ -3134,17 +3526,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Note.</p>
-</dd><dt class="property-optional"
+    <dd>Note.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_plugins_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_plugins_java" style="color: inherit; text-decoration: inherit;">plugins</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobplugin">List&lt;Job<wbr>Plugin<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#jobplugin">List&lt;Job<wbr>Plugin&gt;</a></span>
     </dt>
-    <dd><p>Expansion package file information.</p>
-</dd><dt class="property-optional"
+    <dd>Expansion package file information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3152,26 +3542,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocols_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocols_java" style="color: inherit; text-decoration: inherit;">protocols</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobprotocol">List&lt;Job<wbr>Protocol<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#jobprotocol">List&lt;Job<wbr>Protocol&gt;</a></span>
     </dt>
-    <dd><p>Protocol script information.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol script information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_requestfiles_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_requestfiles_java" style="color: inherit; text-decoration: inherit;">request<wbr>Files</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobrequestfile">List&lt;Job<wbr>Request<wbr>File<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#jobrequestfile">List&lt;Job<wbr>Request<wbr>File&gt;</a></span>
     </dt>
-    <dd><p>Request file information.</p>
-</dd><dt class="property-optional"
+    <dd>Request file information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_requesttotal_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_requesttotal_java" style="color: inherit; text-decoration: inherit;">request<wbr>Total</a>
@@ -3179,8 +3566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Total number of requests.</p>
-</dd><dt class="property-optional"
+    <dd>Total number of requests.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_requestspersecond_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_requestspersecond_java" style="color: inherit; text-decoration: inherit;">requests<wbr>Per<wbr>Second</a>
@@ -3188,8 +3574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Average number of requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Average number of requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimeaverage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimeaverage_java" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>Average</a>
@@ -3197,8 +3582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Average response time.</p>
-</dd><dt class="property-optional"
+    <dd>Average response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimemax_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimemax_java" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>Max</a>
@@ -3206,8 +3590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Maximum response time.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimemin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimemin_java" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>Min</a>
@@ -3215,8 +3598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Minimum response time.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimep90_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimep90_java" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>P90</a>
@@ -3224,8 +3606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>90th percentile response time.</p>
-</dd><dt class="property-optional"
+    <dd>90th percentile response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimep95_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimep95_java" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>P95</a>
@@ -3233,8 +3614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>95th percentile response time.</p>
-</dd><dt class="property-optional"
+    <dd>95th percentile response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimep99_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimep99_java" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>P99</a>
@@ -3242,8 +3622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>99th percentile response time.</p>
-</dd><dt class="property-optional"
+    <dd>99th percentile response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scenarioid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scenarioid_java" style="color: inherit; text-decoration: inherit;">scenario<wbr>Id</a>
@@ -3251,8 +3630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pts scenario id.</p>
-</dd><dt class="property-optional"
+    <dd>Pts scenario id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -3260,8 +3638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start time of the job.</p>
-</dd><dt class="property-optional"
+    <dd>Start time of the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3269,17 +3646,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</p>
-</dd><dt class="property-optional"
+    <dd>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_testscripts_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_testscripts_java" style="color: inherit; text-decoration: inherit;">test<wbr>Scripts</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobtestscript">List&lt;Job<wbr>Test<wbr>Script<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#jobtestscript">List&lt;Job<wbr>Test<wbr>Script&gt;</a></span>
     </dt>
-    <dd><p>Test script information.</p>
-</dd><dt class="property-optional"
+    <dd>Test script information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3287,8 +3662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd></dl>
+    <dd>Scene Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3302,8 +3676,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cause of interruption.</p>
-</dd><dt class="property-optional"
+    <dd>Cause of interruption.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createdat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdat_nodejs" style="color: inherit; text-decoration: inherit;">created<wbr>At</a>
@@ -3311,8 +3684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the job.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cronid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cronid_nodejs" style="color: inherit; text-decoration: inherit;">cron<wbr>Id</a>
@@ -3320,17 +3692,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduled job ID.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduled job ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_datasets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datasets_nodejs" style="color: inherit; text-decoration: inherit;">datasets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobdataset">Job<wbr>Dataset<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#jobdataset">Job<wbr>Dataset[]</a></span>
     </dt>
-    <dd><p>Dataset file for the job.</p>
-</dd><dt class="property-optional"
+    <dd>Dataset file for the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_debug_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_debug_nodejs" style="color: inherit; text-decoration: inherit;">debug</a>
@@ -3338,17 +3708,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to debug.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to debug.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domainnameconfigs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domainnameconfigs_nodejs" style="color: inherit; text-decoration: inherit;">domain<wbr>Name<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobdomainnameconfig">Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#jobdomainnameconfig">Job<wbr>Domain<wbr>Name<wbr>Config[]</a></span>
     </dt>
-    <dd><p>Domain name binding configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name binding configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_duration_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_duration_nodejs" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -3356,8 +3724,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Job duration.</p>
-</dd><dt class="property-optional"
+    <dd>Job duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -3365,8 +3732,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End time of the job.</p>
-</dd><dt class="property-optional"
+    <dd>End time of the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_errorrate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_errorrate_nodejs" style="color: inherit; text-decoration: inherit;">error<wbr>Rate</a>
@@ -3374,8 +3740,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Percentage of error rate.</p>
-</dd><dt class="property-optional"
+    <dd>Percentage of error rate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobid_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -3383,8 +3748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job Id.</p>
-</dd><dt class="property-optional"
+    <dd>Job Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobowner_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobowner_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Owner</a>
@@ -3392,17 +3756,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job owner.</p>
-</dd><dt class="property-optional"
+    <dd>Job owner.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loads_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loads_nodejs" style="color: inherit; text-decoration: inherit;">loads</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobload">Job<wbr>Load<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#jobload">Job<wbr>Load[]</a></span>
     </dt>
-    <dd><p>Pressure configuration of job.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure configuration of job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxrequestspersecond_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxrequestspersecond_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -3410,8 +3772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxvirtualusercount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxvirtualusercount_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Virtual<wbr>User<wbr>Count</a>
@@ -3419,8 +3780,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of VU for the job.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of VU for the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_note_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_note_nodejs" style="color: inherit; text-decoration: inherit;">note</a>
@@ -3428,17 +3788,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Note.</p>
-</dd><dt class="property-optional"
+    <dd>Note.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_plugins_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_plugins_nodejs" style="color: inherit; text-decoration: inherit;">plugins</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobplugin">Job<wbr>Plugin<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#jobplugin">Job<wbr>Plugin[]</a></span>
     </dt>
-    <dd><p>Expansion package file information.</p>
-</dd><dt class="property-optional"
+    <dd>Expansion package file information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3446,26 +3804,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocols_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocols_nodejs" style="color: inherit; text-decoration: inherit;">protocols</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobprotocol">Job<wbr>Protocol<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#jobprotocol">Job<wbr>Protocol[]</a></span>
     </dt>
-    <dd><p>Protocol script information.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol script information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_requestfiles_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_requestfiles_nodejs" style="color: inherit; text-decoration: inherit;">request<wbr>Files</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobrequestfile">Job<wbr>Request<wbr>File<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#jobrequestfile">Job<wbr>Request<wbr>File[]</a></span>
     </dt>
-    <dd><p>Request file information.</p>
-</dd><dt class="property-optional"
+    <dd>Request file information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_requesttotal_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_requesttotal_nodejs" style="color: inherit; text-decoration: inherit;">request<wbr>Total</a>
@@ -3473,8 +3828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total number of requests.</p>
-</dd><dt class="property-optional"
+    <dd>Total number of requests.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_requestspersecond_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_requestspersecond_nodejs" style="color: inherit; text-decoration: inherit;">requests<wbr>Per<wbr>Second</a>
@@ -3482,8 +3836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Average number of requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Average number of requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimeaverage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimeaverage_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>Average</a>
@@ -3491,8 +3844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Average response time.</p>
-</dd><dt class="property-optional"
+    <dd>Average response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimemax_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimemax_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>Max</a>
@@ -3500,8 +3852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum response time.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimemin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimemin_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>Min</a>
@@ -3509,8 +3860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Minimum response time.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimep90_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimep90_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>P90</a>
@@ -3518,8 +3868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>90th percentile response time.</p>
-</dd><dt class="property-optional"
+    <dd>90th percentile response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimep95_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimep95_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>P95</a>
@@ -3527,8 +3876,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>95th percentile response time.</p>
-</dd><dt class="property-optional"
+    <dd>95th percentile response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimep99_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimep99_nodejs" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>P99</a>
@@ -3536,8 +3884,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>99th percentile response time.</p>
-</dd><dt class="property-optional"
+    <dd>99th percentile response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scenarioid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scenarioid_nodejs" style="color: inherit; text-decoration: inherit;">scenario<wbr>Id</a>
@@ -3545,8 +3892,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pts scenario id.</p>
-</dd><dt class="property-optional"
+    <dd>Pts scenario id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -3554,8 +3900,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start time of the job.</p>
-</dd><dt class="property-optional"
+    <dd>Start time of the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3563,17 +3908,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</p>
-</dd><dt class="property-optional"
+    <dd>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_testscripts_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_testscripts_nodejs" style="color: inherit; text-decoration: inherit;">test<wbr>Scripts</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobtestscript">Job<wbr>Test<wbr>Script<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#jobtestscript">Job<wbr>Test<wbr>Script[]</a></span>
     </dt>
-    <dd><p>Test script information.</p>
-</dd><dt class="property-optional"
+    <dd>Test script information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3581,8 +3924,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd></dl>
+    <dd>Scene Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3596,8 +3938,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cause of interruption.</p>
-</dd><dt class="property-optional"
+    <dd>Cause of interruption.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_created_at_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_created_at_python" style="color: inherit; text-decoration: inherit;">created_<wbr>at</a>
@@ -3605,8 +3946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the job.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cron_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cron_id_python" style="color: inherit; text-decoration: inherit;">cron_<wbr>id</a>
@@ -3614,17 +3954,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scheduled job ID.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduled job ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_datasets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datasets_python" style="color: inherit; text-decoration: inherit;">datasets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobdataset">Job<wbr>Dataset<wbr>Args]</a></span>
+        <span class="property-type"><a href="#jobdataset">Sequence[Job<wbr>Dataset<wbr>Args]</a></span>
     </dt>
-    <dd><p>Dataset file for the job.</p>
-</dd><dt class="property-optional"
+    <dd>Dataset file for the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_debug_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_debug_python" style="color: inherit; text-decoration: inherit;">debug</a>
@@ -3632,17 +3970,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to debug.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to debug.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domain_name_configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_name_configs_python" style="color: inherit; text-decoration: inherit;">domain_<wbr>name_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobdomainnameconfig">Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Args]</a></span>
+        <span class="property-type"><a href="#jobdomainnameconfig">Sequence[Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Args]</a></span>
     </dt>
-    <dd><p>Domain name binding configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name binding configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_duration_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_duration_python" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -3650,8 +3986,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Job duration.</p>
-</dd><dt class="property-optional"
+    <dd>Job duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -3659,8 +3994,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>End time of the job.</p>
-</dd><dt class="property-optional"
+    <dd>End time of the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_error_rate_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_error_rate_python" style="color: inherit; text-decoration: inherit;">error_<wbr>rate</a>
@@ -3668,8 +4002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Percentage of error rate.</p>
-</dd><dt class="property-optional"
+    <dd>Percentage of error rate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_job_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_job_id_python" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
@@ -3677,8 +4010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Job Id.</p>
-</dd><dt class="property-optional"
+    <dd>Job Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_job_owner_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_job_owner_python" style="color: inherit; text-decoration: inherit;">job_<wbr>owner</a>
@@ -3686,17 +4018,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Job owner.</p>
-</dd><dt class="property-optional"
+    <dd>Job owner.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loads_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loads_python" style="color: inherit; text-decoration: inherit;">loads</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobload">Job<wbr>Load<wbr>Args]</a></span>
+        <span class="property-type"><a href="#jobload">Sequence[Job<wbr>Load<wbr>Args]</a></span>
     </dt>
-    <dd><p>Pressure configuration of job.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure configuration of job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_requests_per_second_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_requests_per_second_python" style="color: inherit; text-decoration: inherit;">max_<wbr>requests_<wbr>per_<wbr>second</a>
@@ -3704,8 +4034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_virtual_user_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_virtual_user_count_python" style="color: inherit; text-decoration: inherit;">max_<wbr>virtual_<wbr>user_<wbr>count</a>
@@ -3713,8 +4042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of VU for the job.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of VU for the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_note_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_note_python" style="color: inherit; text-decoration: inherit;">note</a>
@@ -3722,17 +4050,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Note.</p>
-</dd><dt class="property-optional"
+    <dd>Note.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_plugins_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_plugins_python" style="color: inherit; text-decoration: inherit;">plugins</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobplugin">Job<wbr>Plugin<wbr>Args]</a></span>
+        <span class="property-type"><a href="#jobplugin">Sequence[Job<wbr>Plugin<wbr>Args]</a></span>
     </dt>
-    <dd><p>Expansion package file information.</p>
-</dd><dt class="property-optional"
+    <dd>Expansion package file information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -3740,26 +4066,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocols_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocols_python" style="color: inherit; text-decoration: inherit;">protocols</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobprotocol">Job<wbr>Protocol<wbr>Args]</a></span>
+        <span class="property-type"><a href="#jobprotocol">Sequence[Job<wbr>Protocol<wbr>Args]</a></span>
     </dt>
-    <dd><p>Protocol script information.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol script information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_request_files_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_request_files_python" style="color: inherit; text-decoration: inherit;">request_<wbr>files</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobrequestfile">Job<wbr>Request<wbr>File<wbr>Args]</a></span>
+        <span class="property-type"><a href="#jobrequestfile">Sequence[Job<wbr>Request<wbr>File<wbr>Args]</a></span>
     </dt>
-    <dd><p>Request file information.</p>
-</dd><dt class="property-optional"
+    <dd>Request file information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_request_total_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_request_total_python" style="color: inherit; text-decoration: inherit;">request_<wbr>total</a>
@@ -3767,8 +4090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Total number of requests.</p>
-</dd><dt class="property-optional"
+    <dd>Total number of requests.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_requests_per_second_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_requests_per_second_python" style="color: inherit; text-decoration: inherit;">requests_<wbr>per_<wbr>second</a>
@@ -3776,8 +4098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Average number of requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Average number of requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_response_time_average_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_response_time_average_python" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>average</a>
@@ -3785,8 +4106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Average response time.</p>
-</dd><dt class="property-optional"
+    <dd>Average response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_response_time_max_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_response_time_max_python" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>max</a>
@@ -3794,8 +4114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Maximum response time.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_response_time_min_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_response_time_min_python" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>min</a>
@@ -3803,8 +4122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Minimum response time.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_response_time_p90_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_response_time_p90_python" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>p90</a>
@@ -3812,8 +4130,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>90th percentile response time.</p>
-</dd><dt class="property-optional"
+    <dd>90th percentile response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_response_time_p95_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_response_time_p95_python" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>p95</a>
@@ -3821,8 +4138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>95th percentile response time.</p>
-</dd><dt class="property-optional"
+    <dd>95th percentile response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_response_time_p99_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_response_time_p99_python" style="color: inherit; text-decoration: inherit;">response_<wbr>time_<wbr>p99</a>
@@ -3830,8 +4146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>99th percentile response time.</p>
-</dd><dt class="property-optional"
+    <dd>99th percentile response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scenario_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scenario_id_python" style="color: inherit; text-decoration: inherit;">scenario_<wbr>id</a>
@@ -3839,8 +4154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pts scenario id.</p>
-</dd><dt class="property-optional"
+    <dd>Pts scenario id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -3848,8 +4162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Start time of the job.</p>
-</dd><dt class="property-optional"
+    <dd>Start time of the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3857,17 +4170,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</p>
-</dd><dt class="property-optional"
+    <dd>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_test_scripts_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_test_scripts_python" style="color: inherit; text-decoration: inherit;">test_<wbr>scripts</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobtestscript">Job<wbr>Test<wbr>Script<wbr>Args]</a></span>
+        <span class="property-type"><a href="#jobtestscript">Sequence[Job<wbr>Test<wbr>Script<wbr>Args]</a></span>
     </dt>
-    <dd><p>Test script information.</p>
-</dd><dt class="property-optional"
+    <dd>Test script information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3875,8 +4186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd></dl>
+    <dd>Scene Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3890,8 +4200,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cause of interruption.</p>
-</dd><dt class="property-optional"
+    <dd>Cause of interruption.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createdat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdat_yaml" style="color: inherit; text-decoration: inherit;">created<wbr>At</a>
@@ -3899,8 +4208,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the job.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cronid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cronid_yaml" style="color: inherit; text-decoration: inherit;">cron<wbr>Id</a>
@@ -3908,8 +4216,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduled job ID.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduled job ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_datasets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datasets_yaml" style="color: inherit; text-decoration: inherit;">datasets</a>
@@ -3917,8 +4224,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdataset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Dataset file for the job.</p>
-</dd><dt class="property-optional"
+    <dd>Dataset file for the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_debug_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_debug_yaml" style="color: inherit; text-decoration: inherit;">debug</a>
@@ -3926,8 +4232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to debug.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to debug.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_domainnameconfigs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domainnameconfigs_yaml" style="color: inherit; text-decoration: inherit;">domain<wbr>Name<wbr>Configs</a>
@@ -3935,8 +4240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdomainnameconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Domain name binding configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name binding configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_duration_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_duration_yaml" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -3944,8 +4248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Job duration.</p>
-</dd><dt class="property-optional"
+    <dd>Job duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -3953,8 +4256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End time of the job.</p>
-</dd><dt class="property-optional"
+    <dd>End time of the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_errorrate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_errorrate_yaml" style="color: inherit; text-decoration: inherit;">error<wbr>Rate</a>
@@ -3962,8 +4264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Percentage of error rate.</p>
-</dd><dt class="property-optional"
+    <dd>Percentage of error rate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobid_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -3971,8 +4272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Job Id.</p>
-</dd><dt class="property-optional"
+    <dd>Job Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobowner_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobowner_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Owner</a>
@@ -3980,8 +4280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Job owner.</p>
-</dd><dt class="property-optional"
+    <dd>Job owner.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loads_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loads_yaml" style="color: inherit; text-decoration: inherit;">loads</a>
@@ -3989,8 +4288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobload">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Pressure configuration of job.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure configuration of job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxrequestspersecond_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxrequestspersecond_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -3998,8 +4296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxvirtualusercount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxvirtualusercount_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Virtual<wbr>User<wbr>Count</a>
@@ -4007,8 +4304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of VU for the job.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of VU for the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_note_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_note_yaml" style="color: inherit; text-decoration: inherit;">note</a>
@@ -4016,8 +4312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Note.</p>
-</dd><dt class="property-optional"
+    <dd>Note.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_plugins_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_plugins_yaml" style="color: inherit; text-decoration: inherit;">plugins</a>
@@ -4025,8 +4320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobplugin">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Expansion package file information.</p>
-</dd><dt class="property-optional"
+    <dd>Expansion package file information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -4034,8 +4328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocols_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocols_yaml" style="color: inherit; text-decoration: inherit;">protocols</a>
@@ -4043,8 +4336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobprotocol">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Protocol script information.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol script information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_requestfiles_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_requestfiles_yaml" style="color: inherit; text-decoration: inherit;">request<wbr>Files</a>
@@ -4052,8 +4344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobrequestfile">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Request file information.</p>
-</dd><dt class="property-optional"
+    <dd>Request file information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_requesttotal_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_requesttotal_yaml" style="color: inherit; text-decoration: inherit;">request<wbr>Total</a>
@@ -4061,8 +4352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total number of requests.</p>
-</dd><dt class="property-optional"
+    <dd>Total number of requests.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_requestspersecond_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_requestspersecond_yaml" style="color: inherit; text-decoration: inherit;">requests<wbr>Per<wbr>Second</a>
@@ -4070,8 +4360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Average number of requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Average number of requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimeaverage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimeaverage_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>Average</a>
@@ -4079,8 +4368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Average response time.</p>
-</dd><dt class="property-optional"
+    <dd>Average response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimemax_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimemax_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>Max</a>
@@ -4088,8 +4376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum response time.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimemin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimemin_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>Min</a>
@@ -4097,8 +4384,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Minimum response time.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimep90_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimep90_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>P90</a>
@@ -4106,8 +4392,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>90th percentile response time.</p>
-</dd><dt class="property-optional"
+    <dd>90th percentile response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimep95_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimep95_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>P95</a>
@@ -4115,8 +4400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>95th percentile response time.</p>
-</dd><dt class="property-optional"
+    <dd>95th percentile response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_responsetimep99_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_responsetimep99_yaml" style="color: inherit; text-decoration: inherit;">response<wbr>Time<wbr>P99</a>
@@ -4124,8 +4408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>99th percentile response time.</p>
-</dd><dt class="property-optional"
+    <dd>99th percentile response time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scenarioid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scenarioid_yaml" style="color: inherit; text-decoration: inherit;">scenario<wbr>Id</a>
@@ -4133,8 +4416,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pts scenario id.</p>
-</dd><dt class="property-optional"
+    <dd>Pts scenario id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -4142,8 +4424,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start time of the job.</p>
-</dd><dt class="property-optional"
+    <dd>Start time of the job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -4151,8 +4432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</p>
-</dd><dt class="property-optional"
+    <dd>The running status of the task; <code>0</code>: JobUnknown, <code>1</code>: JobCreated, <code>2</code>: JobPending, <code>3</code>: JobPreparing, <code>4</code>: JobSelectClustering, <code>5</code>: JobCreateTasking, <code>6</code>: JobSyncTasking, <code>11</code>: JobRunning, <code>12</code>: JobFinished, <code>13</code>: JobPrepareException, <code>14</code>: JobFinishException, <code>15</code>: JobAborting, <code>16</code>: JobAborted, <code>17</code>: JobAbortException, <code>18</code>: JobDeleted, <code>19</code>: JobSelectClusterException, <code>20</code>: JobCreateTaskException, <code>21</code>: JobSyncTaskException.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_testscripts_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_testscripts_yaml" style="color: inherit; text-decoration: inherit;">test<wbr>Scripts</a>
@@ -4160,8 +4440,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobtestscript">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Test script information.</p>
-</dd><dt class="property-optional"
+    <dd>Test script information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -4169,8 +4448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd></dl>
+    <dd>Scene Type.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -4185,7 +4463,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="jobdataset">Job<wbr>Dataset</h4>
+<h4 id="jobdataset">
+Job<wbr>Dataset<pulumi-choosable type="language" values="python,go" class="inline">, Job<wbr>Dataset<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4197,8 +4477,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the first line is the parameter name.</p>
-</dd><dt class="property-required"
+    <dd>Whether the first line is the parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -4206,8 +4485,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The file name where the test dataset is located.</p>
-</dd><dt class="property-required"
+    <dd>The file name where the test dataset is located.</dd><dt class="property-required"
             title="Required">
         <span id="split_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#split_csharp" style="color: inherit; text-decoration: inherit;">Split</a>
@@ -4215,8 +4493,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Test whether the dataset is fragmented.</p>
-</dd><dt class="property-optional"
+    <dd>Test whether the dataset is fragmented.</dd><dt class="property-optional"
             title="Optional">
         <span id="fileid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileid_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Id</a>
@@ -4224,8 +4501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File ID.</p>
-</dd><dt class="property-optional"
+    <dd>File ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="headlines_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headlines_csharp" style="color: inherit; text-decoration: inherit;">Head<wbr>Lines</a>
@@ -4233,8 +4509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Header data row.</p>
-</dd><dt class="property-optional"
+    <dd>Header data row.</dd><dt class="property-optional"
             title="Optional">
         <span id="headercolumns_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headercolumns_csharp" style="color: inherit; text-decoration: inherit;">Header<wbr>Columns</a>
@@ -4242,8 +4517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Parameter name array.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter name array.</dd><dt class="property-optional"
             title="Optional">
         <span id="linecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#linecount_csharp" style="color: inherit; text-decoration: inherit;">Line<wbr>Count</a>
@@ -4251,8 +4525,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of file lines.</p>
-</dd><dt class="property-optional"
+    <dd>Number of file lines.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_csharp" style="color: inherit; text-decoration: inherit;">Size</a>
@@ -4260,8 +4533,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of file bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Number of file bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="taillines_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taillines_csharp" style="color: inherit; text-decoration: inherit;">Tail<wbr>Lines</a>
@@ -4269,8 +4541,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Trailing data row.</p>
-</dd><dt class="property-optional"
+    <dd>Trailing data row.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -4278,8 +4549,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_csharp" style="color: inherit; text-decoration: inherit;">Updated<wbr>At</a>
@@ -4287,8 +4557,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4302,8 +4571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the first line is the parameter name.</p>
-</dd><dt class="property-required"
+    <dd>Whether the first line is the parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -4311,8 +4579,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The file name where the test dataset is located.</p>
-</dd><dt class="property-required"
+    <dd>The file name where the test dataset is located.</dd><dt class="property-required"
             title="Required">
         <span id="split_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#split_go" style="color: inherit; text-decoration: inherit;">Split</a>
@@ -4320,8 +4587,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Test whether the dataset is fragmented.</p>
-</dd><dt class="property-optional"
+    <dd>Test whether the dataset is fragmented.</dd><dt class="property-optional"
             title="Optional">
         <span id="fileid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileid_go" style="color: inherit; text-decoration: inherit;">File<wbr>Id</a>
@@ -4329,8 +4595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File ID.</p>
-</dd><dt class="property-optional"
+    <dd>File ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="headlines_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headlines_go" style="color: inherit; text-decoration: inherit;">Head<wbr>Lines</a>
@@ -4338,8 +4603,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Header data row.</p>
-</dd><dt class="property-optional"
+    <dd>Header data row.</dd><dt class="property-optional"
             title="Optional">
         <span id="headercolumns_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headercolumns_go" style="color: inherit; text-decoration: inherit;">Header<wbr>Columns</a>
@@ -4347,8 +4611,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Parameter name array.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter name array.</dd><dt class="property-optional"
             title="Optional">
         <span id="linecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#linecount_go" style="color: inherit; text-decoration: inherit;">Line<wbr>Count</a>
@@ -4356,8 +4619,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of file lines.</p>
-</dd><dt class="property-optional"
+    <dd>Number of file lines.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_go" style="color: inherit; text-decoration: inherit;">Size</a>
@@ -4365,8 +4627,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of file bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Number of file bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="taillines_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taillines_go" style="color: inherit; text-decoration: inherit;">Tail<wbr>Lines</a>
@@ -4374,8 +4635,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Trailing data row.</p>
-</dd><dt class="property-optional"
+    <dd>Trailing data row.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -4383,8 +4643,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_go" style="color: inherit; text-decoration: inherit;">Updated<wbr>At</a>
@@ -4392,8 +4651,101 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="header_in_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#header_in_file_hcl" style="color: inherit; text-decoration: inherit;">header_<wbr>in_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the first line is the parameter name.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The file name where the test dataset is located.</dd><dt class="property-required"
+            title="Required">
+        <span id="split_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#split_hcl" style="color: inherit; text-decoration: inherit;">split</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Test whether the dataset is fragmented.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="file_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_id_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="head_lines_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#head_lines_hcl" style="color: inherit; text-decoration: inherit;">head_<wbr>lines</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Header data row.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="header_columns_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#header_columns_hcl" style="color: inherit; text-decoration: inherit;">header_<wbr>columns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Parameter name array.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="line_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#line_count_hcl" style="color: inherit; text-decoration: inherit;">line_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of file lines.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_hcl" style="color: inherit; text-decoration: inherit;">size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of file bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tail_lines_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tail_lines_hcl" style="color: inherit; text-decoration: inherit;">tail_<wbr>lines</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Trailing data row.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scene Type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="updated_at_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_at_hcl" style="color: inherit; text-decoration: inherit;">updated_<wbr>at</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4407,8 +4759,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the first line is the parameter name.</p>
-</dd><dt class="property-required"
+    <dd>Whether the first line is the parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -4416,8 +4767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The file name where the test dataset is located.</p>
-</dd><dt class="property-required"
+    <dd>The file name where the test dataset is located.</dd><dt class="property-required"
             title="Required">
         <span id="split_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#split_java" style="color: inherit; text-decoration: inherit;">split</a>
@@ -4425,8 +4775,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Test whether the dataset is fragmented.</p>
-</dd><dt class="property-optional"
+    <dd>Test whether the dataset is fragmented.</dd><dt class="property-optional"
             title="Optional">
         <span id="fileid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileid_java" style="color: inherit; text-decoration: inherit;">file<wbr>Id</a>
@@ -4434,8 +4783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File ID.</p>
-</dd><dt class="property-optional"
+    <dd>File ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="headlines_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headlines_java" style="color: inherit; text-decoration: inherit;">head<wbr>Lines</a>
@@ -4443,8 +4791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Header data row.</p>
-</dd><dt class="property-optional"
+    <dd>Header data row.</dd><dt class="property-optional"
             title="Optional">
         <span id="headercolumns_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headercolumns_java" style="color: inherit; text-decoration: inherit;">header<wbr>Columns</a>
@@ -4452,8 +4799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Parameter name array.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter name array.</dd><dt class="property-optional"
             title="Optional">
         <span id="linecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#linecount_java" style="color: inherit; text-decoration: inherit;">line<wbr>Count</a>
@@ -4461,8 +4807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of file lines.</p>
-</dd><dt class="property-optional"
+    <dd>Number of file lines.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_java" style="color: inherit; text-decoration: inherit;">size</a>
@@ -4470,8 +4815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of file bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Number of file bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="taillines_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taillines_java" style="color: inherit; text-decoration: inherit;">tail<wbr>Lines</a>
@@ -4479,8 +4823,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Trailing data row.</p>
-</dd><dt class="property-optional"
+    <dd>Trailing data row.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -4488,8 +4831,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_java" style="color: inherit; text-decoration: inherit;">updated<wbr>At</a>
@@ -4497,8 +4839,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4512,8 +4853,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the first line is the parameter name.</p>
-</dd><dt class="property-required"
+    <dd>Whether the first line is the parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -4521,8 +4861,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The file name where the test dataset is located.</p>
-</dd><dt class="property-required"
+    <dd>The file name where the test dataset is located.</dd><dt class="property-required"
             title="Required">
         <span id="split_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#split_nodejs" style="color: inherit; text-decoration: inherit;">split</a>
@@ -4530,8 +4869,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Test whether the dataset is fragmented.</p>
-</dd><dt class="property-optional"
+    <dd>Test whether the dataset is fragmented.</dd><dt class="property-optional"
             title="Optional">
         <span id="fileid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileid_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Id</a>
@@ -4539,8 +4877,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File ID.</p>
-</dd><dt class="property-optional"
+    <dd>File ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="headlines_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headlines_nodejs" style="color: inherit; text-decoration: inherit;">head<wbr>Lines</a>
@@ -4548,8 +4885,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Header data row.</p>
-</dd><dt class="property-optional"
+    <dd>Header data row.</dd><dt class="property-optional"
             title="Optional">
         <span id="headercolumns_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headercolumns_nodejs" style="color: inherit; text-decoration: inherit;">header<wbr>Columns</a>
@@ -4557,8 +4893,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Parameter name array.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter name array.</dd><dt class="property-optional"
             title="Optional">
         <span id="linecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#linecount_nodejs" style="color: inherit; text-decoration: inherit;">line<wbr>Count</a>
@@ -4566,8 +4901,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of file lines.</p>
-</dd><dt class="property-optional"
+    <dd>Number of file lines.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_nodejs" style="color: inherit; text-decoration: inherit;">size</a>
@@ -4575,8 +4909,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of file bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Number of file bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="taillines_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taillines_nodejs" style="color: inherit; text-decoration: inherit;">tail<wbr>Lines</a>
@@ -4584,8 +4917,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Trailing data row.</p>
-</dd><dt class="property-optional"
+    <dd>Trailing data row.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -4593,8 +4925,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_nodejs" style="color: inherit; text-decoration: inherit;">updated<wbr>At</a>
@@ -4602,8 +4933,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4617,8 +4947,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the first line is the parameter name.</p>
-</dd><dt class="property-required"
+    <dd>Whether the first line is the parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -4626,8 +4955,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The file name where the test dataset is located.</p>
-</dd><dt class="property-required"
+    <dd>The file name where the test dataset is located.</dd><dt class="property-required"
             title="Required">
         <span id="split_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#split_python" style="color: inherit; text-decoration: inherit;">split</a>
@@ -4635,8 +4963,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Test whether the dataset is fragmented.</p>
-</dd><dt class="property-optional"
+    <dd>Test whether the dataset is fragmented.</dd><dt class="property-optional"
             title="Optional">
         <span id="file_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_id_python" style="color: inherit; text-decoration: inherit;">file_<wbr>id</a>
@@ -4644,8 +4971,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File ID.</p>
-</dd><dt class="property-optional"
+    <dd>File ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="head_lines_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#head_lines_python" style="color: inherit; text-decoration: inherit;">head_<wbr>lines</a>
@@ -4653,8 +4979,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Header data row.</p>
-</dd><dt class="property-optional"
+    <dd>Header data row.</dd><dt class="property-optional"
             title="Optional">
         <span id="header_columns_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#header_columns_python" style="color: inherit; text-decoration: inherit;">header_<wbr>columns</a>
@@ -4662,8 +4987,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Parameter name array.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter name array.</dd><dt class="property-optional"
             title="Optional">
         <span id="line_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#line_count_python" style="color: inherit; text-decoration: inherit;">line_<wbr>count</a>
@@ -4671,8 +4995,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of file lines.</p>
-</dd><dt class="property-optional"
+    <dd>Number of file lines.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_python" style="color: inherit; text-decoration: inherit;">size</a>
@@ -4680,8 +5003,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of file bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Number of file bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="tail_lines_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tail_lines_python" style="color: inherit; text-decoration: inherit;">tail_<wbr>lines</a>
@@ -4689,8 +5011,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Trailing data row.</p>
-</dd><dt class="property-optional"
+    <dd>Trailing data row.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -4698,8 +5019,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updated_at_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_at_python" style="color: inherit; text-decoration: inherit;">updated_<wbr>at</a>
@@ -4707,8 +5027,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4722,8 +5041,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the first line is the parameter name.</p>
-</dd><dt class="property-required"
+    <dd>Whether the first line is the parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -4731,8 +5049,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The file name where the test dataset is located.</p>
-</dd><dt class="property-required"
+    <dd>The file name where the test dataset is located.</dd><dt class="property-required"
             title="Required">
         <span id="split_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#split_yaml" style="color: inherit; text-decoration: inherit;">split</a>
@@ -4740,8 +5057,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Test whether the dataset is fragmented.</p>
-</dd><dt class="property-optional"
+    <dd>Test whether the dataset is fragmented.</dd><dt class="property-optional"
             title="Optional">
         <span id="fileid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileid_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Id</a>
@@ -4749,8 +5065,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File ID.</p>
-</dd><dt class="property-optional"
+    <dd>File ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="headlines_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headlines_yaml" style="color: inherit; text-decoration: inherit;">head<wbr>Lines</a>
@@ -4758,8 +5073,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Header data row.</p>
-</dd><dt class="property-optional"
+    <dd>Header data row.</dd><dt class="property-optional"
             title="Optional">
         <span id="headercolumns_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headercolumns_yaml" style="color: inherit; text-decoration: inherit;">header<wbr>Columns</a>
@@ -4767,8 +5081,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Parameter name array.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter name array.</dd><dt class="property-optional"
             title="Optional">
         <span id="linecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#linecount_yaml" style="color: inherit; text-decoration: inherit;">line<wbr>Count</a>
@@ -4776,8 +5089,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of file lines.</p>
-</dd><dt class="property-optional"
+    <dd>Number of file lines.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_yaml" style="color: inherit; text-decoration: inherit;">size</a>
@@ -4785,8 +5097,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of file bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Number of file bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="taillines_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taillines_yaml" style="color: inherit; text-decoration: inherit;">tail<wbr>Lines</a>
@@ -4794,8 +5105,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Trailing data row.</p>
-</dd><dt class="property-optional"
+    <dd>Trailing data row.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -4803,8 +5113,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_yaml" style="color: inherit; text-decoration: inherit;">updated<wbr>At</a>
@@ -4812,12 +5121,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="jobdomainnameconfig">Job<wbr>Domain<wbr>Name<wbr>Config</h4>
+<h4 id="jobdomainnameconfig">
+Job<wbr>Domain<wbr>Name<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4829,8 +5139,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdomainnameconfigdnsconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Dns<wbr>Config</a></span>
     </dt>
-    <dd><p>DNS configuration.</p>
-</dd><dt class="property-optional"
+    <dd>DNS configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostaliases_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostaliases_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Aliases</a>
@@ -4838,8 +5147,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdomainnameconfighostalias">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Host<wbr>Alias&gt;</a></span>
     </dt>
-    <dd><p>Domain name binding configuration.</p>
-</dd></dl>
+    <dd>Domain name binding configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4853,8 +5161,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdomainnameconfigdnsconfig">Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Dns<wbr>Config</a></span>
     </dt>
-    <dd><p>DNS configuration.</p>
-</dd><dt class="property-optional"
+    <dd>DNS configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostaliases_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostaliases_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Aliases</a>
@@ -4862,8 +5169,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdomainnameconfighostalias">[]Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Host<wbr>Alias</a></span>
     </dt>
-    <dd><p>Domain name binding configuration.</p>
-</dd></dl>
+    <dd>Domain name binding configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dns_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dns_config_hcl" style="color: inherit; text-decoration: inherit;">dns_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobdomainnameconfigdnsconfig">object</a></span>
+    </dt>
+    <dd>DNS configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="host_aliases_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_aliases_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>aliases</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobdomainnameconfighostalias">list(object)</a></span>
+    </dt>
+    <dd>Domain name binding configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4877,8 +5205,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdomainnameconfigdnsconfig">Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Dns<wbr>Config</a></span>
     </dt>
-    <dd><p>DNS configuration.</p>
-</dd><dt class="property-optional"
+    <dd>DNS configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostaliases_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostaliases_java" style="color: inherit; text-decoration: inherit;">host<wbr>Aliases</a>
@@ -4886,8 +5213,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdomainnameconfighostalias">List&lt;Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Host<wbr>Alias&gt;</a></span>
     </dt>
-    <dd><p>Domain name binding configuration.</p>
-</dd></dl>
+    <dd>Domain name binding configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4901,8 +5227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdomainnameconfigdnsconfig">Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Dns<wbr>Config</a></span>
     </dt>
-    <dd><p>DNS configuration.</p>
-</dd><dt class="property-optional"
+    <dd>DNS configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostaliases_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostaliases_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Aliases</a>
@@ -4910,8 +5235,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdomainnameconfighostalias">Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Host<wbr>Alias[]</a></span>
     </dt>
-    <dd><p>Domain name binding configuration.</p>
-</dd></dl>
+    <dd>Domain name binding configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4925,17 +5249,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdomainnameconfigdnsconfig">Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Dns<wbr>Config</a></span>
     </dt>
-    <dd><p>DNS configuration.</p>
-</dd><dt class="property-optional"
+    <dd>DNS configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_aliases_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_aliases_python" style="color: inherit; text-decoration: inherit;">host_<wbr>aliases</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobdomainnameconfighostalias">Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Host<wbr>Alias]</a></span>
+        <span class="property-type"><a href="#jobdomainnameconfighostalias">Sequence[Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Host<wbr>Alias]</a></span>
     </dt>
-    <dd><p>Domain name binding configuration.</p>
-</dd></dl>
+    <dd>Domain name binding configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4949,8 +5271,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdomainnameconfigdnsconfig">Property Map</a></span>
     </dt>
-    <dd><p>DNS configuration.</p>
-</dd><dt class="property-optional"
+    <dd>DNS configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostaliases_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostaliases_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Aliases</a>
@@ -4958,12 +5279,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobdomainnameconfighostalias">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Domain name binding configuration.</p>
-</dd></dl>
+    <dd>Domain name binding configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="jobdomainnameconfigdnsconfig">Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Dns<wbr>Config</h4>
+<h4 id="jobdomainnameconfigdnsconfig">
+Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Dns<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Dns<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4975,8 +5297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>DNS IP List.</p>
-</dd></dl>
+    <dd>DNS IP List.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4990,8 +5311,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>DNS IP List.</p>
-</dd></dl>
+    <dd>DNS IP List.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="nameservers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nameservers_hcl" style="color: inherit; text-decoration: inherit;">nameservers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>DNS IP List.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5005,8 +5339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>DNS IP List.</p>
-</dd></dl>
+    <dd>DNS IP List.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5020,8 +5353,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>DNS IP List.</p>
-</dd></dl>
+    <dd>DNS IP List.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5035,8 +5367,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>DNS IP List.</p>
-</dd></dl>
+    <dd>DNS IP List.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5050,12 +5381,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>DNS IP List.</p>
-</dd></dl>
+    <dd>DNS IP List.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="jobdomainnameconfighostalias">Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Host<wbr>Alias</h4>
+<h4 id="jobdomainnameconfighostalias">
+Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Host<wbr>Alias<pulumi-choosable type="language" values="python,go" class="inline">, Job<wbr>Domain<wbr>Name<wbr>Config<wbr>Host<wbr>Alias<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5067,8 +5399,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of domain names to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>List of domain names to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -5076,8 +5407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IP address to be bound.</p>
-</dd></dl>
+    <dd>The IP address to be bound.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5091,8 +5421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of domain names to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>List of domain names to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -5100,8 +5429,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IP address to be bound.</p>
-</dd></dl>
+    <dd>The IP address to be bound.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="host_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_names_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of domain names to be bound.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The IP address to be bound.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5115,8 +5465,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of domain names to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>List of domain names to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -5124,8 +5473,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The IP address to be bound.</p>
-</dd></dl>
+    <dd>The IP address to be bound.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5139,8 +5487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of domain names to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>List of domain names to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -5148,8 +5495,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IP address to be bound.</p>
-</dd></dl>
+    <dd>The IP address to be bound.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5163,8 +5509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of domain names to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>List of domain names to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -5172,8 +5517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The IP address to be bound.</p>
-</dd></dl>
+    <dd>The IP address to be bound.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5187,8 +5531,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of domain names to be bound.</p>
-</dd><dt class="property-optional"
+    <dd>List of domain names to be bound.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -5196,12 +5539,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The IP address to be bound.</p>
-</dd></dl>
+    <dd>The IP address to be bound.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="jobload">Job<wbr>Load</h4>
+<h4 id="jobload">
+Job<wbr>Load<pulumi-choosable type="language" values="python,go" class="inline">, Job<wbr>Load<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5213,8 +5557,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadgeoregionsloaddistribution">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Load<wbr>Geo<wbr>Regions<wbr>Load<wbr>Distribution&gt;</a></span>
     </dt>
-    <dd><p>Pressure distribution.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure distribution.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadspec_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadspec_csharp" style="color: inherit; text-decoration: inherit;">Load<wbr>Spec</a>
@@ -5222,8 +5565,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspec">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Load<wbr>Load<wbr>Spec</a></span>
     </dt>
-    <dd><p>Pressure allocation.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure allocation.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcloaddistribution_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcloaddistribution_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Load<wbr>Distribution</a>
@@ -5231,8 +5573,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadvpcloaddistribution">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Load<wbr>Vpc<wbr>Load<wbr>Distribution</a></span>
     </dt>
-    <dd><p>Source of stress.</p>
-</dd></dl>
+    <dd>Source of stress.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5246,8 +5587,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadgeoregionsloaddistribution">[]Job<wbr>Load<wbr>Geo<wbr>Regions<wbr>Load<wbr>Distribution</a></span>
     </dt>
-    <dd><p>Pressure distribution.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure distribution.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadspec_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadspec_go" style="color: inherit; text-decoration: inherit;">Load<wbr>Spec</a>
@@ -5255,8 +5595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspec">Job<wbr>Load<wbr>Load<wbr>Spec</a></span>
     </dt>
-    <dd><p>Pressure allocation.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure allocation.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcloaddistribution_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcloaddistribution_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Load<wbr>Distribution</a>
@@ -5264,8 +5603,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadvpcloaddistribution">Job<wbr>Load<wbr>Vpc<wbr>Load<wbr>Distribution</a></span>
     </dt>
-    <dd><p>Source of stress.</p>
-</dd></dl>
+    <dd>Source of stress.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="geo_regions_load_distributions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#geo_regions_load_distributions_hcl" style="color: inherit; text-decoration: inherit;">geo_<wbr>regions_<wbr>load_<wbr>distributions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobloadgeoregionsloaddistribution">list(object)</a></span>
+    </dt>
+    <dd>Pressure distribution.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="load_spec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_spec_hcl" style="color: inherit; text-decoration: inherit;">load_<wbr>spec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobloadloadspec">object</a></span>
+    </dt>
+    <dd>Pressure allocation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_load_distribution_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_load_distribution_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>load_<wbr>distribution</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobloadvpcloaddistribution">object</a></span>
+    </dt>
+    <dd>Source of stress.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5279,8 +5647,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadgeoregionsloaddistribution">List&lt;Job<wbr>Load<wbr>Geo<wbr>Regions<wbr>Load<wbr>Distribution&gt;</a></span>
     </dt>
-    <dd><p>Pressure distribution.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure distribution.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadspec_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadspec_java" style="color: inherit; text-decoration: inherit;">load<wbr>Spec</a>
@@ -5288,8 +5655,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspec">Job<wbr>Load<wbr>Load<wbr>Spec</a></span>
     </dt>
-    <dd><p>Pressure allocation.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure allocation.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcloaddistribution_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcloaddistribution_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Load<wbr>Distribution</a>
@@ -5297,8 +5663,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadvpcloaddistribution">Job<wbr>Load<wbr>Vpc<wbr>Load<wbr>Distribution</a></span>
     </dt>
-    <dd><p>Source of stress.</p>
-</dd></dl>
+    <dd>Source of stress.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5312,8 +5677,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadgeoregionsloaddistribution">Job<wbr>Load<wbr>Geo<wbr>Regions<wbr>Load<wbr>Distribution[]</a></span>
     </dt>
-    <dd><p>Pressure distribution.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure distribution.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadspec_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadspec_nodejs" style="color: inherit; text-decoration: inherit;">load<wbr>Spec</a>
@@ -5321,8 +5685,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspec">Job<wbr>Load<wbr>Load<wbr>Spec</a></span>
     </dt>
-    <dd><p>Pressure allocation.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure allocation.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcloaddistribution_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcloaddistribution_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Load<wbr>Distribution</a>
@@ -5330,8 +5693,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadvpcloaddistribution">Job<wbr>Load<wbr>Vpc<wbr>Load<wbr>Distribution</a></span>
     </dt>
-    <dd><p>Source of stress.</p>
-</dd></dl>
+    <dd>Source of stress.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5343,10 +5705,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#geo_regions_load_distributions_python" style="color: inherit; text-decoration: inherit;">geo_<wbr>regions_<wbr>load_<wbr>distributions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobloadgeoregionsloaddistribution">Job<wbr>Load<wbr>Geo<wbr>Regions<wbr>Load<wbr>Distribution]</a></span>
+        <span class="property-type"><a href="#jobloadgeoregionsloaddistribution">Sequence[Job<wbr>Load<wbr>Geo<wbr>Regions<wbr>Load<wbr>Distribution]</a></span>
     </dt>
-    <dd><p>Pressure distribution.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure distribution.</dd><dt class="property-optional"
             title="Optional">
         <span id="load_spec_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_spec_python" style="color: inherit; text-decoration: inherit;">load_<wbr>spec</a>
@@ -5354,8 +5715,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspec">Job<wbr>Load<wbr>Load<wbr>Spec</a></span>
     </dt>
-    <dd><p>Pressure allocation.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure allocation.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_load_distribution_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_load_distribution_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>load_<wbr>distribution</a>
@@ -5363,8 +5723,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadvpcloaddistribution">Job<wbr>Load<wbr>Vpc<wbr>Load<wbr>Distribution</a></span>
     </dt>
-    <dd><p>Source of stress.</p>
-</dd></dl>
+    <dd>Source of stress.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5378,8 +5737,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadgeoregionsloaddistribution">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Pressure distribution.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure distribution.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadspec_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadspec_yaml" style="color: inherit; text-decoration: inherit;">load<wbr>Spec</a>
@@ -5387,8 +5745,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspec">Property Map</a></span>
     </dt>
-    <dd><p>Pressure allocation.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure allocation.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcloaddistribution_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcloaddistribution_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Load<wbr>Distribution</a>
@@ -5396,12 +5753,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadvpcloaddistribution">Property Map</a></span>
     </dt>
-    <dd><p>Source of stress.</p>
-</dd></dl>
+    <dd>Source of stress.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="jobloadgeoregionsloaddistribution">Job<wbr>Load<wbr>Geo<wbr>Regions<wbr>Load<wbr>Distribution</h4>
+<h4 id="jobloadgeoregionsloaddistribution">
+Job<wbr>Load<wbr>Geo<wbr>Regions<wbr>Load<wbr>Distribution<pulumi-choosable type="language" values="python,go" class="inline">, Job<wbr>Load<wbr>Geo<wbr>Regions<wbr>Load<wbr>Distribution<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5413,8 +5771,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Regional ID.</p>
-</dd><dt class="property-optional"
+    <dd>Regional ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="percentage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percentage_csharp" style="color: inherit; text-decoration: inherit;">Percentage</a>
@@ -5422,8 +5779,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Percentage.</p>
-</dd><dt class="property-optional"
+    <dd>Percentage.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -5431,8 +5787,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd></dl>
+    <dd>Region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5446,8 +5801,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Regional ID.</p>
-</dd><dt class="property-optional"
+    <dd>Regional ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="percentage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percentage_go" style="color: inherit; text-decoration: inherit;">Percentage</a>
@@ -5455,8 +5809,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Percentage.</p>
-</dd><dt class="property-optional"
+    <dd>Percentage.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -5464,8 +5817,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd></dl>
+    <dd>Region.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="region_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_id_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Regional ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="percentage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percentage_hcl" style="color: inherit; text-decoration: inherit;">percentage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Percentage.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5479,8 +5861,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Regional ID.</p>
-</dd><dt class="property-optional"
+    <dd>Regional ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="percentage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percentage_java" style="color: inherit; text-decoration: inherit;">percentage</a>
@@ -5488,8 +5869,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Percentage.</p>
-</dd><dt class="property-optional"
+    <dd>Percentage.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -5497,8 +5877,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd></dl>
+    <dd>Region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5512,8 +5891,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Regional ID.</p>
-</dd><dt class="property-optional"
+    <dd>Regional ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="percentage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percentage_nodejs" style="color: inherit; text-decoration: inherit;">percentage</a>
@@ -5521,8 +5899,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Percentage.</p>
-</dd><dt class="property-optional"
+    <dd>Percentage.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -5530,8 +5907,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd></dl>
+    <dd>Region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5545,8 +5921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Regional ID.</p>
-</dd><dt class="property-optional"
+    <dd>Regional ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="percentage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percentage_python" style="color: inherit; text-decoration: inherit;">percentage</a>
@@ -5554,8 +5929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Percentage.</p>
-</dd><dt class="property-optional"
+    <dd>Percentage.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -5563,8 +5937,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region.</p>
-</dd></dl>
+    <dd>Region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5578,8 +5951,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Regional ID.</p>
-</dd><dt class="property-optional"
+    <dd>Regional ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="percentage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percentage_yaml" style="color: inherit; text-decoration: inherit;">percentage</a>
@@ -5587,8 +5959,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Percentage.</p>
-</dd><dt class="property-optional"
+    <dd>Percentage.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -5596,12 +5967,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd></dl>
+    <dd>Region.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="jobloadloadspec">Job<wbr>Load<wbr>Load<wbr>Spec</h4>
+<h4 id="jobloadloadspec">
+Job<wbr>Load<wbr>Load<wbr>Spec<pulumi-choosable type="language" values="python,go" class="inline">, Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5613,8 +5985,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecconcurrency">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Concurrency</a></span>
     </dt>
-    <dd><p>Configuration of concurrent pressure mode.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of concurrent pressure mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="requestspersecond_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestspersecond_csharp" style="color: inherit; text-decoration: inherit;">Requests<wbr>Per<wbr>Second</a>
@@ -5622,8 +5993,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecrequestspersecond">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Requests<wbr>Per<wbr>Second</a></span>
     </dt>
-    <dd><p>Average number of requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Average number of requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="scriptorigin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scriptorigin_csharp" style="color: inherit; text-decoration: inherit;">Script<wbr>Origin</a>
@@ -5631,8 +6001,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecscriptorigin">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Script<wbr>Origin</a></span>
     </dt>
-    <dd><p>Built-in stress mode in script.</p>
-</dd></dl>
+    <dd>Built-in stress mode in script.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5646,8 +6015,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecconcurrency">Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Concurrency</a></span>
     </dt>
-    <dd><p>Configuration of concurrent pressure mode.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of concurrent pressure mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="requestspersecond_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestspersecond_go" style="color: inherit; text-decoration: inherit;">Requests<wbr>Per<wbr>Second</a>
@@ -5655,8 +6023,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecrequestspersecond">Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Requests<wbr>Per<wbr>Second</a></span>
     </dt>
-    <dd><p>Average number of requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Average number of requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="scriptorigin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scriptorigin_go" style="color: inherit; text-decoration: inherit;">Script<wbr>Origin</a>
@@ -5664,8 +6031,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecscriptorigin">Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Script<wbr>Origin</a></span>
     </dt>
-    <dd><p>Built-in stress mode in script.</p>
-</dd></dl>
+    <dd>Built-in stress mode in script.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="concurrency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrency_hcl" style="color: inherit; text-decoration: inherit;">concurrency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobloadloadspecconcurrency">object</a></span>
+    </dt>
+    <dd>Configuration of concurrent pressure mode.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="requests_per_second_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requests_per_second_hcl" style="color: inherit; text-decoration: inherit;">requests_<wbr>per_<wbr>second</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobloadloadspecrequestspersecond">object</a></span>
+    </dt>
+    <dd>Average number of requests per second.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="script_origin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#script_origin_hcl" style="color: inherit; text-decoration: inherit;">script_<wbr>origin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobloadloadspecscriptorigin">object</a></span>
+    </dt>
+    <dd>Built-in stress mode in script.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5679,8 +6075,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecconcurrency">Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Concurrency</a></span>
     </dt>
-    <dd><p>Configuration of concurrent pressure mode.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of concurrent pressure mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="requestspersecond_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestspersecond_java" style="color: inherit; text-decoration: inherit;">requests<wbr>Per<wbr>Second</a>
@@ -5688,8 +6083,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecrequestspersecond">Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Requests<wbr>Per<wbr>Second</a></span>
     </dt>
-    <dd><p>Average number of requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Average number of requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="scriptorigin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scriptorigin_java" style="color: inherit; text-decoration: inherit;">script<wbr>Origin</a>
@@ -5697,8 +6091,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecscriptorigin">Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Script<wbr>Origin</a></span>
     </dt>
-    <dd><p>Built-in stress mode in script.</p>
-</dd></dl>
+    <dd>Built-in stress mode in script.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5712,8 +6105,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecconcurrency">Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Concurrency</a></span>
     </dt>
-    <dd><p>Configuration of concurrent pressure mode.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of concurrent pressure mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="requestspersecond_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestspersecond_nodejs" style="color: inherit; text-decoration: inherit;">requests<wbr>Per<wbr>Second</a>
@@ -5721,8 +6113,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecrequestspersecond">Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Requests<wbr>Per<wbr>Second</a></span>
     </dt>
-    <dd><p>Average number of requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Average number of requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="scriptorigin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scriptorigin_nodejs" style="color: inherit; text-decoration: inherit;">script<wbr>Origin</a>
@@ -5730,8 +6121,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecscriptorigin">Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Script<wbr>Origin</a></span>
     </dt>
-    <dd><p>Built-in stress mode in script.</p>
-</dd></dl>
+    <dd>Built-in stress mode in script.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5745,8 +6135,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecconcurrency">Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Concurrency</a></span>
     </dt>
-    <dd><p>Configuration of concurrent pressure mode.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of concurrent pressure mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="requests_per_second_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requests_per_second_python" style="color: inherit; text-decoration: inherit;">requests_<wbr>per_<wbr>second</a>
@@ -5754,8 +6143,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecrequestspersecond">Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Requests<wbr>Per<wbr>Second</a></span>
     </dt>
-    <dd><p>Average number of requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Average number of requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="script_origin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#script_origin_python" style="color: inherit; text-decoration: inherit;">script_<wbr>origin</a>
@@ -5763,8 +6151,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecscriptorigin">Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Script<wbr>Origin</a></span>
     </dt>
-    <dd><p>Built-in stress mode in script.</p>
-</dd></dl>
+    <dd>Built-in stress mode in script.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5778,8 +6165,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecconcurrency">Property Map</a></span>
     </dt>
-    <dd><p>Configuration of concurrent pressure mode.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of concurrent pressure mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="requestspersecond_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestspersecond_yaml" style="color: inherit; text-decoration: inherit;">requests<wbr>Per<wbr>Second</a>
@@ -5787,8 +6173,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecrequestspersecond">Property Map</a></span>
     </dt>
-    <dd><p>Average number of requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Average number of requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="scriptorigin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scriptorigin_yaml" style="color: inherit; text-decoration: inherit;">script<wbr>Origin</a>
@@ -5796,12 +6181,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecscriptorigin">Property Map</a></span>
     </dt>
-    <dd><p>Built-in stress mode in script.</p>
-</dd></dl>
+    <dd>Built-in stress mode in script.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="jobloadloadspecconcurrency">Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Concurrency</h4>
+<h4 id="jobloadloadspecconcurrency">
+Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Concurrency<pulumi-choosable type="language" values="python,go" class="inline">, Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Concurrency<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5813,8 +6199,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Wait time for graceful termination of the task.</p>
-</dd><dt class="property-optional"
+    <dd>Wait time for graceful termination of the task.</dd><dt class="property-optional"
             title="Optional">
         <span id="iterationcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iterationcount_csharp" style="color: inherit; text-decoration: inherit;">Iteration<wbr>Count</a>
@@ -5822,8 +6207,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of runs.</p>
-</dd><dt class="property-optional"
+    <dd>Number of runs.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxrequestspersecond_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestspersecond_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -5831,8 +6215,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="stages_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stages_csharp" style="color: inherit; text-decoration: inherit;">Stages</a>
@@ -5840,8 +6223,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecconcurrencystage">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Pts.<wbr>Inputs.<wbr>Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Concurrency<wbr>Stage&gt;</a></span>
     </dt>
-    <dd><p>Multi-phase configuration array.</p>
-</dd></dl>
+    <dd>Multi-phase configuration array.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5855,8 +6237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Wait time for graceful termination of the task.</p>
-</dd><dt class="property-optional"
+    <dd>Wait time for graceful termination of the task.</dd><dt class="property-optional"
             title="Optional">
         <span id="iterationcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iterationcount_go" style="color: inherit; text-decoration: inherit;">Iteration<wbr>Count</a>
@@ -5864,8 +6245,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of runs.</p>
-</dd><dt class="property-optional"
+    <dd>Number of runs.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxrequestspersecond_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestspersecond_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -5873,8 +6253,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="stages_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stages_go" style="color: inherit; text-decoration: inherit;">Stages</a>
@@ -5882,8 +6261,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecconcurrencystage">[]Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Concurrency<wbr>Stage</a></span>
     </dt>
-    <dd><p>Multi-phase configuration array.</p>
-</dd></dl>
+    <dd>Multi-phase configuration array.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="graceful_stop_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#graceful_stop_seconds_hcl" style="color: inherit; text-decoration: inherit;">graceful_<wbr>stop_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Wait time for graceful termination of the task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="iteration_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iteration_count_hcl" style="color: inherit; text-decoration: inherit;">iteration_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of runs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_requests_per_second_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_requests_per_second_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>requests_<wbr>per_<wbr>second</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="stages_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stages_hcl" style="color: inherit; text-decoration: inherit;">stages</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#jobloadloadspecconcurrencystage">list(object)</a></span>
+    </dt>
+    <dd>Multi-phase configuration array.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5897,8 +6313,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Wait time for graceful termination of the task.</p>
-</dd><dt class="property-optional"
+    <dd>Wait time for graceful termination of the task.</dd><dt class="property-optional"
             title="Optional">
         <span id="iterationcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iterationcount_java" style="color: inherit; text-decoration: inherit;">iteration<wbr>Count</a>
@@ -5906,8 +6321,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of runs.</p>
-</dd><dt class="property-optional"
+    <dd>Number of runs.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxrequestspersecond_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestspersecond_java" style="color: inherit; text-decoration: inherit;">max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -5915,8 +6329,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="stages_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stages_java" style="color: inherit; text-decoration: inherit;">stages</a>
@@ -5924,8 +6337,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecconcurrencystage">List&lt;Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Concurrency<wbr>Stage&gt;</a></span>
     </dt>
-    <dd><p>Multi-phase configuration array.</p>
-</dd></dl>
+    <dd>Multi-phase configuration array.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5939,8 +6351,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Wait time for graceful termination of the task.</p>
-</dd><dt class="property-optional"
+    <dd>Wait time for graceful termination of the task.</dd><dt class="property-optional"
             title="Optional">
         <span id="iterationcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iterationcount_nodejs" style="color: inherit; text-decoration: inherit;">iteration<wbr>Count</a>
@@ -5948,8 +6359,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of runs.</p>
-</dd><dt class="property-optional"
+    <dd>Number of runs.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxrequestspersecond_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestspersecond_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -5957,8 +6367,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="stages_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stages_nodejs" style="color: inherit; text-decoration: inherit;">stages</a>
@@ -5966,8 +6375,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecconcurrencystage">Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Concurrency<wbr>Stage[]</a></span>
     </dt>
-    <dd><p>Multi-phase configuration array.</p>
-</dd></dl>
+    <dd>Multi-phase configuration array.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5981,8 +6389,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Wait time for graceful termination of the task.</p>
-</dd><dt class="property-optional"
+    <dd>Wait time for graceful termination of the task.</dd><dt class="property-optional"
             title="Optional">
         <span id="iteration_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iteration_count_python" style="color: inherit; text-decoration: inherit;">iteration_<wbr>count</a>
@@ -5990,8 +6397,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of runs.</p>
-</dd><dt class="property-optional"
+    <dd>Number of runs.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_requests_per_second_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_requests_per_second_python" style="color: inherit; text-decoration: inherit;">max_<wbr>requests_<wbr>per_<wbr>second</a>
@@ -5999,17 +6405,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="stages_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stages_python" style="color: inherit; text-decoration: inherit;">stages</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#jobloadloadspecconcurrencystage">Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Concurrency<wbr>Stage]</a></span>
+        <span class="property-type"><a href="#jobloadloadspecconcurrencystage">Sequence[Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Concurrency<wbr>Stage]</a></span>
     </dt>
-    <dd><p>Multi-phase configuration array.</p>
-</dd></dl>
+    <dd>Multi-phase configuration array.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6023,8 +6427,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Wait time for graceful termination of the task.</p>
-</dd><dt class="property-optional"
+    <dd>Wait time for graceful termination of the task.</dd><dt class="property-optional"
             title="Optional">
         <span id="iterationcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iterationcount_yaml" style="color: inherit; text-decoration: inherit;">iteration<wbr>Count</a>
@@ -6032,8 +6435,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of runs.</p>
-</dd><dt class="property-optional"
+    <dd>Number of runs.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxrequestspersecond_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestspersecond_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -6041,8 +6443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="stages_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stages_yaml" style="color: inherit; text-decoration: inherit;">stages</a>
@@ -6050,12 +6451,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#jobloadloadspecconcurrencystage">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Multi-phase configuration array.</p>
-</dd></dl>
+    <dd>Multi-phase configuration array.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="jobloadloadspecconcurrencystage">Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Concurrency<wbr>Stage</h4>
+<h4 id="jobloadloadspecconcurrencystage">
+Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Concurrency<wbr>Stage<pulumi-choosable type="language" values="python,go" class="inline">, Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Concurrency<wbr>Stage<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -6067,8 +6469,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pressure time.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure time.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetvirtualusers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetvirtualusers_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Virtual<wbr>Users</a>
@@ -6076,8 +6477,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of virtual users.</p>
-</dd></dl>
+    <dd>Number of virtual users.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6091,8 +6491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pressure time.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure time.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetvirtualusers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetvirtualusers_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Virtual<wbr>Users</a>
@@ -6100,8 +6499,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of virtual users.</p>
-</dd></dl>
+    <dd>Number of virtual users.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="duration_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_seconds_hcl" style="color: inherit; text-decoration: inherit;">duration_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Pressure time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="target_virtual_users_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_virtual_users_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>virtual_<wbr>users</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of virtual users.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6115,8 +6535,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Pressure time.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure time.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetvirtualusers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetvirtualusers_java" style="color: inherit; text-decoration: inherit;">target<wbr>Virtual<wbr>Users</a>
@@ -6124,8 +6543,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of virtual users.</p>
-</dd></dl>
+    <dd>Number of virtual users.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6139,8 +6557,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Pressure time.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure time.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetvirtualusers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetvirtualusers_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Virtual<wbr>Users</a>
@@ -6148,8 +6565,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of virtual users.</p>
-</dd></dl>
+    <dd>Number of virtual users.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6163,8 +6579,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pressure time.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure time.</dd><dt class="property-optional"
             title="Optional">
         <span id="target_virtual_users_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_virtual_users_python" style="color: inherit; text-decoration: inherit;">target_<wbr>virtual_<wbr>users</a>
@@ -6172,8 +6587,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of virtual users.</p>
-</dd></dl>
+    <dd>Number of virtual users.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6187,8 +6601,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Pressure time.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure time.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetvirtualusers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetvirtualusers_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Virtual<wbr>Users</a>
@@ -6196,12 +6609,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of virtual users.</p>
-</dd></dl>
+    <dd>Number of virtual users.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="jobloadloadspecrequestspersecond">Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Requests<wbr>Per<wbr>Second</h4>
+<h4 id="jobloadloadspecrequestspersecond">
+Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Requests<wbr>Per<wbr>Second<pulumi-choosable type="language" values="python,go" class="inline">, Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Requests<wbr>Per<wbr>Second<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -6213,8 +6627,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pressure time.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure time.</dd><dt class="property-optional"
             title="Optional">
         <span id="gracefulstopseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gracefulstopseconds_csharp" style="color: inherit; text-decoration: inherit;">Graceful<wbr>Stop<wbr>Seconds</a>
@@ -6222,8 +6635,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Elegant shutdown waiting time.</p>
-</dd><dt class="property-optional"
+    <dd>Elegant shutdown waiting time.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxrequestspersecond_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestspersecond_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -6231,8 +6643,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="resources_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resources_csharp" style="color: inherit; text-decoration: inherit;">Resources</a>
@@ -6240,8 +6651,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of resources.</p>
-</dd><dt class="property-optional"
+    <dd>Number of resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="startrequestspersecond_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startrequestspersecond_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -6249,8 +6659,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Initial RPS.</p>
-</dd><dt class="property-optional"
+    <dd>Initial RPS.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetrequestspersecond_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetrequestspersecond_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -6258,8 +6667,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Target RPS, invalid input parameter.</p>
-</dd></dl>
+    <dd>Target RPS, invalid input parameter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6273,8 +6681,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pressure time.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure time.</dd><dt class="property-optional"
             title="Optional">
         <span id="gracefulstopseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gracefulstopseconds_go" style="color: inherit; text-decoration: inherit;">Graceful<wbr>Stop<wbr>Seconds</a>
@@ -6282,8 +6689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Elegant shutdown waiting time.</p>
-</dd><dt class="property-optional"
+    <dd>Elegant shutdown waiting time.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxrequestspersecond_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestspersecond_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -6291,8 +6697,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="resources_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resources_go" style="color: inherit; text-decoration: inherit;">Resources</a>
@@ -6300,8 +6705,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of resources.</p>
-</dd><dt class="property-optional"
+    <dd>Number of resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="startrequestspersecond_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startrequestspersecond_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -6309,8 +6713,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Initial RPS.</p>
-</dd><dt class="property-optional"
+    <dd>Initial RPS.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetrequestspersecond_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetrequestspersecond_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -6318,8 +6721,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Target RPS, invalid input parameter.</p>
-</dd></dl>
+    <dd>Target RPS, invalid input parameter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="duration_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_seconds_hcl" style="color: inherit; text-decoration: inherit;">duration_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Pressure time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="graceful_stop_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#graceful_stop_seconds_hcl" style="color: inherit; text-decoration: inherit;">graceful_<wbr>stop_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Elegant shutdown waiting time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_requests_per_second_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_requests_per_second_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>requests_<wbr>per_<wbr>second</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="resources_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resources_hcl" style="color: inherit; text-decoration: inherit;">resources</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of resources.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="start_requests_per_second_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_requests_per_second_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>requests_<wbr>per_<wbr>second</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Initial RPS.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="target_requests_per_second_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_requests_per_second_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>requests_<wbr>per_<wbr>second</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Target RPS, invalid input parameter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6333,8 +6789,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Pressure time.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure time.</dd><dt class="property-optional"
             title="Optional">
         <span id="gracefulstopseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gracefulstopseconds_java" style="color: inherit; text-decoration: inherit;">graceful<wbr>Stop<wbr>Seconds</a>
@@ -6342,8 +6797,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Elegant shutdown waiting time.</p>
-</dd><dt class="property-optional"
+    <dd>Elegant shutdown waiting time.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxrequestspersecond_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestspersecond_java" style="color: inherit; text-decoration: inherit;">max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -6351,8 +6805,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="resources_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resources_java" style="color: inherit; text-decoration: inherit;">resources</a>
@@ -6360,8 +6813,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of resources.</p>
-</dd><dt class="property-optional"
+    <dd>Number of resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="startrequestspersecond_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startrequestspersecond_java" style="color: inherit; text-decoration: inherit;">start<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -6369,8 +6821,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Initial RPS.</p>
-</dd><dt class="property-optional"
+    <dd>Initial RPS.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetrequestspersecond_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetrequestspersecond_java" style="color: inherit; text-decoration: inherit;">target<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -6378,8 +6829,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Target RPS, invalid input parameter.</p>
-</dd></dl>
+    <dd>Target RPS, invalid input parameter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6393,8 +6843,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Pressure time.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure time.</dd><dt class="property-optional"
             title="Optional">
         <span id="gracefulstopseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gracefulstopseconds_nodejs" style="color: inherit; text-decoration: inherit;">graceful<wbr>Stop<wbr>Seconds</a>
@@ -6402,8 +6851,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Elegant shutdown waiting time.</p>
-</dd><dt class="property-optional"
+    <dd>Elegant shutdown waiting time.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxrequestspersecond_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestspersecond_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -6411,8 +6859,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="resources_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resources_nodejs" style="color: inherit; text-decoration: inherit;">resources</a>
@@ -6420,8 +6867,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of resources.</p>
-</dd><dt class="property-optional"
+    <dd>Number of resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="startrequestspersecond_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startrequestspersecond_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -6429,8 +6875,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Initial RPS.</p>
-</dd><dt class="property-optional"
+    <dd>Initial RPS.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetrequestspersecond_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetrequestspersecond_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -6438,8 +6883,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Target RPS, invalid input parameter.</p>
-</dd></dl>
+    <dd>Target RPS, invalid input parameter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6453,8 +6897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pressure time.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure time.</dd><dt class="property-optional"
             title="Optional">
         <span id="graceful_stop_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#graceful_stop_seconds_python" style="color: inherit; text-decoration: inherit;">graceful_<wbr>stop_<wbr>seconds</a>
@@ -6462,8 +6905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Elegant shutdown waiting time.</p>
-</dd><dt class="property-optional"
+    <dd>Elegant shutdown waiting time.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_requests_per_second_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_requests_per_second_python" style="color: inherit; text-decoration: inherit;">max_<wbr>requests_<wbr>per_<wbr>second</a>
@@ -6471,8 +6913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="resources_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resources_python" style="color: inherit; text-decoration: inherit;">resources</a>
@@ -6480,8 +6921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of resources.</p>
-</dd><dt class="property-optional"
+    <dd>Number of resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="start_requests_per_second_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_requests_per_second_python" style="color: inherit; text-decoration: inherit;">start_<wbr>requests_<wbr>per_<wbr>second</a>
@@ -6489,8 +6929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Initial RPS.</p>
-</dd><dt class="property-optional"
+    <dd>Initial RPS.</dd><dt class="property-optional"
             title="Optional">
         <span id="target_requests_per_second_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_requests_per_second_python" style="color: inherit; text-decoration: inherit;">target_<wbr>requests_<wbr>per_<wbr>second</a>
@@ -6498,8 +6937,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Target RPS, invalid input parameter.</p>
-</dd></dl>
+    <dd>Target RPS, invalid input parameter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6513,8 +6951,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Pressure time.</p>
-</dd><dt class="property-optional"
+    <dd>Pressure time.</dd><dt class="property-optional"
             title="Optional">
         <span id="gracefulstopseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gracefulstopseconds_yaml" style="color: inherit; text-decoration: inherit;">graceful<wbr>Stop<wbr>Seconds</a>
@@ -6522,8 +6959,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Elegant shutdown waiting time.</p>
-</dd><dt class="property-optional"
+    <dd>Elegant shutdown waiting time.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxrequestspersecond_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestspersecond_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -6531,8 +6967,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum requests per second.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum requests per second.</dd><dt class="property-optional"
             title="Optional">
         <span id="resources_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resources_yaml" style="color: inherit; text-decoration: inherit;">resources</a>
@@ -6540,8 +6975,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of resources.</p>
-</dd><dt class="property-optional"
+    <dd>Number of resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="startrequestspersecond_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startrequestspersecond_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -6549,8 +6983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Initial RPS.</p>
-</dd><dt class="property-optional"
+    <dd>Initial RPS.</dd><dt class="property-optional"
             title="Optional">
         <span id="targetrequestspersecond_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetrequestspersecond_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Requests<wbr>Per<wbr>Second</a>
@@ -6558,12 +6991,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Target RPS, invalid input parameter.</p>
-</dd></dl>
+    <dd>Target RPS, invalid input parameter.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="jobloadloadspecscriptorigin">Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Script<wbr>Origin</h4>
+<h4 id="jobloadloadspecscriptorigin">
+Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Script<wbr>Origin<pulumi-choosable type="language" values="python,go" class="inline">, Job<wbr>Load<wbr>Load<wbr>Spec<wbr>Script<wbr>Origin<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -6575,8 +7009,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pressure testing time.</p>
-</dd><dt class="property-required"
+    <dd>Pressure testing time.</dd><dt class="property-required"
             title="Required">
         <span id="machinenumber_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinenumber_csharp" style="color: inherit; text-decoration: inherit;">Machine<wbr>Number</a>
@@ -6584,8 +7017,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of machines.</p>
-</dd><dt class="property-required"
+    <dd>Number of machines.</dd><dt class="property-required"
             title="Required">
         <span id="machinespecification_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinespecification_csharp" style="color: inherit; text-decoration: inherit;">Machine<wbr>Specification</a>
@@ -6593,8 +7025,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Machine specification.</p>
-</dd></dl>
+    <dd>Machine specification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6608,8 +7039,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pressure testing time.</p>
-</dd><dt class="property-required"
+    <dd>Pressure testing time.</dd><dt class="property-required"
             title="Required">
         <span id="machinenumber_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinenumber_go" style="color: inherit; text-decoration: inherit;">Machine<wbr>Number</a>
@@ -6617,8 +7047,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of machines.</p>
-</dd><dt class="property-required"
+    <dd>Number of machines.</dd><dt class="property-required"
             title="Required">
         <span id="machinespecification_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinespecification_go" style="color: inherit; text-decoration: inherit;">Machine<wbr>Specification</a>
@@ -6626,8 +7055,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Machine specification.</p>
-</dd></dl>
+    <dd>Machine specification.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="duration_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_seconds_hcl" style="color: inherit; text-decoration: inherit;">duration_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Pressure testing time.</dd><dt class="property-required"
+            title="Required">
+        <span id="machine_number_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machine_number_hcl" style="color: inherit; text-decoration: inherit;">machine_<wbr>number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of machines.</dd><dt class="property-required"
+            title="Required">
+        <span id="machine_specification_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machine_specification_hcl" style="color: inherit; text-decoration: inherit;">machine_<wbr>specification</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Machine specification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6641,8 +7099,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Pressure testing time.</p>
-</dd><dt class="property-required"
+    <dd>Pressure testing time.</dd><dt class="property-required"
             title="Required">
         <span id="machinenumber_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinenumber_java" style="color: inherit; text-decoration: inherit;">machine<wbr>Number</a>
@@ -6650,8 +7107,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of machines.</p>
-</dd><dt class="property-required"
+    <dd>Number of machines.</dd><dt class="property-required"
             title="Required">
         <span id="machinespecification_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinespecification_java" style="color: inherit; text-decoration: inherit;">machine<wbr>Specification</a>
@@ -6659,8 +7115,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Machine specification.</p>
-</dd></dl>
+    <dd>Machine specification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6674,8 +7129,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Pressure testing time.</p>
-</dd><dt class="property-required"
+    <dd>Pressure testing time.</dd><dt class="property-required"
             title="Required">
         <span id="machinenumber_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinenumber_nodejs" style="color: inherit; text-decoration: inherit;">machine<wbr>Number</a>
@@ -6683,8 +7137,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of machines.</p>
-</dd><dt class="property-required"
+    <dd>Number of machines.</dd><dt class="property-required"
             title="Required">
         <span id="machinespecification_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinespecification_nodejs" style="color: inherit; text-decoration: inherit;">machine<wbr>Specification</a>
@@ -6692,8 +7145,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Machine specification.</p>
-</dd></dl>
+    <dd>Machine specification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6707,8 +7159,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pressure testing time.</p>
-</dd><dt class="property-required"
+    <dd>Pressure testing time.</dd><dt class="property-required"
             title="Required">
         <span id="machine_number_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machine_number_python" style="color: inherit; text-decoration: inherit;">machine_<wbr>number</a>
@@ -6716,8 +7167,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of machines.</p>
-</dd><dt class="property-required"
+    <dd>Number of machines.</dd><dt class="property-required"
             title="Required">
         <span id="machine_specification_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machine_specification_python" style="color: inherit; text-decoration: inherit;">machine_<wbr>specification</a>
@@ -6725,8 +7175,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Machine specification.</p>
-</dd></dl>
+    <dd>Machine specification.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6740,8 +7189,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Pressure testing time.</p>
-</dd><dt class="property-required"
+    <dd>Pressure testing time.</dd><dt class="property-required"
             title="Required">
         <span id="machinenumber_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinenumber_yaml" style="color: inherit; text-decoration: inherit;">machine<wbr>Number</a>
@@ -6749,8 +7197,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of machines.</p>
-</dd><dt class="property-required"
+    <dd>Number of machines.</dd><dt class="property-required"
             title="Required">
         <span id="machinespecification_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinespecification_yaml" style="color: inherit; text-decoration: inherit;">machine<wbr>Specification</a>
@@ -6758,12 +7205,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Machine specification.</p>
-</dd></dl>
+    <dd>Machine specification.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="jobloadvpcloaddistribution">Job<wbr>Load<wbr>Vpc<wbr>Load<wbr>Distribution</h4>
+<h4 id="jobloadvpcloaddistribution">
+Job<wbr>Load<wbr>Vpc<wbr>Load<wbr>Distribution<pulumi-choosable type="language" values="python,go" class="inline">, Job<wbr>Load<wbr>Vpc<wbr>Load<wbr>Distribution<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -6775,8 +7223,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Regional ID.</p>
-</dd><dt class="property-optional"
+    <dd>Regional ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -6784,8 +7231,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-optional"
+    <dd>Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Ids</a>
@@ -6793,8 +7239,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Subnet ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -6802,8 +7247,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6817,8 +7261,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Regional ID.</p>
-</dd><dt class="property-optional"
+    <dd>Regional ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -6826,8 +7269,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-optional"
+    <dd>Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Ids</a>
@@ -6835,8 +7277,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Subnet ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -6844,8 +7285,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="region_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_id_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Regional ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_ids_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Subnet ID list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6859,8 +7337,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Regional ID.</p>
-</dd><dt class="property-optional"
+    <dd>Regional ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -6868,8 +7345,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-optional"
+    <dd>Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -6877,8 +7353,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Subnet ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -6886,8 +7361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6901,8 +7375,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Regional ID.</p>
-</dd><dt class="property-optional"
+    <dd>Regional ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -6910,8 +7383,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-optional"
+    <dd>Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -6919,8 +7391,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Subnet ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -6928,8 +7399,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6943,8 +7413,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Regional ID.</p>
-</dd><dt class="property-optional"
+    <dd>Regional ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -6952,8 +7421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-optional"
+    <dd>Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_ids_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>ids</a>
@@ -6961,8 +7429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Subnet ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -6970,8 +7437,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6985,8 +7451,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Regional ID.</p>
-</dd><dt class="property-optional"
+    <dd>Regional ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -6994,8 +7459,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-optional"
+    <dd>Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -7003,8 +7467,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Subnet ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -7012,12 +7475,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="jobplugin">Job<wbr>Plugin</h4>
+<h4 id="jobplugin">
+Job<wbr>Plugin<pulumi-choosable type="language" values="python,go" class="inline">, Job<wbr>Plugin<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -7029,8 +7493,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File id.</p>
-</dd><dt class="property-optional"
+    <dd>File id.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -7038,8 +7501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_csharp" style="color: inherit; text-decoration: inherit;">Size</a>
@@ -7047,8 +7509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File size.</p>
-</dd><dt class="property-optional"
+    <dd>File size.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -7056,8 +7517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_csharp" style="color: inherit; text-decoration: inherit;">Updated<wbr>At</a>
@@ -7065,8 +7525,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7080,8 +7539,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File id.</p>
-</dd><dt class="property-optional"
+    <dd>File id.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -7089,8 +7547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_go" style="color: inherit; text-decoration: inherit;">Size</a>
@@ -7098,8 +7555,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File size.</p>
-</dd><dt class="property-optional"
+    <dd>File size.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -7107,8 +7563,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_go" style="color: inherit; text-decoration: inherit;">Updated<wbr>At</a>
@@ -7116,8 +7571,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="file_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_id_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_hcl" style="color: inherit; text-decoration: inherit;">size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>File size.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scene Type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="updated_at_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_at_hcl" style="color: inherit; text-decoration: inherit;">updated_<wbr>at</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7131,8 +7631,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File id.</p>
-</dd><dt class="property-optional"
+    <dd>File id.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -7140,8 +7639,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_java" style="color: inherit; text-decoration: inherit;">size</a>
@@ -7149,8 +7647,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>File size.</p>
-</dd><dt class="property-optional"
+    <dd>File size.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7158,8 +7655,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_java" style="color: inherit; text-decoration: inherit;">updated<wbr>At</a>
@@ -7167,8 +7663,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7182,8 +7677,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File id.</p>
-</dd><dt class="property-optional"
+    <dd>File id.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -7191,8 +7685,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_nodejs" style="color: inherit; text-decoration: inherit;">size</a>
@@ -7200,8 +7693,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>File size.</p>
-</dd><dt class="property-optional"
+    <dd>File size.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7209,8 +7701,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_nodejs" style="color: inherit; text-decoration: inherit;">updated<wbr>At</a>
@@ -7218,8 +7709,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7233,8 +7723,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File id.</p>
-</dd><dt class="property-optional"
+    <dd>File id.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -7242,8 +7731,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_python" style="color: inherit; text-decoration: inherit;">size</a>
@@ -7251,8 +7739,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File size.</p>
-</dd><dt class="property-optional"
+    <dd>File size.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7260,8 +7747,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updated_at_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_at_python" style="color: inherit; text-decoration: inherit;">updated_<wbr>at</a>
@@ -7269,8 +7755,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7284,8 +7769,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File id.</p>
-</dd><dt class="property-optional"
+    <dd>File id.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -7293,8 +7777,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_yaml" style="color: inherit; text-decoration: inherit;">size</a>
@@ -7302,8 +7785,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>File size.</p>
-</dd><dt class="property-optional"
+    <dd>File size.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7311,8 +7793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_yaml" style="color: inherit; text-decoration: inherit;">updated<wbr>At</a>
@@ -7320,12 +7801,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="jobprotocol">Job<wbr>Protocol</h4>
+<h4 id="jobprotocol">
+Job<wbr>Protocol<pulumi-choosable type="language" values="python,go" class="inline">, Job<wbr>Protocol<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -7337,8 +7819,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File ID.</p>
-</dd><dt class="property-optional"
+    <dd>File ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -7346,8 +7827,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol name.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_csharp" style="color: inherit; text-decoration: inherit;">Size</a>
@@ -7355,8 +7835,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -7364,8 +7843,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_csharp" style="color: inherit; text-decoration: inherit;">Updated<wbr>At</a>
@@ -7373,8 +7851,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7388,8 +7865,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File ID.</p>
-</dd><dt class="property-optional"
+    <dd>File ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -7397,8 +7873,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol name.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_go" style="color: inherit; text-decoration: inherit;">Size</a>
@@ -7406,8 +7881,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -7415,8 +7889,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_go" style="color: inherit; text-decoration: inherit;">Updated<wbr>At</a>
@@ -7424,8 +7897,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="file_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_id_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_hcl" style="color: inherit; text-decoration: inherit;">size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>File name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scene Type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="updated_at_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_at_hcl" style="color: inherit; text-decoration: inherit;">updated_<wbr>at</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7439,8 +7957,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File ID.</p>
-</dd><dt class="property-optional"
+    <dd>File ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -7448,8 +7965,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol name.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_java" style="color: inherit; text-decoration: inherit;">size</a>
@@ -7457,8 +7973,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7466,8 +7981,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_java" style="color: inherit; text-decoration: inherit;">updated<wbr>At</a>
@@ -7475,8 +7989,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7490,8 +8003,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File ID.</p>
-</dd><dt class="property-optional"
+    <dd>File ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -7499,8 +8011,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol name.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_nodejs" style="color: inherit; text-decoration: inherit;">size</a>
@@ -7508,8 +8019,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7517,8 +8027,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_nodejs" style="color: inherit; text-decoration: inherit;">updated<wbr>At</a>
@@ -7526,8 +8035,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7541,8 +8049,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File ID.</p>
-</dd><dt class="property-optional"
+    <dd>File ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -7550,8 +8057,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol name.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_python" style="color: inherit; text-decoration: inherit;">size</a>
@@ -7559,8 +8065,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7568,8 +8073,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updated_at_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_at_python" style="color: inherit; text-decoration: inherit;">updated_<wbr>at</a>
@@ -7577,8 +8081,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7592,8 +8095,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File ID.</p>
-</dd><dt class="property-optional"
+    <dd>File ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -7601,8 +8103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol name.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_yaml" style="color: inherit; text-decoration: inherit;">size</a>
@@ -7610,8 +8111,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7619,8 +8119,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_yaml" style="color: inherit; text-decoration: inherit;">updated<wbr>At</a>
@@ -7628,12 +8127,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="jobrequestfile">Job<wbr>Request<wbr>File</h4>
+<h4 id="jobrequestfile">
+Job<wbr>Request<wbr>File<pulumi-choosable type="language" values="python,go" class="inline">, Job<wbr>Request<wbr>File<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -7645,8 +8145,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File id.</p>
-</dd><dt class="property-optional"
+    <dd>File id.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -7654,8 +8153,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_csharp" style="color: inherit; text-decoration: inherit;">Size</a>
@@ -7663,8 +8161,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File size.</p>
-</dd><dt class="property-optional"
+    <dd>File size.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -7672,8 +8169,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_csharp" style="color: inherit; text-decoration: inherit;">Updated<wbr>At</a>
@@ -7681,8 +8177,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7696,8 +8191,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File id.</p>
-</dd><dt class="property-optional"
+    <dd>File id.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -7705,8 +8199,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_go" style="color: inherit; text-decoration: inherit;">Size</a>
@@ -7714,8 +8207,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File size.</p>
-</dd><dt class="property-optional"
+    <dd>File size.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -7723,8 +8215,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_go" style="color: inherit; text-decoration: inherit;">Updated<wbr>At</a>
@@ -7732,8 +8223,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="file_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_id_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_hcl" style="color: inherit; text-decoration: inherit;">size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>File size.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scene Type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="updated_at_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_at_hcl" style="color: inherit; text-decoration: inherit;">updated_<wbr>at</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7747,8 +8283,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File id.</p>
-</dd><dt class="property-optional"
+    <dd>File id.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -7756,8 +8291,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_java" style="color: inherit; text-decoration: inherit;">size</a>
@@ -7765,8 +8299,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>File size.</p>
-</dd><dt class="property-optional"
+    <dd>File size.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7774,8 +8307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_java" style="color: inherit; text-decoration: inherit;">updated<wbr>At</a>
@@ -7783,8 +8315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7798,8 +8329,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File id.</p>
-</dd><dt class="property-optional"
+    <dd>File id.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -7807,8 +8337,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_nodejs" style="color: inherit; text-decoration: inherit;">size</a>
@@ -7816,8 +8345,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>File size.</p>
-</dd><dt class="property-optional"
+    <dd>File size.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7825,8 +8353,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_nodejs" style="color: inherit; text-decoration: inherit;">updated<wbr>At</a>
@@ -7834,8 +8361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7849,8 +8375,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File id.</p>
-</dd><dt class="property-optional"
+    <dd>File id.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -7858,8 +8383,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_python" style="color: inherit; text-decoration: inherit;">size</a>
@@ -7867,8 +8391,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File size.</p>
-</dd><dt class="property-optional"
+    <dd>File size.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7876,8 +8399,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updated_at_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_at_python" style="color: inherit; text-decoration: inherit;">updated_<wbr>at</a>
@@ -7885,8 +8407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -7900,8 +8421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File id.</p>
-</dd><dt class="property-optional"
+    <dd>File id.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -7909,8 +8429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_yaml" style="color: inherit; text-decoration: inherit;">size</a>
@@ -7918,8 +8437,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>File size.</p>
-</dd><dt class="property-optional"
+    <dd>File size.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -7927,8 +8445,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_yaml" style="color: inherit; text-decoration: inherit;">updated<wbr>At</a>
@@ -7936,12 +8453,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="jobtestscript">Job<wbr>Test<wbr>Script</h4>
+<h4 id="jobtestscript">
+Job<wbr>Test<wbr>Script<pulumi-choosable type="language" values="python,go" class="inline">, Job<wbr>Test<wbr>Script<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -7953,8 +8471,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Base64 encoded file content.</p>
-</dd><dt class="property-optional"
+    <dd>Base64 encoded file content.</dd><dt class="property-optional"
             title="Optional">
         <span id="encodedhttparchive_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encodedhttparchive_csharp" style="color: inherit; text-decoration: inherit;">Encoded<wbr>Http<wbr>Archive</a>
@@ -7962,8 +8479,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Base64 encoded har structure.</p>
-</dd><dt class="property-optional"
+    <dd>Base64 encoded har structure.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadweight_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadweight_csharp" style="color: inherit; text-decoration: inherit;">Load<wbr>Weight</a>
@@ -7971,8 +8487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Script weight, range 1-100.</p>
-</dd><dt class="property-optional"
+    <dd>Script weight, range 1-100.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -7980,8 +8495,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_csharp" style="color: inherit; text-decoration: inherit;">Size</a>
@@ -7989,8 +8503,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File size.</p>
-</dd><dt class="property-optional"
+    <dd>File size.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -7998,8 +8511,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_csharp" style="color: inherit; text-decoration: inherit;">Updated<wbr>At</a>
@@ -8007,8 +8519,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -8022,8 +8533,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Base64 encoded file content.</p>
-</dd><dt class="property-optional"
+    <dd>Base64 encoded file content.</dd><dt class="property-optional"
             title="Optional">
         <span id="encodedhttparchive_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encodedhttparchive_go" style="color: inherit; text-decoration: inherit;">Encoded<wbr>Http<wbr>Archive</a>
@@ -8031,8 +8541,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Base64 encoded har structure.</p>
-</dd><dt class="property-optional"
+    <dd>Base64 encoded har structure.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadweight_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadweight_go" style="color: inherit; text-decoration: inherit;">Load<wbr>Weight</a>
@@ -8040,8 +8549,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Script weight, range 1-100.</p>
-</dd><dt class="property-optional"
+    <dd>Script weight, range 1-100.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -8049,8 +8557,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_go" style="color: inherit; text-decoration: inherit;">Size</a>
@@ -8058,8 +8565,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File size.</p>
-</dd><dt class="property-optional"
+    <dd>File size.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -8067,8 +8573,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_go" style="color: inherit; text-decoration: inherit;">Updated<wbr>At</a>
@@ -8076,8 +8581,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="encoded_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encoded_content_hcl" style="color: inherit; text-decoration: inherit;">encoded_<wbr>content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Base64 encoded file content.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encoded_http_archive_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encoded_http_archive_hcl" style="color: inherit; text-decoration: inherit;">encoded_<wbr>http_<wbr>archive</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Base64 encoded har structure.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="load_weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_weight_hcl" style="color: inherit; text-decoration: inherit;">load_<wbr>weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Script weight, range 1-100.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_hcl" style="color: inherit; text-decoration: inherit;">size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>File size.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scene Type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="updated_at_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_at_hcl" style="color: inherit; text-decoration: inherit;">updated_<wbr>at</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -8091,8 +8657,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Base64 encoded file content.</p>
-</dd><dt class="property-optional"
+    <dd>Base64 encoded file content.</dd><dt class="property-optional"
             title="Optional">
         <span id="encodedhttparchive_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encodedhttparchive_java" style="color: inherit; text-decoration: inherit;">encoded<wbr>Http<wbr>Archive</a>
@@ -8100,8 +8665,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Base64 encoded har structure.</p>
-</dd><dt class="property-optional"
+    <dd>Base64 encoded har structure.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadweight_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadweight_java" style="color: inherit; text-decoration: inherit;">load<wbr>Weight</a>
@@ -8109,8 +8673,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Script weight, range 1-100.</p>
-</dd><dt class="property-optional"
+    <dd>Script weight, range 1-100.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -8118,8 +8681,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_java" style="color: inherit; text-decoration: inherit;">size</a>
@@ -8127,8 +8689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>File size.</p>
-</dd><dt class="property-optional"
+    <dd>File size.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -8136,8 +8697,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_java" style="color: inherit; text-decoration: inherit;">updated<wbr>At</a>
@@ -8145,8 +8705,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -8160,8 +8719,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Base64 encoded file content.</p>
-</dd><dt class="property-optional"
+    <dd>Base64 encoded file content.</dd><dt class="property-optional"
             title="Optional">
         <span id="encodedhttparchive_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encodedhttparchive_nodejs" style="color: inherit; text-decoration: inherit;">encoded<wbr>Http<wbr>Archive</a>
@@ -8169,8 +8727,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Base64 encoded har structure.</p>
-</dd><dt class="property-optional"
+    <dd>Base64 encoded har structure.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadweight_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadweight_nodejs" style="color: inherit; text-decoration: inherit;">load<wbr>Weight</a>
@@ -8178,8 +8735,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Script weight, range 1-100.</p>
-</dd><dt class="property-optional"
+    <dd>Script weight, range 1-100.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -8187,8 +8743,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_nodejs" style="color: inherit; text-decoration: inherit;">size</a>
@@ -8196,8 +8751,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>File size.</p>
-</dd><dt class="property-optional"
+    <dd>File size.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -8205,8 +8759,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_nodejs" style="color: inherit; text-decoration: inherit;">updated<wbr>At</a>
@@ -8214,8 +8767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -8229,8 +8781,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Base64 encoded file content.</p>
-</dd><dt class="property-optional"
+    <dd>Base64 encoded file content.</dd><dt class="property-optional"
             title="Optional">
         <span id="encoded_http_archive_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encoded_http_archive_python" style="color: inherit; text-decoration: inherit;">encoded_<wbr>http_<wbr>archive</a>
@@ -8238,8 +8789,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Base64 encoded har structure.</p>
-</dd><dt class="property-optional"
+    <dd>Base64 encoded har structure.</dd><dt class="property-optional"
             title="Optional">
         <span id="load_weight_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_weight_python" style="color: inherit; text-decoration: inherit;">load_<wbr>weight</a>
@@ -8247,8 +8797,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Script weight, range 1-100.</p>
-</dd><dt class="property-optional"
+    <dd>Script weight, range 1-100.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -8256,8 +8805,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_python" style="color: inherit; text-decoration: inherit;">size</a>
@@ -8265,8 +8813,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File size.</p>
-</dd><dt class="property-optional"
+    <dd>File size.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -8274,8 +8821,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updated_at_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_at_python" style="color: inherit; text-decoration: inherit;">updated_<wbr>at</a>
@@ -8283,8 +8829,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -8298,8 +8843,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Base64 encoded file content.</p>
-</dd><dt class="property-optional"
+    <dd>Base64 encoded file content.</dd><dt class="property-optional"
             title="Optional">
         <span id="encodedhttparchive_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encodedhttparchive_yaml" style="color: inherit; text-decoration: inherit;">encoded<wbr>Http<wbr>Archive</a>
@@ -8307,8 +8851,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Base64 encoded har structure.</p>
-</dd><dt class="property-optional"
+    <dd>Base64 encoded har structure.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadweight_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadweight_yaml" style="color: inherit; text-decoration: inherit;">load<wbr>Weight</a>
@@ -8316,8 +8859,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Script weight, range 1-100.</p>
-</dd><dt class="property-optional"
+    <dd>Script weight, range 1-100.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -8325,8 +8867,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File name.</p>
-</dd><dt class="property-optional"
+    <dd>File name.</dd><dt class="property-optional"
             title="Optional">
         <span id="size_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_yaml" style="color: inherit; text-decoration: inherit;">size</a>
@@ -8334,8 +8875,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>File size.</p>
-</dd><dt class="property-optional"
+    <dd>File size.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -8343,8 +8883,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scene Type.</p>
-</dd><dt class="property-optional"
+    <dd>Scene Type.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_yaml" style="color: inherit; text-decoration: inherit;">updated<wbr>At</a>
@@ -8352,8 +8891,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -8362,11 +8900,13 @@ The following state arguments are supported:
 
 
 pts job can be imported using the projectId#scenarioId#jobId, e.g.
-
 ```sh
 $ pulumi import tencentcloud:Pts/job:Job job project-45vw7v82#scenario-22q19f3k#job-dtm93vx0
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -8378,7 +8918,6 @@ $ pulumi import tencentcloud:Pts/job:Job job project-45vw7v82#scenario-22q19f3k#
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

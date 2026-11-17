@@ -2,9 +2,11 @@
 ---
 title: "TranscodeTemplate"
 title_tag: "tencentcloud.Vod.TranscodeTemplate"
-meta_desc: "Documentation for the tencentcloud.Vod.TranscodeTemplate resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a vod transcode template"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -17,69 +19,84 @@ Provides a resource to create a vod transcode template
 
 
 ## Create TranscodeTemplate Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">TranscodeTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TranscodeTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">TranscodeTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TranscodeTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">TranscodeTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                      <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TranscodeTemplateArgs</a></span><span class="p">,</span>
+                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">TranscodeTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                      <span class="nx">audio_template</span><span class="p">:</span> <span class="nx">Optional[_vod.TranscodeTemplateAudioTemplateArgs]</span> = None<span class="p">,</span>
-                      <span class="nx">comment</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                       <span class="nx">container</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                      <span class="nx">audio_template</span><span class="p">:</span> <span class="nx">Optional[TranscodeTemplateAudioTemplateArgs]</span> = None<span class="p">,</span>
+                      <span class="nx">comment</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                       <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                       <span class="nx">remove_audio</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                       <span class="nx">remove_video</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                       <span class="nx">segment_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                       <span class="nx">sub_app_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                      <span class="nx">tehd_config</span><span class="p">:</span> <span class="nx">Optional[_vod.TranscodeTemplateTehdConfigArgs]</span> = None<span class="p">,</span>
-                      <span class="nx">video_template</span><span class="p">:</span> <span class="nx">Optional[_vod.TranscodeTemplateVideoTemplateArgs]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">TranscodeTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                      <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TranscodeTemplateArgs</a></span><span class="p">,</span>
-                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                      <span class="nx">tehd_config</span><span class="p">:</span> <span class="nx">Optional[TranscodeTemplateTehdConfigArgs]</span> = None<span class="p">,</span>
+                      <span class="nx">video_template</span><span class="p">:</span> <span class="nx">Optional[TranscodeTemplateVideoTemplateArgs]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTranscodeTemplate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TranscodeTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TranscodeTemplate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTranscodeTemplate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TranscodeTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TranscodeTemplate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">TranscodeTemplate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TranscodeTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">TranscodeTemplate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TranscodeTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">TranscodeTemplate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TranscodeTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">TranscodeTemplate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TranscodeTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vod:TranscodeTemplate</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vod:TranscodeTemplate</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_vod_transcode_template&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -100,7 +117,7 @@ Provides a resource to create a vod transcode template
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -217,11 +234,19 @@ Provides a resource to create a vod transcode template
 </pulumi-choosable>
 </div>
 
+
+
 ## TranscodeTemplate Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The TranscodeTemplate resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -237,17 +262,15 @@ The TranscodeTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</p>
-</dd><dt class="property-optional"
+    <dd>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</dd><dt class="property-optional"
             title="Optional">
         <span id="audiotemplate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#audiotemplate_csharp" style="color: inherit; text-decoration: inherit;">Audio<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#transcodetemplateaudiotemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Transcode<wbr>Template<wbr>Audio<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#transcodetemplateaudiotemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Transcode<wbr>Template<wbr>Audio<wbr>Template</a></span>
     </dt>
-    <dd><p>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_csharp" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -255,8 +278,7 @@ The TranscodeTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -264,8 +286,7 @@ The TranscodeTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Transcoding template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Transcoding template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="removeaudio_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removeaudio_csharp" style="color: inherit; text-decoration: inherit;">Remove<wbr>Audio</a>
@@ -273,8 +294,7 @@ The TranscodeTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="removevideo_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removevideo_csharp" style="color: inherit; text-decoration: inherit;">Remove<wbr>Video</a>
@@ -282,13 +302,12 @@ The TranscodeTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove video data. Valid values:</p>
+    <dd>Whether to remove video data. Valid values:</p>
 <ul>
 <li>0: retain</li>
 <li>1: remove
 Default value: 0.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="segmenttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segmenttype_csharp" style="color: inherit; text-decoration: inherit;">Segment<wbr>Type</a>
@@ -296,8 +315,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_csharp" style="color: inherit; text-decoration: inherit;">Sub<wbr>App<wbr>Id</a>
@@ -305,26 +323,23 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="tehdconfig_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tehdconfig_csharp" style="color: inherit; text-decoration: inherit;">Tehd<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#transcodetemplatetehdconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Transcode<wbr>Template<wbr>Tehd<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#transcodetemplatetehdconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Transcode<wbr>Template<wbr>Tehd<wbr>Config</a></span>
     </dt>
-    <dd><p>TESHD transcoding parameter.</p>
-</dd><dt class="property-optional"
+    <dd>TESHD transcoding parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="videotemplate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#videotemplate_csharp" style="color: inherit; text-decoration: inherit;">Video<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#transcodetemplatevideotemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Transcode<wbr>Template<wbr>Video<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#transcodetemplatevideotemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Transcode<wbr>Template<wbr>Video<wbr>Template</a></span>
     </dt>
-    <dd><p>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</p>
-</dd></dl>
+    <dd>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -338,8 +353,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</p>
-</dd><dt class="property-optional"
+    <dd>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</dd><dt class="property-optional"
             title="Optional">
         <span id="audiotemplate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#audiotemplate_go" style="color: inherit; text-decoration: inherit;">Audio<wbr>Template</a>
@@ -347,8 +361,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#transcodetemplateaudiotemplate">Transcode<wbr>Template<wbr>Audio<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_go" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -356,8 +369,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -365,8 +377,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Transcoding template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Transcoding template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="removeaudio_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removeaudio_go" style="color: inherit; text-decoration: inherit;">Remove<wbr>Audio</a>
@@ -374,8 +385,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="removevideo_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removevideo_go" style="color: inherit; text-decoration: inherit;">Remove<wbr>Video</a>
@@ -383,13 +393,12 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove video data. Valid values:</p>
+    <dd>Whether to remove video data. Valid values:</p>
 <ul>
 <li>0: retain</li>
 <li>1: remove
 Default value: 0.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="segmenttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segmenttype_go" style="color: inherit; text-decoration: inherit;">Segment<wbr>Type</a>
@@ -397,8 +406,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_go" style="color: inherit; text-decoration: inherit;">Sub<wbr>App<wbr>Id</a>
@@ -406,8 +414,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="tehdconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tehdconfig_go" style="color: inherit; text-decoration: inherit;">Tehd<wbr>Config</a>
@@ -415,8 +422,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#transcodetemplatetehdconfig">Transcode<wbr>Template<wbr>Tehd<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>TESHD transcoding parameter.</p>
-</dd><dt class="property-optional"
+    <dd>TESHD transcoding parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="videotemplate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#videotemplate_go" style="color: inherit; text-decoration: inherit;">Video<wbr>Template</a>
@@ -424,8 +430,98 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#transcodetemplatevideotemplate">Transcode<wbr>Template<wbr>Video<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</p>
-</dd></dl>
+    <dd>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="container_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_hcl" style="color: inherit; text-decoration: inherit;">container</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="audio_template_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#audio_template_hcl" style="color: inherit; text-decoration: inherit;">audio_<wbr>template</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#transcodetemplateaudiotemplate">object</a></span>
+    </dt>
+    <dd>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="comment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_hcl" style="color: inherit; text-decoration: inherit;">comment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Transcoding template name. Length limit: 64 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="remove_audio_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remove_audio_hcl" style="color: inherit; text-decoration: inherit;">remove_<wbr>audio</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="remove_video_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remove_video_hcl" style="color: inherit; text-decoration: inherit;">remove_<wbr>video</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to remove video data. Valid values:</p>
+<ul>
+<li>0: retain</li>
+<li>1: remove
+Default value: 0.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="segment_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segment_type_hcl" style="color: inherit; text-decoration: inherit;">segment_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sub_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_app_id_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tehd_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tehd_config_hcl" style="color: inherit; text-decoration: inherit;">tehd_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#transcodetemplatetehdconfig">object</a></span>
+    </dt>
+    <dd>TESHD transcoding parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="video_template_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#video_template_hcl" style="color: inherit; text-decoration: inherit;">video_<wbr>template</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#transcodetemplatevideotemplate">object</a></span>
+    </dt>
+    <dd>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -439,17 +535,15 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</p>
-</dd><dt class="property-optional"
+    <dd>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</dd><dt class="property-optional"
             title="Optional">
         <span id="audiotemplate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#audiotemplate_java" style="color: inherit; text-decoration: inherit;">audio<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#transcodetemplateaudiotemplate">Transcode<wbr>Template<wbr>Audio<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#transcodetemplateaudiotemplate">Transcode<wbr>Template<wbr>Audio<wbr>Template</a></span>
     </dt>
-    <dd><p>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_java" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -457,8 +551,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -466,8 +559,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Transcoding template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Transcoding template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="removeaudio_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removeaudio_java" style="color: inherit; text-decoration: inherit;">remove<wbr>Audio</a>
@@ -475,8 +567,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="removevideo_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removevideo_java" style="color: inherit; text-decoration: inherit;">remove<wbr>Video</a>
@@ -484,13 +575,12 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to remove video data. Valid values:</p>
+    <dd>Whether to remove video data. Valid values:</p>
 <ul>
 <li>0: retain</li>
 <li>1: remove
 Default value: 0.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="segmenttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segmenttype_java" style="color: inherit; text-decoration: inherit;">segment<wbr>Type</a>
@@ -498,8 +588,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_java" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -507,26 +596,23 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="tehdconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tehdconfig_java" style="color: inherit; text-decoration: inherit;">tehd<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#transcodetemplatetehdconfig">Transcode<wbr>Template<wbr>Tehd<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#transcodetemplatetehdconfig">Transcode<wbr>Template<wbr>Tehd<wbr>Config</a></span>
     </dt>
-    <dd><p>TESHD transcoding parameter.</p>
-</dd><dt class="property-optional"
+    <dd>TESHD transcoding parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="videotemplate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#videotemplate_java" style="color: inherit; text-decoration: inherit;">video<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#transcodetemplatevideotemplate">Transcode<wbr>Template<wbr>Video<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#transcodetemplatevideotemplate">Transcode<wbr>Template<wbr>Video<wbr>Template</a></span>
     </dt>
-    <dd><p>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</p>
-</dd></dl>
+    <dd>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -540,17 +626,15 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</p>
-</dd><dt class="property-optional"
+    <dd>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</dd><dt class="property-optional"
             title="Optional">
         <span id="audiotemplate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#audiotemplate_nodejs" style="color: inherit; text-decoration: inherit;">audio<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#transcodetemplateaudiotemplate">Transcode<wbr>Template<wbr>Audio<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#transcodetemplateaudiotemplate">Transcode<wbr>Template<wbr>Audio<wbr>Template</a></span>
     </dt>
-    <dd><p>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_nodejs" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -558,8 +642,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -567,8 +650,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Transcoding template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Transcoding template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="removeaudio_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removeaudio_nodejs" style="color: inherit; text-decoration: inherit;">remove<wbr>Audio</a>
@@ -576,8 +658,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="removevideo_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removevideo_nodejs" style="color: inherit; text-decoration: inherit;">remove<wbr>Video</a>
@@ -585,13 +666,12 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to remove video data. Valid values:</p>
+    <dd>Whether to remove video data. Valid values:</p>
 <ul>
 <li>0: retain</li>
 <li>1: remove
 Default value: 0.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="segmenttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segmenttype_nodejs" style="color: inherit; text-decoration: inherit;">segment<wbr>Type</a>
@@ -599,8 +679,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_nodejs" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -608,26 +687,23 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="tehdconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tehdconfig_nodejs" style="color: inherit; text-decoration: inherit;">tehd<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#transcodetemplatetehdconfig">Transcode<wbr>Template<wbr>Tehd<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#transcodetemplatetehdconfig">Transcode<wbr>Template<wbr>Tehd<wbr>Config</a></span>
     </dt>
-    <dd><p>TESHD transcoding parameter.</p>
-</dd><dt class="property-optional"
+    <dd>TESHD transcoding parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="videotemplate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#videotemplate_nodejs" style="color: inherit; text-decoration: inherit;">video<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#transcodetemplatevideotemplate">Transcode<wbr>Template<wbr>Video<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#transcodetemplatevideotemplate">Transcode<wbr>Template<wbr>Video<wbr>Template</a></span>
     </dt>
-    <dd><p>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</p>
-</dd></dl>
+    <dd>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -641,8 +717,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</p>
-</dd><dt class="property-optional"
+    <dd>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</dd><dt class="property-optional"
             title="Optional">
         <span id="audio_template_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#audio_template_python" style="color: inherit; text-decoration: inherit;">audio_<wbr>template</a>
@@ -650,8 +725,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#transcodetemplateaudiotemplate">Transcode<wbr>Template<wbr>Audio<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_python" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -659,8 +733,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -668,8 +741,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Transcoding template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Transcoding template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="remove_audio_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remove_audio_python" style="color: inherit; text-decoration: inherit;">remove_<wbr>audio</a>
@@ -677,8 +749,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="remove_video_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remove_video_python" style="color: inherit; text-decoration: inherit;">remove_<wbr>video</a>
@@ -686,13 +757,12 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove video data. Valid values:</p>
+    <dd>Whether to remove video data. Valid values:</p>
 <ul>
 <li>0: retain</li>
 <li>1: remove
 Default value: 0.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="segment_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segment_type_python" style="color: inherit; text-decoration: inherit;">segment_<wbr>type</a>
@@ -700,8 +770,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sub_app_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_app_id_python" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
@@ -709,8 +778,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="tehd_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tehd_config_python" style="color: inherit; text-decoration: inherit;">tehd_<wbr>config</a>
@@ -718,8 +786,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#transcodetemplatetehdconfig">Transcode<wbr>Template<wbr>Tehd<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>TESHD transcoding parameter.</p>
-</dd><dt class="property-optional"
+    <dd>TESHD transcoding parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="video_template_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#video_template_python" style="color: inherit; text-decoration: inherit;">video_<wbr>template</a>
@@ -727,8 +794,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#transcodetemplatevideotemplate">Transcode<wbr>Template<wbr>Video<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</p>
-</dd></dl>
+    <dd>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -742,8 +808,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</p>
-</dd><dt class="property-optional"
+    <dd>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</dd><dt class="property-optional"
             title="Optional">
         <span id="audiotemplate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#audiotemplate_yaml" style="color: inherit; text-decoration: inherit;">audio<wbr>Template</a>
@@ -751,8 +816,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#transcodetemplateaudiotemplate">Property Map</a></span>
     </dt>
-    <dd><p>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_yaml" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -760,8 +824,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -769,8 +832,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Transcoding template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Transcoding template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="removeaudio_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removeaudio_yaml" style="color: inherit; text-decoration: inherit;">remove<wbr>Audio</a>
@@ -778,8 +840,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="removevideo_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removevideo_yaml" style="color: inherit; text-decoration: inherit;">remove<wbr>Video</a>
@@ -787,13 +848,12 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to remove video data. Valid values:</p>
+    <dd>Whether to remove video data. Valid values:</p>
 <ul>
 <li>0: retain</li>
 <li>1: remove
 Default value: 0.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="segmenttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segmenttype_yaml" style="color: inherit; text-decoration: inherit;">segment<wbr>Type</a>
@@ -801,8 +861,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_yaml" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -810,8 +869,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="tehdconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tehdconfig_yaml" style="color: inherit; text-decoration: inherit;">tehd<wbr>Config</a>
@@ -819,8 +877,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#transcodetemplatetehdconfig">Property Map</a></span>
     </dt>
-    <dd><p>TESHD transcoding parameter.</p>
-</dd><dt class="property-optional"
+    <dd>TESHD transcoding parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="videotemplate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#videotemplate_yaml" style="color: inherit; text-decoration: inherit;">video<wbr>Template</a>
@@ -828,8 +885,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#transcodetemplatevideotemplate">Property Map</a></span>
     </dt>
-    <dd><p>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</p>
-</dd></dl>
+    <dd>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -850,8 +906,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -865,8 +920,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -880,8 +948,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -895,8 +962,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -910,8 +976,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -925,8 +990,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -936,22 +1000,22 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing TranscodeTemplate resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TranscodeTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">TranscodeTemplate</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TranscodeTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">TranscodeTemplate</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">audio_template</span><span class="p">:</span> <span class="nx">Optional[_vod.TranscodeTemplateAudioTemplateArgs]</span> = None<span class="p">,</span>
+        <span class="nx">audio_template</span><span class="p">:</span> <span class="nx">Optional[TranscodeTemplateAudioTemplateArgs]</span> = None<span class="p">,</span>
         <span class="nx">comment</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">container</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -959,106 +1023,145 @@ Get an existing TranscodeTemplate resource's state with the given name, ID, and 
         <span class="nx">remove_video</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">segment_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">sub_app_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">tehd_config</span><span class="p">:</span> <span class="nx">Optional[_vod.TranscodeTemplateTehdConfigArgs]</span> = None<span class="p">,</span>
-        <span class="nx">video_template</span><span class="p">:</span> <span class="nx">Optional[_vod.TranscodeTemplateVideoTemplateArgs]</span> = None<span class="p">) -&gt;</span> TranscodeTemplate</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">tehd_config</span><span class="p">:</span> <span class="nx">Optional[TranscodeTemplateTehdConfigArgs]</span> = None<span class="p">,</span>
+        <span class="nx">video_template</span><span class="p">:</span> <span class="nx">Optional[TranscodeTemplateVideoTemplateArgs]</span> = None<span class="p">) -&gt;</span> TranscodeTemplate</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTranscodeTemplate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TranscodeTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TranscodeTemplate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTranscodeTemplate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TranscodeTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TranscodeTemplate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">TranscodeTemplate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TranscodeTemplateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">TranscodeTemplate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TranscodeTemplateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">TranscodeTemplate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TranscodeTemplateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">TranscodeTemplate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TranscodeTemplateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingTranscodeTemplate</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Vod:TranscodeTemplate</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_vod_transcode_template</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TranscodeTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TranscodeTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1066,28 +1169,31 @@ Get an existing TranscodeTemplate resource's state with the given name, ID, and 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TranscodeTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1095,28 +1201,31 @@ Get an existing TranscodeTemplate resource's state with the given name, ID, and 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TranscodeTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1134,10 +1243,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_audiotemplate_csharp" style="color: inherit; text-decoration: inherit;">Audio<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#transcodetemplateaudiotemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Transcode<wbr>Template<wbr>Audio<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#transcodetemplateaudiotemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Transcode<wbr>Template<wbr>Audio<wbr>Template</a></span>
     </dt>
-    <dd><p>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_csharp" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -1145,8 +1253,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_container_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_container_csharp" style="color: inherit; text-decoration: inherit;">Container</a>
@@ -1154,8 +1261,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</p>
-</dd><dt class="property-optional"
+    <dd>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1163,8 +1269,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Transcoding template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Transcoding template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_removeaudio_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_removeaudio_csharp" style="color: inherit; text-decoration: inherit;">Remove<wbr>Audio</a>
@@ -1172,8 +1277,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_removevideo_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_removevideo_csharp" style="color: inherit; text-decoration: inherit;">Remove<wbr>Video</a>
@@ -1181,13 +1285,12 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove video data. Valid values:</p>
+    <dd>Whether to remove video data. Valid values:</p>
 <ul>
 <li>0: retain</li>
 <li>1: remove
 Default value: 0.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_segmenttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segmenttype_csharp" style="color: inherit; text-decoration: inherit;">Segment<wbr>Type</a>
@@ -1195,8 +1298,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_csharp" style="color: inherit; text-decoration: inherit;">Sub<wbr>App<wbr>Id</a>
@@ -1204,26 +1306,23 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tehdconfig_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tehdconfig_csharp" style="color: inherit; text-decoration: inherit;">Tehd<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#transcodetemplatetehdconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Transcode<wbr>Template<wbr>Tehd<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#transcodetemplatetehdconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Transcode<wbr>Template<wbr>Tehd<wbr>Config</a></span>
     </dt>
-    <dd><p>TESHD transcoding parameter.</p>
-</dd><dt class="property-optional"
+    <dd>TESHD transcoding parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_videotemplate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_videotemplate_csharp" style="color: inherit; text-decoration: inherit;">Video<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#transcodetemplatevideotemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Transcode<wbr>Template<wbr>Video<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#transcodetemplatevideotemplate">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Transcode<wbr>Template<wbr>Video<wbr>Template</a></span>
     </dt>
-    <dd><p>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</p>
-</dd></dl>
+    <dd>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1237,8 +1336,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#transcodetemplateaudiotemplate">Transcode<wbr>Template<wbr>Audio<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_go" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -1246,8 +1344,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_container_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_container_go" style="color: inherit; text-decoration: inherit;">Container</a>
@@ -1255,8 +1352,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</p>
-</dd><dt class="property-optional"
+    <dd>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1264,8 +1360,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Transcoding template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Transcoding template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_removeaudio_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_removeaudio_go" style="color: inherit; text-decoration: inherit;">Remove<wbr>Audio</a>
@@ -1273,8 +1368,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_removevideo_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_removevideo_go" style="color: inherit; text-decoration: inherit;">Remove<wbr>Video</a>
@@ -1282,13 +1376,12 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove video data. Valid values:</p>
+    <dd>Whether to remove video data. Valid values:</p>
 <ul>
 <li>0: retain</li>
 <li>1: remove
 Default value: 0.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_segmenttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segmenttype_go" style="color: inherit; text-decoration: inherit;">Segment<wbr>Type</a>
@@ -1296,8 +1389,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_go" style="color: inherit; text-decoration: inherit;">Sub<wbr>App<wbr>Id</a>
@@ -1305,8 +1397,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tehdconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tehdconfig_go" style="color: inherit; text-decoration: inherit;">Tehd<wbr>Config</a>
@@ -1314,8 +1405,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#transcodetemplatetehdconfig">Transcode<wbr>Template<wbr>Tehd<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>TESHD transcoding parameter.</p>
-</dd><dt class="property-optional"
+    <dd>TESHD transcoding parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_videotemplate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_videotemplate_go" style="color: inherit; text-decoration: inherit;">Video<wbr>Template</a>
@@ -1323,8 +1413,98 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#transcodetemplatevideotemplate">Transcode<wbr>Template<wbr>Video<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</p>
-</dd></dl>
+    <dd>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_audio_template_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_audio_template_hcl" style="color: inherit; text-decoration: inherit;">audio_<wbr>template</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#transcodetemplateaudiotemplate">object</a></span>
+    </dt>
+    <dd>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_comment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_hcl" style="color: inherit; text-decoration: inherit;">comment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_container_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_container_hcl" style="color: inherit; text-decoration: inherit;">container</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Transcoding template name. Length limit: 64 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_remove_audio_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remove_audio_hcl" style="color: inherit; text-decoration: inherit;">remove_<wbr>audio</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_remove_video_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remove_video_hcl" style="color: inherit; text-decoration: inherit;">remove_<wbr>video</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to remove video data. Valid values:</p>
+<ul>
+<li>0: retain</li>
+<li>1: remove
+Default value: 0.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_segment_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segment_type_hcl" style="color: inherit; text-decoration: inherit;">segment_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sub_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sub_app_id_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tehd_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tehd_config_hcl" style="color: inherit; text-decoration: inherit;">tehd_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#transcodetemplatetehdconfig">object</a></span>
+    </dt>
+    <dd>TESHD transcoding parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_video_template_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_video_template_hcl" style="color: inherit; text-decoration: inherit;">video_<wbr>template</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#transcodetemplatevideotemplate">object</a></span>
+    </dt>
+    <dd>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1336,10 +1516,9 @@ Default value: 0.</li>
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_audiotemplate_java" style="color: inherit; text-decoration: inherit;">audio<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#transcodetemplateaudiotemplate">Transcode<wbr>Template<wbr>Audio<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#transcodetemplateaudiotemplate">Transcode<wbr>Template<wbr>Audio<wbr>Template</a></span>
     </dt>
-    <dd><p>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_java" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -1347,8 +1526,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_container_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_container_java" style="color: inherit; text-decoration: inherit;">container</a>
@@ -1356,8 +1534,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</p>
-</dd><dt class="property-optional"
+    <dd>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1365,8 +1542,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Transcoding template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Transcoding template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_removeaudio_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_removeaudio_java" style="color: inherit; text-decoration: inherit;">remove<wbr>Audio</a>
@@ -1374,8 +1550,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_removevideo_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_removevideo_java" style="color: inherit; text-decoration: inherit;">remove<wbr>Video</a>
@@ -1383,13 +1558,12 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to remove video data. Valid values:</p>
+    <dd>Whether to remove video data. Valid values:</p>
 <ul>
 <li>0: retain</li>
 <li>1: remove
 Default value: 0.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_segmenttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segmenttype_java" style="color: inherit; text-decoration: inherit;">segment<wbr>Type</a>
@@ -1397,8 +1571,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_java" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -1406,26 +1579,23 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tehdconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tehdconfig_java" style="color: inherit; text-decoration: inherit;">tehd<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#transcodetemplatetehdconfig">Transcode<wbr>Template<wbr>Tehd<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#transcodetemplatetehdconfig">Transcode<wbr>Template<wbr>Tehd<wbr>Config</a></span>
     </dt>
-    <dd><p>TESHD transcoding parameter.</p>
-</dd><dt class="property-optional"
+    <dd>TESHD transcoding parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_videotemplate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_videotemplate_java" style="color: inherit; text-decoration: inherit;">video<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#transcodetemplatevideotemplate">Transcode<wbr>Template<wbr>Video<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#transcodetemplatevideotemplate">Transcode<wbr>Template<wbr>Video<wbr>Template</a></span>
     </dt>
-    <dd><p>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</p>
-</dd></dl>
+    <dd>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1437,10 +1607,9 @@ Default value: 0.</li>
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_audiotemplate_nodejs" style="color: inherit; text-decoration: inherit;">audio<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#transcodetemplateaudiotemplate">Transcode<wbr>Template<wbr>Audio<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#transcodetemplateaudiotemplate">Transcode<wbr>Template<wbr>Audio<wbr>Template</a></span>
     </dt>
-    <dd><p>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_nodejs" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -1448,8 +1617,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_container_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_container_nodejs" style="color: inherit; text-decoration: inherit;">container</a>
@@ -1457,8 +1625,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</p>
-</dd><dt class="property-optional"
+    <dd>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1466,8 +1633,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Transcoding template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Transcoding template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_removeaudio_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_removeaudio_nodejs" style="color: inherit; text-decoration: inherit;">remove<wbr>Audio</a>
@@ -1475,8 +1641,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_removevideo_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_removevideo_nodejs" style="color: inherit; text-decoration: inherit;">remove<wbr>Video</a>
@@ -1484,13 +1649,12 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to remove video data. Valid values:</p>
+    <dd>Whether to remove video data. Valid values:</p>
 <ul>
 <li>0: retain</li>
 <li>1: remove
 Default value: 0.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_segmenttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segmenttype_nodejs" style="color: inherit; text-decoration: inherit;">segment<wbr>Type</a>
@@ -1498,8 +1662,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_nodejs" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -1507,26 +1670,23 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tehdconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tehdconfig_nodejs" style="color: inherit; text-decoration: inherit;">tehd<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#transcodetemplatetehdconfig">Transcode<wbr>Template<wbr>Tehd<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#transcodetemplatetehdconfig">Transcode<wbr>Template<wbr>Tehd<wbr>Config</a></span>
     </dt>
-    <dd><p>TESHD transcoding parameter.</p>
-</dd><dt class="property-optional"
+    <dd>TESHD transcoding parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_videotemplate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_videotemplate_nodejs" style="color: inherit; text-decoration: inherit;">video<wbr>Template</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#transcodetemplatevideotemplate">Transcode<wbr>Template<wbr>Video<wbr>Template<wbr>Args</a></span>
+        <span class="property-type"><a href="#transcodetemplatevideotemplate">Transcode<wbr>Template<wbr>Video<wbr>Template</a></span>
     </dt>
-    <dd><p>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</p>
-</dd></dl>
+    <dd>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1540,8 +1700,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#transcodetemplateaudiotemplate">Transcode<wbr>Template<wbr>Audio<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_python" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -1549,8 +1708,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_container_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_container_python" style="color: inherit; text-decoration: inherit;">container</a>
@@ -1558,8 +1716,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</p>
-</dd><dt class="property-optional"
+    <dd>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1567,8 +1724,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Transcoding template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Transcoding template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remove_audio_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remove_audio_python" style="color: inherit; text-decoration: inherit;">remove_<wbr>audio</a>
@@ -1576,8 +1732,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remove_video_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remove_video_python" style="color: inherit; text-decoration: inherit;">remove_<wbr>video</a>
@@ -1585,13 +1740,12 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to remove video data. Valid values:</p>
+    <dd>Whether to remove video data. Valid values:</p>
 <ul>
 <li>0: retain</li>
 <li>1: remove
 Default value: 0.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_segment_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segment_type_python" style="color: inherit; text-decoration: inherit;">segment_<wbr>type</a>
@@ -1599,8 +1753,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sub_app_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sub_app_id_python" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
@@ -1608,8 +1761,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tehd_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tehd_config_python" style="color: inherit; text-decoration: inherit;">tehd_<wbr>config</a>
@@ -1617,8 +1769,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#transcodetemplatetehdconfig">Transcode<wbr>Template<wbr>Tehd<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>TESHD transcoding parameter.</p>
-</dd><dt class="property-optional"
+    <dd>TESHD transcoding parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_video_template_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_video_template_python" style="color: inherit; text-decoration: inherit;">video_<wbr>template</a>
@@ -1626,8 +1777,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#transcodetemplatevideotemplate">Transcode<wbr>Template<wbr>Video<wbr>Template<wbr>Args</a></span>
     </dt>
-    <dd><p>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</p>
-</dd></dl>
+    <dd>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1641,8 +1791,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#transcodetemplateaudiotemplate">Property Map</a></span>
     </dt>
-    <dd><p>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Audio stream configuration parameter. This field is required when <code>RemoveAudio</code> is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_yaml" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -1650,8 +1799,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_container_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_container_yaml" style="color: inherit; text-decoration: inherit;">container</a>
@@ -1659,8 +1807,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</p>
-</dd><dt class="property-optional"
+    <dd>The container format. Valid values: <code>mp4</code>, <code>flv</code>, <code>hls</code>, <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, <code>wav</code> ( <code>mp3</code>, <code>flac</code>, <code>ogg</code>, <code>m4a</code>, and <code>wav</code> are audio file formats).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1668,8 +1815,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Transcoding template name. Length limit: 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Transcoding template name. Length limit: 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_removeaudio_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_removeaudio_yaml" style="color: inherit; text-decoration: inherit;">remove<wbr>Audio</a>
@@ -1677,8 +1823,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_removevideo_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_removevideo_yaml" style="color: inherit; text-decoration: inherit;">remove<wbr>Video</a>
@@ -1686,13 +1831,12 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to remove video data. Valid values:</p>
+    <dd>Whether to remove video data. Valid values:</p>
 <ul>
 <li>0: retain</li>
 <li>1: remove
 Default value: 0.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_segmenttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segmenttype_yaml" style="color: inherit; text-decoration: inherit;">segment<wbr>Type</a>
@@ -1700,8 +1844,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The segment type. This parameter is valid only if <code>Container</code> is <code>hls</code>. Valid values: <code>ts</code>: TS segment; <code>fmp4</code>: fMP4 segment Default: <code>ts</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_yaml" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -1709,8 +1852,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tehdconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tehdconfig_yaml" style="color: inherit; text-decoration: inherit;">tehd<wbr>Config</a>
@@ -1718,8 +1860,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#transcodetemplatetehdconfig">Property Map</a></span>
     </dt>
-    <dd><p>TESHD transcoding parameter.</p>
-</dd><dt class="property-optional"
+    <dd>TESHD transcoding parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_videotemplate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_videotemplate_yaml" style="color: inherit; text-decoration: inherit;">video<wbr>Template</a>
@@ -1727,8 +1868,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#transcodetemplatevideotemplate">Property Map</a></span>
     </dt>
-    <dd><p>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</p>
-</dd></dl>
+    <dd>Video stream configuration parameter. This field is required when <code>RemoveVideo</code> is 0.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1743,7 +1883,9 @@ Default value: 0.</li>
 
 
 
-<h4 id="transcodetemplateaudiotemplate">Transcode<wbr>Template<wbr>Audio<wbr>Template</h4>
+<h4 id="transcodetemplateaudiotemplate">
+Transcode<wbr>Template<wbr>Audio<wbr>Template<pulumi-choosable type="language" values="python,go" class="inline">, Transcode<wbr>Template<wbr>Audio<wbr>Template<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1755,8 +1897,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.</p>
-</dd><dt class="property-required"
+    <dd>Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.</dd><dt class="property-required"
             title="Required">
         <span id="codec_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codec_csharp" style="color: inherit; text-decoration: inherit;">Codec</a>
@@ -1764,8 +1905,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The audio codec.If <code>Container</code> is <code>mp3</code>, the valid value is:<code>libmp3lame</code>If <code>Container</code> is <code>ogg</code> or <code>flac</code>, the valid value is:<code>flac</code>If <code>Container</code> is <code>m4a</code>, the valid values are:<code>libfdk_aac``libmp3lame``ac3</code>If <code>Container</code> is <code>mp4</code> or <code>flv</code>, the valid values are:<code>libfdk_aac</code> (Recommended for MP4)<code>libmp3lame</code> (Recommended for FLV)<code>mp2</code>If <code>Container</code> is <code>hls</code>, the valid value is:<code>libfdk_aac</code>If <code>Format</code> is <code>HLS</code> or <code>MPEG-DASH</code>, the valid value is:<code>libfdk_aac</code>If <code>Container</code> is <code>wav</code>, the valid value is:<code>pcm16</code>.</p>
-</dd><dt class="property-required"
+    <dd>The audio codec.If <code>Container</code> is <code>mp3</code>, the valid value is:<code>libmp3lame</code>If <code>Container</code> is <code>ogg</code> or <code>flac</code>, the valid value is:<code>flac</code>If <code>Container</code> is <code>m4a</code>, the valid values are:<code>libfdkAac``libmp3lame``ac3</code>If <code>Container</code> is <code>mp4</code> or <code>flv</code>, the valid values are:<code>libfdkAac</code> (Recommended for MP4)<code>libmp3lame</code> (Recommended for FLV)<code>mp2</code>If <code>Container</code> is <code>hls</code>, the valid value is:<code>libfdkAac</code>If <code>Format</code> is <code>HLS</code> or <code>MPEG-DASH</code>, the valid value is:<code>libfdkAac</code>If <code>Container</code> is <code>wav</code>, the valid value is:<code>pcm16</code>.</dd><dt class="property-required"
             title="Required">
         <span id="samplerate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samplerate_csharp" style="color: inherit; text-decoration: inherit;">Sample<wbr>Rate</a>
@@ -1773,8 +1913,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The audio sample rate. Valid values:<code>16000</code> (valid only if <code>Codec</code> is <code>pcm16</code>)<code>32000``44100``48000</code>Unit: Hz.</p>
-</dd><dt class="property-optional"
+    <dd>The audio sample rate. Valid values:<code>16000</code> (valid only if <code>Codec</code> is <code>pcm16</code>)<code>32000``44100``48000</code>Unit: Hz.</dd><dt class="property-optional"
             title="Optional">
         <span id="audiochannel_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#audiochannel_csharp" style="color: inherit; text-decoration: inherit;">Audio<wbr>Channel</a>
@@ -1782,8 +1921,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.</p>
-</dd></dl>
+    <dd>Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1797,8 +1935,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.</p>
-</dd><dt class="property-required"
+    <dd>Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.</dd><dt class="property-required"
             title="Required">
         <span id="codec_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codec_go" style="color: inherit; text-decoration: inherit;">Codec</a>
@@ -1806,8 +1943,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The audio codec.If <code>Container</code> is <code>mp3</code>, the valid value is:<code>libmp3lame</code>If <code>Container</code> is <code>ogg</code> or <code>flac</code>, the valid value is:<code>flac</code>If <code>Container</code> is <code>m4a</code>, the valid values are:<code>libfdk_aac``libmp3lame``ac3</code>If <code>Container</code> is <code>mp4</code> or <code>flv</code>, the valid values are:<code>libfdk_aac</code> (Recommended for MP4)<code>libmp3lame</code> (Recommended for FLV)<code>mp2</code>If <code>Container</code> is <code>hls</code>, the valid value is:<code>libfdk_aac</code>If <code>Format</code> is <code>HLS</code> or <code>MPEG-DASH</code>, the valid value is:<code>libfdk_aac</code>If <code>Container</code> is <code>wav</code>, the valid value is:<code>pcm16</code>.</p>
-</dd><dt class="property-required"
+    <dd>The audio codec.If <code>Container</code> is <code>mp3</code>, the valid value is:<code>libmp3lame</code>If <code>Container</code> is <code>ogg</code> or <code>flac</code>, the valid value is:<code>flac</code>If <code>Container</code> is <code>m4a</code>, the valid values are:<code>libfdkAac``libmp3lame``ac3</code>If <code>Container</code> is <code>mp4</code> or <code>flv</code>, the valid values are:<code>libfdkAac</code> (Recommended for MP4)<code>libmp3lame</code> (Recommended for FLV)<code>mp2</code>If <code>Container</code> is <code>hls</code>, the valid value is:<code>libfdkAac</code>If <code>Format</code> is <code>HLS</code> or <code>MPEG-DASH</code>, the valid value is:<code>libfdkAac</code>If <code>Container</code> is <code>wav</code>, the valid value is:<code>pcm16</code>.</dd><dt class="property-required"
             title="Required">
         <span id="samplerate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samplerate_go" style="color: inherit; text-decoration: inherit;">Sample<wbr>Rate</a>
@@ -1815,8 +1951,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The audio sample rate. Valid values:<code>16000</code> (valid only if <code>Codec</code> is <code>pcm16</code>)<code>32000``44100``48000</code>Unit: Hz.</p>
-</dd><dt class="property-optional"
+    <dd>The audio sample rate. Valid values:<code>16000</code> (valid only if <code>Codec</code> is <code>pcm16</code>)<code>32000``44100``48000</code>Unit: Hz.</dd><dt class="property-optional"
             title="Optional">
         <span id="audiochannel_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#audiochannel_go" style="color: inherit; text-decoration: inherit;">Audio<wbr>Channel</a>
@@ -1824,8 +1959,45 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.</p>
-</dd></dl>
+    <dd>Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bitrate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bitrate_hcl" style="color: inherit; text-decoration: inherit;">bitrate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.</dd><dt class="property-required"
+            title="Required">
+        <span id="codec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codec_hcl" style="color: inherit; text-decoration: inherit;">codec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The audio codec.If <code>Container</code> is <code>mp3</code>, the valid value is:<code>libmp3lame</code>If <code>Container</code> is <code>ogg</code> or <code>flac</code>, the valid value is:<code>flac</code>If <code>Container</code> is <code>m4a</code>, the valid values are:<code>libfdkAac``libmp3lame``ac3</code>If <code>Container</code> is <code>mp4</code> or <code>flv</code>, the valid values are:<code>libfdkAac</code> (Recommended for MP4)<code>libmp3lame</code> (Recommended for FLV)<code>mp2</code>If <code>Container</code> is <code>hls</code>, the valid value is:<code>libfdkAac</code>If <code>Format</code> is <code>HLS</code> or <code>MPEG-DASH</code>, the valid value is:<code>libfdkAac</code>If <code>Container</code> is <code>wav</code>, the valid value is:<code>pcm16</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="sample_rate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sample_rate_hcl" style="color: inherit; text-decoration: inherit;">sample_<wbr>rate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The audio sample rate. Valid values:<code>16000</code> (valid only if <code>Codec</code> is <code>pcm16</code>)<code>32000``44100``48000</code>Unit: Hz.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="audio_channel_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#audio_channel_hcl" style="color: inherit; text-decoration: inherit;">audio_<wbr>channel</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1839,8 +2011,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.</p>
-</dd><dt class="property-required"
+    <dd>Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.</dd><dt class="property-required"
             title="Required">
         <span id="codec_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codec_java" style="color: inherit; text-decoration: inherit;">codec</a>
@@ -1848,8 +2019,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The audio codec.If <code>Container</code> is <code>mp3</code>, the valid value is:<code>libmp3lame</code>If <code>Container</code> is <code>ogg</code> or <code>flac</code>, the valid value is:<code>flac</code>If <code>Container</code> is <code>m4a</code>, the valid values are:<code>libfdk_aac``libmp3lame``ac3</code>If <code>Container</code> is <code>mp4</code> or <code>flv</code>, the valid values are:<code>libfdk_aac</code> (Recommended for MP4)<code>libmp3lame</code> (Recommended for FLV)<code>mp2</code>If <code>Container</code> is <code>hls</code>, the valid value is:<code>libfdk_aac</code>If <code>Format</code> is <code>HLS</code> or <code>MPEG-DASH</code>, the valid value is:<code>libfdk_aac</code>If <code>Container</code> is <code>wav</code>, the valid value is:<code>pcm16</code>.</p>
-</dd><dt class="property-required"
+    <dd>The audio codec.If <code>Container</code> is <code>mp3</code>, the valid value is:<code>libmp3lame</code>If <code>Container</code> is <code>ogg</code> or <code>flac</code>, the valid value is:<code>flac</code>If <code>Container</code> is <code>m4a</code>, the valid values are:<code>libfdkAac``libmp3lame``ac3</code>If <code>Container</code> is <code>mp4</code> or <code>flv</code>, the valid values are:<code>libfdkAac</code> (Recommended for MP4)<code>libmp3lame</code> (Recommended for FLV)<code>mp2</code>If <code>Container</code> is <code>hls</code>, the valid value is:<code>libfdkAac</code>If <code>Format</code> is <code>HLS</code> or <code>MPEG-DASH</code>, the valid value is:<code>libfdkAac</code>If <code>Container</code> is <code>wav</code>, the valid value is:<code>pcm16</code>.</dd><dt class="property-required"
             title="Required">
         <span id="samplerate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samplerate_java" style="color: inherit; text-decoration: inherit;">sample<wbr>Rate</a>
@@ -1857,8 +2027,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The audio sample rate. Valid values:<code>16000</code> (valid only if <code>Codec</code> is <code>pcm16</code>)<code>32000``44100``48000</code>Unit: Hz.</p>
-</dd><dt class="property-optional"
+    <dd>The audio sample rate. Valid values:<code>16000</code> (valid only if <code>Codec</code> is <code>pcm16</code>)<code>32000``44100``48000</code>Unit: Hz.</dd><dt class="property-optional"
             title="Optional">
         <span id="audiochannel_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#audiochannel_java" style="color: inherit; text-decoration: inherit;">audio<wbr>Channel</a>
@@ -1866,8 +2035,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.</p>
-</dd></dl>
+    <dd>Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1881,8 +2049,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.</p>
-</dd><dt class="property-required"
+    <dd>Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.</dd><dt class="property-required"
             title="Required">
         <span id="codec_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codec_nodejs" style="color: inherit; text-decoration: inherit;">codec</a>
@@ -1890,8 +2057,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The audio codec.If <code>Container</code> is <code>mp3</code>, the valid value is:<code>libmp3lame</code>If <code>Container</code> is <code>ogg</code> or <code>flac</code>, the valid value is:<code>flac</code>If <code>Container</code> is <code>m4a</code>, the valid values are:<code>libfdk_aac``libmp3lame``ac3</code>If <code>Container</code> is <code>mp4</code> or <code>flv</code>, the valid values are:<code>libfdk_aac</code> (Recommended for MP4)<code>libmp3lame</code> (Recommended for FLV)<code>mp2</code>If <code>Container</code> is <code>hls</code>, the valid value is:<code>libfdk_aac</code>If <code>Format</code> is <code>HLS</code> or <code>MPEG-DASH</code>, the valid value is:<code>libfdk_aac</code>If <code>Container</code> is <code>wav</code>, the valid value is:<code>pcm16</code>.</p>
-</dd><dt class="property-required"
+    <dd>The audio codec.If <code>Container</code> is <code>mp3</code>, the valid value is:<code>libmp3lame</code>If <code>Container</code> is <code>ogg</code> or <code>flac</code>, the valid value is:<code>flac</code>If <code>Container</code> is <code>m4a</code>, the valid values are:<code>libfdkAac``libmp3lame``ac3</code>If <code>Container</code> is <code>mp4</code> or <code>flv</code>, the valid values are:<code>libfdkAac</code> (Recommended for MP4)<code>libmp3lame</code> (Recommended for FLV)<code>mp2</code>If <code>Container</code> is <code>hls</code>, the valid value is:<code>libfdkAac</code>If <code>Format</code> is <code>HLS</code> or <code>MPEG-DASH</code>, the valid value is:<code>libfdkAac</code>If <code>Container</code> is <code>wav</code>, the valid value is:<code>pcm16</code>.</dd><dt class="property-required"
             title="Required">
         <span id="samplerate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samplerate_nodejs" style="color: inherit; text-decoration: inherit;">sample<wbr>Rate</a>
@@ -1899,8 +2065,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The audio sample rate. Valid values:<code>16000</code> (valid only if <code>Codec</code> is <code>pcm16</code>)<code>32000``44100``48000</code>Unit: Hz.</p>
-</dd><dt class="property-optional"
+    <dd>The audio sample rate. Valid values:<code>16000</code> (valid only if <code>Codec</code> is <code>pcm16</code>)<code>32000``44100``48000</code>Unit: Hz.</dd><dt class="property-optional"
             title="Optional">
         <span id="audiochannel_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#audiochannel_nodejs" style="color: inherit; text-decoration: inherit;">audio<wbr>Channel</a>
@@ -1908,8 +2073,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.</p>
-</dd></dl>
+    <dd>Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1923,8 +2087,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.</p>
-</dd><dt class="property-required"
+    <dd>Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.</dd><dt class="property-required"
             title="Required">
         <span id="codec_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codec_python" style="color: inherit; text-decoration: inherit;">codec</a>
@@ -1932,8 +2095,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The audio codec.If <code>Container</code> is <code>mp3</code>, the valid value is:<code>libmp3lame</code>If <code>Container</code> is <code>ogg</code> or <code>flac</code>, the valid value is:<code>flac</code>If <code>Container</code> is <code>m4a</code>, the valid values are:<code>libfdk_aac``libmp3lame``ac3</code>If <code>Container</code> is <code>mp4</code> or <code>flv</code>, the valid values are:<code>libfdk_aac</code> (Recommended for MP4)<code>libmp3lame</code> (Recommended for FLV)<code>mp2</code>If <code>Container</code> is <code>hls</code>, the valid value is:<code>libfdk_aac</code>If <code>Format</code> is <code>HLS</code> or <code>MPEG-DASH</code>, the valid value is:<code>libfdk_aac</code>If <code>Container</code> is <code>wav</code>, the valid value is:<code>pcm16</code>.</p>
-</dd><dt class="property-required"
+    <dd>The audio codec.If <code>Container</code> is <code>mp3</code>, the valid value is:<code>libmp3lame</code>If <code>Container</code> is <code>ogg</code> or <code>flac</code>, the valid value is:<code>flac</code>If <code>Container</code> is <code>m4a</code>, the valid values are:<code>libfdkAac``libmp3lame``ac3</code>If <code>Container</code> is <code>mp4</code> or <code>flv</code>, the valid values are:<code>libfdkAac</code> (Recommended for MP4)<code>libmp3lame</code> (Recommended for FLV)<code>mp2</code>If <code>Container</code> is <code>hls</code>, the valid value is:<code>libfdkAac</code>If <code>Format</code> is <code>HLS</code> or <code>MPEG-DASH</code>, the valid value is:<code>libfdkAac</code>If <code>Container</code> is <code>wav</code>, the valid value is:<code>pcm16</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sample_rate_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sample_rate_python" style="color: inherit; text-decoration: inherit;">sample_<wbr>rate</a>
@@ -1941,8 +2103,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The audio sample rate. Valid values:<code>16000</code> (valid only if <code>Codec</code> is <code>pcm16</code>)<code>32000``44100``48000</code>Unit: Hz.</p>
-</dd><dt class="property-optional"
+    <dd>The audio sample rate. Valid values:<code>16000</code> (valid only if <code>Codec</code> is <code>pcm16</code>)<code>32000``44100``48000</code>Unit: Hz.</dd><dt class="property-optional"
             title="Optional">
         <span id="audio_channel_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#audio_channel_python" style="color: inherit; text-decoration: inherit;">audio_<wbr>channel</a>
@@ -1950,8 +2111,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.</p>
-</dd></dl>
+    <dd>Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1965,8 +2125,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.</p>
-</dd><dt class="property-required"
+    <dd>Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.</dd><dt class="property-required"
             title="Required">
         <span id="codec_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codec_yaml" style="color: inherit; text-decoration: inherit;">codec</a>
@@ -1974,8 +2133,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The audio codec.If <code>Container</code> is <code>mp3</code>, the valid value is:<code>libmp3lame</code>If <code>Container</code> is <code>ogg</code> or <code>flac</code>, the valid value is:<code>flac</code>If <code>Container</code> is <code>m4a</code>, the valid values are:<code>libfdk_aac``libmp3lame``ac3</code>If <code>Container</code> is <code>mp4</code> or <code>flv</code>, the valid values are:<code>libfdk_aac</code> (Recommended for MP4)<code>libmp3lame</code> (Recommended for FLV)<code>mp2</code>If <code>Container</code> is <code>hls</code>, the valid value is:<code>libfdk_aac</code>If <code>Format</code> is <code>HLS</code> or <code>MPEG-DASH</code>, the valid value is:<code>libfdk_aac</code>If <code>Container</code> is <code>wav</code>, the valid value is:<code>pcm16</code>.</p>
-</dd><dt class="property-required"
+    <dd>The audio codec.If <code>Container</code> is <code>mp3</code>, the valid value is:<code>libmp3lame</code>If <code>Container</code> is <code>ogg</code> or <code>flac</code>, the valid value is:<code>flac</code>If <code>Container</code> is <code>m4a</code>, the valid values are:<code>libfdkAac``libmp3lame``ac3</code>If <code>Container</code> is <code>mp4</code> or <code>flv</code>, the valid values are:<code>libfdkAac</code> (Recommended for MP4)<code>libmp3lame</code> (Recommended for FLV)<code>mp2</code>If <code>Container</code> is <code>hls</code>, the valid value is:<code>libfdkAac</code>If <code>Format</code> is <code>HLS</code> or <code>MPEG-DASH</code>, the valid value is:<code>libfdkAac</code>If <code>Container</code> is <code>wav</code>, the valid value is:<code>pcm16</code>.</dd><dt class="property-required"
             title="Required">
         <span id="samplerate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samplerate_yaml" style="color: inherit; text-decoration: inherit;">sample<wbr>Rate</a>
@@ -1983,8 +2141,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The audio sample rate. Valid values:<code>16000</code> (valid only if <code>Codec</code> is <code>pcm16</code>)<code>32000``44100``48000</code>Unit: Hz.</p>
-</dd><dt class="property-optional"
+    <dd>The audio sample rate. Valid values:<code>16000</code> (valid only if <code>Codec</code> is <code>pcm16</code>)<code>32000``44100``48000</code>Unit: Hz.</dd><dt class="property-optional"
             title="Optional">
         <span id="audiochannel_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#audiochannel_yaml" style="color: inherit; text-decoration: inherit;">audio<wbr>Channel</a>
@@ -1992,12 +2149,13 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.</p>
-</dd></dl>
+    <dd>Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="transcodetemplatetehdconfig">Transcode<wbr>Template<wbr>Tehd<wbr>Config</h4>
+<h4 id="transcodetemplatetehdconfig">
+Transcode<wbr>Template<wbr>Tehd<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Transcode<wbr>Template<wbr>Tehd<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2009,8 +2167,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>TESHD transcoding type. Valid values: TEHD-100, OFF (default).</p>
-</dd><dt class="property-optional"
+    <dd>TESHD transcoding type. Valid values: TEHD-100, OFF (default).</dd><dt class="property-optional"
             title="Optional">
         <span id="maxvideobitrate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxvideobitrate_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Video<wbr>Bitrate</a>
@@ -2018,8 +2175,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum bitrate, which is valid when <code>Type</code> is <code>TESHD</code>.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.</p>
-</dd></dl>
+    <dd>Maximum bitrate, which is valid when <code>Type</code> is <code>TESHD</code>.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2033,8 +2189,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>TESHD transcoding type. Valid values: TEHD-100, OFF (default).</p>
-</dd><dt class="property-optional"
+    <dd>TESHD transcoding type. Valid values: TEHD-100, OFF (default).</dd><dt class="property-optional"
             title="Optional">
         <span id="maxvideobitrate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxvideobitrate_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Video<wbr>Bitrate</a>
@@ -2042,8 +2197,29 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum bitrate, which is valid when <code>Type</code> is <code>TESHD</code>.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.</p>
-</dd></dl>
+    <dd>Maximum bitrate, which is valid when <code>Type</code> is <code>TESHD</code>.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>TESHD transcoding type. Valid values: TEHD-100, OFF (default).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_video_bitrate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_video_bitrate_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>video_<wbr>bitrate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum bitrate, which is valid when <code>Type</code> is <code>TESHD</code>.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2057,8 +2233,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>TESHD transcoding type. Valid values: TEHD-100, OFF (default).</p>
-</dd><dt class="property-optional"
+    <dd>TESHD transcoding type. Valid values: TEHD-100, OFF (default).</dd><dt class="property-optional"
             title="Optional">
         <span id="maxvideobitrate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxvideobitrate_java" style="color: inherit; text-decoration: inherit;">max<wbr>Video<wbr>Bitrate</a>
@@ -2066,8 +2241,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum bitrate, which is valid when <code>Type</code> is <code>TESHD</code>.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.</p>
-</dd></dl>
+    <dd>Maximum bitrate, which is valid when <code>Type</code> is <code>TESHD</code>.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2081,8 +2255,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>TESHD transcoding type. Valid values: TEHD-100, OFF (default).</p>
-</dd><dt class="property-optional"
+    <dd>TESHD transcoding type. Valid values: TEHD-100, OFF (default).</dd><dt class="property-optional"
             title="Optional">
         <span id="maxvideobitrate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxvideobitrate_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Video<wbr>Bitrate</a>
@@ -2090,8 +2263,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum bitrate, which is valid when <code>Type</code> is <code>TESHD</code>.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.</p>
-</dd></dl>
+    <dd>Maximum bitrate, which is valid when <code>Type</code> is <code>TESHD</code>.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2105,8 +2277,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>TESHD transcoding type. Valid values: TEHD-100, OFF (default).</p>
-</dd><dt class="property-optional"
+    <dd>TESHD transcoding type. Valid values: TEHD-100, OFF (default).</dd><dt class="property-optional"
             title="Optional">
         <span id="max_video_bitrate_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_video_bitrate_python" style="color: inherit; text-decoration: inherit;">max_<wbr>video_<wbr>bitrate</a>
@@ -2114,8 +2285,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum bitrate, which is valid when <code>Type</code> is <code>TESHD</code>.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.</p>
-</dd></dl>
+    <dd>Maximum bitrate, which is valid when <code>Type</code> is <code>TESHD</code>.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2129,8 +2299,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>TESHD transcoding type. Valid values: TEHD-100, OFF (default).</p>
-</dd><dt class="property-optional"
+    <dd>TESHD transcoding type. Valid values: TEHD-100, OFF (default).</dd><dt class="property-optional"
             title="Optional">
         <span id="maxvideobitrate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxvideobitrate_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Video<wbr>Bitrate</a>
@@ -2138,12 +2307,13 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum bitrate, which is valid when <code>Type</code> is <code>TESHD</code>.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.</p>
-</dd></dl>
+    <dd>Maximum bitrate, which is valid when <code>Type</code> is <code>TESHD</code>.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="transcodetemplatevideotemplate">Transcode<wbr>Template<wbr>Video<wbr>Template</h4>
+<h4 id="transcodetemplatevideotemplate">
+Transcode<wbr>Template<wbr>Video<wbr>Template<pulumi-choosable type="language" values="python,go" class="inline">, Transcode<wbr>Template<wbr>Video<wbr>Template<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2155,8 +2325,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.</p>
-</dd><dt class="property-required"
+    <dd>Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.</dd><dt class="property-required"
             title="Required">
         <span id="codec_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codec_csharp" style="color: inherit; text-decoration: inherit;">Codec</a>
@@ -2164,8 +2333,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.</p>
-</dd><dt class="property-required"
+    <dd>The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.</dd><dt class="property-required"
             title="Required">
         <span id="fps_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fps_csharp" style="color: inherit; text-decoration: inherit;">Fps</a>
@@ -2173,8 +2341,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.</p>
-</dd><dt class="property-optional"
+    <dd>Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.</dd><dt class="property-optional"
             title="Optional">
         <span id="codectag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codectag_csharp" style="color: inherit; text-decoration: inherit;">Codec<wbr>Tag</a>
@@ -2182,8 +2349,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.</p>
-</dd><dt class="property-optional"
+    <dd>The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.</dd><dt class="property-optional"
             title="Optional">
         <span id="filltype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filltype_csharp" style="color: inherit; text-decoration: inherit;">Fill<wbr>Type</a>
@@ -2191,8 +2357,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image's aspect ratio.white: fills the uncovered area with white color, without changing the image's aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.Default value: black.</p>
-</dd><dt class="property-optional"
+    <dd>Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image's aspect ratio.white: fills the uncovered area with white color, without changing the image's aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.Default value: black.</dd><dt class="property-optional"
             title="Optional">
         <span id="gop_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gop_csharp" style="color: inherit; text-decoration: inherit;">Gop</a>
@@ -2200,8 +2365,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, <code>Gop</code> will be automatically set.</p>
-</dd><dt class="property-optional"
+    <dd>I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, <code>Gop</code> will be automatically set.</dd><dt class="property-optional"
             title="Optional">
         <span id="height_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_csharp" style="color: inherit; text-decoration: inherit;">Height</a>
@@ -2209,8 +2373,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="preservehdrswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#preservehdrswitch_csharp" style="color: inherit; text-decoration: inherit;">Preserve<wbr>Hdr<wbr>Switch</a>
@@ -2218,8 +2381,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.</dd><dt class="property-optional"
             title="Optional">
         <span id="resolutionadaptive_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolutionadaptive_csharp" style="color: inherit; text-decoration: inherit;">Resolution<wbr>Adaptive</a>
@@ -2227,8 +2389,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resolution adaption. Valid values:open: enabled. In this case, <code>Width</code> represents the long side of a video, while <code>Height</code> the short side;close: disabled. In this case, <code>Width</code> represents the width of a video, while <code>Height</code> the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Resolution adaption. Valid values:open: enabled. In this case, <code>Width</code> represents the long side of a video, while <code>Height</code> the short side;close: disabled. In this case, <code>Width</code> represents the width of a video, while <code>Height</code> the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="vcrf_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vcrf_csharp" style="color: inherit; text-decoration: inherit;">Vcrf</a>
@@ -2236,8 +2397,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If <code>Codec</code> is <code>H.266</code>, this parameter is required (<code>28</code> is recommended).We don't recommend using this parameter unless you have special requirements.</p>
-</dd><dt class="property-optional"
+    <dd>The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If <code>Codec</code> is <code>H.266</code>, this parameter is required (<code>28</code> is recommended).We don't recommend using this parameter unless you have special requirements.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_csharp" style="color: inherit; text-decoration: inherit;">Width</a>
@@ -2245,8 +2405,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</p>
-</dd></dl>
+    <dd>The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2260,8 +2419,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.</p>
-</dd><dt class="property-required"
+    <dd>Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.</dd><dt class="property-required"
             title="Required">
         <span id="codec_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codec_go" style="color: inherit; text-decoration: inherit;">Codec</a>
@@ -2269,8 +2427,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.</p>
-</dd><dt class="property-required"
+    <dd>The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.</dd><dt class="property-required"
             title="Required">
         <span id="fps_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fps_go" style="color: inherit; text-decoration: inherit;">Fps</a>
@@ -2278,8 +2435,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.</p>
-</dd><dt class="property-optional"
+    <dd>Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.</dd><dt class="property-optional"
             title="Optional">
         <span id="codectag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codectag_go" style="color: inherit; text-decoration: inherit;">Codec<wbr>Tag</a>
@@ -2287,8 +2443,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.</p>
-</dd><dt class="property-optional"
+    <dd>The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.</dd><dt class="property-optional"
             title="Optional">
         <span id="filltype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filltype_go" style="color: inherit; text-decoration: inherit;">Fill<wbr>Type</a>
@@ -2296,8 +2451,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image's aspect ratio.white: fills the uncovered area with white color, without changing the image's aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.Default value: black.</p>
-</dd><dt class="property-optional"
+    <dd>Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image's aspect ratio.white: fills the uncovered area with white color, without changing the image's aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.Default value: black.</dd><dt class="property-optional"
             title="Optional">
         <span id="gop_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gop_go" style="color: inherit; text-decoration: inherit;">Gop</a>
@@ -2305,8 +2459,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, <code>Gop</code> will be automatically set.</p>
-</dd><dt class="property-optional"
+    <dd>I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, <code>Gop</code> will be automatically set.</dd><dt class="property-optional"
             title="Optional">
         <span id="height_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_go" style="color: inherit; text-decoration: inherit;">Height</a>
@@ -2314,8 +2467,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="preservehdrswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#preservehdrswitch_go" style="color: inherit; text-decoration: inherit;">Preserve<wbr>Hdr<wbr>Switch</a>
@@ -2323,8 +2475,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.</dd><dt class="property-optional"
             title="Optional">
         <span id="resolutionadaptive_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolutionadaptive_go" style="color: inherit; text-decoration: inherit;">Resolution<wbr>Adaptive</a>
@@ -2332,8 +2483,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resolution adaption. Valid values:open: enabled. In this case, <code>Width</code> represents the long side of a video, while <code>Height</code> the short side;close: disabled. In this case, <code>Width</code> represents the width of a video, while <code>Height</code> the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Resolution adaption. Valid values:open: enabled. In this case, <code>Width</code> represents the long side of a video, while <code>Height</code> the short side;close: disabled. In this case, <code>Width</code> represents the width of a video, while <code>Height</code> the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="vcrf_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vcrf_go" style="color: inherit; text-decoration: inherit;">Vcrf</a>
@@ -2341,8 +2491,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If <code>Codec</code> is <code>H.266</code>, this parameter is required (<code>28</code> is recommended).We don't recommend using this parameter unless you have special requirements.</p>
-</dd><dt class="property-optional"
+    <dd>The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If <code>Codec</code> is <code>H.266</code>, this parameter is required (<code>28</code> is recommended).We don't recommend using this parameter unless you have special requirements.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_go" style="color: inherit; text-decoration: inherit;">Width</a>
@@ -2350,8 +2499,101 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</p>
-</dd></dl>
+    <dd>The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bitrate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bitrate_hcl" style="color: inherit; text-decoration: inherit;">bitrate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.</dd><dt class="property-required"
+            title="Required">
+        <span id="codec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codec_hcl" style="color: inherit; text-decoration: inherit;">codec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.</dd><dt class="property-required"
+            title="Required">
+        <span id="fps_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fps_hcl" style="color: inherit; text-decoration: inherit;">fps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="codec_tag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codec_tag_hcl" style="color: inherit; text-decoration: inherit;">codec_<wbr>tag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="fill_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fill_type_hcl" style="color: inherit; text-decoration: inherit;">fill_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image's aspect ratio.white: fills the uncovered area with white color, without changing the image's aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.Default value: black.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="gop_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gop_hcl" style="color: inherit; text-decoration: inherit;">gop</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, <code>Gop</code> will be automatically set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="height_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_hcl" style="color: inherit; text-decoration: inherit;">height</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="preserve_hdr_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#preserve_hdr_switch_hcl" style="color: inherit; text-decoration: inherit;">preserve_<wbr>hdr_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="resolution_adaptive_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolution_adaptive_hcl" style="color: inherit; text-decoration: inherit;">resolution_<wbr>adaptive</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resolution adaption. Valid values:open: enabled. In this case, <code>Width</code> represents the long side of a video, while <code>Height</code> the short side;close: disabled. In this case, <code>Width</code> represents the width of a video, while <code>Height</code> the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vcrf_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vcrf_hcl" style="color: inherit; text-decoration: inherit;">vcrf</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If <code>Codec</code> is <code>H.266</code>, this parameter is required (<code>28</code> is recommended).We don't recommend using this parameter unless you have special requirements.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="width_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_hcl" style="color: inherit; text-decoration: inherit;">width</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2365,8 +2607,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.</p>
-</dd><dt class="property-required"
+    <dd>Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.</dd><dt class="property-required"
             title="Required">
         <span id="codec_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codec_java" style="color: inherit; text-decoration: inherit;">codec</a>
@@ -2374,8 +2615,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.</p>
-</dd><dt class="property-required"
+    <dd>The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.</dd><dt class="property-required"
             title="Required">
         <span id="fps_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fps_java" style="color: inherit; text-decoration: inherit;">fps</a>
@@ -2383,8 +2623,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.</p>
-</dd><dt class="property-optional"
+    <dd>Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.</dd><dt class="property-optional"
             title="Optional">
         <span id="codectag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codectag_java" style="color: inherit; text-decoration: inherit;">codec<wbr>Tag</a>
@@ -2392,8 +2631,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.</p>
-</dd><dt class="property-optional"
+    <dd>The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.</dd><dt class="property-optional"
             title="Optional">
         <span id="filltype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filltype_java" style="color: inherit; text-decoration: inherit;">fill<wbr>Type</a>
@@ -2401,8 +2639,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image's aspect ratio.white: fills the uncovered area with white color, without changing the image's aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.Default value: black.</p>
-</dd><dt class="property-optional"
+    <dd>Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image's aspect ratio.white: fills the uncovered area with white color, without changing the image's aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.Default value: black.</dd><dt class="property-optional"
             title="Optional">
         <span id="gop_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gop_java" style="color: inherit; text-decoration: inherit;">gop</a>
@@ -2410,8 +2647,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, <code>Gop</code> will be automatically set.</p>
-</dd><dt class="property-optional"
+    <dd>I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, <code>Gop</code> will be automatically set.</dd><dt class="property-optional"
             title="Optional">
         <span id="height_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_java" style="color: inherit; text-decoration: inherit;">height</a>
@@ -2419,8 +2655,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="preservehdrswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#preservehdrswitch_java" style="color: inherit; text-decoration: inherit;">preserve<wbr>Hdr<wbr>Switch</a>
@@ -2428,8 +2663,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.</dd><dt class="property-optional"
             title="Optional">
         <span id="resolutionadaptive_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolutionadaptive_java" style="color: inherit; text-decoration: inherit;">resolution<wbr>Adaptive</a>
@@ -2437,8 +2671,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resolution adaption. Valid values:open: enabled. In this case, <code>Width</code> represents the long side of a video, while <code>Height</code> the short side;close: disabled. In this case, <code>Width</code> represents the width of a video, while <code>Height</code> the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Resolution adaption. Valid values:open: enabled. In this case, <code>Width</code> represents the long side of a video, while <code>Height</code> the short side;close: disabled. In this case, <code>Width</code> represents the width of a video, while <code>Height</code> the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="vcrf_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vcrf_java" style="color: inherit; text-decoration: inherit;">vcrf</a>
@@ -2446,8 +2679,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If <code>Codec</code> is <code>H.266</code>, this parameter is required (<code>28</code> is recommended).We don't recommend using this parameter unless you have special requirements.</p>
-</dd><dt class="property-optional"
+    <dd>The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If <code>Codec</code> is <code>H.266</code>, this parameter is required (<code>28</code> is recommended).We don't recommend using this parameter unless you have special requirements.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_java" style="color: inherit; text-decoration: inherit;">width</a>
@@ -2455,8 +2687,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</p>
-</dd></dl>
+    <dd>The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2470,8 +2701,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.</p>
-</dd><dt class="property-required"
+    <dd>Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.</dd><dt class="property-required"
             title="Required">
         <span id="codec_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codec_nodejs" style="color: inherit; text-decoration: inherit;">codec</a>
@@ -2479,8 +2709,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.</p>
-</dd><dt class="property-required"
+    <dd>The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.</dd><dt class="property-required"
             title="Required">
         <span id="fps_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fps_nodejs" style="color: inherit; text-decoration: inherit;">fps</a>
@@ -2488,8 +2717,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.</p>
-</dd><dt class="property-optional"
+    <dd>Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.</dd><dt class="property-optional"
             title="Optional">
         <span id="codectag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codectag_nodejs" style="color: inherit; text-decoration: inherit;">codec<wbr>Tag</a>
@@ -2497,8 +2725,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.</p>
-</dd><dt class="property-optional"
+    <dd>The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.</dd><dt class="property-optional"
             title="Optional">
         <span id="filltype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filltype_nodejs" style="color: inherit; text-decoration: inherit;">fill<wbr>Type</a>
@@ -2506,8 +2733,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image's aspect ratio.white: fills the uncovered area with white color, without changing the image's aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.Default value: black.</p>
-</dd><dt class="property-optional"
+    <dd>Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image's aspect ratio.white: fills the uncovered area with white color, without changing the image's aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.Default value: black.</dd><dt class="property-optional"
             title="Optional">
         <span id="gop_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gop_nodejs" style="color: inherit; text-decoration: inherit;">gop</a>
@@ -2515,8 +2741,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, <code>Gop</code> will be automatically set.</p>
-</dd><dt class="property-optional"
+    <dd>I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, <code>Gop</code> will be automatically set.</dd><dt class="property-optional"
             title="Optional">
         <span id="height_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_nodejs" style="color: inherit; text-decoration: inherit;">height</a>
@@ -2524,8 +2749,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="preservehdrswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#preservehdrswitch_nodejs" style="color: inherit; text-decoration: inherit;">preserve<wbr>Hdr<wbr>Switch</a>
@@ -2533,8 +2757,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.</dd><dt class="property-optional"
             title="Optional">
         <span id="resolutionadaptive_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolutionadaptive_nodejs" style="color: inherit; text-decoration: inherit;">resolution<wbr>Adaptive</a>
@@ -2542,8 +2765,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resolution adaption. Valid values:open: enabled. In this case, <code>Width</code> represents the long side of a video, while <code>Height</code> the short side;close: disabled. In this case, <code>Width</code> represents the width of a video, while <code>Height</code> the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Resolution adaption. Valid values:open: enabled. In this case, <code>Width</code> represents the long side of a video, while <code>Height</code> the short side;close: disabled. In this case, <code>Width</code> represents the width of a video, while <code>Height</code> the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="vcrf_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vcrf_nodejs" style="color: inherit; text-decoration: inherit;">vcrf</a>
@@ -2551,8 +2773,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If <code>Codec</code> is <code>H.266</code>, this parameter is required (<code>28</code> is recommended).We don't recommend using this parameter unless you have special requirements.</p>
-</dd><dt class="property-optional"
+    <dd>The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If <code>Codec</code> is <code>H.266</code>, this parameter is required (<code>28</code> is recommended).We don't recommend using this parameter unless you have special requirements.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_nodejs" style="color: inherit; text-decoration: inherit;">width</a>
@@ -2560,8 +2781,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</p>
-</dd></dl>
+    <dd>The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2575,8 +2795,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.</p>
-</dd><dt class="property-required"
+    <dd>Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.</dd><dt class="property-required"
             title="Required">
         <span id="codec_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codec_python" style="color: inherit; text-decoration: inherit;">codec</a>
@@ -2584,8 +2803,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.</p>
-</dd><dt class="property-required"
+    <dd>The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.</dd><dt class="property-required"
             title="Required">
         <span id="fps_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fps_python" style="color: inherit; text-decoration: inherit;">fps</a>
@@ -2593,8 +2811,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.</p>
-</dd><dt class="property-optional"
+    <dd>Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.</dd><dt class="property-optional"
             title="Optional">
         <span id="codec_tag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codec_tag_python" style="color: inherit; text-decoration: inherit;">codec_<wbr>tag</a>
@@ -2602,8 +2819,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.</p>
-</dd><dt class="property-optional"
+    <dd>The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.</dd><dt class="property-optional"
             title="Optional">
         <span id="fill_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fill_type_python" style="color: inherit; text-decoration: inherit;">fill_<wbr>type</a>
@@ -2611,8 +2827,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image's aspect ratio.white: fills the uncovered area with white color, without changing the image's aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.Default value: black.</p>
-</dd><dt class="property-optional"
+    <dd>Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image's aspect ratio.white: fills the uncovered area with white color, without changing the image's aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.Default value: black.</dd><dt class="property-optional"
             title="Optional">
         <span id="gop_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gop_python" style="color: inherit; text-decoration: inherit;">gop</a>
@@ -2620,8 +2835,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, <code>Gop</code> will be automatically set.</p>
-</dd><dt class="property-optional"
+    <dd>I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, <code>Gop</code> will be automatically set.</dd><dt class="property-optional"
             title="Optional">
         <span id="height_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_python" style="color: inherit; text-decoration: inherit;">height</a>
@@ -2629,8 +2843,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="preserve_hdr_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#preserve_hdr_switch_python" style="color: inherit; text-decoration: inherit;">preserve_<wbr>hdr_<wbr>switch</a>
@@ -2638,8 +2851,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.</dd><dt class="property-optional"
             title="Optional">
         <span id="resolution_adaptive_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolution_adaptive_python" style="color: inherit; text-decoration: inherit;">resolution_<wbr>adaptive</a>
@@ -2647,8 +2859,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resolution adaption. Valid values:open: enabled. In this case, <code>Width</code> represents the long side of a video, while <code>Height</code> the short side;close: disabled. In this case, <code>Width</code> represents the width of a video, while <code>Height</code> the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Resolution adaption. Valid values:open: enabled. In this case, <code>Width</code> represents the long side of a video, while <code>Height</code> the short side;close: disabled. In this case, <code>Width</code> represents the width of a video, while <code>Height</code> the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="vcrf_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vcrf_python" style="color: inherit; text-decoration: inherit;">vcrf</a>
@@ -2656,8 +2867,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If <code>Codec</code> is <code>H.266</code>, this parameter is required (<code>28</code> is recommended).We don't recommend using this parameter unless you have special requirements.</p>
-</dd><dt class="property-optional"
+    <dd>The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If <code>Codec</code> is <code>H.266</code>, this parameter is required (<code>28</code> is recommended).We don't recommend using this parameter unless you have special requirements.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_python" style="color: inherit; text-decoration: inherit;">width</a>
@@ -2665,8 +2875,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</p>
-</dd></dl>
+    <dd>The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2680,8 +2889,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.</p>
-</dd><dt class="property-required"
+    <dd>Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.</dd><dt class="property-required"
             title="Required">
         <span id="codec_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codec_yaml" style="color: inherit; text-decoration: inherit;">codec</a>
@@ -2689,8 +2897,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.</p>
-</dd><dt class="property-required"
+    <dd>The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.</dd><dt class="property-required"
             title="Required">
         <span id="fps_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fps_yaml" style="color: inherit; text-decoration: inherit;">fps</a>
@@ -2698,8 +2905,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.</p>
-</dd><dt class="property-optional"
+    <dd>Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.</dd><dt class="property-optional"
             title="Optional">
         <span id="codectag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codectag_yaml" style="color: inherit; text-decoration: inherit;">codec<wbr>Tag</a>
@@ -2707,8 +2913,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.</p>
-</dd><dt class="property-optional"
+    <dd>The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.</dd><dt class="property-optional"
             title="Optional">
         <span id="filltype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filltype_yaml" style="color: inherit; text-decoration: inherit;">fill<wbr>Type</a>
@@ -2716,8 +2921,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image's aspect ratio.white: fills the uncovered area with white color, without changing the image's aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.Default value: black.</p>
-</dd><dt class="property-optional"
+    <dd>Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image's aspect ratio.white: fills the uncovered area with white color, without changing the image's aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.Default value: black.</dd><dt class="property-optional"
             title="Optional">
         <span id="gop_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gop_yaml" style="color: inherit; text-decoration: inherit;">gop</a>
@@ -2725,8 +2929,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, <code>Gop</code> will be automatically set.</p>
-</dd><dt class="property-optional"
+    <dd>I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, <code>Gop</code> will be automatically set.</dd><dt class="property-optional"
             title="Optional">
         <span id="height_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_yaml" style="color: inherit; text-decoration: inherit;">height</a>
@@ -2734,8 +2937,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="preservehdrswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#preservehdrswitch_yaml" style="color: inherit; text-decoration: inherit;">preserve<wbr>Hdr<wbr>Switch</a>
@@ -2743,8 +2945,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.</dd><dt class="property-optional"
             title="Optional">
         <span id="resolutionadaptive_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resolutionadaptive_yaml" style="color: inherit; text-decoration: inherit;">resolution<wbr>Adaptive</a>
@@ -2752,8 +2953,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resolution adaption. Valid values:open: enabled. In this case, <code>Width</code> represents the long side of a video, while <code>Height</code> the short side;close: disabled. In this case, <code>Width</code> represents the width of a video, while <code>Height</code> the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Resolution adaption. Valid values:open: enabled. In this case, <code>Width</code> represents the long side of a video, while <code>Height</code> the short side;close: disabled. In this case, <code>Width</code> represents the width of a video, while <code>Height</code> the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="vcrf_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vcrf_yaml" style="color: inherit; text-decoration: inherit;">vcrf</a>
@@ -2761,8 +2961,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If <code>Codec</code> is <code>H.266</code>, this parameter is required (<code>28</code> is recommended).We don't recommend using this parameter unless you have special requirements.</p>
-</dd><dt class="property-optional"
+    <dd>The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If <code>Codec</code> is <code>H.266</code>, this parameter is required (<code>28</code> is recommended).We don't recommend using this parameter unless you have special requirements.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_yaml" style="color: inherit; text-decoration: inherit;">width</a>
@@ -2770,8 +2969,7 @@ Default value: 0.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</p>
-</dd></dl>
+    <dd>The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both <code>Width</code> and <code>Height</code> are 0, the output resolution will be the same as that of the source video.If <code>Width</code> is 0 and <code>Height</code> is not, the video width will be proportionally scaled.If <code>Width</code> is not 0 and <code>Height</code> is, the video height will be proportionally scaled.If neither <code>Width</code> nor <code>Height</code> is 0, the specified width and height will be used.Default value: 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2786,6 +2984,8 @@ $ pulumi import tencentcloud:Vod/transcodeTemplate:TranscodeTemplate transcode_t
 ```
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
 
 
 
@@ -2796,7 +2996,6 @@ $ pulumi import tencentcloud:Vod/transcodeTemplate:TranscodeTemplate transcode_t
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

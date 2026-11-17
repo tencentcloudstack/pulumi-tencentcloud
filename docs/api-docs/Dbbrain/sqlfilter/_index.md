@@ -2,9 +2,11 @@
 ---
 title: "SqlFilter"
 title_tag: "tencentcloud.Dbbrain.SqlFilter"
-meta_desc: "Documentation for the tencentcloud.Dbbrain.SqlFilter resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a dbbrain sql_filter."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,20 +18,24 @@ Provides a resource to create a dbbrain sql_filter.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const config = new pulumi.Config();
 const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
 const region = config.get("region") || "ap-guangzhou";
-const mysql = tencentcloud.Mysql.getInstance({
+const mysql = tencentcloud.mysql.getInstance({
     instanceName: "instance_name",
 });
 const mysqlId = mysql.then(mysql => mysql.instanceLists?.[0]?.mysqlId);
-const sqlFilter = new tencentcloud.dbbrain.SqlFilter("sqlFilter", {
+const sqlFilter = new tencentcloud.dbbrain.SqlFilter("sql_filter", {
     instanceId: mysqlId,
     sessionToken: {
         user: "test",
@@ -41,6 +47,11 @@ const sqlFilter = new tencentcloud.dbbrain.SqlFilter("sqlFilter", {
     duration: 3600,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
@@ -53,62 +64,32 @@ if availability_zone is None:
 region = config.get("region")
 if region is None:
     region = "ap-guangzhou"
-mysql = tencentcloud.Mysql.get_instance(instance_name="instance_name")
+mysql = tencentcloud.mysql.get_instance(instance_name="instance_name")
 mysql_id = mysql.instance_lists[0].mysql_id
-sql_filter = tencentcloud.dbbrain.SqlFilter("sqlFilter",
+sql_filter = tencentcloud.dbbrain.SqlFilter("sql_filter",
     instance_id=mysql_id,
-    session_token=tencentcloud.dbbrain.SqlFilterSessionTokenArgs(
-        user="test",
-        password="===password===",
-    ),
+    session_token={
+        "user": "test",
+        "password": "===password===",
+    },
     sql_type="SELECT",
     filter_key="filter_key",
     max_concurrency=10,
     duration=3600)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var config = new Config();
-    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    var region = config.Get("region") ?? "ap-guangzhou";
-    var mysql = Tencentcloud.Mysql.GetInstance.Invoke(new()
-    {
-        InstanceName = "instance_name",
-    });
-
-    var mysqlId = mysql.Apply(getInstanceResult => getInstanceResult.InstanceLists[0]?.MysqlId);
-
-    var sqlFilter = new Tencentcloud.Dbbrain.SqlFilter("sqlFilter", new()
-    {
-        InstanceId = mysqlId,
-        SessionToken = new Tencentcloud.Dbbrain.Inputs.SqlFilterSessionTokenArgs
-        {
-            User = "test",
-            Password = "===password===",
-        },
-        SqlType = "SELECT",
-        FilterKey = "filter_key",
-        MaxConcurrency = 10,
-        Duration = 3600,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dbbrain"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mysql"
 )
 
 func main() {
@@ -122,14 +103,14 @@ func main() {
 		if param := cfg.Get("region"); param != "" {
 			region = param
 		}
-		mysql, err := Mysql.GetInstance(ctx, &mysql.GetInstanceArgs{
+		mysql2, err := mysql.GetInstance(ctx, &mysql.GetInstanceArgs{
 			InstanceName: pulumi.StringRef("instance_name"),
 		}, nil)
 		if err != nil {
 			return err
 		}
-		mysqlId := mysql.InstanceLists[0].MysqlId
-		_, err = Dbbrain.NewSqlFilter(ctx, "sqlFilter", &Dbbrain.SqlFilterArgs{
+		mysqlId := mysql2.InstanceLists[0].MysqlId
+		_, err = dbbrain.NewSqlFilter(ctx, "sql_filter", &dbbrain.SqlFilterArgs{
 			InstanceId: pulumi.String(mysqlId),
 			SessionToken: &dbbrain.SqlFilterSessionTokenArgs{
 				User:     pulumi.String("test"),
@@ -147,6 +128,50 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    var region = config.Get("region") ?? "ap-guangzhou";
+    var mysql = Tencentcloud.Mysql.GetInstance.Invoke(new()
+    {
+        InstanceName = "instance_name",
+    });
+
+    var mysqlId = mysql.Apply(getInstanceResult => getInstanceResult.InstanceLists[0]?.MysqlId);
+
+    var sqlFilter = new Tencentcloud.Dbbrain.SqlFilter("sql_filter", new()
+    {
+        InstanceId = mysqlId,
+        SessionToken = new Tencentcloud.Dbbrain.Inputs.SqlFilterSessionTokenArgs
+        {
+            User = "test",
+            Password = "===password===",
+        },
+        SqlType = "SELECT",
+        FilterKey = "filter_key",
+        MaxConcurrency = 10,
+        Duration = 3600,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -158,8 +183,8 @@ import com.pulumi.tencentcloud.Mysql.inputs.GetInstanceArgs;
 import com.pulumi.tencentcloud.Dbbrain.SqlFilter;
 import com.pulumi.tencentcloud.Dbbrain.SqlFilterArgs;
 import com.pulumi.tencentcloud.Dbbrain.inputs.SqlFilterSessionTokenArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -178,9 +203,9 @@ public class App {
             .instanceName("instance_name")
             .build());
 
-        final var mysqlId = mysql.applyValue(getInstanceResult -> getInstanceResult.instanceLists()[0].mysqlId());
+        final var mysqlId = mysql.instanceLists()[0].mysqlId();
 
-        var sqlFilter = new SqlFilter("sqlFilter", SqlFilterArgs.builder()        
+        var sqlFilter = new SqlFilter("sqlFilter", SqlFilterArgs.builder()
             .instanceId(mysqlId)
             .sessionToken(SqlFilterSessionTokenArgs.builder()
                 .user("test")
@@ -195,6 +220,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 configuration:
   availabilityZone:
@@ -206,6 +236,7 @@ configuration:
 resources:
   sqlFilter:
     type: tencentcloud:Dbbrain:SqlFilter
+    name: sql_filter
     properties:
       instanceId: ${mysqlId}
       sessionToken:
@@ -218,78 +249,150 @@ resources:
 variables:
   mysql:
     fn::invoke:
-      Function: tencentcloud:Mysql:getInstance
-      Arguments:
+      function: tencentcloud:Mysql:getInstance
+      arguments:
         instanceName: instance_name
   mysqlId: ${mysql.instanceLists[0].mysqlId}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_mysql_getinstance" "mysql" {
+  instance_name = "instance_name"
+}
+
+resource "tencentcloud_dbbrain_sqlfilter" "sql_filter" {
+  instance_id = local.mysqlId
+  session_token = {
+    user     = "test"
+    password = "===password==="
+  }
+  sql_type        = "SELECT"
+  filter_key      = "filter_key"
+  max_concurrency = 10
+  duration        = 3600
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-3"
+}
+variable "region" {
+  type    = string
+  default = "ap-guangzhou"
+}
+locals {
+  mysqlId = data.tencentcloud_mysql_getinstance.mysql.instance_lists[0].mysql_id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateSqlFilter](https://www.tencentcloud.com/search/?wd=CreateSqlFilter&type=document&lang=en)
+  - [VerifyUserAccount](https://www.tencentcloud.com/search/?wd=VerifyUserAccount&type=document&lang=en)
+* Read: [DescribeSqlFilters](https://www.tencentcloud.com/search/?wd=DescribeSqlFilters&type=document&lang=en)
+* Update:
+  - [ModifySqlFilters](https://www.tencentcloud.com/search/?wd=ModifySqlFilters&type=document&lang=en)
+  - [VerifyUserAccount](https://www.tencentcloud.com/search/?wd=VerifyUserAccount&type=document&lang=en)
+* Delete:
+  - [DeleteSqlFilters](https://www.tencentcloud.com/search/?wd=DeleteSqlFilters&type=document&lang=en)
+  - [VerifyUserAccount](https://www.tencentcloud.com/search/?wd=VerifyUserAccount&type=document&lang=en)
 
 
 
 ## Create SqlFilter Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">SqlFilter</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SqlFilterArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">SqlFilter</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SqlFilterArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">SqlFilter</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SqlFilterArgs</a></span><span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">SqlFilter</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
               <span class="nx">duration</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
               <span class="nx">filter_key</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">max_concurrency</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-              <span class="nx">product</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">session_token</span><span class="p">:</span> <span class="nx">Optional[_dbbrain.SqlFilterSessionTokenArgs]</span> = None<span class="p">,</span>
+              <span class="nx">session_token</span><span class="p">:</span> <span class="nx">Optional[SqlFilterSessionTokenArgs]</span> = None<span class="p">,</span>
               <span class="nx">sql_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">SqlFilter</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SqlFilterArgs</a></span><span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+              <span class="nx">product</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSqlFilter</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SqlFilterArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SqlFilter</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSqlFilter</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SqlFilterArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SqlFilter</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">SqlFilter</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SqlFilterArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">SqlFilter</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SqlFilterArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">SqlFilter</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SqlFilterArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">SqlFilter</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SqlFilterArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dbbrain:SqlFilter</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dbbrain:SqlFilter</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_dbbrain_sql_filter&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -310,7 +413,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -427,11 +530,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## SqlFilter Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -447,8 +558,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>filter duration.</p>
-</dd><dt class="property-required"
+    <dd>filter duration.</dd><dt class="property-required"
             title="Required">
         <span id="filterkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterkey_csharp" style="color: inherit; text-decoration: inherit;">Filter<wbr>Key</a>
@@ -456,8 +566,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter key.</p>
-</dd><dt class="property-required"
+    <dd>filter key.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -465,8 +574,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="maxconcurrency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrency_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Concurrency</a>
@@ -474,17 +582,15 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>maximum concurreny.</p>
-</dd><dt class="property-required"
+    <dd>maximum concurreny.</dd><dt class="property-required"
             title="Required">
         <span id="sessiontoken_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontoken_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Token</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#sqlfiltersessiontoken">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dbbrain.<wbr>Inputs.<wbr>Sql<wbr>Filter<wbr>Session<wbr>Token<wbr>Args</a></span>
+        <span class="property-type"><a href="#sqlfiltersessiontoken">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dbbrain.<wbr>Inputs.<wbr>Sql<wbr>Filter<wbr>Session<wbr>Token</a></span>
     </dt>
-    <dd><p>session token.</p>
-</dd><dt class="property-required"
+    <dd>session token.</dd><dt class="property-required"
             title="Required">
         <span id="sqltype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqltype_csharp" style="color: inherit; text-decoration: inherit;">Sql<wbr>Type</a>
@@ -492,8 +598,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</p>
-</dd><dt class="property-optional"
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-optional"
             title="Optional">
         <span id="product_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_csharp" style="color: inherit; text-decoration: inherit;">Product</a>
@@ -501,8 +606,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</p>
-</dd><dt class="property-optional"
+    <dd>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -510,8 +614,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter status.</p>
-</dd></dl>
+    <dd>filter status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -525,8 +628,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>filter duration.</p>
-</dd><dt class="property-required"
+    <dd>filter duration.</dd><dt class="property-required"
             title="Required">
         <span id="filterkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterkey_go" style="color: inherit; text-decoration: inherit;">Filter<wbr>Key</a>
@@ -534,8 +636,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter key.</p>
-</dd><dt class="property-required"
+    <dd>filter key.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -543,8 +644,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="maxconcurrency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrency_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Concurrency</a>
@@ -552,8 +652,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>maximum concurreny.</p>
-</dd><dt class="property-required"
+    <dd>maximum concurreny.</dd><dt class="property-required"
             title="Required">
         <span id="sessiontoken_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontoken_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Token</a>
@@ -561,8 +660,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#sqlfiltersessiontoken">Sql<wbr>Filter<wbr>Session<wbr>Token<wbr>Args</a></span>
     </dt>
-    <dd><p>session token.</p>
-</dd><dt class="property-required"
+    <dd>session token.</dd><dt class="property-required"
             title="Required">
         <span id="sqltype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqltype_go" style="color: inherit; text-decoration: inherit;">Sql<wbr>Type</a>
@@ -570,8 +668,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</p>
-</dd><dt class="property-optional"
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-optional"
             title="Optional">
         <span id="product_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_go" style="color: inherit; text-decoration: inherit;">Product</a>
@@ -579,8 +676,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</p>
-</dd><dt class="property-optional"
+    <dd>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -588,8 +684,77 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter status.</p>
-</dd></dl>
+    <dd>filter status.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_hcl" style="color: inherit; text-decoration: inherit;">duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>filter duration.</dd><dt class="property-required"
+            title="Required">
+        <span id="filter_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_key_hcl" style="color: inherit; text-decoration: inherit;">filter_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>filter key.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance id.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_concurrency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_concurrency_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>concurrency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>maximum concurreny.</dd><dt class="property-required"
+            title="Required">
+        <span id="session_token_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_token_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>token</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#sqlfiltersessiontoken">object</a></span>
+    </dt>
+    <dd>session token.</dd><dt class="property-required"
+            title="Required">
+        <span id="sql_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_type_hcl" style="color: inherit; text-decoration: inherit;">sql_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="product_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_hcl" style="color: inherit; text-decoration: inherit;">product</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>filter status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -603,8 +768,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>filter duration.</p>
-</dd><dt class="property-required"
+    <dd>filter duration.</dd><dt class="property-required"
             title="Required">
         <span id="filterkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterkey_java" style="color: inherit; text-decoration: inherit;">filter<wbr>Key</a>
@@ -612,8 +776,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>filter key.</p>
-</dd><dt class="property-required"
+    <dd>filter key.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -621,8 +784,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="maxconcurrency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrency_java" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrency</a>
@@ -630,17 +792,15 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>maximum concurreny.</p>
-</dd><dt class="property-required"
+    <dd>maximum concurreny.</dd><dt class="property-required"
             title="Required">
         <span id="sessiontoken_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontoken_java" style="color: inherit; text-decoration: inherit;">session<wbr>Token</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#sqlfiltersessiontoken">Sql<wbr>Filter<wbr>Session<wbr>Token<wbr>Args</a></span>
+        <span class="property-type"><a href="#sqlfiltersessiontoken">Sql<wbr>Filter<wbr>Session<wbr>Token</a></span>
     </dt>
-    <dd><p>session token.</p>
-</dd><dt class="property-required"
+    <dd>session token.</dd><dt class="property-required"
             title="Required">
         <span id="sqltype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqltype_java" style="color: inherit; text-decoration: inherit;">sql<wbr>Type</a>
@@ -648,8 +808,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</p>
-</dd><dt class="property-optional"
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-optional"
             title="Optional">
         <span id="product_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_java" style="color: inherit; text-decoration: inherit;">product</a>
@@ -657,8 +816,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</p>
-</dd><dt class="property-optional"
+    <dd>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -666,8 +824,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>filter status.</p>
-</dd></dl>
+    <dd>filter status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -681,8 +838,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>filter duration.</p>
-</dd><dt class="property-required"
+    <dd>filter duration.</dd><dt class="property-required"
             title="Required">
         <span id="filterkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterkey_nodejs" style="color: inherit; text-decoration: inherit;">filter<wbr>Key</a>
@@ -690,8 +846,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter key.</p>
-</dd><dt class="property-required"
+    <dd>filter key.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -699,8 +854,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="maxconcurrency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrency_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrency</a>
@@ -708,17 +862,15 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>maximum concurreny.</p>
-</dd><dt class="property-required"
+    <dd>maximum concurreny.</dd><dt class="property-required"
             title="Required">
         <span id="sessiontoken_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontoken_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Token</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#sqlfiltersessiontoken">Sql<wbr>Filter<wbr>Session<wbr>Token<wbr>Args</a></span>
+        <span class="property-type"><a href="#sqlfiltersessiontoken">Sql<wbr>Filter<wbr>Session<wbr>Token</a></span>
     </dt>
-    <dd><p>session token.</p>
-</dd><dt class="property-required"
+    <dd>session token.</dd><dt class="property-required"
             title="Required">
         <span id="sqltype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqltype_nodejs" style="color: inherit; text-decoration: inherit;">sql<wbr>Type</a>
@@ -726,8 +878,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</p>
-</dd><dt class="property-optional"
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-optional"
             title="Optional">
         <span id="product_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_nodejs" style="color: inherit; text-decoration: inherit;">product</a>
@@ -735,8 +886,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</p>
-</dd><dt class="property-optional"
+    <dd>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -744,8 +894,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter status.</p>
-</dd></dl>
+    <dd>filter status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -759,8 +908,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>filter duration.</p>
-</dd><dt class="property-required"
+    <dd>filter duration.</dd><dt class="property-required"
             title="Required">
         <span id="filter_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_key_python" style="color: inherit; text-decoration: inherit;">filter_<wbr>key</a>
@@ -768,8 +916,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>filter key.</p>
-</dd><dt class="property-required"
+    <dd>filter key.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -777,8 +924,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="max_concurrency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_concurrency_python" style="color: inherit; text-decoration: inherit;">max_<wbr>concurrency</a>
@@ -786,8 +932,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>maximum concurreny.</p>
-</dd><dt class="property-required"
+    <dd>maximum concurreny.</dd><dt class="property-required"
             title="Required">
         <span id="session_token_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_token_python" style="color: inherit; text-decoration: inherit;">session_<wbr>token</a>
@@ -795,8 +940,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#sqlfiltersessiontoken">Sql<wbr>Filter<wbr>Session<wbr>Token<wbr>Args</a></span>
     </dt>
-    <dd><p>session token.</p>
-</dd><dt class="property-required"
+    <dd>session token.</dd><dt class="property-required"
             title="Required">
         <span id="sql_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_type_python" style="color: inherit; text-decoration: inherit;">sql_<wbr>type</a>
@@ -804,8 +948,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</p>
-</dd><dt class="property-optional"
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-optional"
             title="Optional">
         <span id="product_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_python" style="color: inherit; text-decoration: inherit;">product</a>
@@ -813,8 +956,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</p>
-</dd><dt class="property-optional"
+    <dd>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -822,8 +964,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>filter status.</p>
-</dd></dl>
+    <dd>filter status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -837,8 +978,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>filter duration.</p>
-</dd><dt class="property-required"
+    <dd>filter duration.</dd><dt class="property-required"
             title="Required">
         <span id="filterkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterkey_yaml" style="color: inherit; text-decoration: inherit;">filter<wbr>Key</a>
@@ -846,8 +986,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>filter key.</p>
-</dd><dt class="property-required"
+    <dd>filter key.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -855,8 +994,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="maxconcurrency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrency_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrency</a>
@@ -864,8 +1002,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>maximum concurreny.</p>
-</dd><dt class="property-required"
+    <dd>maximum concurreny.</dd><dt class="property-required"
             title="Required">
         <span id="sessiontoken_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontoken_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Token</a>
@@ -873,8 +1010,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#sqlfiltersessiontoken">Property Map</a></span>
     </dt>
-    <dd><p>session token.</p>
-</dd><dt class="property-required"
+    <dd>session token.</dd><dt class="property-required"
             title="Required">
         <span id="sqltype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqltype_yaml" style="color: inherit; text-decoration: inherit;">sql<wbr>Type</a>
@@ -882,8 +1018,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</p>
-</dd><dt class="property-optional"
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-optional"
             title="Optional">
         <span id="product_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_yaml" style="color: inherit; text-decoration: inherit;">product</a>
@@ -891,8 +1026,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</p>
-</dd><dt class="property-optional"
+    <dd>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -900,8 +1034,7 @@ The SqlFilter resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>filter status.</p>
-</dd></dl>
+    <dd>filter status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -922,8 +1055,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>filter id.</p>
-</dd><dt class="property-"
+    <dd>filter id.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -931,8 +1063,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -946,8 +1077,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>filter id.</p>
-</dd><dt class="property-"
+    <dd>filter id.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -955,8 +1085,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="filter_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_id_hcl" style="color: inherit; text-decoration: inherit;">filter_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>filter id.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -970,8 +1121,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>filter id.</p>
-</dd><dt class="property-"
+    <dd>filter id.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -979,8 +1129,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -994,8 +1143,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>filter id.</p>
-</dd><dt class="property-"
+    <dd>filter id.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1003,8 +1151,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1018,8 +1165,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>filter id.</p>
-</dd><dt class="property-"
+    <dd>filter id.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1027,8 +1173,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1042,8 +1187,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>filter id.</p>
-</dd><dt class="property-"
+    <dd>filter id.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1051,8 +1195,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1062,18 +1205,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing SqlFilter resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SqlFilterState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">SqlFilter</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SqlFilterState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">SqlFilter</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1083,107 +1226,146 @@ Get an existing SqlFilter resource's state with the given name, ID, and optional
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">max_concurrency</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">product</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">session_token</span><span class="p">:</span> <span class="nx">Optional[_dbbrain.SqlFilterSessionTokenArgs]</span> = None<span class="p">,</span>
+        <span class="nx">session_token</span><span class="p">:</span> <span class="nx">Optional[SqlFilterSessionTokenArgs]</span> = None<span class="p">,</span>
         <span class="nx">sql_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> SqlFilter</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSqlFilter<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SqlFilterState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SqlFilter</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSqlFilter<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SqlFilterState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SqlFilter</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">SqlFilter</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SqlFilterState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">SqlFilter</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SqlFilterState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">SqlFilter</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SqlFilterState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">SqlFilter</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SqlFilterState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingSqlFilter</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Dbbrain:SqlFilter</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_dbbrain_sql_filter</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SqlFilterState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SqlFilterState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1191,28 +1373,31 @@ Get an existing SqlFilter resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SqlFilterState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1220,28 +1405,31 @@ Get an existing SqlFilter resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SqlFilterState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1261,8 +1449,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>filter duration.</p>
-</dd><dt class="property-optional"
+    <dd>filter duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filterid_csharp" style="color: inherit; text-decoration: inherit;">Filter<wbr>Id</a>
@@ -1270,8 +1457,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>filter id.</p>
-</dd><dt class="property-optional"
+    <dd>filter id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filterkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filterkey_csharp" style="color: inherit; text-decoration: inherit;">Filter<wbr>Key</a>
@@ -1279,8 +1465,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter key.</p>
-</dd><dt class="property-optional"
+    <dd>filter key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1288,8 +1473,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxconcurrency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxconcurrency_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Concurrency</a>
@@ -1297,8 +1481,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>maximum concurreny.</p>
-</dd><dt class="property-optional"
+    <dd>maximum concurreny.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_product_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_csharp" style="color: inherit; text-decoration: inherit;">Product</a>
@@ -1306,17 +1489,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</p>
-</dd><dt class="property-optional"
+    <dd>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessiontoken_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessiontoken_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Token</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#sqlfiltersessiontoken">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dbbrain.<wbr>Inputs.<wbr>Sql<wbr>Filter<wbr>Session<wbr>Token<wbr>Args</a></span>
+        <span class="property-type"><a href="#sqlfiltersessiontoken">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dbbrain.<wbr>Inputs.<wbr>Sql<wbr>Filter<wbr>Session<wbr>Token</a></span>
     </dt>
-    <dd><p>session token.</p>
-</dd><dt class="property-optional"
+    <dd>session token.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sqltype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sqltype_csharp" style="color: inherit; text-decoration: inherit;">Sql<wbr>Type</a>
@@ -1324,8 +1505,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</p>
-</dd><dt class="property-optional"
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1333,8 +1513,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter status.</p>
-</dd></dl>
+    <dd>filter status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1348,8 +1527,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>filter duration.</p>
-</dd><dt class="property-optional"
+    <dd>filter duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filterid_go" style="color: inherit; text-decoration: inherit;">Filter<wbr>Id</a>
@@ -1357,8 +1535,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>filter id.</p>
-</dd><dt class="property-optional"
+    <dd>filter id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filterkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filterkey_go" style="color: inherit; text-decoration: inherit;">Filter<wbr>Key</a>
@@ -1366,8 +1543,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter key.</p>
-</dd><dt class="property-optional"
+    <dd>filter key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1375,8 +1551,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxconcurrency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxconcurrency_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Concurrency</a>
@@ -1384,8 +1559,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>maximum concurreny.</p>
-</dd><dt class="property-optional"
+    <dd>maximum concurreny.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_product_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_go" style="color: inherit; text-decoration: inherit;">Product</a>
@@ -1393,8 +1567,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</p>
-</dd><dt class="property-optional"
+    <dd>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessiontoken_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessiontoken_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Token</a>
@@ -1402,8 +1575,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#sqlfiltersessiontoken">Sql<wbr>Filter<wbr>Session<wbr>Token<wbr>Args</a></span>
     </dt>
-    <dd><p>session token.</p>
-</dd><dt class="property-optional"
+    <dd>session token.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sqltype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sqltype_go" style="color: inherit; text-decoration: inherit;">Sql<wbr>Type</a>
@@ -1411,8 +1583,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</p>
-</dd><dt class="property-optional"
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1420,8 +1591,85 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter status.</p>
-</dd></dl>
+    <dd>filter status.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_duration_hcl" style="color: inherit; text-decoration: inherit;">duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>filter duration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_filter_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filter_id_hcl" style="color: inherit; text-decoration: inherit;">filter_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>filter id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_filter_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filter_key_hcl" style="color: inherit; text-decoration: inherit;">filter_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>filter key.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_concurrency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_concurrency_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>concurrency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>maximum concurreny.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_product_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_hcl" style="color: inherit; text-decoration: inherit;">product</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_session_token_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_session_token_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>token</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#sqlfiltersessiontoken">object</a></span>
+    </dt>
+    <dd>session token.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sql_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sql_type_hcl" style="color: inherit; text-decoration: inherit;">sql_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>filter status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1435,8 +1683,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>filter duration.</p>
-</dd><dt class="property-optional"
+    <dd>filter duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filterid_java" style="color: inherit; text-decoration: inherit;">filter<wbr>Id</a>
@@ -1444,8 +1691,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>filter id.</p>
-</dd><dt class="property-optional"
+    <dd>filter id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filterkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filterkey_java" style="color: inherit; text-decoration: inherit;">filter<wbr>Key</a>
@@ -1453,8 +1699,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>filter key.</p>
-</dd><dt class="property-optional"
+    <dd>filter key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1462,8 +1707,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxconcurrency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxconcurrency_java" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrency</a>
@@ -1471,8 +1715,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>maximum concurreny.</p>
-</dd><dt class="property-optional"
+    <dd>maximum concurreny.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_product_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_java" style="color: inherit; text-decoration: inherit;">product</a>
@@ -1480,17 +1723,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</p>
-</dd><dt class="property-optional"
+    <dd>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessiontoken_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessiontoken_java" style="color: inherit; text-decoration: inherit;">session<wbr>Token</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#sqlfiltersessiontoken">Sql<wbr>Filter<wbr>Session<wbr>Token<wbr>Args</a></span>
+        <span class="property-type"><a href="#sqlfiltersessiontoken">Sql<wbr>Filter<wbr>Session<wbr>Token</a></span>
     </dt>
-    <dd><p>session token.</p>
-</dd><dt class="property-optional"
+    <dd>session token.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sqltype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sqltype_java" style="color: inherit; text-decoration: inherit;">sql<wbr>Type</a>
@@ -1498,8 +1739,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</p>
-</dd><dt class="property-optional"
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1507,8 +1747,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>filter status.</p>
-</dd></dl>
+    <dd>filter status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1522,8 +1761,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>filter duration.</p>
-</dd><dt class="property-optional"
+    <dd>filter duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filterid_nodejs" style="color: inherit; text-decoration: inherit;">filter<wbr>Id</a>
@@ -1531,8 +1769,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>filter id.</p>
-</dd><dt class="property-optional"
+    <dd>filter id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filterkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filterkey_nodejs" style="color: inherit; text-decoration: inherit;">filter<wbr>Key</a>
@@ -1540,8 +1777,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter key.</p>
-</dd><dt class="property-optional"
+    <dd>filter key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1549,8 +1785,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxconcurrency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxconcurrency_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrency</a>
@@ -1558,8 +1793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>maximum concurreny.</p>
-</dd><dt class="property-optional"
+    <dd>maximum concurreny.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_product_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_nodejs" style="color: inherit; text-decoration: inherit;">product</a>
@@ -1567,17 +1801,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</p>
-</dd><dt class="property-optional"
+    <dd>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessiontoken_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessiontoken_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Token</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#sqlfiltersessiontoken">Sql<wbr>Filter<wbr>Session<wbr>Token<wbr>Args</a></span>
+        <span class="property-type"><a href="#sqlfiltersessiontoken">Sql<wbr>Filter<wbr>Session<wbr>Token</a></span>
     </dt>
-    <dd><p>session token.</p>
-</dd><dt class="property-optional"
+    <dd>session token.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sqltype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sqltype_nodejs" style="color: inherit; text-decoration: inherit;">sql<wbr>Type</a>
@@ -1585,8 +1817,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</p>
-</dd><dt class="property-optional"
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1594,8 +1825,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter status.</p>
-</dd></dl>
+    <dd>filter status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1609,8 +1839,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>filter duration.</p>
-</dd><dt class="property-optional"
+    <dd>filter duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filter_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filter_id_python" style="color: inherit; text-decoration: inherit;">filter_<wbr>id</a>
@@ -1618,8 +1847,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>filter id.</p>
-</dd><dt class="property-optional"
+    <dd>filter id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filter_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filter_key_python" style="color: inherit; text-decoration: inherit;">filter_<wbr>key</a>
@@ -1627,8 +1855,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>filter key.</p>
-</dd><dt class="property-optional"
+    <dd>filter key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1636,8 +1863,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_concurrency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_concurrency_python" style="color: inherit; text-decoration: inherit;">max_<wbr>concurrency</a>
@@ -1645,8 +1871,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>maximum concurreny.</p>
-</dd><dt class="property-optional"
+    <dd>maximum concurreny.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_product_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_python" style="color: inherit; text-decoration: inherit;">product</a>
@@ -1654,8 +1879,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</p>
-</dd><dt class="property-optional"
+    <dd>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_session_token_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_session_token_python" style="color: inherit; text-decoration: inherit;">session_<wbr>token</a>
@@ -1663,8 +1887,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#sqlfiltersessiontoken">Sql<wbr>Filter<wbr>Session<wbr>Token<wbr>Args</a></span>
     </dt>
-    <dd><p>session token.</p>
-</dd><dt class="property-optional"
+    <dd>session token.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sql_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sql_type_python" style="color: inherit; text-decoration: inherit;">sql_<wbr>type</a>
@@ -1672,8 +1895,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</p>
-</dd><dt class="property-optional"
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1681,8 +1903,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>filter status.</p>
-</dd></dl>
+    <dd>filter status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1696,8 +1917,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>filter duration.</p>
-</dd><dt class="property-optional"
+    <dd>filter duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filterid_yaml" style="color: inherit; text-decoration: inherit;">filter<wbr>Id</a>
@@ -1705,8 +1925,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>filter id.</p>
-</dd><dt class="property-optional"
+    <dd>filter id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filterkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filterkey_yaml" style="color: inherit; text-decoration: inherit;">filter<wbr>Key</a>
@@ -1714,8 +1933,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>filter key.</p>
-</dd><dt class="property-optional"
+    <dd>filter key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1723,8 +1941,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxconcurrency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxconcurrency_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrency</a>
@@ -1732,8 +1949,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>maximum concurreny.</p>
-</dd><dt class="property-optional"
+    <dd>maximum concurreny.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_product_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_yaml" style="color: inherit; text-decoration: inherit;">product</a>
@@ -1741,8 +1957,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</p>
-</dd><dt class="property-optional"
+    <dd>product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessiontoken_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessiontoken_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Token</a>
@@ -1750,8 +1965,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#sqlfiltersessiontoken">Property Map</a></span>
     </dt>
-    <dd><p>session token.</p>
-</dd><dt class="property-optional"
+    <dd>session token.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sqltype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sqltype_yaml" style="color: inherit; text-decoration: inherit;">sql<wbr>Type</a>
@@ -1759,8 +1973,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</p>
-</dd><dt class="property-optional"
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1768,8 +1981,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>filter status.</p>
-</dd></dl>
+    <dd>filter status.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1784,7 +1996,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="sqlfiltersessiontoken">Sql<wbr>Filter<wbr>Session<wbr>Token</h4>
+<h4 id="sqlfiltersessiontoken">
+Sql<wbr>Filter<wbr>Session<wbr>Token<pulumi-choosable type="language" values="python,go" class="inline">, Sql<wbr>Filter<wbr>Session<wbr>Token<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1796,8 +2010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>password.</p>
-</dd><dt class="property-required"
+    <dd>password.</dd><dt class="property-required"
             title="Required">
         <span id="user_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_csharp" style="color: inherit; text-decoration: inherit;">User</a>
@@ -1805,8 +2018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>user name.</p>
-</dd></dl>
+    <dd>user name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1820,8 +2032,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>password.</p>
-</dd><dt class="property-required"
+    <dd>password.</dd><dt class="property-required"
             title="Required">
         <span id="user_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_go" style="color: inherit; text-decoration: inherit;">User</a>
@@ -1829,8 +2040,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>user name.</p>
-</dd></dl>
+    <dd>user name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>password.</dd><dt class="property-required"
+            title="Required">
+        <span id="user_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_hcl" style="color: inherit; text-decoration: inherit;">user</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>user name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1844,8 +2076,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>password.</p>
-</dd><dt class="property-required"
+    <dd>password.</dd><dt class="property-required"
             title="Required">
         <span id="user_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_java" style="color: inherit; text-decoration: inherit;">user</a>
@@ -1853,8 +2084,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>user name.</p>
-</dd></dl>
+    <dd>user name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1868,8 +2098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>password.</p>
-</dd><dt class="property-required"
+    <dd>password.</dd><dt class="property-required"
             title="Required">
         <span id="user_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_nodejs" style="color: inherit; text-decoration: inherit;">user</a>
@@ -1877,8 +2106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>user name.</p>
-</dd></dl>
+    <dd>user name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1892,8 +2120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>password.</p>
-</dd><dt class="property-required"
+    <dd>password.</dd><dt class="property-required"
             title="Required">
         <span id="user_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_python" style="color: inherit; text-decoration: inherit;">user</a>
@@ -1901,8 +2128,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>user name.</p>
-</dd></dl>
+    <dd>user name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1916,8 +2142,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>password.</p>
-</dd><dt class="property-required"
+    <dd>password.</dd><dt class="property-required"
             title="Required">
         <span id="user_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_yaml" style="color: inherit; text-decoration: inherit;">user</a>
@@ -1925,8 +2150,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>user name.</p>
-</dd></dl>
+    <dd>user name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1938,7 +2162,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "Acl"
 title_tag: "tencentcloud.Dasb.Acl"
-meta_desc: "Documentation for the tencentcloud.Dasb.Acl resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a dasb acl"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,31 +18,41 @@ Provides a resource to create a dasb acl
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const exampleUser = new tencentcloud.dasb.User("exampleUser", {
+const example = new tencentcloud.dasb.User("example", {
     userName: "tf_example",
     realName: "terraform",
     phone: "+86|18345678782",
     email: "demo@tencent.com",
     authType: 0,
 });
-const exampleUserGroup = new tencentcloud.dasb.UserGroup("exampleUserGroup", {});
-const exampleDevice = new tencentcloud.dasb.Device("exampleDevice", {
+const exampleUserGroup = new tencentcloud.dasb.UserGroup("example", {name: "tf_example"});
+const exampleDevice = new tencentcloud.dasb.Device("example", {
     osName: "Linux",
     ip: "192.168.0.1",
     port: 80,
+    name: "tf_example",
 });
-const exampleDeviceGroup = new tencentcloud.dasb.DeviceGroup("exampleDeviceGroup", {});
-const exampleDeviceAccount = new tencentcloud.dasb.DeviceAccount("exampleDeviceAccount", {
-    deviceId: exampleDevice.id,
+const exampleDeviceGroup = new tencentcloud.dasb.DeviceGroup("example", {name: "tf_example"});
+const exampleDeviceAccount = new tencentcloud.dasb.DeviceAccount("example", {
+    deviceId: exampleDevice.id.apply(x =>Number(x)),
     account: "root",
 });
-const exampleCmdTemplate = new tencentcloud.dasb.CmdTemplate("exampleCmdTemplate", {cmdList: "rm -rf*"});
-const exampleAcl = new tencentcloud.dasb.Acl("exampleAcl", {
+const exampleCmdTemplate = new tencentcloud.dasb.CmdTemplate("example", {
+    name: "tf_example",
+    cmdList: "rm -rf*",
+});
+const exampleAcl = new tencentcloud.dasb.Acl("example", {
+    name: "tf_example",
     allowDiskRedirect: true,
     allowAnyAccount: false,
     allowClipFileUp: true,
@@ -51,12 +63,12 @@ const exampleAcl = new tencentcloud.dasb.Acl("exampleAcl", {
     allowFileDown: true,
     maxFileUpSize: 0,
     maxFileDownSize: 0,
-    userIdSets: [exampleUser.id],
-    userGroupIdSets: [exampleUserGroup.id],
-    deviceIdSets: [exampleDevice.id],
-    deviceGroupIdSets: [exampleDeviceGroup.id],
+    userIdSets: [example.id.apply(x =>Number(x))],
+    userGroupIdSets: [exampleUserGroup.id.apply(x =>Number(x))],
+    deviceIdSets: [exampleDevice.id.apply(x =>Number(x))],
+    deviceGroupIdSets: [exampleDeviceGroup.id.apply(x =>Number(x))],
     accountSets: [exampleDeviceAccount.id],
-    cmdTemplateIdSets: [exampleCmdTemplate.id],
+    cmdTemplateIdSets: [exampleCmdTemplate.id.apply(x =>Number(x))],
     acTemplateIdSets: [],
     allowDiskFileUp: true,
     allowDiskFileDown: true,
@@ -66,27 +78,36 @@ const exampleAcl = new tencentcloud.dasb.Acl("exampleAcl", {
     allowAccessCredential: true,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-example_user = tencentcloud.dasb.User("exampleUser",
+example = tencentcloud.dasb.User("example",
     user_name="tf_example",
     real_name="terraform",
     phone="+86|18345678782",
     email="demo@tencent.com",
     auth_type=0)
-example_user_group = tencentcloud.dasb.UserGroup("exampleUserGroup")
-example_device = tencentcloud.dasb.Device("exampleDevice",
+example_user_group = tencentcloud.dasb.UserGroup("example", name="tf_example")
+example_device = tencentcloud.dasb.Device("example",
     os_name="Linux",
     ip="192.168.0.1",
-    port=80)
-example_device_group = tencentcloud.dasb.DeviceGroup("exampleDeviceGroup")
-example_device_account = tencentcloud.dasb.DeviceAccount("exampleDeviceAccount",
-    device_id=example_device.id,
+    port=80,
+    name="tf_example")
+example_device_group = tencentcloud.dasb.DeviceGroup("example", name="tf_example")
+example_device_account = tencentcloud.dasb.DeviceAccount("example",
+    device_id=example_device.id.apply(lambda x: int(x)),
     account="root")
-example_cmd_template = tencentcloud.dasb.CmdTemplate("exampleCmdTemplate", cmd_list="rm -rf*")
-example_acl = tencentcloud.dasb.Acl("exampleAcl",
+example_cmd_template = tencentcloud.dasb.CmdTemplate("example",
+    name="tf_example",
+    cmd_list="rm -rf*")
+example_acl = tencentcloud.dasb.Acl("example",
+    name="tf_example",
     allow_disk_redirect=True,
     allow_any_account=False,
     allow_clip_file_up=True,
@@ -97,12 +118,12 @@ example_acl = tencentcloud.dasb.Acl("exampleAcl",
     allow_file_down=True,
     max_file_up_size=0,
     max_file_down_size=0,
-    user_id_sets=[example_user.id],
-    user_group_id_sets=[example_user_group.id],
-    device_id_sets=[example_device.id],
-    device_group_id_sets=[example_device_group.id],
+    user_id_sets=[example.id.apply(lambda x: int(x))],
+    user_group_id_sets=[example_user_group.id.apply(lambda x: int(x))],
+    device_id_sets=[example_device.id.apply(lambda x: int(x))],
+    device_group_id_sets=[example_device_group.id.apply(lambda x: int(x))],
     account_sets=[example_device_account.id],
-    cmd_template_id_sets=[example_cmd_template.id],
+    cmd_template_id_sets=[example_cmd_template.id.apply(lambda x: int(x))],
     ac_template_id_sets=[],
     allow_disk_file_up=True,
     allow_disk_file_down=True,
@@ -111,6 +132,118 @@ example_acl = tencentcloud.dasb.Acl("exampleAcl",
     allow_file_del=True,
     allow_access_credential=True)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"strconv"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dasb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		example, err := dasb.NewUser(ctx, "example", &dasb.UserArgs{
+			UserName: pulumi.String("tf_example"),
+			RealName: pulumi.String("terraform"),
+			Phone:    pulumi.String("+86|18345678782"),
+			Email:    pulumi.String("demo@tencent.com"),
+			AuthType: pulumi.Int(0),
+		})
+		if err != nil {
+			return err
+		}
+		exampleUserGroup, err := dasb.NewUserGroup(ctx, "example", &dasb.UserGroupArgs{
+			Name: pulumi.String("tf_example"),
+		})
+		if err != nil {
+			return err
+		}
+		exampleDevice, err := dasb.NewDevice(ctx, "example", &dasb.DeviceArgs{
+			OsName: pulumi.String("Linux"),
+			Ip:     pulumi.String("192.168.0.1"),
+			Port:   pulumi.Int(80),
+			Name:   pulumi.String("tf_example"),
+		})
+		if err != nil {
+			return err
+		}
+		exampleDeviceGroup, err := dasb.NewDeviceGroup(ctx, "example", &dasb.DeviceGroupArgs{
+			Name: pulumi.String("tf_example"),
+		})
+		if err != nil {
+			return err
+		}
+		exampleDeviceAccount, err := dasb.NewDeviceAccount(ctx, "example", &dasb.DeviceAccountArgs{
+			DeviceId: exampleDevice.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
+			Account:  pulumi.String("root"),
+		})
+		if err != nil {
+			return err
+		}
+		exampleCmdTemplate, err := dasb.NewCmdTemplate(ctx, "example", &dasb.CmdTemplateArgs{
+			Name:    pulumi.String("tf_example"),
+			CmdList: pulumi.String("rm -rf*"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = dasb.NewAcl(ctx, "example", &dasb.AclArgs{
+			Name:              pulumi.String("tf_example"),
+			AllowDiskRedirect: pulumi.Bool(true),
+			AllowAnyAccount:   pulumi.Bool(false),
+			AllowClipFileUp:   pulumi.Bool(true),
+			AllowClipFileDown: pulumi.Bool(true),
+			AllowClipTextUp:   pulumi.Bool(true),
+			AllowClipTextDown: pulumi.Bool(true),
+			AllowFileUp:       pulumi.Bool(true),
+			AllowFileDown:     pulumi.Bool(true),
+			MaxFileUpSize:     pulumi.Int(0),
+			MaxFileDownSize:   pulumi.Int(0),
+			UserIdSets: pulumi.IntArray{
+				example.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
+			},
+			UserGroupIdSets: pulumi.IntArray{
+				exampleUserGroup.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
+			},
+			DeviceIdSets: pulumi.IntArray{
+				exampleDevice.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
+			},
+			DeviceGroupIdSets: pulumi.IntArray{
+				exampleDeviceGroup.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
+			},
+			AccountSets: pulumi.StringArray{
+				exampleDeviceAccount.ID().ToIDOutput().ToStringOutput(),
+			},
+			CmdTemplateIdSets: pulumi.IntArray{
+				exampleCmdTemplate.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
+			},
+			AcTemplateIdSets:      pulumi.StringArray{},
+			AllowDiskFileUp:       pulumi.Bool(true),
+			AllowDiskFileDown:     pulumi.Bool(true),
+			AllowShellFileUp:      pulumi.Bool(true),
+			AllowShellFileDown:    pulumi.Bool(true),
+			AllowFileDel:          pulumi.Bool(true),
+			AllowAccessCredential: pulumi.Bool(true),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -119,7 +252,7 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var exampleUser = new Tencentcloud.Dasb.User("exampleUser", new()
+    var example = new Tencentcloud.Dasb.User("example", new()
     {
         UserName = "tf_example",
         RealName = "terraform",
@@ -128,30 +261,39 @@ return await Deployment.RunAsync(() =>
         AuthType = 0,
     });
 
-    var exampleUserGroup = new Tencentcloud.Dasb.UserGroup("exampleUserGroup");
+    var exampleUserGroup = new Tencentcloud.Dasb.UserGroup("example", new()
+    {
+        Name = "tf_example",
+    });
 
-    var exampleDevice = new Tencentcloud.Dasb.Device("exampleDevice", new()
+    var exampleDevice = new Tencentcloud.Dasb.Device("example", new()
     {
         OsName = "Linux",
         Ip = "192.168.0.1",
         Port = 80,
+        Name = "tf_example",
     });
 
-    var exampleDeviceGroup = new Tencentcloud.Dasb.DeviceGroup("exampleDeviceGroup");
+    var exampleDeviceGroup = new Tencentcloud.Dasb.DeviceGroup("example", new()
+    {
+        Name = "tf_example",
+    });
 
-    var exampleDeviceAccount = new Tencentcloud.Dasb.DeviceAccount("exampleDeviceAccount", new()
+    var exampleDeviceAccount = new Tencentcloud.Dasb.DeviceAccount("example", new()
     {
         DeviceId = exampleDevice.Id,
         Account = "root",
     });
 
-    var exampleCmdTemplate = new Tencentcloud.Dasb.CmdTemplate("exampleCmdTemplate", new()
+    var exampleCmdTemplate = new Tencentcloud.Dasb.CmdTemplate("example", new()
     {
+        Name = "tf_example",
         CmdList = "rm -rf*",
     });
 
-    var exampleAcl = new Tencentcloud.Dasb.Acl("exampleAcl", new()
+    var exampleAcl = new Tencentcloud.Dasb.Acl("example", new()
     {
+        Name = "tf_example",
         AllowDiskRedirect = true,
         AllowAnyAccount = false,
         AllowClipFileUp = true,
@@ -164,7 +306,7 @@ return await Deployment.RunAsync(() =>
         MaxFileDownSize = 0,
         UserIdSets = new[]
         {
-            exampleUser.Id,
+            example.Id,
         },
         UserGroupIdSets = new[]
         {
@@ -197,99 +339,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		exampleUser, err := Dasb.NewUser(ctx, "exampleUser", &Dasb.UserArgs{
-			UserName: pulumi.String("tf_example"),
-			RealName: pulumi.String("terraform"),
-			Phone:    pulumi.String("+86|18345678782"),
-			Email:    pulumi.String("demo@tencent.com"),
-			AuthType: pulumi.Int(0),
-		})
-		if err != nil {
-			return err
-		}
-		exampleUserGroup, err := Dasb.NewUserGroup(ctx, "exampleUserGroup", nil)
-		if err != nil {
-			return err
-		}
-		exampleDevice, err := Dasb.NewDevice(ctx, "exampleDevice", &Dasb.DeviceArgs{
-			OsName: pulumi.String("Linux"),
-			Ip:     pulumi.String("192.168.0.1"),
-			Port:   pulumi.Int(80),
-		})
-		if err != nil {
-			return err
-		}
-		exampleDeviceGroup, err := Dasb.NewDeviceGroup(ctx, "exampleDeviceGroup", nil)
-		if err != nil {
-			return err
-		}
-		exampleDeviceAccount, err := Dasb.NewDeviceAccount(ctx, "exampleDeviceAccount", &Dasb.DeviceAccountArgs{
-			DeviceId: exampleDevice.ID(),
-			Account:  pulumi.String("root"),
-		})
-		if err != nil {
-			return err
-		}
-		exampleCmdTemplate, err := Dasb.NewCmdTemplate(ctx, "exampleCmdTemplate", &Dasb.CmdTemplateArgs{
-			CmdList: pulumi.String("rm -rf*"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Dasb.NewAcl(ctx, "exampleAcl", &Dasb.AclArgs{
-			AllowDiskRedirect: pulumi.Bool(true),
-			AllowAnyAccount:   pulumi.Bool(false),
-			AllowClipFileUp:   pulumi.Bool(true),
-			AllowClipFileDown: pulumi.Bool(true),
-			AllowClipTextUp:   pulumi.Bool(true),
-			AllowClipTextDown: pulumi.Bool(true),
-			AllowFileUp:       pulumi.Bool(true),
-			AllowFileDown:     pulumi.Bool(true),
-			MaxFileUpSize:     pulumi.Int(0),
-			MaxFileDownSize:   pulumi.Int(0),
-			UserIdSets: pulumi.IntArray{
-				exampleUser.ID(),
-			},
-			UserGroupIdSets: pulumi.IntArray{
-				exampleUserGroup.ID(),
-			},
-			DeviceIdSets: pulumi.IntArray{
-				exampleDevice.ID(),
-			},
-			DeviceGroupIdSets: pulumi.IntArray{
-				exampleDeviceGroup.ID(),
-			},
-			AccountSets: pulumi.StringArray{
-				exampleDeviceAccount.ID(),
-			},
-			CmdTemplateIdSets: pulumi.IntArray{
-				exampleCmdTemplate.ID(),
-			},
-			AcTemplateIdSets:      pulumi.StringArray{},
-			AllowDiskFileUp:       pulumi.Bool(true),
-			AllowDiskFileDown:     pulumi.Bool(true),
-			AllowShellFileUp:      pulumi.Bool(true),
-			AllowShellFileDown:    pulumi.Bool(true),
-			AllowFileDel:          pulumi.Bool(true),
-			AllowAccessCredential: pulumi.Bool(true),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -299,17 +353,19 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dasb.User;
 import com.pulumi.tencentcloud.Dasb.UserArgs;
 import com.pulumi.tencentcloud.Dasb.UserGroup;
+import com.pulumi.tencentcloud.Dasb.UserGroupArgs;
 import com.pulumi.tencentcloud.Dasb.Device;
 import com.pulumi.tencentcloud.Dasb.DeviceArgs;
 import com.pulumi.tencentcloud.Dasb.DeviceGroup;
+import com.pulumi.tencentcloud.Dasb.DeviceGroupArgs;
 import com.pulumi.tencentcloud.Dasb.DeviceAccount;
 import com.pulumi.tencentcloud.Dasb.DeviceAccountArgs;
 import com.pulumi.tencentcloud.Dasb.CmdTemplate;
 import com.pulumi.tencentcloud.Dasb.CmdTemplateArgs;
 import com.pulumi.tencentcloud.Dasb.Acl;
 import com.pulumi.tencentcloud.Dasb.AclArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -321,7 +377,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var exampleUser = new User("exampleUser", UserArgs.builder()        
+        var example = new User("example", UserArgs.builder()
             .userName("tf_example")
             .realName("terraform")
             .phone("+86|18345678782")
@@ -329,26 +385,33 @@ public class App {
             .authType(0)
             .build());
 
-        var exampleUserGroup = new UserGroup("exampleUserGroup");
+        var exampleUserGroup = new UserGroup("exampleUserGroup", UserGroupArgs.builder()
+            .name("tf_example")
+            .build());
 
-        var exampleDevice = new Device("exampleDevice", DeviceArgs.builder()        
+        var exampleDevice = new Device("exampleDevice", DeviceArgs.builder()
             .osName("Linux")
             .ip("192.168.0.1")
             .port(80)
+            .name("tf_example")
             .build());
 
-        var exampleDeviceGroup = new DeviceGroup("exampleDeviceGroup");
+        var exampleDeviceGroup = new DeviceGroup("exampleDeviceGroup", DeviceGroupArgs.builder()
+            .name("tf_example")
+            .build());
 
-        var exampleDeviceAccount = new DeviceAccount("exampleDeviceAccount", DeviceAccountArgs.builder()        
+        var exampleDeviceAccount = new DeviceAccount("exampleDeviceAccount", DeviceAccountArgs.builder()
             .deviceId(exampleDevice.id())
             .account("root")
             .build());
 
-        var exampleCmdTemplate = new CmdTemplate("exampleCmdTemplate", CmdTemplateArgs.builder()        
+        var exampleCmdTemplate = new CmdTemplate("exampleCmdTemplate", CmdTemplateArgs.builder()
+            .name("tf_example")
             .cmdList("rm -rf*")
             .build());
 
-        var exampleAcl = new Acl("exampleAcl", AclArgs.builder()        
+        var exampleAcl = new Acl("exampleAcl", AclArgs.builder()
+            .name("tf_example")
             .allowDiskRedirect(true)
             .allowAnyAccount(false)
             .allowClipFileUp(true)
@@ -359,7 +422,7 @@ public class App {
             .allowFileDown(true)
             .maxFileUpSize(0)
             .maxFileDownSize(0)
-            .userIdSets(exampleUser.id())
+            .userIdSets(example.id())
             .userGroupIdSets(exampleUserGroup.id())
             .deviceIdSets(exampleDevice.id())
             .deviceGroupIdSets(exampleDeviceGroup.id())
@@ -377,9 +440,14 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  exampleUser:
+  example:
     type: tencentcloud:Dasb:User
     properties:
       userName: tf_example
@@ -389,26 +457,39 @@ resources:
       authType: 0
   exampleUserGroup:
     type: tencentcloud:Dasb:UserGroup
+    name: example
+    properties:
+      name: tf_example
   exampleDevice:
     type: tencentcloud:Dasb:Device
+    name: example
     properties:
       osName: Linux
       ip: 192.168.0.1
       port: 80
+      name: tf_example
   exampleDeviceGroup:
     type: tencentcloud:Dasb:DeviceGroup
+    name: example
+    properties:
+      name: tf_example
   exampleDeviceAccount:
     type: tencentcloud:Dasb:DeviceAccount
+    name: example
     properties:
       deviceId: ${exampleDevice.id}
       account: root
   exampleCmdTemplate:
     type: tencentcloud:Dasb:CmdTemplate
+    name: example
     properties:
+      name: tf_example
       cmdList: rm -rf*
   exampleAcl:
     type: tencentcloud:Dasb:Acl
+    name: example
     properties:
+      name: tf_example
       allowDiskRedirect: true
       allowAnyAccount: false
       allowClipFileUp: true
@@ -420,7 +501,7 @@ resources:
       maxFileUpSize: 0
       maxFileDownSize: 0
       userIdSets:
-        - ${exampleUser.id}
+        - ${example.id}
       userGroupIdSets:
         - ${exampleUserGroup.id}
       deviceIdSets:
@@ -439,91 +520,184 @@ resources:
       allowFileDel: true
       allowAccessCredential: true
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_dasb_user" "example" {
+  user_name = "tf_example"
+  real_name = "terraform"
+  phone     = "+86|18345678782"
+  email     = "demo@tencent.com"
+  auth_type = 0
+}
+resource "tencentcloud_dasb_usergroup" "example" {
+  name = "tf_example"
+}
+resource "tencentcloud_dasb_device" "example" {
+  os_name = "Linux"
+  ip      = "192.168.0.1"
+  port    = 80
+  name    = "tf_example"
+}
+resource "tencentcloud_dasb_devicegroup" "example" {
+  name = "tf_example"
+}
+resource "tencentcloud_dasb_deviceaccount" "example" {
+  device_id = tencentcloud_dasb_device.example.id
+  account   = "root"
+}
+resource "tencentcloud_dasb_cmdtemplate" "example" {
+  name     = "tf_example"
+  cmd_list = "rm -rf*"
+}
+resource "tencentcloud_dasb_acl" "example" {
+  name                    = "tf_example"
+  allow_disk_redirect     = true
+  allow_any_account       = false
+  allow_clip_file_up      = true
+  allow_clip_file_down    = true
+  allow_clip_text_up      = true
+  allow_clip_text_down    = true
+  allow_file_up           = true
+  allow_file_down         = true
+  max_file_up_size        = 0
+  max_file_down_size      = 0
+  user_id_sets            = [tencentcloud_dasb_user.example.id]
+  user_group_id_sets      = [tencentcloud_dasb_usergroup.example.id]
+  device_id_sets          = [tencentcloud_dasb_device.example.id]
+  device_group_id_sets    = [tencentcloud_dasb_devicegroup.example.id]
+  account_sets            = [tencentcloud_dasb_deviceaccount.example.id]
+  cmd_template_id_sets    = [tencentcloud_dasb_cmdtemplate.example.id]
+  ac_template_id_sets     = []
+  allow_disk_file_up      = true
+  allow_disk_file_down    = true
+  allow_shell_file_up     = true
+  allow_shell_file_down   = true
+  allow_file_del          = true
+  allow_access_credential = true
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateAcl](https://www.tencentcloud.com/search/?wd=CreateAcl&type=document&lang=en)
+* Read: [DescribeAcls](https://www.tencentcloud.com/search/?wd=DescribeAcls&type=document&lang=en)
+* Update: [ModifyAcl](https://www.tencentcloud.com/search/?wd=ModifyAcl&type=document&lang=en)
+* Delete: [DeleteAcls](https://www.tencentcloud.com/search/?wd=DeleteAcls&type=document&lang=en)
 
 
 ## Create Acl Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p">,</span>
+        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">ac_template_id_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-        <span class="nx">account_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-        <span class="nx">allow_access_credential</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">allow_any_account</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">allow_disk_redirect</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">allow_file_down</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">user_group_id_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[int]]</span> = None<span class="p">,</span>
         <span class="nx">allow_clip_file_down</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">allow_clip_file_up</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">allow_clip_text_down</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">allow_clip_text_up</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">allow_disk_file_down</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">allow_disk_file_up</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-        <span class="nx">allow_disk_redirect</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">account_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">allow_file_del</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-        <span class="nx">allow_file_down</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">ac_template_id_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">allow_file_up</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-        <span class="nx">allow_shell_file_down</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-        <span class="nx">allow_shell_file_up</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">allow_access_credential</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">cmd_template_id_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[int]]</span> = None<span class="p">,</span>
+        <span class="nx">allow_shell_file_down</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">department_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">device_group_id_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[int]]</span> = None<span class="p">,</span>
         <span class="nx">device_id_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[int]]</span> = None<span class="p">,</span>
         <span class="nx">max_file_down_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">max_file_up_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">user_group_id_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[int]]</span> = None<span class="p">,</span>
+        <span class="nx">allow_shell_file_up</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">user_id_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[int]]</span> = None<span class="p">,</span>
         <span class="nx">validate_from</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">validate_to</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p">,</span>
-        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+        <span class="nx">validate_to</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAcl</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AclArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Acl</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAcl</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AclArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Acl</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dasb:Acl</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dasb:Acl</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_dasb_acl&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -544,7 +718,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -661,11 +835,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Acl Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -681,8 +863,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow any account.</p>
-</dd><dt class="property-required"
+    <dd>Allow any account.</dd><dt class="property-required"
             title="Required">
         <span id="allowdiskredirect_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowdiskredirect_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Disk<wbr>Redirect</a>
@@ -690,8 +871,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow disk redirect.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk redirect.</dd><dt class="property-optional"
             title="Optional">
         <span id="actemplateidsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#actemplateidsets_csharp" style="color: inherit; text-decoration: inherit;">Ac<wbr>Template<wbr>Id<wbr>Sets</a>
@@ -699,8 +879,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Associate high-risk DB template IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associate high-risk DB template IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountsets_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Sets</a>
@@ -708,8 +887,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Associated accounts.</p>
-</dd><dt class="property-optional"
+    <dd>Associated accounts.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowaccesscredential_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowaccesscredential_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Access<wbr>Credential</a>
@@ -717,8 +895,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow access credential,default allow.</p>
-</dd><dt class="property-optional"
+    <dd>Allow access credential,default allow.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowclipfiledown_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowclipfiledown_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Clip<wbr>File<wbr>Down</a>
@@ -726,8 +903,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip file down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file down.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowclipfileup_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowclipfileup_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Clip<wbr>File<wbr>Up</a>
@@ -735,8 +911,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip file up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file up.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowcliptextdown_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowcliptextdown_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Clip<wbr>Text<wbr>Down</a>
@@ -744,8 +919,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip text down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text down.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowcliptextup_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowcliptextup_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Clip<wbr>Text<wbr>Up</a>
@@ -753,8 +927,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip text up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text up.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowdiskfiledown_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowdiskfiledown_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Disk<wbr>File<wbr>Down</a>
@@ -762,8 +935,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow disk file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowdiskfileup_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowdiskfileup_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Disk<wbr>File<wbr>Up</a>
@@ -771,8 +943,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow disk file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowfiledel_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowfiledel_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>File<wbr>Del</a>
@@ -780,8 +951,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow sftp file delete.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file delete.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowfiledown_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowfiledown_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>File<wbr>Down</a>
@@ -789,8 +959,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow sftp file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowfileup_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowfileup_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>File<wbr>Up</a>
@@ -798,8 +967,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow sftp up file.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp up file.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowshellfiledown_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowshellfiledown_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Shell<wbr>File<wbr>Down</a>
@@ -807,8 +975,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow shell file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowshellfileup_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowshellfileup_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Shell<wbr>File<wbr>Up</a>
@@ -816,8 +983,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow shell file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="cmdtemplateidsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cmdtemplateidsets_csharp" style="color: inherit; text-decoration: inherit;">Cmd<wbr>Template<wbr>Id<wbr>Sets</a>
@@ -825,8 +991,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Associated high-risk command template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated high-risk command template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="departmentid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#departmentid_csharp" style="color: inherit; text-decoration: inherit;">Department<wbr>Id</a>
@@ -834,8 +999,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Department id.</p>
-</dd><dt class="property-optional"
+    <dd>Department id.</dd><dt class="property-optional"
             title="Optional">
         <span id="devicegroupidsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicegroupidsets_csharp" style="color: inherit; text-decoration: inherit;">Device<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -843,8 +1007,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Associated device group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated device group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="deviceidsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deviceidsets_csharp" style="color: inherit; text-decoration: inherit;">Device<wbr>Id<wbr>Sets</a>
@@ -852,8 +1015,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Associated collection of device IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated collection of device IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxfiledownsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxfiledownsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>File<wbr>Down<wbr>Size</a>
@@ -861,8 +1023,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File transfer download size limit (reserved parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File transfer download size limit (reserved parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="maxfileupsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxfileupsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>File<wbr>Up<wbr>Size</a>
@@ -870,8 +1031,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File upload transfer size limit (artifact parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File upload transfer size limit (artifact parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -879,8 +1039,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acl name.</p>
-</dd><dt class="property-optional"
+    <dd>Acl name.</dd><dt class="property-optional"
             title="Optional">
         <span id="usergroupidsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usergroupidsets_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -888,8 +1047,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Associated user group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated user group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="useridsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useridsets_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Id<wbr>Sets</a>
@@ -897,8 +1055,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Associated set of user IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated set of user IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="validatefrom_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validatefrom_csharp" style="color: inherit; text-decoration: inherit;">Validate<wbr>From</a>
@@ -906,8 +1063,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="validateto_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validateto_csharp" style="color: inherit; text-decoration: inherit;">Validate<wbr>To</a>
@@ -915,8 +1071,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd></dl>
+    <dd>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -930,8 +1085,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow any account.</p>
-</dd><dt class="property-required"
+    <dd>Allow any account.</dd><dt class="property-required"
             title="Required">
         <span id="allowdiskredirect_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowdiskredirect_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Disk<wbr>Redirect</a>
@@ -939,8 +1093,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow disk redirect.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk redirect.</dd><dt class="property-optional"
             title="Optional">
         <span id="actemplateidsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#actemplateidsets_go" style="color: inherit; text-decoration: inherit;">Ac<wbr>Template<wbr>Id<wbr>Sets</a>
@@ -948,8 +1101,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Associate high-risk DB template IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associate high-risk DB template IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountsets_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Sets</a>
@@ -957,8 +1109,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Associated accounts.</p>
-</dd><dt class="property-optional"
+    <dd>Associated accounts.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowaccesscredential_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowaccesscredential_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Access<wbr>Credential</a>
@@ -966,8 +1117,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow access credential,default allow.</p>
-</dd><dt class="property-optional"
+    <dd>Allow access credential,default allow.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowclipfiledown_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowclipfiledown_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Clip<wbr>File<wbr>Down</a>
@@ -975,8 +1125,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip file down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file down.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowclipfileup_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowclipfileup_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Clip<wbr>File<wbr>Up</a>
@@ -984,8 +1133,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip file up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file up.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowcliptextdown_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowcliptextdown_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Clip<wbr>Text<wbr>Down</a>
@@ -993,8 +1141,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip text down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text down.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowcliptextup_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowcliptextup_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Clip<wbr>Text<wbr>Up</a>
@@ -1002,8 +1149,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip text up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text up.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowdiskfiledown_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowdiskfiledown_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Disk<wbr>File<wbr>Down</a>
@@ -1011,8 +1157,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow disk file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowdiskfileup_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowdiskfileup_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Disk<wbr>File<wbr>Up</a>
@@ -1020,8 +1165,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow disk file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowfiledel_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowfiledel_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>File<wbr>Del</a>
@@ -1029,8 +1173,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow sftp file delete.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file delete.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowfiledown_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowfiledown_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>File<wbr>Down</a>
@@ -1038,8 +1181,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow sftp file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowfileup_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowfileup_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>File<wbr>Up</a>
@@ -1047,8 +1189,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow sftp up file.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp up file.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowshellfiledown_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowshellfiledown_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Shell<wbr>File<wbr>Down</a>
@@ -1056,8 +1197,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow shell file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowshellfileup_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowshellfileup_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Shell<wbr>File<wbr>Up</a>
@@ -1065,8 +1205,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow shell file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="cmdtemplateidsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cmdtemplateidsets_go" style="color: inherit; text-decoration: inherit;">Cmd<wbr>Template<wbr>Id<wbr>Sets</a>
@@ -1074,8 +1213,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Associated high-risk command template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated high-risk command template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="departmentid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#departmentid_go" style="color: inherit; text-decoration: inherit;">Department<wbr>Id</a>
@@ -1083,8 +1221,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Department id.</p>
-</dd><dt class="property-optional"
+    <dd>Department id.</dd><dt class="property-optional"
             title="Optional">
         <span id="devicegroupidsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicegroupidsets_go" style="color: inherit; text-decoration: inherit;">Device<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -1092,8 +1229,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Associated device group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated device group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="deviceidsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deviceidsets_go" style="color: inherit; text-decoration: inherit;">Device<wbr>Id<wbr>Sets</a>
@@ -1101,8 +1237,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Associated collection of device IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated collection of device IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxfiledownsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxfiledownsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>File<wbr>Down<wbr>Size</a>
@@ -1110,8 +1245,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File transfer download size limit (reserved parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File transfer download size limit (reserved parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="maxfileupsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxfileupsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>File<wbr>Up<wbr>Size</a>
@@ -1119,8 +1253,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File upload transfer size limit (artifact parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File upload transfer size limit (artifact parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1128,8 +1261,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acl name.</p>
-</dd><dt class="property-optional"
+    <dd>Acl name.</dd><dt class="property-optional"
             title="Optional">
         <span id="usergroupidsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usergroupidsets_go" style="color: inherit; text-decoration: inherit;">User<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -1137,8 +1269,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Associated user group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated user group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="useridsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useridsets_go" style="color: inherit; text-decoration: inherit;">User<wbr>Id<wbr>Sets</a>
@@ -1146,8 +1277,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Associated set of user IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated set of user IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="validatefrom_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validatefrom_go" style="color: inherit; text-decoration: inherit;">Validate<wbr>From</a>
@@ -1155,8 +1285,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="validateto_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validateto_go" style="color: inherit; text-decoration: inherit;">Validate<wbr>To</a>
@@ -1164,8 +1293,229 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd></dl>
+    <dd>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="allow_any_account_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_any_account_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>any_<wbr>account</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow any account.</dd><dt class="property-required"
+            title="Required">
+        <span id="allow_disk_redirect_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_disk_redirect_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>disk_<wbr>redirect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow disk redirect.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ac_template_id_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ac_template_id_sets_hcl" style="color: inherit; text-decoration: inherit;">ac_<wbr>template_<wbr>id_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Associate high-risk DB template IDs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="account_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_sets_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Associated accounts.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="allow_access_credential_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_access_credential_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>access_<wbr>credential</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow access credential,default allow.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="allow_clip_file_down_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_clip_file_down_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>clip_<wbr>file_<wbr>down</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow clip file down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="allow_clip_file_up_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_clip_file_up_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>clip_<wbr>file_<wbr>up</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow clip file up.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="allow_clip_text_down_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_clip_text_down_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>clip_<wbr>text_<wbr>down</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow clip text down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="allow_clip_text_up_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_clip_text_up_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>clip_<wbr>text_<wbr>up</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow clip text up.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="allow_disk_file_down_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_disk_file_down_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>disk_<wbr>file_<wbr>down</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow disk file download.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="allow_disk_file_up_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_disk_file_up_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>disk_<wbr>file_<wbr>up</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow disk file upload.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="allow_file_del_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_file_del_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>file_<wbr>del</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow sftp file delete.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="allow_file_down_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_file_down_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>file_<wbr>down</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow sftp file download.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="allow_file_up_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_file_up_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>file_<wbr>up</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow sftp up file.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="allow_shell_file_down_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_shell_file_down_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>shell_<wbr>file_<wbr>down</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow shell file download.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="allow_shell_file_up_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_shell_file_up_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>shell_<wbr>file_<wbr>up</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow shell file upload.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cmd_template_id_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cmd_template_id_sets_hcl" style="color: inherit; text-decoration: inherit;">cmd_<wbr>template_<wbr>id_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Associated high-risk command template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="department_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#department_id_hcl" style="color: inherit; text-decoration: inherit;">department_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Department id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="device_group_id_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_group_id_sets_hcl" style="color: inherit; text-decoration: inherit;">device_<wbr>group_<wbr>id_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Associated device group ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="device_id_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_id_sets_hcl" style="color: inherit; text-decoration: inherit;">device_<wbr>id_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Associated collection of device IDs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_file_down_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_file_down_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>file_<wbr>down_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>File transfer download size limit (reserved parameter, currently unused).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_file_up_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_file_up_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>file_<wbr>up_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>File upload transfer size limit (artifact parameter, currently unused).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Acl name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="user_group_id_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_group_id_sets_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>group_<wbr>id_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Associated user group ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="user_id_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_id_sets_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>id_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Associated set of user IDs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="validate_from_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validate_from_hcl" style="color: inherit; text-decoration: inherit;">validate_<wbr>from</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="validate_to_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validate_to_hcl" style="color: inherit; text-decoration: inherit;">validate_<wbr>to</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1179,8 +1529,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow any account.</p>
-</dd><dt class="property-required"
+    <dd>Allow any account.</dd><dt class="property-required"
             title="Required">
         <span id="allowdiskredirect_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowdiskredirect_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Disk<wbr>Redirect</a>
@@ -1188,8 +1537,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow disk redirect.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk redirect.</dd><dt class="property-optional"
             title="Optional">
         <span id="actemplateidsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#actemplateidsets_java" style="color: inherit; text-decoration: inherit;">ac<wbr>Template<wbr>Id<wbr>Sets</a>
@@ -1197,8 +1545,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Associate high-risk DB template IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associate high-risk DB template IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountsets_java" style="color: inherit; text-decoration: inherit;">account<wbr>Sets</a>
@@ -1206,8 +1553,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Associated accounts.</p>
-</dd><dt class="property-optional"
+    <dd>Associated accounts.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowaccesscredential_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowaccesscredential_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Access<wbr>Credential</a>
@@ -1215,8 +1561,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow access credential,default allow.</p>
-</dd><dt class="property-optional"
+    <dd>Allow access credential,default allow.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowclipfiledown_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowclipfiledown_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>File<wbr>Down</a>
@@ -1224,8 +1569,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow clip file down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file down.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowclipfileup_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowclipfileup_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>File<wbr>Up</a>
@@ -1233,8 +1577,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow clip file up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file up.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowcliptextdown_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowcliptextdown_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>Text<wbr>Down</a>
@@ -1242,8 +1585,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow clip text down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text down.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowcliptextup_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowcliptextup_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>Text<wbr>Up</a>
@@ -1251,8 +1593,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow clip text up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text up.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowdiskfiledown_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowdiskfiledown_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Disk<wbr>File<wbr>Down</a>
@@ -1260,8 +1601,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow disk file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowdiskfileup_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowdiskfileup_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Disk<wbr>File<wbr>Up</a>
@@ -1269,8 +1609,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow disk file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowfiledel_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowfiledel_java" style="color: inherit; text-decoration: inherit;">allow<wbr>File<wbr>Del</a>
@@ -1278,8 +1617,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow sftp file delete.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file delete.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowfiledown_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowfiledown_java" style="color: inherit; text-decoration: inherit;">allow<wbr>File<wbr>Down</a>
@@ -1287,8 +1625,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow sftp file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowfileup_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowfileup_java" style="color: inherit; text-decoration: inherit;">allow<wbr>File<wbr>Up</a>
@@ -1296,8 +1633,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow sftp up file.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp up file.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowshellfiledown_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowshellfiledown_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Shell<wbr>File<wbr>Down</a>
@@ -1305,8 +1641,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow shell file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowshellfileup_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowshellfileup_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Shell<wbr>File<wbr>Up</a>
@@ -1314,8 +1649,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow shell file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="cmdtemplateidsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cmdtemplateidsets_java" style="color: inherit; text-decoration: inherit;">cmd<wbr>Template<wbr>Id<wbr>Sets</a>
@@ -1323,8 +1657,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Associated high-risk command template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated high-risk command template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="departmentid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#departmentid_java" style="color: inherit; text-decoration: inherit;">department<wbr>Id</a>
@@ -1332,8 +1665,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Department id.</p>
-</dd><dt class="property-optional"
+    <dd>Department id.</dd><dt class="property-optional"
             title="Optional">
         <span id="devicegroupidsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicegroupidsets_java" style="color: inherit; text-decoration: inherit;">device<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -1341,8 +1673,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Associated device group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated device group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="deviceidsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deviceidsets_java" style="color: inherit; text-decoration: inherit;">device<wbr>Id<wbr>Sets</a>
@@ -1350,8 +1681,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Associated collection of device IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated collection of device IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxfiledownsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxfiledownsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>File<wbr>Down<wbr>Size</a>
@@ -1359,8 +1689,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>File transfer download size limit (reserved parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File transfer download size limit (reserved parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="maxfileupsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxfileupsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>File<wbr>Up<wbr>Size</a>
@@ -1368,8 +1697,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>File upload transfer size limit (artifact parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File upload transfer size limit (artifact parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1377,8 +1705,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acl name.</p>
-</dd><dt class="property-optional"
+    <dd>Acl name.</dd><dt class="property-optional"
             title="Optional">
         <span id="usergroupidsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usergroupidsets_java" style="color: inherit; text-decoration: inherit;">user<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -1386,8 +1713,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Associated user group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated user group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="useridsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useridsets_java" style="color: inherit; text-decoration: inherit;">user<wbr>Id<wbr>Sets</a>
@@ -1395,8 +1721,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Associated set of user IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated set of user IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="validatefrom_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validatefrom_java" style="color: inherit; text-decoration: inherit;">validate<wbr>From</a>
@@ -1404,8 +1729,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="validateto_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validateto_java" style="color: inherit; text-decoration: inherit;">validate<wbr>To</a>
@@ -1413,8 +1737,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd></dl>
+    <dd>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1428,8 +1751,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow any account.</p>
-</dd><dt class="property-required"
+    <dd>Allow any account.</dd><dt class="property-required"
             title="Required">
         <span id="allowdiskredirect_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowdiskredirect_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Disk<wbr>Redirect</a>
@@ -1437,8 +1759,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow disk redirect.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk redirect.</dd><dt class="property-optional"
             title="Optional">
         <span id="actemplateidsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#actemplateidsets_nodejs" style="color: inherit; text-decoration: inherit;">ac<wbr>Template<wbr>Id<wbr>Sets</a>
@@ -1446,8 +1767,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Associate high-risk DB template IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associate high-risk DB template IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountsets_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Sets</a>
@@ -1455,8 +1775,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Associated accounts.</p>
-</dd><dt class="property-optional"
+    <dd>Associated accounts.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowaccesscredential_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowaccesscredential_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Access<wbr>Credential</a>
@@ -1464,8 +1783,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow access credential,default allow.</p>
-</dd><dt class="property-optional"
+    <dd>Allow access credential,default allow.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowclipfiledown_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowclipfiledown_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>File<wbr>Down</a>
@@ -1473,8 +1791,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow clip file down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file down.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowclipfileup_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowclipfileup_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>File<wbr>Up</a>
@@ -1482,8 +1799,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow clip file up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file up.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowcliptextdown_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowcliptextdown_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>Text<wbr>Down</a>
@@ -1491,8 +1807,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow clip text down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text down.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowcliptextup_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowcliptextup_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>Text<wbr>Up</a>
@@ -1500,8 +1815,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow clip text up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text up.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowdiskfiledown_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowdiskfiledown_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Disk<wbr>File<wbr>Down</a>
@@ -1509,8 +1823,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow disk file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowdiskfileup_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowdiskfileup_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Disk<wbr>File<wbr>Up</a>
@@ -1518,8 +1831,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow disk file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowfiledel_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowfiledel_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>File<wbr>Del</a>
@@ -1527,8 +1839,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow sftp file delete.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file delete.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowfiledown_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowfiledown_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>File<wbr>Down</a>
@@ -1536,8 +1847,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow sftp file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowfileup_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowfileup_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>File<wbr>Up</a>
@@ -1545,8 +1855,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow sftp up file.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp up file.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowshellfiledown_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowshellfiledown_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Shell<wbr>File<wbr>Down</a>
@@ -1554,8 +1863,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow shell file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowshellfileup_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowshellfileup_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Shell<wbr>File<wbr>Up</a>
@@ -1563,8 +1871,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow shell file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="cmdtemplateidsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cmdtemplateidsets_nodejs" style="color: inherit; text-decoration: inherit;">cmd<wbr>Template<wbr>Id<wbr>Sets</a>
@@ -1572,8 +1879,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Associated high-risk command template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated high-risk command template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="departmentid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#departmentid_nodejs" style="color: inherit; text-decoration: inherit;">department<wbr>Id</a>
@@ -1581,8 +1887,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Department id.</p>
-</dd><dt class="property-optional"
+    <dd>Department id.</dd><dt class="property-optional"
             title="Optional">
         <span id="devicegroupidsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicegroupidsets_nodejs" style="color: inherit; text-decoration: inherit;">device<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -1590,8 +1895,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Associated device group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated device group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="deviceidsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deviceidsets_nodejs" style="color: inherit; text-decoration: inherit;">device<wbr>Id<wbr>Sets</a>
@@ -1599,8 +1903,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Associated collection of device IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated collection of device IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxfiledownsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxfiledownsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>File<wbr>Down<wbr>Size</a>
@@ -1608,8 +1911,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>File transfer download size limit (reserved parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File transfer download size limit (reserved parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="maxfileupsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxfileupsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>File<wbr>Up<wbr>Size</a>
@@ -1617,8 +1919,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>File upload transfer size limit (artifact parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File upload transfer size limit (artifact parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1626,8 +1927,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acl name.</p>
-</dd><dt class="property-optional"
+    <dd>Acl name.</dd><dt class="property-optional"
             title="Optional">
         <span id="usergroupidsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usergroupidsets_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -1635,8 +1935,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Associated user group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated user group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="useridsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useridsets_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Id<wbr>Sets</a>
@@ -1644,8 +1943,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Associated set of user IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated set of user IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="validatefrom_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validatefrom_nodejs" style="color: inherit; text-decoration: inherit;">validate<wbr>From</a>
@@ -1653,8 +1951,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="validateto_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validateto_nodejs" style="color: inherit; text-decoration: inherit;">validate<wbr>To</a>
@@ -1662,8 +1959,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd></dl>
+    <dd>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1677,8 +1973,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow any account.</p>
-</dd><dt class="property-required"
+    <dd>Allow any account.</dd><dt class="property-required"
             title="Required">
         <span id="allow_disk_redirect_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_disk_redirect_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>disk_<wbr>redirect</a>
@@ -1686,8 +1981,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow disk redirect.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk redirect.</dd><dt class="property-optional"
             title="Optional">
         <span id="ac_template_id_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ac_template_id_sets_python" style="color: inherit; text-decoration: inherit;">ac_<wbr>template_<wbr>id_<wbr>sets</a>
@@ -1695,8 +1989,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Associate high-risk DB template IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associate high-risk DB template IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="account_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_sets_python" style="color: inherit; text-decoration: inherit;">account_<wbr>sets</a>
@@ -1704,8 +1997,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Associated accounts.</p>
-</dd><dt class="property-optional"
+    <dd>Associated accounts.</dd><dt class="property-optional"
             title="Optional">
         <span id="allow_access_credential_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_access_credential_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>access_<wbr>credential</a>
@@ -1713,8 +2005,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow access credential,default allow.</p>
-</dd><dt class="property-optional"
+    <dd>Allow access credential,default allow.</dd><dt class="property-optional"
             title="Optional">
         <span id="allow_clip_file_down_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_clip_file_down_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>clip_<wbr>file_<wbr>down</a>
@@ -1722,8 +2013,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip file down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file down.</dd><dt class="property-optional"
             title="Optional">
         <span id="allow_clip_file_up_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_clip_file_up_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>clip_<wbr>file_<wbr>up</a>
@@ -1731,8 +2021,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip file up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file up.</dd><dt class="property-optional"
             title="Optional">
         <span id="allow_clip_text_down_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_clip_text_down_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>clip_<wbr>text_<wbr>down</a>
@@ -1740,8 +2029,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip text down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text down.</dd><dt class="property-optional"
             title="Optional">
         <span id="allow_clip_text_up_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_clip_text_up_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>clip_<wbr>text_<wbr>up</a>
@@ -1749,8 +2037,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip text up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text up.</dd><dt class="property-optional"
             title="Optional">
         <span id="allow_disk_file_down_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_disk_file_down_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>disk_<wbr>file_<wbr>down</a>
@@ -1758,8 +2045,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow disk file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="allow_disk_file_up_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_disk_file_up_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>disk_<wbr>file_<wbr>up</a>
@@ -1767,8 +2053,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow disk file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="allow_file_del_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_file_del_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>file_<wbr>del</a>
@@ -1776,8 +2061,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow sftp file delete.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file delete.</dd><dt class="property-optional"
             title="Optional">
         <span id="allow_file_down_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_file_down_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>file_<wbr>down</a>
@@ -1785,8 +2069,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow sftp file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="allow_file_up_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_file_up_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>file_<wbr>up</a>
@@ -1794,8 +2077,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow sftp up file.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp up file.</dd><dt class="property-optional"
             title="Optional">
         <span id="allow_shell_file_down_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_shell_file_down_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>shell_<wbr>file_<wbr>down</a>
@@ -1803,8 +2085,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow shell file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="allow_shell_file_up_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allow_shell_file_up_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>shell_<wbr>file_<wbr>up</a>
@@ -1812,8 +2093,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow shell file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="cmd_template_id_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cmd_template_id_sets_python" style="color: inherit; text-decoration: inherit;">cmd_<wbr>template_<wbr>id_<wbr>sets</a>
@@ -1821,8 +2101,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Associated high-risk command template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated high-risk command template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="department_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#department_id_python" style="color: inherit; text-decoration: inherit;">department_<wbr>id</a>
@@ -1830,8 +2109,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Department id.</p>
-</dd><dt class="property-optional"
+    <dd>Department id.</dd><dt class="property-optional"
             title="Optional">
         <span id="device_group_id_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_group_id_sets_python" style="color: inherit; text-decoration: inherit;">device_<wbr>group_<wbr>id_<wbr>sets</a>
@@ -1839,8 +2117,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Associated device group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated device group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="device_id_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_id_sets_python" style="color: inherit; text-decoration: inherit;">device_<wbr>id_<wbr>sets</a>
@@ -1848,8 +2125,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Associated collection of device IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated collection of device IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_file_down_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_file_down_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>file_<wbr>down_<wbr>size</a>
@@ -1857,8 +2133,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File transfer download size limit (reserved parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File transfer download size limit (reserved parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="max_file_up_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_file_up_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>file_<wbr>up_<wbr>size</a>
@@ -1866,8 +2141,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File upload transfer size limit (artifact parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File upload transfer size limit (artifact parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1875,8 +2149,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Acl name.</p>
-</dd><dt class="property-optional"
+    <dd>Acl name.</dd><dt class="property-optional"
             title="Optional">
         <span id="user_group_id_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_group_id_sets_python" style="color: inherit; text-decoration: inherit;">user_<wbr>group_<wbr>id_<wbr>sets</a>
@@ -1884,8 +2157,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Associated user group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated user group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="user_id_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_id_sets_python" style="color: inherit; text-decoration: inherit;">user_<wbr>id_<wbr>sets</a>
@@ -1893,8 +2165,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Associated set of user IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated set of user IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="validate_from_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validate_from_python" style="color: inherit; text-decoration: inherit;">validate_<wbr>from</a>
@@ -1902,8 +2173,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="validate_to_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validate_to_python" style="color: inherit; text-decoration: inherit;">validate_<wbr>to</a>
@@ -1911,8 +2181,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd></dl>
+    <dd>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1926,8 +2195,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow any account.</p>
-</dd><dt class="property-required"
+    <dd>Allow any account.</dd><dt class="property-required"
             title="Required">
         <span id="allowdiskredirect_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowdiskredirect_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Disk<wbr>Redirect</a>
@@ -1935,8 +2203,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow disk redirect.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk redirect.</dd><dt class="property-optional"
             title="Optional">
         <span id="actemplateidsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#actemplateidsets_yaml" style="color: inherit; text-decoration: inherit;">ac<wbr>Template<wbr>Id<wbr>Sets</a>
@@ -1944,8 +2211,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Associate high-risk DB template IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associate high-risk DB template IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountsets_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Sets</a>
@@ -1953,8 +2219,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Associated accounts.</p>
-</dd><dt class="property-optional"
+    <dd>Associated accounts.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowaccesscredential_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowaccesscredential_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Access<wbr>Credential</a>
@@ -1962,8 +2227,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow access credential,default allow.</p>
-</dd><dt class="property-optional"
+    <dd>Allow access credential,default allow.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowclipfiledown_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowclipfiledown_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>File<wbr>Down</a>
@@ -1971,8 +2235,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow clip file down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file down.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowclipfileup_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowclipfileup_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>File<wbr>Up</a>
@@ -1980,8 +2243,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow clip file up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file up.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowcliptextdown_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowcliptextdown_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>Text<wbr>Down</a>
@@ -1989,8 +2251,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow clip text down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text down.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowcliptextup_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowcliptextup_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>Text<wbr>Up</a>
@@ -1998,8 +2259,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow clip text up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text up.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowdiskfiledown_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowdiskfiledown_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Disk<wbr>File<wbr>Down</a>
@@ -2007,8 +2267,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow disk file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowdiskfileup_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowdiskfileup_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Disk<wbr>File<wbr>Up</a>
@@ -2016,8 +2275,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow disk file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowfiledel_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowfiledel_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>File<wbr>Del</a>
@@ -2025,8 +2283,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow sftp file delete.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file delete.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowfiledown_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowfiledown_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>File<wbr>Down</a>
@@ -2034,8 +2291,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow sftp file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowfileup_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowfileup_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>File<wbr>Up</a>
@@ -2043,8 +2299,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow sftp up file.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp up file.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowshellfiledown_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowshellfiledown_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Shell<wbr>File<wbr>Down</a>
@@ -2052,8 +2307,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow shell file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="allowshellfileup_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allowshellfileup_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Shell<wbr>File<wbr>Up</a>
@@ -2061,8 +2315,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow shell file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="cmdtemplateidsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cmdtemplateidsets_yaml" style="color: inherit; text-decoration: inherit;">cmd<wbr>Template<wbr>Id<wbr>Sets</a>
@@ -2070,8 +2323,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Associated high-risk command template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated high-risk command template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="departmentid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#departmentid_yaml" style="color: inherit; text-decoration: inherit;">department<wbr>Id</a>
@@ -2079,8 +2331,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Department id.</p>
-</dd><dt class="property-optional"
+    <dd>Department id.</dd><dt class="property-optional"
             title="Optional">
         <span id="devicegroupidsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicegroupidsets_yaml" style="color: inherit; text-decoration: inherit;">device<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -2088,8 +2339,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Associated device group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated device group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="deviceidsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deviceidsets_yaml" style="color: inherit; text-decoration: inherit;">device<wbr>Id<wbr>Sets</a>
@@ -2097,8 +2347,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Associated collection of device IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated collection of device IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxfiledownsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxfiledownsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>File<wbr>Down<wbr>Size</a>
@@ -2106,8 +2355,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>File transfer download size limit (reserved parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File transfer download size limit (reserved parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="maxfileupsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxfileupsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>File<wbr>Up<wbr>Size</a>
@@ -2115,8 +2363,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>File upload transfer size limit (artifact parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File upload transfer size limit (artifact parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2124,8 +2371,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acl name.</p>
-</dd><dt class="property-optional"
+    <dd>Acl name.</dd><dt class="property-optional"
             title="Optional">
         <span id="usergroupidsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usergroupidsets_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -2133,8 +2379,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Associated user group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated user group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="useridsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useridsets_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Id<wbr>Sets</a>
@@ -2142,8 +2387,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Associated set of user IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated set of user IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="validatefrom_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validatefrom_yaml" style="color: inherit; text-decoration: inherit;">validate<wbr>From</a>
@@ -2151,8 +2395,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="validateto_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#validateto_yaml" style="color: inherit; text-decoration: inherit;">validate<wbr>To</a>
@@ -2160,8 +2403,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd></dl>
+    <dd>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2182,8 +2424,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2197,8 +2438,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2212,8 +2466,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2227,8 +2480,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2242,8 +2494,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2257,8 +2508,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2268,18 +2518,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Acl resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AclState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Acl</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AclState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Acl</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -2310,104 +2560,143 @@ Get an existing Acl resource's state with the given name, ID, and optional extra
         <span class="nx">user_id_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[int]]</span> = None<span class="p">,</span>
         <span class="nx">validate_from</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">validate_to</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Acl</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAcl<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AclState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Acl</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAcl<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AclState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Acl</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Acl</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AclState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Acl</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AclState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Acl</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AclState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Acl</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AclState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingAcl</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Dasb:Acl</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_dasb_acl</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AclState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AclState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2415,28 +2704,31 @@ Get an existing Acl resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AclState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2444,28 +2736,31 @@ Get an existing Acl resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AclState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2485,8 +2780,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Associate high-risk DB template IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associate high-risk DB template IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_accountsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountsets_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Sets</a>
@@ -2494,8 +2788,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Associated accounts.</p>
-</dd><dt class="property-optional"
+    <dd>Associated accounts.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowaccesscredential_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowaccesscredential_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Access<wbr>Credential</a>
@@ -2503,8 +2796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow access credential,default allow.</p>
-</dd><dt class="property-optional"
+    <dd>Allow access credential,default allow.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowanyaccount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowanyaccount_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Any<wbr>Account</a>
@@ -2512,8 +2804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow any account.</p>
-</dd><dt class="property-optional"
+    <dd>Allow any account.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowclipfiledown_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowclipfiledown_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Clip<wbr>File<wbr>Down</a>
@@ -2521,8 +2812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip file down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file down.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowclipfileup_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowclipfileup_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Clip<wbr>File<wbr>Up</a>
@@ -2530,8 +2820,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip file up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowcliptextdown_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowcliptextdown_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Clip<wbr>Text<wbr>Down</a>
@@ -2539,8 +2828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip text down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text down.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowcliptextup_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowcliptextup_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Clip<wbr>Text<wbr>Up</a>
@@ -2548,8 +2836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip text up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowdiskfiledown_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowdiskfiledown_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Disk<wbr>File<wbr>Down</a>
@@ -2557,8 +2844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow disk file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowdiskfileup_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowdiskfileup_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Disk<wbr>File<wbr>Up</a>
@@ -2566,8 +2852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow disk file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowdiskredirect_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowdiskredirect_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Disk<wbr>Redirect</a>
@@ -2575,8 +2860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow disk redirect.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk redirect.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowfiledel_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowfiledel_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>File<wbr>Del</a>
@@ -2584,8 +2868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow sftp file delete.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file delete.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowfiledown_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowfiledown_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>File<wbr>Down</a>
@@ -2593,8 +2876,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow sftp file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowfileup_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowfileup_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>File<wbr>Up</a>
@@ -2602,8 +2884,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow sftp up file.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp up file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowshellfiledown_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowshellfiledown_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Shell<wbr>File<wbr>Down</a>
@@ -2611,8 +2892,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow shell file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowshellfileup_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowshellfileup_csharp" style="color: inherit; text-decoration: inherit;">Allow<wbr>Shell<wbr>File<wbr>Up</a>
@@ -2620,8 +2900,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow shell file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cmdtemplateidsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cmdtemplateidsets_csharp" style="color: inherit; text-decoration: inherit;">Cmd<wbr>Template<wbr>Id<wbr>Sets</a>
@@ -2629,8 +2908,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Associated high-risk command template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated high-risk command template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_departmentid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_departmentid_csharp" style="color: inherit; text-decoration: inherit;">Department<wbr>Id</a>
@@ -2638,8 +2916,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Department id.</p>
-</dd><dt class="property-optional"
+    <dd>Department id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_devicegroupidsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_devicegroupidsets_csharp" style="color: inherit; text-decoration: inherit;">Device<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -2647,8 +2924,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Associated device group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated device group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deviceidsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deviceidsets_csharp" style="color: inherit; text-decoration: inherit;">Device<wbr>Id<wbr>Sets</a>
@@ -2656,8 +2932,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Associated collection of device IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated collection of device IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxfiledownsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxfiledownsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>File<wbr>Down<wbr>Size</a>
@@ -2665,8 +2940,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File transfer download size limit (reserved parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File transfer download size limit (reserved parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxfileupsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxfileupsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>File<wbr>Up<wbr>Size</a>
@@ -2674,8 +2948,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File upload transfer size limit (artifact parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File upload transfer size limit (artifact parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2683,8 +2956,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acl name.</p>
-</dd><dt class="property-optional"
+    <dd>Acl name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usergroupidsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usergroupidsets_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -2692,8 +2964,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Associated user group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated user group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_useridsets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_useridsets_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Id<wbr>Sets</a>
@@ -2701,8 +2972,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Associated set of user IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated set of user IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validatefrom_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validatefrom_csharp" style="color: inherit; text-decoration: inherit;">Validate<wbr>From</a>
@@ -2710,8 +2980,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validateto_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validateto_csharp" style="color: inherit; text-decoration: inherit;">Validate<wbr>To</a>
@@ -2719,8 +2988,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd></dl>
+    <dd>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2734,8 +3002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Associate high-risk DB template IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associate high-risk DB template IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_accountsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountsets_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Sets</a>
@@ -2743,8 +3010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Associated accounts.</p>
-</dd><dt class="property-optional"
+    <dd>Associated accounts.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowaccesscredential_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowaccesscredential_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Access<wbr>Credential</a>
@@ -2752,8 +3018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow access credential,default allow.</p>
-</dd><dt class="property-optional"
+    <dd>Allow access credential,default allow.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowanyaccount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowanyaccount_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Any<wbr>Account</a>
@@ -2761,8 +3026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow any account.</p>
-</dd><dt class="property-optional"
+    <dd>Allow any account.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowclipfiledown_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowclipfiledown_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Clip<wbr>File<wbr>Down</a>
@@ -2770,8 +3034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip file down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file down.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowclipfileup_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowclipfileup_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Clip<wbr>File<wbr>Up</a>
@@ -2779,8 +3042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip file up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowcliptextdown_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowcliptextdown_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Clip<wbr>Text<wbr>Down</a>
@@ -2788,8 +3050,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip text down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text down.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowcliptextup_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowcliptextup_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Clip<wbr>Text<wbr>Up</a>
@@ -2797,8 +3058,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip text up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowdiskfiledown_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowdiskfiledown_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Disk<wbr>File<wbr>Down</a>
@@ -2806,8 +3066,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow disk file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowdiskfileup_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowdiskfileup_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Disk<wbr>File<wbr>Up</a>
@@ -2815,8 +3074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow disk file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowdiskredirect_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowdiskredirect_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Disk<wbr>Redirect</a>
@@ -2824,8 +3082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow disk redirect.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk redirect.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowfiledel_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowfiledel_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>File<wbr>Del</a>
@@ -2833,8 +3090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow sftp file delete.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file delete.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowfiledown_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowfiledown_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>File<wbr>Down</a>
@@ -2842,8 +3098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow sftp file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowfileup_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowfileup_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>File<wbr>Up</a>
@@ -2851,8 +3106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow sftp up file.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp up file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowshellfiledown_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowshellfiledown_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Shell<wbr>File<wbr>Down</a>
@@ -2860,8 +3114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow shell file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowshellfileup_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowshellfileup_go" style="color: inherit; text-decoration: inherit;">Allow<wbr>Shell<wbr>File<wbr>Up</a>
@@ -2869,8 +3122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow shell file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cmdtemplateidsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cmdtemplateidsets_go" style="color: inherit; text-decoration: inherit;">Cmd<wbr>Template<wbr>Id<wbr>Sets</a>
@@ -2878,8 +3130,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Associated high-risk command template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated high-risk command template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_departmentid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_departmentid_go" style="color: inherit; text-decoration: inherit;">Department<wbr>Id</a>
@@ -2887,8 +3138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Department id.</p>
-</dd><dt class="property-optional"
+    <dd>Department id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_devicegroupidsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_devicegroupidsets_go" style="color: inherit; text-decoration: inherit;">Device<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -2896,8 +3146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Associated device group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated device group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deviceidsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deviceidsets_go" style="color: inherit; text-decoration: inherit;">Device<wbr>Id<wbr>Sets</a>
@@ -2905,8 +3154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Associated collection of device IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated collection of device IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxfiledownsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxfiledownsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>File<wbr>Down<wbr>Size</a>
@@ -2914,8 +3162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File transfer download size limit (reserved parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File transfer download size limit (reserved parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxfileupsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxfileupsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>File<wbr>Up<wbr>Size</a>
@@ -2923,8 +3170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File upload transfer size limit (artifact parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File upload transfer size limit (artifact parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2932,8 +3178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acl name.</p>
-</dd><dt class="property-optional"
+    <dd>Acl name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usergroupidsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usergroupidsets_go" style="color: inherit; text-decoration: inherit;">User<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -2941,8 +3186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Associated user group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated user group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_useridsets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_useridsets_go" style="color: inherit; text-decoration: inherit;">User<wbr>Id<wbr>Sets</a>
@@ -2950,8 +3194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Associated set of user IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated set of user IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validatefrom_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validatefrom_go" style="color: inherit; text-decoration: inherit;">Validate<wbr>From</a>
@@ -2959,8 +3202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validateto_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validateto_go" style="color: inherit; text-decoration: inherit;">Validate<wbr>To</a>
@@ -2968,8 +3210,229 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd></dl>
+    <dd>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_ac_template_id_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ac_template_id_sets_hcl" style="color: inherit; text-decoration: inherit;">ac_<wbr>template_<wbr>id_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Associate high-risk DB template IDs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_account_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_account_sets_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Associated accounts.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_allow_access_credential_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_access_credential_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>access_<wbr>credential</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow access credential,default allow.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_allow_any_account_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_any_account_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>any_<wbr>account</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow any account.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_allow_clip_file_down_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_clip_file_down_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>clip_<wbr>file_<wbr>down</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow clip file down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_allow_clip_file_up_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_clip_file_up_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>clip_<wbr>file_<wbr>up</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow clip file up.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_allow_clip_text_down_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_clip_text_down_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>clip_<wbr>text_<wbr>down</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow clip text down.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_allow_clip_text_up_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_clip_text_up_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>clip_<wbr>text_<wbr>up</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow clip text up.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_allow_disk_file_down_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_disk_file_down_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>disk_<wbr>file_<wbr>down</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow disk file download.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_allow_disk_file_up_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_disk_file_up_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>disk_<wbr>file_<wbr>up</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow disk file upload.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_allow_disk_redirect_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_disk_redirect_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>disk_<wbr>redirect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow disk redirect.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_allow_file_del_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_file_del_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>file_<wbr>del</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow sftp file delete.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_allow_file_down_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_file_down_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>file_<wbr>down</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow sftp file download.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_allow_file_up_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_file_up_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>file_<wbr>up</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow sftp up file.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_allow_shell_file_down_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_shell_file_down_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>shell_<wbr>file_<wbr>down</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow shell file download.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_allow_shell_file_up_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_shell_file_up_hcl" style="color: inherit; text-decoration: inherit;">allow_<wbr>shell_<wbr>file_<wbr>up</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Allow shell file upload.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cmd_template_id_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cmd_template_id_sets_hcl" style="color: inherit; text-decoration: inherit;">cmd_<wbr>template_<wbr>id_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Associated high-risk command template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_department_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_department_id_hcl" style="color: inherit; text-decoration: inherit;">department_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Department id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_device_group_id_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_device_group_id_sets_hcl" style="color: inherit; text-decoration: inherit;">device_<wbr>group_<wbr>id_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Associated device group ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_device_id_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_device_id_sets_hcl" style="color: inherit; text-decoration: inherit;">device_<wbr>id_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Associated collection of device IDs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_file_down_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_file_down_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>file_<wbr>down_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>File transfer download size limit (reserved parameter, currently unused).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_file_up_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_file_up_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>file_<wbr>up_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>File upload transfer size limit (artifact parameter, currently unused).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Acl name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_user_group_id_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_group_id_sets_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>group_<wbr>id_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Associated user group ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_user_id_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_id_sets_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>id_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Associated set of user IDs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_validate_from_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validate_from_hcl" style="color: inherit; text-decoration: inherit;">validate_<wbr>from</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_validate_to_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validate_to_hcl" style="color: inherit; text-decoration: inherit;">validate_<wbr>to</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2983,8 +3446,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Associate high-risk DB template IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associate high-risk DB template IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_accountsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountsets_java" style="color: inherit; text-decoration: inherit;">account<wbr>Sets</a>
@@ -2992,8 +3454,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Associated accounts.</p>
-</dd><dt class="property-optional"
+    <dd>Associated accounts.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowaccesscredential_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowaccesscredential_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Access<wbr>Credential</a>
@@ -3001,8 +3462,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow access credential,default allow.</p>
-</dd><dt class="property-optional"
+    <dd>Allow access credential,default allow.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowanyaccount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowanyaccount_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Any<wbr>Account</a>
@@ -3010,8 +3470,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow any account.</p>
-</dd><dt class="property-optional"
+    <dd>Allow any account.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowclipfiledown_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowclipfiledown_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>File<wbr>Down</a>
@@ -3019,8 +3478,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow clip file down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file down.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowclipfileup_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowclipfileup_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>File<wbr>Up</a>
@@ -3028,8 +3486,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow clip file up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowcliptextdown_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowcliptextdown_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>Text<wbr>Down</a>
@@ -3037,8 +3494,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow clip text down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text down.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowcliptextup_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowcliptextup_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>Text<wbr>Up</a>
@@ -3046,8 +3502,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow clip text up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowdiskfiledown_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowdiskfiledown_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Disk<wbr>File<wbr>Down</a>
@@ -3055,8 +3510,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow disk file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowdiskfileup_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowdiskfileup_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Disk<wbr>File<wbr>Up</a>
@@ -3064,8 +3518,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow disk file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowdiskredirect_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowdiskredirect_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Disk<wbr>Redirect</a>
@@ -3073,8 +3526,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow disk redirect.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk redirect.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowfiledel_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowfiledel_java" style="color: inherit; text-decoration: inherit;">allow<wbr>File<wbr>Del</a>
@@ -3082,8 +3534,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow sftp file delete.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file delete.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowfiledown_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowfiledown_java" style="color: inherit; text-decoration: inherit;">allow<wbr>File<wbr>Down</a>
@@ -3091,8 +3542,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow sftp file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowfileup_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowfileup_java" style="color: inherit; text-decoration: inherit;">allow<wbr>File<wbr>Up</a>
@@ -3100,8 +3550,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow sftp up file.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp up file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowshellfiledown_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowshellfiledown_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Shell<wbr>File<wbr>Down</a>
@@ -3109,8 +3558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow shell file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowshellfileup_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowshellfileup_java" style="color: inherit; text-decoration: inherit;">allow<wbr>Shell<wbr>File<wbr>Up</a>
@@ -3118,8 +3566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow shell file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cmdtemplateidsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cmdtemplateidsets_java" style="color: inherit; text-decoration: inherit;">cmd<wbr>Template<wbr>Id<wbr>Sets</a>
@@ -3127,8 +3574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Associated high-risk command template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated high-risk command template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_departmentid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_departmentid_java" style="color: inherit; text-decoration: inherit;">department<wbr>Id</a>
@@ -3136,8 +3582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Department id.</p>
-</dd><dt class="property-optional"
+    <dd>Department id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_devicegroupidsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_devicegroupidsets_java" style="color: inherit; text-decoration: inherit;">device<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -3145,8 +3590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Associated device group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated device group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deviceidsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deviceidsets_java" style="color: inherit; text-decoration: inherit;">device<wbr>Id<wbr>Sets</a>
@@ -3154,8 +3598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Associated collection of device IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated collection of device IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxfiledownsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxfiledownsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>File<wbr>Down<wbr>Size</a>
@@ -3163,8 +3606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>File transfer download size limit (reserved parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File transfer download size limit (reserved parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxfileupsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxfileupsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>File<wbr>Up<wbr>Size</a>
@@ -3172,8 +3614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>File upload transfer size limit (artifact parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File upload transfer size limit (artifact parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3181,8 +3622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acl name.</p>
-</dd><dt class="property-optional"
+    <dd>Acl name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usergroupidsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usergroupidsets_java" style="color: inherit; text-decoration: inherit;">user<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -3190,8 +3630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Associated user group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated user group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_useridsets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_useridsets_java" style="color: inherit; text-decoration: inherit;">user<wbr>Id<wbr>Sets</a>
@@ -3199,8 +3638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Associated set of user IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated set of user IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validatefrom_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validatefrom_java" style="color: inherit; text-decoration: inherit;">validate<wbr>From</a>
@@ -3208,8 +3646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validateto_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validateto_java" style="color: inherit; text-decoration: inherit;">validate<wbr>To</a>
@@ -3217,8 +3654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd></dl>
+    <dd>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3232,8 +3668,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Associate high-risk DB template IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associate high-risk DB template IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_accountsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountsets_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Sets</a>
@@ -3241,8 +3676,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Associated accounts.</p>
-</dd><dt class="property-optional"
+    <dd>Associated accounts.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowaccesscredential_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowaccesscredential_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Access<wbr>Credential</a>
@@ -3250,8 +3684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow access credential,default allow.</p>
-</dd><dt class="property-optional"
+    <dd>Allow access credential,default allow.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowanyaccount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowanyaccount_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Any<wbr>Account</a>
@@ -3259,8 +3692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow any account.</p>
-</dd><dt class="property-optional"
+    <dd>Allow any account.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowclipfiledown_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowclipfiledown_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>File<wbr>Down</a>
@@ -3268,8 +3700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow clip file down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file down.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowclipfileup_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowclipfileup_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>File<wbr>Up</a>
@@ -3277,8 +3708,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow clip file up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowcliptextdown_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowcliptextdown_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>Text<wbr>Down</a>
@@ -3286,8 +3716,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow clip text down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text down.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowcliptextup_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowcliptextup_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>Text<wbr>Up</a>
@@ -3295,8 +3724,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow clip text up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowdiskfiledown_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowdiskfiledown_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Disk<wbr>File<wbr>Down</a>
@@ -3304,8 +3732,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow disk file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowdiskfileup_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowdiskfileup_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Disk<wbr>File<wbr>Up</a>
@@ -3313,8 +3740,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow disk file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowdiskredirect_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowdiskredirect_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Disk<wbr>Redirect</a>
@@ -3322,8 +3748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow disk redirect.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk redirect.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowfiledel_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowfiledel_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>File<wbr>Del</a>
@@ -3331,8 +3756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow sftp file delete.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file delete.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowfiledown_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowfiledown_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>File<wbr>Down</a>
@@ -3340,8 +3764,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow sftp file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowfileup_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowfileup_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>File<wbr>Up</a>
@@ -3349,8 +3772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow sftp up file.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp up file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowshellfiledown_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowshellfiledown_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Shell<wbr>File<wbr>Down</a>
@@ -3358,8 +3780,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow shell file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowshellfileup_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowshellfileup_nodejs" style="color: inherit; text-decoration: inherit;">allow<wbr>Shell<wbr>File<wbr>Up</a>
@@ -3367,8 +3788,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Allow shell file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cmdtemplateidsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cmdtemplateidsets_nodejs" style="color: inherit; text-decoration: inherit;">cmd<wbr>Template<wbr>Id<wbr>Sets</a>
@@ -3376,8 +3796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Associated high-risk command template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated high-risk command template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_departmentid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_departmentid_nodejs" style="color: inherit; text-decoration: inherit;">department<wbr>Id</a>
@@ -3385,8 +3804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Department id.</p>
-</dd><dt class="property-optional"
+    <dd>Department id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_devicegroupidsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_devicegroupidsets_nodejs" style="color: inherit; text-decoration: inherit;">device<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -3394,8 +3812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Associated device group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated device group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deviceidsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deviceidsets_nodejs" style="color: inherit; text-decoration: inherit;">device<wbr>Id<wbr>Sets</a>
@@ -3403,8 +3820,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Associated collection of device IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated collection of device IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxfiledownsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxfiledownsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>File<wbr>Down<wbr>Size</a>
@@ -3412,8 +3828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>File transfer download size limit (reserved parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File transfer download size limit (reserved parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxfileupsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxfileupsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>File<wbr>Up<wbr>Size</a>
@@ -3421,8 +3836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>File upload transfer size limit (artifact parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File upload transfer size limit (artifact parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3430,8 +3844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acl name.</p>
-</dd><dt class="property-optional"
+    <dd>Acl name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usergroupidsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usergroupidsets_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -3439,8 +3852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Associated user group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated user group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_useridsets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_useridsets_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Id<wbr>Sets</a>
@@ -3448,8 +3860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Associated set of user IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated set of user IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validatefrom_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validatefrom_nodejs" style="color: inherit; text-decoration: inherit;">validate<wbr>From</a>
@@ -3457,8 +3868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validateto_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validateto_nodejs" style="color: inherit; text-decoration: inherit;">validate<wbr>To</a>
@@ -3466,8 +3876,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd></dl>
+    <dd>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3481,8 +3890,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Associate high-risk DB template IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associate high-risk DB template IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_account_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_account_sets_python" style="color: inherit; text-decoration: inherit;">account_<wbr>sets</a>
@@ -3490,8 +3898,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Associated accounts.</p>
-</dd><dt class="property-optional"
+    <dd>Associated accounts.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allow_access_credential_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_access_credential_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>access_<wbr>credential</a>
@@ -3499,8 +3906,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow access credential,default allow.</p>
-</dd><dt class="property-optional"
+    <dd>Allow access credential,default allow.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allow_any_account_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_any_account_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>any_<wbr>account</a>
@@ -3508,8 +3914,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow any account.</p>
-</dd><dt class="property-optional"
+    <dd>Allow any account.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allow_clip_file_down_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_clip_file_down_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>clip_<wbr>file_<wbr>down</a>
@@ -3517,8 +3922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip file down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file down.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allow_clip_file_up_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_clip_file_up_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>clip_<wbr>file_<wbr>up</a>
@@ -3526,8 +3930,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip file up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allow_clip_text_down_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_clip_text_down_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>clip_<wbr>text_<wbr>down</a>
@@ -3535,8 +3938,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip text down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text down.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allow_clip_text_up_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_clip_text_up_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>clip_<wbr>text_<wbr>up</a>
@@ -3544,8 +3946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow clip text up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allow_disk_file_down_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_disk_file_down_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>disk_<wbr>file_<wbr>down</a>
@@ -3553,8 +3954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow disk file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allow_disk_file_up_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_disk_file_up_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>disk_<wbr>file_<wbr>up</a>
@@ -3562,8 +3962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow disk file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allow_disk_redirect_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_disk_redirect_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>disk_<wbr>redirect</a>
@@ -3571,8 +3970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow disk redirect.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk redirect.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allow_file_del_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_file_del_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>file_<wbr>del</a>
@@ -3580,8 +3978,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow sftp file delete.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file delete.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allow_file_down_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_file_down_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>file_<wbr>down</a>
@@ -3589,8 +3986,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow sftp file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allow_file_up_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_file_up_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>file_<wbr>up</a>
@@ -3598,8 +3994,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow sftp up file.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp up file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allow_shell_file_down_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_shell_file_down_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>shell_<wbr>file_<wbr>down</a>
@@ -3607,8 +4002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow shell file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allow_shell_file_up_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allow_shell_file_up_python" style="color: inherit; text-decoration: inherit;">allow_<wbr>shell_<wbr>file_<wbr>up</a>
@@ -3616,8 +4010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Allow shell file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cmd_template_id_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cmd_template_id_sets_python" style="color: inherit; text-decoration: inherit;">cmd_<wbr>template_<wbr>id_<wbr>sets</a>
@@ -3625,8 +4018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Associated high-risk command template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated high-risk command template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_department_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_department_id_python" style="color: inherit; text-decoration: inherit;">department_<wbr>id</a>
@@ -3634,8 +4026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Department id.</p>
-</dd><dt class="property-optional"
+    <dd>Department id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_device_group_id_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_device_group_id_sets_python" style="color: inherit; text-decoration: inherit;">device_<wbr>group_<wbr>id_<wbr>sets</a>
@@ -3643,8 +4034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Associated device group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated device group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_device_id_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_device_id_sets_python" style="color: inherit; text-decoration: inherit;">device_<wbr>id_<wbr>sets</a>
@@ -3652,8 +4042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Associated collection of device IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated collection of device IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_file_down_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_file_down_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>file_<wbr>down_<wbr>size</a>
@@ -3661,8 +4050,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File transfer download size limit (reserved parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File transfer download size limit (reserved parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_file_up_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_file_up_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>file_<wbr>up_<wbr>size</a>
@@ -3670,8 +4058,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>File upload transfer size limit (artifact parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File upload transfer size limit (artifact parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3679,8 +4066,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Acl name.</p>
-</dd><dt class="property-optional"
+    <dd>Acl name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_user_group_id_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_group_id_sets_python" style="color: inherit; text-decoration: inherit;">user_<wbr>group_<wbr>id_<wbr>sets</a>
@@ -3688,8 +4074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Associated user group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated user group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_user_id_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_id_sets_python" style="color: inherit; text-decoration: inherit;">user_<wbr>id_<wbr>sets</a>
@@ -3697,8 +4082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Associated set of user IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated set of user IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validate_from_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validate_from_python" style="color: inherit; text-decoration: inherit;">validate_<wbr>from</a>
@@ -3706,8 +4090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validate_to_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validate_to_python" style="color: inherit; text-decoration: inherit;">validate_<wbr>to</a>
@@ -3715,8 +4098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd></dl>
+    <dd>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3730,8 +4112,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Associate high-risk DB template IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associate high-risk DB template IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_accountsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accountsets_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Sets</a>
@@ -3739,8 +4120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Associated accounts.</p>
-</dd><dt class="property-optional"
+    <dd>Associated accounts.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowaccesscredential_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowaccesscredential_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Access<wbr>Credential</a>
@@ -3748,8 +4128,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow access credential,default allow.</p>
-</dd><dt class="property-optional"
+    <dd>Allow access credential,default allow.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowanyaccount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowanyaccount_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Any<wbr>Account</a>
@@ -3757,8 +4136,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow any account.</p>
-</dd><dt class="property-optional"
+    <dd>Allow any account.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowclipfiledown_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowclipfiledown_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>File<wbr>Down</a>
@@ -3766,8 +4144,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow clip file down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file down.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowclipfileup_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowclipfileup_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>File<wbr>Up</a>
@@ -3775,8 +4152,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow clip file up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip file up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowcliptextdown_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowcliptextdown_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>Text<wbr>Down</a>
@@ -3784,8 +4160,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow clip text down.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text down.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowcliptextup_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowcliptextup_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Clip<wbr>Text<wbr>Up</a>
@@ -3793,8 +4168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow clip text up.</p>
-</dd><dt class="property-optional"
+    <dd>Allow clip text up.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowdiskfiledown_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowdiskfiledown_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Disk<wbr>File<wbr>Down</a>
@@ -3802,8 +4176,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow disk file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowdiskfileup_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowdiskfileup_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Disk<wbr>File<wbr>Up</a>
@@ -3811,8 +4184,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow disk file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowdiskredirect_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowdiskredirect_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Disk<wbr>Redirect</a>
@@ -3820,8 +4192,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow disk redirect.</p>
-</dd><dt class="property-optional"
+    <dd>Allow disk redirect.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowfiledel_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowfiledel_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>File<wbr>Del</a>
@@ -3829,8 +4200,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow sftp file delete.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file delete.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowfiledown_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowfiledown_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>File<wbr>Down</a>
@@ -3838,8 +4208,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow sftp file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowfileup_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowfileup_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>File<wbr>Up</a>
@@ -3847,8 +4216,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow sftp up file.</p>
-</dd><dt class="property-optional"
+    <dd>Allow sftp up file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowshellfiledown_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowshellfiledown_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Shell<wbr>File<wbr>Down</a>
@@ -3856,8 +4224,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow shell file download.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file download.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_allowshellfileup_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_allowshellfileup_yaml" style="color: inherit; text-decoration: inherit;">allow<wbr>Shell<wbr>File<wbr>Up</a>
@@ -3865,8 +4232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Allow shell file upload.</p>
-</dd><dt class="property-optional"
+    <dd>Allow shell file upload.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cmdtemplateidsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cmdtemplateidsets_yaml" style="color: inherit; text-decoration: inherit;">cmd<wbr>Template<wbr>Id<wbr>Sets</a>
@@ -3874,8 +4240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Associated high-risk command template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated high-risk command template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_departmentid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_departmentid_yaml" style="color: inherit; text-decoration: inherit;">department<wbr>Id</a>
@@ -3883,8 +4248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Department id.</p>
-</dd><dt class="property-optional"
+    <dd>Department id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_devicegroupidsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_devicegroupidsets_yaml" style="color: inherit; text-decoration: inherit;">device<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -3892,8 +4256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Associated device group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated device group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deviceidsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deviceidsets_yaml" style="color: inherit; text-decoration: inherit;">device<wbr>Id<wbr>Sets</a>
@@ -3901,8 +4264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Associated collection of device IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated collection of device IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxfiledownsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxfiledownsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>File<wbr>Down<wbr>Size</a>
@@ -3910,8 +4272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>File transfer download size limit (reserved parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File transfer download size limit (reserved parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxfileupsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxfileupsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>File<wbr>Up<wbr>Size</a>
@@ -3919,8 +4280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>File upload transfer size limit (artifact parameter, currently unused).</p>
-</dd><dt class="property-optional"
+    <dd>File upload transfer size limit (artifact parameter, currently unused).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3928,8 +4288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acl name.</p>
-</dd><dt class="property-optional"
+    <dd>Acl name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usergroupidsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usergroupidsets_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Group<wbr>Id<wbr>Sets</a>
@@ -3937,8 +4296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Associated user group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Associated user group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_useridsets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_useridsets_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Id<wbr>Sets</a>
@@ -3946,8 +4304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Associated set of user IDs.</p>
-</dd><dt class="property-optional"
+    <dd>Associated set of user IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validatefrom_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validatefrom_yaml" style="color: inherit; text-decoration: inherit;">validate<wbr>From</a>
@@ -3955,8 +4312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd><dt class="property-optional"
+    <dd>Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_validateto_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_validateto_yaml" style="color: inherit; text-decoration: inherit;">validate<wbr>To</a>
@@ -3964,8 +4320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</p>
-</dd></dl>
+    <dd>Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -3988,6 +4343,9 @@ $ pulumi import tencentcloud:Dasb/acl:Acl example 132
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -3997,7 +4355,6 @@ $ pulumi import tencentcloud:Dasb/acl:Acl example 132
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

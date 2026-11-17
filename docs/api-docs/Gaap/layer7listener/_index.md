@@ -2,9 +2,11 @@
 ---
 title: "Layer7Listener"
 title_tag: "tencentcloud.Gaap.Layer7Listener"
-meta_desc: "Documentation for the tencentcloud.Gaap.Layer7Listener resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a layer7 listener of GAAP."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,73 +18,68 @@ Provides a resource to create a layer7 listener of GAAP.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+const foo = new tencentcloud.gaap.Proxy("foo", {
+    name: "ci-test-gaap-proxy",
     bandwidth: 10,
     concurrent: 2,
     accessRegion: "SouthChina",
     realserverRegion: "NorthChina",
 });
-const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("fooLayer7Listener", {
+const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("foo", {
     protocol: "HTTP",
+    name: "ci-test-gaap-l7-listener",
     port: 80,
-    proxyId: fooProxy.id,
+    proxyId: foo.id,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+foo = tencentcloud.gaap.Proxy("foo",
+    name="ci-test-gaap-proxy",
     bandwidth=10,
     concurrent=2,
     access_region="SouthChina",
     realserver_region="NorthChina")
-foo_layer7_listener = tencentcloud.gaap.Layer7Listener("fooLayer7Listener",
+foo_layer7_listener = tencentcloud.gaap.Layer7Listener("foo",
     protocol="HTTP",
+    name="ci-test-gaap-l7-listener",
     port=80,
-    proxy_id=foo_proxy.id)
+    proxy_id=foo.id)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
-    {
-        Bandwidth = 10,
-        Concurrent = 2,
-        AccessRegion = "SouthChina",
-        RealserverRegion = "NorthChina",
-    });
-
-    var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new()
-    {
-        Protocol = "HTTP",
-        Port = 80,
-        ProxyId = fooProxy.Id,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+		foo, err := gaap.NewProxy(ctx, "foo", &gaap.ProxyArgs{
+			Name:             pulumi.String("ci-test-gaap-proxy"),
 			Bandwidth:        pulumi.Int(10),
 			Concurrent:       pulumi.Int(2),
 			AccessRegion:     pulumi.String("SouthChina"),
@@ -91,10 +88,11 @@ func main() {
 		if err != nil {
 			return err
 		}
-		_, err = Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
+		_, err = gaap.NewLayer7Listener(ctx, "foo", &gaap.Layer7ListenerArgs{
 			Protocol: pulumi.String("HTTP"),
+			Name:     pulumi.String("ci-test-gaap-l7-listener"),
 			Port:     pulumi.Int(80),
-			ProxyId:  fooProxy.ID(),
+			ProxyId:  foo.ID().ToIDOutput().ToStringOutput(),
 		})
 		if err != nil {
 			return err
@@ -103,6 +101,43 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = new Tencentcloud.Gaap.Proxy("foo", new()
+    {
+        Name = "ci-test-gaap-proxy",
+        Bandwidth = 10,
+        Concurrent = 2,
+        AccessRegion = "SouthChina",
+        RealserverRegion = "NorthChina",
+    });
+
+    var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("foo", new()
+    {
+        Protocol = "HTTP",
+        Name = "ci-test-gaap-l7-listener",
+        Port = 80,
+        ProxyId = foo.Id,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -113,8 +148,8 @@ import com.pulumi.tencentcloud.Gaap.Proxy;
 import com.pulumi.tencentcloud.Gaap.ProxyArgs;
 import com.pulumi.tencentcloud.Gaap.Layer7Listener;
 import com.pulumi.tencentcloud.Gaap.Layer7ListenerArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -126,105 +161,186 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var fooProxy = new Proxy("fooProxy", ProxyArgs.builder()        
+        var foo = new Proxy("foo", ProxyArgs.builder()
+            .name("ci-test-gaap-proxy")
             .bandwidth(10)
             .concurrent(2)
             .accessRegion("SouthChina")
             .realserverRegion("NorthChina")
             .build());
 
-        var fooLayer7Listener = new Layer7Listener("fooLayer7Listener", Layer7ListenerArgs.builder()        
+        var fooLayer7Listener = new Layer7Listener("fooLayer7Listener", Layer7ListenerArgs.builder()
             .protocol("HTTP")
+            .name("ci-test-gaap-l7-listener")
             .port(80)
-            .proxyId(fooProxy.id())
+            .proxyId(foo.id())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  fooProxy:
+  foo:
     type: tencentcloud:Gaap:Proxy
     properties:
+      name: ci-test-gaap-proxy
       bandwidth: 10
       concurrent: 2
       accessRegion: SouthChina
       realserverRegion: NorthChina
   fooLayer7Listener:
     type: tencentcloud:Gaap:Layer7Listener
+    name: foo
     properties:
       protocol: HTTP
+      name: ci-test-gaap-l7-listener
       port: 80
-      proxyId: ${fooProxy.id}
+      proxyId: ${foo.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_gaap_proxy" "foo" {
+  name              = "ci-test-gaap-proxy"
+  bandwidth         = 10
+  concurrent        = 2
+  access_region     = "SouthChina"
+  realserver_region = "NorthChina"
+}
+resource "tencentcloud_gaap_layer7listener" "foo" {
+  protocol = "HTTP"
+  name     = "ci-test-gaap-l7-listener"
+  port     = 80
+  proxy_id = tencentcloud_gaap_proxy.foo.id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateHTTPListener](https://www.tencentcloud.com/document/api/608/33076)
+  - [CreateHTTPSListener](https://www.tencentcloud.com/document/api/608/33075)
+  - [DescribeProxyDetail](https://www.tencentcloud.com/document/api/608/33098)
+  - [DescribeProxyGroupDetails](https://www.tencentcloud.com/document/api/608/33082)
+  - [SetTlsVersion](https://www.tencentcloud.com/search/?wd=SetTlsVersion&type=document&lang=en)
+* Read:
+  - [DescribeHTTPListeners](https://www.tencentcloud.com/document/api/608/33071)
+  - [DescribeHTTPSListeners](https://www.tencentcloud.com/document/api/608/33070)
+* Update:
+  - [DescribeProxyDetail](https://www.tencentcloud.com/document/api/608/33098)
+  - [DescribeProxyGroupDetails](https://www.tencentcloud.com/document/api/608/33082)
+  - [ModifyHTTPListenerAttribute](https://www.tencentcloud.com/document/api/608/33066)
+  - [ModifyHTTPSListenerAttribute](https://www.tencentcloud.com/document/api/608/33065)
+  - [SetTlsVersion](https://www.tencentcloud.com/search/?wd=SetTlsVersion&type=document&lang=en)
+* Delete:
+  - [DeleteListeners](https://www.tencentcloud.com/document/api/608/33072)
+  - [DescribeHTTPListeners](https://www.tencentcloud.com/document/api/608/33071)
+  - [DescribeHTTPSListeners](https://www.tencentcloud.com/document/api/608/33070)
 
 
 ## Create Layer7Listener Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Layer7Listener</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Layer7ListenerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Layer7Listener</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Layer7ListenerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Layer7Listener</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                   <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Layer7ListenerArgs</a></span><span class="p">,</span>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Layer7Listener</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                   <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                   <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">auth_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                    <span class="nx">certificate_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">client_certificate_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">client_certificate_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                    <span class="nx">forward_protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                   <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">proxy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Layer7Listener</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                   <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Layer7ListenerArgs</a></span><span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                   <span class="nx">proxy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">tls_ciphers</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">tls_support_versions</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewLayer7Listener</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">Layer7ListenerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Layer7Listener</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewLayer7Listener</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">Layer7ListenerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Layer7Listener</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Layer7Listener</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">Layer7ListenerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Layer7Listener</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">Layer7ListenerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Layer7Listener</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">Layer7ListenerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Layer7Listener</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">Layer7ListenerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Gaap:Layer7Listener</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Gaap:Layer7Listener</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_gaap_layer7_listener&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -245,7 +361,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -362,11 +478,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Layer7Listener Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Layer7Listener resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -382,8 +506,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer7 listener.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Port of the layer7 listener.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -391,17 +514,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-required property-replacement"
-            title="Required">
-        <span id="proxyid_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="authtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authtype_csharp" style="color: inherit; text-decoration: inherit;">Auth<wbr>Type</a>
@@ -409,8 +522,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Id</a>
@@ -418,8 +530,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="clientcertificateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateid_csharp" style="color: inherit; text-decoration: inherit;">Client<wbr>Certificate<wbr>Id</a>
@@ -427,9 +538,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead. ID of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead. ID of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="clientcertificateids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateids_csharp" style="color: inherit; text-decoration: inherit;">Client<wbr>Certificate<wbr>Ids</a>
@@ -437,8 +546,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID list of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID list of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="forwardprotocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Protocol</a>
@@ -446,8 +554,15 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="groupid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -455,8 +570,31 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer7 listener, the maximum length is 30.</p>
-</dd></dl>
+    <dd>Name of the layer7 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="proxyid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tlsciphers_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlsciphers_csharp" style="color: inherit; text-decoration: inherit;">Tls<wbr>Ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tlssupportversions_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlssupportversions_csharp" style="color: inherit; text-decoration: inherit;">Tls<wbr>Support<wbr>Versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -470,8 +608,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer7 listener.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Port of the layer7 listener.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -479,17 +616,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-required property-replacement"
-            title="Required">
-        <span id="proxyid_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="authtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authtype_go" style="color: inherit; text-decoration: inherit;">Auth<wbr>Type</a>
@@ -497,8 +624,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Id</a>
@@ -506,8 +632,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="clientcertificateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateid_go" style="color: inherit; text-decoration: inherit;">Client<wbr>Certificate<wbr>Id</a>
@@ -515,9 +640,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead. ID of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead. ID of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="clientcertificateids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateids_go" style="color: inherit; text-decoration: inherit;">Client<wbr>Certificate<wbr>Ids</a>
@@ -525,8 +648,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID list of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID list of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="forwardprotocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Protocol</a>
@@ -534,8 +656,15 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="groupid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -543,8 +672,133 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer7 listener, the maximum length is 30.</p>
-</dd></dl>
+    <dd>Name of the layer7 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="proxyid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tlsciphers_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlsciphers_go" style="color: inherit; text-decoration: inherit;">Tls<wbr>Ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tlssupportversions_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlssupportversions_go" style="color: inherit; text-decoration: inherit;">Tls<wbr>Support<wbr>Versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of the layer7 listener.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="auth_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auth_type_hcl" style="color: inherit; text-decoration: inherit;">auth_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_id_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="client_certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_certificate_id_hcl" style="color: inherit; text-decoration: inherit;">client_<wbr>certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead. ID of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="client_certificate_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_certificate_ids_hcl" style="color: inherit; text-decoration: inherit;">client_<wbr>certificate_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID list of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="forward_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_protocol_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the layer7 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="proxy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tls_ciphers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tls_ciphers_hcl" style="color: inherit; text-decoration: inherit;">tls_<wbr>ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tls_support_versions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tls_support_versions_hcl" style="color: inherit; text-decoration: inherit;">tls_<wbr>support_<wbr>versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -558,8 +812,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of the layer7 listener.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Port of the layer7 listener.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -567,17 +820,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-required property-replacement"
-            title="Required">
-        <span id="proxyid_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="authtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authtype_java" style="color: inherit; text-decoration: inherit;">auth<wbr>Type</a>
@@ -585,8 +828,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -594,8 +836,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="clientcertificateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateid_java" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Id</a>
@@ -603,9 +844,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead. ID of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead. ID of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="clientcertificateids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateids_java" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Ids</a>
@@ -613,8 +852,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID list of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="forwardprotocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Protocol</a>
@@ -622,8 +860,15 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="groupid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -631,8 +876,31 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the layer7 listener, the maximum length is 30.</p>
-</dd></dl>
+    <dd>Name of the layer7 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="proxyid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tlsciphers_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlsciphers_java" style="color: inherit; text-decoration: inherit;">tls<wbr>Ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tlssupportversions_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlssupportversions_java" style="color: inherit; text-decoration: inherit;">tls<wbr>Support<wbr>Versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -646,8 +914,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of the layer7 listener.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Port of the layer7 listener.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -655,17 +922,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-required property-replacement"
-            title="Required">
-        <span id="proxyid_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="authtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authtype_nodejs" style="color: inherit; text-decoration: inherit;">auth<wbr>Type</a>
@@ -673,8 +930,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -682,8 +938,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="clientcertificateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateid_nodejs" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Id</a>
@@ -691,9 +946,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead. ID of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead. ID of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="clientcertificateids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateids_nodejs" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Ids</a>
@@ -701,8 +954,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID list of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID list of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="forwardprotocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Protocol</a>
@@ -710,8 +962,15 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="groupid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -719,8 +978,31 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer7 listener, the maximum length is 30.</p>
-</dd></dl>
+    <dd>Name of the layer7 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="proxyid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tlsciphers_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlsciphers_nodejs" style="color: inherit; text-decoration: inherit;">tls<wbr>Ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tlssupportversions_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlssupportversions_nodejs" style="color: inherit; text-decoration: inherit;">tls<wbr>Support<wbr>Versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -734,8 +1016,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer7 listener.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Port of the layer7 listener.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -743,17 +1024,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-required property-replacement"
-            title="Required">
-        <span id="proxy_id_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">str</span>
-    </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="auth_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auth_type_python" style="color: inherit; text-decoration: inherit;">auth_<wbr>type</a>
@@ -761,8 +1032,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificate_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_id_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
@@ -770,8 +1040,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="client_certificate_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_certificate_id_python" style="color: inherit; text-decoration: inherit;">client_<wbr>certificate_<wbr>id</a>
@@ -779,9 +1048,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead. ID of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead. ID of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="client_certificate_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_certificate_ids_python" style="color: inherit; text-decoration: inherit;">client_<wbr>certificate_<wbr>ids</a>
@@ -789,8 +1056,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID list of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID list of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="forward_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_protocol_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>protocol</a>
@@ -798,8 +1064,15 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="group_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -807,8 +1080,31 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the layer7 listener, the maximum length is 30.</p>
-</dd></dl>
+    <dd>Name of the layer7 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="proxy_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tls_ciphers_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tls_ciphers_python" style="color: inherit; text-decoration: inherit;">tls_<wbr>ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tls_support_versions_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tls_support_versions_python" style="color: inherit; text-decoration: inherit;">tls_<wbr>support_<wbr>versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -822,8 +1118,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of the layer7 listener.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Port of the layer7 listener.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -831,17 +1126,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-required property-replacement"
-            title="Required">
-        <span id="proxyid_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="authtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authtype_yaml" style="color: inherit; text-decoration: inherit;">auth<wbr>Type</a>
@@ -849,8 +1134,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -858,8 +1142,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="clientcertificateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateid_yaml" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Id</a>
@@ -867,9 +1150,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead. ID of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead. ID of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="clientcertificateids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateids_yaml" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Ids</a>
@@ -877,8 +1158,7 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID list of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="forwardprotocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Protocol</a>
@@ -886,8 +1166,15 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="groupid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -895,8 +1182,31 @@ The Layer7Listener resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the layer7 listener, the maximum length is 30.</p>
-</dd></dl>
+    <dd>Name of the layer7 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="proxyid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tlsciphers_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlsciphers_yaml" style="color: inherit; text-decoration: inherit;">tls<wbr>Ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tlssupportversions_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlssupportversions_yaml" style="color: inherit; text-decoration: inherit;">tls<wbr>Support<wbr>Versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -917,8 +1227,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -926,8 +1235,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -935,8 +1243,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the layer7 listener.</p>
-</dd></dl>
+    <dd>Status of the layer7 listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -950,8 +1257,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -959,8 +1265,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -968,8 +1273,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the layer7 listener.</p>
-</dd></dl>
+    <dd>Status of the layer7 listener.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Status of the layer7 listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -983,8 +1317,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -992,8 +1325,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1001,8 +1333,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Status of the layer7 listener.</p>
-</dd></dl>
+    <dd>Status of the layer7 listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1016,8 +1347,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1025,8 +1355,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1034,8 +1363,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Status of the layer7 listener.</p>
-</dd></dl>
+    <dd>Status of the layer7 listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1049,8 +1377,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1058,8 +1385,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1067,8 +1393,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the layer7 listener.</p>
-</dd></dl>
+    <dd>Status of the layer7 listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1082,8 +1407,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1091,8 +1415,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1100,8 +1423,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Status of the layer7 listener.</p>
-</dd></dl>
+    <dd>Status of the layer7 listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1111,18 +1433,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Layer7Listener resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">Layer7ListenerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Layer7Listener</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">Layer7ListenerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Layer7Listener</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1132,109 +1454,151 @@ Get an existing Layer7Listener resource's state with the given name, ID, and opt
         <span class="nx">client_certificate_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">forward_protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">proxy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> Layer7Listener</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">tls_ciphers</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">tls_support_versions</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">) -&gt;</span> Layer7Listener</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetLayer7Listener<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">Layer7ListenerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Layer7Listener</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetLayer7Listener<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">Layer7ListenerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Layer7Listener</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Layer7Listener</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">Layer7ListenerState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Layer7Listener</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">Layer7ListenerState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Layer7Listener</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">Layer7ListenerState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Layer7Listener</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">Layer7ListenerState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingLayer7Listener</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Gaap:Layer7Listener</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_gaap_layer7_listener</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Layer7ListenerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Layer7ListenerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1242,28 +1606,31 @@ Get an existing Layer7Listener resource's state with the given name, ID, and opt
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Layer7ListenerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1271,28 +1638,31 @@ Get an existing Layer7Listener resource's state with the given name, ID, and opt
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Layer7ListenerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1312,8 +1682,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateid_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Id</a>
@@ -1321,8 +1690,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_clientcertificateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientcertificateid_csharp" style="color: inherit; text-decoration: inherit;">Client<wbr>Certificate<wbr>Id</a>
@@ -1330,9 +1698,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead. ID of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead. ID of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_clientcertificateids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientcertificateids_csharp" style="color: inherit; text-decoration: inherit;">Client<wbr>Certificate<wbr>Ids</a>
@@ -1340,8 +1706,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID list of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1349,8 +1714,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_forwardprotocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardprotocol_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Protocol</a>
@@ -1358,8 +1722,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_groupid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupid_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1367,8 +1738,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer7 listener, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the layer7 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1376,8 +1746,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1385,8 +1754,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_proxyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -1394,8 +1762,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1403,8 +1770,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the layer7 listener.</p>
-</dd></dl>
+    <dd>Status of the layer7 listener.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tlsciphers_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tlsciphers_csharp" style="color: inherit; text-decoration: inherit;">Tls<wbr>Ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tlssupportversions_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tlssupportversions_csharp" style="color: inherit; text-decoration: inherit;">Tls<wbr>Support<wbr>Versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1418,8 +1800,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateid_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Id</a>
@@ -1427,8 +1808,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_clientcertificateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientcertificateid_go" style="color: inherit; text-decoration: inherit;">Client<wbr>Certificate<wbr>Id</a>
@@ -1436,9 +1816,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead. ID of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead. ID of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_clientcertificateids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientcertificateids_go" style="color: inherit; text-decoration: inherit;">Client<wbr>Certificate<wbr>Ids</a>
@@ -1446,8 +1824,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID list of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1455,8 +1832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_forwardprotocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardprotocol_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Protocol</a>
@@ -1464,8 +1840,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_groupid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupid_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1473,8 +1856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer7 listener, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the layer7 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1482,8 +1864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1491,8 +1872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_proxyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -1500,8 +1880,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1509,8 +1888,141 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the layer7 listener.</p>
-</dd></dl>
+    <dd>Status of the layer7 listener.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tlsciphers_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tlsciphers_go" style="color: inherit; text-decoration: inherit;">Tls<wbr>Ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tlssupportversions_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tlssupportversions_go" style="color: inherit; text-decoration: inherit;">Tls<wbr>Support<wbr>Versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_auth_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auth_type_hcl" style="color: inherit; text-decoration: inherit;">auth_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificate_id_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="state_client_certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_client_certificate_id_hcl" style="color: inherit; text-decoration: inherit;">client_<wbr>certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead. ID of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_client_certificate_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_client_certificate_ids_hcl" style="color: inherit; text-decoration: inherit;">client_<wbr>certificate_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID list of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_forward_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forward_protocol_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the layer7 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of the layer7 listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_proxy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Status of the layer7 listener.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tls_ciphers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tls_ciphers_hcl" style="color: inherit; text-decoration: inherit;">tls_<wbr>ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tls_support_versions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tls_support_versions_hcl" style="color: inherit; text-decoration: inherit;">tls_<wbr>support_<wbr>versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1524,8 +2036,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateid_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -1533,8 +2044,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_clientcertificateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientcertificateid_java" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Id</a>
@@ -1542,9 +2052,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead. ID of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead. ID of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_clientcertificateids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientcertificateids_java" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Ids</a>
@@ -1552,8 +2060,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1561,8 +2068,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_forwardprotocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardprotocol_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Protocol</a>
@@ -1570,8 +2076,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_groupid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupid_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1579,8 +2092,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the layer7 listener, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the layer7 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1588,8 +2100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1597,8 +2108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_proxyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1606,8 +2116,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1615,8 +2124,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Status of the layer7 listener.</p>
-</dd></dl>
+    <dd>Status of the layer7 listener.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tlsciphers_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tlsciphers_java" style="color: inherit; text-decoration: inherit;">tls<wbr>Ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tlssupportversions_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tlssupportversions_java" style="color: inherit; text-decoration: inherit;">tls<wbr>Support<wbr>Versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1630,8 +2154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateid_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -1639,8 +2162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_clientcertificateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientcertificateid_nodejs" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Id</a>
@@ -1648,9 +2170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead. ID of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead. ID of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_clientcertificateids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientcertificateids_nodejs" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Ids</a>
@@ -1658,8 +2178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID list of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1667,8 +2186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_forwardprotocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardprotocol_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Protocol</a>
@@ -1676,8 +2194,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_groupid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupid_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1685,8 +2210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer7 listener, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the layer7 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1694,8 +2218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1703,8 +2226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_proxyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1712,8 +2234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1721,8 +2242,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Status of the layer7 listener.</p>
-</dd></dl>
+    <dd>Status of the layer7 listener.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tlsciphers_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tlsciphers_nodejs" style="color: inherit; text-decoration: inherit;">tls<wbr>Ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tlssupportversions_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tlssupportversions_nodejs" style="color: inherit; text-decoration: inherit;">tls<wbr>Support<wbr>Versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1736,8 +2272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificate_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificate_id_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
@@ -1745,8 +2280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_client_certificate_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_client_certificate_id_python" style="color: inherit; text-decoration: inherit;">client_<wbr>certificate_<wbr>id</a>
@@ -1754,9 +2288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead. ID of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead. ID of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_client_certificate_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_client_certificate_ids_python" style="color: inherit; text-decoration: inherit;">client_<wbr>certificate_<wbr>ids</a>
@@ -1764,8 +2296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID list of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1773,8 +2304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_forward_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forward_protocol_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>protocol</a>
@@ -1782,8 +2312,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_group_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_group_id_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1791,8 +2328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the layer7 listener, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the layer7 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1800,8 +2336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1809,8 +2344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_proxy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
@@ -1818,8 +2352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1827,8 +2360,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the layer7 listener.</p>
-</dd></dl>
+    <dd>Status of the layer7 listener.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tls_ciphers_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tls_ciphers_python" style="color: inherit; text-decoration: inherit;">tls_<wbr>ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tls_support_versions_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tls_support_versions_python" style="color: inherit; text-decoration: inherit;">tls_<wbr>support_<wbr>versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1842,8 +2390,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateid_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -1851,8 +2398,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Certificate ID of the layer7 listener. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_clientcertificateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientcertificateid_yaml" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Id</a>
@@ -1860,9 +2406,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead. ID of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Set <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead. ID of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Set <code>clientCertificateIds</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_clientcertificateids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clientcertificateids_yaml" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Ids</a>
@@ -1870,8 +2414,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of the client certificate. Set only when <code>auth_type</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of the client certificate. Set only when <code>authType</code> is specified as mutual authentication. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1879,8 +2422,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_forwardprotocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardprotocol_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Protocol</a>
@@ -1888,8 +2430,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol type of the forwarding. Valid value: <code>HTTP</code> and <code>HTTPS</code>. NOTES: Only supports listeners of <code>HTTPS</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_groupid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupid_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1897,8 +2446,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the layer7 listener, the maximum length is 30.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the layer7 listener, the maximum length is 30.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1906,8 +2454,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1915,8 +2462,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the layer7 listener. Valid value: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_proxyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1924,8 +2470,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1933,8 +2478,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Status of the layer7 listener.</p>
-</dd></dl>
+    <dd>Status of the layer7 listener.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tlsciphers_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tlsciphers_yaml" style="color: inherit; text-decoration: inherit;">tls<wbr>Ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tlssupportversions_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tlssupportversions_yaml" style="color: inherit; text-decoration: inherit;">tls<wbr>Support<wbr>Versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1952,9 +2512,12 @@ The following state arguments are supported:
 GAAP layer7 listener can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener tencentcloud_gaap_layer7_listener.foo listener-11112222
+  $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener foo listener-11112222
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1966,7 +2529,6 @@ $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener tencentcloud_gaa
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

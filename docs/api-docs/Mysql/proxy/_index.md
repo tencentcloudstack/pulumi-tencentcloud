@@ -2,9 +2,11 @@
 ---
 title: "Proxy"
 title_tag: "tencentcloud.Mysql.Proxy"
-meta_desc: "Documentation for the tencentcloud.Mysql.Proxy resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a mysql proxy"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,24 +18,35 @@ Provides a resource to create a mysql proxy
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zones = tencentcloud.Availability.getZonesByProduct({
+const zones = tencentcloud.availability.getZonesByProduct({
     product: "cdb",
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-mysql",
+    cidrBlock: "10.0.0.0/16",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
+    name: "subnet-mysql",
     vpcId: vpc.id,
     cidrBlock: "10.0.0.0/16",
     isMulticast: false,
 });
-const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "mysql test"});
-const exampleInstance = new tencentcloud.mysql.Instance("exampleInstance", {
+const securityGroup = new tencentcloud.security.Group("security_group", {
+    name: "sg-mysql",
+    description: "mysql test",
+});
+const example = new tencentcloud.mysql.Instance("example", {
     internetService: 1,
     engineVersion: "5.7",
     chargeType: "POSTPAID",
@@ -57,8 +70,8 @@ const exampleInstance = new tencentcloud.mysql.Instance("exampleInstance", {
         max_connections: "1000",
     },
 });
-const exampleProxy = new tencentcloud.mysql.Proxy("exampleProxy", {
-    instanceId: exampleInstance.id,
+const exampleProxy = new tencentcloud.mysql.Proxy("example", {
+    instanceId: example.id,
     uniqVpcId: vpc.id,
     uniqSubnetId: subnet.id,
     proxyNodeCustoms: [{
@@ -75,20 +88,30 @@ const exampleProxy = new tencentcloud.mysql.Proxy("exampleProxy", {
     vport: 3306,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+zones = tencentcloud.availability.get_zones_by_product(product="cdb")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-mysql",
+    cidr_block="10.0.0.0/16")
 subnet = tencentcloud.subnet.Instance("subnet",
     availability_zone=zones.zones[0].name,
+    name="subnet-mysql",
     vpc_id=vpc.id,
     cidr_block="10.0.0.0/16",
     is_multicast=False)
-security_group = tencentcloud.security.Group("securityGroup", description="mysql test")
-example_instance = tencentcloud.mysql.Instance("exampleInstance",
+security_group = tencentcloud.security.Group("security_group",
+    name="sg-mysql",
+    description="mysql test")
+example = tencentcloud.mysql.Instance("example",
     internet_service=1,
     engine_version="5.7",
     charge_type="POSTPAID",
@@ -111,28 +134,138 @@ example_instance = tencentcloud.mysql.Instance("exampleInstance",
         "character_set_server": "utf8",
         "max_connections": "1000",
     })
-example_proxy = tencentcloud.mysql.Proxy("exampleProxy",
-    instance_id=example_instance.id,
+example_proxy = tencentcloud.mysql.Proxy("example",
+    instance_id=example.id,
     uniq_vpc_id=vpc.id,
     uniq_subnet_id=subnet.id,
-    proxy_node_customs=[tencentcloud.mysql.ProxyProxyNodeCustomArgs(
-        node_count=1,
-        cpu=2,
-        mem=4000,
-        region="ap-guangzhou",
-        zone="ap-guangzhou-3",
-    )],
+    proxy_node_customs=[{
+        "node_count": 1,
+        "cpu": 2,
+        "mem": 4000,
+        "region": "ap-guangzhou",
+        "zone": "ap-guangzhou-3",
+    }],
     security_groups=[security_group.id],
     desc="desc.",
     connection_pool_limit=2,
     vip="10.0.0.120",
     vport=3306)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mysql"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "cdb",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-mysql"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+			Name:             pulumi.String("subnet-mysql"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			CidrBlock:        pulumi.String("10.0.0.0/16"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		securityGroup, err := security.NewGroup(ctx, "security_group", &security.GroupArgs{
+			Name:        pulumi.String("sg-mysql"),
+			Description: pulumi.String("mysql test"),
+		})
+		if err != nil {
+			return err
+		}
+		example, err := mysql.NewInstance(ctx, "example", &mysql.InstanceArgs{
+			InternetService:  pulumi.Int(1),
+			EngineVersion:    pulumi.String("5.7"),
+			ChargeType:       pulumi.String("POSTPAID"),
+			RootPassword:     pulumi.String("PassWord123"),
+			SlaveDeployMode:  pulumi.Int(1),
+			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+			FirstSlaveZone:   pulumi.String(zones.Zones[1].Name),
+			SlaveSyncMode:    pulumi.Int(1),
+			InstanceName:     pulumi.String("tf-example-mysql"),
+			MemSize:          pulumi.Int(4000),
+			VolumeSize:       pulumi.Int(200),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+			IntranetPort:     pulumi.Int(3306),
+			SecurityGroups: pulumi.StringArray{
+				securityGroup.ID().ToIDOutput().ToStringOutput(),
+			},
+			Tags: pulumi.StringMap{
+				"name": pulumi.String("test"),
+			},
+			Parameters: pulumi.StringMap{
+				"character_set_server": pulumi.String("utf8"),
+				"max_connections":      pulumi.String("1000"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = mysql.NewProxy(ctx, "example", &mysql.ProxyArgs{
+			InstanceId:   example.ID().ToIDOutput().ToStringOutput(),
+			UniqVpcId:    vpc2.ID().ToIDOutput().ToStringOutput(),
+			UniqSubnetId: subnet2.ID().ToIDOutput().ToStringOutput(),
+			ProxyNodeCustoms: mysql.ProxyProxyNodeCustomArray{
+				&mysql.ProxyProxyNodeCustomArgs{
+					NodeCount: pulumi.Int(1),
+					Cpu:       pulumi.Int(2),
+					Mem:       pulumi.Int(4000),
+					Region:    pulumi.String("ap-guangzhou"),
+					Zone:      pulumi.String("ap-guangzhou-3"),
+				},
+			},
+			SecurityGroups: pulumi.StringArray{
+				securityGroup.ID().ToIDOutput().ToStringOutput(),
+			},
+			Desc:                pulumi.String("desc."),
+			ConnectionPoolLimit: pulumi.Int(2),
+			Vip:                 pulumi.String("10.0.0.120"),
+			Vport:               pulumi.Int(3306),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -144,23 +277,26 @@ return await Deployment.RunAsync(() =>
 
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc-mysql",
         CidrBlock = "10.0.0.0/16",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
+        Name = "subnet-mysql",
         VpcId = vpc.Id,
         CidrBlock = "10.0.0.0/16",
         IsMulticast = false,
     });
 
-    var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    var securityGroup = new Tencentcloud.Security.Group("security_group", new()
     {
+        Name = "sg-mysql",
         Description = "mysql test",
     });
 
-    var exampleInstance = new Tencentcloud.Mysql.Instance("exampleInstance", new()
+    var example = new Tencentcloud.Mysql.Instance("example", new()
     {
         InternetService = 1,
         EngineVersion = "5.7",
@@ -191,9 +327,9 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleProxy = new Tencentcloud.Mysql.Proxy("exampleProxy", new()
+    var exampleProxy = new Tencentcloud.Mysql.Proxy("example", new()
     {
-        InstanceId = exampleInstance.Id,
+        InstanceId = example.Id,
         UniqVpcId = vpc.Id,
         UniqSubnetId = subnet.Id,
         ProxyNodeCustoms = new[]
@@ -219,104 +355,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-			Product: "cdb",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-			VpcId:            vpc.ID(),
-			CidrBlock:        pulumi.String("10.0.0.0/16"),
-			IsMulticast:      pulumi.Bool(false),
-		})
-		if err != nil {
-			return err
-		}
-		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-			Description: pulumi.String("mysql test"),
-		})
-		if err != nil {
-			return err
-		}
-		exampleInstance, err := Mysql.NewInstance(ctx, "exampleInstance", &Mysql.InstanceArgs{
-			InternetService:  pulumi.Int(1),
-			EngineVersion:    pulumi.String("5.7"),
-			ChargeType:       pulumi.String("POSTPAID"),
-			RootPassword:     pulumi.String("PassWord123"),
-			SlaveDeployMode:  pulumi.Int(1),
-			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-			FirstSlaveZone:   pulumi.String(zones.Zones[1].Name),
-			SlaveSyncMode:    pulumi.Int(1),
-			InstanceName:     pulumi.String("tf-example-mysql"),
-			MemSize:          pulumi.Int(4000),
-			VolumeSize:       pulumi.Int(200),
-			VpcId:            vpc.ID(),
-			SubnetId:         subnet.ID(),
-			IntranetPort:     pulumi.Int(3306),
-			SecurityGroups: pulumi.StringArray{
-				securityGroup.ID(),
-			},
-			Tags: pulumi.Map{
-				"name": pulumi.Any("test"),
-			},
-			Parameters: pulumi.Map{
-				"character_set_server": pulumi.Any("utf8"),
-				"max_connections":      pulumi.Any("1000"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Mysql.NewProxy(ctx, "exampleProxy", &Mysql.ProxyArgs{
-			InstanceId:   exampleInstance.ID(),
-			UniqVpcId:    vpc.ID(),
-			UniqSubnetId: subnet.ID(),
-			ProxyNodeCustoms: mysql.ProxyProxyNodeCustomArray{
-				&mysql.ProxyProxyNodeCustomArgs{
-					NodeCount: pulumi.Int(1),
-					Cpu:       pulumi.Int(2),
-					Mem:       pulumi.Int(4000),
-					Region:    pulumi.String("ap-guangzhou"),
-					Zone:      pulumi.String("ap-guangzhou-3"),
-				},
-			},
-			SecurityGroups: pulumi.StringArray{
-				securityGroup.ID(),
-			},
-			Desc:                pulumi.String("desc."),
-			ConnectionPoolLimit: pulumi.Int(2),
-			Vip:                 pulumi.String("10.0.0.120"),
-			Vport:               pulumi.Int(3306),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -325,19 +368,13 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
 import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
 import com.pulumi.tencentcloud.Security.Group;
 import com.pulumi.tencentcloud.Security.GroupArgs;
-import com.pulumi.tencentcloud.Mysql.Instance;
-import com.pulumi.tencentcloud.Mysql.InstanceArgs;
 import com.pulumi.tencentcloud.Mysql.Proxy;
 import com.pulumi.tencentcloud.Mysql.ProxyArgs;
 import com.pulumi.tencentcloud.Mysql.inputs.ProxyProxyNodeCustomArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -353,29 +390,32 @@ public class App {
             .product("cdb")
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc-mysql")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .availabilityZone(zones.zones()[0].name())
+            .name("subnet-mysql")
             .vpcId(vpc.id())
             .cidrBlock("10.0.0.0/16")
             .isMulticast(false)
             .build());
 
-        var securityGroup = new Group("securityGroup", GroupArgs.builder()        
+        var securityGroup = new Group("securityGroup", GroupArgs.builder()
+            .name("sg-mysql")
             .description("mysql test")
             .build());
 
-        var exampleInstance = new Instance("exampleInstance", InstanceArgs.builder()        
+        var example = new com.pulumi.tencentcloud.Mysql.Instance("example", com.pulumi.tencentcloud.Mysql.InstanceArgs.builder()
             .internetService(1)
             .engineVersion("5.7")
             .chargeType("POSTPAID")
             .rootPassword("PassWord123")
             .slaveDeployMode(1)
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
-            .firstSlaveZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[1].name()))
+            .availabilityZone(zones.zones()[0].name())
+            .firstSlaveZone(zones.zones()[1].name())
             .slaveSyncMode(1)
             .instanceName("tf-example-mysql")
             .memSize(4000)
@@ -391,8 +431,8 @@ public class App {
             ))
             .build());
 
-        var exampleProxy = new Proxy("exampleProxy", ProxyArgs.builder()        
-            .instanceId(exampleInstance.id())
+        var exampleProxy = new Proxy("exampleProxy", ProxyArgs.builder()
+            .instanceId(example.id())
             .uniqVpcId(vpc.id())
             .uniqSubnetId(subnet.id())
             .proxyNodeCustoms(ProxyProxyNodeCustomArgs.builder()
@@ -412,24 +452,33 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-mysql
       cidrBlock: 10.0.0.0/16
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       availabilityZone: ${zones.zones[0].name}
+      name: subnet-mysql
       vpcId: ${vpc.id}
       cidrBlock: 10.0.0.0/16
       isMulticast: false
   securityGroup:
     type: tencentcloud:Security:Group
+    name: security_group
     properties:
+      name: sg-mysql
       description: mysql test
-  exampleInstance:
+  example:
     type: tencentcloud:Mysql:Instance
     properties:
       internetService: 1
@@ -455,8 +504,9 @@ resources:
         max_connections: '1000'
   exampleProxy:
     type: tencentcloud:Mysql:Proxy
+    name: example
     properties:
-      instanceId: ${exampleInstance.id}
+      instanceId: ${example.id}
       uniqVpcId: ${vpc.id}
       uniqSubnetId: ${subnet.id}
       proxyNodeCustoms:
@@ -474,80 +524,195 @@ resources:
 variables:
   zones:
     fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
         product: cdb
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "zones" {
+  product = "cdb"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-mysql"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[0].name
+  name              = "subnet-mysql"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.0.0/16"
+  is_multicast      = false
+}
+resource "tencentcloud_security_group" "security_group" {
+  name        = "sg-mysql"
+  description = "mysql test"
+}
+resource "tencentcloud_mysql_instance" "example" {
+  internet_service  = 1
+  engine_version    = "5.7"
+  charge_type       = "POSTPAID"
+  root_password     = "PassWord123"
+  slave_deploy_mode = 1
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[0].name
+  first_slave_zone  = data.tencentcloud_availability_getzonesbyproduct.zones.zones[1].name
+  slave_sync_mode   = 1
+  instance_name     = "tf-example-mysql"
+  mem_size          = 4000
+  volume_size       = 200
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  subnet_id         = tencentcloud_subnet_instance.subnet.id
+  intranet_port     = 3306
+  security_groups   = [tencentcloud_security_group.security_group.id]
+  tags = {
+    "name" = "test"
+  }
+  parameters = {
+    "character_set_server" = "utf8"
+    "max_connections"      = "1000"
+  }
+}
+resource "tencentcloud_mysql_proxy" "example" {
+  instance_id    = tencentcloud_mysql_instance.example.id
+  uniq_vpc_id    = tencentcloud_vpc_instance.vpc.id
+  uniq_subnet_id = tencentcloud_subnet_instance.subnet.id
+  proxy_node_customs {
+    node_count = 1
+    cpu        = 2
+    mem        = 4000
+    region     = "ap-guangzhou"
+    zone       = "ap-guangzhou-3"
+  }
+  security_groups       = [tencentcloud_security_group.security_group.id]
+  desc                  = "desc."
+  connection_pool_limit = 2
+  vip                   = "10.0.0.120"
+  vport                 = 3306
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateCdbProxy](https://www.tencentcloud.com/document/api/236/55489)
+  - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+  - [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/55487)
+  - [ModifyCdbProxyAddressVipAndVPort](https://www.tencentcloud.com/document/api/236/55484)
+* Read:
+  - [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/55487)
+  - [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/236/15854)
+* Update:
+  - [AdjustCdbProxy](https://www.tencentcloud.com/document/api/236/55492)
+  - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+  - [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/55487)
+  - [ModifyCdbProxyAddressDesc](https://www.tencentcloud.com/document/api/236/55485)
+  - [ModifyCdbProxyAddressVipAndVPort](https://www.tencentcloud.com/document/api/236/55484)
+  - [ModifyCdbProxyParam](https://www.tencentcloud.com/document/api/236/55483)
+  - [UpgradeCDBProxyVersion](https://www.tencentcloud.com/document/api/236/45186)
+* Delete:
+  - [CloseCDBProxy](https://www.tencentcloud.com/document/api/236/45198)
+  - [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/55487)
 
 
 
 ## Create Proxy Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Proxy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Proxy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Proxy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-          <span class="nx">connection_pool_limit</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-          <span class="nx">desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">proxy_node_customs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_mysql.ProxyProxyNodeCustomArgs]]</span> = None<span class="p">,</span>
-          <span class="nx">proxy_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-          <span class="nx">uniq_subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">uniq_vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">upgrade_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">vip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">vport</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Proxy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p">,</span>
-          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Proxy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+          <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">proxy_node_customs</span><span class="p">:</span> <span class="nx">Optional[Sequence[ProxyProxyNodeCustomArgs]]</span> = None<span class="p">,</span>
+          <span class="nx">uniq_subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">uniq_vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">connection_pool_limit</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">proxy_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+          <span class="nx">upgrade_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">vip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">vport</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewProxy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Proxy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewProxy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Proxy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Proxy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Proxy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Proxy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Proxy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProxyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Mysql:Proxy</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Mysql:Proxy</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_mysql_proxy&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -568,7 +733,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -685,11 +850,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## Proxy Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -705,17 +878,15 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="proxynodecustoms_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxynodecustoms_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Node<wbr>Customs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proxyproxynodecustom">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Proxy<wbr>Proxy<wbr>Node<wbr>Custom<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#proxyproxynodecustom">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Proxy<wbr>Proxy<wbr>Node<wbr>Custom&gt;</a></span>
     </dt>
-    <dd><p>Node specification configuration.</p>
-</dd><dt class="property-required"
+    <dd>Node specification configuration.</dd><dt class="property-required"
             title="Required">
         <span id="uniqsubnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqsubnetid_csharp" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Subnet<wbr>Id</a>
@@ -723,8 +894,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_csharp" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -732,8 +902,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc id.</dd><dt class="property-optional"
             title="Optional">
         <span id="connectionpoollimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connectionpoollimit_csharp" style="color: inherit; text-decoration: inherit;">Connection<wbr>Pool<wbr>Limit</a>
@@ -741,8 +910,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Connection Pool Threshold.</p>
-</dd><dt class="property-optional"
+    <dd>Connection Pool Threshold.</dd><dt class="property-optional"
             title="Optional">
         <span id="desc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_csharp" style="color: inherit; text-decoration: inherit;">Desc</a>
@@ -750,8 +918,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Describe.</p>
-</dd><dt class="property-optional"
+    <dd>Describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxyversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyversion_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Version</a>
@@ -759,8 +926,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The current version of the database agent. No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>The current version of the database agent. No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -768,8 +934,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Security group.</p>
-</dd><dt class="property-optional"
+    <dd>Security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="upgradetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upgradetime_csharp" style="color: inherit; text-decoration: inherit;">Upgrade<wbr>Time</a>
@@ -777,8 +942,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="vip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_csharp" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -786,8 +950,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address.</p>
-</dd><dt class="property-optional"
+    <dd>IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="vport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_csharp" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -795,8 +958,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port.</p>
-</dd></dl>
+    <dd>Port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -810,8 +972,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="proxynodecustoms_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxynodecustoms_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Node<wbr>Customs</a>
@@ -819,8 +980,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proxyproxynodecustom">[]Proxy<wbr>Proxy<wbr>Node<wbr>Custom<wbr>Args</a></span>
     </dt>
-    <dd><p>Node specification configuration.</p>
-</dd><dt class="property-required"
+    <dd>Node specification configuration.</dd><dt class="property-required"
             title="Required">
         <span id="uniqsubnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqsubnetid_go" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Subnet<wbr>Id</a>
@@ -828,8 +988,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_go" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -837,8 +996,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc id.</dd><dt class="property-optional"
             title="Optional">
         <span id="connectionpoollimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connectionpoollimit_go" style="color: inherit; text-decoration: inherit;">Connection<wbr>Pool<wbr>Limit</a>
@@ -846,8 +1004,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Connection Pool Threshold.</p>
-</dd><dt class="property-optional"
+    <dd>Connection Pool Threshold.</dd><dt class="property-optional"
             title="Optional">
         <span id="desc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_go" style="color: inherit; text-decoration: inherit;">Desc</a>
@@ -855,8 +1012,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Describe.</p>
-</dd><dt class="property-optional"
+    <dd>Describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxyversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyversion_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Version</a>
@@ -864,8 +1020,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The current version of the database agent. No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>The current version of the database agent. No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -873,8 +1028,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Security group.</p>
-</dd><dt class="property-optional"
+    <dd>Security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="upgradetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upgradetime_go" style="color: inherit; text-decoration: inherit;">Upgrade<wbr>Time</a>
@@ -882,8 +1036,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="vip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_go" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -891,8 +1044,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address.</p>
-</dd><dt class="property-optional"
+    <dd>IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="vport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_go" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -900,8 +1052,101 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port.</p>
-</dd></dl>
+    <dd>Port.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id.</dd><dt class="property-required"
+            title="Required">
+        <span id="proxy_node_customs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_node_customs_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>node_<wbr>customs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proxyproxynodecustom">list(object)</a></span>
+    </dt>
+    <dd>Node specification configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="uniq_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniq_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">uniq_<wbr>subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet id.</dd><dt class="property-required"
+            title="Required">
+        <span id="uniq_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniq_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vpc id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="connection_pool_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connection_pool_limit_hcl" style="color: inherit; text-decoration: inherit;">connection_<wbr>pool_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Connection Pool Threshold.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_hcl" style="color: inherit; text-decoration: inherit;">desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Describe.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="proxy_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_version_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The current version of the database agent. No need to fill in when creating.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Security group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="upgrade_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upgrade_time_hcl" style="color: inherit; text-decoration: inherit;">upgrade_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vport_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_hcl" style="color: inherit; text-decoration: inherit;">vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -915,17 +1160,15 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="proxynodecustoms_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxynodecustoms_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Node<wbr>Customs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proxyproxynodecustom">List&lt;Proxy<wbr>Proxy<wbr>Node<wbr>Custom<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#proxyproxynodecustom">List&lt;Proxy<wbr>Proxy<wbr>Node<wbr>Custom&gt;</a></span>
     </dt>
-    <dd><p>Node specification configuration.</p>
-</dd><dt class="property-required"
+    <dd>Node specification configuration.</dd><dt class="property-required"
             title="Required">
         <span id="uniqsubnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqsubnetid_java" style="color: inherit; text-decoration: inherit;">uniq<wbr>Subnet<wbr>Id</a>
@@ -933,8 +1176,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_java" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -942,8 +1184,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc id.</dd><dt class="property-optional"
             title="Optional">
         <span id="connectionpoollimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connectionpoollimit_java" style="color: inherit; text-decoration: inherit;">connection<wbr>Pool<wbr>Limit</a>
@@ -951,8 +1192,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Connection Pool Threshold.</p>
-</dd><dt class="property-optional"
+    <dd>Connection Pool Threshold.</dd><dt class="property-optional"
             title="Optional">
         <span id="desc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_java" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -960,8 +1200,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Describe.</p>
-</dd><dt class="property-optional"
+    <dd>Describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxyversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyversion_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Version</a>
@@ -969,8 +1208,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The current version of the database agent. No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>The current version of the database agent. No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -978,8 +1216,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security group.</p>
-</dd><dt class="property-optional"
+    <dd>Security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="upgradetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upgradetime_java" style="color: inherit; text-decoration: inherit;">upgrade<wbr>Time</a>
@@ -987,8 +1224,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="vip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_java" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -996,8 +1232,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address.</p>
-</dd><dt class="property-optional"
+    <dd>IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="vport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_java" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -1005,8 +1240,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port.</p>
-</dd></dl>
+    <dd>Port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1020,17 +1254,15 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="proxynodecustoms_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxynodecustoms_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Node<wbr>Customs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proxyproxynodecustom">Proxy<wbr>Proxy<wbr>Node<wbr>Custom<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#proxyproxynodecustom">Proxy<wbr>Proxy<wbr>Node<wbr>Custom[]</a></span>
     </dt>
-    <dd><p>Node specification configuration.</p>
-</dd><dt class="property-required"
+    <dd>Node specification configuration.</dd><dt class="property-required"
             title="Required">
         <span id="uniqsubnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqsubnetid_nodejs" style="color: inherit; text-decoration: inherit;">uniq<wbr>Subnet<wbr>Id</a>
@@ -1038,8 +1270,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_nodejs" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -1047,8 +1278,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc id.</dd><dt class="property-optional"
             title="Optional">
         <span id="connectionpoollimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connectionpoollimit_nodejs" style="color: inherit; text-decoration: inherit;">connection<wbr>Pool<wbr>Limit</a>
@@ -1056,8 +1286,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Connection Pool Threshold.</p>
-</dd><dt class="property-optional"
+    <dd>Connection Pool Threshold.</dd><dt class="property-optional"
             title="Optional">
         <span id="desc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_nodejs" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -1065,8 +1294,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Describe.</p>
-</dd><dt class="property-optional"
+    <dd>Describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxyversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyversion_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Version</a>
@@ -1074,8 +1302,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The current version of the database agent. No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>The current version of the database agent. No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1083,8 +1310,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Security group.</p>
-</dd><dt class="property-optional"
+    <dd>Security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="upgradetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upgradetime_nodejs" style="color: inherit; text-decoration: inherit;">upgrade<wbr>Time</a>
@@ -1092,8 +1318,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="vip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_nodejs" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1101,8 +1326,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address.</p>
-</dd><dt class="property-optional"
+    <dd>IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="vport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_nodejs" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -1110,8 +1334,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port.</p>
-</dd></dl>
+    <dd>Port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1125,17 +1348,15 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="proxy_node_customs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_node_customs_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>node_<wbr>customs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proxyproxynodecustom">Proxy<wbr>Proxy<wbr>Node<wbr>Custom<wbr>Args]</a></span>
+        <span class="property-type"><a href="#proxyproxynodecustom">Sequence[Proxy<wbr>Proxy<wbr>Node<wbr>Custom<wbr>Args]</a></span>
     </dt>
-    <dd><p>Node specification configuration.</p>
-</dd><dt class="property-required"
+    <dd>Node specification configuration.</dd><dt class="property-required"
             title="Required">
         <span id="uniq_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniq_subnet_id_python" style="color: inherit; text-decoration: inherit;">uniq_<wbr>subnet_<wbr>id</a>
@@ -1143,8 +1364,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="uniq_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniq_vpc_id_python" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
@@ -1152,8 +1372,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc id.</dd><dt class="property-optional"
             title="Optional">
         <span id="connection_pool_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connection_pool_limit_python" style="color: inherit; text-decoration: inherit;">connection_<wbr>pool_<wbr>limit</a>
@@ -1161,8 +1380,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Connection Pool Threshold.</p>
-</dd><dt class="property-optional"
+    <dd>Connection Pool Threshold.</dd><dt class="property-optional"
             title="Optional">
         <span id="desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_python" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -1170,8 +1388,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Describe.</p>
-</dd><dt class="property-optional"
+    <dd>Describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxy_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_version_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>version</a>
@@ -1179,8 +1396,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The current version of the database agent. No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>The current version of the database agent. No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -1188,8 +1404,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Security group.</p>
-</dd><dt class="property-optional"
+    <dd>Security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="upgrade_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upgrade_time_python" style="color: inherit; text-decoration: inherit;">upgrade_<wbr>time</a>
@@ -1197,8 +1412,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_python" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1206,8 +1420,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP address.</p>
-</dd><dt class="property-optional"
+    <dd>IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="vport_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_python" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -1215,8 +1428,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port.</p>
-</dd></dl>
+    <dd>Port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1230,8 +1442,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="proxynodecustoms_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxynodecustoms_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Node<wbr>Customs</a>
@@ -1239,8 +1450,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proxyproxynodecustom">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Node specification configuration.</p>
-</dd><dt class="property-required"
+    <dd>Node specification configuration.</dd><dt class="property-required"
             title="Required">
         <span id="uniqsubnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqsubnetid_yaml" style="color: inherit; text-decoration: inherit;">uniq<wbr>Subnet<wbr>Id</a>
@@ -1248,8 +1458,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-required"
+    <dd>Subnet id.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_yaml" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -1257,8 +1466,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc id.</dd><dt class="property-optional"
             title="Optional">
         <span id="connectionpoollimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connectionpoollimit_yaml" style="color: inherit; text-decoration: inherit;">connection<wbr>Pool<wbr>Limit</a>
@@ -1266,8 +1474,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Connection Pool Threshold.</p>
-</dd><dt class="property-optional"
+    <dd>Connection Pool Threshold.</dd><dt class="property-optional"
             title="Optional">
         <span id="desc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desc_yaml" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -1275,8 +1482,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Describe.</p>
-</dd><dt class="property-optional"
+    <dd>Describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxyversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyversion_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Version</a>
@@ -1284,8 +1490,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The current version of the database agent. No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>The current version of the database agent. No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1293,8 +1498,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security group.</p>
-</dd><dt class="property-optional"
+    <dd>Security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="upgradetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upgradetime_yaml" style="color: inherit; text-decoration: inherit;">upgrade<wbr>Time</a>
@@ -1302,8 +1506,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="vip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_yaml" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1311,8 +1514,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address.</p>
-</dd><dt class="property-optional"
+    <dd>IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="vport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_yaml" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -1320,8 +1522,7 @@ The Proxy resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port.</p>
-</dd></dl>
+    <dd>Port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1342,8 +1543,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="proxyaddressid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyaddressid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Address<wbr>Id</a>
@@ -1351,8 +1551,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy address id.</p>
-</dd><dt class="property-"
+    <dd>Proxy address id.</dd><dt class="property-"
             title="">
         <span id="proxygroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxygroupid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Group<wbr>Id</a>
@@ -1360,8 +1559,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy group id.</p>
-</dd></dl>
+    <dd>Proxy group id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1375,8 +1573,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="proxyaddressid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyaddressid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Address<wbr>Id</a>
@@ -1384,8 +1581,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy address id.</p>
-</dd><dt class="property-"
+    <dd>Proxy address id.</dd><dt class="property-"
             title="">
         <span id="proxygroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxygroupid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Group<wbr>Id</a>
@@ -1393,8 +1589,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy group id.</p>
-</dd></dl>
+    <dd>Proxy group id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="proxy_address_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_address_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>address_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Proxy address id.</dd><dt class="property-"
+            title="">
+        <span id="proxy_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_group_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Proxy group id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1408,8 +1633,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="proxyaddressid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyaddressid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Address<wbr>Id</a>
@@ -1417,8 +1641,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proxy address id.</p>
-</dd><dt class="property-"
+    <dd>Proxy address id.</dd><dt class="property-"
             title="">
         <span id="proxygroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxygroupid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Group<wbr>Id</a>
@@ -1426,8 +1649,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proxy group id.</p>
-</dd></dl>
+    <dd>Proxy group id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1441,8 +1663,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="proxyaddressid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyaddressid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Address<wbr>Id</a>
@@ -1450,8 +1671,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy address id.</p>
-</dd><dt class="property-"
+    <dd>Proxy address id.</dd><dt class="property-"
             title="">
         <span id="proxygroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxygroupid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Group<wbr>Id</a>
@@ -1459,8 +1679,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy group id.</p>
-</dd></dl>
+    <dd>Proxy group id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1474,8 +1693,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="proxy_address_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_address_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>address_<wbr>id</a>
@@ -1483,8 +1701,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Proxy address id.</p>
-</dd><dt class="property-"
+    <dd>Proxy address id.</dd><dt class="property-"
             title="">
         <span id="proxy_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_group_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>group_<wbr>id</a>
@@ -1492,8 +1709,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Proxy group id.</p>
-</dd></dl>
+    <dd>Proxy group id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1507,8 +1723,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="proxyaddressid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyaddressid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Address<wbr>Id</a>
@@ -1516,8 +1731,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proxy address id.</p>
-</dd><dt class="property-"
+    <dd>Proxy address id.</dd><dt class="property-"
             title="">
         <span id="proxygroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxygroupid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Group<wbr>Id</a>
@@ -1525,8 +1739,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proxy group id.</p>
-</dd></dl>
+    <dd>Proxy group id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1536,18 +1749,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Proxy resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ProxyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Proxy</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ProxyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Proxy</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1556,7 +1769,7 @@ Get an existing Proxy resource's state with the given name, ID, and optional ext
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">proxy_address_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">proxy_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">proxy_node_customs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_mysql.ProxyProxyNodeCustomArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">proxy_node_customs</span><span class="p">:</span> <span class="nx">Optional[Sequence[ProxyProxyNodeCustomArgs]]</span> = None<span class="p">,</span>
         <span class="nx">proxy_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">uniq_subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -1564,104 +1777,143 @@ Get an existing Proxy resource's state with the given name, ID, and optional ext
         <span class="nx">upgrade_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vport</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> Proxy</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetProxy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ProxyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Proxy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetProxy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ProxyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Proxy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Proxy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ProxyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Proxy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ProxyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Proxy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ProxyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Proxy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ProxyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingProxy</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Mysql:Proxy</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_mysql_proxy</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ProxyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ProxyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1669,28 +1921,31 @@ Get an existing Proxy resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ProxyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1698,28 +1953,31 @@ Get an existing Proxy resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ProxyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1739,8 +1997,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Connection Pool Threshold.</p>
-</dd><dt class="property-optional"
+    <dd>Connection Pool Threshold.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_desc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desc_csharp" style="color: inherit; text-decoration: inherit;">Desc</a>
@@ -1748,8 +2005,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Describe.</p>
-</dd><dt class="property-optional"
+    <dd>Describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1757,8 +2013,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyaddressid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyaddressid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Address<wbr>Id</a>
@@ -1766,8 +2021,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy address id.</p>
-</dd><dt class="property-optional"
+    <dd>Proxy address id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxygroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxygroupid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Group<wbr>Id</a>
@@ -1775,17 +2029,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy group id.</p>
-</dd><dt class="property-optional"
+    <dd>Proxy group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxynodecustoms_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxynodecustoms_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Node<wbr>Customs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proxyproxynodecustom">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Proxy<wbr>Proxy<wbr>Node<wbr>Custom<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#proxyproxynodecustom">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Proxy<wbr>Proxy<wbr>Node<wbr>Custom&gt;</a></span>
     </dt>
-    <dd><p>Node specification configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Node specification configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyversion_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Version</a>
@@ -1793,8 +2045,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The current version of the database agent. No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>The current version of the database agent. No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -1802,8 +2053,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Security group.</p>
-</dd><dt class="property-optional"
+    <dd>Security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqsubnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqsubnetid_csharp" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Subnet<wbr>Id</a>
@@ -1811,8 +2061,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_csharp" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -1820,8 +2069,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upgradetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upgradetime_csharp" style="color: inherit; text-decoration: inherit;">Upgrade<wbr>Time</a>
@@ -1829,8 +2077,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_csharp" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -1838,8 +2085,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address.</p>
-</dd><dt class="property-optional"
+    <dd>IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_csharp" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -1847,8 +2093,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port.</p>
-</dd></dl>
+    <dd>Port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1862,8 +2107,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Connection Pool Threshold.</p>
-</dd><dt class="property-optional"
+    <dd>Connection Pool Threshold.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_desc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desc_go" style="color: inherit; text-decoration: inherit;">Desc</a>
@@ -1871,8 +2115,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Describe.</p>
-</dd><dt class="property-optional"
+    <dd>Describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1880,8 +2123,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyaddressid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyaddressid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Address<wbr>Id</a>
@@ -1889,8 +2131,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy address id.</p>
-</dd><dt class="property-optional"
+    <dd>Proxy address id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxygroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxygroupid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Group<wbr>Id</a>
@@ -1898,8 +2139,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy group id.</p>
-</dd><dt class="property-optional"
+    <dd>Proxy group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxynodecustoms_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxynodecustoms_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Node<wbr>Customs</a>
@@ -1907,8 +2147,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proxyproxynodecustom">[]Proxy<wbr>Proxy<wbr>Node<wbr>Custom<wbr>Args</a></span>
     </dt>
-    <dd><p>Node specification configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Node specification configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyversion_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Version</a>
@@ -1916,8 +2155,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The current version of the database agent. No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>The current version of the database agent. No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -1925,8 +2163,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Security group.</p>
-</dd><dt class="property-optional"
+    <dd>Security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqsubnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqsubnetid_go" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Subnet<wbr>Id</a>
@@ -1934,8 +2171,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_go" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -1943,8 +2179,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upgradetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upgradetime_go" style="color: inherit; text-decoration: inherit;">Upgrade<wbr>Time</a>
@@ -1952,8 +2187,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_go" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -1961,8 +2195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address.</p>
-</dd><dt class="property-optional"
+    <dd>IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_go" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -1970,8 +2203,117 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port.</p>
-</dd></dl>
+    <dd>Port.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_connection_pool_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_connection_pool_limit_hcl" style="color: inherit; text-decoration: inherit;">connection_<wbr>pool_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Connection Pool Threshold.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desc_hcl" style="color: inherit; text-decoration: inherit;">desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Describe.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_proxy_address_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_address_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>address_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Proxy address id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_proxy_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_group_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Proxy group id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_proxy_node_customs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_node_customs_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>node_<wbr>customs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proxyproxynodecustom">list(object)</a></span>
+    </dt>
+    <dd>Node specification configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_proxy_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_version_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The current version of the database agent. No need to fill in when creating.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Security group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_uniq_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniq_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">uniq_<wbr>subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_uniq_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniq_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vpc id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_upgrade_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upgrade_time_hcl" style="color: inherit; text-decoration: inherit;">upgrade_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vport_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_hcl" style="color: inherit; text-decoration: inherit;">vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1985,8 +2327,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Connection Pool Threshold.</p>
-</dd><dt class="property-optional"
+    <dd>Connection Pool Threshold.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_desc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desc_java" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -1994,8 +2335,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Describe.</p>
-</dd><dt class="property-optional"
+    <dd>Describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2003,8 +2343,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyaddressid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyaddressid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Address<wbr>Id</a>
@@ -2012,8 +2351,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proxy address id.</p>
-</dd><dt class="property-optional"
+    <dd>Proxy address id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxygroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxygroupid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Group<wbr>Id</a>
@@ -2021,17 +2359,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proxy group id.</p>
-</dd><dt class="property-optional"
+    <dd>Proxy group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxynodecustoms_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxynodecustoms_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Node<wbr>Customs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proxyproxynodecustom">List&lt;Proxy<wbr>Proxy<wbr>Node<wbr>Custom<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#proxyproxynodecustom">List&lt;Proxy<wbr>Proxy<wbr>Node<wbr>Custom&gt;</a></span>
     </dt>
-    <dd><p>Node specification configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Node specification configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyversion_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Version</a>
@@ -2039,8 +2375,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The current version of the database agent. No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>The current version of the database agent. No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -2048,8 +2383,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security group.</p>
-</dd><dt class="property-optional"
+    <dd>Security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqsubnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqsubnetid_java" style="color: inherit; text-decoration: inherit;">uniq<wbr>Subnet<wbr>Id</a>
@@ -2057,8 +2391,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_java" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -2066,8 +2399,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upgradetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upgradetime_java" style="color: inherit; text-decoration: inherit;">upgrade<wbr>Time</a>
@@ -2075,8 +2407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_java" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2084,8 +2415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address.</p>
-</dd><dt class="property-optional"
+    <dd>IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_java" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2093,8 +2423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port.</p>
-</dd></dl>
+    <dd>Port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2108,8 +2437,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Connection Pool Threshold.</p>
-</dd><dt class="property-optional"
+    <dd>Connection Pool Threshold.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_desc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desc_nodejs" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -2117,8 +2445,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Describe.</p>
-</dd><dt class="property-optional"
+    <dd>Describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2126,8 +2453,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyaddressid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyaddressid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Address<wbr>Id</a>
@@ -2135,8 +2461,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy address id.</p>
-</dd><dt class="property-optional"
+    <dd>Proxy address id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxygroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxygroupid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Group<wbr>Id</a>
@@ -2144,17 +2469,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy group id.</p>
-</dd><dt class="property-optional"
+    <dd>Proxy group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxynodecustoms_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxynodecustoms_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Node<wbr>Customs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proxyproxynodecustom">Proxy<wbr>Proxy<wbr>Node<wbr>Custom<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#proxyproxynodecustom">Proxy<wbr>Proxy<wbr>Node<wbr>Custom[]</a></span>
     </dt>
-    <dd><p>Node specification configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Node specification configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyversion_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Version</a>
@@ -2162,8 +2485,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The current version of the database agent. No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>The current version of the database agent. No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -2171,8 +2493,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Security group.</p>
-</dd><dt class="property-optional"
+    <dd>Security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqsubnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqsubnetid_nodejs" style="color: inherit; text-decoration: inherit;">uniq<wbr>Subnet<wbr>Id</a>
@@ -2180,8 +2501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_nodejs" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -2189,8 +2509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upgradetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upgradetime_nodejs" style="color: inherit; text-decoration: inherit;">upgrade<wbr>Time</a>
@@ -2198,8 +2517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_nodejs" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2207,8 +2525,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address.</p>
-</dd><dt class="property-optional"
+    <dd>IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_nodejs" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2216,8 +2533,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port.</p>
-</dd></dl>
+    <dd>Port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2231,8 +2547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Connection Pool Threshold.</p>
-</dd><dt class="property-optional"
+    <dd>Connection Pool Threshold.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desc_python" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -2240,8 +2555,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Describe.</p>
-</dd><dt class="property-optional"
+    <dd>Describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -2249,8 +2563,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxy_address_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_address_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>address_<wbr>id</a>
@@ -2258,8 +2571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Proxy address id.</p>
-</dd><dt class="property-optional"
+    <dd>Proxy address id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxy_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_group_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>group_<wbr>id</a>
@@ -2267,17 +2579,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Proxy group id.</p>
-</dd><dt class="property-optional"
+    <dd>Proxy group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxy_node_customs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_node_customs_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>node_<wbr>customs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proxyproxynodecustom">Proxy<wbr>Proxy<wbr>Node<wbr>Custom<wbr>Args]</a></span>
+        <span class="property-type"><a href="#proxyproxynodecustom">Sequence[Proxy<wbr>Proxy<wbr>Node<wbr>Custom<wbr>Args]</a></span>
     </dt>
-    <dd><p>Node specification configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Node specification configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxy_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_version_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>version</a>
@@ -2285,8 +2595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The current version of the database agent. No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>The current version of the database agent. No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -2294,8 +2603,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Security group.</p>
-</dd><dt class="property-optional"
+    <dd>Security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniq_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniq_subnet_id_python" style="color: inherit; text-decoration: inherit;">uniq_<wbr>subnet_<wbr>id</a>
@@ -2303,8 +2611,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniq_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniq_vpc_id_python" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
@@ -2312,8 +2619,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upgrade_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upgrade_time_python" style="color: inherit; text-decoration: inherit;">upgrade_<wbr>time</a>
@@ -2321,8 +2627,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_python" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2330,8 +2635,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP address.</p>
-</dd><dt class="property-optional"
+    <dd>IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vport_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_python" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2339,8 +2643,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port.</p>
-</dd></dl>
+    <dd>Port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2354,8 +2657,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Connection Pool Threshold.</p>
-</dd><dt class="property-optional"
+    <dd>Connection Pool Threshold.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_desc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desc_yaml" style="color: inherit; text-decoration: inherit;">desc</a>
@@ -2363,8 +2665,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Describe.</p>
-</dd><dt class="property-optional"
+    <dd>Describe.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2372,8 +2673,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyaddressid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyaddressid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Address<wbr>Id</a>
@@ -2381,8 +2681,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proxy address id.</p>
-</dd><dt class="property-optional"
+    <dd>Proxy address id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxygroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxygroupid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Group<wbr>Id</a>
@@ -2390,8 +2689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proxy group id.</p>
-</dd><dt class="property-optional"
+    <dd>Proxy group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxynodecustoms_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxynodecustoms_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Node<wbr>Customs</a>
@@ -2399,8 +2697,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proxyproxynodecustom">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Node specification configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Node specification configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyversion_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Version</a>
@@ -2408,8 +2705,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The current version of the database agent. No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>The current version of the database agent. No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -2417,8 +2713,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security group.</p>
-</dd><dt class="property-optional"
+    <dd>Security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqsubnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqsubnetid_yaml" style="color: inherit; text-decoration: inherit;">uniq<wbr>Subnet<wbr>Id</a>
@@ -2426,8 +2721,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_yaml" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -2435,8 +2729,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd><dt class="property-optional"
+    <dd>Vpc id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upgradetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upgradetime_yaml" style="color: inherit; text-decoration: inherit;">upgrade<wbr>Time</a>
@@ -2444,8 +2737,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</p>
-</dd><dt class="property-optional"
+    <dd>Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_yaml" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2453,8 +2745,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address.</p>
-</dd><dt class="property-optional"
+    <dd>IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_yaml" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2462,8 +2753,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port.</p>
-</dd></dl>
+    <dd>Port.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2478,7 +2768,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="proxyproxynodecustom">Proxy<wbr>Proxy<wbr>Node<wbr>Custom</h4>
+<h4 id="proxyproxynodecustom">
+Proxy<wbr>Proxy<wbr>Node<wbr>Custom<pulumi-choosable type="language" values="python,go" class="inline">, Proxy<wbr>Proxy<wbr>Node<wbr>Custom<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2490,8 +2782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of CPU cores.</p>
-</dd><dt class="property-required"
+    <dd>Number of CPU cores.</dd><dt class="property-required"
             title="Required">
         <span id="mem_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mem_csharp" style="color: inherit; text-decoration: inherit;">Mem</a>
@@ -2499,8 +2790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size.</p>
-</dd><dt class="property-required"
+    <dd>Memory size.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Count</a>
@@ -2508,8 +2798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -2517,8 +2806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -2526,8 +2814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone.</p>
-</dd></dl>
+    <dd>Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2541,8 +2828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of CPU cores.</p>
-</dd><dt class="property-required"
+    <dd>Number of CPU cores.</dd><dt class="property-required"
             title="Required">
         <span id="mem_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mem_go" style="color: inherit; text-decoration: inherit;">Mem</a>
@@ -2550,8 +2836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size.</p>
-</dd><dt class="property-required"
+    <dd>Memory size.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Count</a>
@@ -2559,8 +2844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -2568,8 +2852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -2577,8 +2860,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone.</p>
-</dd></dl>
+    <dd>Zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_hcl" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of CPU cores.</dd><dt class="property-required"
+            title="Required">
+        <span id="mem_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mem_hcl" style="color: inherit; text-decoration: inherit;">mem</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory size.</dd><dt class="property-required"
+            title="Required">
+        <span id="node_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_count_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of nodes.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2592,8 +2920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of CPU cores.</p>
-</dd><dt class="property-required"
+    <dd>Number of CPU cores.</dd><dt class="property-required"
             title="Required">
         <span id="mem_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mem_java" style="color: inherit; text-decoration: inherit;">mem</a>
@@ -2601,8 +2928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory size.</p>
-</dd><dt class="property-required"
+    <dd>Memory size.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_java" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -2610,8 +2936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -2619,8 +2944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2628,8 +2952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone.</p>
-</dd></dl>
+    <dd>Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2643,8 +2966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of CPU cores.</p>
-</dd><dt class="property-required"
+    <dd>Number of CPU cores.</dd><dt class="property-required"
             title="Required">
         <span id="mem_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mem_nodejs" style="color: inherit; text-decoration: inherit;">mem</a>
@@ -2652,8 +2974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory size.</p>
-</dd><dt class="property-required"
+    <dd>Memory size.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -2661,8 +2982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -2670,8 +2990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2679,8 +2998,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone.</p>
-</dd></dl>
+    <dd>Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2694,8 +3012,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of CPU cores.</p>
-</dd><dt class="property-required"
+    <dd>Number of CPU cores.</dd><dt class="property-required"
             title="Required">
         <span id="mem_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mem_python" style="color: inherit; text-decoration: inherit;">mem</a>
@@ -2703,8 +3020,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size.</p>
-</dd><dt class="property-required"
+    <dd>Memory size.</dd><dt class="property-required"
             title="Required">
         <span id="node_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_count_python" style="color: inherit; text-decoration: inherit;">node_<wbr>count</a>
@@ -2712,8 +3028,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -2721,8 +3036,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2730,8 +3044,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Zone.</p>
-</dd></dl>
+    <dd>Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2745,8 +3058,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of CPU cores.</p>
-</dd><dt class="property-required"
+    <dd>Number of CPU cores.</dd><dt class="property-required"
             title="Required">
         <span id="mem_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mem_yaml" style="color: inherit; text-decoration: inherit;">mem</a>
@@ -2754,8 +3066,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory size.</p>
-</dd><dt class="property-required"
+    <dd>Memory size.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -2763,8 +3074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of nodes.</dd><dt class="property-required"
             title="Required">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -2772,8 +3082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region.</p>
-</dd><dt class="property-required"
+    <dd>Region.</dd><dt class="property-required"
             title="Required">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2781,8 +3090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone.</p>
-</dd></dl>
+    <dd>Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2794,7 +3102,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

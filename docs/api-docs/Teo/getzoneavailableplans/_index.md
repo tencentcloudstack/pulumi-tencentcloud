@@ -2,9 +2,11 @@
 ---
 title: "getZoneAvailablePlans"
 title_tag: "tencentcloud.Teo.getZoneAvailablePlans"
-meta_desc: "Documentation for the tencentcloud.Teo.getZoneAvailablePlans function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of teo zoneAvailablePlans"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,42 +18,45 @@ Use this data source to query detailed information of teo zoneAvailablePlans
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zoneAvailablePlans = tencentcloud.Teo.getZoneAvailablePlans({});
+const zoneAvailablePlans = tencentcloud.teo.getZoneAvailablePlans({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-zone_available_plans = tencentcloud.Teo.get_zone_available_plans()
+zone_available_plans = tencentcloud.teo.get_zone_available_plans()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var zoneAvailablePlans = Tencentcloud.Teo.GetZoneAvailablePlans.Invoke();
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/teo"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Teo.GetZoneAvailablePlans(ctx, nil, nil)
+		_, err := teo.GetZoneAvailablePlans(ctx, &teo.GetZoneAvailablePlansArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -59,6 +64,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var zoneAvailablePlans = Tencentcloud.Teo.GetZoneAvailablePlans.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -67,8 +94,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Teo.TeoFunctions;
 import com.pulumi.tencentcloud.Teo.inputs.GetZoneAvailablePlansArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -80,20 +107,50 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var zoneAvailablePlans = TeoFunctions.getZoneAvailablePlans();
+        final var zoneAvailablePlans = TeoFunctions.getZoneAvailablePlans(GetZoneAvailablePlansArgs.builder()
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   zoneAvailablePlans:
     fn::invoke:
-      Function: tencentcloud:Teo:getZoneAvailablePlans
-      Arguments: {}
+      function: tencentcloud:Teo:getZoneAvailablePlans
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_teo_getzoneavailableplans" "zoneAvailablePlans" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeAvailablePlans](https://www.tencentcloud.com/document/api/1145/50545)
 
 
 
@@ -105,7 +162,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -113,9 +170,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getZoneAvailablePlans<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneAvailablePlansArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetZoneAvailablePlansResult</a></span>></span
+><span class="k">function </span>getZoneAvailablePlans<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneAvailablePlansArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetZoneAvailablePlansResult</a></span>></span
 ><span class="k">
-function </span>getZoneAvailablePlansOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneAvailablePlansOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetZoneAvailablePlansResult</a></span>></span
+function </span>getZoneAvailablePlansOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneAvailablePlansOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetZoneAvailablePlansResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -127,8 +184,8 @@ function </span>getZoneAvailablePlansOutput<span class="p">(</span><span class="
 ><span class="k">def </span>get_zone_available_plans<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetZoneAvailablePlansResult</span
 ><span class="k">
-def </span>get_zone_available_plans_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetZoneAvailablePlansResult]</span
+def </span>get_zone_available_plans_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetZoneAvailablePlansResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -153,7 +210,8 @@ func </span>GetZoneAvailablePlansOutput<span class="p">(</span><span class="nx">
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetZoneAvailablePlans </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetZoneAvailablePlansResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetZoneAvailablePlansArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneAvailablePlansResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneAvailablePlansInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneAvailablePlansResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneAvailablePlansInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneAvailablePlansResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneAvailablePlansInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -162,7 +220,8 @@ func </span>GetZoneAvailablePlansOutput<span class="p">(</span><span class="nx">
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetZoneAvailablePlansResult</a></span>> </span>getZoneAvailablePlans<span class="p">(</span><span class="nx">GetZoneAvailablePlansArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetZoneAvailablePlansResult</a></span>> </span>getZoneAvailablePlans<span class="p">(</span><span class="nx">GetZoneAvailablePlansArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetZoneAvailablePlansResult</a></span>> </span>getZoneAvailablePlans<span class="p">(</span><span class="nx">GetZoneAvailablePlansArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,6 +233,15 @@ func </span>GetZoneAvailablePlansOutput<span class="p">(</span><span class="nx">
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Teo/getZoneAvailablePlans:getZoneAvailablePlans
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_teo_get_zone_available_plans&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -192,8 +260,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -207,8 +274,21 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -222,8 +302,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -237,8 +316,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -267,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -291,8 +367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="planinfolists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#planinfolists_csharp" style="color: inherit; text-decoration: inherit;">Plan<wbr>Info<wbr>Lists</a>
@@ -300,8 +375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneavailableplansplaninfolist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Teo.<wbr>Outputs.<wbr>Get<wbr>Zone<wbr>Available<wbr>Plans<wbr>Plan<wbr>Info<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Zone plans which current account can use.</p>
-</dd><dt class="property-"
+    <dd>Zone plans which current account can use.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -323,8 +397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="planinfolists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#planinfolists_go" style="color: inherit; text-decoration: inherit;">Plan<wbr>Info<wbr>Lists</a>
@@ -332,11 +405,40 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneavailableplansplaninfolist">[]Get<wbr>Zone<wbr>Available<wbr>Plans<wbr>Plan<wbr>Info<wbr>List</a></span>
     </dt>
-    <dd><p>Zone plans which current account can use.</p>
-</dd><dt class="property-"
+    <dd>Zone plans which current account can use.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="plan_info_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plan_info_lists_hcl" style="color: inherit; text-decoration: inherit;">plan_<wbr>info_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getzoneavailableplansplaninfolist">list(object)</a></span>
+    </dt>
+    <dd>Zone plans which current account can use.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -355,8 +457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="planinfolists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#planinfolists_java" style="color: inherit; text-decoration: inherit;">plan<wbr>Info<wbr>Lists</a>
@@ -364,8 +465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneavailableplansplaninfolist">List&lt;Get<wbr>Zone<wbr>Available<wbr>Plans<wbr>Plan<wbr>Info<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Zone plans which current account can use.</p>
-</dd><dt class="property-"
+    <dd>Zone plans which current account can use.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -387,8 +487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="planinfolists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#planinfolists_nodejs" style="color: inherit; text-decoration: inherit;">plan<wbr>Info<wbr>Lists</a>
@@ -396,8 +495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneavailableplansplaninfolist">Get<wbr>Zone<wbr>Available<wbr>Plans<wbr>Plan<wbr>Info<wbr>List[]</a></span>
     </dt>
-    <dd><p>Zone plans which current account can use.</p>
-</dd><dt class="property-"
+    <dd>Zone plans which current account can use.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -419,17 +517,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="plan_info_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plan_info_lists_python" style="color: inherit; text-decoration: inherit;">plan_<wbr>info_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getzoneavailableplansplaninfolist">Get<wbr>Zone<wbr>Available<wbr>Plans<wbr>Plan<wbr>Info<wbr>List]</a></span>
+        <span class="property-type"><a href="#getzoneavailableplansplaninfolist">Sequence[Get<wbr>Zone<wbr>Available<wbr>Plans<wbr>Plan<wbr>Info<wbr>List]</a></span>
     </dt>
-    <dd><p>Zone plans which current account can use.</p>
-</dd><dt class="property-"
+    <dd>Zone plans which current account can use.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -451,8 +547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="planinfolists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#planinfolists_yaml" style="color: inherit; text-decoration: inherit;">plan<wbr>Info<wbr>Lists</a>
@@ -460,8 +555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneavailableplansplaninfolist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Zone plans which current account can use.</p>
-</dd><dt class="property-"
+    <dd>Zone plans which current account can use.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -493,8 +587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration area of the plan. Valid value: <code>mainland</code>, <code>overseas</code>.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration area of the plan. Valid value: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-required"
             title="Required">
         <span id="currency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currency_csharp" style="color: inherit; text-decoration: inherit;">Currency</a>
@@ -502,8 +595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Settlement Currency Type. Valid values: <code>CNY</code>, <code>USD</code>.</p>
-</dd><dt class="property-required"
+    <dd>Settlement Currency Type. Valid values: <code>CNY</code>, <code>USD</code>.</dd><dt class="property-required"
             title="Required">
         <span id="flux_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flux_csharp" style="color: inherit; text-decoration: inherit;">Flux</a>
@@ -511,8 +603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of fluxes included in the zone plan. Unit: Byte.</p>
-</dd><dt class="property-required"
+    <dd>The number of fluxes included in the zone plan. Unit: Byte.</dd><dt class="property-required"
             title="Required">
         <span id="frequency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_csharp" style="color: inherit; text-decoration: inherit;">Frequency</a>
@@ -520,8 +611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing cycle. Valid values:</p>
-</dd><dt class="property-required"
+    <dd>Billing cycle. Valid values:</dd><dt class="property-required"
             title="Required">
         <span id="plantype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plantype_csharp" style="color: inherit; text-decoration: inherit;">Plan<wbr>Type</a>
@@ -529,8 +619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Plan type.</p>
-</dd><dt class="property-required"
+    <dd>Plan type.</dd><dt class="property-required"
             title="Required">
         <span id="price_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#price_csharp" style="color: inherit; text-decoration: inherit;">Price</a>
@@ -538,8 +627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Price of the plan. Unit: cent.</p>
-</dd><dt class="property-required"
+    <dd>Price of the plan. Unit: cent.</dd><dt class="property-required"
             title="Required">
         <span id="request_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_csharp" style="color: inherit; text-decoration: inherit;">Request</a>
@@ -547,8 +635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of requests included in the zone plan.</p>
-</dd><dt class="property-required"
+    <dd>The number of requests included in the zone plan.</dd><dt class="property-required"
             title="Required">
         <span id="sitenumber_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sitenumber_csharp" style="color: inherit; text-decoration: inherit;">Site<wbr>Number</a>
@@ -556,8 +643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of zones this zone plan can bind.</p>
-</dd></dl>
+    <dd>The number of zones this zone plan can bind.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -571,8 +657,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration area of the plan. Valid value: <code>mainland</code>, <code>overseas</code>.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration area of the plan. Valid value: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-required"
             title="Required">
         <span id="currency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currency_go" style="color: inherit; text-decoration: inherit;">Currency</a>
@@ -580,8 +665,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Settlement Currency Type. Valid values: <code>CNY</code>, <code>USD</code>.</p>
-</dd><dt class="property-required"
+    <dd>Settlement Currency Type. Valid values: <code>CNY</code>, <code>USD</code>.</dd><dt class="property-required"
             title="Required">
         <span id="flux_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flux_go" style="color: inherit; text-decoration: inherit;">Flux</a>
@@ -589,8 +673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of fluxes included in the zone plan. Unit: Byte.</p>
-</dd><dt class="property-required"
+    <dd>The number of fluxes included in the zone plan. Unit: Byte.</dd><dt class="property-required"
             title="Required">
         <span id="frequency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_go" style="color: inherit; text-decoration: inherit;">Frequency</a>
@@ -598,8 +681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing cycle. Valid values:</p>
-</dd><dt class="property-required"
+    <dd>Billing cycle. Valid values:</dd><dt class="property-required"
             title="Required">
         <span id="plantype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plantype_go" style="color: inherit; text-decoration: inherit;">Plan<wbr>Type</a>
@@ -607,8 +689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Plan type.</p>
-</dd><dt class="property-required"
+    <dd>Plan type.</dd><dt class="property-required"
             title="Required">
         <span id="price_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#price_go" style="color: inherit; text-decoration: inherit;">Price</a>
@@ -616,8 +697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Price of the plan. Unit: cent.</p>
-</dd><dt class="property-required"
+    <dd>Price of the plan. Unit: cent.</dd><dt class="property-required"
             title="Required">
         <span id="request_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_go" style="color: inherit; text-decoration: inherit;">Request</a>
@@ -625,8 +705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of requests included in the zone plan.</p>
-</dd><dt class="property-required"
+    <dd>The number of requests included in the zone plan.</dd><dt class="property-required"
             title="Required">
         <span id="sitenumber_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sitenumber_go" style="color: inherit; text-decoration: inherit;">Site<wbr>Number</a>
@@ -634,8 +713,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of zones this zone plan can bind.</p>
-</dd></dl>
+    <dd>The number of zones this zone plan can bind.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="area_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_hcl" style="color: inherit; text-decoration: inherit;">area</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Acceleration area of the plan. Valid value: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="currency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currency_hcl" style="color: inherit; text-decoration: inherit;">currency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Settlement Currency Type. Valid values: <code>CNY</code>, <code>USD</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="flux_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flux_hcl" style="color: inherit; text-decoration: inherit;">flux</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of fluxes included in the zone plan. Unit: Byte.</dd><dt class="property-required"
+            title="Required">
+        <span id="frequency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_hcl" style="color: inherit; text-decoration: inherit;">frequency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Billing cycle. Valid values:</dd><dt class="property-required"
+            title="Required">
+        <span id="plan_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plan_type_hcl" style="color: inherit; text-decoration: inherit;">plan_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Plan type.</dd><dt class="property-required"
+            title="Required">
+        <span id="price_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#price_hcl" style="color: inherit; text-decoration: inherit;">price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Price of the plan. Unit: cent.</dd><dt class="property-required"
+            title="Required">
+        <span id="request_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_hcl" style="color: inherit; text-decoration: inherit;">request</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of requests included in the zone plan.</dd><dt class="property-required"
+            title="Required">
+        <span id="site_number_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#site_number_hcl" style="color: inherit; text-decoration: inherit;">site_<wbr>number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of zones this zone plan can bind.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -649,8 +797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acceleration area of the plan. Valid value: <code>mainland</code>, <code>overseas</code>.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration area of the plan. Valid value: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-required"
             title="Required">
         <span id="currency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currency_java" style="color: inherit; text-decoration: inherit;">currency</a>
@@ -658,8 +805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Settlement Currency Type. Valid values: <code>CNY</code>, <code>USD</code>.</p>
-</dd><dt class="property-required"
+    <dd>Settlement Currency Type. Valid values: <code>CNY</code>, <code>USD</code>.</dd><dt class="property-required"
             title="Required">
         <span id="flux_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flux_java" style="color: inherit; text-decoration: inherit;">flux</a>
@@ -667,8 +813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of fluxes included in the zone plan. Unit: Byte.</p>
-</dd><dt class="property-required"
+    <dd>The number of fluxes included in the zone plan. Unit: Byte.</dd><dt class="property-required"
             title="Required">
         <span id="frequency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_java" style="color: inherit; text-decoration: inherit;">frequency</a>
@@ -676,8 +821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing cycle. Valid values:</p>
-</dd><dt class="property-required"
+    <dd>Billing cycle. Valid values:</dd><dt class="property-required"
             title="Required">
         <span id="plantype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plantype_java" style="color: inherit; text-decoration: inherit;">plan<wbr>Type</a>
@@ -685,8 +829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Plan type.</p>
-</dd><dt class="property-required"
+    <dd>Plan type.</dd><dt class="property-required"
             title="Required">
         <span id="price_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#price_java" style="color: inherit; text-decoration: inherit;">price</a>
@@ -694,8 +837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Price of the plan. Unit: cent.</p>
-</dd><dt class="property-required"
+    <dd>Price of the plan. Unit: cent.</dd><dt class="property-required"
             title="Required">
         <span id="request_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_java" style="color: inherit; text-decoration: inherit;">request</a>
@@ -703,8 +845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of requests included in the zone plan.</p>
-</dd><dt class="property-required"
+    <dd>The number of requests included in the zone plan.</dd><dt class="property-required"
             title="Required">
         <span id="sitenumber_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sitenumber_java" style="color: inherit; text-decoration: inherit;">site<wbr>Number</a>
@@ -712,8 +853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of zones this zone plan can bind.</p>
-</dd></dl>
+    <dd>The number of zones this zone plan can bind.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -727,8 +867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration area of the plan. Valid value: <code>mainland</code>, <code>overseas</code>.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration area of the plan. Valid value: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-required"
             title="Required">
         <span id="currency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currency_nodejs" style="color: inherit; text-decoration: inherit;">currency</a>
@@ -736,8 +875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Settlement Currency Type. Valid values: <code>CNY</code>, <code>USD</code>.</p>
-</dd><dt class="property-required"
+    <dd>Settlement Currency Type. Valid values: <code>CNY</code>, <code>USD</code>.</dd><dt class="property-required"
             title="Required">
         <span id="flux_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flux_nodejs" style="color: inherit; text-decoration: inherit;">flux</a>
@@ -745,8 +883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of fluxes included in the zone plan. Unit: Byte.</p>
-</dd><dt class="property-required"
+    <dd>The number of fluxes included in the zone plan. Unit: Byte.</dd><dt class="property-required"
             title="Required">
         <span id="frequency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_nodejs" style="color: inherit; text-decoration: inherit;">frequency</a>
@@ -754,8 +891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing cycle. Valid values:</p>
-</dd><dt class="property-required"
+    <dd>Billing cycle. Valid values:</dd><dt class="property-required"
             title="Required">
         <span id="plantype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plantype_nodejs" style="color: inherit; text-decoration: inherit;">plan<wbr>Type</a>
@@ -763,8 +899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Plan type.</p>
-</dd><dt class="property-required"
+    <dd>Plan type.</dd><dt class="property-required"
             title="Required">
         <span id="price_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#price_nodejs" style="color: inherit; text-decoration: inherit;">price</a>
@@ -772,8 +907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Price of the plan. Unit: cent.</p>
-</dd><dt class="property-required"
+    <dd>Price of the plan. Unit: cent.</dd><dt class="property-required"
             title="Required">
         <span id="request_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_nodejs" style="color: inherit; text-decoration: inherit;">request</a>
@@ -781,8 +915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of requests included in the zone plan.</p>
-</dd><dt class="property-required"
+    <dd>The number of requests included in the zone plan.</dd><dt class="property-required"
             title="Required">
         <span id="sitenumber_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sitenumber_nodejs" style="color: inherit; text-decoration: inherit;">site<wbr>Number</a>
@@ -790,8 +923,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of zones this zone plan can bind.</p>
-</dd></dl>
+    <dd>The number of zones this zone plan can bind.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -805,8 +937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Acceleration area of the plan. Valid value: <code>mainland</code>, <code>overseas</code>.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration area of the plan. Valid value: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-required"
             title="Required">
         <span id="currency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currency_python" style="color: inherit; text-decoration: inherit;">currency</a>
@@ -814,8 +945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Settlement Currency Type. Valid values: <code>CNY</code>, <code>USD</code>.</p>
-</dd><dt class="property-required"
+    <dd>Settlement Currency Type. Valid values: <code>CNY</code>, <code>USD</code>.</dd><dt class="property-required"
             title="Required">
         <span id="flux_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flux_python" style="color: inherit; text-decoration: inherit;">flux</a>
@@ -823,8 +953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of fluxes included in the zone plan. Unit: Byte.</p>
-</dd><dt class="property-required"
+    <dd>The number of fluxes included in the zone plan. Unit: Byte.</dd><dt class="property-required"
             title="Required">
         <span id="frequency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_python" style="color: inherit; text-decoration: inherit;">frequency</a>
@@ -832,8 +961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Billing cycle. Valid values:</p>
-</dd><dt class="property-required"
+    <dd>Billing cycle. Valid values:</dd><dt class="property-required"
             title="Required">
         <span id="plan_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plan_type_python" style="color: inherit; text-decoration: inherit;">plan_<wbr>type</a>
@@ -841,8 +969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Plan type.</p>
-</dd><dt class="property-required"
+    <dd>Plan type.</dd><dt class="property-required"
             title="Required">
         <span id="price_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#price_python" style="color: inherit; text-decoration: inherit;">price</a>
@@ -850,8 +977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Price of the plan. Unit: cent.</p>
-</dd><dt class="property-required"
+    <dd>Price of the plan. Unit: cent.</dd><dt class="property-required"
             title="Required">
         <span id="request_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_python" style="color: inherit; text-decoration: inherit;">request</a>
@@ -859,8 +985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of requests included in the zone plan.</p>
-</dd><dt class="property-required"
+    <dd>The number of requests included in the zone plan.</dd><dt class="property-required"
             title="Required">
         <span id="site_number_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#site_number_python" style="color: inherit; text-decoration: inherit;">site_<wbr>number</a>
@@ -868,8 +993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of zones this zone plan can bind.</p>
-</dd></dl>
+    <dd>The number of zones this zone plan can bind.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -883,8 +1007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acceleration area of the plan. Valid value: <code>mainland</code>, <code>overseas</code>.</p>
-</dd><dt class="property-required"
+    <dd>Acceleration area of the plan. Valid value: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-required"
             title="Required">
         <span id="currency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currency_yaml" style="color: inherit; text-decoration: inherit;">currency</a>
@@ -892,8 +1015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Settlement Currency Type. Valid values: <code>CNY</code>, <code>USD</code>.</p>
-</dd><dt class="property-required"
+    <dd>Settlement Currency Type. Valid values: <code>CNY</code>, <code>USD</code>.</dd><dt class="property-required"
             title="Required">
         <span id="flux_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flux_yaml" style="color: inherit; text-decoration: inherit;">flux</a>
@@ -901,8 +1023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of fluxes included in the zone plan. Unit: Byte.</p>
-</dd><dt class="property-required"
+    <dd>The number of fluxes included in the zone plan. Unit: Byte.</dd><dt class="property-required"
             title="Required">
         <span id="frequency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_yaml" style="color: inherit; text-decoration: inherit;">frequency</a>
@@ -910,8 +1031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing cycle. Valid values:</p>
-</dd><dt class="property-required"
+    <dd>Billing cycle. Valid values:</dd><dt class="property-required"
             title="Required">
         <span id="plantype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plantype_yaml" style="color: inherit; text-decoration: inherit;">plan<wbr>Type</a>
@@ -919,8 +1039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Plan type.</p>
-</dd><dt class="property-required"
+    <dd>Plan type.</dd><dt class="property-required"
             title="Required">
         <span id="price_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#price_yaml" style="color: inherit; text-decoration: inherit;">price</a>
@@ -928,8 +1047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Price of the plan. Unit: cent.</p>
-</dd><dt class="property-required"
+    <dd>Price of the plan. Unit: cent.</dd><dt class="property-required"
             title="Required">
         <span id="request_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_yaml" style="color: inherit; text-decoration: inherit;">request</a>
@@ -937,8 +1055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of requests included in the zone plan.</p>
-</dd><dt class="property-required"
+    <dd>The number of requests included in the zone plan.</dd><dt class="property-required"
             title="Required">
         <span id="sitenumber_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sitenumber_yaml" style="color: inherit; text-decoration: inherit;">site<wbr>Number</a>
@@ -946,8 +1063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of zones this zone plan can bind.</p>
-</dd></dl>
+    <dd>The number of zones this zone plan can bind.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -962,7 +1078,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

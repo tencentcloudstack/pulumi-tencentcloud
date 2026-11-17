@@ -2,9 +2,11 @@
 ---
 title: "Service"
 title_tag: "tencentcloud.ApiGateway.Service"
-meta_desc: "Documentation for the tencentcloud.ApiGateway.Service resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create API gateway service. NOTE: After setting uniqVpcId, it cannot be modified."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,18 +16,26 @@ no_edit_this_page: true
 
 Use this resource to create API gateway service.
 
-> **NOTE:** After setting `uniq_vpc_id`, it cannot be modified.
+> **NOTE:** After setting `uniqVpcId`, it cannot be modified.
 
 ## Example Usage
 
 ### Shared Service
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "example-vpc",
+    cidrBlock: "10.0.0.0/16",
+});
 const example = new tencentcloud.apigateway.Service("example", {
     serviceName: "tf-example",
     protocol: "http&https",
@@ -44,12 +54,19 @@ const example = new tencentcloud.apigateway.Service("example", {
     testLimit: 500,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
-example = tencentcloud.api_gateway.Service("example",
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="example-vpc",
+    cidr_block="10.0.0.0/16")
+example = tencentcloud.apigateway.Service("example",
     service_name="tf-example",
     protocol="http&https",
     service_desc="desc.",
@@ -66,6 +83,58 @@ example = tencentcloud.api_gateway.Service("example",
     pre_limit=500,
     test_limit=500)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("example-vpc"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = apigateway.NewService(ctx, "example", &apigateway.ServiceArgs{
+			ServiceName: pulumi.String("tf-example"),
+			Protocol:    pulumi.String("http&https"),
+			ServiceDesc: pulumi.String("desc."),
+			NetTypes: pulumi.StringArray{
+				pulumi.String("INNER"),
+				pulumi.String("OUTER"),
+			},
+			IpVersion: pulumi.String("IPv4"),
+			UniqVpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+			ReleaseLimit: pulumi.Int(500),
+			PreLimit:     pulumi.Int(500),
+			TestLimit:    pulumi.Int(500),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -76,6 +145,7 @@ return await Deployment.RunAsync(() =>
 {
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "example-vpc",
         CidrBlock = "10.0.0.0/16",
     });
 
@@ -102,47 +172,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = ApiGateway.NewService(ctx, "example", &ApiGateway.ServiceArgs{
-			ServiceName: pulumi.String("tf-example"),
-			Protocol:    pulumi.String("http&https"),
-			ServiceDesc: pulumi.String("desc."),
-			NetTypes: pulumi.StringArray{
-				pulumi.String("INNER"),
-				pulumi.String("OUTER"),
-			},
-			IpVersion: pulumi.String("IPv4"),
-			UniqVpcId: vpc.ID(),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-			ReleaseLimit: pulumi.Int(500),
-			PreLimit:     pulumi.Int(500),
-			TestLimit:    pulumi.Int(500),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -153,8 +187,8 @@ import com.pulumi.tencentcloud.Vpc.Instance;
 import com.pulumi.tencentcloud.Vpc.InstanceArgs;
 import com.pulumi.tencentcloud.ApiGateway.Service;
 import com.pulumi.tencentcloud.ApiGateway.ServiceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -166,11 +200,12 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new Instance("vpc", InstanceArgs.builder()
+            .name("example-vpc")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var example = new Service("example", ServiceArgs.builder()        
+        var example = new Service("example", ServiceArgs.builder()
             .serviceName("tf-example")
             .protocol("http&https")
             .serviceDesc("desc.")
@@ -188,11 +223,17 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: example-vpc
       cidrBlock: 10.0.0.0/16
   example:
     type: tencentcloud:ApiGateway:Service
@@ -211,11 +252,51 @@ resources:
       preLimit: 500
       testLimit: 500
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "example-vpc"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_apigateway_service" "example" {
+  service_name = "tf-example"
+  protocol     = "http&https"
+  service_desc = "desc."
+  net_types    = ["INNER", "OUTER"]
+  ip_version   = "IPv4"
+  uniq_vpc_id  = tencentcloud_vpc_instance.vpc.id
+  tags = {
+    "createdBy" = "terraform"
+  }
+  release_limit = 500
+  pre_limit     = 500
+  test_limit    = 500
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Exclusive Service
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -229,7 +310,7 @@ const example = new tencentcloud.apigateway.Service("example", {
         "OUTER",
     ],
     ipVersion: "IPv4",
-    uniqVpcId: tencentcloud_vpc.vpc.id,
+    uniqVpcId: vpc.id,
     instanceId: "instance-rc6fcv4e",
     tags: {
         createdBy: "terraform",
@@ -239,11 +320,16 @@ const example = new tencentcloud.apigateway.Service("example", {
     testLimit: 500,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-example = tencentcloud.api_gateway.Service("example",
+example = tencentcloud.apigateway.Service("example",
     service_name="tf-example",
     protocol="http&https",
     service_desc="desc.",
@@ -252,7 +338,7 @@ example = tencentcloud.api_gateway.Service("example",
         "OUTER",
     ],
     ip_version="IPv4",
-    uniq_vpc_id=tencentcloud_vpc["vpc"]["id"],
+    uniq_vpc_id=vpc["id"],
     instance_id="instance-rc6fcv4e",
     tags={
         "createdBy": "terraform",
@@ -261,6 +347,51 @@ example = tencentcloud.api_gateway.Service("example",
     pre_limit=500,
     test_limit=500)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := apigateway.NewService(ctx, "example", &apigateway.ServiceArgs{
+			ServiceName: pulumi.String("tf-example"),
+			Protocol:    pulumi.String("http&https"),
+			ServiceDesc: pulumi.String("desc."),
+			NetTypes: pulumi.StringArray{
+				pulumi.String("INNER"),
+				pulumi.String("OUTER"),
+			},
+			IpVersion:  pulumi.String("IPv4"),
+			UniqVpcId:  pulumi.Any(vpc.Id),
+			InstanceId: pulumi.String("instance-rc6fcv4e"),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+			ReleaseLimit: pulumi.Int(500),
+			PreLimit:     pulumi.Int(500),
+			TestLimit:    pulumi.Int(500),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -280,7 +411,7 @@ return await Deployment.RunAsync(() =>
             "OUTER",
         },
         IpVersion = "IPv4",
-        UniqVpcId = tencentcloud_vpc.Vpc.Id,
+        UniqVpcId = vpc.Id,
         InstanceId = "instance-rc6fcv4e",
         Tags = 
         {
@@ -293,41 +424,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := ApiGateway.NewService(ctx, "example", &ApiGateway.ServiceArgs{
-			ServiceName: pulumi.String("tf-example"),
-			Protocol:    pulumi.String("http&https"),
-			ServiceDesc: pulumi.String("desc."),
-			NetTypes: pulumi.StringArray{
-				pulumi.String("INNER"),
-				pulumi.String("OUTER"),
-			},
-			IpVersion:  pulumi.String("IPv4"),
-			UniqVpcId:  pulumi.Any(tencentcloud_vpc.Vpc.Id),
-			InstanceId: pulumi.String("instance-rc6fcv4e"),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-			ReleaseLimit: pulumi.Int(500),
-			PreLimit:     pulumi.Int(500),
-			TestLimit:    pulumi.Int(500),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -336,8 +437,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.ApiGateway.Service;
 import com.pulumi.tencentcloud.ApiGateway.ServiceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -349,7 +450,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new Service("example", ServiceArgs.builder()        
+        var example = new Service("example", ServiceArgs.builder()
             .serviceName("tf-example")
             .protocol("http&https")
             .serviceDesc("desc.")
@@ -357,7 +458,7 @@ public class App {
                 "INNER",
                 "OUTER")
             .ipVersion("IPv4")
-            .uniqVpcId(tencentcloud_vpc.vpc().id())
+            .uniqVpcId(vpc.id())
             .instanceId("instance-rc6fcv4e")
             .tags(Map.of("createdBy", "terraform"))
             .releaseLimit(500)
@@ -368,6 +469,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
@@ -380,7 +486,7 @@ resources:
         - INNER
         - OUTER
       ipVersion: IPv4
-      uniqVpcId: ${tencentcloud_vpc.vpc.id}
+      uniqVpcId: ${vpc.id}
       instanceId: instance-rc6fcv4e
       tags:
         createdBy: terraform
@@ -388,76 +494,146 @@ resources:
       preLimit: 500
       testLimit: 500
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_apigateway_service" "example" {
+  service_name = "tf-example"
+  protocol     = "http&https"
+  service_desc = "desc."
+  net_types    = ["INNER", "OUTER"]
+  ip_version   = "IPv4"
+  uniq_vpc_id  = vpc.id
+  instance_id  = "instance-rc6fcv4e"
+  tags = {
+    "createdBy" = "terraform"
+  }
+  release_limit = 500
+  pre_limit     = 500
+  test_limit    = 500
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateService](https://www.tencentcloud.com/search/?wd=CreateService&type=document&lang=en)
+  - [DescribeService](https://www.tencentcloud.com/search/?wd=DescribeService&type=document&lang=en)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [ModifyServiceEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=ModifyServiceEnvironmentStrategy&type=document&lang=en)
+* Read:
+  - [DescribeApiUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeApiUsagePlan&type=document&lang=en)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [DescribeService](https://www.tencentcloud.com/search/?wd=DescribeService&type=document&lang=en)
+  - [DescribeServiceEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=DescribeServiceEnvironmentStrategy&type=document&lang=en)
+  - [DescribeServiceUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeServiceUsagePlan&type=document&lang=en)
+* Update:
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [ModifyService](https://www.tencentcloud.com/search/?wd=ModifyService&type=document&lang=en)
+  - [ModifyServiceEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=ModifyServiceEnvironmentStrategy&type=document&lang=en)
+* Delete:
+  - [DeleteService](https://www.tencentcloud.com/search/?wd=DeleteService&type=document&lang=en)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [UnReleaseService](https://www.tencentcloud.com/search/?wd=UnReleaseService&type=document&lang=en)
 
 
 ## Create Service Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Service</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ServiceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Service</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ServiceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Service</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ServiceArgs</a></span><span class="p">,</span>
+            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Service</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+            <span class="nx">net_types</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+            <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">service_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">exclusive_set_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">ip_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">net_types</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
             <span class="nx">pre_limit</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-            <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">release_limit</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
             <span class="nx">service_desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">service_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+            <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
             <span class="nx">test_limit</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-            <span class="nx">uniq_vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Service</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ServiceArgs</a></span><span class="p">,</span>
-            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+            <span class="nx">uniq_vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewService</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ServiceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Service</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewService</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ServiceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Service</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Service</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ServiceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Service</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ServiceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Service</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ServiceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Service</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ServiceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:ApiGateway:Service</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:ApiGateway:Service</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_api_gateway_service&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -478,7 +654,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -595,11 +771,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Service Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Service resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -615,8 +799,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</p>
-</dd><dt class="property-required"
+    <dd>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -624,8 +807,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-required"
+    <dd>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-required"
             title="Required">
         <span id="servicename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Name</a>
@@ -633,8 +815,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom service name.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Custom service name.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="exclusivesetname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusivesetname_csharp" style="color: inherit; text-decoration: inherit;">Exclusive<wbr>Set<wbr>Name</a>
@@ -642,9 +823,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.81.9.</p>
-</p></dd><dt class="property-optional property-replacement"
+    <dd>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.<p class="property-message">Deprecated: It has been deprecated from version 1.81.9.</p></dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -652,8 +831,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Exclusive instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Exclusive instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="ipversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipversion_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Version</a>
@@ -661,8 +839,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="prelimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prelimit_csharp" style="color: inherit; text-decoration: inherit;">Pre<wbr>Limit</a>
@@ -670,8 +847,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="releaselimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releaselimit_csharp" style="color: inherit; text-decoration: inherit;">Release<wbr>Limit</a>
@@ -679,8 +855,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicedesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicedesc_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Desc</a>
@@ -688,17 +863,15 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom service description.</p>
-</dd><dt class="property-optional"
+    <dd>Custom service description.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="testlimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#testlimit_csharp" style="color: inherit; text-decoration: inherit;">Test<wbr>Limit</a>
@@ -706,8 +879,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqvpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_csharp" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -715,8 +887,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -730,8 +901,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</p>
-</dd><dt class="property-required"
+    <dd>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -739,8 +909,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-required"
+    <dd>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-required"
             title="Required">
         <span id="servicename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Name</a>
@@ -748,8 +917,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom service name.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Custom service name.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="exclusivesetname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusivesetname_go" style="color: inherit; text-decoration: inherit;">Exclusive<wbr>Set<wbr>Name</a>
@@ -757,9 +925,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.81.9.</p>
-</p></dd><dt class="property-optional property-replacement"
+    <dd>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.<p class="property-message">Deprecated: It has been deprecated from version 1.81.9.</p></dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -767,8 +933,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Exclusive instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Exclusive instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="ipversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipversion_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Version</a>
@@ -776,8 +941,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="prelimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prelimit_go" style="color: inherit; text-decoration: inherit;">Pre<wbr>Limit</a>
@@ -785,8 +949,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="releaselimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releaselimit_go" style="color: inherit; text-decoration: inherit;">Release<wbr>Limit</a>
@@ -794,8 +957,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicedesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicedesc_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Desc</a>
@@ -803,17 +965,15 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom service description.</p>
-</dd><dt class="property-optional"
+    <dd>Custom service description.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="testlimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#testlimit_go" style="color: inherit; text-decoration: inherit;">Test<wbr>Limit</a>
@@ -821,8 +981,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqvpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_go" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -830,8 +989,109 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="net_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#net_types_hcl" style="color: inherit; text-decoration: inherit;">net_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_name_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom service name.</dd><dt class="property-optional property-deprecated property-replacement"
+            title="Optional, Deprecated">
+        <span id="exclusive_set_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusive_set_name_hcl" style="color: inherit; text-decoration: inherit;">exclusive_<wbr>set_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.<p class="property-message">Deprecated: It has been deprecated from version 1.81.9.</p></dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive instance ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="ip_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_version_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="pre_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pre_limit_hcl" style="color: inherit; text-decoration: inherit;">pre_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="release_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#release_limit_hcl" style="color: inherit; text-decoration: inherit;">release_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="service_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_desc_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom service description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="test_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#test_limit_hcl" style="color: inherit; text-decoration: inherit;">test_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="uniq_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniq_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -845,8 +1105,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</p>
-</dd><dt class="property-required"
+    <dd>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -854,8 +1113,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-required"
+    <dd>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-required"
             title="Required">
         <span id="servicename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_java" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -863,8 +1121,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom service name.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Custom service name.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="exclusivesetname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusivesetname_java" style="color: inherit; text-decoration: inherit;">exclusive<wbr>Set<wbr>Name</a>
@@ -872,9 +1129,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.81.9.</p>
-</p></dd><dt class="property-optional property-replacement"
+    <dd>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.<p class="property-message">Deprecated: It has been deprecated from version 1.81.9.</p></dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -882,8 +1137,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Exclusive instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Exclusive instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="ipversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipversion_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Version</a>
@@ -891,8 +1145,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="prelimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prelimit_java" style="color: inherit; text-decoration: inherit;">pre<wbr>Limit</a>
@@ -900,8 +1153,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="releaselimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releaselimit_java" style="color: inherit; text-decoration: inherit;">release<wbr>Limit</a>
@@ -909,8 +1161,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicedesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicedesc_java" style="color: inherit; text-decoration: inherit;">service<wbr>Desc</a>
@@ -918,17 +1169,15 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom service description.</p>
-</dd><dt class="property-optional"
+    <dd>Custom service description.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="testlimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#testlimit_java" style="color: inherit; text-decoration: inherit;">test<wbr>Limit</a>
@@ -936,8 +1185,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqvpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_java" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -945,8 +1193,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -960,8 +1207,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</p>
-</dd><dt class="property-required"
+    <dd>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -969,8 +1215,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-required"
+    <dd>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-required"
             title="Required">
         <span id="servicename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -978,8 +1223,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom service name.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Custom service name.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="exclusivesetname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusivesetname_nodejs" style="color: inherit; text-decoration: inherit;">exclusive<wbr>Set<wbr>Name</a>
@@ -987,9 +1231,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.81.9.</p>
-</p></dd><dt class="property-optional property-replacement"
+    <dd>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.<p class="property-message">Deprecated: It has been deprecated from version 1.81.9.</p></dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -997,8 +1239,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Exclusive instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Exclusive instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="ipversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipversion_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Version</a>
@@ -1006,8 +1247,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="prelimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prelimit_nodejs" style="color: inherit; text-decoration: inherit;">pre<wbr>Limit</a>
@@ -1015,8 +1255,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="releaselimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releaselimit_nodejs" style="color: inherit; text-decoration: inherit;">release<wbr>Limit</a>
@@ -1024,8 +1263,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicedesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicedesc_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Desc</a>
@@ -1033,17 +1271,15 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom service description.</p>
-</dd><dt class="property-optional"
+    <dd>Custom service description.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="testlimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#testlimit_nodejs" style="color: inherit; text-decoration: inherit;">test<wbr>Limit</a>
@@ -1051,8 +1287,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqvpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_nodejs" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -1060,8 +1295,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1075,8 +1309,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</p>
-</dd><dt class="property-required"
+    <dd>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1084,8 +1317,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-required"
+    <dd>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-required"
             title="Required">
         <span id="service_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_name_python" style="color: inherit; text-decoration: inherit;">service_<wbr>name</a>
@@ -1093,8 +1325,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom service name.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Custom service name.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="exclusive_set_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusive_set_name_python" style="color: inherit; text-decoration: inherit;">exclusive_<wbr>set_<wbr>name</a>
@@ -1102,9 +1333,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.81.9.</p>
-</p></dd><dt class="property-optional property-replacement"
+    <dd>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.<p class="property-message">Deprecated: It has been deprecated from version 1.81.9.</p></dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1112,8 +1341,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Exclusive instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Exclusive instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="ip_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_version_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>version</a>
@@ -1121,8 +1349,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="pre_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pre_limit_python" style="color: inherit; text-decoration: inherit;">pre_<wbr>limit</a>
@@ -1130,8 +1357,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="release_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#release_limit_python" style="color: inherit; text-decoration: inherit;">release_<wbr>limit</a>
@@ -1139,8 +1365,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="service_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_desc_python" style="color: inherit; text-decoration: inherit;">service_<wbr>desc</a>
@@ -1148,17 +1373,15 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom service description.</p>
-</dd><dt class="property-optional"
+    <dd>Custom service description.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="test_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#test_limit_python" style="color: inherit; text-decoration: inherit;">test_<wbr>limit</a>
@@ -1166,8 +1389,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniq_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniq_vpc_id_python" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
@@ -1175,8 +1397,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1190,8 +1411,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</p>
-</dd><dt class="property-required"
+    <dd>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1199,8 +1419,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-required"
+    <dd>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-required"
             title="Required">
         <span id="servicename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -1208,8 +1427,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom service name.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Custom service name.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="exclusivesetname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusivesetname_yaml" style="color: inherit; text-decoration: inherit;">exclusive<wbr>Set<wbr>Name</a>
@@ -1217,9 +1435,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.81.9.</p>
-</p></dd><dt class="property-optional property-replacement"
+    <dd>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.<p class="property-message">Deprecated: It has been deprecated from version 1.81.9.</p></dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1227,8 +1443,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Exclusive instance ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Exclusive instance ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="ipversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipversion_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Version</a>
@@ -1236,8 +1451,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="prelimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prelimit_yaml" style="color: inherit; text-decoration: inherit;">pre<wbr>Limit</a>
@@ -1245,8 +1459,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="releaselimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#releaselimit_yaml" style="color: inherit; text-decoration: inherit;">release<wbr>Limit</a>
@@ -1254,8 +1467,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicedesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicedesc_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Desc</a>
@@ -1263,17 +1475,15 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom service description.</p>
-</dd><dt class="property-optional"
+    <dd>Custom service description.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="testlimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#testlimit_yaml" style="color: inherit; text-decoration: inherit;">test<wbr>Limit</a>
@@ -1281,8 +1491,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqvpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_yaml" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -1290,8 +1499,7 @@ The Service resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1312,8 +1520,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serviceapilist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Outputs.<wbr>Service<wbr>Api<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of APIs.</p>
-</dd><dt class="property-"
+    <dd>A list of APIs.</dd><dt class="property-"
             title="">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1321,8 +1528,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1330,8 +1536,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="innerhttpport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#innerhttpport_csharp" style="color: inherit; text-decoration: inherit;">Inner<wbr>Http<wbr>Port</a>
@@ -1339,8 +1544,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port number for http access over private network.</p>
-</dd><dt class="property-"
+    <dd>Port number for http access over private network.</dd><dt class="property-"
             title="">
         <span id="innerhttpsport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#innerhttpsport_csharp" style="color: inherit; text-decoration: inherit;">Inner<wbr>Https<wbr>Port</a>
@@ -1348,8 +1552,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port number for https access over private network.</p>
-</dd><dt class="property-"
+    <dd>Port number for https access over private network.</dd><dt class="property-"
             title="">
         <span id="internalsubdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internalsubdomain_csharp" style="color: inherit; text-decoration: inherit;">Internal<wbr>Sub<wbr>Domain</a>
@@ -1357,8 +1560,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private network access subdomain name.</p>
-</dd><dt class="property-"
+    <dd>Private network access subdomain name.</dd><dt class="property-"
             title="">
         <span id="modifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_csharp" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -1366,8 +1568,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="outersubdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outersubdomain_csharp" style="color: inherit; text-decoration: inherit;">Outer<wbr>Sub<wbr>Domain</a>
@@ -1375,8 +1576,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network access subdomain name.</p>
-</dd><dt class="property-"
+    <dd>Public network access subdomain name.</dd><dt class="property-"
             title="">
         <span id="usageplanlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanlists_csharp" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Lists</a>
@@ -1384,8 +1584,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serviceusageplanlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Outputs.<wbr>Service<wbr>Usage<wbr>Plan<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of attach usage plans.</p>
-</dd></dl>
+    <dd>A list of attach usage plans.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1399,8 +1598,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serviceapilist">[]Service<wbr>Api<wbr>List</a></span>
     </dt>
-    <dd><p>A list of APIs.</p>
-</dd><dt class="property-"
+    <dd>A list of APIs.</dd><dt class="property-"
             title="">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1408,8 +1606,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1417,8 +1614,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="innerhttpport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#innerhttpport_go" style="color: inherit; text-decoration: inherit;">Inner<wbr>Http<wbr>Port</a>
@@ -1426,8 +1622,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port number for http access over private network.</p>
-</dd><dt class="property-"
+    <dd>Port number for http access over private network.</dd><dt class="property-"
             title="">
         <span id="innerhttpsport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#innerhttpsport_go" style="color: inherit; text-decoration: inherit;">Inner<wbr>Https<wbr>Port</a>
@@ -1435,8 +1630,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port number for https access over private network.</p>
-</dd><dt class="property-"
+    <dd>Port number for https access over private network.</dd><dt class="property-"
             title="">
         <span id="internalsubdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internalsubdomain_go" style="color: inherit; text-decoration: inherit;">Internal<wbr>Sub<wbr>Domain</a>
@@ -1444,8 +1638,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private network access subdomain name.</p>
-</dd><dt class="property-"
+    <dd>Private network access subdomain name.</dd><dt class="property-"
             title="">
         <span id="modifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_go" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -1453,8 +1646,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="outersubdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outersubdomain_go" style="color: inherit; text-decoration: inherit;">Outer<wbr>Sub<wbr>Domain</a>
@@ -1462,8 +1654,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network access subdomain name.</p>
-</dd><dt class="property-"
+    <dd>Public network access subdomain name.</dd><dt class="property-"
             title="">
         <span id="usageplanlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanlists_go" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Lists</a>
@@ -1471,8 +1662,85 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serviceusageplanlist">[]Service<wbr>Usage<wbr>Plan<wbr>List</a></span>
     </dt>
-    <dd><p>A list of attach usage plans.</p>
-</dd></dl>
+    <dd>A list of attach usage plans.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="api_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_lists_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#serviceapilist">list(object)</a></span>
+    </dt>
+    <dd>A list of APIs.</dd><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="inner_http_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inner_http_port_hcl" style="color: inherit; text-decoration: inherit;">inner_<wbr>http_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port number for http access over private network.</dd><dt class="property-"
+            title="">
+        <span id="inner_https_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inner_https_port_hcl" style="color: inherit; text-decoration: inherit;">inner_<wbr>https_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port number for https access over private network.</dd><dt class="property-"
+            title="">
+        <span id="internal_sub_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internal_sub_domain_hcl" style="color: inherit; text-decoration: inherit;">internal_<wbr>sub_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Private network access subdomain name.</dd><dt class="property-"
+            title="">
+        <span id="modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_hcl" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
+            title="">
+        <span id="outer_sub_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outer_sub_domain_hcl" style="color: inherit; text-decoration: inherit;">outer_<wbr>sub_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Public network access subdomain name.</dd><dt class="property-"
+            title="">
+        <span id="usage_plan_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_lists_hcl" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#serviceusageplanlist">list(object)</a></span>
+    </dt>
+    <dd>A list of attach usage plans.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1486,8 +1754,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serviceapilist">List&lt;Service<wbr>Api<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of APIs.</p>
-</dd><dt class="property-"
+    <dd>A list of APIs.</dd><dt class="property-"
             title="">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1495,8 +1762,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1504,8 +1770,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="innerhttpport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#innerhttpport_java" style="color: inherit; text-decoration: inherit;">inner<wbr>Http<wbr>Port</a>
@@ -1513,8 +1778,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port number for http access over private network.</p>
-</dd><dt class="property-"
+    <dd>Port number for http access over private network.</dd><dt class="property-"
             title="">
         <span id="innerhttpsport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#innerhttpsport_java" style="color: inherit; text-decoration: inherit;">inner<wbr>Https<wbr>Port</a>
@@ -1522,8 +1786,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port number for https access over private network.</p>
-</dd><dt class="property-"
+    <dd>Port number for https access over private network.</dd><dt class="property-"
             title="">
         <span id="internalsubdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internalsubdomain_java" style="color: inherit; text-decoration: inherit;">internal<wbr>Sub<wbr>Domain</a>
@@ -1531,8 +1794,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private network access subdomain name.</p>
-</dd><dt class="property-"
+    <dd>Private network access subdomain name.</dd><dt class="property-"
             title="">
         <span id="modifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_java" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1540,8 +1802,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="outersubdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outersubdomain_java" style="color: inherit; text-decoration: inherit;">outer<wbr>Sub<wbr>Domain</a>
@@ -1549,8 +1810,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public network access subdomain name.</p>
-</dd><dt class="property-"
+    <dd>Public network access subdomain name.</dd><dt class="property-"
             title="">
         <span id="usageplanlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanlists_java" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Lists</a>
@@ -1558,8 +1818,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serviceusageplanlist">List&lt;Service<wbr>Usage<wbr>Plan<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of attach usage plans.</p>
-</dd></dl>
+    <dd>A list of attach usage plans.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1573,8 +1832,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serviceapilist">Service<wbr>Api<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of APIs.</p>
-</dd><dt class="property-"
+    <dd>A list of APIs.</dd><dt class="property-"
             title="">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1582,8 +1840,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1591,8 +1848,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="innerhttpport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#innerhttpport_nodejs" style="color: inherit; text-decoration: inherit;">inner<wbr>Http<wbr>Port</a>
@@ -1600,8 +1856,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port number for http access over private network.</p>
-</dd><dt class="property-"
+    <dd>Port number for http access over private network.</dd><dt class="property-"
             title="">
         <span id="innerhttpsport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#innerhttpsport_nodejs" style="color: inherit; text-decoration: inherit;">inner<wbr>Https<wbr>Port</a>
@@ -1609,8 +1864,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port number for https access over private network.</p>
-</dd><dt class="property-"
+    <dd>Port number for https access over private network.</dd><dt class="property-"
             title="">
         <span id="internalsubdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internalsubdomain_nodejs" style="color: inherit; text-decoration: inherit;">internal<wbr>Sub<wbr>Domain</a>
@@ -1618,8 +1872,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private network access subdomain name.</p>
-</dd><dt class="property-"
+    <dd>Private network access subdomain name.</dd><dt class="property-"
             title="">
         <span id="modifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_nodejs" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1627,8 +1880,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="outersubdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outersubdomain_nodejs" style="color: inherit; text-decoration: inherit;">outer<wbr>Sub<wbr>Domain</a>
@@ -1636,8 +1888,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network access subdomain name.</p>
-</dd><dt class="property-"
+    <dd>Public network access subdomain name.</dd><dt class="property-"
             title="">
         <span id="usageplanlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanlists_nodejs" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Lists</a>
@@ -1645,8 +1896,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serviceusageplanlist">Service<wbr>Usage<wbr>Plan<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of attach usage plans.</p>
-</dd></dl>
+    <dd>A list of attach usage plans.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1658,10 +1908,9 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_lists_python" style="color: inherit; text-decoration: inherit;">api_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serviceapilist">Service<wbr>Api<wbr>List]</a></span>
+        <span class="property-type"><a href="#serviceapilist">Sequence[Service<wbr>Api<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of APIs.</p>
-</dd><dt class="property-"
+    <dd>A list of APIs.</dd><dt class="property-"
             title="">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1669,8 +1918,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1678,8 +1926,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="inner_http_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inner_http_port_python" style="color: inherit; text-decoration: inherit;">inner_<wbr>http_<wbr>port</a>
@@ -1687,8 +1934,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port number for http access over private network.</p>
-</dd><dt class="property-"
+    <dd>Port number for http access over private network.</dd><dt class="property-"
             title="">
         <span id="inner_https_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inner_https_port_python" style="color: inherit; text-decoration: inherit;">inner_<wbr>https_<wbr>port</a>
@@ -1696,8 +1942,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port number for https access over private network.</p>
-</dd><dt class="property-"
+    <dd>Port number for https access over private network.</dd><dt class="property-"
             title="">
         <span id="internal_sub_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internal_sub_domain_python" style="color: inherit; text-decoration: inherit;">internal_<wbr>sub_<wbr>domain</a>
@@ -1705,8 +1950,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Private network access subdomain name.</p>
-</dd><dt class="property-"
+    <dd>Private network access subdomain name.</dd><dt class="property-"
             title="">
         <span id="modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_python" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
@@ -1714,8 +1958,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="outer_sub_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outer_sub_domain_python" style="color: inherit; text-decoration: inherit;">outer_<wbr>sub_<wbr>domain</a>
@@ -1723,17 +1966,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Public network access subdomain name.</p>
-</dd><dt class="property-"
+    <dd>Public network access subdomain name.</dd><dt class="property-"
             title="">
         <span id="usage_plan_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_lists_python" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serviceusageplanlist">Service<wbr>Usage<wbr>Plan<wbr>List]</a></span>
+        <span class="property-type"><a href="#serviceusageplanlist">Sequence[Service<wbr>Usage<wbr>Plan<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of attach usage plans.</p>
-</dd></dl>
+    <dd>A list of attach usage plans.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1747,8 +1988,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serviceapilist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of APIs.</p>
-</dd><dt class="property-"
+    <dd>A list of APIs.</dd><dt class="property-"
             title="">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1756,8 +1996,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1765,8 +2004,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="innerhttpport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#innerhttpport_yaml" style="color: inherit; text-decoration: inherit;">inner<wbr>Http<wbr>Port</a>
@@ -1774,8 +2012,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port number for http access over private network.</p>
-</dd><dt class="property-"
+    <dd>Port number for http access over private network.</dd><dt class="property-"
             title="">
         <span id="innerhttpsport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#innerhttpsport_yaml" style="color: inherit; text-decoration: inherit;">inner<wbr>Https<wbr>Port</a>
@@ -1783,8 +2020,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port number for https access over private network.</p>
-</dd><dt class="property-"
+    <dd>Port number for https access over private network.</dd><dt class="property-"
             title="">
         <span id="internalsubdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internalsubdomain_yaml" style="color: inherit; text-decoration: inherit;">internal<wbr>Sub<wbr>Domain</a>
@@ -1792,8 +2028,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private network access subdomain name.</p>
-</dd><dt class="property-"
+    <dd>Private network access subdomain name.</dd><dt class="property-"
             title="">
         <span id="modifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_yaml" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1801,8 +2036,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="outersubdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outersubdomain_yaml" style="color: inherit; text-decoration: inherit;">outer<wbr>Sub<wbr>Domain</a>
@@ -1810,8 +2044,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public network access subdomain name.</p>
-</dd><dt class="property-"
+    <dd>Public network access subdomain name.</dd><dt class="property-"
             title="">
         <span id="usageplanlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanlists_yaml" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Lists</a>
@@ -1819,8 +2052,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serviceusageplanlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of attach usage plans.</p>
-</dd></dl>
+    <dd>A list of attach usage plans.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1830,22 +2062,22 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Service resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ServiceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Service</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ServiceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Service</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">api_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_apigateway.ServiceApiListArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">api_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[ServiceApiListArgs]]</span> = None<span class="p">,</span>
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">exclusive_set_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">inner_http_port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
@@ -1861,108 +2093,147 @@ Get an existing Service resource's state with the given name, ID, and optional e
         <span class="nx">release_limit</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">service_desc</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">service_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">test_limit</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">uniq_vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">usage_plan_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_apigateway.ServiceUsagePlanListArgs]]</span> = None<span class="p">) -&gt;</span> Service</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">usage_plan_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[ServiceUsagePlanListArgs]]</span> = None<span class="p">) -&gt;</span> Service</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetService<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ServiceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Service</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetService<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ServiceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Service</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Service</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ServiceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Service</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ServiceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Service</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ServiceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Service</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ServiceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingService</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:ApiGateway:Service</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_api_gateway_service</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ServiceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ServiceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1970,28 +2241,31 @@ Get an existing Service resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ServiceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1999,28 +2273,31 @@ Get an existing Service resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ServiceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2038,10 +2315,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apilists_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serviceapilist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Service<wbr>Api<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#serviceapilist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Service<wbr>Api<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of APIs.</p>
-</dd><dt class="property-optional"
+    <dd>A list of APIs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2049,8 +2325,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="state_exclusivesetname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_exclusivesetname_csharp" style="color: inherit; text-decoration: inherit;">Exclusive<wbr>Set<wbr>Name</a>
@@ -2058,9 +2333,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.81.9.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.<p class="property-message">Deprecated: It has been deprecated from version 1.81.9.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_innerhttpport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_innerhttpport_csharp" style="color: inherit; text-decoration: inherit;">Inner<wbr>Http<wbr>Port</a>
@@ -2068,8 +2341,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port number for http access over private network.</p>
-</dd><dt class="property-optional"
+    <dd>Port number for http access over private network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_innerhttpsport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_innerhttpsport_csharp" style="color: inherit; text-decoration: inherit;">Inner<wbr>Https<wbr>Port</a>
@@ -2077,8 +2349,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port number for https access over private network.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port number for https access over private network.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -2086,8 +2357,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Exclusive instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Exclusive instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internalsubdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internalsubdomain_csharp" style="color: inherit; text-decoration: inherit;">Internal<wbr>Sub<wbr>Domain</a>
@@ -2095,8 +2365,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private network access subdomain name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Private network access subdomain name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ipversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipversion_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Version</a>
@@ -2104,8 +2373,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_modifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modifytime_csharp" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -2113,8 +2381,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nettypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nettypes_csharp" style="color: inherit; text-decoration: inherit;">Net<wbr>Types</a>
@@ -2122,8 +2389,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</p>
-</dd><dt class="property-optional"
+    <dd>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_outersubdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_outersubdomain_csharp" style="color: inherit; text-decoration: inherit;">Outer<wbr>Sub<wbr>Domain</a>
@@ -2131,8 +2397,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network access subdomain name.</p>
-</dd><dt class="property-optional"
+    <dd>Public network access subdomain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prelimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prelimit_csharp" style="color: inherit; text-decoration: inherit;">Pre<wbr>Limit</a>
@@ -2140,8 +2405,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -2149,8 +2413,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_releaselimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releaselimit_csharp" style="color: inherit; text-decoration: inherit;">Release<wbr>Limit</a>
@@ -2158,8 +2421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicedesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicedesc_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Desc</a>
@@ -2167,8 +2429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom service description.</p>
-</dd><dt class="property-optional"
+    <dd>Custom service description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicename_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Name</a>
@@ -2176,17 +2437,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom service name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom service name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_testlimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_testlimit_csharp" style="color: inherit; text-decoration: inherit;">Test<wbr>Limit</a>
@@ -2194,8 +2453,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_csharp" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -2203,17 +2461,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usageplanlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usageplanlists_csharp" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serviceusageplanlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Service<wbr>Usage<wbr>Plan<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#serviceusageplanlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Service<wbr>Usage<wbr>Plan<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of attach usage plans.</p>
-</dd></dl>
+    <dd>A list of attach usage plans.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2227,8 +2483,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serviceapilist">[]Service<wbr>Api<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>A list of APIs.</p>
-</dd><dt class="property-optional"
+    <dd>A list of APIs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2236,8 +2491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="state_exclusivesetname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_exclusivesetname_go" style="color: inherit; text-decoration: inherit;">Exclusive<wbr>Set<wbr>Name</a>
@@ -2245,9 +2499,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.81.9.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.<p class="property-message">Deprecated: It has been deprecated from version 1.81.9.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_innerhttpport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_innerhttpport_go" style="color: inherit; text-decoration: inherit;">Inner<wbr>Http<wbr>Port</a>
@@ -2255,8 +2507,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port number for http access over private network.</p>
-</dd><dt class="property-optional"
+    <dd>Port number for http access over private network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_innerhttpsport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_innerhttpsport_go" style="color: inherit; text-decoration: inherit;">Inner<wbr>Https<wbr>Port</a>
@@ -2264,8 +2515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port number for https access over private network.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port number for https access over private network.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -2273,8 +2523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Exclusive instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Exclusive instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internalsubdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internalsubdomain_go" style="color: inherit; text-decoration: inherit;">Internal<wbr>Sub<wbr>Domain</a>
@@ -2282,8 +2531,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private network access subdomain name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Private network access subdomain name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ipversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipversion_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Version</a>
@@ -2291,8 +2539,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_modifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modifytime_go" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -2300,8 +2547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nettypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nettypes_go" style="color: inherit; text-decoration: inherit;">Net<wbr>Types</a>
@@ -2309,8 +2555,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</p>
-</dd><dt class="property-optional"
+    <dd>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_outersubdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_outersubdomain_go" style="color: inherit; text-decoration: inherit;">Outer<wbr>Sub<wbr>Domain</a>
@@ -2318,8 +2563,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network access subdomain name.</p>
-</dd><dt class="property-optional"
+    <dd>Public network access subdomain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prelimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prelimit_go" style="color: inherit; text-decoration: inherit;">Pre<wbr>Limit</a>
@@ -2327,8 +2571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -2336,8 +2579,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_releaselimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releaselimit_go" style="color: inherit; text-decoration: inherit;">Release<wbr>Limit</a>
@@ -2345,8 +2587,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicedesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicedesc_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Desc</a>
@@ -2354,8 +2595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom service description.</p>
-</dd><dt class="property-optional"
+    <dd>Custom service description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicename_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Name</a>
@@ -2363,17 +2603,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom service name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom service name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_testlimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_testlimit_go" style="color: inherit; text-decoration: inherit;">Test<wbr>Limit</a>
@@ -2381,8 +2619,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_go" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -2390,8 +2627,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usageplanlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usageplanlists_go" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Lists</a>
@@ -2399,8 +2635,173 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serviceusageplanlist">[]Service<wbr>Usage<wbr>Plan<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>A list of attach usage plans.</p>
-</dd></dl>
+    <dd>A list of attach usage plans.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_api_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_api_lists_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#serviceapilist">list(object)</a></span>
+    </dt>
+    <dd>A list of APIs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-deprecated property-replacement"
+            title="Optional, Deprecated">
+        <span id="state_exclusive_set_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_exclusive_set_name_hcl" style="color: inherit; text-decoration: inherit;">exclusive_<wbr>set_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.<p class="property-message">Deprecated: It has been deprecated from version 1.81.9.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_inner_http_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_inner_http_port_hcl" style="color: inherit; text-decoration: inherit;">inner_<wbr>http_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port number for http access over private network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_inner_https_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_inner_https_port_hcl" style="color: inherit; text-decoration: inherit;">inner_<wbr>https_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port number for https access over private network.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive instance ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_internal_sub_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internal_sub_domain_hcl" style="color: inherit; text-decoration: inherit;">internal_<wbr>sub_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Private network access subdomain name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_ip_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_version_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modify_time_hcl" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_net_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_net_types_hcl" style="color: inherit; text-decoration: inherit;">net_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_outer_sub_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_outer_sub_domain_hcl" style="color: inherit; text-decoration: inherit;">outer_<wbr>sub_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Public network access subdomain name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_pre_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pre_limit_hcl" style="color: inherit; text-decoration: inherit;">pre_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_release_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_release_limit_hcl" style="color: inherit; text-decoration: inherit;">release_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_service_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_desc_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom service description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_service_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_name_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom service name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_test_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_test_limit_hcl" style="color: inherit; text-decoration: inherit;">test_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_uniq_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniq_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_usage_plan_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usage_plan_lists_hcl" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#serviceusageplanlist">list(object)</a></span>
+    </dt>
+    <dd>A list of attach usage plans.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2412,10 +2813,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apilists_java" style="color: inherit; text-decoration: inherit;">api<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serviceapilist">List&lt;Service<wbr>Api<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#serviceapilist">List&lt;Service<wbr>Api<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of APIs.</p>
-</dd><dt class="property-optional"
+    <dd>A list of APIs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2423,8 +2823,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="state_exclusivesetname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_exclusivesetname_java" style="color: inherit; text-decoration: inherit;">exclusive<wbr>Set<wbr>Name</a>
@@ -2432,9 +2831,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.81.9.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.<p class="property-message">Deprecated: It has been deprecated from version 1.81.9.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_innerhttpport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_innerhttpport_java" style="color: inherit; text-decoration: inherit;">inner<wbr>Http<wbr>Port</a>
@@ -2442,8 +2839,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port number for http access over private network.</p>
-</dd><dt class="property-optional"
+    <dd>Port number for http access over private network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_innerhttpsport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_innerhttpsport_java" style="color: inherit; text-decoration: inherit;">inner<wbr>Https<wbr>Port</a>
@@ -2451,8 +2847,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port number for https access over private network.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port number for https access over private network.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2460,8 +2855,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Exclusive instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Exclusive instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internalsubdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internalsubdomain_java" style="color: inherit; text-decoration: inherit;">internal<wbr>Sub<wbr>Domain</a>
@@ -2469,8 +2863,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private network access subdomain name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Private network access subdomain name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ipversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipversion_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Version</a>
@@ -2478,8 +2871,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_modifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modifytime_java" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -2487,8 +2879,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nettypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nettypes_java" style="color: inherit; text-decoration: inherit;">net<wbr>Types</a>
@@ -2496,8 +2887,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</p>
-</dd><dt class="property-optional"
+    <dd>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_outersubdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_outersubdomain_java" style="color: inherit; text-decoration: inherit;">outer<wbr>Sub<wbr>Domain</a>
@@ -2505,8 +2895,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public network access subdomain name.</p>
-</dd><dt class="property-optional"
+    <dd>Public network access subdomain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prelimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prelimit_java" style="color: inherit; text-decoration: inherit;">pre<wbr>Limit</a>
@@ -2514,8 +2903,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2523,8 +2911,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_releaselimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releaselimit_java" style="color: inherit; text-decoration: inherit;">release<wbr>Limit</a>
@@ -2532,8 +2919,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicedesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicedesc_java" style="color: inherit; text-decoration: inherit;">service<wbr>Desc</a>
@@ -2541,8 +2927,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom service description.</p>
-</dd><dt class="property-optional"
+    <dd>Custom service description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicename_java" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -2550,17 +2935,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom service name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom service name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_testlimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_testlimit_java" style="color: inherit; text-decoration: inherit;">test<wbr>Limit</a>
@@ -2568,8 +2951,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_java" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -2577,17 +2959,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usageplanlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usageplanlists_java" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serviceusageplanlist">List&lt;Service<wbr>Usage<wbr>Plan<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#serviceusageplanlist">List&lt;Service<wbr>Usage<wbr>Plan<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of attach usage plans.</p>
-</dd></dl>
+    <dd>A list of attach usage plans.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2599,10 +2979,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_apilists_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serviceapilist">Service<wbr>Api<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#serviceapilist">Service<wbr>Api<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of APIs.</p>
-</dd><dt class="property-optional"
+    <dd>A list of APIs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2610,8 +2989,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="state_exclusivesetname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_exclusivesetname_nodejs" style="color: inherit; text-decoration: inherit;">exclusive<wbr>Set<wbr>Name</a>
@@ -2619,9 +2997,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.81.9.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.<p class="property-message">Deprecated: It has been deprecated from version 1.81.9.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_innerhttpport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_innerhttpport_nodejs" style="color: inherit; text-decoration: inherit;">inner<wbr>Http<wbr>Port</a>
@@ -2629,8 +3005,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port number for http access over private network.</p>
-</dd><dt class="property-optional"
+    <dd>Port number for http access over private network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_innerhttpsport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_innerhttpsport_nodejs" style="color: inherit; text-decoration: inherit;">inner<wbr>Https<wbr>Port</a>
@@ -2638,8 +3013,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port number for https access over private network.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port number for https access over private network.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2647,8 +3021,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Exclusive instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Exclusive instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internalsubdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internalsubdomain_nodejs" style="color: inherit; text-decoration: inherit;">internal<wbr>Sub<wbr>Domain</a>
@@ -2656,8 +3029,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private network access subdomain name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Private network access subdomain name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ipversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipversion_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Version</a>
@@ -2665,8 +3037,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_modifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modifytime_nodejs" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -2674,8 +3045,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nettypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nettypes_nodejs" style="color: inherit; text-decoration: inherit;">net<wbr>Types</a>
@@ -2683,8 +3053,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</p>
-</dd><dt class="property-optional"
+    <dd>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_outersubdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_outersubdomain_nodejs" style="color: inherit; text-decoration: inherit;">outer<wbr>Sub<wbr>Domain</a>
@@ -2692,8 +3061,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network access subdomain name.</p>
-</dd><dt class="property-optional"
+    <dd>Public network access subdomain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prelimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prelimit_nodejs" style="color: inherit; text-decoration: inherit;">pre<wbr>Limit</a>
@@ -2701,8 +3069,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2710,8 +3077,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_releaselimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releaselimit_nodejs" style="color: inherit; text-decoration: inherit;">release<wbr>Limit</a>
@@ -2719,8 +3085,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicedesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicedesc_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Desc</a>
@@ -2728,8 +3093,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom service description.</p>
-</dd><dt class="property-optional"
+    <dd>Custom service description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicename_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -2737,17 +3101,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom service name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom service name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_testlimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_testlimit_nodejs" style="color: inherit; text-decoration: inherit;">test<wbr>Limit</a>
@@ -2755,8 +3117,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_nodejs" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -2764,17 +3125,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usageplanlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usageplanlists_nodejs" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serviceusageplanlist">Service<wbr>Usage<wbr>Plan<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#serviceusageplanlist">Service<wbr>Usage<wbr>Plan<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of attach usage plans.</p>
-</dd></dl>
+    <dd>A list of attach usage plans.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2786,10 +3145,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_api_lists_python" style="color: inherit; text-decoration: inherit;">api_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serviceapilist">Service<wbr>Api<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#serviceapilist">Sequence[Service<wbr>Api<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>A list of APIs.</p>
-</dd><dt class="property-optional"
+    <dd>A list of APIs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2797,8 +3155,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="state_exclusive_set_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_exclusive_set_name_python" style="color: inherit; text-decoration: inherit;">exclusive_<wbr>set_<wbr>name</a>
@@ -2806,9 +3163,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.81.9.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.<p class="property-message">Deprecated: It has been deprecated from version 1.81.9.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_inner_http_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_inner_http_port_python" style="color: inherit; text-decoration: inherit;">inner_<wbr>http_<wbr>port</a>
@@ -2816,8 +3171,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port number for http access over private network.</p>
-</dd><dt class="property-optional"
+    <dd>Port number for http access over private network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_inner_https_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_inner_https_port_python" style="color: inherit; text-decoration: inherit;">inner_<wbr>https_<wbr>port</a>
@@ -2825,8 +3179,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port number for https access over private network.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port number for https access over private network.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -2834,8 +3187,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Exclusive instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Exclusive instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internal_sub_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internal_sub_domain_python" style="color: inherit; text-decoration: inherit;">internal_<wbr>sub_<wbr>domain</a>
@@ -2843,8 +3195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Private network access subdomain name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Private network access subdomain name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ip_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_version_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>version</a>
@@ -2852,8 +3203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modify_time_python" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
@@ -2861,8 +3211,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_net_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_net_types_python" style="color: inherit; text-decoration: inherit;">net_<wbr>types</a>
@@ -2870,8 +3219,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</p>
-</dd><dt class="property-optional"
+    <dd>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_outer_sub_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_outer_sub_domain_python" style="color: inherit; text-decoration: inherit;">outer_<wbr>sub_<wbr>domain</a>
@@ -2879,8 +3227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Public network access subdomain name.</p>
-</dd><dt class="property-optional"
+    <dd>Public network access subdomain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pre_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pre_limit_python" style="color: inherit; text-decoration: inherit;">pre_<wbr>limit</a>
@@ -2888,8 +3235,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2897,8 +3243,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_release_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_release_limit_python" style="color: inherit; text-decoration: inherit;">release_<wbr>limit</a>
@@ -2906,8 +3251,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_service_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_desc_python" style="color: inherit; text-decoration: inherit;">service_<wbr>desc</a>
@@ -2915,8 +3259,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom service description.</p>
-</dd><dt class="property-optional"
+    <dd>Custom service description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_service_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_name_python" style="color: inherit; text-decoration: inherit;">service_<wbr>name</a>
@@ -2924,17 +3267,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom service name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom service name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_test_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_test_limit_python" style="color: inherit; text-decoration: inherit;">test_<wbr>limit</a>
@@ -2942,8 +3283,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniq_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniq_vpc_id_python" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
@@ -2951,17 +3291,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usage_plan_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usage_plan_lists_python" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serviceusageplanlist">Service<wbr>Usage<wbr>Plan<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#serviceusageplanlist">Sequence[Service<wbr>Usage<wbr>Plan<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>A list of attach usage plans.</p>
-</dd></dl>
+    <dd>A list of attach usage plans.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2975,8 +3313,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serviceapilist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of APIs.</p>
-</dd><dt class="property-optional"
+    <dd>A list of APIs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2984,8 +3321,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="state_exclusivesetname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_exclusivesetname_yaml" style="color: inherit; text-decoration: inherit;">exclusive<wbr>Set<wbr>Name</a>
@@ -2993,9 +3329,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.81.9.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.<p class="property-message">Deprecated: It has been deprecated from version 1.81.9.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_innerhttpport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_innerhttpport_yaml" style="color: inherit; text-decoration: inherit;">inner<wbr>Http<wbr>Port</a>
@@ -3003,8 +3337,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port number for http access over private network.</p>
-</dd><dt class="property-optional"
+    <dd>Port number for http access over private network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_innerhttpsport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_innerhttpsport_yaml" style="color: inherit; text-decoration: inherit;">inner<wbr>Https<wbr>Port</a>
@@ -3012,8 +3345,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port number for https access over private network.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port number for https access over private network.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -3021,8 +3353,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Exclusive instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Exclusive instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internalsubdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internalsubdomain_yaml" style="color: inherit; text-decoration: inherit;">internal<wbr>Sub<wbr>Domain</a>
@@ -3030,8 +3361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private network access subdomain name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Private network access subdomain name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ipversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipversion_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Version</a>
@@ -3039,8 +3369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IP version number. Valid values: <code>IPv4</code>, <code>IPv6</code>. Default value: <code>IPv4</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_modifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_modifytime_yaml" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -3048,8 +3377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional"
+    <dd>Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nettypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nettypes_yaml" style="color: inherit; text-decoration: inherit;">net<wbr>Types</a>
@@ -3057,8 +3385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</p>
-</dd><dt class="property-optional"
+    <dd>Network type list, which is used to specify the supported network types. Valid values: <code>INNER</code>, <code>OUTER</code>. <code>INNER</code> indicates access over private network, and <code>OUTER</code> indicates access over public network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_outersubdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_outersubdomain_yaml" style="color: inherit; text-decoration: inherit;">outer<wbr>Sub<wbr>Domain</a>
@@ -3066,8 +3393,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public network access subdomain name.</p>
-</dd><dt class="property-optional"
+    <dd>Public network access subdomain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prelimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prelimit_yaml" style="color: inherit; text-decoration: inherit;">pre<wbr>Limit</a>
@@ -3075,8 +3401,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3084,8 +3409,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Service frontend request type. Valid values: <code>http</code>, <code>https</code>, <code>http&amp;https</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_releaselimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_releaselimit_yaml" style="color: inherit; text-decoration: inherit;">release<wbr>Limit</a>
@@ -3093,8 +3417,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicedesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicedesc_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Desc</a>
@@ -3102,8 +3425,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom service description.</p>
-</dd><dt class="property-optional"
+    <dd>Custom service description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicename_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -3111,17 +3433,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom service name.</p>
-</dd><dt class="property-optional"
+    <dd>Custom service name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_testlimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_testlimit_yaml" style="color: inherit; text-decoration: inherit;">test<wbr>Limit</a>
@@ -3129,8 +3449,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>API QPS value. Enter a positive number to limit the API query rate per second <code>QPS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_yaml" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -3138,8 +3457,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usageplanlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usageplanlists_yaml" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Lists</a>
@@ -3147,8 +3465,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serviceusageplanlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of attach usage plans.</p>
-</dd></dl>
+    <dd>A list of attach usage plans.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -3163,7 +3480,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="serviceapilist">Service<wbr>Api<wbr>List</h4>
+<h4 id="serviceapilist">
+Service<wbr>Api<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Service<wbr>Api<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3175,8 +3494,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the API.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Id</a>
@@ -3184,8 +3502,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the API.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_csharp" style="color: inherit; text-decoration: inherit;">Api<wbr>Name</a>
@@ -3193,8 +3510,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the API.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="method_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_csharp" style="color: inherit; text-decoration: inherit;">Method</a>
@@ -3202,8 +3518,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Method of the API.</p>
-</dd><dt class="property-optional"
+    <dd>Method of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_csharp" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -3211,8 +3526,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Path of the API.</p>
-</dd></dl>
+    <dd>Path of the API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3226,8 +3540,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the API.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Id</a>
@@ -3235,8 +3548,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the API.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_go" style="color: inherit; text-decoration: inherit;">Api<wbr>Name</a>
@@ -3244,8 +3556,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the API.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="method_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_go" style="color: inherit; text-decoration: inherit;">Method</a>
@@ -3253,8 +3564,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Method of the API.</p>
-</dd><dt class="property-optional"
+    <dd>Method of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_go" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -3262,8 +3572,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Path of the API.</p>
-</dd></dl>
+    <dd>Path of the API.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="api_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_desc_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the API.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="api_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_id_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the API.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="api_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_name_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the API.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="method_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_hcl" style="color: inherit; text-decoration: inherit;">method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Method of the API.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_hcl" style="color: inherit; text-decoration: inherit;">path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Path of the API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3277,8 +3632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the API.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_java" style="color: inherit; text-decoration: inherit;">api<wbr>Id</a>
@@ -3286,8 +3640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the API.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_java" style="color: inherit; text-decoration: inherit;">api<wbr>Name</a>
@@ -3295,8 +3648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the API.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="method_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_java" style="color: inherit; text-decoration: inherit;">method</a>
@@ -3304,8 +3656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Method of the API.</p>
-</dd><dt class="property-optional"
+    <dd>Method of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_java" style="color: inherit; text-decoration: inherit;">path</a>
@@ -3313,8 +3664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Path of the API.</p>
-</dd></dl>
+    <dd>Path of the API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3328,8 +3678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the API.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Id</a>
@@ -3337,8 +3686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the API.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_nodejs" style="color: inherit; text-decoration: inherit;">api<wbr>Name</a>
@@ -3346,8 +3694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the API.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="method_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_nodejs" style="color: inherit; text-decoration: inherit;">method</a>
@@ -3355,8 +3702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Method of the API.</p>
-</dd><dt class="property-optional"
+    <dd>Method of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_nodejs" style="color: inherit; text-decoration: inherit;">path</a>
@@ -3364,8 +3710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Path of the API.</p>
-</dd></dl>
+    <dd>Path of the API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3379,8 +3724,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the API.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="api_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_id_python" style="color: inherit; text-decoration: inherit;">api_<wbr>id</a>
@@ -3388,8 +3732,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the API.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="api_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_name_python" style="color: inherit; text-decoration: inherit;">api_<wbr>name</a>
@@ -3397,8 +3740,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the API.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="method_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_python" style="color: inherit; text-decoration: inherit;">method</a>
@@ -3406,8 +3748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Method of the API.</p>
-</dd><dt class="property-optional"
+    <dd>Method of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_python" style="color: inherit; text-decoration: inherit;">path</a>
@@ -3415,8 +3756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Path of the API.</p>
-</dd></dl>
+    <dd>Path of the API.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3430,8 +3770,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the API.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiid_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Id</a>
@@ -3439,8 +3778,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the API.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="apiname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apiname_yaml" style="color: inherit; text-decoration: inherit;">api<wbr>Name</a>
@@ -3448,8 +3786,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the API.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="method_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#method_yaml" style="color: inherit; text-decoration: inherit;">method</a>
@@ -3457,8 +3794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Method of the API.</p>
-</dd><dt class="property-optional"
+    <dd>Method of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_yaml" style="color: inherit; text-decoration: inherit;">path</a>
@@ -3466,12 +3802,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Path of the API.</p>
-</dd></dl>
+    <dd>Path of the API.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="serviceusageplanlist">Service<wbr>Usage<wbr>Plan<wbr>List</h4>
+<h4 id="serviceusageplanlist">
+Service<wbr>Usage<wbr>Plan<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Service<wbr>Usage<wbr>Plan<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3483,8 +3820,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the API.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindtype_csharp" style="color: inherit; text-decoration: inherit;">Bind<wbr>Type</a>
@@ -3492,8 +3828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Binding type.</p>
-</dd><dt class="property-optional"
+    <dd>Binding type.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_csharp" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Id</a>
@@ -3501,8 +3836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the usage plan.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_csharp" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Name</a>
@@ -3510,8 +3844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3525,8 +3858,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the API.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindtype_go" style="color: inherit; text-decoration: inherit;">Bind<wbr>Type</a>
@@ -3534,8 +3866,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Binding type.</p>
-</dd><dt class="property-optional"
+    <dd>Binding type.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_go" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Id</a>
@@ -3543,8 +3874,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the usage plan.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_go" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Name</a>
@@ -3552,8 +3882,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="api_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#api_id_hcl" style="color: inherit; text-decoration: inherit;">api_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the API.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bind_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bind_type_hcl" style="color: inherit; text-decoration: inherit;">bind_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Binding type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="usage_plan_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_id_hcl" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the usage plan.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="usage_plan_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_name_hcl" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3567,8 +3934,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the API.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindtype_java" style="color: inherit; text-decoration: inherit;">bind<wbr>Type</a>
@@ -3576,8 +3942,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Binding type.</p>
-</dd><dt class="property-optional"
+    <dd>Binding type.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_java" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Id</a>
@@ -3585,8 +3950,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the usage plan.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_java" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Name</a>
@@ -3594,8 +3958,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3609,8 +3972,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the API.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindtype_nodejs" style="color: inherit; text-decoration: inherit;">bind<wbr>Type</a>
@@ -3618,8 +3980,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Binding type.</p>
-</dd><dt class="property-optional"
+    <dd>Binding type.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_nodejs" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Id</a>
@@ -3627,8 +3988,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the usage plan.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_nodejs" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Name</a>
@@ -3636,8 +3996,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3651,8 +4010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the API.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="bind_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bind_type_python" style="color: inherit; text-decoration: inherit;">bind_<wbr>type</a>
@@ -3660,8 +4018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Binding type.</p>
-</dd><dt class="property-optional"
+    <dd>Binding type.</dd><dt class="property-optional"
             title="Optional">
         <span id="usage_plan_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_id_python" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>id</a>
@@ -3669,8 +4026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the usage plan.</dd><dt class="property-optional"
             title="Optional">
         <span id="usage_plan_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_name_python" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>name</a>
@@ -3678,8 +4034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3693,8 +4048,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the API.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the API.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindtype_yaml" style="color: inherit; text-decoration: inherit;">bind<wbr>Type</a>
@@ -3702,8 +4056,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Binding type.</p>
-</dd><dt class="property-optional"
+    <dd>Binding type.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_yaml" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Id</a>
@@ -3711,8 +4064,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the usage plan.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_yaml" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Name</a>
@@ -3720,8 +4072,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3737,6 +4088,9 @@ $ pulumi import tencentcloud:ApiGateway/service:Service service service-pg6ud8pa
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -3746,7 +4100,6 @@ $ pulumi import tencentcloud:ApiGateway/service:Service service service-pg6ud8pa
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

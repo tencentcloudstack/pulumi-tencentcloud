@@ -2,9 +2,11 @@
 ---
 title: "getDomainErrorPages"
 title_tag: "tencentcloud.Gaap.getDomainErrorPages"
-meta_desc: "Documentation for the tencentcloud.Gaap.getDomainErrorPages function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query custom GAAP HTTP domain error page info list."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,28 +18,34 @@ Use this data source to query custom GAAP HTTP domain error page info list.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+const fooProxy = new tencentcloud.gaap.Proxy("foo", {
+    name: "ci-test-gaap-proxy",
     bandwidth: 10,
     concurrent: 2,
     accessRegion: "SouthChina",
     realserverRegion: "NorthChina",
 });
-const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("fooLayer7Listener", {
+const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("foo", {
     protocol: "HTTP",
+    name: "ci-test-gaap-l7-listener",
     port: 80,
     proxyId: "%s",
 });
-const fooHttpDomain = new tencentcloud.gaap.HttpDomain("fooHttpDomain", {
+const fooHttpDomain = new tencentcloud.gaap.HttpDomain("foo", {
     listenerId: fooLayer7Listener.id,
     domain: "www.qq.com",
 });
-const fooDomainErrorPage = new tencentcloud.gaap.DomainErrorPage("fooDomainErrorPage", {
+const fooDomainErrorPage = new tencentcloud.gaap.DomainErrorPage("foo", {
     listenerId: fooLayer7Listener.id,
     domain: fooHttpDomain.domain,
     errorCodes: [
@@ -54,29 +62,36 @@ const fooDomainErrorPage = new tencentcloud.gaap.DomainErrorPage("fooDomainError
         "X-TEST": "test",
     },
 });
-const fooDomainErrorPages = tencentcloud.Gaap.getDomainErrorPagesOutput({
+const foo = tencentcloud.gaap.getDomainErrorPagesOutput({
     listenerId: fooDomainErrorPage.listenerId,
     domain: fooDomainErrorPage.domain,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+foo_proxy = tencentcloud.gaap.Proxy("foo",
+    name="ci-test-gaap-proxy",
     bandwidth=10,
     concurrent=2,
     access_region="SouthChina",
     realserver_region="NorthChina")
-foo_layer7_listener = tencentcloud.gaap.Layer7Listener("fooLayer7Listener",
+foo_layer7_listener = tencentcloud.gaap.Layer7Listener("foo",
     protocol="HTTP",
+    name="ci-test-gaap-l7-listener",
     port=80,
     proxy_id="%s")
-foo_http_domain = tencentcloud.gaap.HttpDomain("fooHttpDomain",
+foo_http_domain = tencentcloud.gaap.HttpDomain("foo",
     listener_id=foo_layer7_listener.id,
     domain="www.qq.com")
-foo_domain_error_page = tencentcloud.gaap.DomainErrorPage("fooDomainErrorPage",
+foo_domain_error_page = tencentcloud.gaap.DomainErrorPage("foo",
     listener_id=foo_layer7_listener.id,
     domain=foo_http_domain.domain,
     error_codes=[
@@ -92,40 +107,115 @@ foo_domain_error_page = tencentcloud.gaap.DomainErrorPage("fooDomainErrorPage",
     set_headers={
         "X-TEST": "test",
     })
-foo_domain_error_pages = tencentcloud.Gaap.get_domain_error_pages_output(listener_id=foo_domain_error_page.listener_id,
+foo = tencentcloud.gaap.get_domain_error_pages_output(listener_id=foo_domain_error_page.listener_id,
     domain=foo_domain_error_page.domain)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := gaap.NewProxy(ctx, "foo", &gaap.ProxyArgs{
+			Name:             pulumi.String("ci-test-gaap-proxy"),
+			Bandwidth:        pulumi.Int(10),
+			Concurrent:       pulumi.Int(2),
+			AccessRegion:     pulumi.String("SouthChina"),
+			RealserverRegion: pulumi.String("NorthChina"),
+		})
+		if err != nil {
+			return err
+		}
+		fooLayer7Listener, err := gaap.NewLayer7Listener(ctx, "foo", &gaap.Layer7ListenerArgs{
+			Protocol: pulumi.String("HTTP"),
+			Name:     pulumi.String("ci-test-gaap-l7-listener"),
+			Port:     pulumi.Int(80),
+			ProxyId:  pulumi.String("%s"),
+		})
+		if err != nil {
+			return err
+		}
+		fooHttpDomain, err := gaap.NewHttpDomain(ctx, "foo", &gaap.HttpDomainArgs{
+			ListenerId: fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
+			Domain:     pulumi.String("www.qq.com"),
+		})
+		if err != nil {
+			return err
+		}
+		fooDomainErrorPage, err := gaap.NewDomainErrorPage(ctx, "foo", &gaap.DomainErrorPageArgs{
+			ListenerId: fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
+			Domain:     fooHttpDomain.Domain,
+			ErrorCodes: pulumi.IntArray{
+				pulumi.Int(406),
+				pulumi.Int(504),
+			},
+			NewErrorCode: pulumi.Int(502),
+			Body:         pulumi.String("bad request"),
+			ClearHeaders: pulumi.StringArray{
+				pulumi.String("Content-Length"),
+				pulumi.String("X-TEST"),
+			},
+			SetHeaders: pulumi.StringMap{
+				"X-TEST": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_ = gaap.GetDomainErrorPagesOutput(ctx, gaap.GetDomainErrorPagesOutputArgs{
+			ListenerId: fooDomainErrorPage.ListenerId,
+			Domain:     fooDomainErrorPage.Domain,
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
+    var fooProxy = new Tencentcloud.Gaap.Proxy("foo", new()
     {
+        Name = "ci-test-gaap-proxy",
         Bandwidth = 10,
         Concurrent = 2,
         AccessRegion = "SouthChina",
         RealserverRegion = "NorthChina",
     });
 
-    var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new()
+    var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("foo", new()
     {
         Protocol = "HTTP",
+        Name = "ci-test-gaap-l7-listener",
         Port = 80,
         ProxyId = "%s",
     });
 
-    var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("fooHttpDomain", new()
+    var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("foo", new()
     {
         ListenerId = fooLayer7Listener.Id,
         Domain = "www.qq.com",
     });
 
-    var fooDomainErrorPage = new Tencentcloud.Gaap.DomainErrorPage("fooDomainErrorPage", new()
+    var fooDomainErrorPage = new Tencentcloud.Gaap.DomainErrorPage("foo", new()
     {
         ListenerId = fooLayer7Listener.Id,
         Domain = fooHttpDomain.Domain,
@@ -147,7 +237,7 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var fooDomainErrorPages = Tencentcloud.Gaap.GetDomainErrorPages.Invoke(new()
+    var foo = Tencentcloud.Gaap.GetDomainErrorPages.Invoke(new()
     {
         ListenerId = fooDomainErrorPage.ListenerId,
         Domain = fooDomainErrorPage.Domain,
@@ -155,68 +245,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
-			Bandwidth:        pulumi.Int(10),
-			Concurrent:       pulumi.Int(2),
-			AccessRegion:     pulumi.String("SouthChina"),
-			RealserverRegion: pulumi.String("NorthChina"),
-		})
-		if err != nil {
-			return err
-		}
-		fooLayer7Listener, err := Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
-			Protocol: pulumi.String("HTTP"),
-			Port:     pulumi.Int(80),
-			ProxyId:  pulumi.String("%s"),
-		})
-		if err != nil {
-			return err
-		}
-		fooHttpDomain, err := Gaap.NewHttpDomain(ctx, "fooHttpDomain", &Gaap.HttpDomainArgs{
-			ListenerId: fooLayer7Listener.ID(),
-			Domain:     pulumi.String("www.qq.com"),
-		})
-		if err != nil {
-			return err
-		}
-		fooDomainErrorPage, err := Gaap.NewDomainErrorPage(ctx, "fooDomainErrorPage", &Gaap.DomainErrorPageArgs{
-			ListenerId: fooLayer7Listener.ID(),
-			Domain:     fooHttpDomain.Domain,
-			ErrorCodes: pulumi.IntArray{
-				pulumi.Int(406),
-				pulumi.Int(504),
-			},
-			NewErrorCode: pulumi.Int(502),
-			Body:         pulumi.String("bad request"),
-			ClearHeaders: pulumi.StringArray{
-				pulumi.String("Content-Length"),
-				pulumi.String("X-TEST"),
-			},
-			SetHeaders: pulumi.Map{
-				"X-TEST": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_ = Gaap.GetDomainErrorPagesOutput(ctx, gaap.GetDomainErrorPagesOutputArgs{
-			ListenerId: fooDomainErrorPage.ListenerId,
-			Domain:     fooDomainErrorPage.Domain,
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -233,8 +266,8 @@ import com.pulumi.tencentcloud.Gaap.DomainErrorPage;
 import com.pulumi.tencentcloud.Gaap.DomainErrorPageArgs;
 import com.pulumi.tencentcloud.Gaap.GaapFunctions;
 import com.pulumi.tencentcloud.Gaap.inputs.GetDomainErrorPagesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -246,25 +279,27 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var fooProxy = new Proxy("fooProxy", ProxyArgs.builder()        
+        var fooProxy = new Proxy("fooProxy", ProxyArgs.builder()
+            .name("ci-test-gaap-proxy")
             .bandwidth(10)
             .concurrent(2)
             .accessRegion("SouthChina")
             .realserverRegion("NorthChina")
             .build());
 
-        var fooLayer7Listener = new Layer7Listener("fooLayer7Listener", Layer7ListenerArgs.builder()        
+        var fooLayer7Listener = new Layer7Listener("fooLayer7Listener", Layer7ListenerArgs.builder()
             .protocol("HTTP")
+            .name("ci-test-gaap-l7-listener")
             .port(80)
             .proxyId("%s")
             .build());
 
-        var fooHttpDomain = new HttpDomain("fooHttpDomain", HttpDomainArgs.builder()        
+        var fooHttpDomain = new HttpDomain("fooHttpDomain", HttpDomainArgs.builder()
             .listenerId(fooLayer7Listener.id())
             .domain("www.qq.com")
             .build());
 
-        var fooDomainErrorPage = new DomainErrorPage("fooDomainErrorPage", DomainErrorPageArgs.builder()        
+        var fooDomainErrorPage = new DomainErrorPage("fooDomainErrorPage", DomainErrorPageArgs.builder()
             .listenerId(fooLayer7Listener.id())
             .domain(fooHttpDomain.domain())
             .errorCodes(            
@@ -278,7 +313,7 @@ public class App {
             .setHeaders(Map.of("X-TEST", "test"))
             .build());
 
-        final var fooDomainErrorPages = GaapFunctions.getDomainErrorPages(GetDomainErrorPagesArgs.builder()
+        final var foo = GaapFunctions.getDomainErrorPages(GetDomainErrorPagesArgs.builder()
             .listenerId(fooDomainErrorPage.listenerId())
             .domain(fooDomainErrorPage.domain())
             .build());
@@ -286,28 +321,39 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   fooProxy:
     type: tencentcloud:Gaap:Proxy
+    name: foo
     properties:
+      name: ci-test-gaap-proxy
       bandwidth: 10
       concurrent: 2
       accessRegion: SouthChina
       realserverRegion: NorthChina
   fooLayer7Listener:
     type: tencentcloud:Gaap:Layer7Listener
+    name: foo
     properties:
       protocol: HTTP
+      name: ci-test-gaap-l7-listener
       port: 80
       proxyId: '%s'
   fooHttpDomain:
     type: tencentcloud:Gaap:HttpDomain
+    name: foo
     properties:
       listenerId: ${fooLayer7Listener.id}
       domain: www.qq.com
   fooDomainErrorPage:
     type: tencentcloud:Gaap:DomainErrorPage
+    name: foo
     properties:
       listenerId: ${fooLayer7Listener.id}
       domain: ${fooHttpDomain.domain}
@@ -322,15 +368,70 @@ resources:
       setHeaders:
         X-TEST: test
 variables:
-  fooDomainErrorPages:
+  foo:
     fn::invoke:
-      Function: tencentcloud:Gaap:getDomainErrorPages
-      Arguments:
+      function: tencentcloud:Gaap:getDomainErrorPages
+      arguments:
         listenerId: ${fooDomainErrorPage.listenerId}
         domain: ${fooDomainErrorPage.domain}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_getdomainerrorpages" "foo" {
+  listener_id = tencentcloud_gaap_domainerrorpage.foo.listener_id
+  domain      = tencentcloud_gaap_domainerrorpage.foo.domain
+}
+
+resource "tencentcloud_gaap_proxy" "foo" {
+  name              = "ci-test-gaap-proxy"
+  bandwidth         = 10
+  concurrent        = 2
+  access_region     = "SouthChina"
+  realserver_region = "NorthChina"
+}
+resource "tencentcloud_gaap_layer7listener" "foo" {
+  protocol = "HTTP"
+  name     = "ci-test-gaap-l7-listener"
+  port     = 80
+  proxy_id = "%s"
+}
+resource "tencentcloud_gaap_httpdomain" "foo" {
+  listener_id = tencentcloud_gaap_layer7listener.foo.id
+  domain      = "www.qq.com"
+}
+resource "tencentcloud_gaap_domainerrorpage" "foo" {
+  listener_id    = tencentcloud_gaap_layer7listener.foo.id
+  domain         = tencentcloud_gaap_httpdomain.foo.domain
+  error_codes    = [406, 504]
+  new_error_code = 502
+  body           = "bad request"
+  clear_headers  = ["Content-Length", "X-TEST"]
+  set_headers = {
+    "X-TEST" = "test"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeDomainErrorPageInfo](https://www.tencentcloud.com/document/api/608/33135)
 
 
 
@@ -342,7 +443,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -350,9 +451,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getDomainErrorPages<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainErrorPagesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDomainErrorPagesResult</a></span>></span
+><span class="k">function </span>getDomainErrorPages<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainErrorPagesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDomainErrorPagesResult</a></span>></span
 ><span class="k">
-function </span>getDomainErrorPagesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainErrorPagesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDomainErrorPagesResult</a></span>></span
+function </span>getDomainErrorPagesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainErrorPagesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDomainErrorPagesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -367,11 +468,11 @@ function </span>getDomainErrorPagesOutput<span class="p">(</span><span class="nx
                            <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetDomainErrorPagesResult</span
 ><span class="k">
-def </span>get_domain_error_pages_output<span class="p">(</span><span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                           <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDomainErrorPagesResult]</span
+def </span>get_domain_error_pages_output<span class="p">(</span><span class="nx">domain</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                           <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDomainErrorPagesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -396,7 +497,8 @@ func </span>GetDomainErrorPagesOutput<span class="p">(</span><span class="nx">ct
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetDomainErrorPages </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetDomainErrorPagesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetDomainErrorPagesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetDomainErrorPagesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDomainErrorPagesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDomainErrorPagesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDomainErrorPagesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDomainErrorPagesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDomainErrorPagesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -405,7 +507,8 @@ func </span>GetDomainErrorPagesOutput<span class="p">(</span><span class="nx">ct
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetDomainErrorPagesResult</a></span>> </span>getDomainErrorPages<span class="p">(</span><span class="nx">GetDomainErrorPagesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDomainErrorPagesResult</a></span>> </span>getDomainErrorPages<span class="p">(</span><span class="nx">GetDomainErrorPagesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDomainErrorPagesResult</a></span>> </span>getDomainErrorPages<span class="p">(</span><span class="nx">GetDomainErrorPagesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -417,6 +520,15 @@ func </span>GetDomainErrorPagesOutput<span class="p">(</span><span class="nx">ct
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getDomainErrorPages:getDomainErrorPages
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_domain_error_pages&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -435,8 +547,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP domain to be queried.</p>
-</dd><dt class="property-required"
+    <dd>HTTP domain to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -444,8 +555,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="ids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_csharp" style="color: inherit; text-decoration: inherit;">Ids</a>
@@ -453,8 +563,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of the error page info ID to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>List of the error page info ID to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -462,8 +571,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -477,8 +585,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP domain to be queried.</p>
-</dd><dt class="property-required"
+    <dd>HTTP domain to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -486,8 +593,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="ids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_go" style="color: inherit; text-decoration: inherit;">Ids</a>
@@ -495,8 +601,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of the error page info ID to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>List of the error page info ID to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -504,8 +609,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTP domain to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_hcl" style="color: inherit; text-decoration: inherit;">ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of the error page info ID to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -519,8 +661,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP domain to be queried.</p>
-</dd><dt class="property-required"
+    <dd>HTTP domain to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -528,8 +669,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="ids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_java" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -537,8 +677,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of the error page info ID to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>List of the error page info ID to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -546,8 +685,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -561,8 +699,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP domain to be queried.</p>
-</dd><dt class="property-required"
+    <dd>HTTP domain to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -570,8 +707,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="ids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_nodejs" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -579,8 +715,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of the error page info ID to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>List of the error page info ID to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -588,8 +723,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -603,8 +737,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTP domain to be queried.</p>
-</dd><dt class="property-required"
+    <dd>HTTP domain to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -612,8 +745,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_python" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -621,8 +753,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of the error page info ID to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>List of the error page info ID to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -630,8 +761,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -645,8 +775,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP domain to be queried.</p>
-</dd><dt class="property-required"
+    <dd>HTTP domain to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -654,8 +783,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="ids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_yaml" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -663,8 +791,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of the error page info ID to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>List of the error page info ID to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -672,8 +799,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -696,8 +822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP domain.</p>
-</dd><dt class="property-"
+    <dd>HTTP domain.</dd><dt class="property-"
             title="">
         <span id="errorpageinfolists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorpageinfolists_csharp" style="color: inherit; text-decoration: inherit;">Error<wbr>Page<wbr>Info<wbr>Lists</a>
@@ -705,8 +830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainerrorpageserrorpageinfolist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Domain<wbr>Error<wbr>Pages<wbr>Error<wbr>Page<wbr>Info<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of error page info detail. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of error page info detail. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -714,8 +838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -723,8 +846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="ids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_csharp" style="color: inherit; text-decoration: inherit;">Ids</a>
@@ -754,8 +876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP domain.</p>
-</dd><dt class="property-"
+    <dd>HTTP domain.</dd><dt class="property-"
             title="">
         <span id="errorpageinfolists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorpageinfolists_go" style="color: inherit; text-decoration: inherit;">Error<wbr>Page<wbr>Info<wbr>Lists</a>
@@ -763,8 +884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainerrorpageserrorpageinfolist">[]Get<wbr>Domain<wbr>Error<wbr>Pages<wbr>Error<wbr>Page<wbr>Info<wbr>List</a></span>
     </dt>
-    <dd><p>An information list of error page info detail. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of error page info detail. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -772,8 +892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -781,8 +900,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="ids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_go" style="color: inherit; text-decoration: inherit;">Ids</a>
@@ -803,6 +921,60 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTP domain.</dd><dt class="property-"
+            title="">
+        <span id="error_page_info_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_page_info_lists_hcl" style="color: inherit; text-decoration: inherit;">error_<wbr>page_<wbr>info_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdomainerrorpageserrorpageinfolist">list(object)</a></span>
+    </dt>
+    <dd>An information list of error page info detail. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the layer7 listener.</dd><dt class="property-"
+            title="">
+        <span id="ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_hcl" style="color: inherit; text-decoration: inherit;">ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -812,8 +984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP domain.</p>
-</dd><dt class="property-"
+    <dd>HTTP domain.</dd><dt class="property-"
             title="">
         <span id="errorpageinfolists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorpageinfolists_java" style="color: inherit; text-decoration: inherit;">error<wbr>Page<wbr>Info<wbr>Lists</a>
@@ -821,8 +992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainerrorpageserrorpageinfolist">List&lt;Get<wbr>Domain<wbr>Error<wbr>Pages<wbr>Error<wbr>Page<wbr>Info<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of error page info detail. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of error page info detail. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -830,8 +1000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -839,8 +1008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="ids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_java" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -870,8 +1038,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP domain.</p>
-</dd><dt class="property-"
+    <dd>HTTP domain.</dd><dt class="property-"
             title="">
         <span id="errorpageinfolists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorpageinfolists_nodejs" style="color: inherit; text-decoration: inherit;">error<wbr>Page<wbr>Info<wbr>Lists</a>
@@ -879,8 +1046,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainerrorpageserrorpageinfolist">Get<wbr>Domain<wbr>Error<wbr>Pages<wbr>Error<wbr>Page<wbr>Info<wbr>List[]</a></span>
     </dt>
-    <dd><p>An information list of error page info detail. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of error page info detail. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -888,8 +1054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -897,8 +1062,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="ids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_nodejs" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -928,17 +1092,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTP domain.</p>
-</dd><dt class="property-"
+    <dd>HTTP domain.</dd><dt class="property-"
             title="">
         <span id="error_page_info_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_page_info_lists_python" style="color: inherit; text-decoration: inherit;">error_<wbr>page_<wbr>info_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdomainerrorpageserrorpageinfolist">Get<wbr>Domain<wbr>Error<wbr>Pages<wbr>Error<wbr>Page<wbr>Info<wbr>List]</a></span>
+        <span class="property-type"><a href="#getdomainerrorpageserrorpageinfolist">Sequence[Get<wbr>Domain<wbr>Error<wbr>Pages<wbr>Error<wbr>Page<wbr>Info<wbr>List]</a></span>
     </dt>
-    <dd><p>An information list of error page info detail. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of error page info detail. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -946,8 +1108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -955,8 +1116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_python" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -986,8 +1146,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP domain.</p>
-</dd><dt class="property-"
+    <dd>HTTP domain.</dd><dt class="property-"
             title="">
         <span id="errorpageinfolists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorpageinfolists_yaml" style="color: inherit; text-decoration: inherit;">error<wbr>Page<wbr>Info<wbr>Lists</a>
@@ -995,8 +1154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainerrorpageserrorpageinfolist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of error page info detail. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of error page info detail. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1004,8 +1162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1013,8 +1170,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="ids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ids_yaml" style="color: inherit; text-decoration: inherit;">ids</a>
@@ -1054,8 +1210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>New response body.</p>
-</dd><dt class="property-required"
+    <dd>New response body.</dd><dt class="property-required"
             title="Required">
         <span id="clearheaders_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clearheaders_csharp" style="color: inherit; text-decoration: inherit;">Clear<wbr>Headers</a>
@@ -1063,8 +1218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Response headers to be removed.</p>
-</dd><dt class="property-required"
+    <dd>Response headers to be removed.</dd><dt class="property-required"
             title="Required">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1072,8 +1226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP domain to be queried.</p>
-</dd><dt class="property-required"
+    <dd>HTTP domain to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="errorcodes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorcodes_csharp" style="color: inherit; text-decoration: inherit;">Error<wbr>Codes</a>
@@ -1081,8 +1234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Original error codes.</p>
-</dd><dt class="property-required"
+    <dd>Original error codes.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1090,8 +1242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the error page info.</p>
-</dd><dt class="property-required"
+    <dd>ID of the error page info.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -1099,8 +1250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="newerrorcodes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newerrorcodes_csharp" style="color: inherit; text-decoration: inherit;">New<wbr>Error<wbr>Codes</a>
@@ -1108,17 +1258,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>New error code.</p>
-</dd><dt class="property-required"
+    <dd>New error code.</dd><dt class="property-required"
             title="Required">
         <span id="setheaders_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#setheaders_csharp" style="color: inherit; text-decoration: inherit;">Set<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Response headers to be set.</p>
-</dd></dl>
+    <dd>Response headers to be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1132,8 +1280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>New response body.</p>
-</dd><dt class="property-required"
+    <dd>New response body.</dd><dt class="property-required"
             title="Required">
         <span id="clearheaders_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clearheaders_go" style="color: inherit; text-decoration: inherit;">Clear<wbr>Headers</a>
@@ -1141,8 +1288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Response headers to be removed.</p>
-</dd><dt class="property-required"
+    <dd>Response headers to be removed.</dd><dt class="property-required"
             title="Required">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1150,8 +1296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP domain to be queried.</p>
-</dd><dt class="property-required"
+    <dd>HTTP domain to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="errorcodes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorcodes_go" style="color: inherit; text-decoration: inherit;">Error<wbr>Codes</a>
@@ -1159,8 +1304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Original error codes.</p>
-</dd><dt class="property-required"
+    <dd>Original error codes.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1168,8 +1312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the error page info.</p>
-</dd><dt class="property-required"
+    <dd>ID of the error page info.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -1177,8 +1320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="newerrorcodes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newerrorcodes_go" style="color: inherit; text-decoration: inherit;">New<wbr>Error<wbr>Codes</a>
@@ -1186,17 +1328,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>New error code.</p>
-</dd><dt class="property-required"
+    <dd>New error code.</dd><dt class="property-required"
             title="Required">
         <span id="setheaders_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#setheaders_go" style="color: inherit; text-decoration: inherit;">Set<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Response headers to be set.</p>
-</dd></dl>
+    <dd>Response headers to be set.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="body_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#body_hcl" style="color: inherit; text-decoration: inherit;">body</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>New response body.</dd><dt class="property-required"
+            title="Required">
+        <span id="clear_headers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clear_headers_hcl" style="color: inherit; text-decoration: inherit;">clear_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Response headers to be removed.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTP domain to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="error_codes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_codes_hcl" style="color: inherit; text-decoration: inherit;">error_<wbr>codes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Original error codes.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the error page info.</dd><dt class="property-required"
+            title="Required">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="new_error_codes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_error_codes_hcl" style="color: inherit; text-decoration: inherit;">new_<wbr>error_<wbr>codes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>New error code.</dd><dt class="property-required"
+            title="Required">
+        <span id="set_headers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#set_headers_hcl" style="color: inherit; text-decoration: inherit;">set_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Response headers to be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1210,8 +1420,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>New response body.</p>
-</dd><dt class="property-required"
+    <dd>New response body.</dd><dt class="property-required"
             title="Required">
         <span id="clearheaders_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clearheaders_java" style="color: inherit; text-decoration: inherit;">clear<wbr>Headers</a>
@@ -1219,8 +1428,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Response headers to be removed.</p>
-</dd><dt class="property-required"
+    <dd>Response headers to be removed.</dd><dt class="property-required"
             title="Required">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1228,8 +1436,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP domain to be queried.</p>
-</dd><dt class="property-required"
+    <dd>HTTP domain to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="errorcodes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorcodes_java" style="color: inherit; text-decoration: inherit;">error<wbr>Codes</a>
@@ -1237,8 +1444,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Original error codes.</p>
-</dd><dt class="property-required"
+    <dd>Original error codes.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1246,8 +1452,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the error page info.</p>
-</dd><dt class="property-required"
+    <dd>ID of the error page info.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1255,8 +1460,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="newerrorcodes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newerrorcodes_java" style="color: inherit; text-decoration: inherit;">new<wbr>Error<wbr>Codes</a>
@@ -1264,17 +1468,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>New error code.</p>
-</dd><dt class="property-required"
+    <dd>New error code.</dd><dt class="property-required"
             title="Required">
         <span id="setheaders_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#setheaders_java" style="color: inherit; text-decoration: inherit;">set<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Response headers to be set.</p>
-</dd></dl>
+    <dd>Response headers to be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1288,8 +1490,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>New response body.</p>
-</dd><dt class="property-required"
+    <dd>New response body.</dd><dt class="property-required"
             title="Required">
         <span id="clearheaders_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clearheaders_nodejs" style="color: inherit; text-decoration: inherit;">clear<wbr>Headers</a>
@@ -1297,8 +1498,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Response headers to be removed.</p>
-</dd><dt class="property-required"
+    <dd>Response headers to be removed.</dd><dt class="property-required"
             title="Required">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1306,8 +1506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP domain to be queried.</p>
-</dd><dt class="property-required"
+    <dd>HTTP domain to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="errorcodes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorcodes_nodejs" style="color: inherit; text-decoration: inherit;">error<wbr>Codes</a>
@@ -1315,8 +1514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Original error codes.</p>
-</dd><dt class="property-required"
+    <dd>Original error codes.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1324,8 +1522,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the error page info.</p>
-</dd><dt class="property-required"
+    <dd>ID of the error page info.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1333,8 +1530,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="newerrorcodes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newerrorcodes_nodejs" style="color: inherit; text-decoration: inherit;">new<wbr>Error<wbr>Codes</a>
@@ -1342,17 +1538,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>New error code.</p>
-</dd><dt class="property-required"
+    <dd>New error code.</dd><dt class="property-required"
             title="Required">
         <span id="setheaders_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#setheaders_nodejs" style="color: inherit; text-decoration: inherit;">set<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Response headers to be set.</p>
-</dd></dl>
+    <dd>Response headers to be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1366,8 +1560,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>New response body.</p>
-</dd><dt class="property-required"
+    <dd>New response body.</dd><dt class="property-required"
             title="Required">
         <span id="clear_headers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clear_headers_python" style="color: inherit; text-decoration: inherit;">clear_<wbr>headers</a>
@@ -1375,8 +1568,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Response headers to be removed.</p>
-</dd><dt class="property-required"
+    <dd>Response headers to be removed.</dd><dt class="property-required"
             title="Required">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1384,8 +1576,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTP domain to be queried.</p>
-</dd><dt class="property-required"
+    <dd>HTTP domain to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="error_codes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_codes_python" style="color: inherit; text-decoration: inherit;">error_<wbr>codes</a>
@@ -1393,8 +1584,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Original error codes.</p>
-</dd><dt class="property-required"
+    <dd>Original error codes.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1402,8 +1592,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the error page info.</p>
-</dd><dt class="property-required"
+    <dd>ID of the error page info.</dd><dt class="property-required"
             title="Required">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -1411,8 +1600,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="new_error_codes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_error_codes_python" style="color: inherit; text-decoration: inherit;">new_<wbr>error_<wbr>codes</a>
@@ -1420,17 +1608,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>New error code.</p>
-</dd><dt class="property-required"
+    <dd>New error code.</dd><dt class="property-required"
             title="Required">
         <span id="set_headers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#set_headers_python" style="color: inherit; text-decoration: inherit;">set_<wbr>headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Response headers to be set.</p>
-</dd></dl>
+    <dd>Response headers to be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1444,8 +1630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>New response body.</p>
-</dd><dt class="property-required"
+    <dd>New response body.</dd><dt class="property-required"
             title="Required">
         <span id="clearheaders_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clearheaders_yaml" style="color: inherit; text-decoration: inherit;">clear<wbr>Headers</a>
@@ -1453,8 +1638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Response headers to be removed.</p>
-</dd><dt class="property-required"
+    <dd>Response headers to be removed.</dd><dt class="property-required"
             title="Required">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1462,8 +1646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP domain to be queried.</p>
-</dd><dt class="property-required"
+    <dd>HTTP domain to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="errorcodes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorcodes_yaml" style="color: inherit; text-decoration: inherit;">error<wbr>Codes</a>
@@ -1471,8 +1654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Original error codes.</p>
-</dd><dt class="property-required"
+    <dd>Original error codes.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1480,8 +1662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the error page info.</p>
-</dd><dt class="property-required"
+    <dd>ID of the error page info.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1489,8 +1670,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="newerrorcodes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newerrorcodes_yaml" style="color: inherit; text-decoration: inherit;">new<wbr>Error<wbr>Codes</a>
@@ -1498,17 +1678,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>New error code.</p>
-</dd><dt class="property-required"
+    <dd>New error code.</dd><dt class="property-required"
             title="Required">
         <span id="setheaders_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#setheaders_yaml" style="color: inherit; text-decoration: inherit;">set<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Response headers to be set.</p>
-</dd></dl>
+    <dd>Response headers to be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1523,7 +1701,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

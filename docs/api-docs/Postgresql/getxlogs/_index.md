@@ -2,9 +2,11 @@
 ---
 title: "getXlogs"
 title_tag: "tencentcloud.Postgresql.getXlogs"
-meta_desc: "Documentation for the tencentcloud.Postgresql.getXlogs function with examples, input properties, output properties, and supporting types."
+meta_desc: "Provide a datasource to query PostgreSQL Xlogs."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,56 +18,54 @@ Provide a datasource to query PostgreSQL Xlogs.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Postgresql.getXlogs({
-    endTime: "2022-01-07 01:02:03",
+const foo = tencentcloud.postgresql.getXlogs({
     instanceId: "postgres-xxxxxxxx",
     startTime: "2022-01-01 00:00:00",
+    endTime: "2022-01-07 01:02:03",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Postgresql.get_xlogs(end_time="2022-01-07 01:02:03",
-    instance_id="postgres-xxxxxxxx",
-    start_time="2022-01-01 00:00:00")
+foo = tencentcloud.postgresql.get_xlogs(instance_id="postgres-xxxxxxxx",
+    start_time="2022-01-01 00:00:00",
+    end_time="2022-01-07 01:02:03")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Postgresql.GetXlogs.Invoke(new()
-    {
-        EndTime = "2022-01-07 01:02:03",
-        InstanceId = "postgres-xxxxxxxx",
-        StartTime = "2022-01-01 00:00:00",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/postgresql"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Postgresql.GetXlogs(ctx, &postgresql.GetXlogsArgs{
-			EndTime:    pulumi.StringRef("2022-01-07 01:02:03"),
+		_, err := postgresql.GetXlogs(ctx, &postgresql.GetXlogsArgs{
 			InstanceId: "postgres-xxxxxxxx",
 			StartTime:  pulumi.StringRef("2022-01-01 00:00:00"),
+			EndTime:    pulumi.StringRef("2022-01-07 01:02:03"),
 		}, nil)
 		if err != nil {
 			return err
@@ -74,6 +74,33 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = Tencentcloud.Postgresql.GetXlogs.Invoke(new()
+    {
+        InstanceId = "postgres-xxxxxxxx",
+        StartTime = "2022-01-01 00:00:00",
+        EndTime = "2022-01-07 01:02:03",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -82,8 +109,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Postgresql.PostgresqlFunctions;
 import com.pulumi.tencentcloud.Postgresql.inputs.GetXlogsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -96,26 +123,58 @@ public class App {
 
     public static void stack(Context ctx) {
         final var foo = PostgresqlFunctions.getXlogs(GetXlogsArgs.builder()
-            .endTime("2022-01-07 01:02:03")
             .instanceId("postgres-xxxxxxxx")
             .startTime("2022-01-01 00:00:00")
+            .endTime("2022-01-07 01:02:03")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   foo:
     fn::invoke:
-      Function: tencentcloud:Postgresql:getXlogs
-      Arguments:
-        endTime: 2022-01-07 01:02:03
+      function: tencentcloud:Postgresql:getXlogs
+      arguments:
         instanceId: postgres-xxxxxxxx
         startTime: 2022-01-01 00:00:00
+        endTime: 2022-01-07 01:02:03
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_postgresql_getxlogs" "foo" {
+  instance_id = "postgres-xxxxxxxx"
+  start_time  = "2022-01-01 00:00:00"
+  end_time    = "2022-01-07 01:02:03"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeDBXlogs](https://www.tencentcloud.com/document/api/409/18091)
 
 
 
@@ -127,7 +186,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -135,9 +194,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getXlogs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetXlogsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetXlogsResult</a></span>></span
+><span class="k">function </span>getXlogs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetXlogsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetXlogsResult</a></span>></span
 ><span class="k">
-function </span>getXlogsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetXlogsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetXlogsResult</a></span>></span
+function </span>getXlogsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetXlogsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetXlogsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -152,11 +211,11 @@ function </span>getXlogsOutput<span class="p">(</span><span class="nx">args</spa
               <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetXlogsResult</span
 ><span class="k">
-def </span>get_xlogs_output<span class="p">(</span><span class="nx">end_time</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetXlogsResult]</span
+def </span>get_xlogs_output<span class="p">(</span><span class="nx">end_time</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">start_time</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetXlogsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -181,7 +240,8 @@ func </span>GetXlogsOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetXlogs </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetXlogsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetXlogsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetXlogsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetXlogsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetXlogsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetXlogsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetXlogsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetXlogsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -190,7 +250,8 @@ func </span>GetXlogsOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetXlogsResult</a></span>> </span>getXlogs<span class="p">(</span><span class="nx">GetXlogsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetXlogsResult</a></span>> </span>getXlogs<span class="p">(</span><span class="nx">GetXlogsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetXlogsResult</a></span>> </span>getXlogs<span class="p">(</span><span class="nx">GetXlogsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -202,6 +263,15 @@ func </span>GetXlogsOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Postgresql/getXlogs:getXlogs
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_postgresql_get_xlogs&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -220,8 +290,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PostgreSQL instance id.</p>
-</dd><dt class="property-optional"
+    <dd>PostgreSQL instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -229,8 +298,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -238,8 +306,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used for save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -247,8 +314,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</p>
-</dd></dl>
+    <dd>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -262,8 +328,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PostgreSQL instance id.</p>
-</dd><dt class="property-optional"
+    <dd>PostgreSQL instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -271,8 +336,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -280,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used for save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -289,8 +352,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</p>
-</dd></dl>
+    <dd>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>PostgreSQL instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used for save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -304,8 +404,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>PostgreSQL instance id.</p>
-</dd><dt class="property-optional"
+    <dd>PostgreSQL instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -313,8 +412,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -322,8 +420,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used for save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used for save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -331,8 +428,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</p>
-</dd></dl>
+    <dd>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -346,8 +442,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>PostgreSQL instance id.</p>
-</dd><dt class="property-optional"
+    <dd>PostgreSQL instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -355,8 +450,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -364,8 +458,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used for save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -373,8 +466,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</p>
-</dd></dl>
+    <dd>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -388,8 +480,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>PostgreSQL instance id.</p>
-</dd><dt class="property-optional"
+    <dd>PostgreSQL instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -397,8 +488,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -406,8 +496,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used for save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used for save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -415,8 +504,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</p>
-</dd></dl>
+    <dd>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -430,8 +518,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>PostgreSQL instance id.</p>
-</dd><dt class="property-optional"
+    <dd>PostgreSQL instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -439,8 +526,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -448,8 +534,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used for save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used for save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -457,8 +542,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</p>
-</dd></dl>
+    <dd>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -481,8 +565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -498,8 +581,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getxlogslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Postgresql.<wbr>Outputs.<wbr>Get<wbr>Xlogs<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of Xlog query result.</p>
-</dd><dt class="property-"
+    <dd>List of Xlog query result.</dd><dt class="property-"
             title="">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -507,8 +589,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog file created end time.</p>
-</dd><dt class="property-"
+    <dd>Xlog file created end time.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -524,8 +605,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog file created start time.</p>
-</dd></dl>
+    <dd>Xlog file created start time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -539,8 +619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -556,8 +635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getxlogslist">[]Get<wbr>Xlogs<wbr>List</a></span>
     </dt>
-    <dd><p>List of Xlog query result.</p>
-</dd><dt class="property-"
+    <dd>List of Xlog query result.</dd><dt class="property-"
             title="">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -565,8 +643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog file created end time.</p>
-</dd><dt class="property-"
+    <dd>Xlog file created end time.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -582,8 +659,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog file created start time.</p>
-</dd></dl>
+    <dd>Xlog file created start time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getxlogslist">list(object)</a></span>
+    </dt>
+    <dd>List of Xlog query result.</dd><dt class="property-"
+            title="">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Xlog file created end time.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Xlog file created start time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -597,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -614,8 +743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getxlogslist">List&lt;Get<wbr>Xlogs<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of Xlog query result.</p>
-</dd><dt class="property-"
+    <dd>List of Xlog query result.</dd><dt class="property-"
             title="">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -623,8 +751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Xlog file created end time.</p>
-</dd><dt class="property-"
+    <dd>Xlog file created end time.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -640,8 +767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Xlog file created start time.</p>
-</dd></dl>
+    <dd>Xlog file created start time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -655,8 +781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -672,8 +797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getxlogslist">Get<wbr>Xlogs<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of Xlog query result.</p>
-</dd><dt class="property-"
+    <dd>List of Xlog query result.</dd><dt class="property-"
             title="">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -681,8 +805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog file created end time.</p>
-</dd><dt class="property-"
+    <dd>Xlog file created end time.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -698,8 +821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog file created start time.</p>
-</dd></dl>
+    <dd>Xlog file created start time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -713,8 +835,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -728,10 +849,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getxlogslist">Get<wbr>Xlogs<wbr>List]</a></span>
+        <span class="property-type"><a href="#getxlogslist">Sequence[Get<wbr>Xlogs<wbr>List]</a></span>
     </dt>
-    <dd><p>List of Xlog query result.</p>
-</dd><dt class="property-"
+    <dd>List of Xlog query result.</dd><dt class="property-"
             title="">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -739,8 +859,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Xlog file created end time.</p>
-</dd><dt class="property-"
+    <dd>Xlog file created end time.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -756,8 +875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Xlog file created start time.</p>
-</dd></dl>
+    <dd>Xlog file created start time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -771,8 +889,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -788,8 +905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getxlogslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of Xlog query result.</p>
-</dd><dt class="property-"
+    <dd>List of Xlog query result.</dd><dt class="property-"
             title="">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -797,8 +913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Xlog file created end time.</p>
-</dd><dt class="property-"
+    <dd>Xlog file created end time.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -814,8 +929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Xlog file created start time.</p>
-</dd></dl>
+    <dd>Xlog file created start time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -839,8 +953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</p>
-</dd><dt class="property-required"
+    <dd>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</dd><dt class="property-required"
             title="Required">
         <span id="externaladdr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externaladdr_csharp" style="color: inherit; text-decoration: inherit;">External<wbr>Addr</a>
@@ -848,8 +961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog external download address.</p>
-</dd><dt class="property-required"
+    <dd>Xlog external download address.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -857,8 +969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Xlog id.</p>
-</dd><dt class="property-required"
+    <dd>Xlog id.</dd><dt class="property-required"
             title="Required">
         <span id="internaladdr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internaladdr_csharp" style="color: inherit; text-decoration: inherit;">Internal<wbr>Addr</a>
@@ -866,8 +977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog internal download address.</p>
-</dd><dt class="property-required"
+    <dd>Xlog internal download address.</dd><dt class="property-required"
             title="Required">
         <span id="size_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_csharp" style="color: inherit; text-decoration: inherit;">Size</a>
@@ -875,8 +985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Xlog file size.</p>
-</dd><dt class="property-required"
+    <dd>Xlog file size.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -884,8 +993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</p>
-</dd></dl>
+    <dd>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -899,8 +1007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</p>
-</dd><dt class="property-required"
+    <dd>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</dd><dt class="property-required"
             title="Required">
         <span id="externaladdr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externaladdr_go" style="color: inherit; text-decoration: inherit;">External<wbr>Addr</a>
@@ -908,8 +1015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog external download address.</p>
-</dd><dt class="property-required"
+    <dd>Xlog external download address.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -917,8 +1023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Xlog id.</p>
-</dd><dt class="property-required"
+    <dd>Xlog id.</dd><dt class="property-required"
             title="Required">
         <span id="internaladdr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internaladdr_go" style="color: inherit; text-decoration: inherit;">Internal<wbr>Addr</a>
@@ -926,8 +1031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog internal download address.</p>
-</dd><dt class="property-required"
+    <dd>Xlog internal download address.</dd><dt class="property-required"
             title="Required">
         <span id="size_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_go" style="color: inherit; text-decoration: inherit;">Size</a>
@@ -935,8 +1039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Xlog file size.</p>
-</dd><dt class="property-required"
+    <dd>Xlog file size.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -944,8 +1047,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</p>
-</dd></dl>
+    <dd>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="external_addr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#external_addr_hcl" style="color: inherit; text-decoration: inherit;">external_<wbr>addr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Xlog external download address.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Xlog id.</dd><dt class="property-required"
+            title="Required">
+        <span id="internal_addr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internal_addr_hcl" style="color: inherit; text-decoration: inherit;">internal_<wbr>addr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Xlog internal download address.</dd><dt class="property-required"
+            title="Required">
+        <span id="size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_hcl" style="color: inherit; text-decoration: inherit;">size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Xlog file size.</dd><dt class="property-required"
+            title="Required">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -959,8 +1115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</p>
-</dd><dt class="property-required"
+    <dd>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</dd><dt class="property-required"
             title="Required">
         <span id="externaladdr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externaladdr_java" style="color: inherit; text-decoration: inherit;">external<wbr>Addr</a>
@@ -968,8 +1123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Xlog external download address.</p>
-</dd><dt class="property-required"
+    <dd>Xlog external download address.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -977,8 +1131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Xlog id.</p>
-</dd><dt class="property-required"
+    <dd>Xlog id.</dd><dt class="property-required"
             title="Required">
         <span id="internaladdr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internaladdr_java" style="color: inherit; text-decoration: inherit;">internal<wbr>Addr</a>
@@ -986,8 +1139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Xlog internal download address.</p>
-</dd><dt class="property-required"
+    <dd>Xlog internal download address.</dd><dt class="property-required"
             title="Required">
         <span id="size_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_java" style="color: inherit; text-decoration: inherit;">size</a>
@@ -995,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Xlog file size.</p>
-</dd><dt class="property-required"
+    <dd>Xlog file size.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1004,8 +1155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</p>
-</dd></dl>
+    <dd>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1019,8 +1169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</p>
-</dd><dt class="property-required"
+    <dd>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</dd><dt class="property-required"
             title="Required">
         <span id="externaladdr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externaladdr_nodejs" style="color: inherit; text-decoration: inherit;">external<wbr>Addr</a>
@@ -1028,8 +1177,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog external download address.</p>
-</dd><dt class="property-required"
+    <dd>Xlog external download address.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1037,8 +1185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Xlog id.</p>
-</dd><dt class="property-required"
+    <dd>Xlog id.</dd><dt class="property-required"
             title="Required">
         <span id="internaladdr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internaladdr_nodejs" style="color: inherit; text-decoration: inherit;">internal<wbr>Addr</a>
@@ -1046,8 +1193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog internal download address.</p>
-</dd><dt class="property-required"
+    <dd>Xlog internal download address.</dd><dt class="property-required"
             title="Required">
         <span id="size_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_nodejs" style="color: inherit; text-decoration: inherit;">size</a>
@@ -1055,8 +1201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Xlog file size.</p>
-</dd><dt class="property-required"
+    <dd>Xlog file size.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1064,8 +1209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</p>
-</dd></dl>
+    <dd>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1079,8 +1223,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</p>
-</dd><dt class="property-required"
+    <dd>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</dd><dt class="property-required"
             title="Required">
         <span id="external_addr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#external_addr_python" style="color: inherit; text-decoration: inherit;">external_<wbr>addr</a>
@@ -1088,8 +1231,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Xlog external download address.</p>
-</dd><dt class="property-required"
+    <dd>Xlog external download address.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1097,8 +1239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Xlog id.</p>
-</dd><dt class="property-required"
+    <dd>Xlog id.</dd><dt class="property-required"
             title="Required">
         <span id="internal_addr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internal_addr_python" style="color: inherit; text-decoration: inherit;">internal_<wbr>addr</a>
@@ -1106,8 +1247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Xlog internal download address.</p>
-</dd><dt class="property-required"
+    <dd>Xlog internal download address.</dd><dt class="property-required"
             title="Required">
         <span id="size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_python" style="color: inherit; text-decoration: inherit;">size</a>
@@ -1115,8 +1255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Xlog file size.</p>
-</dd><dt class="property-required"
+    <dd>Xlog file size.</dd><dt class="property-required"
             title="Required">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -1124,8 +1263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</p>
-</dd></dl>
+    <dd>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1139,8 +1277,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</p>
-</dd><dt class="property-required"
+    <dd>Xlog end time, format <code>yyyy-MM-dd hh:mm:ss</code>.</dd><dt class="property-required"
             title="Required">
         <span id="externaladdr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#externaladdr_yaml" style="color: inherit; text-decoration: inherit;">external<wbr>Addr</a>
@@ -1148,8 +1285,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Xlog external download address.</p>
-</dd><dt class="property-required"
+    <dd>Xlog external download address.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1157,8 +1293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Xlog id.</p>
-</dd><dt class="property-required"
+    <dd>Xlog id.</dd><dt class="property-required"
             title="Required">
         <span id="internaladdr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internaladdr_yaml" style="color: inherit; text-decoration: inherit;">internal<wbr>Addr</a>
@@ -1166,8 +1301,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Xlog internal download address.</p>
-</dd><dt class="property-required"
+    <dd>Xlog internal download address.</dd><dt class="property-required"
             title="Required">
         <span id="size_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_yaml" style="color: inherit; text-decoration: inherit;">size</a>
@@ -1175,8 +1309,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Xlog file size.</p>
-</dd><dt class="property-required"
+    <dd>Xlog file size.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1184,8 +1317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</p>
-</dd></dl>
+    <dd>Xlog start time, format <code>yyyy-MM-dd hh:mm:ss</code>, start time cannot before 7 days ago.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1200,7 +1332,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

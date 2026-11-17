@@ -2,9 +2,11 @@
 ---
 title: "PlayDomainCertAttachment"
 title_tag: "tencentcloud.Css.PlayDomainCertAttachment"
-meta_desc: "Documentation for the tencentcloud.Css.PlayDomainCertAttachment resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a css play_domain_cert_attachment. This resource is used for binding the play domain and specified certification together."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,16 +18,20 @@ Provides a resource to create a css play_domain_cert_attachment. This resource i
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Ssl.getCertificates({
+const foo = tencentcloud.ssl.getCertificates({
     name: "your_ssl_cert",
 });
-const playDomainCertAttachment = new tencentcloud.css.PlayDomainCertAttachment("playDomainCertAttachment", {
+const playDomainCertAttachment = new tencentcloud.css.PlayDomainCertAttachment("play_domain_cert_attachment", {
     cloudCertId: foo.then(foo => foo.certificates?.[0]?.id),
     domainInfo: {
         domainName: "your_domain_name",
@@ -33,63 +39,47 @@ const playDomainCertAttachment = new tencentcloud.css.PlayDomainCertAttachment("
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.Ssl.get_certificates(name="your_ssl_cert")
-play_domain_cert_attachment = tencentcloud.css.PlayDomainCertAttachment("playDomainCertAttachment",
+foo = tencentcloud.ssl.get_certificates(name="your_ssl_cert")
+play_domain_cert_attachment = tencentcloud.css.PlayDomainCertAttachment("play_domain_cert_attachment",
     cloud_cert_id=foo.certificates[0].id,
-    domain_info=tencentcloud.css.PlayDomainCertAttachmentDomainInfoArgs(
-        domain_name="your_domain_name",
-        status=1,
-    ))
+    domain_info={
+        "domain_name": "your_domain_name",
+        "status": 1,
+    })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Ssl.GetCertificates.Invoke(new()
-    {
-        Name = "your_ssl_cert",
-    });
-
-    var playDomainCertAttachment = new Tencentcloud.Css.PlayDomainCertAttachment("playDomainCertAttachment", new()
-    {
-        CloudCertId = foo.Apply(getCertificatesResult => getCertificatesResult.Certificates[0]?.Id),
-        DomainInfo = new Tencentcloud.Css.Inputs.PlayDomainCertAttachmentDomainInfoArgs
-        {
-            DomainName = "your_domain_name",
-            Status = 1,
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/css"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ssl"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		foo, err := Ssl.GetCertificates(ctx, &ssl.GetCertificatesArgs{
+		foo, err := ssl.GetCertificates(ctx, &ssl.GetCertificatesArgs{
 			Name: pulumi.StringRef("your_ssl_cert"),
 		}, nil)
 		if err != nil {
 			return err
 		}
-		_, err = Css.NewPlayDomainCertAttachment(ctx, "playDomainCertAttachment", &Css.PlayDomainCertAttachmentArgs{
+		_, err = css.NewPlayDomainCertAttachment(ctx, "play_domain_cert_attachment", &css.PlayDomainCertAttachmentArgs{
 			CloudCertId: pulumi.String(foo.Certificates[0].Id),
 			DomainInfo: &css.PlayDomainCertAttachmentDomainInfoArgs{
 				DomainName: pulumi.String("your_domain_name"),
@@ -103,6 +93,41 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = Tencentcloud.Ssl.GetCertificates.Invoke(new()
+    {
+        Name = "your_ssl_cert",
+    });
+
+    var playDomainCertAttachment = new Tencentcloud.Css.PlayDomainCertAttachment("play_domain_cert_attachment", new()
+    {
+        CloudCertId = foo.Apply(getCertificatesResult => getCertificatesResult.Certificates[0]?.Id),
+        DomainInfo = new Tencentcloud.Css.Inputs.PlayDomainCertAttachmentDomainInfoArgs
+        {
+            DomainName = "your_domain_name",
+            Status = 1,
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -114,8 +139,8 @@ import com.pulumi.tencentcloud.Ssl.inputs.GetCertificatesArgs;
 import com.pulumi.tencentcloud.Css.PlayDomainCertAttachment;
 import com.pulumi.tencentcloud.Css.PlayDomainCertAttachmentArgs;
 import com.pulumi.tencentcloud.Css.inputs.PlayDomainCertAttachmentDomainInfoArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -131,8 +156,8 @@ public class App {
             .name("your_ssl_cert")
             .build());
 
-        var playDomainCertAttachment = new PlayDomainCertAttachment("playDomainCertAttachment", PlayDomainCertAttachmentArgs.builder()        
-            .cloudCertId(foo.applyValue(getCertificatesResult -> getCertificatesResult.certificates()[0].id()))
+        var playDomainCertAttachment = new PlayDomainCertAttachment("playDomainCertAttachment", PlayDomainCertAttachmentArgs.builder()
+            .cloudCertId(foo.certificates()[0].id())
             .domainInfo(PlayDomainCertAttachmentDomainInfoArgs.builder()
                 .domainName("your_domain_name")
                 .status(1)
@@ -142,10 +167,16 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   playDomainCertAttachment:
     type: tencentcloud:Css:PlayDomainCertAttachment
+    name: play_domain_cert_attachment
     properties:
       cloudCertId: ${foo.certificates[0].id}
       domainInfo:
@@ -154,70 +185,120 @@ resources:
 variables:
   foo:
     fn::invoke:
-      Function: tencentcloud:Ssl:getCertificates
-      Arguments:
+      function: tencentcloud:Ssl:getCertificates
+      arguments:
         name: your_ssl_cert
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_ssl_getcertificates" "foo" {
+  name = "your_ssl_cert"
+}
+
+resource "tencentcloud_css_playdomaincertattachment" "play_domain_cert_attachment" {
+  cloud_cert_id = data.tencentcloud_ssl_getcertificates.foo.certificates[0].id
+  domain_info = {
+    domain_name = "your_domain_name"
+    status      = 1
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [ModifyLiveDomainCertBindings](https://www.tencentcloud.com/document/api/267/49644)
+* Read: [DescribeLiveDomainCertBindings](https://www.tencentcloud.com/document/api/267/49645)
+* Delete: [UnBindLiveDomainCert](https://www.tencentcloud.com/document/api/267/30774)
 
 
 ## Create PlayDomainCertAttachment Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">PlayDomainCertAttachment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PlayDomainCertAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">PlayDomainCertAttachment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PlayDomainCertAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">PlayDomainCertAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                             <span class="nx">cloud_cert_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                             <span class="nx">domain_info</span><span class="p">:</span> <span class="nx">Optional[_css.PlayDomainCertAttachmentDomainInfoArgs]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">PlayDomainCertAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PlayDomainCertAttachmentArgs</a></span><span class="p">,</span>
-                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">PlayDomainCertAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                             <span class="nx">domain_info</span><span class="p">:</span> <span class="nx">Optional[PlayDomainCertAttachmentDomainInfoArgs]</span> = None<span class="p">,</span>
+                             <span class="nx">cloud_cert_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewPlayDomainCertAttachment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">PlayDomainCertAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PlayDomainCertAttachment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewPlayDomainCertAttachment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">PlayDomainCertAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PlayDomainCertAttachment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">PlayDomainCertAttachment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PlayDomainCertAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">PlayDomainCertAttachment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PlayDomainCertAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">PlayDomainCertAttachment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PlayDomainCertAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">PlayDomainCertAttachment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PlayDomainCertAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Css:PlayDomainCertAttachment</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Css:PlayDomainCertAttachment</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_css_play_domain_cert_attachment&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -238,7 +319,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -355,11 +436,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## PlayDomainCertAttachment Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The PlayDomainCertAttachment resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -373,10 +462,9 @@ The PlayDomainCertAttachment resource accepts the following [input](/docs/intro/
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domaininfo_csharp" style="color: inherit; text-decoration: inherit;">Domain<wbr>Info</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info<wbr>Args</a></span>
+        <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info</a></span>
     </dt>
-    <dd><p>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="cloudcertid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cloudcertid_csharp" style="color: inherit; text-decoration: inherit;">Cloud<wbr>Cert<wbr>Id</a>
@@ -384,8 +472,7 @@ The PlayDomainCertAttachment resource accepts the following [input](/docs/intro/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</p>
-</dd></dl>
+    <dd>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -399,8 +486,7 @@ The PlayDomainCertAttachment resource accepts the following [input](/docs/intro/
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info<wbr>Args</a></span>
     </dt>
-    <dd><p>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="cloudcertid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cloudcertid_go" style="color: inherit; text-decoration: inherit;">Cloud<wbr>Cert<wbr>Id</a>
@@ -408,8 +494,29 @@ The PlayDomainCertAttachment resource accepts the following [input](/docs/intro/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</p>
-</dd></dl>
+    <dd>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="domain_info_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_info_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">object</a></span>
+    </dt>
+    <dd>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cloud_cert_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cloud_cert_id_hcl" style="color: inherit; text-decoration: inherit;">cloud_<wbr>cert_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -421,10 +528,9 @@ The PlayDomainCertAttachment resource accepts the following [input](/docs/intro/
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domaininfo_java" style="color: inherit; text-decoration: inherit;">domain<wbr>Info</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info<wbr>Args</a></span>
+        <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info</a></span>
     </dt>
-    <dd><p>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="cloudcertid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cloudcertid_java" style="color: inherit; text-decoration: inherit;">cloud<wbr>Cert<wbr>Id</a>
@@ -432,8 +538,7 @@ The PlayDomainCertAttachment resource accepts the following [input](/docs/intro/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</p>
-</dd></dl>
+    <dd>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -445,10 +550,9 @@ The PlayDomainCertAttachment resource accepts the following [input](/docs/intro/
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domaininfo_nodejs" style="color: inherit; text-decoration: inherit;">domain<wbr>Info</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info<wbr>Args</a></span>
+        <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info</a></span>
     </dt>
-    <dd><p>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="cloudcertid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cloudcertid_nodejs" style="color: inherit; text-decoration: inherit;">cloud<wbr>Cert<wbr>Id</a>
@@ -456,8 +560,7 @@ The PlayDomainCertAttachment resource accepts the following [input](/docs/intro/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</p>
-</dd></dl>
+    <dd>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -471,8 +574,7 @@ The PlayDomainCertAttachment resource accepts the following [input](/docs/intro/
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info<wbr>Args</a></span>
     </dt>
-    <dd><p>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="cloud_cert_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cloud_cert_id_python" style="color: inherit; text-decoration: inherit;">cloud_<wbr>cert_<wbr>id</a>
@@ -480,8 +582,7 @@ The PlayDomainCertAttachment resource accepts the following [input](/docs/intro/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</p>
-</dd></dl>
+    <dd>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -495,8 +596,7 @@ The PlayDomainCertAttachment resource accepts the following [input](/docs/intro/
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">Property Map</a></span>
     </dt>
-    <dd><p>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="cloudcertid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cloudcertid_yaml" style="color: inherit; text-decoration: inherit;">cloud<wbr>Cert<wbr>Id</a>
@@ -504,8 +604,7 @@ The PlayDomainCertAttachment resource accepts the following [input](/docs/intro/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</p>
-</dd></dl>
+    <dd>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -526,8 +625,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>certificate expiration time.</p>
-</dd><dt class="property-"
+    <dd>certificate expiration time.</dd><dt class="property-"
             title="">
         <span id="certid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certid_csharp" style="color: inherit; text-decoration: inherit;">Cert<wbr>Id</a>
@@ -535,8 +633,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>certificate ID.</p>
-</dd><dt class="property-"
+    <dd>certificate ID.</dd><dt class="property-"
             title="">
         <span id="certtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certtype_csharp" style="color: inherit; text-decoration: inherit;">Cert<wbr>Type</a>
@@ -544,8 +641,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</p>
-</dd><dt class="property-"
+    <dd>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</dd><dt class="property-"
             title="">
         <span id="certificatealias_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatealias_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Alias</a>
@@ -553,8 +649,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>certificate remarks. Synonymous with CertName.</p>
-</dd><dt class="property-"
+    <dd>certificate remarks. Synonymous with CertName.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -562,8 +657,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -571,8 +665,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the rule was last updated.</p>
-</dd></dl>
+    <dd>The time when the rule was last updated.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -586,8 +679,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>certificate expiration time.</p>
-</dd><dt class="property-"
+    <dd>certificate expiration time.</dd><dt class="property-"
             title="">
         <span id="certid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certid_go" style="color: inherit; text-decoration: inherit;">Cert<wbr>Id</a>
@@ -595,8 +687,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>certificate ID.</p>
-</dd><dt class="property-"
+    <dd>certificate ID.</dd><dt class="property-"
             title="">
         <span id="certtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certtype_go" style="color: inherit; text-decoration: inherit;">Cert<wbr>Type</a>
@@ -604,8 +695,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</p>
-</dd><dt class="property-"
+    <dd>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</dd><dt class="property-"
             title="">
         <span id="certificatealias_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatealias_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Alias</a>
@@ -613,8 +703,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>certificate remarks. Synonymous with CertName.</p>
-</dd><dt class="property-"
+    <dd>certificate remarks. Synonymous with CertName.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -622,8 +711,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -631,8 +719,61 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the rule was last updated.</p>
-</dd></dl>
+    <dd>The time when the rule was last updated.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="cert_expire_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_expire_time_hcl" style="color: inherit; text-decoration: inherit;">cert_<wbr>expire_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>certificate expiration time.</dd><dt class="property-"
+            title="">
+        <span id="cert_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_id_hcl" style="color: inherit; text-decoration: inherit;">cert_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>certificate ID.</dd><dt class="property-"
+            title="">
+        <span id="cert_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_type_hcl" style="color: inherit; text-decoration: inherit;">cert_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</dd><dt class="property-"
+            title="">
+        <span id="certificate_alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_alias_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>certificate remarks. Synonymous with CertName.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time when the rule was last updated.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -646,8 +787,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>certificate expiration time.</p>
-</dd><dt class="property-"
+    <dd>certificate expiration time.</dd><dt class="property-"
             title="">
         <span id="certid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certid_java" style="color: inherit; text-decoration: inherit;">cert<wbr>Id</a>
@@ -655,8 +795,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>certificate ID.</p>
-</dd><dt class="property-"
+    <dd>certificate ID.</dd><dt class="property-"
             title="">
         <span id="certtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certtype_java" style="color: inherit; text-decoration: inherit;">cert<wbr>Type</a>
@@ -664,8 +803,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</p>
-</dd><dt class="property-"
+    <dd>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</dd><dt class="property-"
             title="">
         <span id="certificatealias_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatealias_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Alias</a>
@@ -673,8 +811,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>certificate remarks. Synonymous with CertName.</p>
-</dd><dt class="property-"
+    <dd>certificate remarks. Synonymous with CertName.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -682,8 +819,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -691,8 +827,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the rule was last updated.</p>
-</dd></dl>
+    <dd>The time when the rule was last updated.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -706,8 +841,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>certificate expiration time.</p>
-</dd><dt class="property-"
+    <dd>certificate expiration time.</dd><dt class="property-"
             title="">
         <span id="certid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certid_nodejs" style="color: inherit; text-decoration: inherit;">cert<wbr>Id</a>
@@ -715,8 +849,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>certificate ID.</p>
-</dd><dt class="property-"
+    <dd>certificate ID.</dd><dt class="property-"
             title="">
         <span id="certtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certtype_nodejs" style="color: inherit; text-decoration: inherit;">cert<wbr>Type</a>
@@ -724,8 +857,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</p>
-</dd><dt class="property-"
+    <dd>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</dd><dt class="property-"
             title="">
         <span id="certificatealias_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatealias_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Alias</a>
@@ -733,8 +865,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>certificate remarks. Synonymous with CertName.</p>
-</dd><dt class="property-"
+    <dd>certificate remarks. Synonymous with CertName.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -742,8 +873,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -751,8 +881,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the rule was last updated.</p>
-</dd></dl>
+    <dd>The time when the rule was last updated.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -766,8 +895,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>certificate expiration time.</p>
-</dd><dt class="property-"
+    <dd>certificate expiration time.</dd><dt class="property-"
             title="">
         <span id="cert_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_id_python" style="color: inherit; text-decoration: inherit;">cert_<wbr>id</a>
@@ -775,8 +903,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>certificate ID.</p>
-</dd><dt class="property-"
+    <dd>certificate ID.</dd><dt class="property-"
             title="">
         <span id="cert_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_type_python" style="color: inherit; text-decoration: inherit;">cert_<wbr>type</a>
@@ -784,8 +911,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</p>
-</dd><dt class="property-"
+    <dd>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</dd><dt class="property-"
             title="">
         <span id="certificate_alias_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_alias_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>alias</a>
@@ -793,8 +919,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>certificate remarks. Synonymous with CertName.</p>
-</dd><dt class="property-"
+    <dd>certificate remarks. Synonymous with CertName.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -802,8 +927,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -811,8 +935,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time when the rule was last updated.</p>
-</dd></dl>
+    <dd>The time when the rule was last updated.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -826,8 +949,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>certificate expiration time.</p>
-</dd><dt class="property-"
+    <dd>certificate expiration time.</dd><dt class="property-"
             title="">
         <span id="certid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certid_yaml" style="color: inherit; text-decoration: inherit;">cert<wbr>Id</a>
@@ -835,8 +957,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>certificate ID.</p>
-</dd><dt class="property-"
+    <dd>certificate ID.</dd><dt class="property-"
             title="">
         <span id="certtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certtype_yaml" style="color: inherit; text-decoration: inherit;">cert<wbr>Type</a>
@@ -844,8 +965,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</p>
-</dd><dt class="property-"
+    <dd>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</dd><dt class="property-"
             title="">
         <span id="certificatealias_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatealias_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Alias</a>
@@ -853,8 +973,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>certificate remarks. Synonymous with CertName.</p>
-</dd><dt class="property-"
+    <dd>certificate remarks. Synonymous with CertName.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -862,8 +981,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -871,8 +989,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the rule was last updated.</p>
-</dd></dl>
+    <dd>The time when the rule was last updated.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -882,18 +999,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing PlayDomainCertAttachment resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">PlayDomainCertAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">PlayDomainCertAttachment</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">PlayDomainCertAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">PlayDomainCertAttachment</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -902,106 +1019,145 @@ Get an existing PlayDomainCertAttachment resource's state with the given name, I
         <span class="nx">cert_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">certificate_alias</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">cloud_cert_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">domain_info</span><span class="p">:</span> <span class="nx">Optional[_css.PlayDomainCertAttachmentDomainInfoArgs]</span> = None<span class="p">,</span>
+        <span class="nx">domain_info</span><span class="p">:</span> <span class="nx">Optional[PlayDomainCertAttachmentDomainInfoArgs]</span> = None<span class="p">,</span>
         <span class="nx">update_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> PlayDomainCertAttachment</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetPlayDomainCertAttachment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">PlayDomainCertAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PlayDomainCertAttachment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetPlayDomainCertAttachment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">PlayDomainCertAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PlayDomainCertAttachment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">PlayDomainCertAttachment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PlayDomainCertAttachmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">PlayDomainCertAttachment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PlayDomainCertAttachmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">PlayDomainCertAttachment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PlayDomainCertAttachmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">PlayDomainCertAttachment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PlayDomainCertAttachmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingPlayDomainCertAttachment</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Css:PlayDomainCertAttachment</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_css_play_domain_cert_attachment</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PlayDomainCertAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PlayDomainCertAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1009,28 +1165,31 @@ Get an existing PlayDomainCertAttachment resource's state with the given name, I
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PlayDomainCertAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1038,28 +1197,31 @@ Get an existing PlayDomainCertAttachment resource's state with the given name, I
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PlayDomainCertAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1079,8 +1241,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>certificate expiration time.</p>
-</dd><dt class="property-optional"
+    <dd>certificate expiration time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certid_csharp" style="color: inherit; text-decoration: inherit;">Cert<wbr>Id</a>
@@ -1088,8 +1249,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>certificate ID.</p>
-</dd><dt class="property-optional"
+    <dd>certificate ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certtype_csharp" style="color: inherit; text-decoration: inherit;">Cert<wbr>Type</a>
@@ -1097,8 +1257,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</p>
-</dd><dt class="property-optional"
+    <dd>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificatealias_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificatealias_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Alias</a>
@@ -1106,8 +1265,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>certificate remarks. Synonymous with CertName.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>certificate remarks. Synonymous with CertName.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cloudcertid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cloudcertid_csharp" style="color: inherit; text-decoration: inherit;">Cloud<wbr>Cert<wbr>Id</a>
@@ -1115,17 +1273,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domaininfo_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domaininfo_csharp" style="color: inherit; text-decoration: inherit;">Domain<wbr>Info</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info<wbr>Args</a></span>
+        <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Css.<wbr>Inputs.<wbr>Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info</a></span>
     </dt>
-    <dd><p>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</p>
-</dd><dt class="property-optional"
+    <dd>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1133,8 +1289,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the rule was last updated.</p>
-</dd></dl>
+    <dd>The time when the rule was last updated.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1148,8 +1303,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>certificate expiration time.</p>
-</dd><dt class="property-optional"
+    <dd>certificate expiration time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certid_go" style="color: inherit; text-decoration: inherit;">Cert<wbr>Id</a>
@@ -1157,8 +1311,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>certificate ID.</p>
-</dd><dt class="property-optional"
+    <dd>certificate ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certtype_go" style="color: inherit; text-decoration: inherit;">Cert<wbr>Type</a>
@@ -1166,8 +1319,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</p>
-</dd><dt class="property-optional"
+    <dd>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificatealias_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificatealias_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Alias</a>
@@ -1175,8 +1327,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>certificate remarks. Synonymous with CertName.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>certificate remarks. Synonymous with CertName.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cloudcertid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cloudcertid_go" style="color: inherit; text-decoration: inherit;">Cloud<wbr>Cert<wbr>Id</a>
@@ -1184,8 +1335,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domaininfo_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domaininfo_go" style="color: inherit; text-decoration: inherit;">Domain<wbr>Info</a>
@@ -1193,8 +1343,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info<wbr>Args</a></span>
     </dt>
-    <dd><p>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</p>
-</dd><dt class="property-optional"
+    <dd>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1202,8 +1351,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the rule was last updated.</p>
-</dd></dl>
+    <dd>The time when the rule was last updated.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_cert_expire_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cert_expire_time_hcl" style="color: inherit; text-decoration: inherit;">cert_<wbr>expire_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>certificate expiration time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cert_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cert_id_hcl" style="color: inherit; text-decoration: inherit;">cert_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>certificate ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cert_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cert_type_hcl" style="color: inherit; text-decoration: inherit;">cert_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_certificate_alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificate_alias_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>certificate remarks. Synonymous with CertName.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cloud_cert_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cloud_cert_id_hcl" style="color: inherit; text-decoration: inherit;">cloud_<wbr>cert_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_domain_info_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_info_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">object</a></span>
+    </dt>
+    <dd>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time when the rule was last updated.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1217,8 +1427,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>certificate expiration time.</p>
-</dd><dt class="property-optional"
+    <dd>certificate expiration time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certid_java" style="color: inherit; text-decoration: inherit;">cert<wbr>Id</a>
@@ -1226,8 +1435,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>certificate ID.</p>
-</dd><dt class="property-optional"
+    <dd>certificate ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certtype_java" style="color: inherit; text-decoration: inherit;">cert<wbr>Type</a>
@@ -1235,8 +1443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</p>
-</dd><dt class="property-optional"
+    <dd>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificatealias_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificatealias_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Alias</a>
@@ -1244,8 +1451,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>certificate remarks. Synonymous with CertName.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>certificate remarks. Synonymous with CertName.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cloudcertid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cloudcertid_java" style="color: inherit; text-decoration: inherit;">cloud<wbr>Cert<wbr>Id</a>
@@ -1253,17 +1459,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domaininfo_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domaininfo_java" style="color: inherit; text-decoration: inherit;">domain<wbr>Info</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info<wbr>Args</a></span>
+        <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info</a></span>
     </dt>
-    <dd><p>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</p>
-</dd><dt class="property-optional"
+    <dd>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1271,8 +1475,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the rule was last updated.</p>
-</dd></dl>
+    <dd>The time when the rule was last updated.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1286,8 +1489,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>certificate expiration time.</p>
-</dd><dt class="property-optional"
+    <dd>certificate expiration time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certid_nodejs" style="color: inherit; text-decoration: inherit;">cert<wbr>Id</a>
@@ -1295,8 +1497,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>certificate ID.</p>
-</dd><dt class="property-optional"
+    <dd>certificate ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certtype_nodejs" style="color: inherit; text-decoration: inherit;">cert<wbr>Type</a>
@@ -1304,8 +1505,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</p>
-</dd><dt class="property-optional"
+    <dd>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificatealias_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificatealias_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Alias</a>
@@ -1313,8 +1513,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>certificate remarks. Synonymous with CertName.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>certificate remarks. Synonymous with CertName.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cloudcertid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cloudcertid_nodejs" style="color: inherit; text-decoration: inherit;">cloud<wbr>Cert<wbr>Id</a>
@@ -1322,17 +1521,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domaininfo_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domaininfo_nodejs" style="color: inherit; text-decoration: inherit;">domain<wbr>Info</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info<wbr>Args</a></span>
+        <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info</a></span>
     </dt>
-    <dd><p>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</p>
-</dd><dt class="property-optional"
+    <dd>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1340,8 +1537,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the rule was last updated.</p>
-</dd></dl>
+    <dd>The time when the rule was last updated.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1355,8 +1551,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>certificate expiration time.</p>
-</dd><dt class="property-optional"
+    <dd>certificate expiration time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cert_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cert_id_python" style="color: inherit; text-decoration: inherit;">cert_<wbr>id</a>
@@ -1364,8 +1559,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>certificate ID.</p>
-</dd><dt class="property-optional"
+    <dd>certificate ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cert_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cert_type_python" style="color: inherit; text-decoration: inherit;">cert_<wbr>type</a>
@@ -1373,8 +1567,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</p>
-</dd><dt class="property-optional"
+    <dd>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificate_alias_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificate_alias_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>alias</a>
@@ -1382,8 +1575,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>certificate remarks. Synonymous with CertName.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>certificate remarks. Synonymous with CertName.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cloud_cert_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cloud_cert_id_python" style="color: inherit; text-decoration: inherit;">cloud_<wbr>cert_<wbr>id</a>
@@ -1391,8 +1583,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_info_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_info_python" style="color: inherit; text-decoration: inherit;">domain_<wbr>info</a>
@@ -1400,8 +1591,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info<wbr>Args</a></span>
     </dt>
-    <dd><p>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</p>
-</dd><dt class="property-optional"
+    <dd>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -1409,8 +1599,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time when the rule was last updated.</p>
-</dd></dl>
+    <dd>The time when the rule was last updated.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1424,8 +1613,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>certificate expiration time.</p>
-</dd><dt class="property-optional"
+    <dd>certificate expiration time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certid_yaml" style="color: inherit; text-decoration: inherit;">cert<wbr>Id</a>
@@ -1433,8 +1621,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>certificate ID.</p>
-</dd><dt class="property-optional"
+    <dd>certificate ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certtype_yaml" style="color: inherit; text-decoration: inherit;">cert<wbr>Type</a>
@@ -1442,8 +1629,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</p>
-</dd><dt class="property-optional"
+    <dd>certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificatealias_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificatealias_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Alias</a>
@@ -1451,8 +1637,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>certificate remarks. Synonymous with CertName.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>certificate remarks. Synonymous with CertName.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cloudcertid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cloudcertid_yaml" style="color: inherit; text-decoration: inherit;">cloud<wbr>Cert<wbr>Id</a>
@@ -1460,8 +1645,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Tencent cloud ssl certificate Id. Refer to <code>tencentcloud.Ssl.Certificate</code> to create or obtain the resource ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domaininfo_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domaininfo_yaml" style="color: inherit; text-decoration: inherit;">domain<wbr>Info</a>
@@ -1469,8 +1653,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#playdomaincertattachmentdomaininfo">Property Map</a></span>
     </dt>
-    <dd><p>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</p>
-</dd><dt class="property-optional"
+    <dd>The playback domains to bind and whether to enable HTTPS for them. If <code>CloudCertId</code> is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1478,8 +1661,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the rule was last updated.</p>
-</dd></dl>
+    <dd>The time when the rule was last updated.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1494,7 +1676,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="playdomaincertattachmentdomaininfo">Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info</h4>
+<h4 id="playdomaincertattachmentdomaininfo">
+Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info<pulumi-choosable type="language" values="python,go" class="inline">, Play<wbr>Domain<wbr>Cert<wbr>Attachment<wbr>Domain<wbr>Info<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1506,8 +1690,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain name.</p>
-</dd><dt class="property-required"
+    <dd>domain name.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1515,8 +1698,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable the https rule for the domain name. 1: enable, 0: disabled, -1: remain unchanged.</p>
-</dd></dl>
+    <dd>Whether to enable the https rule for the domain name. 1: enable, 0: disabled, -1: remain unchanged.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1530,8 +1712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain name.</p>
-</dd><dt class="property-required"
+    <dd>domain name.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1539,8 +1720,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable the https rule for the domain name. 1: enable, 0: disabled, -1: remain unchanged.</p>
-</dd></dl>
+    <dd>Whether to enable the https rule for the domain name. 1: enable, 0: disabled, -1: remain unchanged.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="domain_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_name_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>domain name.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable the https rule for the domain name. 1: enable, 0: disabled, -1: remain unchanged.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1554,8 +1756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>domain name.</p>
-</dd><dt class="property-required"
+    <dd>domain name.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1563,8 +1764,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable the https rule for the domain name. 1: enable, 0: disabled, -1: remain unchanged.</p>
-</dd></dl>
+    <dd>Whether to enable the https rule for the domain name. 1: enable, 0: disabled, -1: remain unchanged.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1578,8 +1778,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain name.</p>
-</dd><dt class="property-required"
+    <dd>domain name.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1587,8 +1786,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable the https rule for the domain name. 1: enable, 0: disabled, -1: remain unchanged.</p>
-</dd></dl>
+    <dd>Whether to enable the https rule for the domain name. 1: enable, 0: disabled, -1: remain unchanged.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1602,8 +1800,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>domain name.</p>
-</dd><dt class="property-required"
+    <dd>domain name.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1611,8 +1808,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable the https rule for the domain name. 1: enable, 0: disabled, -1: remain unchanged.</p>
-</dd></dl>
+    <dd>Whether to enable the https rule for the domain name. 1: enable, 0: disabled, -1: remain unchanged.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1626,8 +1822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>domain name.</p>
-</dd><dt class="property-required"
+    <dd>domain name.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1635,8 +1830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable the https rule for the domain name. 1: enable, 0: disabled, -1: remain unchanged.</p>
-</dd></dl>
+    <dd>Whether to enable the https rule for the domain name. 1: enable, 0: disabled, -1: remain unchanged.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1644,12 +1838,15 @@ The following state arguments are supported:
 
 
 
-css play_domain_cert_attachment can be imported using the id, e.g.
+css playDomainCertAttachment can be imported using the id, e.g.
 
 ```sh
 $ pulumi import tencentcloud:Css/playDomainCertAttachment:PlayDomainCertAttachment play_domain_cert_attachment domainName#cloudCertId
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1661,7 +1858,6 @@ $ pulumi import tencentcloud:Css/playDomainCertAttachment:PlayDomainCertAttachme
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

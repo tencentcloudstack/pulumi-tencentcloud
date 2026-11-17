@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Images.getInstance"
 meta_desc: "Documentation for the tencentcloud.Images.getInstance function with examples, input properties, output properties, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,42 +20,45 @@ Use this data source to query images.
 
 ### Query all images
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Images.getInstance({});
+const example = tencentcloud.images.getInstance({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Images.get_instance()
+example = tencentcloud.images.get_instance()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var example = Tencentcloud.Images.GetInstance.Invoke();
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Images.GetInstance(ctx, nil, nil)
+		_, err := images.GetInstance(ctx, &images.GetInstanceArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -61,6 +66,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Images.GetInstance.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -69,8 +96,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Images.ImagesFunctions;
 import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -82,42 +109,107 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var example = ImagesFunctions.getInstance();
+        final var example = ImagesFunctions.getInstance(GetInstanceArgs.builder()
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Images:getInstance
-      Arguments: {}
+      function: tencentcloud:Images:getInstance
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_images_getinstance" "example" {
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Query images by image ID
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Images.getInstance({
+const example = tencentcloud.images.getInstance({
     imageId: "img-9qrfy1xt",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Images.get_instance(image_id="img-9qrfy1xt")
+example = tencentcloud.images.get_instance(image_id="img-9qrfy1xt")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+			ImageId: pulumi.StringRef("img-9qrfy1xt"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -128,26 +220,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-			ImageId: pulumi.StringRef("img-9qrfy1xt"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -156,8 +233,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Images.ImagesFunctions;
 import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -176,38 +253,103 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Images:getInstance
-      Arguments:
+      function: tencentcloud:Images:getInstance
+      arguments:
         imageId: img-9qrfy1xt
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_images_getinstance" "example" {
+  image_id = "img-9qrfy1xt"
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Query images by os name
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Images.getInstance({
+const example = tencentcloud.images.getInstance({
     osName: "TencentOS Server 3.2 (Final)",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Images.get_instance(os_name="TencentOS Server 3.2 (Final)")
+example = tencentcloud.images.get_instance(os_name="TencentOS Server 3.2 (Final)")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -218,26 +360,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -246,8 +373,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Images.ImagesFunctions;
 import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -266,38 +393,103 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Images:getInstance
-      Arguments:
+      function: tencentcloud:Images:getInstance
+      arguments:
         osName: TencentOS Server 3.2 (Final)
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_images_getinstance" "example" {
+  os_name = "TencentOS Server 3.2 (Final)"
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Query images by image name regex
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Images.getInstance({
+const example = tencentcloud.images.getInstance({
     imageNameRegex: "^TencentOS",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Images.get_instance(image_name_regex="^TencentOS")
+example = tencentcloud.images.get_instance(image_name_regex="^TencentOS")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+			ImageNameRegex: pulumi.StringRef("^TencentOS"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -308,26 +500,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-			ImageNameRegex: pulumi.StringRef("^TencentOS"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -336,8 +513,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Images.ImagesFunctions;
 import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -356,38 +533,105 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Images:getInstance
-      Arguments:
+      function: tencentcloud:Images:getInstance
+      arguments:
         imageNameRegex: ^TencentOS
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_images_getinstance" "example" {
+  image_name_regex = "^TencentOS"
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Query images by image type
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Images.getInstance({
+const example = tencentcloud.images.getInstance({
     imageTypes: ["PUBLIC_IMAGE"],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"])
+example = tencentcloud.images.get_instance(image_types=["PUBLIC_IMAGE"])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+			ImageTypes: []string{
+				"PUBLIC_IMAGE",
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -401,28 +645,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-			ImageTypes: []string{
-				"PUBLIC_IMAGE",
-			},
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -431,8 +658,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Images.ImagesFunctions;
 import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -451,39 +678,104 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Images:getInstance
-      Arguments:
+      function: tencentcloud:Images:getInstance
+      arguments:
         imageTypes:
           - PUBLIC_IMAGE
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_images_getinstance" "example" {
+  image_types = ["PUBLIC_IMAGE"]
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Query images by instance type
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Images.getInstance({
+const example = tencentcloud.images.getInstance({
     instanceType: "S1.SMALL1",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Images.get_instance(instance_type="S1.SMALL1")
+example = tencentcloud.images.get_instance(instance_type="S1.SMALL1")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+			InstanceType: pulumi.StringRef("S1.SMALL1"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -494,26 +786,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-			InstanceType: pulumi.StringRef("S1.SMALL1"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -522,8 +799,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Images.ImagesFunctions;
 import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -542,16 +819,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Images:getInstance
-      Arguments:
+      function: tencentcloud:Images:getInstance
+      arguments:
         instanceType: S1.SMALL1
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_images_getinstance" "example" {
+  instance_type = "S1.SMALL1"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
 
 
 
@@ -563,7 +870,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -571,9 +878,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstance<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
+><span class="k">function </span>getInstance<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
 ><span class="k">
-function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
+function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -590,13 +897,13 @@ function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</
                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstanceResult</span
 ><span class="k">
-def </span>get_instance_output<span class="p">(</span><span class="nx">image_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">image_name_regex</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">image_types</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                 <span class="nx">instance_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">os_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstanceResult]</span
+def </span>get_instance_output<span class="p">(</span><span class="nx">image_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">image_name_regex</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">image_types</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">instance_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">os_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstanceResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -621,7 +928,8 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstance </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -630,7 +938,8 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -642,6 +951,15 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Images/getInstance:getInstance
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_images_get_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -660,8 +978,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the image to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the image to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagenameregex_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagenameregex_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Name<wbr>Regex</a>
@@ -669,8 +986,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A regex string to apply to the image list returned by TencentCloud, conflict with 'os_name'. <strong>NOTE</strong>: it is not wildcard, should look like <code>image_name_regex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A regex string to apply to the image list returned by TencentCloud, conflict with 'os_name'. <strong>NOTE</strong>: it is not wildcard, should look like <code>imageNameRegex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagetypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagetypes_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Types</a>
@@ -678,8 +994,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</p>
-</dd><dt class="property-optional"
+    <dd>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -687,8 +1002,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type, such as <code>S1.SMALL1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type, such as <code>S1.SMALL1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="osname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#osname_csharp" style="color: inherit; text-decoration: inherit;">Os<wbr>Name</a>
@@ -696,8 +1010,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A string to apply with fuzzy match to the os_name attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</p>
-</dd><dt class="property-optional"
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -705,8 +1018,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -720,8 +1032,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the image to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the image to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagenameregex_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagenameregex_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Name<wbr>Regex</a>
@@ -729,8 +1040,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A regex string to apply to the image list returned by TencentCloud, conflict with 'os_name'. <strong>NOTE</strong>: it is not wildcard, should look like <code>image_name_regex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A regex string to apply to the image list returned by TencentCloud, conflict with 'os_name'. <strong>NOTE</strong>: it is not wildcard, should look like <code>imageNameRegex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagetypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagetypes_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Types</a>
@@ -738,8 +1048,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</p>
-</dd><dt class="property-optional"
+    <dd>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -747,8 +1056,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type, such as <code>S1.SMALL1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type, such as <code>S1.SMALL1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="osname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#osname_go" style="color: inherit; text-decoration: inherit;">Os<wbr>Name</a>
@@ -756,8 +1064,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A string to apply with fuzzy match to the os_name attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</p>
-</dd><dt class="property-optional"
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -765,8 +1072,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="image_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_id_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the image to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="image_name_regex_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_name_regex_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>name_<wbr>regex</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A regex string to apply to the image list returned by TencentCloud, conflict with 'os_name'. <strong>NOTE</strong>: it is not wildcard, should look like <code>imageNameRegex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="image_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_types_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance type, such as <code>S1.SMALL1</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="os_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#os_name_hcl" style="color: inherit; text-decoration: inherit;">os_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -780,8 +1140,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the image to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the image to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagenameregex_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagenameregex_java" style="color: inherit; text-decoration: inherit;">image<wbr>Name<wbr>Regex</a>
@@ -789,8 +1148,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A regex string to apply to the image list returned by TencentCloud, conflict with 'os_name'. <strong>NOTE</strong>: it is not wildcard, should look like <code>image_name_regex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A regex string to apply to the image list returned by TencentCloud, conflict with 'os_name'. <strong>NOTE</strong>: it is not wildcard, should look like <code>imageNameRegex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagetypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagetypes_java" style="color: inherit; text-decoration: inherit;">image<wbr>Types</a>
@@ -798,8 +1156,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</p>
-</dd><dt class="property-optional"
+    <dd>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -807,8 +1164,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance type, such as <code>S1.SMALL1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type, such as <code>S1.SMALL1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="osname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#osname_java" style="color: inherit; text-decoration: inherit;">os<wbr>Name</a>
@@ -816,8 +1172,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A string to apply with fuzzy match to the os_name attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</p>
-</dd><dt class="property-optional"
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -825,8 +1180,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -840,8 +1194,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the image to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the image to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagenameregex_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagenameregex_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Name<wbr>Regex</a>
@@ -849,8 +1202,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A regex string to apply to the image list returned by TencentCloud, conflict with 'os_name'. <strong>NOTE</strong>: it is not wildcard, should look like <code>image_name_regex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A regex string to apply to the image list returned by TencentCloud, conflict with 'os_name'. <strong>NOTE</strong>: it is not wildcard, should look like <code>imageNameRegex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagetypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagetypes_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Types</a>
@@ -858,8 +1210,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</p>
-</dd><dt class="property-optional"
+    <dd>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -867,8 +1218,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type, such as <code>S1.SMALL1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type, such as <code>S1.SMALL1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="osname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#osname_nodejs" style="color: inherit; text-decoration: inherit;">os<wbr>Name</a>
@@ -876,8 +1226,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A string to apply with fuzzy match to the os_name attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</p>
-</dd><dt class="property-optional"
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -885,8 +1234,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -900,8 +1248,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the image to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the image to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="image_name_regex_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_name_regex_python" style="color: inherit; text-decoration: inherit;">image_<wbr>name_<wbr>regex</a>
@@ -909,8 +1256,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A regex string to apply to the image list returned by TencentCloud, conflict with 'os_name'. <strong>NOTE</strong>: it is not wildcard, should look like <code>image_name_regex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A regex string to apply to the image list returned by TencentCloud, conflict with 'os_name'. <strong>NOTE</strong>: it is not wildcard, should look like <code>imageNameRegex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="image_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_types_python" style="color: inherit; text-decoration: inherit;">image_<wbr>types</a>
@@ -918,8 +1264,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</p>
-</dd><dt class="property-optional"
+    <dd>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -927,8 +1272,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance type, such as <code>S1.SMALL1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type, such as <code>S1.SMALL1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="os_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#os_name_python" style="color: inherit; text-decoration: inherit;">os_<wbr>name</a>
@@ -936,8 +1280,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A string to apply with fuzzy match to the os_name attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</p>
-</dd><dt class="property-optional"
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -945,8 +1288,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -960,8 +1302,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the image to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the image to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagenameregex_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagenameregex_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Name<wbr>Regex</a>
@@ -969,8 +1310,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A regex string to apply to the image list returned by TencentCloud, conflict with 'os_name'. <strong>NOTE</strong>: it is not wildcard, should look like <code>image_name_regex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A regex string to apply to the image list returned by TencentCloud, conflict with 'os_name'. <strong>NOTE</strong>: it is not wildcard, should look like <code>imageNameRegex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagetypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagetypes_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Types</a>
@@ -978,8 +1318,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</p>
-</dd><dt class="property-optional"
+    <dd>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -987,8 +1326,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance type, such as <code>S1.SMALL1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type, such as <code>S1.SMALL1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="osname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#osname_yaml" style="color: inherit; text-decoration: inherit;">os<wbr>Name</a>
@@ -996,8 +1334,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A string to apply with fuzzy match to the os_name attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</p>
-</dd><dt class="property-optional"
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1005,8 +1342,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1029,8 +1365,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="images_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#images_csharp" style="color: inherit; text-decoration: inherit;">Images</a>
@@ -1038,8 +1373,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceimage">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Images.<wbr>Outputs.<wbr>Get<wbr>Instance<wbr>Image&gt;</a></span>
     </dt>
-    <dd><p>An information list of image. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of image. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="imageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
@@ -1047,8 +1381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the image.</p>
-</dd><dt class="property-"
+    <dd>ID of the image.</dd><dt class="property-"
             title="">
         <span id="imagenameregex_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagenameregex_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Name<wbr>Regex</a>
@@ -1064,8 +1397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Type of the image.</p>
-</dd><dt class="property-"
+    <dd>Type of the image.</dd><dt class="property-"
             title="">
         <span id="instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1081,8 +1413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>OS name of the image.</p>
-</dd><dt class="property-"
+    <dd>OS name of the image.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -1104,8 +1435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="images_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#images_go" style="color: inherit; text-decoration: inherit;">Images</a>
@@ -1113,8 +1443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceimage">[]Get<wbr>Instance<wbr>Image</a></span>
     </dt>
-    <dd><p>An information list of image. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of image. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="imageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
@@ -1122,8 +1451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the image.</p>
-</dd><dt class="property-"
+    <dd>ID of the image.</dd><dt class="property-"
             title="">
         <span id="imagenameregex_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagenameregex_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Name<wbr>Regex</a>
@@ -1139,8 +1467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Type of the image.</p>
-</dd><dt class="property-"
+    <dd>Type of the image.</dd><dt class="property-"
             title="">
         <span id="instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1156,11 +1483,80 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>OS name of the image.</p>
-</dd><dt class="property-"
+    <dd>OS name of the image.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="images_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#images_hcl" style="color: inherit; text-decoration: inherit;">images</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstanceimage">list(object)</a></span>
+    </dt>
+    <dd>An information list of image. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="image_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_id_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the image.</dd><dt class="property-"
+            title="">
+        <span id="image_name_regex_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_name_regex_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>name_<wbr>regex</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="image_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_types_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Type of the image.</dd><dt class="property-"
+            title="">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="os_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#os_name_hcl" style="color: inherit; text-decoration: inherit;">os_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>OS name of the image.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -1179,8 +1575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="images_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#images_java" style="color: inherit; text-decoration: inherit;">images</a>
@@ -1188,8 +1583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceimage">List&lt;Get<wbr>Instance<wbr>Image&gt;</a></span>
     </dt>
-    <dd><p>An information list of image. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of image. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="imageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_java" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -1197,8 +1591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the image.</p>
-</dd><dt class="property-"
+    <dd>ID of the image.</dd><dt class="property-"
             title="">
         <span id="imagenameregex_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagenameregex_java" style="color: inherit; text-decoration: inherit;">image<wbr>Name<wbr>Regex</a>
@@ -1214,8 +1607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Type of the image.</p>
-</dd><dt class="property-"
+    <dd>Type of the image.</dd><dt class="property-"
             title="">
         <span id="instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1231,8 +1623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>OS name of the image.</p>
-</dd><dt class="property-"
+    <dd>OS name of the image.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1254,8 +1645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="images_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#images_nodejs" style="color: inherit; text-decoration: inherit;">images</a>
@@ -1263,8 +1653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceimage">Get<wbr>Instance<wbr>Image[]</a></span>
     </dt>
-    <dd><p>An information list of image. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of image. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="imageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -1272,8 +1661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the image.</p>
-</dd><dt class="property-"
+    <dd>ID of the image.</dd><dt class="property-"
             title="">
         <span id="imagenameregex_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagenameregex_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Name<wbr>Regex</a>
@@ -1289,8 +1677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Type of the image.</p>
-</dd><dt class="property-"
+    <dd>Type of the image.</dd><dt class="property-"
             title="">
         <span id="instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1306,8 +1693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>OS name of the image.</p>
-</dd><dt class="property-"
+    <dd>OS name of the image.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1329,17 +1715,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="images_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#images_python" style="color: inherit; text-decoration: inherit;">images</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstanceimage">Get<wbr>Instance<wbr>Image]</a></span>
+        <span class="property-type"><a href="#getinstanceimage">Sequence[Get<wbr>Instance<wbr>Image]</a></span>
     </dt>
-    <dd><p>An information list of image. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of image. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="image_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_id_python" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
@@ -1347,8 +1731,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the image.</p>
-</dd><dt class="property-"
+    <dd>ID of the image.</dd><dt class="property-"
             title="">
         <span id="image_name_regex_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_name_regex_python" style="color: inherit; text-decoration: inherit;">image_<wbr>name_<wbr>regex</a>
@@ -1364,8 +1747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Type of the image.</p>
-</dd><dt class="property-"
+    <dd>Type of the image.</dd><dt class="property-"
             title="">
         <span id="instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -1381,8 +1763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>OS name of the image.</p>
-</dd><dt class="property-"
+    <dd>OS name of the image.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1404,8 +1785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="images_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#images_yaml" style="color: inherit; text-decoration: inherit;">images</a>
@@ -1413,8 +1793,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceimage">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of image. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of image. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="imageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -1422,8 +1801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the image.</p>
-</dd><dt class="property-"
+    <dd>ID of the image.</dd><dt class="property-"
             title="">
         <span id="imagenameregex_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagenameregex_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Name<wbr>Regex</a>
@@ -1439,8 +1817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Type of the image.</p>
-</dd><dt class="property-"
+    <dd>Type of the image.</dd><dt class="property-"
             title="">
         <span id="instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1456,8 +1833,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>OS name of the image.</p>
-</dd><dt class="property-"
+    <dd>OS name of the image.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1489,8 +1865,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Architecture of the image.</p>
-</dd><dt class="property-required"
+    <dd>Architecture of the image.</dd><dt class="property-required"
             title="Required">
         <span id="createdtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_csharp" style="color: inherit; text-decoration: inherit;">Created<wbr>Time</a>
@@ -1498,8 +1873,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Created time of the image.</p>
-</dd><dt class="property-required"
+    <dd>Created time of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagecreator_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagecreator_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Creator</a>
@@ -1507,8 +1881,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image creator of the image.</p>
-</dd><dt class="property-required"
+    <dd>Image creator of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagedescription_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagedescription_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Description</a>
@@ -1516,8 +1889,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the image.</p>
-</dd><dt class="property-required"
+    <dd>Description of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
@@ -1525,8 +1897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the image to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the image to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="imagename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagename_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Name</a>
@@ -1534,8 +1905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the image.</p>
-</dd><dt class="property-required"
+    <dd>Name of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagesize_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Size</a>
@@ -1543,8 +1913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the image.</p>
-</dd><dt class="property-required"
+    <dd>Size of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagesource_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagesource_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Source</a>
@@ -1552,8 +1921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image source of the image.</p>
-</dd><dt class="property-required"
+    <dd>Image source of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagestate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagestate_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>State</a>
@@ -1561,8 +1929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the image.</p>
-</dd><dt class="property-required"
+    <dd>State of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagetype_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Type</a>
@@ -1570,8 +1937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</p>
-</dd><dt class="property-required"
+    <dd>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</dd><dt class="property-required"
             title="Required">
         <span id="osname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#osname_csharp" style="color: inherit; text-decoration: inherit;">Os<wbr>Name</a>
@@ -1579,8 +1945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A string to apply with fuzzy match to the os_name attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</p>
-</dd><dt class="property-required"
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</dd><dt class="property-required"
             title="Required">
         <span id="platform_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platform_csharp" style="color: inherit; text-decoration: inherit;">Platform</a>
@@ -1588,8 +1953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Platform of the image.</p>
-</dd><dt class="property-required"
+    <dd>Platform of the image.</dd><dt class="property-required"
             title="Required">
         <span id="snapshots_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshots_csharp" style="color: inherit; text-decoration: inherit;">Snapshots</a>
@@ -1597,8 +1961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceimagesnapshot">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Images.<wbr>Inputs.<wbr>Get<wbr>Instance<wbr>Image<wbr>Snapshot&gt;</a></span>
     </dt>
-    <dd><p>List of snapshot details.</p>
-</dd><dt class="property-required"
+    <dd>List of snapshot details.</dd><dt class="property-required"
             title="Required">
         <span id="supportcloudinit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportcloudinit_csharp" style="color: inherit; text-decoration: inherit;">Support<wbr>Cloud<wbr>Init</a>
@@ -1606,8 +1969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether support cloud-init.</p>
-</dd><dt class="property-required"
+    <dd>Whether support cloud-init.</dd><dt class="property-required"
             title="Required">
         <span id="syncpercent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncpercent_csharp" style="color: inherit; text-decoration: inherit;">Sync<wbr>Percent</a>
@@ -1615,8 +1977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sync percent of the image.</p>
-</dd></dl>
+    <dd>Sync percent of the image.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1630,8 +1991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Architecture of the image.</p>
-</dd><dt class="property-required"
+    <dd>Architecture of the image.</dd><dt class="property-required"
             title="Required">
         <span id="createdtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_go" style="color: inherit; text-decoration: inherit;">Created<wbr>Time</a>
@@ -1639,8 +1999,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Created time of the image.</p>
-</dd><dt class="property-required"
+    <dd>Created time of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagecreator_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagecreator_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Creator</a>
@@ -1648,8 +2007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image creator of the image.</p>
-</dd><dt class="property-required"
+    <dd>Image creator of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagedescription_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagedescription_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Description</a>
@@ -1657,8 +2015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the image.</p>
-</dd><dt class="property-required"
+    <dd>Description of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
@@ -1666,8 +2023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the image to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the image to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="imagename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagename_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Name</a>
@@ -1675,8 +2031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the image.</p>
-</dd><dt class="property-required"
+    <dd>Name of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagesize_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Size</a>
@@ -1684,8 +2039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the image.</p>
-</dd><dt class="property-required"
+    <dd>Size of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagesource_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagesource_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Source</a>
@@ -1693,8 +2047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image source of the image.</p>
-</dd><dt class="property-required"
+    <dd>Image source of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagestate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagestate_go" style="color: inherit; text-decoration: inherit;">Image<wbr>State</a>
@@ -1702,8 +2055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the image.</p>
-</dd><dt class="property-required"
+    <dd>State of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagetype_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Type</a>
@@ -1711,8 +2063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</p>
-</dd><dt class="property-required"
+    <dd>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</dd><dt class="property-required"
             title="Required">
         <span id="osname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#osname_go" style="color: inherit; text-decoration: inherit;">Os<wbr>Name</a>
@@ -1720,8 +2071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A string to apply with fuzzy match to the os_name attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</p>
-</dd><dt class="property-required"
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</dd><dt class="property-required"
             title="Required">
         <span id="platform_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platform_go" style="color: inherit; text-decoration: inherit;">Platform</a>
@@ -1729,8 +2079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Platform of the image.</p>
-</dd><dt class="property-required"
+    <dd>Platform of the image.</dd><dt class="property-required"
             title="Required">
         <span id="snapshots_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshots_go" style="color: inherit; text-decoration: inherit;">Snapshots</a>
@@ -1738,8 +2087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceimagesnapshot">[]Get<wbr>Instance<wbr>Image<wbr>Snapshot</a></span>
     </dt>
-    <dd><p>List of snapshot details.</p>
-</dd><dt class="property-required"
+    <dd>List of snapshot details.</dd><dt class="property-required"
             title="Required">
         <span id="supportcloudinit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportcloudinit_go" style="color: inherit; text-decoration: inherit;">Support<wbr>Cloud<wbr>Init</a>
@@ -1747,8 +2095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether support cloud-init.</p>
-</dd><dt class="property-required"
+    <dd>Whether support cloud-init.</dd><dt class="property-required"
             title="Required">
         <span id="syncpercent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncpercent_go" style="color: inherit; text-decoration: inherit;">Sync<wbr>Percent</a>
@@ -1756,8 +2103,133 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sync percent of the image.</p>
-</dd></dl>
+    <dd>Sync percent of the image.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="architecture_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#architecture_hcl" style="color: inherit; text-decoration: inherit;">architecture</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Architecture of the image.</dd><dt class="property-required"
+            title="Required">
+        <span id="created_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_time_hcl" style="color: inherit; text-decoration: inherit;">created_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Created time of the image.</dd><dt class="property-required"
+            title="Required">
+        <span id="image_creator_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_creator_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>creator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Image creator of the image.</dd><dt class="property-required"
+            title="Required">
+        <span id="image_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_description_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the image.</dd><dt class="property-required"
+            title="Required">
+        <span id="image_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_id_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the image to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="image_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_name_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the image.</dd><dt class="property-required"
+            title="Required">
+        <span id="image_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_size_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Size of the image.</dd><dt class="property-required"
+            title="Required">
+        <span id="image_source_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_source_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Image source of the image.</dd><dt class="property-required"
+            title="Required">
+        <span id="image_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_state_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the image.</dd><dt class="property-required"
+            title="Required">
+        <span id="image_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_type_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</dd><dt class="property-required"
+            title="Required">
+        <span id="os_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#os_name_hcl" style="color: inherit; text-decoration: inherit;">os_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</dd><dt class="property-required"
+            title="Required">
+        <span id="platform_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platform_hcl" style="color: inherit; text-decoration: inherit;">platform</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Platform of the image.</dd><dt class="property-required"
+            title="Required">
+        <span id="snapshots_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshots_hcl" style="color: inherit; text-decoration: inherit;">snapshots</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstanceimagesnapshot">list(object)</a></span>
+    </dt>
+    <dd>List of snapshot details.</dd><dt class="property-required"
+            title="Required">
+        <span id="support_cloud_init_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_cloud_init_hcl" style="color: inherit; text-decoration: inherit;">support_<wbr>cloud_<wbr>init</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether support cloud-init.</dd><dt class="property-required"
+            title="Required">
+        <span id="sync_percent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sync_percent_hcl" style="color: inherit; text-decoration: inherit;">sync_<wbr>percent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Sync percent of the image.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1771,8 +2243,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Architecture of the image.</p>
-</dd><dt class="property-required"
+    <dd>Architecture of the image.</dd><dt class="property-required"
             title="Required">
         <span id="createdtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_java" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
@@ -1780,8 +2251,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Created time of the image.</p>
-</dd><dt class="property-required"
+    <dd>Created time of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagecreator_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagecreator_java" style="color: inherit; text-decoration: inherit;">image<wbr>Creator</a>
@@ -1789,8 +2259,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Image creator of the image.</p>
-</dd><dt class="property-required"
+    <dd>Image creator of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagedescription_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagedescription_java" style="color: inherit; text-decoration: inherit;">image<wbr>Description</a>
@@ -1798,8 +2267,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the image.</p>
-</dd><dt class="property-required"
+    <dd>Description of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_java" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -1807,8 +2275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the image to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the image to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="imagename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagename_java" style="color: inherit; text-decoration: inherit;">image<wbr>Name</a>
@@ -1816,8 +2283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the image.</p>
-</dd><dt class="property-required"
+    <dd>Name of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagesize_java" style="color: inherit; text-decoration: inherit;">image<wbr>Size</a>
@@ -1825,8 +2291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Size of the image.</p>
-</dd><dt class="property-required"
+    <dd>Size of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagesource_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagesource_java" style="color: inherit; text-decoration: inherit;">image<wbr>Source</a>
@@ -1834,8 +2299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Image source of the image.</p>
-</dd><dt class="property-required"
+    <dd>Image source of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagestate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagestate_java" style="color: inherit; text-decoration: inherit;">image<wbr>State</a>
@@ -1843,8 +2307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the image.</p>
-</dd><dt class="property-required"
+    <dd>State of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagetype_java" style="color: inherit; text-decoration: inherit;">image<wbr>Type</a>
@@ -1852,8 +2315,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</p>
-</dd><dt class="property-required"
+    <dd>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</dd><dt class="property-required"
             title="Required">
         <span id="osname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#osname_java" style="color: inherit; text-decoration: inherit;">os<wbr>Name</a>
@@ -1861,8 +2323,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A string to apply with fuzzy match to the os_name attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</p>
-</dd><dt class="property-required"
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</dd><dt class="property-required"
             title="Required">
         <span id="platform_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platform_java" style="color: inherit; text-decoration: inherit;">platform</a>
@@ -1870,8 +2331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Platform of the image.</p>
-</dd><dt class="property-required"
+    <dd>Platform of the image.</dd><dt class="property-required"
             title="Required">
         <span id="snapshots_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshots_java" style="color: inherit; text-decoration: inherit;">snapshots</a>
@@ -1879,8 +2339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceimagesnapshot">List&lt;Get<wbr>Instance<wbr>Image<wbr>Snapshot&gt;</a></span>
     </dt>
-    <dd><p>List of snapshot details.</p>
-</dd><dt class="property-required"
+    <dd>List of snapshot details.</dd><dt class="property-required"
             title="Required">
         <span id="supportcloudinit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportcloudinit_java" style="color: inherit; text-decoration: inherit;">support<wbr>Cloud<wbr>Init</a>
@@ -1888,8 +2347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether support cloud-init.</p>
-</dd><dt class="property-required"
+    <dd>Whether support cloud-init.</dd><dt class="property-required"
             title="Required">
         <span id="syncpercent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncpercent_java" style="color: inherit; text-decoration: inherit;">sync<wbr>Percent</a>
@@ -1897,8 +2355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Sync percent of the image.</p>
-</dd></dl>
+    <dd>Sync percent of the image.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1912,8 +2369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Architecture of the image.</p>
-</dd><dt class="property-required"
+    <dd>Architecture of the image.</dd><dt class="property-required"
             title="Required">
         <span id="createdtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_nodejs" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
@@ -1921,8 +2377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Created time of the image.</p>
-</dd><dt class="property-required"
+    <dd>Created time of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagecreator_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagecreator_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Creator</a>
@@ -1930,8 +2385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image creator of the image.</p>
-</dd><dt class="property-required"
+    <dd>Image creator of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagedescription_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagedescription_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Description</a>
@@ -1939,8 +2393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the image.</p>
-</dd><dt class="property-required"
+    <dd>Description of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -1948,8 +2401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the image to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the image to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="imagename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagename_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Name</a>
@@ -1957,8 +2409,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the image.</p>
-</dd><dt class="property-required"
+    <dd>Name of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagesize_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Size</a>
@@ -1966,8 +2417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Size of the image.</p>
-</dd><dt class="property-required"
+    <dd>Size of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagesource_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagesource_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Source</a>
@@ -1975,8 +2425,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image source of the image.</p>
-</dd><dt class="property-required"
+    <dd>Image source of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagestate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagestate_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>State</a>
@@ -1984,8 +2433,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the image.</p>
-</dd><dt class="property-required"
+    <dd>State of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagetype_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Type</a>
@@ -1993,8 +2441,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</p>
-</dd><dt class="property-required"
+    <dd>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</dd><dt class="property-required"
             title="Required">
         <span id="osname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#osname_nodejs" style="color: inherit; text-decoration: inherit;">os<wbr>Name</a>
@@ -2002,8 +2449,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A string to apply with fuzzy match to the os_name attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</p>
-</dd><dt class="property-required"
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</dd><dt class="property-required"
             title="Required">
         <span id="platform_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platform_nodejs" style="color: inherit; text-decoration: inherit;">platform</a>
@@ -2011,8 +2457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Platform of the image.</p>
-</dd><dt class="property-required"
+    <dd>Platform of the image.</dd><dt class="property-required"
             title="Required">
         <span id="snapshots_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshots_nodejs" style="color: inherit; text-decoration: inherit;">snapshots</a>
@@ -2020,8 +2465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceimagesnapshot">Get<wbr>Instance<wbr>Image<wbr>Snapshot[]</a></span>
     </dt>
-    <dd><p>List of snapshot details.</p>
-</dd><dt class="property-required"
+    <dd>List of snapshot details.</dd><dt class="property-required"
             title="Required">
         <span id="supportcloudinit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportcloudinit_nodejs" style="color: inherit; text-decoration: inherit;">support<wbr>Cloud<wbr>Init</a>
@@ -2029,8 +2473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether support cloud-init.</p>
-</dd><dt class="property-required"
+    <dd>Whether support cloud-init.</dd><dt class="property-required"
             title="Required">
         <span id="syncpercent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncpercent_nodejs" style="color: inherit; text-decoration: inherit;">sync<wbr>Percent</a>
@@ -2038,8 +2481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Sync percent of the image.</p>
-</dd></dl>
+    <dd>Sync percent of the image.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2053,8 +2495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Architecture of the image.</p>
-</dd><dt class="property-required"
+    <dd>Architecture of the image.</dd><dt class="property-required"
             title="Required">
         <span id="created_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_time_python" style="color: inherit; text-decoration: inherit;">created_<wbr>time</a>
@@ -2062,8 +2503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Created time of the image.</p>
-</dd><dt class="property-required"
+    <dd>Created time of the image.</dd><dt class="property-required"
             title="Required">
         <span id="image_creator_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_creator_python" style="color: inherit; text-decoration: inherit;">image_<wbr>creator</a>
@@ -2071,8 +2511,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Image creator of the image.</p>
-</dd><dt class="property-required"
+    <dd>Image creator of the image.</dd><dt class="property-required"
             title="Required">
         <span id="image_description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_description_python" style="color: inherit; text-decoration: inherit;">image_<wbr>description</a>
@@ -2080,8 +2519,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the image.</p>
-</dd><dt class="property-required"
+    <dd>Description of the image.</dd><dt class="property-required"
             title="Required">
         <span id="image_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_id_python" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
@@ -2089,8 +2527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the image to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the image to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="image_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_name_python" style="color: inherit; text-decoration: inherit;">image_<wbr>name</a>
@@ -2098,8 +2535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the image.</p>
-</dd><dt class="property-required"
+    <dd>Name of the image.</dd><dt class="property-required"
             title="Required">
         <span id="image_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_size_python" style="color: inherit; text-decoration: inherit;">image_<wbr>size</a>
@@ -2107,8 +2543,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the image.</p>
-</dd><dt class="property-required"
+    <dd>Size of the image.</dd><dt class="property-required"
             title="Required">
         <span id="image_source_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_source_python" style="color: inherit; text-decoration: inherit;">image_<wbr>source</a>
@@ -2116,8 +2551,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Image source of the image.</p>
-</dd><dt class="property-required"
+    <dd>Image source of the image.</dd><dt class="property-required"
             title="Required">
         <span id="image_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_state_python" style="color: inherit; text-decoration: inherit;">image_<wbr>state</a>
@@ -2125,8 +2559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the image.</p>
-</dd><dt class="property-required"
+    <dd>State of the image.</dd><dt class="property-required"
             title="Required">
         <span id="image_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_type_python" style="color: inherit; text-decoration: inherit;">image_<wbr>type</a>
@@ -2134,8 +2567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</p>
-</dd><dt class="property-required"
+    <dd>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</dd><dt class="property-required"
             title="Required">
         <span id="os_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#os_name_python" style="color: inherit; text-decoration: inherit;">os_<wbr>name</a>
@@ -2143,8 +2575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A string to apply with fuzzy match to the os_name attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</p>
-</dd><dt class="property-required"
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</dd><dt class="property-required"
             title="Required">
         <span id="platform_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platform_python" style="color: inherit; text-decoration: inherit;">platform</a>
@@ -2152,17 +2583,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Platform of the image.</p>
-</dd><dt class="property-required"
+    <dd>Platform of the image.</dd><dt class="property-required"
             title="Required">
         <span id="snapshots_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshots_python" style="color: inherit; text-decoration: inherit;">snapshots</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstanceimagesnapshot">Get<wbr>Instance<wbr>Image<wbr>Snapshot]</a></span>
+        <span class="property-type"><a href="#getinstanceimagesnapshot">Sequence[Get<wbr>Instance<wbr>Image<wbr>Snapshot]</a></span>
     </dt>
-    <dd><p>List of snapshot details.</p>
-</dd><dt class="property-required"
+    <dd>List of snapshot details.</dd><dt class="property-required"
             title="Required">
         <span id="support_cloud_init_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_cloud_init_python" style="color: inherit; text-decoration: inherit;">support_<wbr>cloud_<wbr>init</a>
@@ -2170,8 +2599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether support cloud-init.</p>
-</dd><dt class="property-required"
+    <dd>Whether support cloud-init.</dd><dt class="property-required"
             title="Required">
         <span id="sync_percent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sync_percent_python" style="color: inherit; text-decoration: inherit;">sync_<wbr>percent</a>
@@ -2179,8 +2607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sync percent of the image.</p>
-</dd></dl>
+    <dd>Sync percent of the image.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2194,8 +2621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Architecture of the image.</p>
-</dd><dt class="property-required"
+    <dd>Architecture of the image.</dd><dt class="property-required"
             title="Required">
         <span id="createdtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createdtime_yaml" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
@@ -2203,8 +2629,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Created time of the image.</p>
-</dd><dt class="property-required"
+    <dd>Created time of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagecreator_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagecreator_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Creator</a>
@@ -2212,8 +2637,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Image creator of the image.</p>
-</dd><dt class="property-required"
+    <dd>Image creator of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagedescription_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagedescription_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Description</a>
@@ -2221,8 +2645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the image.</p>
-</dd><dt class="property-required"
+    <dd>Description of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -2230,8 +2653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the image to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the image to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="imagename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagename_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Name</a>
@@ -2239,8 +2661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the image.</p>
-</dd><dt class="property-required"
+    <dd>Name of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagesize_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Size</a>
@@ -2248,8 +2669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Size of the image.</p>
-</dd><dt class="property-required"
+    <dd>Size of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagesource_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagesource_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Source</a>
@@ -2257,8 +2677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Image source of the image.</p>
-</dd><dt class="property-required"
+    <dd>Image source of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagestate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagestate_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>State</a>
@@ -2266,8 +2685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the image.</p>
-</dd><dt class="property-required"
+    <dd>State of the image.</dd><dt class="property-required"
             title="Required">
         <span id="imagetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagetype_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Type</a>
@@ -2275,8 +2693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</p>
-</dd><dt class="property-required"
+    <dd>A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.</dd><dt class="property-required"
             title="Required">
         <span id="osname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#osname_yaml" style="color: inherit; text-decoration: inherit;">os<wbr>Name</a>
@@ -2284,8 +2701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A string to apply with fuzzy match to the os_name attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</p>
-</dd><dt class="property-required"
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.</dd><dt class="property-required"
             title="Required">
         <span id="platform_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platform_yaml" style="color: inherit; text-decoration: inherit;">platform</a>
@@ -2293,8 +2709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Platform of the image.</p>
-</dd><dt class="property-required"
+    <dd>Platform of the image.</dd><dt class="property-required"
             title="Required">
         <span id="snapshots_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshots_yaml" style="color: inherit; text-decoration: inherit;">snapshots</a>
@@ -2302,8 +2717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceimagesnapshot">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of snapshot details.</p>
-</dd><dt class="property-required"
+    <dd>List of snapshot details.</dd><dt class="property-required"
             title="Required">
         <span id="supportcloudinit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportcloudinit_yaml" style="color: inherit; text-decoration: inherit;">support<wbr>Cloud<wbr>Init</a>
@@ -2311,8 +2725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether support cloud-init.</p>
-</dd><dt class="property-required"
+    <dd>Whether support cloud-init.</dd><dt class="property-required"
             title="Required">
         <span id="syncpercent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncpercent_yaml" style="color: inherit; text-decoration: inherit;">sync<wbr>Percent</a>
@@ -2320,8 +2733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Sync percent of the image.</p>
-</dd></dl>
+    <dd>Sync percent of the image.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2339,8 +2751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the cloud disk used to create the snapshot; unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Size of the cloud disk used to create the snapshot; unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="diskusage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Usage</a>
@@ -2348,8 +2759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the cloud disk used to create the snapshot.</p>
-</dd><dt class="property-required"
+    <dd>Type of the cloud disk used to create the snapshot.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_csharp" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Id</a>
@@ -2357,8 +2767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Snapshot ID.</p>
-</dd><dt class="property-required"
+    <dd>Snapshot ID.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_csharp" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Name</a>
@@ -2366,8 +2775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Snapshot name, the user-defined snapshot alias.</p>
-</dd></dl>
+    <dd>Snapshot name, the user-defined snapshot alias.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2381,8 +2789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the cloud disk used to create the snapshot; unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Size of the cloud disk used to create the snapshot; unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="diskusage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Usage</a>
@@ -2390,8 +2797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the cloud disk used to create the snapshot.</p>
-</dd><dt class="property-required"
+    <dd>Type of the cloud disk used to create the snapshot.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_go" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Id</a>
@@ -2399,8 +2805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Snapshot ID.</p>
-</dd><dt class="property-required"
+    <dd>Snapshot ID.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_go" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Name</a>
@@ -2408,8 +2813,45 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Snapshot name, the user-defined snapshot alias.</p>
-</dd></dl>
+    <dd>Snapshot name, the user-defined snapshot alias.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Size of the cloud disk used to create the snapshot; unit: GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_usage_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the cloud disk used to create the snapshot.</dd><dt class="property-required"
+            title="Required">
+        <span id="snapshot_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_id_hcl" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Snapshot ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="snapshot_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_name_hcl" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Snapshot name, the user-defined snapshot alias.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2423,8 +2865,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Size of the cloud disk used to create the snapshot; unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Size of the cloud disk used to create the snapshot; unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="diskusage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Usage</a>
@@ -2432,8 +2873,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the cloud disk used to create the snapshot.</p>
-</dd><dt class="property-required"
+    <dd>Type of the cloud disk used to create the snapshot.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_java" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -2441,8 +2881,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Snapshot ID.</p>
-</dd><dt class="property-required"
+    <dd>Snapshot ID.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_java" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Name</a>
@@ -2450,8 +2889,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Snapshot name, the user-defined snapshot alias.</p>
-</dd></dl>
+    <dd>Snapshot name, the user-defined snapshot alias.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2465,8 +2903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Size of the cloud disk used to create the snapshot; unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Size of the cloud disk used to create the snapshot; unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="diskusage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Usage</a>
@@ -2474,8 +2911,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the cloud disk used to create the snapshot.</p>
-</dd><dt class="property-required"
+    <dd>Type of the cloud disk used to create the snapshot.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_nodejs" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -2483,8 +2919,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Snapshot ID.</p>
-</dd><dt class="property-required"
+    <dd>Snapshot ID.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_nodejs" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Name</a>
@@ -2492,8 +2927,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Snapshot name, the user-defined snapshot alias.</p>
-</dd></dl>
+    <dd>Snapshot name, the user-defined snapshot alias.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2507,8 +2941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the cloud disk used to create the snapshot; unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Size of the cloud disk used to create the snapshot; unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="disk_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_usage_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>usage</a>
@@ -2516,8 +2949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the cloud disk used to create the snapshot.</p>
-</dd><dt class="property-required"
+    <dd>Type of the cloud disk used to create the snapshot.</dd><dt class="property-required"
             title="Required">
         <span id="snapshot_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_id_python" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
@@ -2525,8 +2957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Snapshot ID.</p>
-</dd><dt class="property-required"
+    <dd>Snapshot ID.</dd><dt class="property-required"
             title="Required">
         <span id="snapshot_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_name_python" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>name</a>
@@ -2534,8 +2965,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Snapshot name, the user-defined snapshot alias.</p>
-</dd></dl>
+    <dd>Snapshot name, the user-defined snapshot alias.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2549,8 +2979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Size of the cloud disk used to create the snapshot; unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Size of the cloud disk used to create the snapshot; unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="diskusage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskusage_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Usage</a>
@@ -2558,8 +2987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the cloud disk used to create the snapshot.</p>
-</dd><dt class="property-required"
+    <dd>Type of the cloud disk used to create the snapshot.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_yaml" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -2567,8 +2995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Snapshot ID.</p>
-</dd><dt class="property-required"
+    <dd>Snapshot ID.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_yaml" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Name</a>
@@ -2576,8 +3003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Snapshot name, the user-defined snapshot alias.</p>
-</dd></dl>
+    <dd>Snapshot name, the user-defined snapshot alias.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2592,7 +3018,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

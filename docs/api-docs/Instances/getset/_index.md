@@ -2,9 +2,11 @@
 ---
 title: "getSet"
 title_tag: "tencentcloud.Instances.getSet"
-meta_desc: "Documentation for the tencentcloud.Instances.getSet function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query cvm instances in parallel."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,81 +18,72 @@ Use this data source to query cvm instances in parallel.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Instances.getSet({
-    availabilityZone: "ap-guangzhou-6",
+const example = tencentcloud.instances.getSet({
     instanceId: "ins-a81rnm8c",
     instanceName: "tf_example",
+    availabilityZone: "ap-guangzhou-6",
     projectId: 0,
+    vpcId: "vpc-l040hycv",
     subnetId: "subnet-1to7t9au",
     tags: {
         tagKey: "tagValue",
     },
-    vpcId: "vpc-l040hycv",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Instances.get_set(availability_zone="ap-guangzhou-6",
-    instance_id="ins-a81rnm8c",
+example = tencentcloud.instances.get_set(instance_id="ins-a81rnm8c",
     instance_name="tf_example",
+    availability_zone="ap-guangzhou-6",
     project_id=0,
+    vpc_id="vpc-l040hycv",
     subnet_id="subnet-1to7t9au",
     tags={
         "tagKey": "tagValue",
-    },
-    vpc_id="vpc-l040hycv")
+    })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var example = Tencentcloud.Instances.GetSet.Invoke(new()
-    {
-        AvailabilityZone = "ap-guangzhou-6",
-        InstanceId = "ins-a81rnm8c",
-        InstanceName = "tf_example",
-        ProjectId = 0,
-        SubnetId = "subnet-1to7t9au",
-        Tags = 
-        {
-            { "tagKey", "tagValue" },
-        },
-        VpcId = "vpc-l040hycv",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instances"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/instances"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Instances.GetSet(ctx, &instances.GetSetArgs{
-			AvailabilityZone: pulumi.StringRef("ap-guangzhou-6"),
+		_, err := instances.GetSet(ctx, &instances.GetSetArgs{
 			InstanceId:       pulumi.StringRef("ins-a81rnm8c"),
 			InstanceName:     pulumi.StringRef("tf_example"),
+			AvailabilityZone: pulumi.StringRef("ap-guangzhou-6"),
 			ProjectId:        pulumi.IntRef(0),
+			VpcId:            pulumi.StringRef("vpc-l040hycv"),
 			SubnetId:         pulumi.StringRef("subnet-1to7t9au"),
-			Tags: map[string]interface{}{
+			Tags: map[string]string{
 				"tagKey": "tagValue",
 			},
-			VpcId: pulumi.StringRef("vpc-l040hycv"),
 		}, nil)
 		if err != nil {
 			return err
@@ -99,6 +92,40 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Instances.GetSet.Invoke(new()
+    {
+        InstanceId = "ins-a81rnm8c",
+        InstanceName = "tf_example",
+        AvailabilityZone = "ap-guangzhou-6",
+        ProjectId = 0,
+        VpcId = "vpc-l040hycv",
+        SubnetId = "subnet-1to7t9au",
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -107,8 +134,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Instances.InstancesFunctions;
 import com.pulumi.tencentcloud.Instances.inputs.GetSetArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -121,35 +148,73 @@ public class App {
 
     public static void stack(Context ctx) {
         final var example = InstancesFunctions.getSet(GetSetArgs.builder()
-            .availabilityZone("ap-guangzhou-6")
             .instanceId("ins-a81rnm8c")
             .instanceName("tf_example")
+            .availabilityZone("ap-guangzhou-6")
             .projectId(0)
+            .vpcId("vpc-l040hycv")
             .subnetId("subnet-1to7t9au")
             .tags(Map.of("tagKey", "tagValue"))
-            .vpcId("vpc-l040hycv")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Instances:getSet
-      Arguments:
-        availabilityZone: ap-guangzhou-6
+      function: tencentcloud:Instances:getSet
+      arguments:
         instanceId: ins-a81rnm8c
         instanceName: tf_example
+        availabilityZone: ap-guangzhou-6
         projectId: 0
+        vpcId: vpc-l040hycv
         subnetId: subnet-1to7t9au
         tags:
           tagKey: tagValue
-        vpcId: vpc-l040hycv
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_instances_getset" "example" {
+  instance_id       = "ins-a81rnm8c"
+  instance_name     = "tf_example"
+  availability_zone = "ap-guangzhou-6"
+  project_id        = 0
+  vpc_id            = "vpc-l040hycv"
+  subnet_id         = "subnet-1to7t9au"
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
 
 
 
@@ -161,7 +226,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -169,9 +234,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getSet<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSetArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSetResult</a></span>></span
+><span class="k">function </span>getSet<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSetArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSetResult</a></span>></span
 ><span class="k">
-function </span>getSetOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSetOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSetResult</a></span>></span
+function </span>getSetOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSetOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSetResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -186,19 +251,19 @@ function </span>getSetOutput<span class="p">(</span><span class="nx">args</span>
             <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+            <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetSetResult</span
 ><span class="k">
-def </span>get_set_output<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-            <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-            <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-            <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-            <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-            <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-            <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Mapping[str, Any]]]</span> = None<span class="p">,</span>
-            <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSetResult]</span
+def </span>get_set_output<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+            <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+            <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+            <span class="nx">project_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+            <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+            <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+            <span class="nx">tags</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Mapping[str, pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+            <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSetResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -223,7 +288,8 @@ func </span>GetSetOutput<span class="p">(</span><span class="nx">ctx</span><span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetSet </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetSetResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetSetArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetSetResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSetInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSetResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSetInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSetResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSetInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -232,7 +298,8 @@ func </span>GetSetOutput<span class="p">(</span><span class="nx">ctx</span><span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetSetResult</a></span>> </span>getSet<span class="p">(</span><span class="nx">GetSetArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSetResult</a></span>> </span>getSet<span class="p">(</span><span class="nx">GetSetArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSetResult</a></span>> </span>getSet<span class="p">(</span><span class="nx">GetSetArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -244,6 +311,15 @@ func </span>GetSetOutput<span class="p">(</span><span class="nx">ctx</span><span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Instances/getSet:getSet
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_instances_get_set&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -262,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -271,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -280,8 +354,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -289,8 +362,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CVM belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>The project CVM belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -298,8 +370,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -307,17 +378,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a vpc subnetwork.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -325,8 +394,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc to be queried.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -340,8 +408,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -349,8 +416,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -358,8 +424,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -367,8 +432,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CVM belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>The project CVM belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -376,8 +440,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -385,17 +448,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a vpc subnetwork.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -403,8 +464,77 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc to be queried.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the instances to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the instances to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The project CVM belongs to.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the vpc to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -418,8 +548,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -427,8 +556,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -436,8 +564,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -445,8 +572,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The project CVM belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>The project CVM belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -454,8 +580,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -463,17 +588,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a vpc subnetwork.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -481,8 +604,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc to be queried.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -496,8 +618,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -505,8 +626,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -514,8 +634,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -523,8 +642,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The project CVM belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>The project CVM belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -532,8 +650,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -541,17 +658,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a vpc subnetwork.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -559,8 +674,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc to be queried.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -574,8 +688,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -583,8 +696,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -592,8 +704,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -601,8 +712,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CVM belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>The project CVM belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -610,8 +720,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -619,17 +728,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of a vpc subnetwork.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -637,8 +744,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the vpc to be queried.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -652,8 +758,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -661,8 +766,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -670,8 +774,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the instances to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the instances to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -679,8 +782,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The project CVM belongs to.</p>
-</dd><dt class="property-optional"
+    <dd>The project CVM belongs to.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -688,8 +790,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -697,17 +798,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a vpc subnetwork.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -715,8 +814,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc to be queried.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -739,8 +837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -748,8 +845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsetinstancelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Instances.<wbr>Outputs.<wbr>Get<wbr>Set<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of cvm instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cvm instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -757,8 +853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -766,8 +861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instances.</p>
-</dd><dt class="property-"
+    <dd>ID of the instances.</dd><dt class="property-"
             title="">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -775,8 +869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the instances.</p>
-</dd><dt class="property-"
+    <dd>Name of the instances.</dd><dt class="property-"
             title="">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -784,8 +877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CVM belongs to.</p>
-</dd><dt class="property-"
+    <dd>The project CVM belongs to.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -801,17 +893,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a vpc subnetwork.</p>
-</dd><dt class="property-"
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-"
             title="">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the instance.</p>
-</dd><dt class="property-"
+    <dd>Tags of the instance.</dd><dt class="property-"
             title="">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -819,8 +909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd></dl>
+    <dd>ID of the vpc.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -834,8 +923,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -843,8 +931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsetinstancelist">[]Get<wbr>Set<wbr>Instance<wbr>List</a></span>
     </dt>
-    <dd><p>An information list of cvm instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cvm instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -852,8 +939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -861,8 +947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instances.</p>
-</dd><dt class="property-"
+    <dd>ID of the instances.</dd><dt class="property-"
             title="">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -870,8 +955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the instances.</p>
-</dd><dt class="property-"
+    <dd>Name of the instances.</dd><dt class="property-"
             title="">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -879,8 +963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CVM belongs to.</p>
-</dd><dt class="property-"
+    <dd>The project CVM belongs to.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -896,17 +979,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a vpc subnetwork.</p>
-</dd><dt class="property-"
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-"
             title="">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the instance.</p>
-</dd><dt class="property-"
+    <dd>Tags of the instance.</dd><dt class="property-"
             title="">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -914,8 +995,93 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd></dl>
+    <dd>ID of the vpc.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsetinstancelist">list(object)</a></span>
+    </dt>
+    <dd>An information list of cvm instance. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the instances.</dd><dt class="property-"
+            title="">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the instances.</dd><dt class="property-"
+            title="">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The project CVM belongs to.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-"
+            title="">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the instance.</dd><dt class="property-"
+            title="">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the vpc.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -929,8 +1095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -938,8 +1103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsetinstancelist">List&lt;Get<wbr>Set<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>An information list of cvm instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cvm instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -947,8 +1111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -956,8 +1119,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the instances.</p>
-</dd><dt class="property-"
+    <dd>ID of the instances.</dd><dt class="property-"
             title="">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -965,8 +1127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the instances.</p>
-</dd><dt class="property-"
+    <dd>Name of the instances.</dd><dt class="property-"
             title="">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -974,8 +1135,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The project CVM belongs to.</p>
-</dd><dt class="property-"
+    <dd>The project CVM belongs to.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -991,17 +1151,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a vpc subnetwork.</p>
-</dd><dt class="property-"
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-"
             title="">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the instance.</p>
-</dd><dt class="property-"
+    <dd>Tags of the instance.</dd><dt class="property-"
             title="">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1009,8 +1167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd></dl>
+    <dd>ID of the vpc.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1024,8 +1181,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -1033,8 +1189,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsetinstancelist">Get<wbr>Set<wbr>Instance<wbr>List[]</a></span>
     </dt>
-    <dd><p>An information list of cvm instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cvm instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1042,8 +1197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1051,8 +1205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instances.</p>
-</dd><dt class="property-"
+    <dd>ID of the instances.</dd><dt class="property-"
             title="">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1060,8 +1213,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the instances.</p>
-</dd><dt class="property-"
+    <dd>Name of the instances.</dd><dt class="property-"
             title="">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1069,8 +1221,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The project CVM belongs to.</p>
-</dd><dt class="property-"
+    <dd>The project CVM belongs to.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1086,17 +1237,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a vpc subnetwork.</p>
-</dd><dt class="property-"
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-"
             title="">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the instance.</p>
-</dd><dt class="property-"
+    <dd>Tags of the instance.</dd><dt class="property-"
             title="">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1104,8 +1253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd></dl>
+    <dd>ID of the vpc.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1119,17 +1267,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsetinstancelist">Get<wbr>Set<wbr>Instance<wbr>List]</a></span>
+        <span class="property-type"><a href="#getsetinstancelist">Sequence[Get<wbr>Set<wbr>Instance<wbr>List]</a></span>
     </dt>
-    <dd><p>An information list of cvm instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cvm instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availability_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
@@ -1137,8 +1283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1146,8 +1291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the instances.</p>
-</dd><dt class="property-"
+    <dd>ID of the instances.</dd><dt class="property-"
             title="">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -1155,8 +1299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the instances.</p>
-</dd><dt class="property-"
+    <dd>Name of the instances.</dd><dt class="property-"
             title="">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1164,8 +1307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CVM belongs to.</p>
-</dd><dt class="property-"
+    <dd>The project CVM belongs to.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1181,17 +1323,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of a vpc subnetwork.</p>
-</dd><dt class="property-"
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-"
             title="">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the instance.</p>
-</dd><dt class="property-"
+    <dd>Tags of the instance.</dd><dt class="property-"
             title="">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1199,8 +1339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd></dl>
+    <dd>ID of the vpc.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1214,8 +1353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -1223,8 +1361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsetinstancelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of cvm instance. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of cvm instance. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1232,8 +1369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1241,8 +1377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the instances.</p>
-</dd><dt class="property-"
+    <dd>ID of the instances.</dd><dt class="property-"
             title="">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1250,8 +1385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the instances.</p>
-</dd><dt class="property-"
+    <dd>Name of the instances.</dd><dt class="property-"
             title="">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1259,8 +1393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The project CVM belongs to.</p>
-</dd><dt class="property-"
+    <dd>The project CVM belongs to.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1276,17 +1409,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a vpc subnetwork.</p>
-</dd><dt class="property-"
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-"
             title="">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the instance.</p>
-</dd><dt class="property-"
+    <dd>Tags of the instance.</dd><dt class="property-"
             title="">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1294,8 +1425,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd></dl>
+    <dd>ID of the vpc.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1319,8 +1449,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether public ip is assigned.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether public ip is assigned.</dd><dt class="property-required"
             title="Required">
         <span id="availabilityzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -1328,8 +1457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="camrolename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_csharp" style="color: inherit; text-decoration: inherit;">Cam<wbr>Role<wbr>Name</a>
@@ -1337,8 +1465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-required"
+    <dd>CAM role name authorized to access.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_csharp" style="color: inherit; text-decoration: inherit;">Cpu</a>
@@ -1346,8 +1473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1355,8 +1481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="datadisks_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Disks</a>
@@ -1364,8 +1489,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsetinstancelistdatadisk">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Instances.<wbr>Inputs.<wbr>Get<wbr>Set<wbr>Instance<wbr>List<wbr>Data<wbr>Disk&gt;</a></span>
     </dt>
-    <dd><p>An information list of data disk. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>An information list of data disk. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_csharp" style="color: inherit; text-decoration: inherit;">Expired<wbr>Time</a>
@@ -1373,8 +1497,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Expired time of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="imageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
@@ -1382,8 +1505,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the image.</p>
-</dd><dt class="property-required"
+    <dd>ID of the image.</dd><dt class="property-required"
             title="Required">
         <span id="instancechargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type</a>
@@ -1391,8 +1513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancechargetypeprepaidrenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -1400,8 +1521,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The way that CVM instance will be renew automatically or not when it reach the end of the prepaid tenancy.</p>
-</dd><dt class="property-required"
+    <dd>The way that CVM instance will be renew automatically or not when it reach the end of the prepaid tenancy.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1409,8 +1529,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1418,8 +1537,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1427,8 +1545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -1436,8 +1553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1445,8 +1561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Public network maximum output bandwidth of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Public network maximum output bandwidth of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="memory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_csharp" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -1454,8 +1569,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="privateip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_csharp" style="color: inherit; text-decoration: inherit;">Private<wbr>Ip</a>
@@ -1463,8 +1577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private IP of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Private IP of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1472,8 +1585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CVM belongs to.</p>
-</dd><dt class="property-required"
+    <dd>The project CVM belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="publicip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip</a>
@@ -1481,8 +1593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public IP of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Public IP of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -1490,8 +1601,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Security groups of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Security groups of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1499,8 +1609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Status of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1508,8 +1617,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a vpc subnetwork.</p>
-</dd><dt class="property-required"
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-required"
             title="Required">
         <span id="systemdiskid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdiskid_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Id</a>
@@ -1517,8 +1625,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image ID of the system disk.</p>
-</dd><dt class="property-required"
+    <dd>Image ID of the system disk.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Size</a>
@@ -1526,8 +1633,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the system disk.</p>
-</dd><dt class="property-required"
+    <dd>Size of the system disk.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Type</a>
@@ -1535,17 +1641,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the system disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of the system disk.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1553,8 +1657,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc to be queried.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1568,8 +1671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether public ip is assigned.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether public ip is assigned.</dd><dt class="property-required"
             title="Required">
         <span id="availabilityzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -1577,8 +1679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="camrolename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_go" style="color: inherit; text-decoration: inherit;">Cam<wbr>Role<wbr>Name</a>
@@ -1586,8 +1687,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-required"
+    <dd>CAM role name authorized to access.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_go" style="color: inherit; text-decoration: inherit;">Cpu</a>
@@ -1595,8 +1695,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1604,8 +1703,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="datadisks_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Disks</a>
@@ -1613,8 +1711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsetinstancelistdatadisk">[]Get<wbr>Set<wbr>Instance<wbr>List<wbr>Data<wbr>Disk</a></span>
     </dt>
-    <dd><p>An information list of data disk. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>An information list of data disk. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_go" style="color: inherit; text-decoration: inherit;">Expired<wbr>Time</a>
@@ -1622,8 +1719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Expired time of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="imageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
@@ -1631,8 +1727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the image.</p>
-</dd><dt class="property-required"
+    <dd>ID of the image.</dd><dt class="property-required"
             title="Required">
         <span id="instancechargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type</a>
@@ -1640,8 +1735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancechargetypeprepaidrenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -1649,8 +1743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The way that CVM instance will be renew automatically or not when it reach the end of the prepaid tenancy.</p>
-</dd><dt class="property-required"
+    <dd>The way that CVM instance will be renew automatically or not when it reach the end of the prepaid tenancy.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1658,8 +1751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1667,8 +1759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1676,8 +1767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -1685,8 +1775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1694,8 +1783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Public network maximum output bandwidth of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Public network maximum output bandwidth of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="memory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_go" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -1703,8 +1791,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="privateip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_go" style="color: inherit; text-decoration: inherit;">Private<wbr>Ip</a>
@@ -1712,8 +1799,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private IP of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Private IP of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1721,8 +1807,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CVM belongs to.</p>
-</dd><dt class="property-required"
+    <dd>The project CVM belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="publicip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip</a>
@@ -1730,8 +1815,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public IP of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Public IP of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -1739,8 +1823,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Security groups of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Security groups of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1748,8 +1831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Status of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1757,8 +1839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a vpc subnetwork.</p>
-</dd><dt class="property-required"
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-required"
             title="Required">
         <span id="systemdiskid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdiskid_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Id</a>
@@ -1766,8 +1847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image ID of the system disk.</p>
-</dd><dt class="property-required"
+    <dd>Image ID of the system disk.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Size</a>
@@ -1775,8 +1855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the system disk.</p>
-</dd><dt class="property-required"
+    <dd>Size of the system disk.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Type</a>
@@ -1784,17 +1863,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the system disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of the system disk.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1802,8 +1879,229 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc to be queried.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="allocate_public_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#allocate_public_ip_hcl" style="color: inherit; text-decoration: inherit;">allocate_<wbr>public_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether public ip is assigned.</dd><dt class="property-required"
+            title="Required">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-required"
+            title="Required">
+        <span id="cam_role_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cam_role_name_hcl" style="color: inherit; text-decoration: inherit;">cam_<wbr>role_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CAM role name authorized to access.</dd><dt class="property-required"
+            title="Required">
+        <span id="cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_hcl" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="data_disks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_disks_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>disks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsetinstancelistdatadisk">list(object)</a></span>
+    </dt>
+    <dd>An information list of data disk. Each element contains the following attributes:</dd><dt class="property-required"
+            title="Required">
+        <span id="expired_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_time_hcl" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Expired time of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="image_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_id_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the image.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_charge_type_prepaid_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_prepaid_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The way that CVM instance will be renew automatically or not when it reach the end of the prepaid tenancy.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the instances to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the instances to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="internet_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_charge_type_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="internet_max_bandwidth_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_max_bandwidth_out_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Public network maximum output bandwidth of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_hcl" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="private_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_ip_hcl" style="color: inherit; text-decoration: inherit;">private_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Private IP of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The project CVM belongs to.</dd><dt class="property-required"
+            title="Required">
+        <span id="public_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Public IP of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Security groups of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-required"
+            title="Required">
+        <span id="system_disk_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_id_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Image ID of the system disk.</dd><dt class="property-required"
+            title="Required">
+        <span id="system_disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_size_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Size of the system disk.</dd><dt class="property-required"
+            title="Required">
+        <span id="system_disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_type_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the system disk.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the vpc to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1817,8 +2115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether public ip is assigned.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether public ip is assigned.</dd><dt class="property-required"
             title="Required">
         <span id="availabilityzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1826,8 +2123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="camrolename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_java" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
@@ -1835,8 +2131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-required"
+    <dd>CAM role name authorized to access.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_java" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -1844,8 +2139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1853,8 +2147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="datadisks_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_java" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
@@ -1862,8 +2155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsetinstancelistdatadisk">List&lt;Get<wbr>Set<wbr>Instance<wbr>List<wbr>Data<wbr>Disk&gt;</a></span>
     </dt>
-    <dd><p>An information list of data disk. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>An information list of data disk. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_java" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -1871,8 +2163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Expired time of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="imageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_java" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -1880,8 +2171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the image.</p>
-</dd><dt class="property-required"
+    <dd>ID of the image.</dd><dt class="property-required"
             title="Required">
         <span id="instancechargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -1889,8 +2179,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancechargetypeprepaidrenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -1898,8 +2187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The way that CVM instance will be renew automatically or not when it reach the end of the prepaid tenancy.</p>
-</dd><dt class="property-required"
+    <dd>The way that CVM instance will be renew automatically or not when it reach the end of the prepaid tenancy.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1907,8 +2195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1916,8 +2203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1925,8 +2211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -1934,8 +2219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1943,8 +2227,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Public network maximum output bandwidth of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Public network maximum output bandwidth of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="memory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_java" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1952,8 +2235,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="privateip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_java" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -1961,8 +2243,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private IP of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Private IP of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1970,8 +2251,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The project CVM belongs to.</p>
-</dd><dt class="property-required"
+    <dd>The project CVM belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="publicip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -1979,8 +2259,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public IP of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Public IP of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1988,8 +2267,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security groups of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Security groups of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1997,8 +2275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Status of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2006,8 +2283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a vpc subnetwork.</p>
-</dd><dt class="property-required"
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-required"
             title="Required">
         <span id="systemdiskid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdiskid_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Id</a>
@@ -2015,8 +2291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Image ID of the system disk.</p>
-</dd><dt class="property-required"
+    <dd>Image ID of the system disk.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -2024,8 +2299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Size of the system disk.</p>
-</dd><dt class="property-required"
+    <dd>Size of the system disk.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -2033,17 +2307,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the system disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of the system disk.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2051,8 +2323,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc to be queried.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2066,8 +2337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether public ip is assigned.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether public ip is assigned.</dd><dt class="property-required"
             title="Required">
         <span id="availabilityzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -2075,8 +2345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="camrolename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_nodejs" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
@@ -2084,8 +2353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-required"
+    <dd>CAM role name authorized to access.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_nodejs" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -2093,8 +2361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2102,8 +2369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="datadisks_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
@@ -2111,8 +2377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsetinstancelistdatadisk">Get<wbr>Set<wbr>Instance<wbr>List<wbr>Data<wbr>Disk[]</a></span>
     </dt>
-    <dd><p>An information list of data disk. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>An information list of data disk. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_nodejs" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -2120,8 +2385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Expired time of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="imageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -2129,8 +2393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the image.</p>
-</dd><dt class="property-required"
+    <dd>ID of the image.</dd><dt class="property-required"
             title="Required">
         <span id="instancechargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -2138,8 +2401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancechargetypeprepaidrenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -2147,8 +2409,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The way that CVM instance will be renew automatically or not when it reach the end of the prepaid tenancy.</p>
-</dd><dt class="property-required"
+    <dd>The way that CVM instance will be renew automatically or not when it reach the end of the prepaid tenancy.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2156,8 +2417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2165,8 +2425,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -2174,8 +2433,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -2183,8 +2441,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -2192,8 +2449,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Public network maximum output bandwidth of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Public network maximum output bandwidth of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="memory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_nodejs" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -2201,8 +2457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="privateip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_nodejs" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -2210,8 +2465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private IP of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Private IP of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2219,8 +2473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The project CVM belongs to.</p>
-</dd><dt class="property-required"
+    <dd>The project CVM belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="publicip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -2228,8 +2481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public IP of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Public IP of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -2237,8 +2489,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Security groups of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Security groups of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2246,8 +2497,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Status of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2255,8 +2505,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a vpc subnetwork.</p>
-</dd><dt class="property-required"
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-required"
             title="Required">
         <span id="systemdiskid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdiskid_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Id</a>
@@ -2264,8 +2513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image ID of the system disk.</p>
-</dd><dt class="property-required"
+    <dd>Image ID of the system disk.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -2273,8 +2521,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Size of the system disk.</p>
-</dd><dt class="property-required"
+    <dd>Size of the system disk.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -2282,17 +2529,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the system disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of the system disk.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2300,8 +2545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc to be queried.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2315,8 +2559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether public ip is assigned.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether public ip is assigned.</dd><dt class="property-required"
             title="Required">
         <span id="availability_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
@@ -2324,8 +2567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="cam_role_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cam_role_name_python" style="color: inherit; text-decoration: inherit;">cam_<wbr>role_<wbr>name</a>
@@ -2333,8 +2575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-required"
+    <dd>CAM role name authorized to access.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_python" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -2342,8 +2583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2351,17 +2591,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="data_disks_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_disks_python" style="color: inherit; text-decoration: inherit;">data_<wbr>disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsetinstancelistdatadisk">Get<wbr>Set<wbr>Instance<wbr>List<wbr>Data<wbr>Disk]</a></span>
+        <span class="property-type"><a href="#getsetinstancelistdatadisk">Sequence[Get<wbr>Set<wbr>Instance<wbr>List<wbr>Data<wbr>Disk]</a></span>
     </dt>
-    <dd><p>An information list of data disk. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>An information list of data disk. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="expired_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_time_python" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
@@ -2369,8 +2607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Expired time of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="image_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_id_python" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
@@ -2378,8 +2615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the image.</p>
-</dd><dt class="property-required"
+    <dd>ID of the image.</dd><dt class="property-required"
             title="Required">
         <span id="instance_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type</a>
@@ -2387,8 +2623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="instance_charge_type_prepaid_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_prepaid_renew_flag_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>renew_<wbr>flag</a>
@@ -2396,8 +2631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The way that CVM instance will be renew automatically or not when it reach the end of the prepaid tenancy.</p>
-</dd><dt class="property-required"
+    <dd>The way that CVM instance will be renew automatically or not when it reach the end of the prepaid tenancy.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -2405,8 +2639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -2414,8 +2647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -2423,8 +2655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="internet_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_charge_type_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
@@ -2432,8 +2663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="internet_max_bandwidth_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_max_bandwidth_out_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
@@ -2441,8 +2671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Public network maximum output bandwidth of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Public network maximum output bandwidth of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="memory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_python" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -2450,8 +2679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="private_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#private_ip_python" style="color: inherit; text-decoration: inherit;">private_<wbr>ip</a>
@@ -2459,8 +2687,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Private IP of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Private IP of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -2468,8 +2695,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project CVM belongs to.</p>
-</dd><dt class="property-required"
+    <dd>The project CVM belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="public_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip</a>
@@ -2477,8 +2703,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Public IP of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Public IP of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -2486,8 +2711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Security groups of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Security groups of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2495,8 +2719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Status of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -2504,8 +2727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of a vpc subnetwork.</p>
-</dd><dt class="property-required"
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-required"
             title="Required">
         <span id="system_disk_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_id_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>id</a>
@@ -2513,8 +2735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Image ID of the system disk.</p>
-</dd><dt class="property-required"
+    <dd>Image ID of the system disk.</dd><dt class="property-required"
             title="Required">
         <span id="system_disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_size_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>size</a>
@@ -2522,8 +2743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the system disk.</p>
-</dd><dt class="property-required"
+    <dd>Size of the system disk.</dd><dt class="property-required"
             title="Required">
         <span id="system_disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_type_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>type</a>
@@ -2531,17 +2751,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the system disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of the system disk.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2549,8 +2767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the vpc to be queried.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2564,8 +2781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether public ip is assigned.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether public ip is assigned.</dd><dt class="property-required"
             title="Required">
         <span id="availabilityzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -2573,8 +2789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CVM instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CVM instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="camrolename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_yaml" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
@@ -2582,8 +2797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-required"
+    <dd>CAM role name authorized to access.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_yaml" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -2591,8 +2805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of CPU cores of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU cores of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2600,8 +2813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="datadisks_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
@@ -2609,8 +2821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsetinstancelistdatadisk">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of data disk. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>An information list of data disk. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="expiredtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredtime_yaml" style="color: inherit; text-decoration: inherit;">expired<wbr>Time</a>
@@ -2618,8 +2829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expired time of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Expired time of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="imageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -2627,8 +2837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the image.</p>
-</dd><dt class="property-required"
+    <dd>ID of the image.</dd><dt class="property-required"
             title="Required">
         <span id="instancechargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -2636,8 +2845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancechargetypeprepaidrenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -2645,8 +2853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The way that CVM instance will be renew automatically or not when it reach the end of the prepaid tenancy.</p>
-</dd><dt class="property-required"
+    <dd>The way that CVM instance will be renew automatically or not when it reach the end of the prepaid tenancy.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2654,8 +2861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2663,8 +2869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the instances to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the instances to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -2672,8 +2877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Type of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -2681,8 +2885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of the instance.</p>
-</dd><dt class="property-required"
+    <dd>The charge type of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -2690,8 +2893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Public network maximum output bandwidth of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Public network maximum output bandwidth of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="memory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_yaml" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -2699,8 +2901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance memory capacity, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory capacity, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="privateip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#privateip_yaml" style="color: inherit; text-decoration: inherit;">private<wbr>Ip</a>
@@ -2708,8 +2909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private IP of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Private IP of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2717,8 +2917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The project CVM belongs to.</p>
-</dd><dt class="property-required"
+    <dd>The project CVM belongs to.</dd><dt class="property-required"
             title="Required">
         <span id="publicip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -2726,8 +2925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public IP of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Public IP of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -2735,8 +2933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security groups of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Security groups of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2744,8 +2941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Status of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2753,8 +2949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a vpc subnetwork.</p>
-</dd><dt class="property-required"
+    <dd>ID of a vpc subnetwork.</dd><dt class="property-required"
             title="Required">
         <span id="systemdiskid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdiskid_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Id</a>
@@ -2762,8 +2957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Image ID of the system disk.</p>
-</dd><dt class="property-required"
+    <dd>Image ID of the system disk.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -2771,8 +2965,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Size of the system disk.</p>
-</dd><dt class="property-required"
+    <dd>Size of the system disk.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -2780,17 +2973,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the system disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of the system disk.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the instance.</p>
-</dd><dt class="property-required"
+    <dd>Tags of the instance.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2798,8 +2989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc to be queried.</p>
-</dd></dl>
+    <dd>ID of the vpc to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2817,8 +3007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image ID of the data disk.</p>
-</dd><dt class="property-required"
+    <dd>Image ID of the data disk.</dd><dt class="property-required"
             title="Required">
         <span id="datadisksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisksize_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Disk<wbr>Size</a>
@@ -2826,8 +3015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the data disk.</p>
-</dd><dt class="property-required"
+    <dd>Size of the data disk.</dd><dt class="property-required"
             title="Required">
         <span id="datadisktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisktype_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Disk<wbr>Type</a>
@@ -2835,8 +3023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the data disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of the data disk.</dd><dt class="property-required"
             title="Required">
         <span id="deletewithinstance_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletewithinstance_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>With<wbr>Instance</a>
@@ -2844,8 +3031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the data disk is destroyed with the instance.</p>
-</dd></dl>
+    <dd>Indicates whether the data disk is destroyed with the instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2859,8 +3045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image ID of the data disk.</p>
-</dd><dt class="property-required"
+    <dd>Image ID of the data disk.</dd><dt class="property-required"
             title="Required">
         <span id="datadisksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisksize_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Disk<wbr>Size</a>
@@ -2868,8 +3053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the data disk.</p>
-</dd><dt class="property-required"
+    <dd>Size of the data disk.</dd><dt class="property-required"
             title="Required">
         <span id="datadisktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisktype_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Disk<wbr>Type</a>
@@ -2877,8 +3061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the data disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of the data disk.</dd><dt class="property-required"
             title="Required">
         <span id="deletewithinstance_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletewithinstance_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>With<wbr>Instance</a>
@@ -2886,8 +3069,45 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the data disk is destroyed with the instance.</p>
-</dd></dl>
+    <dd>Indicates whether the data disk is destroyed with the instance.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="data_disk_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_disk_id_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>disk_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Image ID of the data disk.</dd><dt class="property-required"
+            title="Required">
+        <span id="data_disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_disk_size_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Size of the data disk.</dd><dt class="property-required"
+            title="Required">
+        <span id="data_disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_disk_type_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the data disk.</dd><dt class="property-required"
+            title="Required">
+        <span id="delete_with_instance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_with_instance_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>with_<wbr>instance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the data disk is destroyed with the instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2901,8 +3121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Image ID of the data disk.</p>
-</dd><dt class="property-required"
+    <dd>Image ID of the data disk.</dd><dt class="property-required"
             title="Required">
         <span id="datadisksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisksize_java" style="color: inherit; text-decoration: inherit;">data<wbr>Disk<wbr>Size</a>
@@ -2910,8 +3129,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Size of the data disk.</p>
-</dd><dt class="property-required"
+    <dd>Size of the data disk.</dd><dt class="property-required"
             title="Required">
         <span id="datadisktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisktype_java" style="color: inherit; text-decoration: inherit;">data<wbr>Disk<wbr>Type</a>
@@ -2919,8 +3137,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the data disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of the data disk.</dd><dt class="property-required"
             title="Required">
         <span id="deletewithinstance_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletewithinstance_java" style="color: inherit; text-decoration: inherit;">delete<wbr>With<wbr>Instance</a>
@@ -2928,8 +3145,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the data disk is destroyed with the instance.</p>
-</dd></dl>
+    <dd>Indicates whether the data disk is destroyed with the instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2943,8 +3159,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image ID of the data disk.</p>
-</dd><dt class="property-required"
+    <dd>Image ID of the data disk.</dd><dt class="property-required"
             title="Required">
         <span id="datadisksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisksize_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Disk<wbr>Size</a>
@@ -2952,8 +3167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Size of the data disk.</p>
-</dd><dt class="property-required"
+    <dd>Size of the data disk.</dd><dt class="property-required"
             title="Required">
         <span id="datadisktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisktype_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Disk<wbr>Type</a>
@@ -2961,8 +3175,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the data disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of the data disk.</dd><dt class="property-required"
             title="Required">
         <span id="deletewithinstance_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletewithinstance_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>With<wbr>Instance</a>
@@ -2970,8 +3183,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the data disk is destroyed with the instance.</p>
-</dd></dl>
+    <dd>Indicates whether the data disk is destroyed with the instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2985,8 +3197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Image ID of the data disk.</p>
-</dd><dt class="property-required"
+    <dd>Image ID of the data disk.</dd><dt class="property-required"
             title="Required">
         <span id="data_disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_disk_size_python" style="color: inherit; text-decoration: inherit;">data_<wbr>disk_<wbr>size</a>
@@ -2994,8 +3205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the data disk.</p>
-</dd><dt class="property-required"
+    <dd>Size of the data disk.</dd><dt class="property-required"
             title="Required">
         <span id="data_disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_disk_type_python" style="color: inherit; text-decoration: inherit;">data_<wbr>disk_<wbr>type</a>
@@ -3003,8 +3213,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the data disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of the data disk.</dd><dt class="property-required"
             title="Required">
         <span id="delete_with_instance_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_with_instance_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>with_<wbr>instance</a>
@@ -3012,8 +3221,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the data disk is destroyed with the instance.</p>
-</dd></dl>
+    <dd>Indicates whether the data disk is destroyed with the instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3027,8 +3235,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Image ID of the data disk.</p>
-</dd><dt class="property-required"
+    <dd>Image ID of the data disk.</dd><dt class="property-required"
             title="Required">
         <span id="datadisksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisksize_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Disk<wbr>Size</a>
@@ -3036,8 +3243,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Size of the data disk.</p>
-</dd><dt class="property-required"
+    <dd>Size of the data disk.</dd><dt class="property-required"
             title="Required">
         <span id="datadisktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisktype_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Disk<wbr>Type</a>
@@ -3045,8 +3251,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the data disk.</p>
-</dd><dt class="property-required"
+    <dd>Type of the data disk.</dd><dt class="property-required"
             title="Required">
         <span id="deletewithinstance_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletewithinstance_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>With<wbr>Instance</a>
@@ -3054,8 +3259,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the data disk is destroyed with the instance.</p>
-</dd></dl>
+    <dd>Indicates whether the data disk is destroyed with the instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3070,7 +3274,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "L4Rule"
 title_tag: "tencentcloud.Dayu.L4Rule"
-meta_desc: "Documentation for the tencentcloud.Dayu.L4Rule resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create dayu layer 4 rule NOTE: This resource only support resource Anti-DDoS of type bgpip and net"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,22 +20,29 @@ Use this resource to create dayu layer 4 rule
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const testRule = new tencentcloud.dayu.L4Rule("testRule", {
+const testRule = new tencentcloud.dayu.L4Rule("test_rule", {
+    resourceType: "bgpip",
+    resourceId: "bgpip-00000294",
+    name: "rule_test",
+    protocol: "TCP",
+    sPort: 80,
     dPort: 60,
-    healthCheckHealthNum: 5,
-    healthCheckInterval: 35,
+    sourceType: 2,
     healthCheckSwitch: true,
     healthCheckTimeout: 30,
+    healthCheckInterval: 35,
+    healthCheckHealthNum: 5,
     healthCheckUnhealthNum: 10,
-    protocol: "TCP",
-    resourceId: "bgpip-00000294",
-    resourceType: "bgpip",
-    sPort: 80,
     sessionSwitch: false,
     sessionTime: 300,
     sourceLists: [
@@ -46,38 +55,96 @@ const testRule = new tencentcloud.dayu.L4Rule("testRule", {
             weight: 50,
         },
     ],
-    sourceType: 2,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-test_rule = tencentcloud.dayu.L4Rule("testRule",
+test_rule = tencentcloud.dayu.L4Rule("test_rule",
+    resource_type="bgpip",
+    resource_id="bgpip-00000294",
+    name="rule_test",
+    protocol="TCP",
+    s_port=80,
     d_port=60,
-    health_check_health_num=5,
-    health_check_interval=35,
+    source_type=2,
     health_check_switch=True,
     health_check_timeout=30,
+    health_check_interval=35,
+    health_check_health_num=5,
     health_check_unhealth_num=10,
-    protocol="TCP",
-    resource_id="bgpip-00000294",
-    resource_type="bgpip",
-    s_port=80,
     session_switch=False,
     session_time=300,
     source_lists=[
-        tencentcloud.dayu.L4RuleSourceListArgs(
-            source="1.1.1.1",
-            weight=100,
-        ),
-        tencentcloud.dayu.L4RuleSourceListArgs(
-            source="2.2.2.2",
-            weight=50,
-        ),
-    ],
-    source_type=2)
+        {
+            "source": "1.1.1.1",
+            "weight": 100,
+        },
+        {
+            "source": "2.2.2.2",
+            "weight": 50,
+        },
+    ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dayu"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dayu.NewL4Rule(ctx, "test_rule", &dayu.L4RuleArgs{
+			ResourceType:           pulumi.String("bgpip"),
+			ResourceId:             pulumi.String("bgpip-00000294"),
+			Name:                   pulumi.String("rule_test"),
+			Protocol:               pulumi.String("TCP"),
+			SPort:                  pulumi.Int(80),
+			DPort:                  pulumi.Int(60),
+			SourceType:             pulumi.Int(2),
+			HealthCheckSwitch:      pulumi.Bool(true),
+			HealthCheckTimeout:     pulumi.Int(30),
+			HealthCheckInterval:    pulumi.Int(35),
+			HealthCheckHealthNum:   pulumi.Int(5),
+			HealthCheckUnhealthNum: pulumi.Int(10),
+			SessionSwitch:          pulumi.Bool(false),
+			SessionTime:            pulumi.Int(300),
+			SourceLists: dayu.L4RuleSourceListArray{
+				&dayu.L4RuleSourceListArgs{
+					Source: pulumi.String("1.1.1.1"),
+					Weight: pulumi.Int(100),
+				},
+				&dayu.L4RuleSourceListArgs{
+					Source: pulumi.String("2.2.2.2"),
+					Weight: pulumi.Int(50),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -86,18 +153,20 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var testRule = new Tencentcloud.Dayu.L4Rule("testRule", new()
+    var testRule = new Tencentcloud.Dayu.L4Rule("test_rule", new()
     {
+        ResourceType = "bgpip",
+        ResourceId = "bgpip-00000294",
+        Name = "rule_test",
+        Protocol = "TCP",
+        SPort = 80,
         DPort = 60,
-        HealthCheckHealthNum = 5,
-        HealthCheckInterval = 35,
+        SourceType = 2,
         HealthCheckSwitch = true,
         HealthCheckTimeout = 30,
+        HealthCheckInterval = 35,
+        HealthCheckHealthNum = 5,
         HealthCheckUnhealthNum = 10,
-        Protocol = "TCP",
-        ResourceId = "bgpip-00000294",
-        ResourceType = "bgpip",
-        SPort = 80,
         SessionSwitch = false,
         SessionTime = 300,
         SourceLists = new[]
@@ -113,53 +182,15 @@ return await Deployment.RunAsync(() =>
                 Weight = 50,
             },
         },
-        SourceType = 2,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dayu.NewL4Rule(ctx, "testRule", &Dayu.L4RuleArgs{
-			DPort:                  pulumi.Int(60),
-			HealthCheckHealthNum:   pulumi.Int(5),
-			HealthCheckInterval:    pulumi.Int(35),
-			HealthCheckSwitch:      pulumi.Bool(true),
-			HealthCheckTimeout:     pulumi.Int(30),
-			HealthCheckUnhealthNum: pulumi.Int(10),
-			Protocol:               pulumi.String("TCP"),
-			ResourceId:             pulumi.String("bgpip-00000294"),
-			ResourceType:           pulumi.String("bgpip"),
-			SPort:                  pulumi.Int(80),
-			SessionSwitch:          pulumi.Bool(false),
-			SessionTime:            pulumi.Int(300),
-			SourceLists: dayu.L4RuleSourceListArray{
-				&dayu.L4RuleSourceListArgs{
-					Source: pulumi.String("1.1.1.1"),
-					Weight: pulumi.Int(100),
-				},
-				&dayu.L4RuleSourceListArgs{
-					Source: pulumi.String("2.2.2.2"),
-					Weight: pulumi.Int(50),
-				},
-			},
-			SourceType: pulumi.Int(2),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -169,8 +200,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dayu.L4Rule;
 import com.pulumi.tencentcloud.Dayu.L4RuleArgs;
 import com.pulumi.tencentcloud.Dayu.inputs.L4RuleSourceListArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -182,17 +213,19 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var testRule = new L4Rule("testRule", L4RuleArgs.builder()        
+        var testRule = new L4Rule("testRule", L4RuleArgs.builder()
+            .resourceType("bgpip")
+            .resourceId("bgpip-00000294")
+            .name("rule_test")
+            .protocol("TCP")
+            .sPort(80)
             .dPort(60)
-            .healthCheckHealthNum(5)
-            .healthCheckInterval(35)
+            .sourceType(2)
             .healthCheckSwitch(true)
             .healthCheckTimeout(30)
+            .healthCheckInterval(35)
+            .healthCheckHealthNum(5)
             .healthCheckUnhealthNum(10)
-            .protocol("TCP")
-            .resourceId("bgpip-00000294")
-            .resourceType("bgpip")
-            .sPort(80)
             .sessionSwitch(false)
             .sessionTime(300)
             .sourceLists(            
@@ -204,27 +237,34 @@ public class App {
                     .source("2.2.2.2")
                     .weight(50)
                     .build())
-            .sourceType(2)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   testRule:
     type: tencentcloud:Dayu:L4Rule
+    name: test_rule
     properties:
+      resourceType: bgpip
+      resourceId: bgpip-00000294
+      name: rule_test
+      protocol: TCP
+      sPort: 80
       dPort: 60
-      healthCheckHealthNum: 5
-      healthCheckInterval: 35
+      sourceType: 2
       healthCheckSwitch: true
       healthCheckTimeout: 30
+      healthCheckInterval: 35
+      healthCheckHealthNum: 5
       healthCheckUnhealthNum: 10
-      protocol: TCP
-      resourceId: bgpip-00000294
-      resourceType: bgpip
-      sPort: 80
       sessionSwitch: false
       sessionTime: 300
       sourceLists:
@@ -232,82 +272,154 @@ resources:
           weight: 100
         - source: 2.2.2.2
           weight: 50
-      sourceType: 2
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_dayu_l4rule" "test_rule" {
+  resource_type             = "bgpip"
+  resource_id               = "bgpip-00000294"
+  name                      = "rule_test"
+  protocol                  = "TCP"
+  s_port                    = 80
+  d_port                    = 60
+  source_type               = 2
+  health_check_switch       = true
+  health_check_timeout      = 30
+  health_check_interval     = 35
+  health_check_health_num   = 5
+  health_check_unhealth_num = 10
+  session_switch            = false
+  session_time              = 300
+  source_lists {
+    source = "1.1.1.1"
+    weight = 100
+  }
+  source_lists {
+    source = "2.2.2.2"
+    weight = 50
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateL4HealthConfig](https://www.tencentcloud.com/search/?wd=CreateL4HealthConfig&type=document&lang=en)
+  - [CreateL4Rules](https://www.tencentcloud.com/search/?wd=CreateL4Rules&type=document&lang=en)
+  - [DescribleL4Rules](https://www.tencentcloud.com/search/?wd=DescribleL4Rules&type=document&lang=en)
+  - [ModifyL4KeepTime](https://www.tencentcloud.com/search/?wd=ModifyL4KeepTime&type=document&lang=en)
+* Read: [DescribleL4Rules](https://www.tencentcloud.com/search/?wd=DescribleL4Rules&type=document&lang=en)
+* Update:
+  - [CreateL4HealthConfig](https://www.tencentcloud.com/search/?wd=CreateL4HealthConfig&type=document&lang=en)
+  - [ModifyL4KeepTime](https://www.tencentcloud.com/search/?wd=ModifyL4KeepTime&type=document&lang=en)
+  - [ModifyL4Rules](https://www.tencentcloud.com/search/?wd=ModifyL4Rules&type=document&lang=en)
+* Delete:
+  - [DeleteL4Rules](https://www.tencentcloud.com/search/?wd=DeleteL4Rules&type=document&lang=en)
+  - [DescribleL4Rules](https://www.tencentcloud.com/search/?wd=DescribleL4Rules&type=document&lang=en)
 
 
 
 ## Create L4Rule Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">L4Rule</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">L4RuleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">L4Rule</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">L4RuleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">L4Rule</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-           <span class="nx">d_port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-           <span class="nx">health_check_health_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-           <span class="nx">health_check_interval</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-           <span class="nx">health_check_switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-           <span class="nx">health_check_timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-           <span class="nx">health_check_unhealth_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-           <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-           <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-           <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-           <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-           <span class="nx">s_port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-           <span class="nx">session_switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-           <span class="nx">session_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-           <span class="nx">source_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.L4RuleSourceListArgs]]</span> = None<span class="p">,</span>
-           <span class="nx">source_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">L4Rule</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">L4RuleArgs</a></span><span class="p">,</span>
-           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">L4Rule</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+           <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+           <span class="nx">source_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+           <span class="nx">source_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[L4RuleSourceListArgs]]</span> = None<span class="p">,</span>
+           <span class="nx">d_port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+           <span class="nx">s_port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+           <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+           <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+           <span class="nx">health_check_switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+           <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+           <span class="nx">health_check_unhealth_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+           <span class="nx">health_check_timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+           <span class="nx">session_switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+           <span class="nx">session_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+           <span class="nx">health_check_interval</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+           <span class="nx">health_check_health_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewL4Rule</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">L4RuleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">L4Rule</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewL4Rule</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">L4RuleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">L4Rule</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">L4Rule</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">L4RuleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">L4Rule</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">L4RuleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">L4Rule</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">L4RuleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">L4Rule</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">L4RuleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dayu:L4Rule</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dayu:L4Rule</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_dayu_l4_rule&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -328,7 +440,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -445,11 +557,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## L4Rule Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -465,8 +585,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The destination port of the L4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The destination port of the L4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -474,8 +593,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>source_type</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>sourceType</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -483,8 +601,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the layer 4 rule works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the layer 4 rule works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -492,8 +609,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sport_csharp" style="color: inherit; text-decoration: inherit;">SPort</a>
@@ -501,17 +617,15 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The source port of the L4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The source port of the L4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelists_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#l4rulesourcelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>L4Rule<wbr>Source<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#l4rulesourcelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>L4Rule<wbr>Source<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="sourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcetype_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Type</a>
@@ -519,8 +633,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd><dt class="property-optional"
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhealthnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhealthnum_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -528,8 +641,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckinterval_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Interval</a>
@@ -537,8 +649,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</p>
-</dd><dt class="property-optional"
+    <dd>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckswitch_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Switch</a>
@@ -546,8 +657,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecktimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktimeout_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Timeout</a>
@@ -555,8 +665,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTP Status Code. The default is 26 and value range is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP Status Code. The default is 26 and value range is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckunhealthnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckunhealthnum_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -564,8 +673,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -573,8 +681,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the rule. When the <code>resource_type</code> is <code>net</code>, this field should be set with valid domain.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the rule. When the <code>resourceType</code> is <code>net</code>, this field should be set with valid domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessionswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionswitch_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Switch</a>
@@ -582,8 +689,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate that the session will keep or not, and default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate that the session will keep or not, and default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessiontime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontime_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Time</a>
@@ -591,8 +697,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Session keep time, only valid when <code>session_switch</code> is true, the available value ranges from 1 to 300 and unit is second.</p>
-</dd></dl>
+    <dd>Session keep time, only valid when <code>sessionSwitch</code> is true, the available value ranges from 1 to 300 and unit is second.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -606,8 +711,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The destination port of the L4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The destination port of the L4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -615,8 +719,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>source_type</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>sourceType</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -624,8 +727,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the layer 4 rule works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the layer 4 rule works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -633,8 +735,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sport_go" style="color: inherit; text-decoration: inherit;">SPort</a>
@@ -642,8 +743,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The source port of the L4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The source port of the L4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelists_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Lists</a>
@@ -651,8 +751,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#l4rulesourcelist">[]L4Rule<wbr>Source<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="sourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcetype_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Type</a>
@@ -660,8 +759,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd><dt class="property-optional"
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhealthnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhealthnum_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -669,8 +767,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckinterval_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Interval</a>
@@ -678,8 +775,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</p>
-</dd><dt class="property-optional"
+    <dd>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckswitch_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Switch</a>
@@ -687,8 +783,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecktimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktimeout_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Timeout</a>
@@ -696,8 +791,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTP Status Code. The default is 26 and value range is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP Status Code. The default is 26 and value range is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckunhealthnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckunhealthnum_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -705,8 +799,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -714,8 +807,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the rule. When the <code>resource_type</code> is <code>net</code>, this field should be set with valid domain.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the rule. When the <code>resourceType</code> is <code>net</code>, this field should be set with valid domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessionswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionswitch_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Switch</a>
@@ -723,8 +815,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate that the session will keep or not, and default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate that the session will keep or not, and default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessiontime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontime_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Time</a>
@@ -732,8 +823,133 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Session keep time, only valid when <code>session_switch</code> is true, the available value ranges from 1 to 300 and unit is second.</p>
-</dd></dl>
+    <dd>Session keep time, only valid when <code>sessionSwitch</code> is true, the available value ranges from 1 to 300 and unit is second.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="d_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_port_hcl" style="color: inherit; text-decoration: inherit;">d_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The destination port of the L4 rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>sourceType</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the resource that the layer 4 rule works for.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="s_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_port_hcl" style="color: inherit; text-decoration: inherit;">s_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The source port of the L4 rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="source_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_lists_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#l4rulesourcelist">list(object)</a></span>
+    </dt>
+    <dd>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="source_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_type_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_health_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_health_num_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>health_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_interval_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_switch_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_timeout_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>HTTP Status Code. The default is 26 and value range is 2-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_unhealth_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_unhealth_num_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>unhealth_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the rule. When the <code>resourceType</code> is <code>net</code>, this field should be set with valid domain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="session_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_switch_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate that the session will keep or not, and default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="session_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_time_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Session keep time, only valid when <code>sessionSwitch</code> is true, the available value ranges from 1 to 300 and unit is second.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -747,8 +963,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The destination port of the L4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The destination port of the L4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -756,8 +971,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>source_type</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>sourceType</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -765,8 +979,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the layer 4 rule works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the layer 4 rule works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -774,8 +987,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sport_java" style="color: inherit; text-decoration: inherit;">s<wbr>Port</a>
@@ -783,17 +995,15 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The source port of the L4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The source port of the L4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelists_java" style="color: inherit; text-decoration: inherit;">source<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#l4rulesourcelist">List&lt;L4Rule<wbr>Source<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#l4rulesourcelist">List&lt;L4Rule<wbr>Source<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="sourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcetype_java" style="color: inherit; text-decoration: inherit;">source<wbr>Type</a>
@@ -801,8 +1011,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd><dt class="property-optional"
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhealthnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhealthnum_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -810,8 +1019,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckinterval_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Interval</a>
@@ -819,8 +1027,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</p>
-</dd><dt class="property-optional"
+    <dd>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckswitch_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Switch</a>
@@ -828,8 +1035,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecktimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktimeout_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Timeout</a>
@@ -837,8 +1043,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>HTTP Status Code. The default is 26 and value range is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP Status Code. The default is 26 and value range is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckunhealthnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckunhealthnum_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -846,8 +1051,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -855,8 +1059,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the rule. When the <code>resource_type</code> is <code>net</code>, this field should be set with valid domain.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the rule. When the <code>resourceType</code> is <code>net</code>, this field should be set with valid domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessionswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionswitch_java" style="color: inherit; text-decoration: inherit;">session<wbr>Switch</a>
@@ -864,8 +1067,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate that the session will keep or not, and default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate that the session will keep or not, and default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessiontime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontime_java" style="color: inherit; text-decoration: inherit;">session<wbr>Time</a>
@@ -873,8 +1075,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Session keep time, only valid when <code>session_switch</code> is true, the available value ranges from 1 to 300 and unit is second.</p>
-</dd></dl>
+    <dd>Session keep time, only valid when <code>sessionSwitch</code> is true, the available value ranges from 1 to 300 and unit is second.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -888,8 +1089,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The destination port of the L4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The destination port of the L4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -897,8 +1097,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>source_type</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>sourceType</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -906,8 +1105,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the layer 4 rule works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the layer 4 rule works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -915,8 +1113,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sport_nodejs" style="color: inherit; text-decoration: inherit;">s<wbr>Port</a>
@@ -924,17 +1121,15 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The source port of the L4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The source port of the L4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelists_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#l4rulesourcelist">L4Rule<wbr>Source<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#l4rulesourcelist">L4Rule<wbr>Source<wbr>List[]</a></span>
     </dt>
-    <dd><p>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="sourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcetype_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Type</a>
@@ -942,8 +1137,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd><dt class="property-optional"
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhealthnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhealthnum_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -951,8 +1145,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckinterval_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Interval</a>
@@ -960,8 +1153,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</p>
-</dd><dt class="property-optional"
+    <dd>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckswitch_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Switch</a>
@@ -969,8 +1161,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecktimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktimeout_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Timeout</a>
@@ -978,8 +1169,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>HTTP Status Code. The default is 26 and value range is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP Status Code. The default is 26 and value range is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckunhealthnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckunhealthnum_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -987,8 +1177,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -996,8 +1185,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the rule. When the <code>resource_type</code> is <code>net</code>, this field should be set with valid domain.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the rule. When the <code>resourceType</code> is <code>net</code>, this field should be set with valid domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessionswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionswitch_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Switch</a>
@@ -1005,8 +1193,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate that the session will keep or not, and default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate that the session will keep or not, and default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessiontime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontime_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Time</a>
@@ -1014,8 +1201,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Session keep time, only valid when <code>session_switch</code> is true, the available value ranges from 1 to 300 and unit is second.</p>
-</dd></dl>
+    <dd>Session keep time, only valid when <code>sessionSwitch</code> is true, the available value ranges from 1 to 300 and unit is second.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1029,8 +1215,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The destination port of the L4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The destination port of the L4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1038,8 +1223,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>source_type</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>sourceType</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -1047,8 +1231,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the resource that the layer 4 rule works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the layer 4 rule works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -1056,8 +1239,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="s_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_port_python" style="color: inherit; text-decoration: inherit;">s_<wbr>port</a>
@@ -1065,17 +1247,15 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The source port of the L4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The source port of the L4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="source_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_lists_python" style="color: inherit; text-decoration: inherit;">source_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#l4rulesourcelist">L4Rule<wbr>Source<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#l4rulesourcelist">Sequence[L4Rule<wbr>Source<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="source_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_type_python" style="color: inherit; text-decoration: inherit;">source_<wbr>type</a>
@@ -1083,8 +1263,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd><dt class="property-optional"
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_health_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_health_num_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>health_<wbr>num</a>
@@ -1092,8 +1271,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_interval_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>interval</a>
@@ -1101,8 +1279,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</p>
-</dd><dt class="property-optional"
+    <dd>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_switch_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>switch</a>
@@ -1110,8 +1287,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_timeout_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>timeout</a>
@@ -1119,8 +1295,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTP Status Code. The default is 26 and value range is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP Status Code. The default is 26 and value range is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_unhealth_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_unhealth_num_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>unhealth_<wbr>num</a>
@@ -1128,8 +1303,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1137,8 +1311,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the rule. When the <code>resource_type</code> is <code>net</code>, this field should be set with valid domain.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the rule. When the <code>resourceType</code> is <code>net</code>, this field should be set with valid domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="session_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_switch_python" style="color: inherit; text-decoration: inherit;">session_<wbr>switch</a>
@@ -1146,8 +1319,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate that the session will keep or not, and default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate that the session will keep or not, and default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="session_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_time_python" style="color: inherit; text-decoration: inherit;">session_<wbr>time</a>
@@ -1155,8 +1327,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Session keep time, only valid when <code>session_switch</code> is true, the available value ranges from 1 to 300 and unit is second.</p>
-</dd></dl>
+    <dd>Session keep time, only valid when <code>sessionSwitch</code> is true, the available value ranges from 1 to 300 and unit is second.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1170,8 +1341,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The destination port of the L4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The destination port of the L4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1179,8 +1349,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>source_type</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>sourceType</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1188,8 +1357,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the layer 4 rule works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the layer 4 rule works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1197,8 +1365,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sport_yaml" style="color: inherit; text-decoration: inherit;">s<wbr>Port</a>
@@ -1206,8 +1373,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The source port of the L4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The source port of the L4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelists_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Lists</a>
@@ -1215,8 +1381,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#l4rulesourcelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="sourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcetype_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Type</a>
@@ -1224,8 +1389,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd><dt class="property-optional"
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhealthnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhealthnum_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -1233,8 +1397,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckinterval_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Interval</a>
@@ -1242,8 +1405,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</p>
-</dd><dt class="property-optional"
+    <dd>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckswitch_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Switch</a>
@@ -1251,8 +1413,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecktimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktimeout_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Timeout</a>
@@ -1260,8 +1421,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>HTTP Status Code. The default is 26 and value range is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP Status Code. The default is 26 and value range is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckunhealthnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckunhealthnum_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -1269,8 +1429,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1278,8 +1437,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the rule. When the <code>resource_type</code> is <code>net</code>, this field should be set with valid domain.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the rule. When the <code>resourceType</code> is <code>net</code>, this field should be set with valid domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessionswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionswitch_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Switch</a>
@@ -1287,8 +1445,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate that the session will keep or not, and default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate that the session will keep or not, and default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessiontime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontime_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Time</a>
@@ -1296,8 +1453,7 @@ The L4Rule resource accepts the following [input](/docs/intro/concepts/inputs-ou
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Session keep time, only valid when <code>session_switch</code> is true, the available value ranges from 1 to 300 and unit is second.</p>
-</dd></dl>
+    <dd>Session keep time, only valid when <code>sessionSwitch</code> is true, the available value ranges from 1 to 300 and unit is second.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1318,8 +1474,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lbtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbtype_csharp" style="color: inherit; text-decoration: inherit;">Lb<wbr>Type</a>
@@ -1327,8 +1482,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-"
+    <dd>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-"
             title="">
         <span id="ruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -1336,8 +1490,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer 4 rule.</p>
-</dd></dl>
+    <dd>ID of the layer 4 rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1351,8 +1504,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lbtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbtype_go" style="color: inherit; text-decoration: inherit;">Lb<wbr>Type</a>
@@ -1360,8 +1512,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-"
+    <dd>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-"
             title="">
         <span id="ruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -1369,8 +1520,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer 4 rule.</p>
-</dd></dl>
+    <dd>ID of the layer 4 rule.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lb_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lb_type_hcl" style="color: inherit; text-decoration: inherit;">lb_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-"
+            title="">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the layer 4 rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1384,8 +1564,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lbtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbtype_java" style="color: inherit; text-decoration: inherit;">lb<wbr>Type</a>
@@ -1393,8 +1572,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-"
+    <dd>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-"
             title="">
         <span id="ruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1402,8 +1580,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer 4 rule.</p>
-</dd></dl>
+    <dd>ID of the layer 4 rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1417,8 +1594,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lbtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbtype_nodejs" style="color: inherit; text-decoration: inherit;">lb<wbr>Type</a>
@@ -1426,8 +1602,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-"
+    <dd>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-"
             title="">
         <span id="ruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1435,8 +1610,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer 4 rule.</p>
-</dd></dl>
+    <dd>ID of the layer 4 rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1450,8 +1624,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lb_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lb_type_python" style="color: inherit; text-decoration: inherit;">lb_<wbr>type</a>
@@ -1459,8 +1632,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-"
+    <dd>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-"
             title="">
         <span id="rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
@@ -1468,8 +1640,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the layer 4 rule.</p>
-</dd></dl>
+    <dd>ID of the layer 4 rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1483,8 +1654,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lbtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbtype_yaml" style="color: inherit; text-decoration: inherit;">lb<wbr>Type</a>
@@ -1492,8 +1662,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-"
+    <dd>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-"
             title="">
         <span id="ruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1501,8 +1670,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer 4 rule.</p>
-</dd></dl>
+    <dd>ID of the layer 4 rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1512,18 +1680,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing L4Rule resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">L4RuleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">L4Rule</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">L4RuleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">L4Rule</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1542,106 +1710,145 @@ Get an existing L4Rule resource's state with the given name, ID, and optional ex
         <span class="nx">s_port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">session_switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">session_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">source_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.L4RuleSourceListArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">source_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[L4RuleSourceListArgs]]</span> = None<span class="p">,</span>
         <span class="nx">source_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> L4Rule</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetL4Rule<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">L4RuleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">L4Rule</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetL4Rule<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">L4RuleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">L4Rule</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">L4Rule</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">L4RuleState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">L4Rule</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">L4RuleState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">L4Rule</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">L4RuleState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">L4Rule</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">L4RuleState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingL4Rule</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Dayu:L4Rule</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_dayu_l4_rule</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">L4RuleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">L4RuleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1649,28 +1856,31 @@ Get an existing L4Rule resource's state with the given name, ID, and optional ex
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">L4RuleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1678,28 +1888,31 @@ Get an existing L4Rule resource's state with the given name, ID, and optional ex
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">L4RuleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1719,8 +1932,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The destination port of the L4 rule.</p>
-</dd><dt class="property-optional"
+    <dd>The destination port of the L4 rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhealthnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhealthnum_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -1728,8 +1940,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckinterval_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Interval</a>
@@ -1737,8 +1948,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</p>
-</dd><dt class="property-optional"
+    <dd>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckswitch_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Switch</a>
@@ -1746,8 +1956,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecktimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktimeout_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Timeout</a>
@@ -1755,8 +1964,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTP Status Code. The default is 26 and value range is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP Status Code. The default is 26 and value range is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckunhealthnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckunhealthnum_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -1764,8 +1972,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</p>
-</dd><dt class="property-optional"
+    <dd>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lbtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lbtype_csharp" style="color: inherit; text-decoration: inherit;">Lb<wbr>Type</a>
@@ -1773,8 +1980,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1782,8 +1988,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the rule. When the <code>resource_type</code> is <code>net</code>, this field should be set with valid domain.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the rule. When the <code>resourceType</code> is <code>net</code>, this field should be set with valid domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1791,8 +1996,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>source_type</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>sourceType</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1800,8 +2004,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the layer 4 rule works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the layer 4 rule works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1809,8 +2012,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -1818,8 +2020,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer 4 rule.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer 4 rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sport_csharp" style="color: inherit; text-decoration: inherit;">SPort</a>
@@ -1827,8 +2028,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The source port of the L4 rule.</p>
-</dd><dt class="property-optional"
+    <dd>The source port of the L4 rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessionswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionswitch_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Switch</a>
@@ -1836,8 +2036,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate that the session will keep or not, and default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate that the session will keep or not, and default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessiontime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessiontime_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Time</a>
@@ -1845,17 +2044,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Session keep time, only valid when <code>session_switch</code> is true, the available value ranges from 1 to 300 and unit is second.</p>
-</dd><dt class="property-optional"
+    <dd>Session keep time, only valid when <code>sessionSwitch</code> is true, the available value ranges from 1 to 300 and unit is second.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sourcelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcelists_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#l4rulesourcelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>L4Rule<wbr>Source<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#l4rulesourcelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>L4Rule<wbr>Source<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcetype_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Type</a>
@@ -1863,8 +2060,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd></dl>
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1878,8 +2074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The destination port of the L4 rule.</p>
-</dd><dt class="property-optional"
+    <dd>The destination port of the L4 rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhealthnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhealthnum_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -1887,8 +2082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckinterval_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Interval</a>
@@ -1896,8 +2090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</p>
-</dd><dt class="property-optional"
+    <dd>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckswitch_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Switch</a>
@@ -1905,8 +2098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecktimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktimeout_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Timeout</a>
@@ -1914,8 +2106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTP Status Code. The default is 26 and value range is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP Status Code. The default is 26 and value range is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckunhealthnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckunhealthnum_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -1923,8 +2114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</p>
-</dd><dt class="property-optional"
+    <dd>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lbtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lbtype_go" style="color: inherit; text-decoration: inherit;">Lb<wbr>Type</a>
@@ -1932,8 +2122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1941,8 +2130,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the rule. When the <code>resource_type</code> is <code>net</code>, this field should be set with valid domain.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the rule. When the <code>resourceType</code> is <code>net</code>, this field should be set with valid domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1950,8 +2138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>source_type</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>sourceType</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1959,8 +2146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the layer 4 rule works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the layer 4 rule works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1968,8 +2154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -1977,8 +2162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer 4 rule.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer 4 rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sport_go" style="color: inherit; text-decoration: inherit;">SPort</a>
@@ -1986,8 +2170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The source port of the L4 rule.</p>
-</dd><dt class="property-optional"
+    <dd>The source port of the L4 rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessionswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionswitch_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Switch</a>
@@ -1995,8 +2178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate that the session will keep or not, and default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate that the session will keep or not, and default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessiontime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessiontime_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Time</a>
@@ -2004,8 +2186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Session keep time, only valid when <code>session_switch</code> is true, the available value ranges from 1 to 300 and unit is second.</p>
-</dd><dt class="property-optional"
+    <dd>Session keep time, only valid when <code>sessionSwitch</code> is true, the available value ranges from 1 to 300 and unit is second.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sourcelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcelists_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Lists</a>
@@ -2013,8 +2194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#l4rulesourcelist">[]L4Rule<wbr>Source<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcetype_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Type</a>
@@ -2022,8 +2202,149 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd></dl>
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_d_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_d_port_hcl" style="color: inherit; text-decoration: inherit;">d_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The destination port of the L4 rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_health_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_health_num_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>health_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_interval_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_switch_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_timeout_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>HTTP Status Code. The default is 26 and value range is 2-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_unhealth_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_unhealth_num_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>unhealth_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lb_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lb_type_hcl" style="color: inherit; text-decoration: inherit;">lb_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the rule. When the <code>resourceType</code> is <code>net</code>, this field should be set with valid domain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>sourceType</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the resource that the layer 4 rule works for.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the layer 4 rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_s_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_s_port_hcl" style="color: inherit; text-decoration: inherit;">s_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The source port of the L4 rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_session_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_session_switch_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate that the session will keep or not, and default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_session_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_session_time_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Session keep time, only valid when <code>sessionSwitch</code> is true, the available value ranges from 1 to 300 and unit is second.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_source_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_lists_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#l4rulesourcelist">list(object)</a></span>
+    </dt>
+    <dd>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_source_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_type_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2037,8 +2358,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The destination port of the L4 rule.</p>
-</dd><dt class="property-optional"
+    <dd>The destination port of the L4 rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhealthnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhealthnum_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -2046,8 +2366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckinterval_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Interval</a>
@@ -2055,8 +2374,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</p>
-</dd><dt class="property-optional"
+    <dd>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckswitch_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Switch</a>
@@ -2064,8 +2382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecktimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktimeout_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Timeout</a>
@@ -2073,8 +2390,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>HTTP Status Code. The default is 26 and value range is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP Status Code. The default is 26 and value range is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckunhealthnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckunhealthnum_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -2082,8 +2398,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</p>
-</dd><dt class="property-optional"
+    <dd>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lbtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lbtype_java" style="color: inherit; text-decoration: inherit;">lb<wbr>Type</a>
@@ -2091,8 +2406,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2100,8 +2414,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the rule. When the <code>resource_type</code> is <code>net</code>, this field should be set with valid domain.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the rule. When the <code>resourceType</code> is <code>net</code>, this field should be set with valid domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2109,8 +2422,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>source_type</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>sourceType</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -2118,8 +2430,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the layer 4 rule works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the layer 4 rule works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -2127,8 +2438,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -2136,8 +2446,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer 4 rule.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer 4 rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sport_java" style="color: inherit; text-decoration: inherit;">s<wbr>Port</a>
@@ -2145,8 +2454,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The source port of the L4 rule.</p>
-</dd><dt class="property-optional"
+    <dd>The source port of the L4 rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessionswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionswitch_java" style="color: inherit; text-decoration: inherit;">session<wbr>Switch</a>
@@ -2154,8 +2462,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate that the session will keep or not, and default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate that the session will keep or not, and default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessiontime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessiontime_java" style="color: inherit; text-decoration: inherit;">session<wbr>Time</a>
@@ -2163,17 +2470,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Session keep time, only valid when <code>session_switch</code> is true, the available value ranges from 1 to 300 and unit is second.</p>
-</dd><dt class="property-optional"
+    <dd>Session keep time, only valid when <code>sessionSwitch</code> is true, the available value ranges from 1 to 300 and unit is second.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sourcelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcelists_java" style="color: inherit; text-decoration: inherit;">source<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#l4rulesourcelist">List&lt;L4Rule<wbr>Source<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#l4rulesourcelist">List&lt;L4Rule<wbr>Source<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcetype_java" style="color: inherit; text-decoration: inherit;">source<wbr>Type</a>
@@ -2181,8 +2486,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd></dl>
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2196,8 +2500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The destination port of the L4 rule.</p>
-</dd><dt class="property-optional"
+    <dd>The destination port of the L4 rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhealthnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhealthnum_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -2205,8 +2508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckinterval_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Interval</a>
@@ -2214,8 +2516,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</p>
-</dd><dt class="property-optional"
+    <dd>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckswitch_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Switch</a>
@@ -2223,8 +2524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecktimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktimeout_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Timeout</a>
@@ -2232,8 +2532,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>HTTP Status Code. The default is 26 and value range is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP Status Code. The default is 26 and value range is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckunhealthnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckunhealthnum_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -2241,8 +2540,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</p>
-</dd><dt class="property-optional"
+    <dd>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lbtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lbtype_nodejs" style="color: inherit; text-decoration: inherit;">lb<wbr>Type</a>
@@ -2250,8 +2548,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2259,8 +2556,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the rule. When the <code>resource_type</code> is <code>net</code>, this field should be set with valid domain.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the rule. When the <code>resourceType</code> is <code>net</code>, this field should be set with valid domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2268,8 +2564,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>source_type</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>sourceType</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -2277,8 +2572,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the layer 4 rule works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the layer 4 rule works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -2286,8 +2580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -2295,8 +2588,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer 4 rule.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer 4 rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sport_nodejs" style="color: inherit; text-decoration: inherit;">s<wbr>Port</a>
@@ -2304,8 +2596,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The source port of the L4 rule.</p>
-</dd><dt class="property-optional"
+    <dd>The source port of the L4 rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessionswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionswitch_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Switch</a>
@@ -2313,8 +2604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate that the session will keep or not, and default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate that the session will keep or not, and default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessiontime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessiontime_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Time</a>
@@ -2322,17 +2612,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Session keep time, only valid when <code>session_switch</code> is true, the available value ranges from 1 to 300 and unit is second.</p>
-</dd><dt class="property-optional"
+    <dd>Session keep time, only valid when <code>sessionSwitch</code> is true, the available value ranges from 1 to 300 and unit is second.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sourcelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcelists_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#l4rulesourcelist">L4Rule<wbr>Source<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#l4rulesourcelist">L4Rule<wbr>Source<wbr>List[]</a></span>
     </dt>
-    <dd><p>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcetype_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Type</a>
@@ -2340,8 +2628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd></dl>
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2355,8 +2642,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The destination port of the L4 rule.</p>
-</dd><dt class="property-optional"
+    <dd>The destination port of the L4 rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_health_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_health_num_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>health_<wbr>num</a>
@@ -2364,8 +2650,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_interval_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>interval</a>
@@ -2373,8 +2658,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</p>
-</dd><dt class="property-optional"
+    <dd>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_switch_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>switch</a>
@@ -2382,8 +2666,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_timeout_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>timeout</a>
@@ -2391,8 +2674,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTP Status Code. The default is 26 and value range is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP Status Code. The default is 26 and value range is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_unhealth_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_unhealth_num_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>unhealth_<wbr>num</a>
@@ -2400,8 +2682,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</p>
-</dd><dt class="property-optional"
+    <dd>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lb_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lb_type_python" style="color: inherit; text-decoration: inherit;">lb_<wbr>type</a>
@@ -2409,8 +2690,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2418,8 +2698,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the rule. When the <code>resource_type</code> is <code>net</code>, this field should be set with valid domain.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the rule. When the <code>resourceType</code> is <code>net</code>, this field should be set with valid domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2427,8 +2706,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>source_type</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>sourceType</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -2436,8 +2714,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the resource that the layer 4 rule works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the layer 4 rule works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -2445,8 +2722,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
@@ -2454,8 +2730,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the layer 4 rule.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer 4 rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_s_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_s_port_python" style="color: inherit; text-decoration: inherit;">s_<wbr>port</a>
@@ -2463,8 +2738,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The source port of the L4 rule.</p>
-</dd><dt class="property-optional"
+    <dd>The source port of the L4 rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_session_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_session_switch_python" style="color: inherit; text-decoration: inherit;">session_<wbr>switch</a>
@@ -2472,8 +2746,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate that the session will keep or not, and default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate that the session will keep or not, and default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_session_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_session_time_python" style="color: inherit; text-decoration: inherit;">session_<wbr>time</a>
@@ -2481,17 +2754,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Session keep time, only valid when <code>session_switch</code> is true, the available value ranges from 1 to 300 and unit is second.</p>
-</dd><dt class="property-optional"
+    <dd>Session keep time, only valid when <code>sessionSwitch</code> is true, the available value ranges from 1 to 300 and unit is second.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_source_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_lists_python" style="color: inherit; text-decoration: inherit;">source_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#l4rulesourcelist">L4Rule<wbr>Source<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#l4rulesourcelist">Sequence[L4Rule<wbr>Source<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_source_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_type_python" style="color: inherit; text-decoration: inherit;">source_<wbr>type</a>
@@ -2499,8 +2770,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd></dl>
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2514,8 +2784,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The destination port of the L4 rule.</p>
-</dd><dt class="property-optional"
+    <dd>The destination port of the L4 rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhealthnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhealthnum_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -2523,8 +2792,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckinterval_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Interval</a>
@@ -2532,8 +2800,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</p>
-</dd><dt class="property-optional"
+    <dd>Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckswitch_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Switch</a>
@@ -2541,8 +2808,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled. The default is <code>false</code>. Only valid when source list has more than one source item.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecktimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktimeout_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Timeout</a>
@@ -2550,8 +2816,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>HTTP Status Code. The default is 26 and value range is 2-60.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP Status Code. The default is 26 and value range is 2-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckunhealthnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckunhealthnum_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -2559,8 +2824,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</p>
-</dd><dt class="property-optional"
+    <dd>Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lbtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lbtype_yaml" style="color: inherit; text-decoration: inherit;">lb<wbr>Type</a>
@@ -2568,8 +2832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>LB type of the rule. Valid values: <code>1</code>, <code>2</code>. <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2577,8 +2840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the rule. When the <code>resource_type</code> is <code>net</code>, this field should be set with valid domain.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the rule. When the <code>resourceType</code> is <code>net</code>, this field should be set with valid domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2586,8 +2848,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>source_type</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol of the rule. Valid values: <code>http</code>, <code>https</code>. When <code>sourceType</code> is 1(host source), the value of this field can only set with <code>tcp</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -2595,8 +2856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the layer 4 rule works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the layer 4 rule works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -2604,8 +2864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the layer 4 rule works for. Valid values: <code>bgpip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -2613,8 +2872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer 4 rule.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer 4 rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sport_yaml" style="color: inherit; text-decoration: inherit;">s<wbr>Port</a>
@@ -2622,8 +2880,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The source port of the L4 rule.</p>
-</dd><dt class="property-optional"
+    <dd>The source port of the L4 rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessionswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionswitch_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Switch</a>
@@ -2631,8 +2888,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate that the session will keep or not, and default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate that the session will keep or not, and default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessiontime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessiontime_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Time</a>
@@ -2640,8 +2896,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Session keep time, only valid when <code>session_switch</code> is true, the available value ranges from 1 to 300 and unit is second.</p>
-</dd><dt class="property-optional"
+    <dd>Session keep time, only valid when <code>sessionSwitch</code> is true, the available value ranges from 1 to 300 and unit is second.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sourcelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcelists_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Lists</a>
@@ -2649,8 +2904,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#l4rulesourcelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcetype_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Type</a>
@@ -2658,8 +2912,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd></dl>
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2674,7 +2927,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="l4rulesourcelist">L4Rule<wbr>Source<wbr>List</h4>
+<h4 id="l4rulesourcelist">
+L4Rule<wbr>Source<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, L4Rule<wbr>Source<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2686,8 +2941,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source IP or domain, valid format of ip is like <code>1.1.1.1</code> and valid format of host source is like <code>abc.com</code>.</p>
-</dd><dt class="property-required"
+    <dd>Source IP or domain, valid format of ip is like <code>1.1.1.1</code> and valid format of host source is like <code>abc.com</code>.</dd><dt class="property-required"
             title="Required">
         <span id="weight_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_csharp" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -2695,8 +2949,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Weight of the source, the valid value ranges from 0 to 100.</p>
-</dd></dl>
+    <dd>Weight of the source, the valid value ranges from 0 to 100.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2710,8 +2963,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source IP or domain, valid format of ip is like <code>1.1.1.1</code> and valid format of host source is like <code>abc.com</code>.</p>
-</dd><dt class="property-required"
+    <dd>Source IP or domain, valid format of ip is like <code>1.1.1.1</code> and valid format of host source is like <code>abc.com</code>.</dd><dt class="property-required"
             title="Required">
         <span id="weight_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_go" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -2719,8 +2971,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Weight of the source, the valid value ranges from 0 to 100.</p>
-</dd></dl>
+    <dd>Weight of the source, the valid value ranges from 0 to 100.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="source_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_hcl" style="color: inherit; text-decoration: inherit;">source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Source IP or domain, valid format of ip is like <code>1.1.1.1</code> and valid format of host source is like <code>abc.com</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_hcl" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Weight of the source, the valid value ranges from 0 to 100.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2734,8 +3007,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Source IP or domain, valid format of ip is like <code>1.1.1.1</code> and valid format of host source is like <code>abc.com</code>.</p>
-</dd><dt class="property-required"
+    <dd>Source IP or domain, valid format of ip is like <code>1.1.1.1</code> and valid format of host source is like <code>abc.com</code>.</dd><dt class="property-required"
             title="Required">
         <span id="weight_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_java" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2743,8 +3015,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Weight of the source, the valid value ranges from 0 to 100.</p>
-</dd></dl>
+    <dd>Weight of the source, the valid value ranges from 0 to 100.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2758,8 +3029,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source IP or domain, valid format of ip is like <code>1.1.1.1</code> and valid format of host source is like <code>abc.com</code>.</p>
-</dd><dt class="property-required"
+    <dd>Source IP or domain, valid format of ip is like <code>1.1.1.1</code> and valid format of host source is like <code>abc.com</code>.</dd><dt class="property-required"
             title="Required">
         <span id="weight_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_nodejs" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2767,8 +3037,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Weight of the source, the valid value ranges from 0 to 100.</p>
-</dd></dl>
+    <dd>Weight of the source, the valid value ranges from 0 to 100.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2782,8 +3051,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Source IP or domain, valid format of ip is like <code>1.1.1.1</code> and valid format of host source is like <code>abc.com</code>.</p>
-</dd><dt class="property-required"
+    <dd>Source IP or domain, valid format of ip is like <code>1.1.1.1</code> and valid format of host source is like <code>abc.com</code>.</dd><dt class="property-required"
             title="Required">
         <span id="weight_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_python" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2791,8 +3059,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Weight of the source, the valid value ranges from 0 to 100.</p>
-</dd></dl>
+    <dd>Weight of the source, the valid value ranges from 0 to 100.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2806,8 +3073,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Source IP or domain, valid format of ip is like <code>1.1.1.1</code> and valid format of host source is like <code>abc.com</code>.</p>
-</dd><dt class="property-required"
+    <dd>Source IP or domain, valid format of ip is like <code>1.1.1.1</code> and valid format of host source is like <code>abc.com</code>.</dd><dt class="property-required"
             title="Required">
         <span id="weight_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_yaml" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2815,8 +3081,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Weight of the source, the valid value ranges from 0 to 100.</p>
-</dd></dl>
+    <dd>Weight of the source, the valid value ranges from 0 to 100.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2828,7 +3093,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getL4RulesV2"
 title_tag: "tencentcloud.Dayu.getL4RulesV2"
-meta_desc: "Documentation for the tencentcloud.Dayu.getL4RulesV2 function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query dayu new layer 4 rules"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query dayu new layer 4 rules
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const tencentcloudDayuL4RulesV2 = tencentcloud.Dayu.getL4RulesV2({
+const tencentcloudDayuL4RulesV2 = tencentcloud.dayu.getL4RulesV2({
     business: "bgpip",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-tencentcloud_dayu_l4_rules_v2 = tencentcloud.Dayu.get_l4_rules_v2(business="bgpip")
+tencentcloud_dayu_l4_rules_v2 = tencentcloud.dayu.get_l4_rules_v2(business="bgpip")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dayu"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dayu.GetL4RulesV2(ctx, &dayu.GetL4RulesV2Args{
+			Business: "bgpip",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dayu.GetL4RulesV2(ctx, &dayu.GetL4RulesV2Args{
-			Business: "bgpip",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dayu.DayuFunctions;
 import com.pulumi.tencentcloud.Dayu.inputs.GetL4RulesV2Args;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   tencentcloudDayuL4RulesV2:
     fn::invoke:
-      Function: tencentcloud:Dayu:getL4RulesV2
-      Arguments:
+      function: tencentcloud:Dayu:getL4RulesV2
+      arguments:
         business: bgpip
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dayu_getl4rulesv2" "tencentcloudDayuL4RulesV2" {
+  business = "bgpip"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeNewL4Rules](https://www.tencentcloud.com/search/?wd=DescribeNewL4Rules&type=document&lang=en)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getL4RulesV2<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetL4RulesV2Args</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetL4RulesV2Result</a></span>></span
+><span class="k">function </span>getL4RulesV2<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetL4RulesV2Args</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetL4RulesV2Result</a></span>></span
 ><span class="k">
-function </span>getL4RulesV2Output<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetL4RulesV2OutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetL4RulesV2Result</a></span>></span
+function </span>getL4RulesV2Output<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetL4RulesV2OutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetL4RulesV2Result</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -140,11 +197,11 @@ function </span>getL4RulesV2Output<span class="p">(</span><span class="nx">args<
                     <span class="nx">virtual_port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetL4RulesV2Result</span
 ><span class="k">
-def </span>get_l4_rules_v2_output<span class="p">(</span><span class="nx">business</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">ip</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">virtual_port</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetL4RulesV2Result]</span
+def </span>get_l4_rules_v2_output<span class="p">(</span><span class="nx">business</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">ip</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">virtual_port</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetL4RulesV2Result]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -169,7 +226,8 @@ func </span>GetL4RulesV2Output<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetL4RulesV2 </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetL4RulesV2Result</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetL4RulesV2Args</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetL4RulesV2Result</a></span>> <span class="p">Invoke(</span><span class="nx">GetL4RulesV2InvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetL4RulesV2Result</a></span>> <span class="p">Invoke(</span><span class="nx">GetL4RulesV2InvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetL4RulesV2Result</a></span>> <span class="p">Invoke(</span><span class="nx">GetL4RulesV2InvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -178,7 +236,8 @@ func </span>GetL4RulesV2Output<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetL4RulesV2Result</a></span>> </span>getL4RulesV2<span class="p">(</span><span class="nx">GetL4RulesV2Args</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetL4RulesV2Result</a></span>> </span>getL4RulesV2<span class="p">(</span><span class="nx">GetL4RulesV2Args</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetL4RulesV2Result</a></span>> </span>getL4RulesV2<span class="p">(</span><span class="nx">GetL4RulesV2Args</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -190,6 +249,15 @@ func </span>GetL4RulesV2Output<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dayu/getL4RulesV2:getL4RulesV2
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dayu_get_l4_rules_v2&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -208,8 +276,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the layer 4 rule works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the layer 4 rule works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -217,8 +284,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of the resource.</p>
-</dd><dt class="property-optional"
+    <dd>Ip of the resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -226,8 +292,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="virtualport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#virtualport_csharp" style="color: inherit; text-decoration: inherit;">Virtual<wbr>Port</a>
@@ -235,8 +300,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Virtual port of resource.</p>
-</dd></dl>
+    <dd>Virtual port of resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -250,8 +314,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the layer 4 rule works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the layer 4 rule works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -259,8 +322,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of the resource.</p>
-</dd><dt class="property-optional"
+    <dd>Ip of the resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -268,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="virtualport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#virtualport_go" style="color: inherit; text-decoration: inherit;">Virtual<wbr>Port</a>
@@ -277,8 +338,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Virtual port of resource.</p>
-</dd></dl>
+    <dd>Virtual port of resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="business_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#business_hcl" style="color: inherit; text-decoration: inherit;">business</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the layer 4 rule works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ip of the resource.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="virtual_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#virtual_port_hcl" style="color: inherit; text-decoration: inherit;">virtual_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Virtual port of resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -292,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the layer 4 rule works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the layer 4 rule works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -301,8 +398,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip of the resource.</p>
-</dd><dt class="property-optional"
+    <dd>Ip of the resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -310,8 +406,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="virtualport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#virtualport_java" style="color: inherit; text-decoration: inherit;">virtual<wbr>Port</a>
@@ -319,8 +414,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Virtual port of resource.</p>
-</dd></dl>
+    <dd>Virtual port of resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -334,8 +428,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the layer 4 rule works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the layer 4 rule works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -343,8 +436,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of the resource.</p>
-</dd><dt class="property-optional"
+    <dd>Ip of the resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -352,8 +444,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="virtualport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#virtualport_nodejs" style="color: inherit; text-decoration: inherit;">virtual<wbr>Port</a>
@@ -361,8 +452,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Virtual port of resource.</p>
-</dd></dl>
+    <dd>Virtual port of resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -376,8 +466,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the layer 4 rule works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the layer 4 rule works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -385,8 +474,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ip of the resource.</p>
-</dd><dt class="property-optional"
+    <dd>Ip of the resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -394,8 +482,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="virtual_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#virtual_port_python" style="color: inherit; text-decoration: inherit;">virtual_<wbr>port</a>
@@ -403,8 +490,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Virtual port of resource.</p>
-</dd></dl>
+    <dd>Virtual port of resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -418,8 +504,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the layer 4 rule works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the layer 4 rule works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -427,8 +512,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip of the resource.</p>
-</dd><dt class="property-optional"
+    <dd>Ip of the resource.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -436,8 +520,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="virtualport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#virtualport_yaml" style="color: inherit; text-decoration: inherit;">virtual<wbr>Port</a>
@@ -445,8 +528,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Virtual port of resource.</p>
-</dd></dl>
+    <dd>Virtual port of resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -477,8 +559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -486,8 +567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getl4rulesv2list">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Outputs.<wbr>Get<wbr>L4Rules<wbr>V2List&gt;</a></span>
     </dt>
-    <dd><p>A list of layer 4 rules. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of layer 4 rules. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -495,8 +575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bind the resource IP information.</p>
-</dd><dt class="property-"
+    <dd>Bind the resource IP information.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -512,8 +591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The virtual port of the layer 4 rule.</p>
-</dd></dl>
+    <dd>The virtual port of the layer 4 rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -535,8 +613,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -544,8 +621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getl4rulesv2list">[]Get<wbr>L4Rules<wbr>V2List</a></span>
     </dt>
-    <dd><p>A list of layer 4 rules. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of layer 4 rules. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -553,8 +629,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bind the resource IP information.</p>
-</dd><dt class="property-"
+    <dd>Bind the resource IP information.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -570,8 +645,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The virtual port of the layer 4 rule.</p>
-</dd></dl>
+    <dd>The virtual port of the layer 4 rule.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="business_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#business_hcl" style="color: inherit; text-decoration: inherit;">business</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getl4rulesv2list">list(object)</a></span>
+    </dt>
+    <dd>A list of layer 4 rules. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bind the resource IP information.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="virtual_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#virtual_port_hcl" style="color: inherit; text-decoration: inherit;">virtual_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The virtual port of the layer 4 rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -593,8 +721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -602,8 +729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getl4rulesv2list">List&lt;Get<wbr>L4Rules<wbr>V2List&gt;</a></span>
     </dt>
-    <dd><p>A list of layer 4 rules. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of layer 4 rules. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -611,8 +737,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bind the resource IP information.</p>
-</dd><dt class="property-"
+    <dd>Bind the resource IP information.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -628,8 +753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The virtual port of the layer 4 rule.</p>
-</dd></dl>
+    <dd>The virtual port of the layer 4 rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -651,8 +775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -660,8 +783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getl4rulesv2list">Get<wbr>L4Rules<wbr>V2List[]</a></span>
     </dt>
-    <dd><p>A list of layer 4 rules. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of layer 4 rules. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -669,8 +791,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bind the resource IP information.</p>
-</dd><dt class="property-"
+    <dd>Bind the resource IP information.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -686,8 +807,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The virtual port of the layer 4 rule.</p>
-</dd></dl>
+    <dd>The virtual port of the layer 4 rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -709,17 +829,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getl4rulesv2list">Get<wbr>L4Rules<wbr>V2List]</a></span>
+        <span class="property-type"><a href="#getl4rulesv2list">Sequence[Get<wbr>L4Rules<wbr>V2List]</a></span>
     </dt>
-    <dd><p>A list of layer 4 rules. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of layer 4 rules. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -727,8 +845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Bind the resource IP information.</p>
-</dd><dt class="property-"
+    <dd>Bind the resource IP information.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -744,8 +861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The virtual port of the layer 4 rule.</p>
-</dd></dl>
+    <dd>The virtual port of the layer 4 rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -767,8 +883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -776,8 +891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getl4rulesv2list">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of layer 4 rules. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of layer 4 rules. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -785,8 +899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bind the resource IP information.</p>
-</dd><dt class="property-"
+    <dd>Bind the resource IP information.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -802,8 +915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The virtual port of the layer 4 rule.</p>
-</dd></dl>
+    <dd>The virtual port of the layer 4 rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -827,8 +939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bind the resource ID information.</p>
-</dd><dt class="property-required"
+    <dd>Bind the resource ID information.</dd><dt class="property-required"
             title="Required">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -836,8 +947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of the resource.</p>
-</dd><dt class="property-required"
+    <dd>Ip of the resource.</dd><dt class="property-required"
             title="Required">
         <span id="keepenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepenable_csharp" style="color: inherit; text-decoration: inherit;">Keep<wbr>Enable</a>
@@ -845,8 +955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>session hold switch.</p>
-</dd><dt class="property-required"
+    <dd>session hold switch.</dd><dt class="property-required"
             title="Required">
         <span id="keeptime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keeptime_csharp" style="color: inherit; text-decoration: inherit;">Keeptime</a>
@@ -854,8 +963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The keeptime of the layer 4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The keeptime of the layer 4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="lbtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbtype_csharp" style="color: inherit; text-decoration: inherit;">Lb<wbr>Type</a>
@@ -863,8 +971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-required"
+    <dd>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_csharp" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -872,8 +979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule modification time.</p>
-</dd><dt class="property-required"
+    <dd>Rule modification time.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -881,8 +987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -890,8 +995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Corresponding regional information.</p>
-</dd><dt class="property-required"
+    <dd>Corresponding regional information.</dd><dt class="property-required"
             title="Required">
         <span id="removeswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removeswitch_csharp" style="color: inherit; text-decoration: inherit;">Remove<wbr>Switch</a>
@@ -899,8 +1003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Remove the watermark state.</p>
-</dd><dt class="property-required"
+    <dd>Remove the watermark state.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -908,8 +1011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the 4 layer rule.</p>
-</dd><dt class="property-required"
+    <dd>ID of the 4 layer rule.</dd><dt class="property-required"
             title="Required">
         <span id="rulename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulename_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Name</a>
@@ -917,8 +1019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Name of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelists_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Lists</a>
@@ -926,8 +1027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getl4rulesv2listsourcelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Get<wbr>L4Rules<wbr>V2List<wbr>Source<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Source list of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Source list of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourceport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceport_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Port</a>
@@ -935,8 +1035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The source port of the layer 4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The source port of the layer 4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcetype_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Type</a>
@@ -944,8 +1043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd><dt class="property-required"
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-required"
             title="Required">
         <span id="virtualport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#virtualport_csharp" style="color: inherit; text-decoration: inherit;">Virtual<wbr>Port</a>
@@ -953,8 +1051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Virtual port of resource.</p>
-</dd></dl>
+    <dd>Virtual port of resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -968,8 +1065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bind the resource ID information.</p>
-</dd><dt class="property-required"
+    <dd>Bind the resource ID information.</dd><dt class="property-required"
             title="Required">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -977,8 +1073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of the resource.</p>
-</dd><dt class="property-required"
+    <dd>Ip of the resource.</dd><dt class="property-required"
             title="Required">
         <span id="keepenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepenable_go" style="color: inherit; text-decoration: inherit;">Keep<wbr>Enable</a>
@@ -986,8 +1081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>session hold switch.</p>
-</dd><dt class="property-required"
+    <dd>session hold switch.</dd><dt class="property-required"
             title="Required">
         <span id="keeptime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keeptime_go" style="color: inherit; text-decoration: inherit;">Keeptime</a>
@@ -995,8 +1089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The keeptime of the layer 4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The keeptime of the layer 4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="lbtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbtype_go" style="color: inherit; text-decoration: inherit;">Lb<wbr>Type</a>
@@ -1004,8 +1097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-required"
+    <dd>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_go" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -1013,8 +1105,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule modification time.</p>
-</dd><dt class="property-required"
+    <dd>Rule modification time.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1022,8 +1113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -1031,8 +1121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Corresponding regional information.</p>
-</dd><dt class="property-required"
+    <dd>Corresponding regional information.</dd><dt class="property-required"
             title="Required">
         <span id="removeswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removeswitch_go" style="color: inherit; text-decoration: inherit;">Remove<wbr>Switch</a>
@@ -1040,8 +1129,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Remove the watermark state.</p>
-</dd><dt class="property-required"
+    <dd>Remove the watermark state.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -1049,8 +1137,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the 4 layer rule.</p>
-</dd><dt class="property-required"
+    <dd>ID of the 4 layer rule.</dd><dt class="property-required"
             title="Required">
         <span id="rulename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulename_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Name</a>
@@ -1058,8 +1145,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Name of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelists_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Lists</a>
@@ -1067,8 +1153,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getl4rulesv2listsourcelist">[]Get<wbr>L4Rules<wbr>V2List<wbr>Source<wbr>List</a></span>
     </dt>
-    <dd><p>Source list of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Source list of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourceport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceport_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Port</a>
@@ -1076,8 +1161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The source port of the layer 4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The source port of the layer 4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcetype_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Type</a>
@@ -1085,8 +1169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd><dt class="property-required"
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-required"
             title="Required">
         <span id="virtualport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#virtualport_go" style="color: inherit; text-decoration: inherit;">Virtual<wbr>Port</a>
@@ -1094,8 +1177,133 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Virtual port of resource.</p>
-</dd></dl>
+    <dd>Virtual port of resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bind the resource ID information.</dd><dt class="property-required"
+            title="Required">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ip of the resource.</dd><dt class="property-required"
+            title="Required">
+        <span id="keep_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keep_enable_hcl" style="color: inherit; text-decoration: inherit;">keep_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>session hold switch.</dd><dt class="property-required"
+            title="Required">
+        <span id="keeptime_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keeptime_hcl" style="color: inherit; text-decoration: inherit;">keeptime</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The keeptime of the layer 4 rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="lb_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lb_type_hcl" style="color: inherit; text-decoration: inherit;">lb_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-required"
+            title="Required">
+        <span id="modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_hcl" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule modification time.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol of the rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Corresponding regional information.</dd><dt class="property-required"
+            title="Required">
+        <span id="remove_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remove_switch_hcl" style="color: inherit; text-decoration: inherit;">remove_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Remove the watermark state.</dd><dt class="property-required"
+            title="Required">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the 4 layer rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="rule_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_name_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="source_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_lists_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getl4rulesv2listsourcelist">list(object)</a></span>
+    </dt>
+    <dd>Source list of the rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="source_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_port_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The source port of the layer 4 rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="source_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_type_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-required"
+            title="Required">
+        <span id="virtual_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#virtual_port_hcl" style="color: inherit; text-decoration: inherit;">virtual_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Virtual port of resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1109,8 +1317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bind the resource ID information.</p>
-</dd><dt class="property-required"
+    <dd>Bind the resource ID information.</dd><dt class="property-required"
             title="Required">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1118,8 +1325,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip of the resource.</p>
-</dd><dt class="property-required"
+    <dd>Ip of the resource.</dd><dt class="property-required"
             title="Required">
         <span id="keepenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepenable_java" style="color: inherit; text-decoration: inherit;">keep<wbr>Enable</a>
@@ -1127,8 +1333,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>session hold switch.</p>
-</dd><dt class="property-required"
+    <dd>session hold switch.</dd><dt class="property-required"
             title="Required">
         <span id="keeptime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keeptime_java" style="color: inherit; text-decoration: inherit;">keeptime</a>
@@ -1136,8 +1341,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The keeptime of the layer 4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The keeptime of the layer 4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="lbtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbtype_java" style="color: inherit; text-decoration: inherit;">lb<wbr>Type</a>
@@ -1145,8 +1349,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-required"
+    <dd>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_java" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1154,8 +1357,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule modification time.</p>
-</dd><dt class="property-required"
+    <dd>Rule modification time.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1163,8 +1365,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1172,8 +1373,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Corresponding regional information.</p>
-</dd><dt class="property-required"
+    <dd>Corresponding regional information.</dd><dt class="property-required"
             title="Required">
         <span id="removeswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removeswitch_java" style="color: inherit; text-decoration: inherit;">remove<wbr>Switch</a>
@@ -1181,8 +1381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Remove the watermark state.</p>
-</dd><dt class="property-required"
+    <dd>Remove the watermark state.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1190,8 +1389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the 4 layer rule.</p>
-</dd><dt class="property-required"
+    <dd>ID of the 4 layer rule.</dd><dt class="property-required"
             title="Required">
         <span id="rulename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulename_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Name</a>
@@ -1199,8 +1397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Name of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelists_java" style="color: inherit; text-decoration: inherit;">source<wbr>Lists</a>
@@ -1208,8 +1405,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getl4rulesv2listsourcelist">List&lt;Get<wbr>L4Rules<wbr>V2List<wbr>Source<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Source list of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Source list of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourceport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceport_java" style="color: inherit; text-decoration: inherit;">source<wbr>Port</a>
@@ -1217,8 +1413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The source port of the layer 4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The source port of the layer 4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcetype_java" style="color: inherit; text-decoration: inherit;">source<wbr>Type</a>
@@ -1226,8 +1421,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd><dt class="property-required"
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-required"
             title="Required">
         <span id="virtualport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#virtualport_java" style="color: inherit; text-decoration: inherit;">virtual<wbr>Port</a>
@@ -1235,8 +1429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Virtual port of resource.</p>
-</dd></dl>
+    <dd>Virtual port of resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1250,8 +1443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bind the resource ID information.</p>
-</dd><dt class="property-required"
+    <dd>Bind the resource ID information.</dd><dt class="property-required"
             title="Required">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1259,8 +1451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of the resource.</p>
-</dd><dt class="property-required"
+    <dd>Ip of the resource.</dd><dt class="property-required"
             title="Required">
         <span id="keepenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepenable_nodejs" style="color: inherit; text-decoration: inherit;">keep<wbr>Enable</a>
@@ -1268,8 +1459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>session hold switch.</p>
-</dd><dt class="property-required"
+    <dd>session hold switch.</dd><dt class="property-required"
             title="Required">
         <span id="keeptime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keeptime_nodejs" style="color: inherit; text-decoration: inherit;">keeptime</a>
@@ -1277,8 +1467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The keeptime of the layer 4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The keeptime of the layer 4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="lbtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbtype_nodejs" style="color: inherit; text-decoration: inherit;">lb<wbr>Type</a>
@@ -1286,8 +1475,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-required"
+    <dd>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_nodejs" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1295,8 +1483,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule modification time.</p>
-</dd><dt class="property-required"
+    <dd>Rule modification time.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1304,8 +1491,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1313,8 +1499,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Corresponding regional information.</p>
-</dd><dt class="property-required"
+    <dd>Corresponding regional information.</dd><dt class="property-required"
             title="Required">
         <span id="removeswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removeswitch_nodejs" style="color: inherit; text-decoration: inherit;">remove<wbr>Switch</a>
@@ -1322,8 +1507,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Remove the watermark state.</p>
-</dd><dt class="property-required"
+    <dd>Remove the watermark state.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1331,8 +1515,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the 4 layer rule.</p>
-</dd><dt class="property-required"
+    <dd>ID of the 4 layer rule.</dd><dt class="property-required"
             title="Required">
         <span id="rulename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulename_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Name</a>
@@ -1340,8 +1523,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Name of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelists_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Lists</a>
@@ -1349,8 +1531,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getl4rulesv2listsourcelist">Get<wbr>L4Rules<wbr>V2List<wbr>Source<wbr>List[]</a></span>
     </dt>
-    <dd><p>Source list of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Source list of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourceport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceport_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Port</a>
@@ -1358,8 +1539,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The source port of the layer 4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The source port of the layer 4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcetype_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Type</a>
@@ -1367,8 +1547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd><dt class="property-required"
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-required"
             title="Required">
         <span id="virtualport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#virtualport_nodejs" style="color: inherit; text-decoration: inherit;">virtual<wbr>Port</a>
@@ -1376,8 +1555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Virtual port of resource.</p>
-</dd></dl>
+    <dd>Virtual port of resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1391,8 +1569,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Bind the resource ID information.</p>
-</dd><dt class="property-required"
+    <dd>Bind the resource ID information.</dd><dt class="property-required"
             title="Required">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1400,8 +1577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ip of the resource.</p>
-</dd><dt class="property-required"
+    <dd>Ip of the resource.</dd><dt class="property-required"
             title="Required">
         <span id="keep_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keep_enable_python" style="color: inherit; text-decoration: inherit;">keep_<wbr>enable</a>
@@ -1409,8 +1585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>session hold switch.</p>
-</dd><dt class="property-required"
+    <dd>session hold switch.</dd><dt class="property-required"
             title="Required">
         <span id="keeptime_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keeptime_python" style="color: inherit; text-decoration: inherit;">keeptime</a>
@@ -1418,8 +1593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The keeptime of the layer 4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The keeptime of the layer 4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="lb_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lb_type_python" style="color: inherit; text-decoration: inherit;">lb_<wbr>type</a>
@@ -1427,8 +1601,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-required"
+    <dd>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-required"
             title="Required">
         <span id="modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_python" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
@@ -1436,8 +1609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule modification time.</p>
-</dd><dt class="property-required"
+    <dd>Rule modification time.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1445,8 +1617,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1454,8 +1625,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Corresponding regional information.</p>
-</dd><dt class="property-required"
+    <dd>Corresponding regional information.</dd><dt class="property-required"
             title="Required">
         <span id="remove_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remove_switch_python" style="color: inherit; text-decoration: inherit;">remove_<wbr>switch</a>
@@ -1463,8 +1633,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Remove the watermark state.</p>
-</dd><dt class="property-required"
+    <dd>Remove the watermark state.</dd><dt class="property-required"
             title="Required">
         <span id="rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
@@ -1472,8 +1641,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the 4 layer rule.</p>
-</dd><dt class="property-required"
+    <dd>ID of the 4 layer rule.</dd><dt class="property-required"
             title="Required">
         <span id="rule_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_name_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>name</a>
@@ -1481,17 +1649,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Name of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="source_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_lists_python" style="color: inherit; text-decoration: inherit;">source_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getl4rulesv2listsourcelist">Get<wbr>L4Rules<wbr>V2List<wbr>Source<wbr>List]</a></span>
+        <span class="property-type"><a href="#getl4rulesv2listsourcelist">Sequence[Get<wbr>L4Rules<wbr>V2List<wbr>Source<wbr>List]</a></span>
     </dt>
-    <dd><p>Source list of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Source list of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="source_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_port_python" style="color: inherit; text-decoration: inherit;">source_<wbr>port</a>
@@ -1499,8 +1665,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The source port of the layer 4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The source port of the layer 4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="source_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_type_python" style="color: inherit; text-decoration: inherit;">source_<wbr>type</a>
@@ -1508,8 +1673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd><dt class="property-required"
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-required"
             title="Required">
         <span id="virtual_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#virtual_port_python" style="color: inherit; text-decoration: inherit;">virtual_<wbr>port</a>
@@ -1517,8 +1681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Virtual port of resource.</p>
-</dd></dl>
+    <dd>Virtual port of resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1532,8 +1695,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bind the resource ID information.</p>
-</dd><dt class="property-required"
+    <dd>Bind the resource ID information.</dd><dt class="property-required"
             title="Required">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1541,8 +1703,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip of the resource.</p>
-</dd><dt class="property-required"
+    <dd>Ip of the resource.</dd><dt class="property-required"
             title="Required">
         <span id="keepenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepenable_yaml" style="color: inherit; text-decoration: inherit;">keep<wbr>Enable</a>
@@ -1550,8 +1711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>session hold switch.</p>
-</dd><dt class="property-required"
+    <dd>session hold switch.</dd><dt class="property-required"
             title="Required">
         <span id="keeptime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keeptime_yaml" style="color: inherit; text-decoration: inherit;">keeptime</a>
@@ -1559,8 +1719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The keeptime of the layer 4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The keeptime of the layer 4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="lbtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbtype_yaml" style="color: inherit; text-decoration: inherit;">lb<wbr>Type</a>
@@ -1568,8 +1727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-required"
+    <dd>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_yaml" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1577,8 +1735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule modification time.</p>
-</dd><dt class="property-required"
+    <dd>Rule modification time.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1586,8 +1743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1595,8 +1751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Corresponding regional information.</p>
-</dd><dt class="property-required"
+    <dd>Corresponding regional information.</dd><dt class="property-required"
             title="Required">
         <span id="removeswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removeswitch_yaml" style="color: inherit; text-decoration: inherit;">remove<wbr>Switch</a>
@@ -1604,8 +1759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Remove the watermark state.</p>
-</dd><dt class="property-required"
+    <dd>Remove the watermark state.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1613,8 +1767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the 4 layer rule.</p>
-</dd><dt class="property-required"
+    <dd>ID of the 4 layer rule.</dd><dt class="property-required"
             title="Required">
         <span id="rulename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulename_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Name</a>
@@ -1622,8 +1775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Name of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelists_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Lists</a>
@@ -1631,8 +1783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getl4rulesv2listsourcelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Source list of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Source list of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourceport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourceport_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Port</a>
@@ -1640,8 +1791,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The source port of the layer 4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The source port of the layer 4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcetype_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Type</a>
@@ -1649,8 +1799,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd><dt class="property-required"
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-required"
             title="Required">
         <span id="virtualport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#virtualport_yaml" style="color: inherit; text-decoration: inherit;">virtual<wbr>Port</a>
@@ -1658,8 +1807,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Virtual port of resource.</p>
-</dd></dl>
+    <dd>Virtual port of resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1677,8 +1825,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Source IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="weight_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_csharp" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -1686,8 +1833,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Weight of the source.</p>
-</dd></dl>
+    <dd>Weight of the source.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1701,8 +1847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Source IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="weight_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_go" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -1710,8 +1855,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Weight of the source.</p>
-</dd></dl>
+    <dd>Weight of the source.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="source_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_hcl" style="color: inherit; text-decoration: inherit;">source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Source IP or domain.</dd><dt class="property-required"
+            title="Required">
+        <span id="weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_hcl" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Weight of the source.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1725,8 +1891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Source IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Source IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="weight_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_java" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1734,8 +1899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Weight of the source.</p>
-</dd></dl>
+    <dd>Weight of the source.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1749,8 +1913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Source IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="weight_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_nodejs" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1758,8 +1921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Weight of the source.</p>
-</dd></dl>
+    <dd>Weight of the source.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1773,8 +1935,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Source IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Source IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="weight_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_python" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1782,8 +1943,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Weight of the source.</p>
-</dd></dl>
+    <dd>Weight of the source.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1797,8 +1957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Source IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Source IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="weight_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_yaml" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1806,8 +1965,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Weight of the source.</p>
-</dd></dl>
+    <dd>Weight of the source.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1822,7 +1980,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

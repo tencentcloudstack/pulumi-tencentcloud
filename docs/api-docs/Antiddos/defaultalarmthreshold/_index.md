@@ -2,9 +2,11 @@
 ---
 title: "DefaultAlarmThreshold"
 title_tag: "tencentcloud.Antiddos.DefaultAlarmThreshold"
-meta_desc: "Documentation for the tencentcloud.Antiddos.DefaultAlarmThreshold resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a antiddos default alarm threshold"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,64 +18,59 @@ Provides a resource to create a antiddos default alarm threshold
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const defaultAlarmThreshold = new tencentcloud.antiddos.DefaultAlarmThreshold("defaultAlarmThreshold", {
+const defaultAlarmThreshold = new tencentcloud.antiddos.DefaultAlarmThreshold("default_alarm_threshold", {
     defaultAlarmConfig: {
-        alarmThreshold: 2000,
         alarmType: 1,
+        alarmThreshold: 2000,
     },
     instanceType: "bgp",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-default_alarm_threshold = tencentcloud.antiddos.DefaultAlarmThreshold("defaultAlarmThreshold",
-    default_alarm_config=tencentcloud.antiddos.DefaultAlarmThresholdDefaultAlarmConfigArgs(
-        alarm_threshold=2000,
-        alarm_type=1,
-    ),
+default_alarm_threshold = tencentcloud.antiddos.DefaultAlarmThreshold("default_alarm_threshold",
+    default_alarm_config={
+        "alarm_type": 1,
+        "alarm_threshold": 2000,
+    },
     instance_type="bgp")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var defaultAlarmThreshold = new Tencentcloud.Antiddos.DefaultAlarmThreshold("defaultAlarmThreshold", new()
-    {
-        DefaultAlarmConfig = new Tencentcloud.Antiddos.Inputs.DefaultAlarmThresholdDefaultAlarmConfigArgs
-        {
-            AlarmThreshold = 2000,
-            AlarmType = 1,
-        },
-        InstanceType = "bgp",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/antiddos"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Antiddos.NewDefaultAlarmThreshold(ctx, "defaultAlarmThreshold", &Antiddos.DefaultAlarmThresholdArgs{
+		_, err := antiddos.NewDefaultAlarmThreshold(ctx, "default_alarm_threshold", &antiddos.DefaultAlarmThresholdArgs{
 			DefaultAlarmConfig: &antiddos.DefaultAlarmThresholdDefaultAlarmConfigArgs{
-				AlarmThreshold: pulumi.Int(2000),
 				AlarmType:      pulumi.Int(1),
+				AlarmThreshold: pulumi.Int(2000),
 			},
 			InstanceType: pulumi.String("bgp"),
 		})
@@ -84,6 +81,36 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var defaultAlarmThreshold = new Tencentcloud.Antiddos.DefaultAlarmThreshold("default_alarm_threshold", new()
+    {
+        DefaultAlarmConfig = new Tencentcloud.Antiddos.Inputs.DefaultAlarmThresholdDefaultAlarmConfigArgs
+        {
+            AlarmType = 1,
+            AlarmThreshold = 2000,
+        },
+        InstanceType = "bgp",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -93,8 +120,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Antiddos.DefaultAlarmThreshold;
 import com.pulumi.tencentcloud.Antiddos.DefaultAlarmThresholdArgs;
 import com.pulumi.tencentcloud.Antiddos.inputs.DefaultAlarmThresholdDefaultAlarmConfigArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -106,10 +133,10 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var defaultAlarmThreshold = new DefaultAlarmThreshold("defaultAlarmThreshold", DefaultAlarmThresholdArgs.builder()        
+        var defaultAlarmThreshold = new DefaultAlarmThreshold("defaultAlarmThreshold", DefaultAlarmThresholdArgs.builder()
             .defaultAlarmConfig(DefaultAlarmThresholdDefaultAlarmConfigArgs.builder()
-                .alarmThreshold(2000)
                 .alarmType(1)
+                .alarmThreshold(2000)
                 .build())
             .instanceType("bgp")
             .build());
@@ -117,76 +144,128 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   defaultAlarmThreshold:
     type: tencentcloud:Antiddos:DefaultAlarmThreshold
+    name: default_alarm_threshold
     properties:
       defaultAlarmConfig:
-        alarmThreshold: 2000
         alarmType: 1
+        alarmThreshold: 2000
       instanceType: bgp
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_antiddos_defaultalarmthreshold" "default_alarm_threshold" {
+  default_alarm_config = {
+    alarm_type      = 1
+    alarm_threshold = 2000
+  }
+  instance_type = "bgp"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateDefaultAlarmThreshold](https://www.tencentcloud.com/document/api/1213/61414)
+* Read: [DescribeDefaultAlarmThreshold](https://www.tencentcloud.com/document/api/1213/61412)
+* Update: [CreateDefaultAlarmThreshold](https://www.tencentcloud.com/document/api/1213/61414)
 
 
 ## Create DefaultAlarmThreshold Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">DefaultAlarmThreshold</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DefaultAlarmThresholdArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">DefaultAlarmThreshold</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DefaultAlarmThresholdArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">DefaultAlarmThreshold</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                          <span class="nx">default_alarm_config</span><span class="p">:</span> <span class="nx">Optional[_antiddos.DefaultAlarmThresholdDefaultAlarmConfigArgs]</span> = None<span class="p">,</span>
-                          <span class="nx">instance_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">DefaultAlarmThreshold</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DefaultAlarmThresholdArgs</a></span><span class="p">,</span>
-                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">DefaultAlarmThreshold</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                          <span class="nx">default_alarm_config</span><span class="p">:</span> <span class="nx">Optional[DefaultAlarmThresholdDefaultAlarmConfigArgs]</span> = None<span class="p">,</span>
+                          <span class="nx">instance_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDefaultAlarmThreshold</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DefaultAlarmThresholdArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DefaultAlarmThreshold</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDefaultAlarmThreshold</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DefaultAlarmThresholdArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DefaultAlarmThreshold</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">DefaultAlarmThreshold</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DefaultAlarmThresholdArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">DefaultAlarmThreshold</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DefaultAlarmThresholdArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">DefaultAlarmThreshold</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DefaultAlarmThresholdArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">DefaultAlarmThreshold</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DefaultAlarmThresholdArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Antiddos:DefaultAlarmThreshold</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Antiddos:DefaultAlarmThreshold</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_antiddos_default_alarm_threshold&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -207,7 +286,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -324,11 +403,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## DefaultAlarmThreshold Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The DefaultAlarmThreshold resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -342,10 +429,9 @@ The DefaultAlarmThreshold resource accepts the following [input](/docs/intro/con
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultalarmconfig_csharp" style="color: inherit; text-decoration: inherit;">Default<wbr>Alarm<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config</a></span>
     </dt>
-    <dd><p>Alarm threshold configuration.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Alarm threshold configuration.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -353,8 +439,7 @@ The DefaultAlarmThreshold resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</p>
-</dd></dl>
+    <dd>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -368,8 +453,7 @@ The DefaultAlarmThreshold resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Alarm threshold configuration.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Alarm threshold configuration.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -377,8 +461,29 @@ The DefaultAlarmThreshold resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</p>
-</dd></dl>
+    <dd>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="default_alarm_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_alarm_config_hcl" style="color: inherit; text-decoration: inherit;">default_<wbr>alarm_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">object</a></span>
+    </dt>
+    <dd>Alarm threshold configuration.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -390,10 +495,9 @@ The DefaultAlarmThreshold resource accepts the following [input](/docs/intro/con
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultalarmconfig_java" style="color: inherit; text-decoration: inherit;">default<wbr>Alarm<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config</a></span>
     </dt>
-    <dd><p>Alarm threshold configuration.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Alarm threshold configuration.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -401,8 +505,7 @@ The DefaultAlarmThreshold resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</p>
-</dd></dl>
+    <dd>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -414,10 +517,9 @@ The DefaultAlarmThreshold resource accepts the following [input](/docs/intro/con
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultalarmconfig_nodejs" style="color: inherit; text-decoration: inherit;">default<wbr>Alarm<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config</a></span>
     </dt>
-    <dd><p>Alarm threshold configuration.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Alarm threshold configuration.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -425,8 +527,7 @@ The DefaultAlarmThreshold resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</p>
-</dd></dl>
+    <dd>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -440,8 +541,7 @@ The DefaultAlarmThreshold resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Alarm threshold configuration.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Alarm threshold configuration.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -449,8 +549,7 @@ The DefaultAlarmThreshold resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</p>
-</dd></dl>
+    <dd>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -464,8 +563,7 @@ The DefaultAlarmThreshold resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">Property Map</a></span>
     </dt>
-    <dd><p>Alarm threshold configuration.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Alarm threshold configuration.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -473,8 +571,7 @@ The DefaultAlarmThreshold resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</p>
-</dd></dl>
+    <dd>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -495,8 +592,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -510,8 +606,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -525,8 +634,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -540,8 +648,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -555,8 +662,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -570,8 +676,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -581,121 +686,160 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing DefaultAlarmThreshold resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DefaultAlarmThresholdState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">DefaultAlarmThreshold</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DefaultAlarmThresholdState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">DefaultAlarmThreshold</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">default_alarm_config</span><span class="p">:</span> <span class="nx">Optional[_antiddos.DefaultAlarmThresholdDefaultAlarmConfigArgs]</span> = None<span class="p">,</span>
+        <span class="nx">default_alarm_config</span><span class="p">:</span> <span class="nx">Optional[DefaultAlarmThresholdDefaultAlarmConfigArgs]</span> = None<span class="p">,</span>
         <span class="nx">instance_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> DefaultAlarmThreshold</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDefaultAlarmThreshold<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DefaultAlarmThresholdState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DefaultAlarmThreshold</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDefaultAlarmThreshold<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DefaultAlarmThresholdState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DefaultAlarmThreshold</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">DefaultAlarmThreshold</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DefaultAlarmThresholdState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">DefaultAlarmThreshold</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DefaultAlarmThresholdState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">DefaultAlarmThreshold</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DefaultAlarmThresholdState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">DefaultAlarmThreshold</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DefaultAlarmThresholdState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingDefaultAlarmThreshold</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Antiddos:DefaultAlarmThreshold</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_antiddos_default_alarm_threshold</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DefaultAlarmThresholdState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DefaultAlarmThresholdState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -703,28 +847,31 @@ Get an existing DefaultAlarmThreshold resource's state with the given name, ID, 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DefaultAlarmThresholdState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -732,28 +879,31 @@ Get an existing DefaultAlarmThreshold resource's state with the given name, ID, 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DefaultAlarmThresholdState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -771,10 +921,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultalarmconfig_csharp" style="color: inherit; text-decoration: inherit;">Default<wbr>Alarm<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Antiddos.<wbr>Inputs.<wbr>Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config</a></span>
     </dt>
-    <dd><p>Alarm threshold configuration.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Alarm threshold configuration.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -782,8 +931,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</p>
-</dd></dl>
+    <dd>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -797,8 +945,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Alarm threshold configuration.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Alarm threshold configuration.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -806,8 +953,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</p>
-</dd></dl>
+    <dd>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_default_alarm_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_default_alarm_config_hcl" style="color: inherit; text-decoration: inherit;">default_<wbr>alarm_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">object</a></span>
+    </dt>
+    <dd>Alarm threshold configuration.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -819,10 +987,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultalarmconfig_java" style="color: inherit; text-decoration: inherit;">default<wbr>Alarm<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config</a></span>
     </dt>
-    <dd><p>Alarm threshold configuration.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Alarm threshold configuration.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -830,8 +997,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</p>
-</dd></dl>
+    <dd>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -843,10 +1009,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultalarmconfig_nodejs" style="color: inherit; text-decoration: inherit;">default<wbr>Alarm<wbr>Config</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config<wbr>Args</a></span>
+        <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config</a></span>
     </dt>
-    <dd><p>Alarm threshold configuration.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Alarm threshold configuration.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -854,8 +1019,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</p>
-</dd></dl>
+    <dd>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -869,8 +1033,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Alarm threshold configuration.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Alarm threshold configuration.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -878,8 +1041,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</p>
-</dd></dl>
+    <dd>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -893,8 +1055,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#defaultalarmthresholddefaultalarmconfig">Property Map</a></span>
     </dt>
-    <dd><p>Alarm threshold configuration.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Alarm threshold configuration.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -902,8 +1063,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</p>
-</dd></dl>
+    <dd>Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -918,7 +1078,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="defaultalarmthresholddefaultalarmconfig">Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config</h4>
+<h4 id="defaultalarmthresholddefaultalarmconfig">
+Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Default<wbr>Alarm<wbr>Threshold<wbr>Default<wbr>Alarm<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -930,8 +1092,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm threshold, in Mbps, with a value of&gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm threshold, in Mbps, with a value of&gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.</dd><dt class="property-optional"
             title="Optional">
         <span id="alarmtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmtype_csharp" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Type</a>
@@ -939,8 +1100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm threshold type, value [1 (incoming traffic alarm threshold) 2 (attack cleaning traffic alarm threshold)].</p>
-</dd></dl>
+    <dd>Alarm threshold type, value [1 (incoming traffic alarm threshold) 2 (attack cleaning traffic alarm threshold)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -954,8 +1114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm threshold, in Mbps, with a value of&gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm threshold, in Mbps, with a value of&gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.</dd><dt class="property-optional"
             title="Optional">
         <span id="alarmtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmtype_go" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Type</a>
@@ -963,8 +1122,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm threshold type, value [1 (incoming traffic alarm threshold) 2 (attack cleaning traffic alarm threshold)].</p>
-</dd></dl>
+    <dd>Alarm threshold type, value [1 (incoming traffic alarm threshold) 2 (attack cleaning traffic alarm threshold)].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="alarm_threshold_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_threshold_hcl" style="color: inherit; text-decoration: inherit;">alarm_<wbr>threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm threshold, in Mbps, with a value of&gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alarm_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_type_hcl" style="color: inherit; text-decoration: inherit;">alarm_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm threshold type, value [1 (incoming traffic alarm threshold) 2 (attack cleaning traffic alarm threshold)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -978,8 +1158,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Alarm threshold, in Mbps, with a value of&gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm threshold, in Mbps, with a value of&gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.</dd><dt class="property-optional"
             title="Optional">
         <span id="alarmtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmtype_java" style="color: inherit; text-decoration: inherit;">alarm<wbr>Type</a>
@@ -987,8 +1166,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Alarm threshold type, value [1 (incoming traffic alarm threshold) 2 (attack cleaning traffic alarm threshold)].</p>
-</dd></dl>
+    <dd>Alarm threshold type, value [1 (incoming traffic alarm threshold) 2 (attack cleaning traffic alarm threshold)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1002,8 +1180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Alarm threshold, in Mbps, with a value of&gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm threshold, in Mbps, with a value of&gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.</dd><dt class="property-optional"
             title="Optional">
         <span id="alarmtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmtype_nodejs" style="color: inherit; text-decoration: inherit;">alarm<wbr>Type</a>
@@ -1011,8 +1188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Alarm threshold type, value [1 (incoming traffic alarm threshold) 2 (attack cleaning traffic alarm threshold)].</p>
-</dd></dl>
+    <dd>Alarm threshold type, value [1 (incoming traffic alarm threshold) 2 (attack cleaning traffic alarm threshold)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1026,8 +1202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm threshold, in Mbps, with a value of&gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm threshold, in Mbps, with a value of&gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.</dd><dt class="property-optional"
             title="Optional">
         <span id="alarm_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_type_python" style="color: inherit; text-decoration: inherit;">alarm_<wbr>type</a>
@@ -1035,8 +1210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm threshold type, value [1 (incoming traffic alarm threshold) 2 (attack cleaning traffic alarm threshold)].</p>
-</dd></dl>
+    <dd>Alarm threshold type, value [1 (incoming traffic alarm threshold) 2 (attack cleaning traffic alarm threshold)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1050,8 +1224,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Alarm threshold, in Mbps, with a value of&gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm threshold, in Mbps, with a value of&gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.</dd><dt class="property-optional"
             title="Optional">
         <span id="alarmtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmtype_yaml" style="color: inherit; text-decoration: inherit;">alarm<wbr>Type</a>
@@ -1059,8 +1232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Alarm threshold type, value [1 (incoming traffic alarm threshold) 2 (attack cleaning traffic alarm threshold)].</p>
-</dd></dl>
+    <dd>Alarm threshold type, value [1 (incoming traffic alarm threshold) 2 (attack cleaning traffic alarm threshold)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1068,12 +1240,15 @@ The following state arguments are supported:
 
 
 
-antiddos default_alarm_threshold can be imported using the id, e.g.
+antiddos defaultAlarmThreshold can be imported using the id, e.g.
 
 ```sh
 $ pulumi import tencentcloud:Antiddos/defaultAlarmThreshold:DefaultAlarmThreshold default_alarm_threshold ${instanceType}
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1085,7 +1260,6 @@ $ pulumi import tencentcloud:Antiddos/defaultAlarmThreshold:DefaultAlarmThreshol
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

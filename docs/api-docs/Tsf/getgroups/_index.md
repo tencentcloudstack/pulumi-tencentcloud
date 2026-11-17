@@ -2,9 +2,11 @@
 ---
 title: "getGroups"
 title_tag: "tencentcloud.Tsf.getGroups"
-meta_desc: "Documentation for the tencentcloud.Tsf.getGroups function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of tsf groups"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,90 +18,76 @@ Use this data source to query detailed information of tsf groups
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const groups = tencentcloud.Tsf.getGroups({
+const groups = tencentcloud.tsf.getGroups({
+    searchWord: "keep",
     applicationId: "application-a24x29xv",
-    clusterId: "cluster-vwgj5e6y",
-    groupIdLists: ["group-yrjkln9v"],
-    groupResourceTypeLists: ["DEF"],
-    namespaceId: "namespace-aemrg36v",
     orderBy: "createTime",
     orderType: 0,
-    searchWord: "keep",
+    namespaceId: "namespace-aemrg36v",
+    clusterId: "cluster-vwgj5e6y",
+    groupResourceTypeLists: ["DEF"],
     status: "Running",
+    groupIdLists: ["group-yrjkln9v"],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-groups = tencentcloud.Tsf.get_groups(application_id="application-a24x29xv",
-    cluster_id="cluster-vwgj5e6y",
-    group_id_lists=["group-yrjkln9v"],
-    group_resource_type_lists=["DEF"],
-    namespace_id="namespace-aemrg36v",
+groups = tencentcloud.tsf.get_groups(search_word="keep",
+    application_id="application-a24x29xv",
     order_by="createTime",
     order_type=0,
-    search_word="keep",
-    status="Running")
+    namespace_id="namespace-aemrg36v",
+    cluster_id="cluster-vwgj5e6y",
+    group_resource_type_lists=["DEF"],
+    status="Running",
+    group_id_lists=["group-yrjkln9v"])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var groups = Tencentcloud.Tsf.GetGroups.Invoke(new()
-    {
-        ApplicationId = "application-a24x29xv",
-        ClusterId = "cluster-vwgj5e6y",
-        GroupIdLists = new[]
-        {
-            "group-yrjkln9v",
-        },
-        GroupResourceTypeLists = new[]
-        {
-            "DEF",
-        },
-        NamespaceId = "namespace-aemrg36v",
-        OrderBy = "createTime",
-        OrderType = 0,
-        SearchWord = "keep",
-        Status = "Running",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tsf"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tsf.GetGroups(ctx, &tsf.GetGroupsArgs{
+		_, err := tsf.GetGroups(ctx, &tsf.GetGroupsArgs{
+			SearchWord:    pulumi.StringRef("keep"),
 			ApplicationId: pulumi.StringRef("application-a24x29xv"),
+			OrderBy:       pulumi.StringRef("createTime"),
+			OrderType:     pulumi.IntRef(0),
+			NamespaceId:   pulumi.StringRef("namespace-aemrg36v"),
 			ClusterId:     pulumi.StringRef("cluster-vwgj5e6y"),
-			GroupIdLists: []string{
-				"group-yrjkln9v",
-			},
 			GroupResourceTypeLists: []string{
 				"DEF",
 			},
-			NamespaceId: pulumi.StringRef("namespace-aemrg36v"),
-			OrderBy:     pulumi.StringRef("createTime"),
-			OrderType:   pulumi.IntRef(0),
-			SearchWord:  pulumi.StringRef("keep"),
-			Status:      pulumi.StringRef("Running"),
+			Status: pulumi.StringRef("Running"),
+			GroupIdLists: []string{
+				"group-yrjkln9v",
+			},
 		}, nil)
 		if err != nil {
 			return err
@@ -108,6 +96,45 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var groups = Tencentcloud.Tsf.GetGroups.Invoke(new()
+    {
+        SearchWord = "keep",
+        ApplicationId = "application-a24x29xv",
+        OrderBy = "createTime",
+        OrderType = 0,
+        NamespaceId = "namespace-aemrg36v",
+        ClusterId = "cluster-vwgj5e6y",
+        GroupResourceTypeLists = new[]
+        {
+            "DEF",
+        },
+        Status = "Running",
+        GroupIdLists = new[]
+        {
+            "group-yrjkln9v",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -116,8 +143,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tsf.TsfFunctions;
 import com.pulumi.tencentcloud.Tsf.inputs.GetGroupsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -130,40 +157,78 @@ public class App {
 
     public static void stack(Context ctx) {
         final var groups = TsfFunctions.getGroups(GetGroupsArgs.builder()
+            .searchWord("keep")
             .applicationId("application-a24x29xv")
-            .clusterId("cluster-vwgj5e6y")
-            .groupIdLists("group-yrjkln9v")
-            .groupResourceTypeLists("DEF")
-            .namespaceId("namespace-aemrg36v")
             .orderBy("createTime")
             .orderType(0)
-            .searchWord("keep")
+            .namespaceId("namespace-aemrg36v")
+            .clusterId("cluster-vwgj5e6y")
+            .groupResourceTypeLists("DEF")
             .status("Running")
+            .groupIdLists("group-yrjkln9v")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   groups:
     fn::invoke:
-      Function: tencentcloud:Tsf:getGroups
-      Arguments:
+      function: tencentcloud:Tsf:getGroups
+      arguments:
+        searchWord: keep
         applicationId: application-a24x29xv
-        clusterId: cluster-vwgj5e6y
-        groupIdLists:
-          - group-yrjkln9v
-        groupResourceTypeLists:
-          - DEF
-        namespaceId: namespace-aemrg36v
         orderBy: createTime
         orderType: 0
-        searchWord: keep
+        namespaceId: namespace-aemrg36v
+        clusterId: cluster-vwgj5e6y
+        groupResourceTypeLists:
+          - DEF
         status: Running
+        groupIdLists:
+          - group-yrjkln9v
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_tsf_getgroups" "groups" {
+  search_word               = "keep"
+  application_id            = "application-a24x29xv"
+  order_by                  = "createTime"
+  order_type                = 0
+  namespace_id              = "namespace-aemrg36v"
+  cluster_id                = "cluster-vwgj5e6y"
+  group_resource_type_lists = ["DEF"]
+  status                    = "Running"
+  group_id_lists            = ["group-yrjkln9v"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeGroups](https://www.tencentcloud.com/search/?wd=DescribeGroups&type=document&lang=en)
 
 
 
@@ -175,7 +240,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -183,9 +248,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getGroups<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGroupsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>></span
+><span class="k">function </span>getGroups<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGroupsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>></span
 ><span class="k">
-function </span>getGroupsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGroupsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>></span
+function </span>getGroupsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGroupsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -206,17 +271,17 @@ function </span>getGroupsOutput<span class="p">(</span><span class="nx">args</sp
                <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetGroupsResult</span
 ><span class="k">
-def </span>get_groups_output<span class="p">(</span><span class="nx">application_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">group_id_lists</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-               <span class="nx">group_resource_type_lists</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-               <span class="nx">namespace_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">order_by</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">order_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">search_word</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetGroupsResult]</span
+def </span>get_groups_output<span class="p">(</span><span class="nx">application_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">group_id_lists</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+               <span class="nx">group_resource_type_lists</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+               <span class="nx">namespace_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">order_by</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">order_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">search_word</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">status</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetGroupsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -225,12 +290,12 @@ def </span>get_groups_output<span class="p">(</span><span class="nx">application
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetGroups<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetGroupsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetGroupsResult</a></span>, error)</span
+><span class="k">func </span>LookupGroups<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupGroupsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupGroupsResult</a></span>, error)</span
 ><span class="k">
-func </span>GetGroupsOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetGroupsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetGroupsResultOutput</span
+func </span>LookupGroupsOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupGroupsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupGroupsResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetGroups` in the Go SDK.
+&gt; Note: This function is named `LookupGroups` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -241,7 +306,8 @@ func </span>GetGroupsOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetGroups </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -250,7 +316,8 @@ func </span>GetGroupsOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>> </span>getGroups<span class="p">(</span><span class="nx">GetGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>> </span>getGroups<span class="p">(</span><span class="nx">GetGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>> </span>getGroups<span class="p">(</span><span class="nx">GetGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -262,6 +329,15 @@ func </span>GetGroupsOutput<span class="p">(</span><span class="nx">ctx</span><s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tsf/getGroups:getGroups
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tsf_get_groups&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -280,8 +356,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>applicationId.</p>
-</dd><dt class="property-optional"
+    <dd>applicationId.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -289,8 +364,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>clusterId.</p>
-</dd><dt class="property-optional"
+    <dd>clusterId.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupidlists_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id<wbr>Lists</a>
@@ -298,8 +372,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>group Id list.</p>
-</dd><dt class="property-optional"
+    <dd>group Id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupresourcetypelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupresourcetypelists_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Resource<wbr>Type<wbr>Lists</a>
@@ -307,8 +380,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Group resourceType list.</p>
-</dd><dt class="property-optional"
+    <dd>Group resourceType list.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Id</a>
@@ -316,8 +388,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace Id.</p>
-</dd><dt class="property-optional"
+    <dd>namespace Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>By</a>
@@ -325,8 +396,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sort term.</p>
-</dd><dt class="property-optional"
+    <dd>sort term.</dd><dt class="property-optional"
             title="Optional">
         <span id="ordertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>Type</a>
@@ -334,8 +404,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>order type, 0 desc, 1 asc.</p>
-</dd><dt class="property-optional"
+    <dd>order type, 0 desc, 1 asc.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -343,8 +412,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_csharp" style="color: inherit; text-decoration: inherit;">Search<wbr>Word</a>
@@ -352,8 +420,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>searchWord, support groupName.</p>
-</dd><dt class="property-optional"
+    <dd>searchWord, support groupName.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -361,8 +428,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>group status filter, <code>Running</code>: running, <code>Unknown</code>: unknown.</p>
-</dd></dl>
+    <dd>group status filter, <code>Running</code>: running, <code>Unknown</code>: unknown.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -376,8 +442,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>applicationId.</p>
-</dd><dt class="property-optional"
+    <dd>applicationId.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -385,8 +450,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>clusterId.</p>
-</dd><dt class="property-optional"
+    <dd>clusterId.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupidlists_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id<wbr>Lists</a>
@@ -394,8 +458,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>group Id list.</p>
-</dd><dt class="property-optional"
+    <dd>group Id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupresourcetypelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupresourcetypelists_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Resource<wbr>Type<wbr>Lists</a>
@@ -403,8 +466,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Group resourceType list.</p>
-</dd><dt class="property-optional"
+    <dd>Group resourceType list.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Id</a>
@@ -412,8 +474,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace Id.</p>
-</dd><dt class="property-optional"
+    <dd>namespace Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_go" style="color: inherit; text-decoration: inherit;">Order<wbr>By</a>
@@ -421,8 +482,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sort term.</p>
-</dd><dt class="property-optional"
+    <dd>sort term.</dd><dt class="property-optional"
             title="Optional">
         <span id="ordertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_go" style="color: inherit; text-decoration: inherit;">Order<wbr>Type</a>
@@ -430,8 +490,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>order type, 0 desc, 1 asc.</p>
-</dd><dt class="property-optional"
+    <dd>order type, 0 desc, 1 asc.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -439,8 +498,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_go" style="color: inherit; text-decoration: inherit;">Search<wbr>Word</a>
@@ -448,8 +506,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>searchWord, support groupName.</p>
-</dd><dt class="property-optional"
+    <dd>searchWord, support groupName.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -457,8 +514,93 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>group status filter, <code>Running</code>: running, <code>Unknown</code>: unknown.</p>
-</dd></dl>
+    <dd>group status filter, <code>Running</code>: running, <code>Unknown</code>: unknown.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="application_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_id_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>applicationId.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>clusterId.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="group_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_lists_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>group Id list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="group_resource_type_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_resource_type_lists_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>resource_<wbr>type_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Group resourceType list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="namespace_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_id_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace Id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_by_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>sort term.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_type_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>order type, 0 desc, 1 asc.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="search_word_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_word_hcl" style="color: inherit; text-decoration: inherit;">search_<wbr>word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>searchWord, support groupName.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>group status filter, <code>Running</code>: running, <code>Unknown</code>: unknown.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -472,8 +614,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>applicationId.</p>
-</dd><dt class="property-optional"
+    <dd>applicationId.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -481,8 +622,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>clusterId.</p>
-</dd><dt class="property-optional"
+    <dd>clusterId.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupidlists_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id<wbr>Lists</a>
@@ -490,8 +630,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>group Id list.</p>
-</dd><dt class="property-optional"
+    <dd>group Id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupresourcetypelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupresourcetypelists_java" style="color: inherit; text-decoration: inherit;">group<wbr>Resource<wbr>Type<wbr>Lists</a>
@@ -499,8 +638,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Group resourceType list.</p>
-</dd><dt class="property-optional"
+    <dd>Group resourceType list.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -508,8 +646,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace Id.</p>
-</dd><dt class="property-optional"
+    <dd>namespace Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_java" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -517,8 +654,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>sort term.</p>
-</dd><dt class="property-optional"
+    <dd>sort term.</dd><dt class="property-optional"
             title="Optional">
         <span id="ordertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_java" style="color: inherit; text-decoration: inherit;">order<wbr>Type</a>
@@ -526,8 +662,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>order type, 0 desc, 1 asc.</p>
-</dd><dt class="property-optional"
+    <dd>order type, 0 desc, 1 asc.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -535,8 +670,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_java" style="color: inherit; text-decoration: inherit;">search<wbr>Word</a>
@@ -544,8 +678,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>searchWord, support groupName.</p>
-</dd><dt class="property-optional"
+    <dd>searchWord, support groupName.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -553,8 +686,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>group status filter, <code>Running</code>: running, <code>Unknown</code>: unknown.</p>
-</dd></dl>
+    <dd>group status filter, <code>Running</code>: running, <code>Unknown</code>: unknown.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -568,8 +700,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>applicationId.</p>
-</dd><dt class="property-optional"
+    <dd>applicationId.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -577,8 +708,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>clusterId.</p>
-</dd><dt class="property-optional"
+    <dd>clusterId.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupidlists_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id<wbr>Lists</a>
@@ -586,8 +716,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>group Id list.</p>
-</dd><dt class="property-optional"
+    <dd>group Id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupresourcetypelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupresourcetypelists_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Resource<wbr>Type<wbr>Lists</a>
@@ -595,8 +724,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Group resourceType list.</p>
-</dd><dt class="property-optional"
+    <dd>Group resourceType list.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -604,8 +732,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace Id.</p>
-</dd><dt class="property-optional"
+    <dd>namespace Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -613,8 +740,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sort term.</p>
-</dd><dt class="property-optional"
+    <dd>sort term.</dd><dt class="property-optional"
             title="Optional">
         <span id="ordertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>Type</a>
@@ -622,8 +748,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>order type, 0 desc, 1 asc.</p>
-</dd><dt class="property-optional"
+    <dd>order type, 0 desc, 1 asc.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -631,8 +756,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_nodejs" style="color: inherit; text-decoration: inherit;">search<wbr>Word</a>
@@ -640,8 +764,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>searchWord, support groupName.</p>
-</dd><dt class="property-optional"
+    <dd>searchWord, support groupName.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -649,8 +772,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>group status filter, <code>Running</code>: running, <code>Unknown</code>: unknown.</p>
-</dd></dl>
+    <dd>group status filter, <code>Running</code>: running, <code>Unknown</code>: unknown.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -664,8 +786,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>applicationId.</p>
-</dd><dt class="property-optional"
+    <dd>applicationId.</dd><dt class="property-optional"
             title="Optional">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -673,8 +794,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>clusterId.</p>
-</dd><dt class="property-optional"
+    <dd>clusterId.</dd><dt class="property-optional"
             title="Optional">
         <span id="group_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_lists_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id_<wbr>lists</a>
@@ -682,8 +802,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>group Id list.</p>
-</dd><dt class="property-optional"
+    <dd>group Id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="group_resource_type_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_resource_type_lists_python" style="color: inherit; text-decoration: inherit;">group_<wbr>resource_<wbr>type_<wbr>lists</a>
@@ -691,8 +810,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Group resourceType list.</p>
-</dd><dt class="property-optional"
+    <dd>Group resourceType list.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_id_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id</a>
@@ -700,8 +818,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace Id.</p>
-</dd><dt class="property-optional"
+    <dd>namespace Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_by_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_python" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
@@ -709,8 +826,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>sort term.</p>
-</dd><dt class="property-optional"
+    <dd>sort term.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_type_python" style="color: inherit; text-decoration: inherit;">order_<wbr>type</a>
@@ -718,8 +834,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>order type, 0 desc, 1 asc.</p>
-</dd><dt class="property-optional"
+    <dd>order type, 0 desc, 1 asc.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -727,8 +842,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="search_word_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_word_python" style="color: inherit; text-decoration: inherit;">search_<wbr>word</a>
@@ -736,8 +850,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>searchWord, support groupName.</p>
-</dd><dt class="property-optional"
+    <dd>searchWord, support groupName.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -745,8 +858,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>group status filter, <code>Running</code>: running, <code>Unknown</code>: unknown.</p>
-</dd></dl>
+    <dd>group status filter, <code>Running</code>: running, <code>Unknown</code>: unknown.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -760,8 +872,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>applicationId.</p>
-</dd><dt class="property-optional"
+    <dd>applicationId.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -769,8 +880,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>clusterId.</p>
-</dd><dt class="property-optional"
+    <dd>clusterId.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupidlists_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id<wbr>Lists</a>
@@ -778,8 +888,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>group Id list.</p>
-</dd><dt class="property-optional"
+    <dd>group Id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupresourcetypelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupresourcetypelists_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Resource<wbr>Type<wbr>Lists</a>
@@ -787,8 +896,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Group resourceType list.</p>
-</dd><dt class="property-optional"
+    <dd>Group resourceType list.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespaceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -796,8 +904,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace Id.</p>
-</dd><dt class="property-optional"
+    <dd>namespace Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -805,8 +912,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>sort term.</p>
-</dd><dt class="property-optional"
+    <dd>sort term.</dd><dt class="property-optional"
             title="Optional">
         <span id="ordertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ordertype_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>Type</a>
@@ -814,8 +920,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>order type, 0 desc, 1 asc.</p>
-</dd><dt class="property-optional"
+    <dd>order type, 0 desc, 1 asc.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -823,8 +928,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="searchword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#searchword_yaml" style="color: inherit; text-decoration: inherit;">search<wbr>Word</a>
@@ -832,8 +936,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>searchWord, support groupName.</p>
-</dd><dt class="property-optional"
+    <dd>searchWord, support groupName.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -841,8 +944,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>group status filter, <code>Running</code>: running, <code>Unknown</code>: unknown.</p>
-</dd></dl>
+    <dd>group status filter, <code>Running</code>: running, <code>Unknown</code>: unknown.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -865,8 +967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_csharp" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -874,8 +975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupsresult">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Outputs.<wbr>Get<wbr>Groups<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>Pagination information of the virtual machine deployment group.Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Pagination information of the virtual machine deployment group.Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="applicationid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Id</a>
@@ -883,8 +983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Application ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -892,8 +991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Cluster ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="groupidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupidlists_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id<wbr>Lists</a>
@@ -917,8 +1015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Namespace ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="orderby_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>By</a>
@@ -972,8 +1069,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_go" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -981,8 +1077,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupsresult">[]Get<wbr>Groups<wbr>Result</a></span>
     </dt>
-    <dd><p>Pagination information of the virtual machine deployment group.Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Pagination information of the virtual machine deployment group.Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="applicationid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Id</a>
@@ -990,8 +1085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Application ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -999,8 +1093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Cluster ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="groupidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupidlists_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id<wbr>Lists</a>
@@ -1024,8 +1117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Namespace ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="orderby_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_go" style="color: inherit; text-decoration: inherit;">Order<wbr>By</a>
@@ -1070,6 +1162,108 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="results_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_hcl" style="color: inherit; text-decoration: inherit;">results</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getgroupsresult">list(object)</a></span>
+    </dt>
+    <dd>Pagination information of the virtual machine deployment group.Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
+            title="">
+        <span id="application_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_id_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
+            title="">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
+            title="">
+        <span id="group_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_lists_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="group_resource_type_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_resource_type_lists_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>resource_<wbr>type_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="namespace_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_id_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Namespace ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
+            title="">
+        <span id="order_by_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="order_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_type_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="search_word_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#search_word_hcl" style="color: inherit; text-decoration: inherit;">search_<wbr>word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -1079,8 +1273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_java" style="color: inherit; text-decoration: inherit;">results</a>
@@ -1088,8 +1281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupsresult">List&lt;Get<wbr>Groups<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>Pagination information of the virtual machine deployment group.Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Pagination information of the virtual machine deployment group.Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="applicationid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_java" style="color: inherit; text-decoration: inherit;">application<wbr>Id</a>
@@ -1097,8 +1289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Application ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1106,8 +1297,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Cluster ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="groupidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupidlists_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id<wbr>Lists</a>
@@ -1131,8 +1321,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Namespace ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="orderby_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_java" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -1186,8 +1375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_nodejs" style="color: inherit; text-decoration: inherit;">results</a>
@@ -1195,8 +1383,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupsresult">Get<wbr>Groups<wbr>Result[]</a></span>
     </dt>
-    <dd><p>Pagination information of the virtual machine deployment group.Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Pagination information of the virtual machine deployment group.Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="applicationid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Id</a>
@@ -1204,8 +1391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Application ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1213,8 +1399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Cluster ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="groupidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupidlists_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id<wbr>Lists</a>
@@ -1238,8 +1423,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Namespace ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="orderby_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -1293,17 +1477,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_python" style="color: inherit; text-decoration: inherit;">results</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getgroupsresult">Get<wbr>Groups<wbr>Result]</a></span>
+        <span class="property-type"><a href="#getgroupsresult">Sequence[Get<wbr>Groups<wbr>Result]</a></span>
     </dt>
-    <dd><p>Pagination information of the virtual machine deployment group.Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Pagination information of the virtual machine deployment group.Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="application_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_id_python" style="color: inherit; text-decoration: inherit;">application_<wbr>id</a>
@@ -1311,8 +1493,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Application ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -1320,8 +1501,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Cluster ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="group_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_lists_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id_<wbr>lists</a>
@@ -1345,8 +1525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespace ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Namespace ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="order_by_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_python" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
@@ -1400,8 +1579,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_yaml" style="color: inherit; text-decoration: inherit;">results</a>
@@ -1409,8 +1587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupsresult">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Pagination information of the virtual machine deployment group.Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Pagination information of the virtual machine deployment group.Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="applicationid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Id</a>
@@ -1418,8 +1595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Application ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1427,8 +1603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Cluster ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="groupidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupidlists_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id<wbr>Lists</a>
@@ -1452,8 +1627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-"
+    <dd>Namespace ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-"
             title="">
         <span id="orderby_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -1517,8 +1691,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupsresultcontent">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Get<wbr>Groups<wbr>Result<wbr>Content&gt;</a></span>
     </dt>
-    <dd><p>Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_csharp" style="color: inherit; text-decoration: inherit;">Total<wbr>Count</a>
@@ -1526,8 +1699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1541,8 +1713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupsresultcontent">[]Get<wbr>Groups<wbr>Result<wbr>Content</a></span>
     </dt>
-    <dd><p>Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_go" style="color: inherit; text-decoration: inherit;">Total<wbr>Count</a>
@@ -1550,8 +1721,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="contents_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contents_hcl" style="color: inherit; text-decoration: inherit;">contents</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getgroupsresultcontent">list(object)</a></span>
+    </dt>
+    <dd>Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
+            title="Required">
+        <span id="total_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_count_hcl" style="color: inherit; text-decoration: inherit;">total_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1565,8 +1757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupsresultcontent">List&lt;Get<wbr>Groups<wbr>Result<wbr>Content&gt;</a></span>
     </dt>
-    <dd><p>Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_java" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -1574,8 +1765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1589,8 +1779,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupsresultcontent">Get<wbr>Groups<wbr>Result<wbr>Content[]</a></span>
     </dt>
-    <dd><p>Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_nodejs" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -1598,8 +1787,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1611,10 +1799,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contents_python" style="color: inherit; text-decoration: inherit;">contents</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getgroupsresultcontent">Get<wbr>Groups<wbr>Result<wbr>Content]</a></span>
+        <span class="property-type"><a href="#getgroupsresultcontent">Sequence[Get<wbr>Groups<wbr>Result<wbr>Content]</a></span>
     </dt>
-    <dd><p>Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="total_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_count_python" style="color: inherit; text-decoration: inherit;">total_<wbr>count</a>
@@ -1622,8 +1809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1637,8 +1823,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupsresultcontent">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Virtual machine deployment group list. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_yaml" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -1646,8 +1831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Total count virtual machine deployment group. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1665,8 +1849,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group alias. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group alias. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="applicationid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Id</a>
@@ -1674,8 +1857,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>applicationId.</p>
-</dd><dt class="property-required"
+    <dd>applicationId.</dd><dt class="property-required"
             title="Required">
         <span id="applicationname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationname_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Name</a>
@@ -1683,8 +1865,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application name. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Application name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="applicationtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_csharp" style="color: inherit; text-decoration: inherit;">Application<wbr>Type</a>
@@ -1692,8 +1873,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application type. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Application type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1701,8 +1881,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>clusterId.</p>
-</dd><dt class="property-required"
+    <dd>clusterId.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -1710,8 +1889,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster name. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1719,8 +1897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create Time. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Create Time. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="deploydesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploydesc_csharp" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Desc</a>
@@ -1728,8 +1905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group description. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group description. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupdesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupdesc_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Desc</a>
@@ -1737,8 +1913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group description. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group description. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -1746,8 +1921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Name</a>
@@ -1755,8 +1929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupresourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupresourcetype_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Resource<wbr>Type</a>
@@ -1764,8 +1937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group resource type. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group resource type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="microservicetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_csharp" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Type</a>
@@ -1773,8 +1945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Microservice type. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Microservice type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="namespaceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Id</a>
@@ -1782,8 +1953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace Id.</p>
-</dd><dt class="property-required"
+    <dd>namespace Id.</dd><dt class="property-required"
             title="Required">
         <span id="namespacename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -1791,8 +1961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace name. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="startupparameters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startupparameters_csharp" style="color: inherit; text-decoration: inherit;">Startup<wbr>Parameters</a>
@@ -1800,8 +1969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group start up Parameters. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group start up Parameters. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1809,8 +1977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group update time. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group update time. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="updatedtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_csharp" style="color: inherit; text-decoration: inherit;">Updated<wbr>Time</a>
@@ -1818,8 +1985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Update time. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Update time. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1833,8 +1999,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group alias. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group alias. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="applicationid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Id</a>
@@ -1842,8 +2007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>applicationId.</p>
-</dd><dt class="property-required"
+    <dd>applicationId.</dd><dt class="property-required"
             title="Required">
         <span id="applicationname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationname_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Name</a>
@@ -1851,8 +2015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application name. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Application name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="applicationtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_go" style="color: inherit; text-decoration: inherit;">Application<wbr>Type</a>
@@ -1860,8 +2023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application type. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Application type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1869,8 +2031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>clusterId.</p>
-</dd><dt class="property-required"
+    <dd>clusterId.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -1878,8 +2039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster name. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1887,8 +2047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create Time. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Create Time. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="deploydesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploydesc_go" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Desc</a>
@@ -1896,8 +2055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group description. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group description. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupdesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupdesc_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Desc</a>
@@ -1905,8 +2063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group description. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group description. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -1914,8 +2071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Name</a>
@@ -1923,8 +2079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupresourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupresourcetype_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Resource<wbr>Type</a>
@@ -1932,8 +2087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group resource type. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group resource type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="microservicetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_go" style="color: inherit; text-decoration: inherit;">Microservice<wbr>Type</a>
@@ -1941,8 +2095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Microservice type. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Microservice type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="namespaceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Id</a>
@@ -1950,8 +2103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace Id.</p>
-</dd><dt class="property-required"
+    <dd>namespace Id.</dd><dt class="property-required"
             title="Required">
         <span id="namespacename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -1959,8 +2111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace name. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="startupparameters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startupparameters_go" style="color: inherit; text-decoration: inherit;">Startup<wbr>Parameters</a>
@@ -1968,8 +2119,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group start up Parameters. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group start up Parameters. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1977,8 +2127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group update time. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group update time. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="updatedtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_go" style="color: inherit; text-decoration: inherit;">Updated<wbr>Time</a>
@@ -1986,8 +2135,157 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Update time. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Update time. Note: This field may return null, indicating that no valid value was found.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group alias. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
+            title="Required">
+        <span id="application_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_id_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>applicationId.</dd><dt class="property-required"
+            title="Required">
+        <span id="application_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_name_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
+            title="Required">
+        <span id="application_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_type_hcl" style="color: inherit; text-decoration: inherit;">application_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>clusterId.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create Time. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
+            title="Required">
+        <span id="deploy_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploy_desc_hcl" style="color: inherit; text-decoration: inherit;">deploy_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group description. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
+            title="Required">
+        <span id="group_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_desc_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group description. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
+            title="Required">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
+            title="Required">
+        <span id="group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_name_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
+            title="Required">
+        <span id="group_resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_resource_type_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group resource type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
+            title="Required">
+        <span id="microservice_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_type_hcl" style="color: inherit; text-decoration: inherit;">microservice_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Microservice type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
+            title="Required">
+        <span id="namespace_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_id_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace Id.</dd><dt class="property-required"
+            title="Required">
+        <span id="namespace_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_name_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Namespace name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
+            title="Required">
+        <span id="startup_parameters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startup_parameters_hcl" style="color: inherit; text-decoration: inherit;">startup_<wbr>parameters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group start up Parameters. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
+            title="Required">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group update time. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
+            title="Required">
+        <span id="updated_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_time_hcl" style="color: inherit; text-decoration: inherit;">updated_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Update time. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2001,8 +2299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group alias. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group alias. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="applicationid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_java" style="color: inherit; text-decoration: inherit;">application<wbr>Id</a>
@@ -2010,8 +2307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>applicationId.</p>
-</dd><dt class="property-required"
+    <dd>applicationId.</dd><dt class="property-required"
             title="Required">
         <span id="applicationname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationname_java" style="color: inherit; text-decoration: inherit;">application<wbr>Name</a>
@@ -2019,8 +2315,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application name. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Application name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="applicationtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_java" style="color: inherit; text-decoration: inherit;">application<wbr>Type</a>
@@ -2028,8 +2323,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application type. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Application type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -2037,8 +2331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>clusterId.</p>
-</dd><dt class="property-required"
+    <dd>clusterId.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -2046,8 +2339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster name. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2055,8 +2347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create Time. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Create Time. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="deploydesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploydesc_java" style="color: inherit; text-decoration: inherit;">deploy<wbr>Desc</a>
@@ -2064,8 +2355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group description. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group description. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupdesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupdesc_java" style="color: inherit; text-decoration: inherit;">group<wbr>Desc</a>
@@ -2073,8 +2363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group description. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group description. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -2082,8 +2371,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_java" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -2091,8 +2379,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupresourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupresourcetype_java" style="color: inherit; text-decoration: inherit;">group<wbr>Resource<wbr>Type</a>
@@ -2100,8 +2387,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group resource type. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group resource type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="microservicetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_java" style="color: inherit; text-decoration: inherit;">microservice<wbr>Type</a>
@@ -2109,8 +2395,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Microservice type. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Microservice type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="namespaceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -2118,8 +2403,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace Id.</p>
-</dd><dt class="property-required"
+    <dd>namespace Id.</dd><dt class="property-required"
             title="Required">
         <span id="namespacename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -2127,8 +2411,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace name. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="startupparameters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startupparameters_java" style="color: inherit; text-decoration: inherit;">startup<wbr>Parameters</a>
@@ -2136,8 +2419,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group start up Parameters. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group start up Parameters. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2145,8 +2427,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group update time. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group update time. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="updatedtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_java" style="color: inherit; text-decoration: inherit;">updated<wbr>Time</a>
@@ -2154,8 +2435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Update time. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Update time. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2169,8 +2449,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group alias. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group alias. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="applicationid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Id</a>
@@ -2178,8 +2457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>applicationId.</p>
-</dd><dt class="property-required"
+    <dd>applicationId.</dd><dt class="property-required"
             title="Required">
         <span id="applicationname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationname_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Name</a>
@@ -2187,8 +2465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application name. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Application name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="applicationtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_nodejs" style="color: inherit; text-decoration: inherit;">application<wbr>Type</a>
@@ -2196,8 +2473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application type. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Application type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -2205,8 +2481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>clusterId.</p>
-</dd><dt class="property-required"
+    <dd>clusterId.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -2214,8 +2489,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster name. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2223,8 +2497,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create Time. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Create Time. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="deploydesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploydesc_nodejs" style="color: inherit; text-decoration: inherit;">deploy<wbr>Desc</a>
@@ -2232,8 +2505,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group description. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group description. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupdesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupdesc_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Desc</a>
@@ -2241,8 +2513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group description. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group description. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -2250,8 +2521,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -2259,8 +2529,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupresourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupresourcetype_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Resource<wbr>Type</a>
@@ -2268,8 +2537,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group resource type. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group resource type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="microservicetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_nodejs" style="color: inherit; text-decoration: inherit;">microservice<wbr>Type</a>
@@ -2277,8 +2545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Microservice type. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Microservice type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="namespaceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -2286,8 +2553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace Id.</p>
-</dd><dt class="property-required"
+    <dd>namespace Id.</dd><dt class="property-required"
             title="Required">
         <span id="namespacename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -2295,8 +2561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace name. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="startupparameters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startupparameters_nodejs" style="color: inherit; text-decoration: inherit;">startup<wbr>Parameters</a>
@@ -2304,8 +2569,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group start up Parameters. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group start up Parameters. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2313,8 +2577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group update time. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group update time. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="updatedtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_nodejs" style="color: inherit; text-decoration: inherit;">updated<wbr>Time</a>
@@ -2322,8 +2585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Update time. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Update time. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2337,8 +2599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Group alias. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group alias. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="application_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_id_python" style="color: inherit; text-decoration: inherit;">application_<wbr>id</a>
@@ -2346,8 +2607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>applicationId.</p>
-</dd><dt class="property-required"
+    <dd>applicationId.</dd><dt class="property-required"
             title="Required">
         <span id="application_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_name_python" style="color: inherit; text-decoration: inherit;">application_<wbr>name</a>
@@ -2355,8 +2615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application name. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Application name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="application_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#application_type_python" style="color: inherit; text-decoration: inherit;">application_<wbr>type</a>
@@ -2364,8 +2623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application type. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Application type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -2373,8 +2631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>clusterId.</p>
-</dd><dt class="property-required"
+    <dd>clusterId.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
@@ -2382,8 +2639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster name. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2391,8 +2647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create Time. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Create Time. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="deploy_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploy_desc_python" style="color: inherit; text-decoration: inherit;">deploy_<wbr>desc</a>
@@ -2400,8 +2655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Group description. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group description. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="group_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_desc_python" style="color: inherit; text-decoration: inherit;">group_<wbr>desc</a>
@@ -2409,8 +2663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Group description. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group description. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
@@ -2418,8 +2671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Group ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_name_python" style="color: inherit; text-decoration: inherit;">group_<wbr>name</a>
@@ -2427,8 +2679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Group ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="group_resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_resource_type_python" style="color: inherit; text-decoration: inherit;">group_<wbr>resource_<wbr>type</a>
@@ -2436,8 +2687,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Group resource type. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group resource type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="microservice_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservice_type_python" style="color: inherit; text-decoration: inherit;">microservice_<wbr>type</a>
@@ -2445,8 +2695,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Microservice type. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Microservice type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_id_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id</a>
@@ -2454,8 +2703,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace Id.</p>
-</dd><dt class="property-required"
+    <dd>namespace Id.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_name_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
@@ -2463,8 +2711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespace name. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="startup_parameters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startup_parameters_python" style="color: inherit; text-decoration: inherit;">startup_<wbr>parameters</a>
@@ -2472,8 +2719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Group start up Parameters. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group start up Parameters. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -2481,8 +2727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Group update time. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group update time. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="updated_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_time_python" style="color: inherit; text-decoration: inherit;">updated_<wbr>time</a>
@@ -2490,8 +2735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Update time. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Update time. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2505,8 +2749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group alias. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group alias. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="applicationid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationid_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Id</a>
@@ -2514,8 +2757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>applicationId.</p>
-</dd><dt class="property-required"
+    <dd>applicationId.</dd><dt class="property-required"
             title="Required">
         <span id="applicationname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationname_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Name</a>
@@ -2523,8 +2765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application name. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Application name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="applicationtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicationtype_yaml" style="color: inherit; text-decoration: inherit;">application<wbr>Type</a>
@@ -2532,8 +2773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application type. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Application type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -2541,8 +2781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>clusterId.</p>
-</dd><dt class="property-required"
+    <dd>clusterId.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -2550,8 +2789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster name. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Cluster name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2559,8 +2797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create Time. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Create Time. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="deploydesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploydesc_yaml" style="color: inherit; text-decoration: inherit;">deploy<wbr>Desc</a>
@@ -2568,8 +2805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group description. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group description. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupdesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupdesc_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Desc</a>
@@ -2577,8 +2813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group description. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group description. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -2586,8 +2821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -2595,8 +2829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group ID. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group ID. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="groupresourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupresourcetype_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Resource<wbr>Type</a>
@@ -2604,8 +2837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group resource type. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group resource type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="microservicetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#microservicetype_yaml" style="color: inherit; text-decoration: inherit;">microservice<wbr>Type</a>
@@ -2613,8 +2845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Microservice type. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Microservice type. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="namespaceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaceid_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Id</a>
@@ -2622,8 +2853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace Id.</p>
-</dd><dt class="property-required"
+    <dd>namespace Id.</dd><dt class="property-required"
             title="Required">
         <span id="namespacename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -2631,8 +2861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace name. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="startupparameters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startupparameters_yaml" style="color: inherit; text-decoration: inherit;">startup<wbr>Parameters</a>
@@ -2640,8 +2869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group start up Parameters. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group start up Parameters. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2649,8 +2877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group update time. Note: This field may return null, indicating that no valid value was found.</p>
-</dd><dt class="property-required"
+    <dd>Group update time. Note: This field may return null, indicating that no valid value was found.</dd><dt class="property-required"
             title="Required">
         <span id="updatedtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedtime_yaml" style="color: inherit; text-decoration: inherit;">updated<wbr>Time</a>
@@ -2658,8 +2885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Update time. Note: This field may return null, indicating that no valid value was found.</p>
-</dd></dl>
+    <dd>Update time. Note: This field may return null, indicating that no valid value was found.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2674,7 +2900,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

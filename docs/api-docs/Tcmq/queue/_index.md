@@ -2,9 +2,11 @@
 ---
 title: "Queue"
 title_tag: "tencentcloud.Tcmq.Queue"
-meta_desc: "Documentation for the tencentcloud.Tcmq.Queue resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a tcmq queue"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,19 +18,59 @@ Provides a resource to create a tcmq queue
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const queue = new tencentcloud.tcmq.Queue("queue", {queueName: "queue_name"});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 queue = tencentcloud.tcmq.Queue("queue", queue_name="queue_name")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcmq"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tcmq.NewQueue(ctx, "queue", &tcmq.QueueArgs{
+			QueueName: pulumi.String("queue_name"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -44,26 +86,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcmq"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tcmq.NewQueue(ctx, "queue", &Tcmq.QueueArgs{
-			QueueName: pulumi.String("queue_name"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -72,8 +99,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tcmq.Queue;
 import com.pulumi.tencentcloud.Tcmq.QueueArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -85,13 +112,18 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var queue = new Queue("queue", QueueArgs.builder()        
+        var queue = new Queue("queue", QueueArgs.builder()
             .queueName("queue_name")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   queue:
@@ -99,80 +131,123 @@ resources:
     properties:
       queueName: queue_name
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tcmq_queue" "queue" {
+  queue_name = "queue_name"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateCmqQueue](https://www.tencentcloud.com/search/?wd=CreateCmqQueue&type=document&lang=en)
+* Read: [DescribeCmqQueueDetail](https://www.tencentcloud.com/search/?wd=DescribeCmqQueueDetail&type=document&lang=en)
+* Update: [ModifyCmqQueueAttribute](https://www.tencentcloud.com/search/?wd=ModifyCmqQueueAttribute&type=document&lang=en)
+* Delete: [DeleteCmqQueue](https://www.tencentcloud.com/search/?wd=DeleteCmqQueue&type=document&lang=en)
 
 
 ## Create Queue Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Queue</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">QueueArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Queue</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">QueueArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Queue</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">QueueArgs</a></span><span class="p">,</span>
+          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Queue</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-          <span class="nx">dead_letter_queue_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">first_query_interval</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-          <span class="nx">max_msg_heap_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">queue_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">policy</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">retention_size_in_mb</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
           <span class="nx">max_msg_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
           <span class="nx">max_query_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
           <span class="nx">max_receive_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
           <span class="nx">max_time_to_live</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-          <span class="nx">msg_retention_seconds</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-          <span class="nx">policy</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">max_msg_heap_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
           <span class="nx">polling_wait_seconds</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-          <span class="nx">queue_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">retention_size_in_mb</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">msg_retention_seconds</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">first_query_interval</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">dead_letter_queue_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">rewind_seconds</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
           <span class="nx">trace</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
           <span class="nx">transaction</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-          <span class="nx">visibility_timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Queue</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">QueueArgs</a></span><span class="p">,</span>
-          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+          <span class="nx">visibility_timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewQueue</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">QueueArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Queue</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewQueue</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">QueueArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Queue</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Queue</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">QueueArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Queue</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">QueueArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Queue</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">QueueArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Queue</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">QueueArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcmq:Queue</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcmq:Queue</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tcmq_queue&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -193,7 +268,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -310,11 +385,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Queue Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Queue resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -330,8 +413,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="deadletterqueuename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadletterqueuename_csharp" style="color: inherit; text-decoration: inherit;">Dead<wbr>Letter<wbr>Queue<wbr>Name</a>
@@ -339,8 +421,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Dead letter queue name.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter queue name.</dd><dt class="property-optional"
             title="Optional">
         <span id="firstqueryinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firstqueryinterval_csharp" style="color: inherit; text-decoration: inherit;">First<wbr>Query<wbr>Interval</a>
@@ -348,8 +429,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>First lookback interval.</p>
-</dd><dt class="property-optional"
+    <dd>First lookback interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxmsgheapnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgheapnum_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Msg<wbr>Heap<wbr>Num</a>
@@ -357,8 +437,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxmsgsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Msg<wbr>Size</a>
@@ -366,8 +445,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxquerycount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxquerycount_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Query<wbr>Count</a>
@@ -375,8 +453,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of lookbacks.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of lookbacks.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxreceivecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreceivecount_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Receive<wbr>Count</a>
@@ -384,8 +461,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum receipt times. Value range: 1-1000.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum receipt times. Value range: 1-1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxtimetolive_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtimetolive_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Time<wbr>To<wbr>Live</a>
@@ -393,8 +469,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</p>
-</dd><dt class="property-optional"
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-optional"
             title="Optional">
         <span id="msgretentionseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgretentionseconds_csharp" style="color: inherit; text-decoration: inherit;">Msg<wbr>Retention<wbr>Seconds</a>
@@ -402,8 +477,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</p>
-</dd><dt class="property-optional"
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_csharp" style="color: inherit; text-decoration: inherit;">Policy</a>
@@ -411,8 +485,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</dd><dt class="property-optional"
             title="Optional">
         <span id="pollingwaitseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pollingwaitseconds_csharp" style="color: inherit; text-decoration: inherit;">Polling<wbr>Wait<wbr>Seconds</a>
@@ -420,8 +493,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="retentionsizeinmb_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentionsizeinmb_csharp" style="color: inherit; text-decoration: inherit;">Retention<wbr>Size<wbr>In<wbr>Mb</a>
@@ -429,8 +501,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="rewindseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewindseconds_csharp" style="color: inherit; text-decoration: inherit;">Rewind<wbr>Seconds</a>
@@ -438,8 +509,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="trace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_csharp" style="color: inherit; text-decoration: inherit;">Trace</a>
@@ -447,8 +517,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="transaction_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transaction_csharp" style="color: inherit; text-decoration: inherit;">Transaction</a>
@@ -456,8 +525,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>1: transaction queue; 0: general queue.</p>
-</dd><dt class="property-optional"
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-optional"
             title="Optional">
         <span id="visibilitytimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#visibilitytimeout_csharp" style="color: inherit; text-decoration: inherit;">Visibility<wbr>Timeout</a>
@@ -465,8 +533,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</p>
-</dd></dl>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -480,8 +547,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="deadletterqueuename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadletterqueuename_go" style="color: inherit; text-decoration: inherit;">Dead<wbr>Letter<wbr>Queue<wbr>Name</a>
@@ -489,8 +555,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Dead letter queue name.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter queue name.</dd><dt class="property-optional"
             title="Optional">
         <span id="firstqueryinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firstqueryinterval_go" style="color: inherit; text-decoration: inherit;">First<wbr>Query<wbr>Interval</a>
@@ -498,8 +563,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>First lookback interval.</p>
-</dd><dt class="property-optional"
+    <dd>First lookback interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxmsgheapnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgheapnum_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Msg<wbr>Heap<wbr>Num</a>
@@ -507,8 +571,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxmsgsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Msg<wbr>Size</a>
@@ -516,8 +579,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxquerycount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxquerycount_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Query<wbr>Count</a>
@@ -525,8 +587,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of lookbacks.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of lookbacks.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxreceivecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreceivecount_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Receive<wbr>Count</a>
@@ -534,8 +595,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum receipt times. Value range: 1-1000.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum receipt times. Value range: 1-1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxtimetolive_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtimetolive_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Time<wbr>To<wbr>Live</a>
@@ -543,8 +603,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</p>
-</dd><dt class="property-optional"
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-optional"
             title="Optional">
         <span id="msgretentionseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgretentionseconds_go" style="color: inherit; text-decoration: inherit;">Msg<wbr>Retention<wbr>Seconds</a>
@@ -552,8 +611,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</p>
-</dd><dt class="property-optional"
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_go" style="color: inherit; text-decoration: inherit;">Policy</a>
@@ -561,8 +619,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</dd><dt class="property-optional"
             title="Optional">
         <span id="pollingwaitseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pollingwaitseconds_go" style="color: inherit; text-decoration: inherit;">Polling<wbr>Wait<wbr>Seconds</a>
@@ -570,8 +627,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="retentionsizeinmb_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentionsizeinmb_go" style="color: inherit; text-decoration: inherit;">Retention<wbr>Size<wbr>In<wbr>Mb</a>
@@ -579,8 +635,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="rewindseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewindseconds_go" style="color: inherit; text-decoration: inherit;">Rewind<wbr>Seconds</a>
@@ -588,8 +643,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="trace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_go" style="color: inherit; text-decoration: inherit;">Trace</a>
@@ -597,8 +651,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="transaction_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transaction_go" style="color: inherit; text-decoration: inherit;">Transaction</a>
@@ -606,8 +659,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>1: transaction queue; 0: general queue.</p>
-</dd><dt class="property-optional"
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-optional"
             title="Optional">
         <span id="visibilitytimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#visibilitytimeout_go" style="color: inherit; text-decoration: inherit;">Visibility<wbr>Timeout</a>
@@ -615,8 +667,141 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</p>
-</dd></dl>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="queue_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#queue_name_hcl" style="color: inherit; text-decoration: inherit;">queue_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dead_letter_queue_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dead_letter_queue_name_hcl" style="color: inherit; text-decoration: inherit;">dead_<wbr>letter_<wbr>queue_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dead letter queue name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="first_query_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#first_query_interval_hcl" style="color: inherit; text-decoration: inherit;">first_<wbr>query_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>First lookback interval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_msg_heap_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_msg_heap_num_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>msg_<wbr>heap_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_msg_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_msg_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>msg_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_query_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_query_count_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>query_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of lookbacks.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_receive_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_receive_count_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>receive_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum receipt times. Value range: 1-1000.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_time_to_live_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_time_to_live_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>time_<wbr>to_<wbr>live</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="msg_retention_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_retention_seconds_hcl" style="color: inherit; text-decoration: inherit;">msg_<wbr>retention_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_hcl" style="color: inherit; text-decoration: inherit;">policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="polling_wait_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#polling_wait_seconds_hcl" style="color: inherit; text-decoration: inherit;">polling_<wbr>wait_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="retention_size_in_mb_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retention_size_in_mb_hcl" style="color: inherit; text-decoration: inherit;">retention_<wbr>size_<wbr>in_<wbr>mb</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rewind_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewind_seconds_hcl" style="color: inherit; text-decoration: inherit;">rewind_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="trace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_hcl" style="color: inherit; text-decoration: inherit;">trace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="transaction_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transaction_hcl" style="color: inherit; text-decoration: inherit;">transaction</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="visibility_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#visibility_timeout_hcl" style="color: inherit; text-decoration: inherit;">visibility_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -630,8 +815,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="deadletterqueuename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadletterqueuename_java" style="color: inherit; text-decoration: inherit;">dead<wbr>Letter<wbr>Queue<wbr>Name</a>
@@ -639,8 +823,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Dead letter queue name.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter queue name.</dd><dt class="property-optional"
             title="Optional">
         <span id="firstqueryinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firstqueryinterval_java" style="color: inherit; text-decoration: inherit;">first<wbr>Query<wbr>Interval</a>
@@ -648,8 +831,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>First lookback interval.</p>
-</dd><dt class="property-optional"
+    <dd>First lookback interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxmsgheapnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgheapnum_java" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Heap<wbr>Num</a>
@@ -657,8 +839,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxmsgsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Size</a>
@@ -666,8 +847,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxquerycount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxquerycount_java" style="color: inherit; text-decoration: inherit;">max<wbr>Query<wbr>Count</a>
@@ -675,8 +855,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of lookbacks.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of lookbacks.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxreceivecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreceivecount_java" style="color: inherit; text-decoration: inherit;">max<wbr>Receive<wbr>Count</a>
@@ -684,8 +863,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum receipt times. Value range: 1-1000.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum receipt times. Value range: 1-1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxtimetolive_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtimetolive_java" style="color: inherit; text-decoration: inherit;">max<wbr>Time<wbr>To<wbr>Live</a>
@@ -693,8 +871,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</p>
-</dd><dt class="property-optional"
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-optional"
             title="Optional">
         <span id="msgretentionseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgretentionseconds_java" style="color: inherit; text-decoration: inherit;">msg<wbr>Retention<wbr>Seconds</a>
@@ -702,8 +879,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</p>
-</dd><dt class="property-optional"
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_java" style="color: inherit; text-decoration: inherit;">policy</a>
@@ -711,8 +887,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</dd><dt class="property-optional"
             title="Optional">
         <span id="pollingwaitseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pollingwaitseconds_java" style="color: inherit; text-decoration: inherit;">polling<wbr>Wait<wbr>Seconds</a>
@@ -720,8 +895,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="retentionsizeinmb_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentionsizeinmb_java" style="color: inherit; text-decoration: inherit;">retention<wbr>Size<wbr>In<wbr>Mb</a>
@@ -729,8 +903,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="rewindseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewindseconds_java" style="color: inherit; text-decoration: inherit;">rewind<wbr>Seconds</a>
@@ -738,8 +911,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="trace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_java" style="color: inherit; text-decoration: inherit;">trace</a>
@@ -747,8 +919,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="transaction_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transaction_java" style="color: inherit; text-decoration: inherit;">transaction</a>
@@ -756,8 +927,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>1: transaction queue; 0: general queue.</p>
-</dd><dt class="property-optional"
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-optional"
             title="Optional">
         <span id="visibilitytimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#visibilitytimeout_java" style="color: inherit; text-decoration: inherit;">visibility<wbr>Timeout</a>
@@ -765,8 +935,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</p>
-</dd></dl>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -780,8 +949,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="deadletterqueuename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadletterqueuename_nodejs" style="color: inherit; text-decoration: inherit;">dead<wbr>Letter<wbr>Queue<wbr>Name</a>
@@ -789,8 +957,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Dead letter queue name.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter queue name.</dd><dt class="property-optional"
             title="Optional">
         <span id="firstqueryinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firstqueryinterval_nodejs" style="color: inherit; text-decoration: inherit;">first<wbr>Query<wbr>Interval</a>
@@ -798,8 +965,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>First lookback interval.</p>
-</dd><dt class="property-optional"
+    <dd>First lookback interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxmsgheapnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgheapnum_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Heap<wbr>Num</a>
@@ -807,8 +973,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxmsgsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Size</a>
@@ -816,8 +981,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxquerycount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxquerycount_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Query<wbr>Count</a>
@@ -825,8 +989,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of lookbacks.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of lookbacks.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxreceivecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreceivecount_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Receive<wbr>Count</a>
@@ -834,8 +997,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum receipt times. Value range: 1-1000.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum receipt times. Value range: 1-1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxtimetolive_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtimetolive_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Time<wbr>To<wbr>Live</a>
@@ -843,8 +1005,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</p>
-</dd><dt class="property-optional"
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-optional"
             title="Optional">
         <span id="msgretentionseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgretentionseconds_nodejs" style="color: inherit; text-decoration: inherit;">msg<wbr>Retention<wbr>Seconds</a>
@@ -852,8 +1013,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</p>
-</dd><dt class="property-optional"
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_nodejs" style="color: inherit; text-decoration: inherit;">policy</a>
@@ -861,8 +1021,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</dd><dt class="property-optional"
             title="Optional">
         <span id="pollingwaitseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pollingwaitseconds_nodejs" style="color: inherit; text-decoration: inherit;">polling<wbr>Wait<wbr>Seconds</a>
@@ -870,8 +1029,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="retentionsizeinmb_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentionsizeinmb_nodejs" style="color: inherit; text-decoration: inherit;">retention<wbr>Size<wbr>In<wbr>Mb</a>
@@ -879,8 +1037,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="rewindseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewindseconds_nodejs" style="color: inherit; text-decoration: inherit;">rewind<wbr>Seconds</a>
@@ -888,8 +1045,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="trace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_nodejs" style="color: inherit; text-decoration: inherit;">trace</a>
@@ -897,8 +1053,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="transaction_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transaction_nodejs" style="color: inherit; text-decoration: inherit;">transaction</a>
@@ -906,8 +1061,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>1: transaction queue; 0: general queue.</p>
-</dd><dt class="property-optional"
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-optional"
             title="Optional">
         <span id="visibilitytimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#visibilitytimeout_nodejs" style="color: inherit; text-decoration: inherit;">visibility<wbr>Timeout</a>
@@ -915,8 +1069,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</p>
-</dd></dl>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -930,8 +1083,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="dead_letter_queue_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dead_letter_queue_name_python" style="color: inherit; text-decoration: inherit;">dead_<wbr>letter_<wbr>queue_<wbr>name</a>
@@ -939,8 +1091,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Dead letter queue name.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter queue name.</dd><dt class="property-optional"
             title="Optional">
         <span id="first_query_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#first_query_interval_python" style="color: inherit; text-decoration: inherit;">first_<wbr>query_<wbr>interval</a>
@@ -948,8 +1099,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>First lookback interval.</p>
-</dd><dt class="property-optional"
+    <dd>First lookback interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_msg_heap_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_msg_heap_num_python" style="color: inherit; text-decoration: inherit;">max_<wbr>msg_<wbr>heap_<wbr>num</a>
@@ -957,8 +1107,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_msg_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_msg_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>msg_<wbr>size</a>
@@ -966,8 +1115,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_query_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_query_count_python" style="color: inherit; text-decoration: inherit;">max_<wbr>query_<wbr>count</a>
@@ -975,8 +1123,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of lookbacks.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of lookbacks.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_receive_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_receive_count_python" style="color: inherit; text-decoration: inherit;">max_<wbr>receive_<wbr>count</a>
@@ -984,8 +1131,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum receipt times. Value range: 1-1000.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum receipt times. Value range: 1-1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_time_to_live_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_time_to_live_python" style="color: inherit; text-decoration: inherit;">max_<wbr>time_<wbr>to_<wbr>live</a>
@@ -993,8 +1139,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</p>
-</dd><dt class="property-optional"
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-optional"
             title="Optional">
         <span id="msg_retention_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_retention_seconds_python" style="color: inherit; text-decoration: inherit;">msg_<wbr>retention_<wbr>seconds</a>
@@ -1002,8 +1147,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</p>
-</dd><dt class="property-optional"
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_python" style="color: inherit; text-decoration: inherit;">policy</a>
@@ -1011,8 +1155,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</dd><dt class="property-optional"
             title="Optional">
         <span id="polling_wait_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#polling_wait_seconds_python" style="color: inherit; text-decoration: inherit;">polling_<wbr>wait_<wbr>seconds</a>
@@ -1020,8 +1163,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="retention_size_in_mb_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retention_size_in_mb_python" style="color: inherit; text-decoration: inherit;">retention_<wbr>size_<wbr>in_<wbr>mb</a>
@@ -1029,8 +1171,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="rewind_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewind_seconds_python" style="color: inherit; text-decoration: inherit;">rewind_<wbr>seconds</a>
@@ -1038,8 +1179,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="trace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_python" style="color: inherit; text-decoration: inherit;">trace</a>
@@ -1047,8 +1187,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="transaction_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transaction_python" style="color: inherit; text-decoration: inherit;">transaction</a>
@@ -1056,8 +1195,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>1: transaction queue; 0: general queue.</p>
-</dd><dt class="property-optional"
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-optional"
             title="Optional">
         <span id="visibility_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#visibility_timeout_python" style="color: inherit; text-decoration: inherit;">visibility_<wbr>timeout</a>
@@ -1065,8 +1203,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</p>
-</dd></dl>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1080,8 +1217,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="deadletterqueuename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadletterqueuename_yaml" style="color: inherit; text-decoration: inherit;">dead<wbr>Letter<wbr>Queue<wbr>Name</a>
@@ -1089,8 +1225,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Dead letter queue name.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter queue name.</dd><dt class="property-optional"
             title="Optional">
         <span id="firstqueryinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#firstqueryinterval_yaml" style="color: inherit; text-decoration: inherit;">first<wbr>Query<wbr>Interval</a>
@@ -1098,8 +1233,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>First lookback interval.</p>
-</dd><dt class="property-optional"
+    <dd>First lookback interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxmsgheapnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgheapnum_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Heap<wbr>Num</a>
@@ -1107,8 +1241,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxmsgsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmsgsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Size</a>
@@ -1116,8 +1249,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxquerycount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxquerycount_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Query<wbr>Count</a>
@@ -1125,8 +1257,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of lookbacks.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of lookbacks.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxreceivecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxreceivecount_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Receive<wbr>Count</a>
@@ -1134,8 +1265,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum receipt times. Value range: 1-1000.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum receipt times. Value range: 1-1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxtimetolive_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtimetolive_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Time<wbr>To<wbr>Live</a>
@@ -1143,8 +1273,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</p>
-</dd><dt class="property-optional"
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-optional"
             title="Optional">
         <span id="msgretentionseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgretentionseconds_yaml" style="color: inherit; text-decoration: inherit;">msg<wbr>Retention<wbr>Seconds</a>
@@ -1152,8 +1281,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</p>
-</dd><dt class="property-optional"
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_yaml" style="color: inherit; text-decoration: inherit;">policy</a>
@@ -1161,8 +1289,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</dd><dt class="property-optional"
             title="Optional">
         <span id="pollingwaitseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pollingwaitseconds_yaml" style="color: inherit; text-decoration: inherit;">polling<wbr>Wait<wbr>Seconds</a>
@@ -1170,8 +1297,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="retentionsizeinmb_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentionsizeinmb_yaml" style="color: inherit; text-decoration: inherit;">retention<wbr>Size<wbr>In<wbr>Mb</a>
@@ -1179,8 +1305,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="rewindseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewindseconds_yaml" style="color: inherit; text-decoration: inherit;">rewind<wbr>Seconds</a>
@@ -1188,8 +1313,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="trace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_yaml" style="color: inherit; text-decoration: inherit;">trace</a>
@@ -1197,8 +1321,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="transaction_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transaction_yaml" style="color: inherit; text-decoration: inherit;">transaction</a>
@@ -1206,8 +1329,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>1: transaction queue; 0: general queue.</p>
-</dd><dt class="property-optional"
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-optional"
             title="Optional">
         <span id="visibilitytimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#visibilitytimeout_yaml" style="color: inherit; text-decoration: inherit;">visibility<wbr>Timeout</a>
@@ -1215,8 +1337,7 @@ The Queue resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</p>
-</dd></dl>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1237,8 +1358,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1252,8 +1372,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1267,8 +1400,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1282,8 +1414,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1297,8 +1428,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1312,8 +1442,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1323,18 +1452,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Queue resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">QueueState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Queue</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">QueueState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Queue</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1354,104 +1483,143 @@ Get an existing Queue resource's state with the given name, ID, and optional ext
         <span class="nx">trace</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">transaction</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">visibility_timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> Queue</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetQueue<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">QueueState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Queue</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetQueue<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">QueueState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Queue</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Queue</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">QueueState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Queue</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">QueueState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Queue</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">QueueState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Queue</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">QueueState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingQueue</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tcmq:Queue</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tcmq_queue</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">QueueState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">QueueState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1459,28 +1627,31 @@ Get an existing Queue resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">QueueState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1488,28 +1659,31 @@ Get an existing Queue resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">QueueState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1529,8 +1703,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Dead letter queue name.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter queue name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_firstqueryinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_firstqueryinterval_csharp" style="color: inherit; text-decoration: inherit;">First<wbr>Query<wbr>Interval</a>
@@ -1538,8 +1711,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>First lookback interval.</p>
-</dd><dt class="property-optional"
+    <dd>First lookback interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxmsgheapnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxmsgheapnum_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Msg<wbr>Heap<wbr>Num</a>
@@ -1547,8 +1719,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxmsgsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxmsgsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Msg<wbr>Size</a>
@@ -1556,8 +1727,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxquerycount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxquerycount_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Query<wbr>Count</a>
@@ -1565,8 +1735,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of lookbacks.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of lookbacks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxreceivecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxreceivecount_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Receive<wbr>Count</a>
@@ -1574,8 +1743,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum receipt times. Value range: 1-1000.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum receipt times. Value range: 1-1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxtimetolive_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxtimetolive_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Time<wbr>To<wbr>Live</a>
@@ -1583,8 +1751,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</p>
-</dd><dt class="property-optional"
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_msgretentionseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_msgretentionseconds_csharp" style="color: inherit; text-decoration: inherit;">Msg<wbr>Retention<wbr>Seconds</a>
@@ -1592,8 +1759,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</p>
-</dd><dt class="property-optional"
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_csharp" style="color: inherit; text-decoration: inherit;">Policy</a>
@@ -1601,8 +1767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pollingwaitseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pollingwaitseconds_csharp" style="color: inherit; text-decoration: inherit;">Polling<wbr>Wait<wbr>Seconds</a>
@@ -1610,8 +1775,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_queuename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_queuename_csharp" style="color: inherit; text-decoration: inherit;">Queue<wbr>Name</a>
@@ -1619,8 +1783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retentionsizeinmb_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retentionsizeinmb_csharp" style="color: inherit; text-decoration: inherit;">Retention<wbr>Size<wbr>In<wbr>Mb</a>
@@ -1628,8 +1791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rewindseconds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rewindseconds_csharp" style="color: inherit; text-decoration: inherit;">Rewind<wbr>Seconds</a>
@@ -1637,8 +1799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_trace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trace_csharp" style="color: inherit; text-decoration: inherit;">Trace</a>
@@ -1646,8 +1807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_transaction_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_transaction_csharp" style="color: inherit; text-decoration: inherit;">Transaction</a>
@@ -1655,8 +1815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>1: transaction queue; 0: general queue.</p>
-</dd><dt class="property-optional"
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_visibilitytimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_visibilitytimeout_csharp" style="color: inherit; text-decoration: inherit;">Visibility<wbr>Timeout</a>
@@ -1664,8 +1823,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</p>
-</dd></dl>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1679,8 +1837,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Dead letter queue name.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter queue name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_firstqueryinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_firstqueryinterval_go" style="color: inherit; text-decoration: inherit;">First<wbr>Query<wbr>Interval</a>
@@ -1688,8 +1845,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>First lookback interval.</p>
-</dd><dt class="property-optional"
+    <dd>First lookback interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxmsgheapnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxmsgheapnum_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Msg<wbr>Heap<wbr>Num</a>
@@ -1697,8 +1853,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxmsgsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxmsgsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Msg<wbr>Size</a>
@@ -1706,8 +1861,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxquerycount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxquerycount_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Query<wbr>Count</a>
@@ -1715,8 +1869,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of lookbacks.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of lookbacks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxreceivecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxreceivecount_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Receive<wbr>Count</a>
@@ -1724,8 +1877,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum receipt times. Value range: 1-1000.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum receipt times. Value range: 1-1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxtimetolive_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxtimetolive_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Time<wbr>To<wbr>Live</a>
@@ -1733,8 +1885,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</p>
-</dd><dt class="property-optional"
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_msgretentionseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_msgretentionseconds_go" style="color: inherit; text-decoration: inherit;">Msg<wbr>Retention<wbr>Seconds</a>
@@ -1742,8 +1893,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</p>
-</dd><dt class="property-optional"
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_go" style="color: inherit; text-decoration: inherit;">Policy</a>
@@ -1751,8 +1901,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pollingwaitseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pollingwaitseconds_go" style="color: inherit; text-decoration: inherit;">Polling<wbr>Wait<wbr>Seconds</a>
@@ -1760,8 +1909,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_queuename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_queuename_go" style="color: inherit; text-decoration: inherit;">Queue<wbr>Name</a>
@@ -1769,8 +1917,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retentionsizeinmb_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retentionsizeinmb_go" style="color: inherit; text-decoration: inherit;">Retention<wbr>Size<wbr>In<wbr>Mb</a>
@@ -1778,8 +1925,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rewindseconds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rewindseconds_go" style="color: inherit; text-decoration: inherit;">Rewind<wbr>Seconds</a>
@@ -1787,8 +1933,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_trace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trace_go" style="color: inherit; text-decoration: inherit;">Trace</a>
@@ -1796,8 +1941,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_transaction_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_transaction_go" style="color: inherit; text-decoration: inherit;">Transaction</a>
@@ -1805,8 +1949,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>1: transaction queue; 0: general queue.</p>
-</dd><dt class="property-optional"
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_visibilitytimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_visibilitytimeout_go" style="color: inherit; text-decoration: inherit;">Visibility<wbr>Timeout</a>
@@ -1814,8 +1957,141 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</p>
-</dd></dl>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_dead_letter_queue_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dead_letter_queue_name_hcl" style="color: inherit; text-decoration: inherit;">dead_<wbr>letter_<wbr>queue_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dead letter queue name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_first_query_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_first_query_interval_hcl" style="color: inherit; text-decoration: inherit;">first_<wbr>query_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>First lookback interval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_msg_heap_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_msg_heap_num_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>msg_<wbr>heap_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_msg_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_msg_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>msg_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_query_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_query_count_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>query_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of lookbacks.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_receive_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_receive_count_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>receive_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum receipt times. Value range: 1-1000.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_time_to_live_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_time_to_live_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>time_<wbr>to_<wbr>live</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_msg_retention_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_msg_retention_seconds_hcl" style="color: inherit; text-decoration: inherit;">msg_<wbr>retention_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_hcl" style="color: inherit; text-decoration: inherit;">policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_polling_wait_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_polling_wait_seconds_hcl" style="color: inherit; text-decoration: inherit;">polling_<wbr>wait_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_queue_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_queue_name_hcl" style="color: inherit; text-decoration: inherit;">queue_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_retention_size_in_mb_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retention_size_in_mb_hcl" style="color: inherit; text-decoration: inherit;">retention_<wbr>size_<wbr>in_<wbr>mb</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rewind_seconds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rewind_seconds_hcl" style="color: inherit; text-decoration: inherit;">rewind_<wbr>seconds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_trace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trace_hcl" style="color: inherit; text-decoration: inherit;">trace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_transaction_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_transaction_hcl" style="color: inherit; text-decoration: inherit;">transaction</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_visibility_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_visibility_timeout_hcl" style="color: inherit; text-decoration: inherit;">visibility_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1829,8 +2105,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Dead letter queue name.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter queue name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_firstqueryinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_firstqueryinterval_java" style="color: inherit; text-decoration: inherit;">first<wbr>Query<wbr>Interval</a>
@@ -1838,8 +2113,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>First lookback interval.</p>
-</dd><dt class="property-optional"
+    <dd>First lookback interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxmsgheapnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxmsgheapnum_java" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Heap<wbr>Num</a>
@@ -1847,8 +2121,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxmsgsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxmsgsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Size</a>
@@ -1856,8 +2129,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxquerycount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxquerycount_java" style="color: inherit; text-decoration: inherit;">max<wbr>Query<wbr>Count</a>
@@ -1865,8 +2137,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of lookbacks.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of lookbacks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxreceivecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxreceivecount_java" style="color: inherit; text-decoration: inherit;">max<wbr>Receive<wbr>Count</a>
@@ -1874,8 +2145,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum receipt times. Value range: 1-1000.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum receipt times. Value range: 1-1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxtimetolive_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxtimetolive_java" style="color: inherit; text-decoration: inherit;">max<wbr>Time<wbr>To<wbr>Live</a>
@@ -1883,8 +2153,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</p>
-</dd><dt class="property-optional"
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_msgretentionseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_msgretentionseconds_java" style="color: inherit; text-decoration: inherit;">msg<wbr>Retention<wbr>Seconds</a>
@@ -1892,8 +2161,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</p>
-</dd><dt class="property-optional"
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_java" style="color: inherit; text-decoration: inherit;">policy</a>
@@ -1901,8 +2169,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pollingwaitseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pollingwaitseconds_java" style="color: inherit; text-decoration: inherit;">polling<wbr>Wait<wbr>Seconds</a>
@@ -1910,8 +2177,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_queuename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_queuename_java" style="color: inherit; text-decoration: inherit;">queue<wbr>Name</a>
@@ -1919,8 +2185,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retentionsizeinmb_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retentionsizeinmb_java" style="color: inherit; text-decoration: inherit;">retention<wbr>Size<wbr>In<wbr>Mb</a>
@@ -1928,8 +2193,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rewindseconds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rewindseconds_java" style="color: inherit; text-decoration: inherit;">rewind<wbr>Seconds</a>
@@ -1937,8 +2201,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_trace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trace_java" style="color: inherit; text-decoration: inherit;">trace</a>
@@ -1946,8 +2209,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_transaction_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_transaction_java" style="color: inherit; text-decoration: inherit;">transaction</a>
@@ -1955,8 +2217,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>1: transaction queue; 0: general queue.</p>
-</dd><dt class="property-optional"
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_visibilitytimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_visibilitytimeout_java" style="color: inherit; text-decoration: inherit;">visibility<wbr>Timeout</a>
@@ -1964,8 +2225,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</p>
-</dd></dl>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1979,8 +2239,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Dead letter queue name.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter queue name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_firstqueryinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_firstqueryinterval_nodejs" style="color: inherit; text-decoration: inherit;">first<wbr>Query<wbr>Interval</a>
@@ -1988,8 +2247,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>First lookback interval.</p>
-</dd><dt class="property-optional"
+    <dd>First lookback interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxmsgheapnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxmsgheapnum_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Heap<wbr>Num</a>
@@ -1997,8 +2255,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxmsgsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxmsgsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Size</a>
@@ -2006,8 +2263,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxquerycount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxquerycount_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Query<wbr>Count</a>
@@ -2015,8 +2271,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of lookbacks.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of lookbacks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxreceivecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxreceivecount_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Receive<wbr>Count</a>
@@ -2024,8 +2279,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum receipt times. Value range: 1-1000.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum receipt times. Value range: 1-1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxtimetolive_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxtimetolive_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Time<wbr>To<wbr>Live</a>
@@ -2033,8 +2287,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</p>
-</dd><dt class="property-optional"
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_msgretentionseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_msgretentionseconds_nodejs" style="color: inherit; text-decoration: inherit;">msg<wbr>Retention<wbr>Seconds</a>
@@ -2042,8 +2295,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</p>
-</dd><dt class="property-optional"
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_nodejs" style="color: inherit; text-decoration: inherit;">policy</a>
@@ -2051,8 +2303,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pollingwaitseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pollingwaitseconds_nodejs" style="color: inherit; text-decoration: inherit;">polling<wbr>Wait<wbr>Seconds</a>
@@ -2060,8 +2311,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_queuename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_queuename_nodejs" style="color: inherit; text-decoration: inherit;">queue<wbr>Name</a>
@@ -2069,8 +2319,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retentionsizeinmb_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retentionsizeinmb_nodejs" style="color: inherit; text-decoration: inherit;">retention<wbr>Size<wbr>In<wbr>Mb</a>
@@ -2078,8 +2327,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rewindseconds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rewindseconds_nodejs" style="color: inherit; text-decoration: inherit;">rewind<wbr>Seconds</a>
@@ -2087,8 +2335,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_trace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trace_nodejs" style="color: inherit; text-decoration: inherit;">trace</a>
@@ -2096,8 +2343,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_transaction_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_transaction_nodejs" style="color: inherit; text-decoration: inherit;">transaction</a>
@@ -2105,8 +2351,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>1: transaction queue; 0: general queue.</p>
-</dd><dt class="property-optional"
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_visibilitytimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_visibilitytimeout_nodejs" style="color: inherit; text-decoration: inherit;">visibility<wbr>Timeout</a>
@@ -2114,8 +2359,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</p>
-</dd></dl>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2129,8 +2373,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Dead letter queue name.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter queue name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_first_query_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_first_query_interval_python" style="color: inherit; text-decoration: inherit;">first_<wbr>query_<wbr>interval</a>
@@ -2138,8 +2381,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>First lookback interval.</p>
-</dd><dt class="property-optional"
+    <dd>First lookback interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_msg_heap_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_msg_heap_num_python" style="color: inherit; text-decoration: inherit;">max_<wbr>msg_<wbr>heap_<wbr>num</a>
@@ -2147,8 +2389,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_msg_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_msg_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>msg_<wbr>size</a>
@@ -2156,8 +2397,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_query_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_query_count_python" style="color: inherit; text-decoration: inherit;">max_<wbr>query_<wbr>count</a>
@@ -2165,8 +2405,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of lookbacks.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of lookbacks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_receive_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_receive_count_python" style="color: inherit; text-decoration: inherit;">max_<wbr>receive_<wbr>count</a>
@@ -2174,8 +2413,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum receipt times. Value range: 1-1000.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum receipt times. Value range: 1-1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_time_to_live_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_time_to_live_python" style="color: inherit; text-decoration: inherit;">max_<wbr>time_<wbr>to_<wbr>live</a>
@@ -2183,8 +2421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</p>
-</dd><dt class="property-optional"
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_msg_retention_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_msg_retention_seconds_python" style="color: inherit; text-decoration: inherit;">msg_<wbr>retention_<wbr>seconds</a>
@@ -2192,8 +2429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</p>
-</dd><dt class="property-optional"
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_python" style="color: inherit; text-decoration: inherit;">policy</a>
@@ -2201,8 +2437,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_polling_wait_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_polling_wait_seconds_python" style="color: inherit; text-decoration: inherit;">polling_<wbr>wait_<wbr>seconds</a>
@@ -2210,8 +2445,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_queue_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_queue_name_python" style="color: inherit; text-decoration: inherit;">queue_<wbr>name</a>
@@ -2219,8 +2453,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retention_size_in_mb_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retention_size_in_mb_python" style="color: inherit; text-decoration: inherit;">retention_<wbr>size_<wbr>in_<wbr>mb</a>
@@ -2228,8 +2461,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rewind_seconds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rewind_seconds_python" style="color: inherit; text-decoration: inherit;">rewind_<wbr>seconds</a>
@@ -2237,8 +2469,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_trace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trace_python" style="color: inherit; text-decoration: inherit;">trace</a>
@@ -2246,8 +2477,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_transaction_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_transaction_python" style="color: inherit; text-decoration: inherit;">transaction</a>
@@ -2255,8 +2485,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>1: transaction queue; 0: general queue.</p>
-</dd><dt class="property-optional"
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_visibility_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_visibility_timeout_python" style="color: inherit; text-decoration: inherit;">visibility_<wbr>timeout</a>
@@ -2264,8 +2493,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</p>
-</dd></dl>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2279,8 +2507,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Dead letter queue name.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter queue name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_firstqueryinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_firstqueryinterval_yaml" style="color: inherit; text-decoration: inherit;">first<wbr>Query<wbr>Interval</a>
@@ -2288,8 +2515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>First lookback interval.</p>
-</dd><dt class="property-optional"
+    <dd>First lookback interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxmsgheapnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxmsgheapnum_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Heap<wbr>Num</a>
@@ -2297,8 +2523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxmsgsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxmsgsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Msg<wbr>Size</a>
@@ -2306,8 +2531,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxquerycount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxquerycount_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Query<wbr>Count</a>
@@ -2315,8 +2539,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of lookbacks.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of lookbacks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxreceivecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxreceivecount_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Receive<wbr>Count</a>
@@ -2324,8 +2547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum receipt times. Value range: 1-1000.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum receipt times. Value range: 1-1000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxtimetolive_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxtimetolive_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Time<wbr>To<wbr>Live</a>
@@ -2333,8 +2555,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</p>
-</dd><dt class="property-optional"
+    <dd>Maximum period in seconds before an unconsumed message expires, which is required if <code>policy</code> is 1. Value range: 300-43200. This value should be smaller than <code>msgRetentionSeconds</code> (maximum message retention period).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_msgretentionseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_msgretentionseconds_yaml" style="color: inherit; text-decoration: inherit;">msg<wbr>Retention<wbr>Seconds</a>
@@ -2342,8 +2563,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</p>
-</dd><dt class="property-optional"
+    <dd>The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_yaml" style="color: inherit; text-decoration: inherit;">policy</a>
@@ -2351,8 +2571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</p>
-</dd><dt class="property-optional"
+    <dd>Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: <code>Time-To-Live</code> has elapsed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pollingwaitseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pollingwaitseconds_yaml" style="color: inherit; text-decoration: inherit;">polling<wbr>Wait<wbr>Seconds</a>
@@ -2360,8 +2579,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_queuename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_queuename_yaml" style="color: inherit; text-decoration: inherit;">queue<wbr>Name</a>
@@ -2369,8 +2587,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retentionsizeinmb_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retentionsizeinmb_yaml" style="color: inherit; text-decoration: inherit;">retention<wbr>Size<wbr>In<wbr>Mb</a>
@@ -2378,8 +2595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rewindseconds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rewindseconds_yaml" style="color: inherit; text-decoration: inherit;">rewind<wbr>Seconds</a>
@@ -2387,8 +2603,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value <code>0</code> indicates that message rewind is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_trace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trace_yaml" style="color: inherit; text-decoration: inherit;">trace</a>
@@ -2396,8 +2611,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_transaction_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_transaction_yaml" style="color: inherit; text-decoration: inherit;">transaction</a>
@@ -2405,8 +2619,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>1: transaction queue; 0: general queue.</p>
-</dd><dt class="property-optional"
+    <dd>1: transaction queue; 0: general queue.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_visibilitytimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_visibilitytimeout_yaml" style="color: inherit; text-decoration: inherit;">visibility<wbr>Timeout</a>
@@ -2414,8 +2627,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</p>
-</dd></dl>
+    <dd>Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2438,6 +2650,9 @@ $ pulumi import tencentcloud:Tcmq/queue:Queue queue queue_id
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -2447,7 +2662,6 @@ $ pulumi import tencentcloud:Tcmq/queue:Queue queue queue_id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

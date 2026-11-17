@@ -2,9 +2,11 @@
 ---
 title: "Idl"
 title_tag: "tencentcloud.Tcaplus.Idl"
-meta_desc: "Documentation for the tencentcloud.Tcaplus.Idl resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create TcaplusDB IDL file."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -20,21 +22,25 @@ Use this resource to create TcaplusDB IDL file.
 
 The file will be with a specified cluster and tablegroup.
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const config = new pulumi.Config();
 const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
-const vpc = tencentcloud.Vpc.getSubnets({
+const vpc = tencentcloud.vpc.getSubnets({
     isDefault: true,
     availabilityZone: availabilityZone,
 });
 const vpcId = vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId);
 const subnetId = vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId);
-const exampleCluster = new tencentcloud.tcaplus.Cluster("exampleCluster", {
+const example = new tencentcloud.tcaplus.Cluster("example", {
     idlType: "PROTO",
     clusterName: "tf_example_tcaplus_cluster",
     vpcId: vpcId,
@@ -42,21 +48,21 @@ const exampleCluster = new tencentcloud.tcaplus.Cluster("exampleCluster", {
     password: "your_pw_123111",
     oldPasswordExpireLast: 3600,
 });
-const exampleTablegroup = new tencentcloud.tcaplus.Tablegroup("exampleTablegroup", {
-    clusterId: exampleCluster.id,
+const exampleTablegroup = new tencentcloud.tcaplus.Tablegroup("example", {
+    clusterId: example.id,
     tablegroupName: "tf_example_group_name",
 });
 const main = new tencentcloud.tcaplus.Idl("main", {
-    clusterId: exampleCluster.id,
+    clusterId: example.id,
     tablegroupId: exampleTablegroup.id,
     fileName: "tf_example_tcaplus_idl",
     fileType: "PROTO",
     fileExtType: "proto",
-    fileContent: `    syntax = "proto2";
+    fileContent: `    syntax = \\"proto2\\";
     package myTcaplusTable;
-    import "tcaplusservice.optionv1.proto";
+    import \\"tcaplusservice.optionv1.proto\\";
     message tb_online {
-        option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
+        option(tcaplusservice.tcaplus_primary_key) = \\"uin,name,region\\";
         required int64 uin = 1;
         required string name = 2;
         required int32 region = 3;
@@ -80,6 +86,11 @@ const main = new tencentcloud.tcaplus.Idl("main", {
 `,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
@@ -89,31 +100,31 @@ config = pulumi.Config()
 availability_zone = config.get("availabilityZone")
 if availability_zone is None:
     availability_zone = "ap-guangzhou-3"
-vpc = tencentcloud.Vpc.get_subnets(is_default=True,
+vpc = tencentcloud.vpc.get_subnets(is_default=True,
     availability_zone=availability_zone)
 vpc_id = vpc.instance_lists[0].vpc_id
 subnet_id = vpc.instance_lists[0].subnet_id
-example_cluster = tencentcloud.tcaplus.Cluster("exampleCluster",
+example = tencentcloud.tcaplus.Cluster("example",
     idl_type="PROTO",
     cluster_name="tf_example_tcaplus_cluster",
     vpc_id=vpc_id,
     subnet_id=subnet_id,
     password="your_pw_123111",
     old_password_expire_last=3600)
-example_tablegroup = tencentcloud.tcaplus.Tablegroup("exampleTablegroup",
-    cluster_id=example_cluster.id,
+example_tablegroup = tencentcloud.tcaplus.Tablegroup("example",
+    cluster_id=example.id,
     tablegroup_name="tf_example_group_name")
 main = tencentcloud.tcaplus.Idl("main",
-    cluster_id=example_cluster.id,
+    cluster_id=example.id,
     tablegroup_id=example_tablegroup.id,
     file_name="tf_example_tcaplus_idl",
     file_type="PROTO",
     file_ext_type="proto",
-    file_content="""    syntax = "proto2";
+    file_content="""    syntax = \"proto2\";
     package myTcaplusTable;
-    import "tcaplusservice.optionv1.proto";
+    import \"tcaplusservice.optionv1.proto\";
     message tb_online {
-        option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
+        option(tcaplusservice.tcaplus_primary_key) = \"uin,name,region\";
         required int64 uin = 1;
         required string name = 2;
         required int32 region = 3;
@@ -136,88 +147,19 @@ main = tencentcloud.tcaplus.Idl("main",
     }
 """)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var config = new Config();
-    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
-    {
-        IsDefault = true,
-        AvailabilityZone = availabilityZone,
-    });
-
-    var vpcId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.VpcId);
-
-    var subnetId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.SubnetId);
-
-    var exampleCluster = new Tencentcloud.Tcaplus.Cluster("exampleCluster", new()
-    {
-        IdlType = "PROTO",
-        ClusterName = "tf_example_tcaplus_cluster",
-        VpcId = vpcId,
-        SubnetId = subnetId,
-        Password = "your_pw_123111",
-        OldPasswordExpireLast = 3600,
-    });
-
-    var exampleTablegroup = new Tencentcloud.Tcaplus.Tablegroup("exampleTablegroup", new()
-    {
-        ClusterId = exampleCluster.Id,
-        TablegroupName = "tf_example_group_name",
-    });
-
-    var main = new Tencentcloud.Tcaplus.Idl("main", new()
-    {
-        ClusterId = exampleCluster.Id,
-        TablegroupId = exampleTablegroup.Id,
-        FileName = "tf_example_tcaplus_idl",
-        FileType = "PROTO",
-        FileExtType = "proto",
-        FileContent = @"    syntax = ""proto2"";
-    package myTcaplusTable;
-    import ""tcaplusservice.optionv1.proto"";
-    message tb_online {
-        option(tcaplusservice.tcaplus_primary_key) = ""uin,name,region"";
-        required int64 uin = 1;
-        required string name = 2;
-        required int32 region = 3;
-        required int32 gamesvrid = 4;
-        optional int32 logintime = 5 [default = 1];
-        repeated int64 lockid = 6 [packed = true];
-        optional bool is_available = 7 [default = false];
-        optional pay_info pay = 8;
-    }
-
-    message pay_info {
-        required int64 pay_id = 1;
-        optional uint64 total_money = 2;
-        optional uint64 pay_times = 3;
-        optional pay_auth_info auth = 4;
-        message pay_auth_info {
-            required string pay_keys = 1;
-            optional int64 update_time = 2;
-        }
-    }
-",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcaplus"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 )
 
 func main() {
@@ -227,16 +169,16 @@ func main() {
 		if param := cfg.Get("availabilityZone"); param != "" {
 			availabilityZone = param
 		}
-		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+		vpc2, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
 			IsDefault:        pulumi.BoolRef(true),
 			AvailabilityZone: pulumi.StringRef(availabilityZone),
 		}, nil)
 		if err != nil {
 			return err
 		}
-		vpcId := vpc.InstanceLists[0].VpcId
-		subnetId := vpc.InstanceLists[0].SubnetId
-		exampleCluster, err := Tcaplus.NewCluster(ctx, "exampleCluster", &Tcaplus.ClusterArgs{
+		vpcId := vpc2.InstanceLists[0].VpcId
+		subnetId := vpc2.InstanceLists[0].SubnetId
+		example, err := tcaplus.NewCluster(ctx, "example", &tcaplus.ClusterArgs{
 			IdlType:               pulumi.String("PROTO"),
 			ClusterName:           pulumi.String("tf_example_tcaplus_cluster"),
 			VpcId:                 pulumi.String(vpcId),
@@ -247,24 +189,24 @@ func main() {
 		if err != nil {
 			return err
 		}
-		exampleTablegroup, err := Tcaplus.NewTablegroup(ctx, "exampleTablegroup", &Tcaplus.TablegroupArgs{
-			ClusterId:      exampleCluster.ID(),
+		exampleTablegroup, err := tcaplus.NewTablegroup(ctx, "example", &tcaplus.TablegroupArgs{
+			ClusterId:      example.ID().ToIDOutput().ToStringOutput(),
 			TablegroupName: pulumi.String("tf_example_group_name"),
 		})
 		if err != nil {
 			return err
 		}
-		_, err = Tcaplus.NewIdl(ctx, "main", &Tcaplus.IdlArgs{
-			ClusterId:    exampleCluster.ID(),
-			TablegroupId: exampleTablegroup.ID(),
+		_, err = tcaplus.NewIdl(ctx, "main", &tcaplus.IdlArgs{
+			ClusterId:    example.ID().ToIDOutput().ToStringOutput(),
+			TablegroupId: exampleTablegroup.ID().ToIDOutput().ToStringOutput(),
 			FileName:     pulumi.String("tf_example_tcaplus_idl"),
 			FileType:     pulumi.String("PROTO"),
 			FileExtType:  pulumi.String("proto"),
-			FileContent: pulumi.String(`    syntax = "proto2";
+			FileContent: pulumi.String(`    syntax = \"proto2\";
     package myTcaplusTable;
-    import "tcaplusservice.optionv1.proto";
+    import \"tcaplusservice.optionv1.proto\";
     message tb_online {
-        option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
+        option(tcaplusservice.tcaplus_primary_key) = \"uin,name,region\";
         required int64 uin = 1;
         required string name = 2;
         required int32 region = 3;
@@ -294,6 +236,89 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+    {
+        IsDefault = true,
+        AvailabilityZone = availabilityZone,
+    });
+
+    var vpcId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.VpcId);
+
+    var subnetId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.SubnetId);
+
+    var example = new Tencentcloud.Tcaplus.Cluster("example", new()
+    {
+        IdlType = "PROTO",
+        ClusterName = "tf_example_tcaplus_cluster",
+        VpcId = vpcId,
+        SubnetId = subnetId,
+        Password = "your_pw_123111",
+        OldPasswordExpireLast = 3600,
+    });
+
+    var exampleTablegroup = new Tencentcloud.Tcaplus.Tablegroup("example", new()
+    {
+        ClusterId = example.Id,
+        TablegroupName = "tf_example_group_name",
+    });
+
+    var main = new Tencentcloud.Tcaplus.Idl("main", new()
+    {
+        ClusterId = example.Id,
+        TablegroupId = exampleTablegroup.Id,
+        FileName = "tf_example_tcaplus_idl",
+        FileType = "PROTO",
+        FileExtType = "proto",
+        FileContent = @"    syntax = \""proto2\"";
+    package myTcaplusTable;
+    import \""tcaplusservice.optionv1.proto\"";
+    message tb_online {
+        option(tcaplusservice.tcaplus_primary_key) = \""uin,name,region\"";
+        required int64 uin = 1;
+        required string name = 2;
+        required int32 region = 3;
+        required int32 gamesvrid = 4;
+        optional int32 logintime = 5 [default = 1];
+        repeated int64 lockid = 6 [packed = true];
+        optional bool is_available = 7 [default = false];
+        optional pay_info pay = 8;
+    }
+
+    message pay_info {
+        required int64 pay_id = 1;
+        optional uint64 total_money = 2;
+        optional uint64 pay_times = 3;
+        optional pay_auth_info auth = 4;
+        message pay_auth_info {
+            required string pay_keys = 1;
+            optional int64 update_time = 2;
+        }
+    }
+",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -308,8 +333,8 @@ import com.pulumi.tencentcloud.Tcaplus.Tablegroup;
 import com.pulumi.tencentcloud.Tcaplus.TablegroupArgs;
 import com.pulumi.tencentcloud.Tcaplus.Idl;
 import com.pulumi.tencentcloud.Tcaplus.IdlArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -328,11 +353,11 @@ public class App {
             .availabilityZone(availabilityZone)
             .build());
 
-        final var vpcId = vpc.applyValue(getSubnetsResult -> getSubnetsResult.instanceLists()[0].vpcId());
+        final var vpcId = vpc.instanceLists()[0].vpcId();
 
-        final var subnetId = vpc.applyValue(getSubnetsResult -> getSubnetsResult.instanceLists()[0].subnetId());
+        final var subnetId = vpc.instanceLists()[0].subnetId();
 
-        var exampleCluster = new Cluster("exampleCluster", ClusterArgs.builder()        
+        var example = new Cluster("example", ClusterArgs.builder()
             .idlType("PROTO")
             .clusterName("tf_example_tcaplus_cluster")
             .vpcId(vpcId)
@@ -341,23 +366,23 @@ public class App {
             .oldPasswordExpireLast(3600)
             .build());
 
-        var exampleTablegroup = new Tablegroup("exampleTablegroup", TablegroupArgs.builder()        
-            .clusterId(exampleCluster.id())
+        var exampleTablegroup = new Tablegroup("exampleTablegroup", TablegroupArgs.builder()
+            .clusterId(example.id())
             .tablegroupName("tf_example_group_name")
             .build());
 
-        var main = new Idl("main", IdlArgs.builder()        
-            .clusterId(exampleCluster.id())
+        var main = new Idl("main", IdlArgs.builder()
+            .clusterId(example.id())
             .tablegroupId(exampleTablegroup.id())
             .fileName("tf_example_tcaplus_idl")
             .fileType("PROTO")
             .fileExtType("proto")
             .fileContent("""
-    syntax = "proto2";
+    syntax = \"proto2\";
     package myTcaplusTable;
-    import "tcaplusservice.optionv1.proto";
+    import \"tcaplusservice.optionv1.proto\";
     message tb_online {
-        option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
+        option(tcaplusservice.tcaplus_primary_key) = \"uin,name,region\";
         required int64 uin = 1;
         required string name = 2;
         required int32 region = 3;
@@ -384,13 +409,18 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 configuration:
   availabilityZone:
     type: string
     default: ap-guangzhou-3
 resources:
-  exampleCluster:
+  example:
     type: tencentcloud:Tcaplus:Cluster
     properties:
       idlType: PROTO
@@ -401,23 +431,24 @@ resources:
       oldPasswordExpireLast: 3600
   exampleTablegroup:
     type: tencentcloud:Tcaplus:Tablegroup
+    name: example
     properties:
-      clusterId: ${exampleCluster.id}
+      clusterId: ${example.id}
       tablegroupName: tf_example_group_name
   main:
     type: tencentcloud:Tcaplus:Idl
     properties:
-      clusterId: ${exampleCluster.id}
+      clusterId: ${example.id}
       tablegroupId: ${exampleTablegroup.id}
       fileName: tf_example_tcaplus_idl
       fileType: PROTO
       fileExtType: proto
       fileContent: |2
-            syntax = "proto2";
+            syntax = \"proto2\";
             package myTcaplusTable;
-            import "tcaplusservice.optionv1.proto";
+            import \"tcaplusservice.optionv1.proto\";
             message tb_online {
-                option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
+                option(tcaplusservice.tcaplus_primary_key) = \"uin,name,region\";
                 required int64 uin = 1;
                 required string name = 2;
                 required int32 region = 3;
@@ -443,31 +474,99 @@ variables:
   subnetId: ${vpc.instanceLists[0].subnetId}
   vpc:
     fn::invoke:
-      Function: tencentcloud:Vpc:getSubnets
-      Arguments:
+      function: tencentcloud:Vpc:getSubnets
+      arguments:
         isDefault: true
         availabilityZone: ${availabilityZone}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_vpc_getsubnets" "vpc" {
+  is_default        = true
+  availability_zone = var.availabilityZone
+}
+
+resource "tencentcloud_tcaplus_cluster" "example" {
+  idl_type                 = "PROTO"
+  cluster_name             = "tf_example_tcaplus_cluster"
+  vpc_id                   = local.vpcId
+  subnet_id                = local.subnetId
+  password                 = "your_pw_123111"
+  old_password_expire_last = 3600
+}
+resource "tencentcloud_tcaplus_tablegroup" "example" {
+  cluster_id      = tencentcloud_tcaplus_cluster.example.id
+  tablegroup_name = "tf_example_group_name"
+}
+resource "tencentcloud_tcaplus_idl" "main" {
+  cluster_id    = tencentcloud_tcaplus_cluster.example.id
+  tablegroup_id = tencentcloud_tcaplus_tablegroup.example.id
+  file_name     = "tf_example_tcaplus_idl"
+  file_type     = "PROTO"
+  file_ext_type = "proto"
+  file_content  = "    syntax = \\\"proto2\\\";\n    package myTcaplusTable;\n    import \\\"tcaplusservice.optionv1.proto\\\";\n    message tb_online {\n        option(tcaplusservice.tcaplus_primary_key) = \\\"uin,name,region\\\";\n        required int64 uin = 1;\n        required string name = 2;\n        required int32 region = 3;\n        required int32 gamesvrid = 4;\n        optional int32 logintime = 5 [default = 1];\n        repeated int64 lockid = 6 [packed = true];\n        optional bool is_available = 7 [default = false];\n        optional pay_info pay = 8;\n    }\n\n    message pay_info {\n        required int64 pay_id = 1;\n        optional uint64 total_money = 2;\n        optional uint64 pay_times = 3;\n        optional pay_auth_info auth = 4;\n        message pay_auth_info {\n            required string pay_keys = 1;\n            optional int64 update_time = 2;\n        }\n    }\n"
+}
+locals {
+  vpcId = data.tencentcloud_vpc_getsubnets.vpc.instance_lists[0].vpc_id
+}
+locals {
+  subnetId = data.tencentcloud_vpc_getsubnets.vpc.instance_lists[0].subnet_id
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-3"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [VerifyIdlFiles](https://www.tencentcloud.com/document/api/1016/35029)
+* Read: [VerifyIdlFiles](https://www.tencentcloud.com/document/api/1016/35029)
+* Delete: [DeleteIdlFiles](https://www.tencentcloud.com/document/api/1016/35051)
 
 
 
 ## Create Idl Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Idl</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">IdlArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Idl</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">IdlArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Idl</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">IdlArgs</a></span><span class="p">,</span>
+        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Idl</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -475,44 +574,50 @@ variables:
         <span class="nx">file_ext_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">file_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">file_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tablegroup_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Idl</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">IdlArgs</a></span><span class="p">,</span>
-        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+        <span class="nx">tablegroup_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewIdl</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">IdlArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Idl</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewIdl</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">IdlArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Idl</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Idl</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">IdlArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Idl</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">IdlArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Idl</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">IdlArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Idl</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">IdlArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcaplus:Idl</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcaplus:Idl</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tcaplus_idl&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -533,7 +638,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -650,11 +755,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## Idl Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -670,8 +783,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="filecontent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filecontent_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Content</a>
@@ -679,8 +791,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IDL file content of the TcaplusDB table.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>IDL file content of the TcaplusDB table.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="fileexttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileexttype_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Ext<wbr>Type</a>
@@ -688,8 +799,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File ext type of the IDL file. If <code>file_type</code> is <code>PROTO</code>, <code>file_ext_type</code> must be 'proto'; If <code>file_type</code> is <code>TDR</code>, <code>file_ext_type</code> must be 'xml'.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>File ext type of the IDL file. If <code>fileType</code> is <code>PROTO</code>, <code>fileExtType</code> must be 'proto'; If <code>fileType</code> is <code>TDR</code>, <code>fileExtType</code> must be 'xml'.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="filename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filename_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Name</a>
@@ -697,8 +807,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the IDL file.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the IDL file.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="filetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filetype_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Type</a>
@@ -706,8 +815,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the IDL file. Valid values are PROTO and TDR.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of the IDL file. Valid values are PROTO and TDR.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tablegroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_csharp" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Id</a>
@@ -715,8 +823,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the table group to which the IDL file belongs.</p>
-</dd></dl>
+    <dd>ID of the table group to which the IDL file belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -730,8 +837,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="filecontent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filecontent_go" style="color: inherit; text-decoration: inherit;">File<wbr>Content</a>
@@ -739,8 +845,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IDL file content of the TcaplusDB table.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>IDL file content of the TcaplusDB table.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="fileexttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileexttype_go" style="color: inherit; text-decoration: inherit;">File<wbr>Ext<wbr>Type</a>
@@ -748,8 +853,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File ext type of the IDL file. If <code>file_type</code> is <code>PROTO</code>, <code>file_ext_type</code> must be 'proto'; If <code>file_type</code> is <code>TDR</code>, <code>file_ext_type</code> must be 'xml'.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>File ext type of the IDL file. If <code>fileType</code> is <code>PROTO</code>, <code>fileExtType</code> must be 'proto'; If <code>fileType</code> is <code>TDR</code>, <code>fileExtType</code> must be 'xml'.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="filename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filename_go" style="color: inherit; text-decoration: inherit;">File<wbr>Name</a>
@@ -757,8 +861,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the IDL file.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the IDL file.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="filetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filetype_go" style="color: inherit; text-decoration: inherit;">File<wbr>Type</a>
@@ -766,8 +869,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the IDL file. Valid values are PROTO and TDR.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of the IDL file. Valid values are PROTO and TDR.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tablegroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_go" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Id</a>
@@ -775,8 +877,61 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the table group to which the IDL file belongs.</p>
-</dd></dl>
+    <dd>ID of the table group to which the IDL file belongs.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="file_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_content_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IDL file content of the TcaplusDB table.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="file_ext_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_ext_type_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>ext_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File ext type of the IDL file. If <code>fileType</code> is <code>PROTO</code>, <code>fileExtType</code> must be 'proto'; If <code>fileType</code> is <code>TDR</code>, <code>fileExtType</code> must be 'xml'.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="file_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_name_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the IDL file.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="file_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_type_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the IDL file. Valid values are PROTO and TDR.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="tablegroup_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_id_hcl" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the table group to which the IDL file belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -790,8 +945,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="filecontent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filecontent_java" style="color: inherit; text-decoration: inherit;">file<wbr>Content</a>
@@ -799,8 +953,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IDL file content of the TcaplusDB table.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>IDL file content of the TcaplusDB table.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="fileexttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileexttype_java" style="color: inherit; text-decoration: inherit;">file<wbr>Ext<wbr>Type</a>
@@ -808,8 +961,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File ext type of the IDL file. If <code>file_type</code> is <code>PROTO</code>, <code>file_ext_type</code> must be 'proto'; If <code>file_type</code> is <code>TDR</code>, <code>file_ext_type</code> must be 'xml'.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>File ext type of the IDL file. If <code>fileType</code> is <code>PROTO</code>, <code>fileExtType</code> must be 'proto'; If <code>fileType</code> is <code>TDR</code>, <code>fileExtType</code> must be 'xml'.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="filename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filename_java" style="color: inherit; text-decoration: inherit;">file<wbr>Name</a>
@@ -817,8 +969,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the IDL file.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the IDL file.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="filetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filetype_java" style="color: inherit; text-decoration: inherit;">file<wbr>Type</a>
@@ -826,8 +977,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the IDL file. Valid values are PROTO and TDR.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of the IDL file. Valid values are PROTO and TDR.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tablegroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_java" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -835,8 +985,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the table group to which the IDL file belongs.</p>
-</dd></dl>
+    <dd>ID of the table group to which the IDL file belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -850,8 +999,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="filecontent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filecontent_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Content</a>
@@ -859,8 +1007,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IDL file content of the TcaplusDB table.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>IDL file content of the TcaplusDB table.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="fileexttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileexttype_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Ext<wbr>Type</a>
@@ -868,8 +1015,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File ext type of the IDL file. If <code>file_type</code> is <code>PROTO</code>, <code>file_ext_type</code> must be 'proto'; If <code>file_type</code> is <code>TDR</code>, <code>file_ext_type</code> must be 'xml'.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>File ext type of the IDL file. If <code>fileType</code> is <code>PROTO</code>, <code>fileExtType</code> must be 'proto'; If <code>fileType</code> is <code>TDR</code>, <code>fileExtType</code> must be 'xml'.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="filename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filename_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Name</a>
@@ -877,8 +1023,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the IDL file.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the IDL file.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="filetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filetype_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Type</a>
@@ -886,8 +1031,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the IDL file. Valid values are PROTO and TDR.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of the IDL file. Valid values are PROTO and TDR.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tablegroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_nodejs" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -895,8 +1039,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the table group to which the IDL file belongs.</p>
-</dd></dl>
+    <dd>ID of the table group to which the IDL file belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -910,8 +1053,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="file_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_content_python" style="color: inherit; text-decoration: inherit;">file_<wbr>content</a>
@@ -919,8 +1061,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IDL file content of the TcaplusDB table.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>IDL file content of the TcaplusDB table.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="file_ext_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_ext_type_python" style="color: inherit; text-decoration: inherit;">file_<wbr>ext_<wbr>type</a>
@@ -928,8 +1069,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File ext type of the IDL file. If <code>file_type</code> is <code>PROTO</code>, <code>file_ext_type</code> must be 'proto'; If <code>file_type</code> is <code>TDR</code>, <code>file_ext_type</code> must be 'xml'.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>File ext type of the IDL file. If <code>fileType</code> is <code>PROTO</code>, <code>fileExtType</code> must be 'proto'; If <code>fileType</code> is <code>TDR</code>, <code>fileExtType</code> must be 'xml'.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="file_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_name_python" style="color: inherit; text-decoration: inherit;">file_<wbr>name</a>
@@ -937,8 +1077,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the IDL file.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the IDL file.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="file_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_type_python" style="color: inherit; text-decoration: inherit;">file_<wbr>type</a>
@@ -946,8 +1085,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the IDL file. Valid values are PROTO and TDR.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of the IDL file. Valid values are PROTO and TDR.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tablegroup_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_id_python" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
@@ -955,8 +1093,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the table group to which the IDL file belongs.</p>
-</dd></dl>
+    <dd>ID of the table group to which the IDL file belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -970,8 +1107,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="filecontent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filecontent_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Content</a>
@@ -979,8 +1115,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IDL file content of the TcaplusDB table.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>IDL file content of the TcaplusDB table.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="fileexttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fileexttype_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Ext<wbr>Type</a>
@@ -988,8 +1123,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File ext type of the IDL file. If <code>file_type</code> is <code>PROTO</code>, <code>file_ext_type</code> must be 'proto'; If <code>file_type</code> is <code>TDR</code>, <code>file_ext_type</code> must be 'xml'.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>File ext type of the IDL file. If <code>fileType</code> is <code>PROTO</code>, <code>fileExtType</code> must be 'proto'; If <code>fileType</code> is <code>TDR</code>, <code>fileExtType</code> must be 'xml'.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="filename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filename_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Name</a>
@@ -997,8 +1131,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the IDL file.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the IDL file.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="filetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filetype_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Type</a>
@@ -1006,8 +1139,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the IDL file. Valid values are PROTO and TDR.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of the IDL file. Valid values are PROTO and TDR.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="tablegroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_yaml" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -1015,8 +1147,7 @@ The Idl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the table group to which the IDL file belongs.</p>
-</dd></dl>
+    <dd>ID of the table group to which the IDL file belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1037,8 +1168,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tableinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableinfos_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Infos</a>
@@ -1046,8 +1176,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#idltableinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcaplus.<wbr>Outputs.<wbr>Idl<wbr>Table<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Table info of the IDL.</p>
-</dd></dl>
+    <dd>Table info of the IDL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1061,8 +1190,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tableinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableinfos_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Infos</a>
@@ -1070,8 +1198,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#idltableinfo">[]Idl<wbr>Table<wbr>Info</a></span>
     </dt>
-    <dd><p>Table info of the IDL.</p>
-</dd></dl>
+    <dd>Table info of the IDL.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="table_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_infos_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#idltableinfo">list(object)</a></span>
+    </dt>
+    <dd>Table info of the IDL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1085,8 +1234,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tableinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableinfos_java" style="color: inherit; text-decoration: inherit;">table<wbr>Infos</a>
@@ -1094,8 +1242,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#idltableinfo">List&lt;Idl<wbr>Table<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Table info of the IDL.</p>
-</dd></dl>
+    <dd>Table info of the IDL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1109,8 +1256,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tableinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableinfos_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Infos</a>
@@ -1118,8 +1264,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#idltableinfo">Idl<wbr>Table<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Table info of the IDL.</p>
-</dd></dl>
+    <dd>Table info of the IDL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1133,17 +1278,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="table_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_infos_python" style="color: inherit; text-decoration: inherit;">table_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#idltableinfo">Idl<wbr>Table<wbr>Info]</a></span>
+        <span class="property-type"><a href="#idltableinfo">Sequence[Idl<wbr>Table<wbr>Info]</a></span>
     </dt>
-    <dd><p>Table info of the IDL.</p>
-</dd></dl>
+    <dd>Table info of the IDL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1157,8 +1300,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tableinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableinfos_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Infos</a>
@@ -1166,8 +1308,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#idltableinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Table info of the IDL.</p>
-</dd></dl>
+    <dd>Table info of the IDL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1177,18 +1318,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Idl resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">IdlState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Idl</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">IdlState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Idl</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1197,106 +1338,145 @@ Get an existing Idl resource's state with the given name, ID, and optional extra
         <span class="nx">file_ext_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">file_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">file_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">table_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tcaplus.IdlTableInfoArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">table_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[IdlTableInfoArgs]]</span> = None<span class="p">,</span>
         <span class="nx">tablegroup_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Idl</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetIdl<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">IdlState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Idl</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetIdl<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">IdlState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Idl</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Idl</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">IdlState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Idl</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">IdlState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Idl</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">IdlState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Idl</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">IdlState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingIdl</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tcaplus:Idl</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tcaplus_idl</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">IdlState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">IdlState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1304,28 +1484,31 @@ Get an existing Idl resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">IdlState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1333,28 +1516,31 @@ Get an existing Idl resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">IdlState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1374,8 +1560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filecontent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filecontent_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Content</a>
@@ -1383,8 +1568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IDL file content of the TcaplusDB table.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>IDL file content of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_fileexttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fileexttype_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Ext<wbr>Type</a>
@@ -1392,8 +1576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File ext type of the IDL file. If <code>file_type</code> is <code>PROTO</code>, <code>file_ext_type</code> must be 'proto'; If <code>file_type</code> is <code>TDR</code>, <code>file_ext_type</code> must be 'xml'.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>File ext type of the IDL file. If <code>fileType</code> is <code>PROTO</code>, <code>fileExtType</code> must be 'proto'; If <code>fileType</code> is <code>TDR</code>, <code>fileExtType</code> must be 'xml'.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filename_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Name</a>
@@ -1401,8 +1584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the IDL file.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the IDL file.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filetype_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Type</a>
@@ -1410,17 +1592,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the IDL file. Valid values are PROTO and TDR.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the IDL file. Valid values are PROTO and TDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tableinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tableinfos_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#idltableinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcaplus.<wbr>Inputs.<wbr>Idl<wbr>Table<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#idltableinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcaplus.<wbr>Inputs.<wbr>Idl<wbr>Table<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Table info of the IDL.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Table info of the IDL.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tablegroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupid_csharp" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Id</a>
@@ -1428,8 +1608,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the table group to which the IDL file belongs.</p>
-</dd></dl>
+    <dd>ID of the table group to which the IDL file belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1443,8 +1622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filecontent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filecontent_go" style="color: inherit; text-decoration: inherit;">File<wbr>Content</a>
@@ -1452,8 +1630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IDL file content of the TcaplusDB table.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>IDL file content of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_fileexttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fileexttype_go" style="color: inherit; text-decoration: inherit;">File<wbr>Ext<wbr>Type</a>
@@ -1461,8 +1638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File ext type of the IDL file. If <code>file_type</code> is <code>PROTO</code>, <code>file_ext_type</code> must be 'proto'; If <code>file_type</code> is <code>TDR</code>, <code>file_ext_type</code> must be 'xml'.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>File ext type of the IDL file. If <code>fileType</code> is <code>PROTO</code>, <code>fileExtType</code> must be 'proto'; If <code>fileType</code> is <code>TDR</code>, <code>fileExtType</code> must be 'xml'.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filename_go" style="color: inherit; text-decoration: inherit;">File<wbr>Name</a>
@@ -1470,8 +1646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the IDL file.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the IDL file.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filetype_go" style="color: inherit; text-decoration: inherit;">File<wbr>Type</a>
@@ -1479,8 +1654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the IDL file. Valid values are PROTO and TDR.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the IDL file. Valid values are PROTO and TDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tableinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tableinfos_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Infos</a>
@@ -1488,8 +1662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#idltableinfo">[]Idl<wbr>Table<wbr>Info<wbr>Args</a></span>
     </dt>
-    <dd><p>Table info of the IDL.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Table info of the IDL.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tablegroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupid_go" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Id</a>
@@ -1497,8 +1670,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the table group to which the IDL file belongs.</p>
-</dd></dl>
+    <dd>ID of the table group to which the IDL file belongs.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_file_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_file_content_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IDL file content of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_file_ext_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_file_ext_type_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>ext_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File ext type of the IDL file. If <code>fileType</code> is <code>PROTO</code>, <code>fileExtType</code> must be 'proto'; If <code>fileType</code> is <code>TDR</code>, <code>fileExtType</code> must be 'xml'.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_file_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_file_name_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the IDL file.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_file_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_file_type_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the IDL file. Valid values are PROTO and TDR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_table_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_table_infos_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#idltableinfo">list(object)</a></span>
+    </dt>
+    <dd>Table info of the IDL.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_tablegroup_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroup_id_hcl" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the table group to which the IDL file belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1512,8 +1746,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filecontent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filecontent_java" style="color: inherit; text-decoration: inherit;">file<wbr>Content</a>
@@ -1521,8 +1754,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IDL file content of the TcaplusDB table.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>IDL file content of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_fileexttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fileexttype_java" style="color: inherit; text-decoration: inherit;">file<wbr>Ext<wbr>Type</a>
@@ -1530,8 +1762,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File ext type of the IDL file. If <code>file_type</code> is <code>PROTO</code>, <code>file_ext_type</code> must be 'proto'; If <code>file_type</code> is <code>TDR</code>, <code>file_ext_type</code> must be 'xml'.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>File ext type of the IDL file. If <code>fileType</code> is <code>PROTO</code>, <code>fileExtType</code> must be 'proto'; If <code>fileType</code> is <code>TDR</code>, <code>fileExtType</code> must be 'xml'.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filename_java" style="color: inherit; text-decoration: inherit;">file<wbr>Name</a>
@@ -1539,8 +1770,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the IDL file.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the IDL file.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filetype_java" style="color: inherit; text-decoration: inherit;">file<wbr>Type</a>
@@ -1548,17 +1778,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the IDL file. Valid values are PROTO and TDR.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the IDL file. Valid values are PROTO and TDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tableinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tableinfos_java" style="color: inherit; text-decoration: inherit;">table<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#idltableinfo">List&lt;Idl<wbr>Table<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#idltableinfo">List&lt;Idl<wbr>Table<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Table info of the IDL.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Table info of the IDL.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tablegroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupid_java" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -1566,8 +1794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the table group to which the IDL file belongs.</p>
-</dd></dl>
+    <dd>ID of the table group to which the IDL file belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1581,8 +1808,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filecontent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filecontent_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Content</a>
@@ -1590,8 +1816,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IDL file content of the TcaplusDB table.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>IDL file content of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_fileexttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fileexttype_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Ext<wbr>Type</a>
@@ -1599,8 +1824,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File ext type of the IDL file. If <code>file_type</code> is <code>PROTO</code>, <code>file_ext_type</code> must be 'proto'; If <code>file_type</code> is <code>TDR</code>, <code>file_ext_type</code> must be 'xml'.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>File ext type of the IDL file. If <code>fileType</code> is <code>PROTO</code>, <code>fileExtType</code> must be 'proto'; If <code>fileType</code> is <code>TDR</code>, <code>fileExtType</code> must be 'xml'.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filename_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Name</a>
@@ -1608,8 +1832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the IDL file.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the IDL file.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filetype_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Type</a>
@@ -1617,17 +1840,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the IDL file. Valid values are PROTO and TDR.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the IDL file. Valid values are PROTO and TDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tableinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tableinfos_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#idltableinfo">Idl<wbr>Table<wbr>Info<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#idltableinfo">Idl<wbr>Table<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Table info of the IDL.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Table info of the IDL.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tablegroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupid_nodejs" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -1635,8 +1856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the table group to which the IDL file belongs.</p>
-</dd></dl>
+    <dd>ID of the table group to which the IDL file belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1650,8 +1870,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_file_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_file_content_python" style="color: inherit; text-decoration: inherit;">file_<wbr>content</a>
@@ -1659,8 +1878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IDL file content of the TcaplusDB table.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>IDL file content of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_file_ext_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_file_ext_type_python" style="color: inherit; text-decoration: inherit;">file_<wbr>ext_<wbr>type</a>
@@ -1668,8 +1886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File ext type of the IDL file. If <code>file_type</code> is <code>PROTO</code>, <code>file_ext_type</code> must be 'proto'; If <code>file_type</code> is <code>TDR</code>, <code>file_ext_type</code> must be 'xml'.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>File ext type of the IDL file. If <code>fileType</code> is <code>PROTO</code>, <code>fileExtType</code> must be 'proto'; If <code>fileType</code> is <code>TDR</code>, <code>fileExtType</code> must be 'xml'.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_file_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_file_name_python" style="color: inherit; text-decoration: inherit;">file_<wbr>name</a>
@@ -1677,8 +1894,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the IDL file.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the IDL file.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_file_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_file_type_python" style="color: inherit; text-decoration: inherit;">file_<wbr>type</a>
@@ -1686,17 +1902,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the IDL file. Valid values are PROTO and TDR.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the IDL file. Valid values are PROTO and TDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_table_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_table_infos_python" style="color: inherit; text-decoration: inherit;">table_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#idltableinfo">Idl<wbr>Table<wbr>Info<wbr>Args]</a></span>
+        <span class="property-type"><a href="#idltableinfo">Sequence[Idl<wbr>Table<wbr>Info<wbr>Args]</a></span>
     </dt>
-    <dd><p>Table info of the IDL.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Table info of the IDL.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tablegroup_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroup_id_python" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
@@ -1704,8 +1918,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the table group to which the IDL file belongs.</p>
-</dd></dl>
+    <dd>ID of the table group to which the IDL file belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1719,8 +1932,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to which the table group belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the TcaplusDB cluster to which the table group belongs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filecontent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filecontent_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Content</a>
@@ -1728,8 +1940,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IDL file content of the TcaplusDB table.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>IDL file content of the TcaplusDB table.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_fileexttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fileexttype_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Ext<wbr>Type</a>
@@ -1737,8 +1948,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File ext type of the IDL file. If <code>file_type</code> is <code>PROTO</code>, <code>file_ext_type</code> must be 'proto'; If <code>file_type</code> is <code>TDR</code>, <code>file_ext_type</code> must be 'xml'.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>File ext type of the IDL file. If <code>fileType</code> is <code>PROTO</code>, <code>fileExtType</code> must be 'proto'; If <code>fileType</code> is <code>TDR</code>, <code>fileExtType</code> must be 'xml'.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filename_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Name</a>
@@ -1746,8 +1956,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the IDL file.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the IDL file.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filetype_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Type</a>
@@ -1755,8 +1964,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the IDL file. Valid values are PROTO and TDR.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the IDL file. Valid values are PROTO and TDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tableinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tableinfos_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Infos</a>
@@ -1764,8 +1972,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#idltableinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Table info of the IDL.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Table info of the IDL.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_tablegroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tablegroupid_yaml" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -1773,8 +1980,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the table group to which the IDL file belongs.</p>
-</dd></dl>
+    <dd>ID of the table group to which the IDL file belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1789,7 +1995,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="idltableinfo">Idl<wbr>Table<wbr>Info</h4>
+<h4 id="idltableinfo">
+Idl<wbr>Table<wbr>Info<pulumi-choosable type="language" values="python,go" class="inline">, Idl<wbr>Table<wbr>Info<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1801,8 +2009,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Error messages for creating IDL file.</p>
-</dd><dt class="property-optional"
+    <dd>Error messages for creating IDL file.</dd><dt class="property-optional"
             title="Optional">
         <span id="indexkeyset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexkeyset_csharp" style="color: inherit; text-decoration: inherit;">Index<wbr>Key<wbr>Set</a>
@@ -1810,8 +2017,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index key set of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Index key set of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyfields_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyfields_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Fields</a>
@@ -1819,8 +2025,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Primary key fields of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Primary key fields of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="sumkeyfieldsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sumkeyfieldsize_csharp" style="color: inherit; text-decoration: inherit;">Sum<wbr>Key<wbr>Field<wbr>Size</a>
@@ -1828,8 +2033,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total size of primary key field of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Total size of primary key field of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="sumvaluefieldsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sumvaluefieldsize_csharp" style="color: inherit; text-decoration: inherit;">Sum<wbr>Value<wbr>Field<wbr>Size</a>
@@ -1837,8 +2041,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total size of non-primary key fields of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Total size of non-primary key fields of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Name</a>
@@ -1846,8 +2049,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="valuefields_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#valuefields_csharp" style="color: inherit; text-decoration: inherit;">Value<wbr>Fields</a>
@@ -1855,8 +2057,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Non-primary key fields of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Non-primary key fields of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1870,8 +2071,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Error messages for creating IDL file.</p>
-</dd><dt class="property-optional"
+    <dd>Error messages for creating IDL file.</dd><dt class="property-optional"
             title="Optional">
         <span id="indexkeyset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexkeyset_go" style="color: inherit; text-decoration: inherit;">Index<wbr>Key<wbr>Set</a>
@@ -1879,8 +2079,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index key set of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Index key set of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyfields_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyfields_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Fields</a>
@@ -1888,8 +2087,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Primary key fields of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Primary key fields of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="sumkeyfieldsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sumkeyfieldsize_go" style="color: inherit; text-decoration: inherit;">Sum<wbr>Key<wbr>Field<wbr>Size</a>
@@ -1897,8 +2095,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total size of primary key field of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Total size of primary key field of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="sumvaluefieldsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sumvaluefieldsize_go" style="color: inherit; text-decoration: inherit;">Sum<wbr>Value<wbr>Field<wbr>Size</a>
@@ -1906,8 +2103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total size of non-primary key fields of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Total size of non-primary key fields of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Name</a>
@@ -1915,8 +2111,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="valuefields_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#valuefields_go" style="color: inherit; text-decoration: inherit;">Value<wbr>Fields</a>
@@ -1924,8 +2119,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Non-primary key fields of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Non-primary key fields of the TcaplusDB table.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="error_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_hcl" style="color: inherit; text-decoration: inherit;">error</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Error messages for creating IDL file.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="index_key_set_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_key_set_hcl" style="color: inherit; text-decoration: inherit;">index_<wbr>key_<wbr>set</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Index key set of the TcaplusDB table.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_fields_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_fields_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>fields</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Primary key fields of the TcaplusDB table.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sum_key_field_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sum_key_field_size_hcl" style="color: inherit; text-decoration: inherit;">sum_<wbr>key_<wbr>field_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total size of primary key field of the TcaplusDB table.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sum_value_field_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sum_value_field_size_hcl" style="color: inherit; text-decoration: inherit;">sum_<wbr>value_<wbr>field_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total size of non-primary key fields of the TcaplusDB table.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="table_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_name_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_fields_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_fields_hcl" style="color: inherit; text-decoration: inherit;">value_<wbr>fields</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Non-primary key fields of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1939,8 +2195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Error messages for creating IDL file.</p>
-</dd><dt class="property-optional"
+    <dd>Error messages for creating IDL file.</dd><dt class="property-optional"
             title="Optional">
         <span id="indexkeyset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexkeyset_java" style="color: inherit; text-decoration: inherit;">index<wbr>Key<wbr>Set</a>
@@ -1948,8 +2203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index key set of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Index key set of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyfields_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyfields_java" style="color: inherit; text-decoration: inherit;">key<wbr>Fields</a>
@@ -1957,8 +2211,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Primary key fields of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Primary key fields of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="sumkeyfieldsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sumkeyfieldsize_java" style="color: inherit; text-decoration: inherit;">sum<wbr>Key<wbr>Field<wbr>Size</a>
@@ -1966,8 +2219,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total size of primary key field of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Total size of primary key field of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="sumvaluefieldsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sumvaluefieldsize_java" style="color: inherit; text-decoration: inherit;">sum<wbr>Value<wbr>Field<wbr>Size</a>
@@ -1975,8 +2227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total size of non-primary key fields of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Total size of non-primary key fields of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_java" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -1984,8 +2235,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="valuefields_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#valuefields_java" style="color: inherit; text-decoration: inherit;">value<wbr>Fields</a>
@@ -1993,8 +2243,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Non-primary key fields of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Non-primary key fields of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2008,8 +2257,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Error messages for creating IDL file.</p>
-</dd><dt class="property-optional"
+    <dd>Error messages for creating IDL file.</dd><dt class="property-optional"
             title="Optional">
         <span id="indexkeyset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexkeyset_nodejs" style="color: inherit; text-decoration: inherit;">index<wbr>Key<wbr>Set</a>
@@ -2017,8 +2265,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Index key set of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Index key set of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyfields_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyfields_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Fields</a>
@@ -2026,8 +2273,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Primary key fields of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Primary key fields of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="sumkeyfieldsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sumkeyfieldsize_nodejs" style="color: inherit; text-decoration: inherit;">sum<wbr>Key<wbr>Field<wbr>Size</a>
@@ -2035,8 +2281,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total size of primary key field of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Total size of primary key field of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="sumvaluefieldsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sumvaluefieldsize_nodejs" style="color: inherit; text-decoration: inherit;">sum<wbr>Value<wbr>Field<wbr>Size</a>
@@ -2044,8 +2289,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total size of non-primary key fields of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Total size of non-primary key fields of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -2053,8 +2297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="valuefields_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#valuefields_nodejs" style="color: inherit; text-decoration: inherit;">value<wbr>Fields</a>
@@ -2062,8 +2305,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Non-primary key fields of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Non-primary key fields of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2077,8 +2319,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Error messages for creating IDL file.</p>
-</dd><dt class="property-optional"
+    <dd>Error messages for creating IDL file.</dd><dt class="property-optional"
             title="Optional">
         <span id="index_key_set_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#index_key_set_python" style="color: inherit; text-decoration: inherit;">index_<wbr>key_<wbr>set</a>
@@ -2086,8 +2327,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Index key set of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Index key set of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_fields_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_fields_python" style="color: inherit; text-decoration: inherit;">key_<wbr>fields</a>
@@ -2095,8 +2335,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Primary key fields of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Primary key fields of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="sum_key_field_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sum_key_field_size_python" style="color: inherit; text-decoration: inherit;">sum_<wbr>key_<wbr>field_<wbr>size</a>
@@ -2104,8 +2343,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total size of primary key field of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Total size of primary key field of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="sum_value_field_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sum_value_field_size_python" style="color: inherit; text-decoration: inherit;">sum_<wbr>value_<wbr>field_<wbr>size</a>
@@ -2113,8 +2351,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total size of non-primary key fields of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Total size of non-primary key fields of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="table_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_name_python" style="color: inherit; text-decoration: inherit;">table_<wbr>name</a>
@@ -2122,8 +2359,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_fields_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_fields_python" style="color: inherit; text-decoration: inherit;">value_<wbr>fields</a>
@@ -2131,8 +2367,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Non-primary key fields of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Non-primary key fields of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2146,8 +2381,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Error messages for creating IDL file.</p>
-</dd><dt class="property-optional"
+    <dd>Error messages for creating IDL file.</dd><dt class="property-optional"
             title="Optional">
         <span id="indexkeyset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indexkeyset_yaml" style="color: inherit; text-decoration: inherit;">index<wbr>Key<wbr>Set</a>
@@ -2155,8 +2389,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Index key set of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Index key set of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyfields_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyfields_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Fields</a>
@@ -2164,8 +2397,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Primary key fields of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Primary key fields of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="sumkeyfieldsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sumkeyfieldsize_yaml" style="color: inherit; text-decoration: inherit;">sum<wbr>Key<wbr>Field<wbr>Size</a>
@@ -2173,8 +2405,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total size of primary key field of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Total size of primary key field of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="sumvaluefieldsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sumvaluefieldsize_yaml" style="color: inherit; text-decoration: inherit;">sum<wbr>Value<wbr>Field<wbr>Size</a>
@@ -2182,8 +2413,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total size of non-primary key fields of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Total size of non-primary key fields of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -2191,8 +2421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-optional"
             title="Optional">
         <span id="valuefields_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#valuefields_yaml" style="color: inherit; text-decoration: inherit;">value<wbr>Fields</a>
@@ -2200,8 +2429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Non-primary key fields of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Non-primary key fields of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2213,7 +2441,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

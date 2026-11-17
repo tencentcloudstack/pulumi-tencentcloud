@@ -2,9 +2,11 @@
 ---
 title: "getOrders"
 title_tag: "tencentcloud.Dcdb.getOrders"
-meta_desc: "Documentation for the tencentcloud.Dcdb.getOrders function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of dcdb orders"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,68 @@ Use this data source to query detailed information of dcdb orders
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const orders = tencentcloud.Dcdb.getOrders({
+const orders = tencentcloud.dcdb.getOrders({
     dealNames: ["2023061224903413767xxxx"],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-orders = tencentcloud.Dcdb.get_orders(deal_names=["2023061224903413767xxxx"])
+orders = tencentcloud.dcdb.get_orders(deal_names=["2023061224903413767xxxx"])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dcdb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dcdb.GetOrders(ctx, &dcdb.GetOrdersArgs{
+			DealNames: []string{
+				"2023061224903413767xxxx",
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -49,28 +93,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dcdb.GetOrders(ctx, &dcdb.GetOrdersArgs{
-			DealNames: []string{
-				"2023061224903413767xxxx",
-			},
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -79,8 +106,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dcdb.DcdbFunctions;
 import com.pulumi.tencentcloud.Dcdb.inputs.GetOrdersArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -99,17 +126,47 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   orders:
     fn::invoke:
-      Function: tencentcloud:Dcdb:getOrders
-      Arguments:
+      function: tencentcloud:Dcdb:getOrders
+      arguments:
         dealNames:
           - 2023061224903413767xxxx
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dcdb_getorders" "orders" {
+  deal_names = ["2023061224903413767xxxx"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeOrders](https://www.tencentcloud.com/document/api/1042/47773)
 
 
 
@@ -121,7 +178,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +186,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getOrders<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetOrdersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetOrdersResult</a></span>></span
+><span class="k">function </span>getOrders<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetOrdersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetOrdersResult</a></span>></span
 ><span class="k">
-function </span>getOrdersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetOrdersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetOrdersResult</a></span>></span
+function </span>getOrdersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetOrdersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetOrdersResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -144,9 +201,9 @@ function </span>getOrdersOutput<span class="p">(</span><span class="nx">args</sp
                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetOrdersResult</span
 ><span class="k">
-def </span>get_orders_output<span class="p">(</span><span class="nx">deal_names</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetOrdersResult]</span
+def </span>get_orders_output<span class="p">(</span><span class="nx">deal_names</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetOrdersResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -171,7 +228,8 @@ func </span>GetOrdersOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetOrders </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetOrdersResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetOrdersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetOrdersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetOrdersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetOrdersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetOrdersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetOrdersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetOrdersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -180,7 +238,8 @@ func </span>GetOrdersOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetOrdersResult</a></span>> </span>getOrders<span class="p">(</span><span class="nx">GetOrdersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetOrdersResult</a></span>> </span>getOrders<span class="p">(</span><span class="nx">GetOrdersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetOrdersResult</a></span>> </span>getOrders<span class="p">(</span><span class="nx">GetOrdersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -192,6 +251,15 @@ func </span>GetOrdersOutput<span class="p">(</span><span class="nx">ctx</span><s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dcdb/getOrders:getOrders
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dcdb_get_orders&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -210,8 +278,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.</p>
-</dd><dt class="property-optional"
+    <dd>List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -219,8 +286,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -234,8 +300,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.</p>
-</dd><dt class="property-optional"
+    <dd>List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -243,8 +308,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="deal_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deal_names_hcl" style="color: inherit; text-decoration: inherit;">deal_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -258,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.</p>
-</dd><dt class="property-optional"
+    <dd>List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -267,8 +352,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -282,8 +366,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.</p>
-</dd><dt class="property-optional"
+    <dd>List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -291,8 +374,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -306,8 +388,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.</p>
-</dd><dt class="property-optional"
+    <dd>List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -315,8 +396,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -330,8 +410,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.</p>
-</dd><dt class="property-optional"
+    <dd>List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -339,8 +418,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -371,8 +449,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getordersdeal">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dcdb.<wbr>Outputs.<wbr>Get<wbr>Orders<wbr>Deal&gt;</a></span>
     </dt>
-    <dd><p>Order information list.</p>
-</dd><dt class="property-"
+    <dd>Order information list.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -380,8 +457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -411,8 +487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getordersdeal">[]Get<wbr>Orders<wbr>Deal</a></span>
     </dt>
-    <dd><p>Order information list.</p>
-</dd><dt class="property-"
+    <dd>Order information list.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -420,11 +495,48 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="deal_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deal_names_hcl" style="color: inherit; text-decoration: inherit;">deal_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="deals_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deals_hcl" style="color: inherit; text-decoration: inherit;">deals</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getordersdeal">list(object)</a></span>
+    </dt>
+    <dd>Order information list.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -451,8 +563,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getordersdeal">List&lt;Get<wbr>Orders<wbr>Deal&gt;</a></span>
     </dt>
-    <dd><p>Order information list.</p>
-</dd><dt class="property-"
+    <dd>Order information list.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -460,8 +571,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -491,8 +601,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getordersdeal">Get<wbr>Orders<wbr>Deal[]</a></span>
     </dt>
-    <dd><p>Order information list.</p>
-</dd><dt class="property-"
+    <dd>Order information list.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -500,8 +609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -529,10 +637,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deals_python" style="color: inherit; text-decoration: inherit;">deals</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getordersdeal">Get<wbr>Orders<wbr>Deal]</a></span>
+        <span class="property-type"><a href="#getordersdeal">Sequence[Get<wbr>Orders<wbr>Deal]</a></span>
     </dt>
-    <dd><p>Order information list.</p>
-</dd><dt class="property-"
+    <dd>Order information list.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -540,8 +647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -571,8 +677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getordersdeal">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Order information list.</p>
-</dd><dt class="property-"
+    <dd>Order information list.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -580,8 +685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -613,8 +717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of items.</p>
-</dd><dt class="property-required"
+    <dd>Number of items.</dd><dt class="property-required"
             title="Required">
         <span id="dealname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dealname_csharp" style="color: inherit; text-decoration: inherit;">Deal<wbr>Name</a>
@@ -622,8 +725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Order number.</p>
-</dd><dt class="property-required"
+    <dd>Order number.</dd><dt class="property-required"
             title="Required">
         <span id="flowid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flowid_csharp" style="color: inherit; text-decoration: inherit;">Flow<wbr>Id</a>
@@ -631,8 +733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the associated process, which can be used to query the process execution status.</p>
-</dd><dt class="property-required"
+    <dd>ID of the associated process, which can be used to query the process execution status.</dd><dt class="property-required"
             title="Required">
         <span id="instanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -640,8 +741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="owneruin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owneruin_csharp" style="color: inherit; text-decoration: inherit;">Owner<wbr>Uin</a>
@@ -649,8 +749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account.</p>
-</dd><dt class="property-required"
+    <dd>Account.</dd><dt class="property-required"
             title="Required">
         <span id="paymode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_csharp" style="color: inherit; text-decoration: inherit;">Pay<wbr>Mode</a>
@@ -658,8 +757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Payment mode. Valid values: 0 (postpaid), 1 (prepaid).</p>
-</dd></dl>
+    <dd>Payment mode. Valid values: 0 (postpaid), 1 (prepaid).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -673,8 +771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of items.</p>
-</dd><dt class="property-required"
+    <dd>Number of items.</dd><dt class="property-required"
             title="Required">
         <span id="dealname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dealname_go" style="color: inherit; text-decoration: inherit;">Deal<wbr>Name</a>
@@ -682,8 +779,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Order number.</p>
-</dd><dt class="property-required"
+    <dd>Order number.</dd><dt class="property-required"
             title="Required">
         <span id="flowid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flowid_go" style="color: inherit; text-decoration: inherit;">Flow<wbr>Id</a>
@@ -691,8 +787,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the associated process, which can be used to query the process execution status.</p>
-</dd><dt class="property-required"
+    <dd>ID of the associated process, which can be used to query the process execution status.</dd><dt class="property-required"
             title="Required">
         <span id="instanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -700,8 +795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="owneruin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owneruin_go" style="color: inherit; text-decoration: inherit;">Owner<wbr>Uin</a>
@@ -709,8 +803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account.</p>
-</dd><dt class="property-required"
+    <dd>Account.</dd><dt class="property-required"
             title="Required">
         <span id="paymode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_go" style="color: inherit; text-decoration: inherit;">Pay<wbr>Mode</a>
@@ -718,8 +811,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Payment mode. Valid values: 0 (postpaid), 1 (prepaid).</p>
-</dd></dl>
+    <dd>Payment mode. Valid values: 0 (postpaid), 1 (prepaid).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#count_hcl" style="color: inherit; text-decoration: inherit;">count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of items.</dd><dt class="property-required"
+            title="Required">
+        <span id="deal_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deal_name_hcl" style="color: inherit; text-decoration: inherit;">deal_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Order number.</dd><dt class="property-required"
+            title="Required">
+        <span id="flow_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flow_id_hcl" style="color: inherit; text-decoration: inherit;">flow_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the associated process, which can be used to query the process execution status.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="owner_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owner_uin_hcl" style="color: inherit; text-decoration: inherit;">owner_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Account.</dd><dt class="property-required"
+            title="Required">
+        <span id="pay_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_mode_hcl" style="color: inherit; text-decoration: inherit;">pay_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Payment mode. Valid values: 0 (postpaid), 1 (prepaid).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -733,8 +879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of items.</p>
-</dd><dt class="property-required"
+    <dd>Number of items.</dd><dt class="property-required"
             title="Required">
         <span id="dealname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dealname_java" style="color: inherit; text-decoration: inherit;">deal<wbr>Name</a>
@@ -742,8 +887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Order number.</p>
-</dd><dt class="property-required"
+    <dd>Order number.</dd><dt class="property-required"
             title="Required">
         <span id="flowid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flowid_java" style="color: inherit; text-decoration: inherit;">flow<wbr>Id</a>
@@ -751,8 +895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the associated process, which can be used to query the process execution status.</p>
-</dd><dt class="property-required"
+    <dd>ID of the associated process, which can be used to query the process execution status.</dd><dt class="property-required"
             title="Required">
         <span id="instanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -760,8 +903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="owneruin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owneruin_java" style="color: inherit; text-decoration: inherit;">owner<wbr>Uin</a>
@@ -769,8 +911,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account.</p>
-</dd><dt class="property-required"
+    <dd>Account.</dd><dt class="property-required"
             title="Required">
         <span id="paymode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_java" style="color: inherit; text-decoration: inherit;">pay<wbr>Mode</a>
@@ -778,8 +919,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Payment mode. Valid values: 0 (postpaid), 1 (prepaid).</p>
-</dd></dl>
+    <dd>Payment mode. Valid values: 0 (postpaid), 1 (prepaid).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -793,8 +933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of items.</p>
-</dd><dt class="property-required"
+    <dd>Number of items.</dd><dt class="property-required"
             title="Required">
         <span id="dealname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dealname_nodejs" style="color: inherit; text-decoration: inherit;">deal<wbr>Name</a>
@@ -802,8 +941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Order number.</p>
-</dd><dt class="property-required"
+    <dd>Order number.</dd><dt class="property-required"
             title="Required">
         <span id="flowid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flowid_nodejs" style="color: inherit; text-decoration: inherit;">flow<wbr>Id</a>
@@ -811,8 +949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the associated process, which can be used to query the process execution status.</p>
-</dd><dt class="property-required"
+    <dd>ID of the associated process, which can be used to query the process execution status.</dd><dt class="property-required"
             title="Required">
         <span id="instanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -820,8 +957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="owneruin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owneruin_nodejs" style="color: inherit; text-decoration: inherit;">owner<wbr>Uin</a>
@@ -829,8 +965,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account.</p>
-</dd><dt class="property-required"
+    <dd>Account.</dd><dt class="property-required"
             title="Required">
         <span id="paymode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_nodejs" style="color: inherit; text-decoration: inherit;">pay<wbr>Mode</a>
@@ -838,8 +973,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Payment mode. Valid values: 0 (postpaid), 1 (prepaid).</p>
-</dd></dl>
+    <dd>Payment mode. Valid values: 0 (postpaid), 1 (prepaid).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -853,8 +987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of items.</p>
-</dd><dt class="property-required"
+    <dd>Number of items.</dd><dt class="property-required"
             title="Required">
         <span id="deal_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deal_name_python" style="color: inherit; text-decoration: inherit;">deal_<wbr>name</a>
@@ -862,8 +995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Order number.</p>
-</dd><dt class="property-required"
+    <dd>Order number.</dd><dt class="property-required"
             title="Required">
         <span id="flow_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flow_id_python" style="color: inherit; text-decoration: inherit;">flow_<wbr>id</a>
@@ -871,8 +1003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the associated process, which can be used to query the process execution status.</p>
-</dd><dt class="property-required"
+    <dd>ID of the associated process, which can be used to query the process execution status.</dd><dt class="property-required"
             title="Required">
         <span id="instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
@@ -880,8 +1011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="owner_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owner_uin_python" style="color: inherit; text-decoration: inherit;">owner_<wbr>uin</a>
@@ -889,8 +1019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Account.</p>
-</dd><dt class="property-required"
+    <dd>Account.</dd><dt class="property-required"
             title="Required">
         <span id="pay_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_mode_python" style="color: inherit; text-decoration: inherit;">pay_<wbr>mode</a>
@@ -898,8 +1027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Payment mode. Valid values: 0 (postpaid), 1 (prepaid).</p>
-</dd></dl>
+    <dd>Payment mode. Valid values: 0 (postpaid), 1 (prepaid).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -913,8 +1041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of items.</p>
-</dd><dt class="property-required"
+    <dd>Number of items.</dd><dt class="property-required"
             title="Required">
         <span id="dealname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dealname_yaml" style="color: inherit; text-decoration: inherit;">deal<wbr>Name</a>
@@ -922,8 +1049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Order number.</p>
-</dd><dt class="property-required"
+    <dd>Order number.</dd><dt class="property-required"
             title="Required">
         <span id="flowid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flowid_yaml" style="color: inherit; text-decoration: inherit;">flow<wbr>Id</a>
@@ -931,8 +1057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the associated process, which can be used to query the process execution status.</p>
-</dd><dt class="property-required"
+    <dd>ID of the associated process, which can be used to query the process execution status.</dd><dt class="property-required"
             title="Required">
         <span id="instanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -940,8 +1065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the created instance, which is required only for the order that creates an instance.Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="owneruin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owneruin_yaml" style="color: inherit; text-decoration: inherit;">owner<wbr>Uin</a>
@@ -949,8 +1073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account.</p>
-</dd><dt class="property-required"
+    <dd>Account.</dd><dt class="property-required"
             title="Required">
         <span id="paymode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_yaml" style="color: inherit; text-decoration: inherit;">pay<wbr>Mode</a>
@@ -958,8 +1081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Payment mode. Valid values: 0 (postpaid), 1 (prepaid).</p>
-</dd></dl>
+    <dd>Payment mode. Valid values: 0 (postpaid), 1 (prepaid).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -974,7 +1096,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

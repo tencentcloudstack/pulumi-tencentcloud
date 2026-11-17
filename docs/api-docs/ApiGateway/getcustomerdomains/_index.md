@@ -2,9 +2,11 @@
 ---
 title: "getCustomerDomains"
 title_tag: "tencentcloud.ApiGateway.getCustomerDomains"
-meta_desc: "Documentation for the tencentcloud.ApiGateway.getCustomerDomains function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query API gateway domain list."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,10 +18,14 @@ Use this data source to query API gateway domain list.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const foo = new tencentcloud.apigateway.CustomDomain("foo", {
@@ -34,16 +40,21 @@ const foo = new tencentcloud.apigateway.CustomDomain("foo", {
         "/root#release",
     ],
 });
-const id = tencentcloud.ApiGateway.getCustomerDomainsOutput({
+const id = tencentcloud.apigateway.getCustomerDomainsOutput({
     serviceId: foo.serviceId,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.api_gateway.CustomDomain("foo",
+foo = tencentcloud.apigateway.CustomDomain("foo",
     service_id="service-ohxqslqe",
     sub_domain="tic-test.dnsv1.com",
     protocol="http",
@@ -54,13 +65,54 @@ foo = tencentcloud.api_gateway.CustomDomain("foo",
         "/good#test",
         "/root#release",
     ])
-id = tencentcloud.ApiGateway.get_customer_domains_output(service_id=foo.service_id)
+id = tencentcloud.apigateway.get_customer_domains_output(service_id=foo.service_id)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		foo, err := apigateway.NewCustomDomain(ctx, "foo", &apigateway.CustomDomainArgs{
+			ServiceId:        pulumi.String("service-ohxqslqe"),
+			SubDomain:        pulumi.String("tic-test.dnsv1.com"),
+			Protocol:         pulumi.String("http"),
+			NetType:          pulumi.String("OUTER"),
+			IsDefaultMapping: pulumi.Bool(false),
+			DefaultDomain:    pulumi.String("service-ohxqslqe-1259649581.gz.apigw.tencentcs.com"),
+			PathMappings: pulumi.StringArray{
+				pulumi.String("/good#test"),
+				pulumi.String("/root#release"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_ = apigateway.GetCustomerDomainsOutput(ctx, apigateway.GetCustomerDomainsOutputArgs{
+			ServiceId: foo.ServiceId,
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -87,38 +139,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		foo, err := ApiGateway.NewCustomDomain(ctx, "foo", &ApiGateway.CustomDomainArgs{
-			ServiceId:        pulumi.String("service-ohxqslqe"),
-			SubDomain:        pulumi.String("tic-test.dnsv1.com"),
-			Protocol:         pulumi.String("http"),
-			NetType:          pulumi.String("OUTER"),
-			IsDefaultMapping: pulumi.Bool(false),
-			DefaultDomain:    pulumi.String("service-ohxqslqe-1259649581.gz.apigw.tencentcs.com"),
-			PathMappings: pulumi.StringArray{
-				pulumi.String("/good#test"),
-				pulumi.String("/root#release"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_ = ApiGateway.GetCustomerDomainsOutput(ctx, apigateway.GetCustomerDomainsOutputArgs{
-			ServiceId: foo.ServiceId,
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -129,8 +154,8 @@ import com.pulumi.tencentcloud.ApiGateway.CustomDomain;
 import com.pulumi.tencentcloud.ApiGateway.CustomDomainArgs;
 import com.pulumi.tencentcloud.ApiGateway.ApiGatewayFunctions;
 import com.pulumi.tencentcloud.ApiGateway.inputs.GetCustomerDomainsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -142,12 +167,12 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new CustomDomain("foo", CustomDomainArgs.builder()        
+        var foo = new CustomDomain("foo", CustomDomainArgs.builder()
             .serviceId("service-ohxqslqe")
             .subDomain("tic-test.dnsv1.com")
             .protocol("http")
             .netType("OUTER")
-            .isDefaultMapping("false")
+            .isDefaultMapping(false)
             .defaultDomain("service-ohxqslqe-1259649581.gz.apigw.tencentcs.com")
             .pathMappings(            
                 "/good#test",
@@ -161,6 +186,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   foo:
@@ -178,12 +208,49 @@ resources:
 variables:
   id:
     fn::invoke:
-      Function: tencentcloud:ApiGateway:getCustomerDomains
-      Arguments:
+      function: tencentcloud:ApiGateway:getCustomerDomains
+      arguments:
         serviceId: ${foo.serviceId}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_apigateway_getcustomerdomains" "id" {
+  service_id = tencentcloud_apigateway_customdomain.foo.service_id
+}
+
+resource "tencentcloud_apigateway_customdomain" "foo" {
+  service_id         = "service-ohxqslqe"
+  sub_domain         = "tic-test.dnsv1.com"
+  protocol           = "http"
+  net_type           = "OUTER"
+  is_default_mapping = "false"
+  default_domain     = "service-ohxqslqe-1259649581.gz.apigw.tencentcs.com"
+  path_mappings      = ["/good#test", "/root#release"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeServiceSubDomainMappings](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomainMappings&type=document&lang=en)
+  - [DescribeServiceSubDomains](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomains&type=document&lang=en)
 
 
 
@@ -195,7 +262,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -203,9 +270,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getCustomerDomains<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCustomerDomainsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetCustomerDomainsResult</a></span>></span
+><span class="k">function </span>getCustomerDomains<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCustomerDomainsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetCustomerDomainsResult</a></span>></span
 ><span class="k">
-function </span>getCustomerDomainsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCustomerDomainsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetCustomerDomainsResult</a></span>></span
+function </span>getCustomerDomainsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCustomerDomainsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetCustomerDomainsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -218,9 +285,9 @@ function </span>getCustomerDomainsOutput<span class="p">(</span><span class="nx"
                          <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetCustomerDomainsResult</span
 ><span class="k">
-def </span>get_customer_domains_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetCustomerDomainsResult]</span
+def </span>get_customer_domains_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">service_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetCustomerDomainsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -245,7 +312,8 @@ func </span>GetCustomerDomainsOutput<span class="p">(</span><span class="nx">ctx
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetCustomerDomains </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetCustomerDomainsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetCustomerDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetCustomerDomainsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCustomerDomainsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetCustomerDomainsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCustomerDomainsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetCustomerDomainsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCustomerDomainsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -254,7 +322,8 @@ func </span>GetCustomerDomainsOutput<span class="p">(</span><span class="nx">ctx
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetCustomerDomainsResult</a></span>> </span>getCustomerDomains<span class="p">(</span><span class="nx">GetCustomerDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetCustomerDomainsResult</a></span>> </span>getCustomerDomains<span class="p">(</span><span class="nx">GetCustomerDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetCustomerDomainsResult</a></span>> </span>getCustomerDomains<span class="p">(</span><span class="nx">GetCustomerDomainsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -266,6 +335,15 @@ func </span>GetCustomerDomainsOutput<span class="p">(</span><span class="nx">ctx
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:ApiGateway/getCustomerDomains:getCustomerDomains
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_api_gateway_get_customer_domains&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -284,8 +362,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The service ID.</p>
-</dd><dt class="property-optional"
+    <dd>The service ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -293,8 +370,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -308,8 +384,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The service ID.</p>
-</dd><dt class="property-optional"
+    <dd>The service ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -317,8 +392,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The service ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -332,8 +428,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The service ID.</p>
-</dd><dt class="property-optional"
+    <dd>The service ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -341,8 +436,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -356,8 +450,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The service ID.</p>
-</dd><dt class="property-optional"
+    <dd>The service ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -365,8 +458,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -380,8 +472,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The service ID.</p>
-</dd><dt class="property-optional"
+    <dd>The service ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -389,8 +480,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -404,8 +494,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The service ID.</p>
-</dd><dt class="property-optional"
+    <dd>The service ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -413,8 +502,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -437,8 +525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -446,8 +533,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcustomerdomainslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Outputs.<wbr>Get<wbr>Customer<wbr>Domains<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Service custom domain name list.</p>
-</dd><dt class="property-"
+    <dd>Service custom domain name list.</dd><dt class="property-"
             title="">
         <span id="serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -477,8 +563,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -486,8 +571,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcustomerdomainslist">[]Get<wbr>Customer<wbr>Domains<wbr>List</a></span>
     </dt>
-    <dd><p>Service custom domain name list.</p>
-</dd><dt class="property-"
+    <dd>Service custom domain name list.</dd><dt class="property-"
             title="">
         <span id="serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -508,6 +592,44 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcustomerdomainslist">list(object)</a></span>
+    </dt>
+    <dd>Service custom domain name list.</dd><dt class="property-"
+            title="">
+        <span id="service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -517,8 +639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -526,8 +647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcustomerdomainslist">List&lt;Get<wbr>Customer<wbr>Domains<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Service custom domain name list.</p>
-</dd><dt class="property-"
+    <dd>Service custom domain name list.</dd><dt class="property-"
             title="">
         <span id="serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -557,8 +677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -566,8 +685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcustomerdomainslist">Get<wbr>Customer<wbr>Domains<wbr>List[]</a></span>
     </dt>
-    <dd><p>Service custom domain name list.</p>
-</dd><dt class="property-"
+    <dd>Service custom domain name list.</dd><dt class="property-"
             title="">
         <span id="serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -597,17 +715,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcustomerdomainslist">Get<wbr>Customer<wbr>Domains<wbr>List]</a></span>
+        <span class="property-type"><a href="#getcustomerdomainslist">Sequence[Get<wbr>Customer<wbr>Domains<wbr>List]</a></span>
     </dt>
-    <dd><p>Service custom domain name list.</p>
-</dd><dt class="property-"
+    <dd>Service custom domain name list.</dd><dt class="property-"
             title="">
         <span id="service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -637,8 +753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -646,8 +761,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcustomerdomainslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Service custom domain name list.</p>
-</dd><dt class="property-"
+    <dd>Service custom domain name list.</dd><dt class="property-"
             title="">
         <span id="serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -687,8 +801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The certificate ID.</p>
-</dd><dt class="property-required"
+    <dd>The certificate ID.</dd><dt class="property-required"
             title="Required">
         <span id="domainname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainname_csharp" style="color: inherit; text-decoration: inherit;">Domain<wbr>Name</a>
@@ -696,8 +809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-required"
+    <dd>Domain name.</dd><dt class="property-required"
             title="Required">
         <span id="isdefaultmapping_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefaultmapping_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Default<wbr>Mapping</a>
@@ -705,8 +817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to use default path mapping. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means to use default path mapping, <code>false</code> means to use custom path mapping.</p>
-</dd><dt class="property-required"
+    <dd>Whether to use default path mapping. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means to use default path mapping, <code>false</code> means to use custom path mapping.</dd><dt class="property-required"
             title="Required">
         <span id="isstatuson_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isstatuson_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Status<wbr>On</a>
@@ -714,8 +825,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Domain name resolution status. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means normal parsing, <code>false</code> means parsing failed.</p>
-</dd><dt class="property-required"
+    <dd>Domain name resolution status. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means normal parsing, <code>false</code> means parsing failed.</dd><dt class="property-required"
             title="Required">
         <span id="nettype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nettype_csharp" style="color: inherit; text-decoration: inherit;">Net<wbr>Type</a>
@@ -723,8 +833,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network type.</p>
-</dd><dt class="property-required"
+    <dd>Network type.</dd><dt class="property-required"
             title="Required">
         <span id="pathmappings_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pathmappings_csharp" style="color: inherit; text-decoration: inherit;">Path<wbr>Mappings</a>
@@ -732,8 +841,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcustomerdomainslistpathmapping">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Get<wbr>Customer<wbr>Domains<wbr>List<wbr>Path<wbr>Mapping&gt;</a></span>
     </dt>
-    <dd><p>Domain name mapping path and environment list.</p>
-</dd><dt class="property-required"
+    <dd>Domain name mapping path and environment list.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -741,8 +849,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom domain name agreement type.</p>
-</dd></dl>
+    <dd>Custom domain name agreement type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -756,8 +863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The certificate ID.</p>
-</dd><dt class="property-required"
+    <dd>The certificate ID.</dd><dt class="property-required"
             title="Required">
         <span id="domainname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainname_go" style="color: inherit; text-decoration: inherit;">Domain<wbr>Name</a>
@@ -765,8 +871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-required"
+    <dd>Domain name.</dd><dt class="property-required"
             title="Required">
         <span id="isdefaultmapping_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefaultmapping_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Default<wbr>Mapping</a>
@@ -774,8 +879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to use default path mapping. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means to use default path mapping, <code>false</code> means to use custom path mapping.</p>
-</dd><dt class="property-required"
+    <dd>Whether to use default path mapping. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means to use default path mapping, <code>false</code> means to use custom path mapping.</dd><dt class="property-required"
             title="Required">
         <span id="isstatuson_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isstatuson_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Status<wbr>On</a>
@@ -783,8 +887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Domain name resolution status. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means normal parsing, <code>false</code> means parsing failed.</p>
-</dd><dt class="property-required"
+    <dd>Domain name resolution status. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means normal parsing, <code>false</code> means parsing failed.</dd><dt class="property-required"
             title="Required">
         <span id="nettype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nettype_go" style="color: inherit; text-decoration: inherit;">Net<wbr>Type</a>
@@ -792,8 +895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network type.</p>
-</dd><dt class="property-required"
+    <dd>Network type.</dd><dt class="property-required"
             title="Required">
         <span id="pathmappings_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pathmappings_go" style="color: inherit; text-decoration: inherit;">Path<wbr>Mappings</a>
@@ -801,8 +903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcustomerdomainslistpathmapping">[]Get<wbr>Customer<wbr>Domains<wbr>List<wbr>Path<wbr>Mapping</a></span>
     </dt>
-    <dd><p>Domain name mapping path and environment list.</p>
-</dd><dt class="property-required"
+    <dd>Domain name mapping path and environment list.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -810,8 +911,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom domain name agreement type.</p>
-</dd></dl>
+    <dd>Custom domain name agreement type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_id_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The certificate ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_name_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_default_mapping_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_mapping_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>default_<wbr>mapping</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to use default path mapping. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means to use default path mapping, <code>false</code> means to use custom path mapping.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_status_on_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_status_on_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>status_<wbr>on</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Domain name resolution status. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means normal parsing, <code>false</code> means parsing failed.</dd><dt class="property-required"
+            title="Required">
+        <span id="net_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#net_type_hcl" style="color: inherit; text-decoration: inherit;">net_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network type.</dd><dt class="property-required"
+            title="Required">
+        <span id="path_mappings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_mappings_hcl" style="color: inherit; text-decoration: inherit;">path_<wbr>mappings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcustomerdomainslistpathmapping">list(object)</a></span>
+    </dt>
+    <dd>Domain name mapping path and environment list.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom domain name agreement type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -825,8 +987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The certificate ID.</p>
-</dd><dt class="property-required"
+    <dd>The certificate ID.</dd><dt class="property-required"
             title="Required">
         <span id="domainname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainname_java" style="color: inherit; text-decoration: inherit;">domain<wbr>Name</a>
@@ -834,8 +995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-required"
+    <dd>Domain name.</dd><dt class="property-required"
             title="Required">
         <span id="isdefaultmapping_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefaultmapping_java" style="color: inherit; text-decoration: inherit;">is<wbr>Default<wbr>Mapping</a>
@@ -843,8 +1003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to use default path mapping. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means to use default path mapping, <code>false</code> means to use custom path mapping.</p>
-</dd><dt class="property-required"
+    <dd>Whether to use default path mapping. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means to use default path mapping, <code>false</code> means to use custom path mapping.</dd><dt class="property-required"
             title="Required">
         <span id="isstatuson_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isstatuson_java" style="color: inherit; text-decoration: inherit;">is<wbr>Status<wbr>On</a>
@@ -852,8 +1011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Domain name resolution status. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means normal parsing, <code>false</code> means parsing failed.</p>
-</dd><dt class="property-required"
+    <dd>Domain name resolution status. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means normal parsing, <code>false</code> means parsing failed.</dd><dt class="property-required"
             title="Required">
         <span id="nettype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nettype_java" style="color: inherit; text-decoration: inherit;">net<wbr>Type</a>
@@ -861,8 +1019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network type.</p>
-</dd><dt class="property-required"
+    <dd>Network type.</dd><dt class="property-required"
             title="Required">
         <span id="pathmappings_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pathmappings_java" style="color: inherit; text-decoration: inherit;">path<wbr>Mappings</a>
@@ -870,8 +1027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcustomerdomainslistpathmapping">List&lt;Get<wbr>Customer<wbr>Domains<wbr>List<wbr>Path<wbr>Mapping&gt;</a></span>
     </dt>
-    <dd><p>Domain name mapping path and environment list.</p>
-</dd><dt class="property-required"
+    <dd>Domain name mapping path and environment list.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -879,8 +1035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom domain name agreement type.</p>
-</dd></dl>
+    <dd>Custom domain name agreement type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -894,8 +1049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The certificate ID.</p>
-</dd><dt class="property-required"
+    <dd>The certificate ID.</dd><dt class="property-required"
             title="Required">
         <span id="domainname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainname_nodejs" style="color: inherit; text-decoration: inherit;">domain<wbr>Name</a>
@@ -903,8 +1057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-required"
+    <dd>Domain name.</dd><dt class="property-required"
             title="Required">
         <span id="isdefaultmapping_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefaultmapping_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Default<wbr>Mapping</a>
@@ -912,8 +1065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to use default path mapping. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means to use default path mapping, <code>false</code> means to use custom path mapping.</p>
-</dd><dt class="property-required"
+    <dd>Whether to use default path mapping. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means to use default path mapping, <code>false</code> means to use custom path mapping.</dd><dt class="property-required"
             title="Required">
         <span id="isstatuson_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isstatuson_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Status<wbr>On</a>
@@ -921,8 +1073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Domain name resolution status. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means normal parsing, <code>false</code> means parsing failed.</p>
-</dd><dt class="property-required"
+    <dd>Domain name resolution status. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means normal parsing, <code>false</code> means parsing failed.</dd><dt class="property-required"
             title="Required">
         <span id="nettype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nettype_nodejs" style="color: inherit; text-decoration: inherit;">net<wbr>Type</a>
@@ -930,8 +1081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network type.</p>
-</dd><dt class="property-required"
+    <dd>Network type.</dd><dt class="property-required"
             title="Required">
         <span id="pathmappings_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pathmappings_nodejs" style="color: inherit; text-decoration: inherit;">path<wbr>Mappings</a>
@@ -939,8 +1089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcustomerdomainslistpathmapping">Get<wbr>Customer<wbr>Domains<wbr>List<wbr>Path<wbr>Mapping[]</a></span>
     </dt>
-    <dd><p>Domain name mapping path and environment list.</p>
-</dd><dt class="property-required"
+    <dd>Domain name mapping path and environment list.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -948,8 +1097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom domain name agreement type.</p>
-</dd></dl>
+    <dd>Custom domain name agreement type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -963,8 +1111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The certificate ID.</p>
-</dd><dt class="property-required"
+    <dd>The certificate ID.</dd><dt class="property-required"
             title="Required">
         <span id="domain_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_name_python" style="color: inherit; text-decoration: inherit;">domain_<wbr>name</a>
@@ -972,8 +1119,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-required"
+    <dd>Domain name.</dd><dt class="property-required"
             title="Required">
         <span id="is_default_mapping_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_mapping_python" style="color: inherit; text-decoration: inherit;">is_<wbr>default_<wbr>mapping</a>
@@ -981,8 +1127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to use default path mapping. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means to use default path mapping, <code>false</code> means to use custom path mapping.</p>
-</dd><dt class="property-required"
+    <dd>Whether to use default path mapping. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means to use default path mapping, <code>false</code> means to use custom path mapping.</dd><dt class="property-required"
             title="Required">
         <span id="is_status_on_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_status_on_python" style="color: inherit; text-decoration: inherit;">is_<wbr>status_<wbr>on</a>
@@ -990,8 +1135,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Domain name resolution status. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means normal parsing, <code>false</code> means parsing failed.</p>
-</dd><dt class="property-required"
+    <dd>Domain name resolution status. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means normal parsing, <code>false</code> means parsing failed.</dd><dt class="property-required"
             title="Required">
         <span id="net_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#net_type_python" style="color: inherit; text-decoration: inherit;">net_<wbr>type</a>
@@ -999,17 +1143,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network type.</p>
-</dd><dt class="property-required"
+    <dd>Network type.</dd><dt class="property-required"
             title="Required">
         <span id="path_mappings_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_mappings_python" style="color: inherit; text-decoration: inherit;">path_<wbr>mappings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcustomerdomainslistpathmapping">Get<wbr>Customer<wbr>Domains<wbr>List<wbr>Path<wbr>Mapping]</a></span>
+        <span class="property-type"><a href="#getcustomerdomainslistpathmapping">Sequence[Get<wbr>Customer<wbr>Domains<wbr>List<wbr>Path<wbr>Mapping]</a></span>
     </dt>
-    <dd><p>Domain name mapping path and environment list.</p>
-</dd><dt class="property-required"
+    <dd>Domain name mapping path and environment list.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1017,8 +1159,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom domain name agreement type.</p>
-</dd></dl>
+    <dd>Custom domain name agreement type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1032,8 +1173,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The certificate ID.</p>
-</dd><dt class="property-required"
+    <dd>The certificate ID.</dd><dt class="property-required"
             title="Required">
         <span id="domainname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainname_yaml" style="color: inherit; text-decoration: inherit;">domain<wbr>Name</a>
@@ -1041,8 +1181,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-required"
+    <dd>Domain name.</dd><dt class="property-required"
             title="Required">
         <span id="isdefaultmapping_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefaultmapping_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Default<wbr>Mapping</a>
@@ -1050,8 +1189,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to use default path mapping. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means to use default path mapping, <code>false</code> means to use custom path mapping.</p>
-</dd><dt class="property-required"
+    <dd>Whether to use default path mapping. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means to use default path mapping, <code>false</code> means to use custom path mapping.</dd><dt class="property-required"
             title="Required">
         <span id="isstatuson_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isstatuson_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Status<wbr>On</a>
@@ -1059,8 +1197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Domain name resolution status. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means normal parsing, <code>false</code> means parsing failed.</p>
-</dd><dt class="property-required"
+    <dd>Domain name resolution status. Valid values: <code>true</code>, <code>false</code>. <code>true</code> means normal parsing, <code>false</code> means parsing failed.</dd><dt class="property-required"
             title="Required">
         <span id="nettype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nettype_yaml" style="color: inherit; text-decoration: inherit;">net<wbr>Type</a>
@@ -1068,8 +1205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network type.</p>
-</dd><dt class="property-required"
+    <dd>Network type.</dd><dt class="property-required"
             title="Required">
         <span id="pathmappings_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pathmappings_yaml" style="color: inherit; text-decoration: inherit;">path<wbr>Mappings</a>
@@ -1077,8 +1213,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcustomerdomainslistpathmapping">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Domain name mapping path and environment list.</p>
-</dd><dt class="property-required"
+    <dd>Domain name mapping path and environment list.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1086,8 +1221,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom domain name agreement type.</p>
-</dd></dl>
+    <dd>Custom domain name agreement type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1105,8 +1239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Release environment.</p>
-</dd><dt class="property-required"
+    <dd>Release environment.</dd><dt class="property-required"
             title="Required">
         <span id="path_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_csharp" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -1114,8 +1247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The domain mapping path.</p>
-</dd></dl>
+    <dd>The domain mapping path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1129,8 +1261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Release environment.</p>
-</dd><dt class="property-required"
+    <dd>Release environment.</dd><dt class="property-required"
             title="Required">
         <span id="path_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_go" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -1138,8 +1269,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The domain mapping path.</p>
-</dd></dl>
+    <dd>The domain mapping path.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="environment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_hcl" style="color: inherit; text-decoration: inherit;">environment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Release environment.</dd><dt class="property-required"
+            title="Required">
+        <span id="path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_hcl" style="color: inherit; text-decoration: inherit;">path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The domain mapping path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1153,8 +1305,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Release environment.</p>
-</dd><dt class="property-required"
+    <dd>Release environment.</dd><dt class="property-required"
             title="Required">
         <span id="path_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_java" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1162,8 +1313,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The domain mapping path.</p>
-</dd></dl>
+    <dd>The domain mapping path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1177,8 +1327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Release environment.</p>
-</dd><dt class="property-required"
+    <dd>Release environment.</dd><dt class="property-required"
             title="Required">
         <span id="path_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_nodejs" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1186,8 +1335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The domain mapping path.</p>
-</dd></dl>
+    <dd>The domain mapping path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1201,8 +1349,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Release environment.</p>
-</dd><dt class="property-required"
+    <dd>Release environment.</dd><dt class="property-required"
             title="Required">
         <span id="path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_python" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1210,8 +1357,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The domain mapping path.</p>
-</dd></dl>
+    <dd>The domain mapping path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1225,8 +1371,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Release environment.</p>
-</dd><dt class="property-required"
+    <dd>Release environment.</dd><dt class="property-required"
             title="Required">
         <span id="path_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_yaml" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1234,8 +1379,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The domain mapping path.</p>
-</dd></dl>
+    <dd>The domain mapping path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1250,7 +1394,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

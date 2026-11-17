@@ -2,9 +2,11 @@
 ---
 title: "SshKeyPairSecret"
 title_tag: "tencentcloud.Ssm.SshKeyPairSecret"
-meta_desc: "Documentation for the tencentcloud.Ssm.SshKeyPairSecret resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a ssm ssh key pair secret"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,12 +18,17 @@ Provides a resource to create a ssm ssh key pair secret
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const exampleKey = new tencentcloud.kms.Key("exampleKey", {
+const example = new tencentcloud.kms.Key("example", {
     alias: "tf-example-kms-key",
     description: "example of kms key",
     keyRotationEnabled: false,
@@ -30,11 +37,11 @@ const exampleKey = new tencentcloud.kms.Key("exampleKey", {
         createdBy: "terraform",
     },
 });
-const exampleSshKeyPairSecret = new tencentcloud.ssm.SshKeyPairSecret("exampleSshKeyPairSecret", {
+const exampleSshKeyPairSecret = new tencentcloud.ssm.SshKeyPairSecret("example", {
     secretName: "tf-example",
     projectId: 0,
     description: "desc.",
-    kmsKeyId: exampleKey.id,
+    kmsKeyId: example.id,
     sshKeyName: "tf_example_ssh",
     status: "Enabled",
     cleanSshKey: true,
@@ -43,11 +50,16 @@ const exampleSshKeyPairSecret = new tencentcloud.ssm.SshKeyPairSecret("exampleSs
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-example_key = tencentcloud.kms.Key("exampleKey",
+example = tencentcloud.kms.Key("example",
     alias="tf-example-kms-key",
     description="example of kms key",
     key_rotation_enabled=False,
@@ -55,11 +67,11 @@ example_key = tencentcloud.kms.Key("exampleKey",
     tags={
         "createdBy": "terraform",
     })
-example_ssh_key_pair_secret = tencentcloud.ssm.SshKeyPairSecret("exampleSshKeyPairSecret",
+example_ssh_key_pair_secret = tencentcloud.ssm.SshKeyPairSecret("example",
     secret_name="tf-example",
     project_id=0,
     description="desc.",
-    kms_key_id=example_key.id,
+    kms_key_id=example.id,
     ssh_key_name="tf_example_ssh",
     status="Enabled",
     clean_ssh_key=True,
@@ -67,6 +79,58 @@ example_ssh_key_pair_secret = tencentcloud.ssm.SshKeyPairSecret("exampleSshKeyPa
         "createdBy": "terraform",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kms"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ssm"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		example, err := kms.NewKey(ctx, "example", &kms.KeyArgs{
+			Alias:              pulumi.String("tf-example-kms-key"),
+			Description:        pulumi.String("example of kms key"),
+			KeyRotationEnabled: pulumi.Bool(false),
+			IsEnabled:          pulumi.Bool(true),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = ssm.NewSshKeyPairSecret(ctx, "example", &ssm.SshKeyPairSecretArgs{
+			SecretName:  pulumi.String("tf-example"),
+			ProjectId:   pulumi.Int(0),
+			Description: pulumi.String("desc."),
+			KmsKeyId:    example.ID().ToIDOutput().ToStringOutput(),
+			SshKeyName:  pulumi.String("tf_example_ssh"),
+			Status:      pulumi.String("Enabled"),
+			CleanSshKey: pulumi.Bool(true),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -75,7 +139,7 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var exampleKey = new Tencentcloud.Kms.Key("exampleKey", new()
+    var example = new Tencentcloud.Kms.Key("example", new()
     {
         Alias = "tf-example-kms-key",
         Description = "example of kms key",
@@ -87,12 +151,12 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleSshKeyPairSecret = new Tencentcloud.Ssm.SshKeyPairSecret("exampleSshKeyPairSecret", new()
+    var exampleSshKeyPairSecret = new Tencentcloud.Ssm.SshKeyPairSecret("example", new()
     {
         SecretName = "tf-example",
         ProjectId = 0,
         Description = "desc.",
-        KmsKeyId = exampleKey.Id,
+        KmsKeyId = example.Id,
         SshKeyName = "tf_example_ssh",
         Status = "Enabled",
         CleanSshKey = true,
@@ -104,48 +168,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		exampleKey, err := Kms.NewKey(ctx, "exampleKey", &Kms.KeyArgs{
-			Alias:              pulumi.String("tf-example-kms-key"),
-			Description:        pulumi.String("example of kms key"),
-			KeyRotationEnabled: pulumi.Bool(false),
-			IsEnabled:          pulumi.Bool(true),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Ssm.NewSshKeyPairSecret(ctx, "exampleSshKeyPairSecret", &Ssm.SshKeyPairSecretArgs{
-			SecretName:  pulumi.String("tf-example"),
-			ProjectId:   pulumi.Int(0),
-			Description: pulumi.String("desc."),
-			KmsKeyId:    exampleKey.ID(),
-			SshKeyName:  pulumi.String("tf_example_ssh"),
-			Status:      pulumi.String("Enabled"),
-			CleanSshKey: pulumi.Bool(true),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -156,8 +183,8 @@ import com.pulumi.tencentcloud.Kms.Key;
 import com.pulumi.tencentcloud.Kms.KeyArgs;
 import com.pulumi.tencentcloud.Ssm.SshKeyPairSecret;
 import com.pulumi.tencentcloud.Ssm.SshKeyPairSecretArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -169,7 +196,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var exampleKey = new Key("exampleKey", KeyArgs.builder()        
+        var example = new Key("example", KeyArgs.builder()
             .alias("tf-example-kms-key")
             .description("example of kms key")
             .keyRotationEnabled(false)
@@ -177,11 +204,11 @@ public class App {
             .tags(Map.of("createdBy", "terraform"))
             .build());
 
-        var exampleSshKeyPairSecret = new SshKeyPairSecret("exampleSshKeyPairSecret", SshKeyPairSecretArgs.builder()        
+        var exampleSshKeyPairSecret = new SshKeyPairSecret("exampleSshKeyPairSecret", SshKeyPairSecretArgs.builder()
             .secretName("tf-example")
             .projectId(0)
             .description("desc.")
-            .kmsKeyId(exampleKey.id())
+            .kmsKeyId(example.id())
             .sshKeyName("tf_example_ssh")
             .status("Enabled")
             .cleanSshKey(true)
@@ -191,9 +218,14 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  exampleKey:
+  example:
     type: tencentcloud:Kms:Key
     properties:
       alias: tf-example-kms-key
@@ -204,83 +236,160 @@ resources:
         createdBy: terraform
   exampleSshKeyPairSecret:
     type: tencentcloud:Ssm:SshKeyPairSecret
+    name: example
     properties:
       secretName: tf-example
       projectId: 0
       description: desc.
-      kmsKeyId: ${exampleKey.id}
+      kmsKeyId: ${example.id}
       sshKeyName: tf_example_ssh
       status: Enabled
       cleanSshKey: true
       tags:
         createdBy: terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_kms_key" "example" {
+  alias                = "tf-example-kms-key"
+  description          = "example of kms key"
+  key_rotation_enabled = false
+  is_enabled           = true
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+resource "tencentcloud_ssm_sshkeypairsecret" "example" {
+  secret_name   = "tf-example"
+  project_id    = 0
+  description   = "desc."
+  kms_key_id    = tencentcloud_kms_key.example.id
+  ssh_key_name  = "tf_example_ssh"
+  status        = "Enabled"
+  clean_ssh_key = true
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateSSHKeyPairSecret](https://www.tencentcloud.com/document/api/1078/42262)
+  - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+  - [DisableSecret](https://www.tencentcloud.com/document/api/1078/38652)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+  - [GetSSHKeyPairValue](https://www.tencentcloud.com/document/api/1078/42261)
+  - [ListSecrets](https://www.tencentcloud.com/document/api/1078/38646)
+* Update:
+  - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+  - [DisableSecret](https://www.tencentcloud.com/document/api/1078/38652)
+  - [EnableSecret](https://www.tencentcloud.com/document/api/1078/38651)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [UpdateDescription](https://www.tencentcloud.com/document/api/1078/38643)
+* Delete:
+  - [DeleteSecret](https://www.tencentcloud.com/document/api/1078/38655)
+  - [DisableSecret](https://www.tencentcloud.com/document/api/1078/38652)
 
 
 ## Create SshKeyPairSecret Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">SshKeyPairSecret</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SshKeyPairSecretArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">SshKeyPairSecret</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SshKeyPairSecretArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">SshKeyPairSecret</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                     <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SshKeyPairSecretArgs</a></span><span class="p">,</span>
+                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">SshKeyPairSecret</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                     <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                     <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">clean_ssh_key</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
                      <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">kms_key_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                     <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                     <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">ssh_key_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                     <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">SshKeyPairSecret</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                     <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SshKeyPairSecretArgs</a></span><span class="p">,</span>
-                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                     <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSshKeyPairSecret</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SshKeyPairSecretArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SshKeyPairSecret</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSshKeyPairSecret</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SshKeyPairSecretArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SshKeyPairSecret</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">SshKeyPairSecret</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SshKeyPairSecretArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">SshKeyPairSecret</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SshKeyPairSecretArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">SshKeyPairSecret</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SshKeyPairSecretArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">SshKeyPairSecret</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SshKeyPairSecretArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ssm:SshKeyPairSecret</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ssm:SshKeyPairSecret</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_ssm_ssh_key_pair_secret&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -301,7 +410,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -418,11 +527,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## SshKeyPairSecret Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -438,8 +555,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the created SSH key belongs.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the project to which the created SSH key belongs.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="secretname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -447,8 +563,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</dd><dt class="property-optional"
             title="Optional">
         <span id="cleansshkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cleansshkey_csharp" style="color: inherit; text-decoration: inherit;">Clean<wbr>Ssh<wbr>Key</a>
@@ -456,8 +571,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -465,8 +579,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description, such as what it is used for. It contains up to 2,048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description, such as what it is used for. It contains up to 2,048 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="kmskeyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
@@ -474,8 +587,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="sshkeyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sshkeyname_csharp" style="color: inherit; text-decoration: inherit;">Ssh<wbr>Key<wbr>Name</a>
@@ -483,8 +595,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -492,17 +603,15 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -516,8 +625,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the created SSH key belongs.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the project to which the created SSH key belongs.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="secretname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -525,8 +633,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</dd><dt class="property-optional"
             title="Optional">
         <span id="cleansshkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cleansshkey_go" style="color: inherit; text-decoration: inherit;">Clean<wbr>Ssh<wbr>Key</a>
@@ -534,8 +641,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -543,8 +649,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description, such as what it is used for. It contains up to 2,048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description, such as what it is used for. It contains up to 2,048 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="kmskeyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
@@ -552,8 +657,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="sshkeyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sshkeyname_go" style="color: inherit; text-decoration: inherit;">Ssh<wbr>Key<wbr>Name</a>
@@ -561,8 +665,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -570,17 +673,85 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project to which the created SSH key belongs.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="secret_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_name_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="clean_ssh_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clean_ssh_key_hcl" style="color: inherit; text-decoration: inherit;">clean_<wbr>ssh_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description, such as what it is used for. It contains up to 2,048 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kms_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_key_id_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ssh_key_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssh_key_name_hcl" style="color: inherit; text-decoration: inherit;">ssh_<wbr>key_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -594,8 +765,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project to which the created SSH key belongs.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the project to which the created SSH key belongs.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="secretname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -603,8 +773,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</dd><dt class="property-optional"
             title="Optional">
         <span id="cleansshkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cleansshkey_java" style="color: inherit; text-decoration: inherit;">clean<wbr>Ssh<wbr>Key</a>
@@ -612,8 +781,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -621,8 +789,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description, such as what it is used for. It contains up to 2,048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description, such as what it is used for. It contains up to 2,048 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="kmskeyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -630,8 +797,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="sshkeyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sshkeyname_java" style="color: inherit; text-decoration: inherit;">ssh<wbr>Key<wbr>Name</a>
@@ -639,8 +805,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -648,17 +813,15 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -672,8 +835,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project to which the created SSH key belongs.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the project to which the created SSH key belongs.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="secretname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -681,8 +843,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</dd><dt class="property-optional"
             title="Optional">
         <span id="cleansshkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cleansshkey_nodejs" style="color: inherit; text-decoration: inherit;">clean<wbr>Ssh<wbr>Key</a>
@@ -690,8 +851,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -699,8 +859,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description, such as what it is used for. It contains up to 2,048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description, such as what it is used for. It contains up to 2,048 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="kmskeyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -708,8 +867,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="sshkeyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sshkeyname_nodejs" style="color: inherit; text-decoration: inherit;">ssh<wbr>Key<wbr>Name</a>
@@ -717,8 +875,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -726,17 +883,15 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -750,8 +905,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the created SSH key belongs.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the project to which the created SSH key belongs.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="secret_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_name_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
@@ -759,8 +913,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</dd><dt class="property-optional"
             title="Optional">
         <span id="clean_ssh_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clean_ssh_key_python" style="color: inherit; text-decoration: inherit;">clean_<wbr>ssh_<wbr>key</a>
@@ -768,8 +921,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -777,8 +929,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description, such as what it is used for. It contains up to 2,048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description, such as what it is used for. It contains up to 2,048 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="kms_key_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_key_id_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
@@ -786,8 +937,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="ssh_key_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssh_key_name_python" style="color: inherit; text-decoration: inherit;">ssh_<wbr>key_<wbr>name</a>
@@ -795,8 +945,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -804,17 +953,15 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -828,8 +975,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project to which the created SSH key belongs.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the project to which the created SSH key belongs.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="secretname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -837,8 +983,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</dd><dt class="property-optional"
             title="Optional">
         <span id="cleansshkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cleansshkey_yaml" style="color: inherit; text-decoration: inherit;">clean<wbr>Ssh<wbr>Key</a>
@@ -846,8 +991,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -855,8 +999,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description, such as what it is used for. It contains up to 2,048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description, such as what it is used for. It contains up to 2,048 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="kmskeyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -864,8 +1007,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="sshkeyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sshkeyname_yaml" style="color: inherit; text-decoration: inherit;">ssh<wbr>Key<wbr>Name</a>
@@ -873,8 +1015,7 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -882,17 +1023,15 @@ The SshKeyPairSecret resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -913,8 +1052,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Credential creation time in UNIX timestamp format.</p>
-</dd><dt class="property-"
+    <dd>Credential creation time in UNIX timestamp format.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -922,8 +1060,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="resourceid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The resource ID associated with the secret.</dd><dt class="property-"
             title="">
         <span id="secrettype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Type</a>
@@ -931,8 +1076,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</dd><dt class="property-"
+            title="">
+        <span id="sshkeyid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sshkeyid_csharp" style="color: inherit; text-decoration: inherit;">Ssh<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The key pair ID is the unique identifier of the key pair in the cloud server.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -946,8 +1098,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Credential creation time in UNIX timestamp format.</p>
-</dd><dt class="property-"
+    <dd>Credential creation time in UNIX timestamp format.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -955,8 +1106,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="resourceid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The resource ID associated with the secret.</dd><dt class="property-"
             title="">
         <span id="secrettype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Type</a>
@@ -964,8 +1122,61 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</dd><dt class="property-"
+            title="">
+        <span id="sshkeyid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sshkeyid_go" style="color: inherit; text-decoration: inherit;">Ssh<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The key pair ID is the unique identifier of the key pair in the cloud server.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Credential creation time in UNIX timestamp format.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The resource ID associated with the secret.</dd><dt class="property-"
+            title="">
+        <span id="secret_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_type_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</dd><dt class="property-"
+            title="">
+        <span id="ssh_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssh_key_id_hcl" style="color: inherit; text-decoration: inherit;">ssh_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The key pair ID is the unique identifier of the key pair in the cloud server.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -979,8 +1190,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Credential creation time in UNIX timestamp format.</p>
-</dd><dt class="property-"
+    <dd>Credential creation time in UNIX timestamp format.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -988,8 +1198,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="resourceid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The resource ID associated with the secret.</dd><dt class="property-"
             title="">
         <span id="secrettype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -997,8 +1214,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</dd><dt class="property-"
+            title="">
+        <span id="sshkeyid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sshkeyid_java" style="color: inherit; text-decoration: inherit;">ssh<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The key pair ID is the unique identifier of the key pair in the cloud server.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1012,8 +1236,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Credential creation time in UNIX timestamp format.</p>
-</dd><dt class="property-"
+    <dd>Credential creation time in UNIX timestamp format.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1021,8 +1244,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="resourceid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The resource ID associated with the secret.</dd><dt class="property-"
             title="">
         <span id="secrettype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -1030,8 +1260,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</dd><dt class="property-"
+            title="">
+        <span id="sshkeyid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sshkeyid_nodejs" style="color: inherit; text-decoration: inherit;">ssh<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The key pair ID is the unique identifier of the key pair in the cloud server.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1045,8 +1282,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Credential creation time in UNIX timestamp format.</p>
-</dd><dt class="property-"
+    <dd>Credential creation time in UNIX timestamp format.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1054,8 +1290,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="resource_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The resource ID associated with the secret.</dd><dt class="property-"
             title="">
         <span id="secret_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_type_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>type</a>
@@ -1063,8 +1306,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</dd><dt class="property-"
+            title="">
+        <span id="ssh_key_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssh_key_id_python" style="color: inherit; text-decoration: inherit;">ssh_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The key pair ID is the unique identifier of the key pair in the cloud server.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1078,8 +1328,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Credential creation time in UNIX timestamp format.</p>
-</dd><dt class="property-"
+    <dd>Credential creation time in UNIX timestamp format.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1087,8 +1336,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="resourceid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The resource ID associated with the secret.</dd><dt class="property-"
             title="">
         <span id="secrettype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secrettype_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -1096,8 +1352,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</dd><dt class="property-"
+            title="">
+        <span id="sshkeyid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sshkeyid_yaml" style="color: inherit; text-decoration: inherit;">ssh<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The key pair ID is the unique identifier of the key pair in the cloud server.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1107,18 +1370,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing SshKeyPairSecret resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SshKeyPairSecretState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">SshKeyPairSecret</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SshKeyPairSecretState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">SshKeyPairSecret</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1127,109 +1390,150 @@ Get an existing SshKeyPairSecret resource's state with the given name, ID, and o
         <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">kms_key_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">secret_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">ssh_key_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">ssh_key_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">) -&gt;</span> SshKeyPairSecret</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">) -&gt;</span> SshKeyPairSecret</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSshKeyPairSecret<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SshKeyPairSecretState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SshKeyPairSecret</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSshKeyPairSecret<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SshKeyPairSecretState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SshKeyPairSecret</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">SshKeyPairSecret</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SshKeyPairSecretState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">SshKeyPairSecret</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SshKeyPairSecretState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">SshKeyPairSecret</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SshKeyPairSecretState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">SshKeyPairSecret</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SshKeyPairSecretState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingSshKeyPairSecret</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Ssm:SshKeyPairSecret</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_ssm_ssh_key_pair_secret</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SshKeyPairSecretState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SshKeyPairSecretState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1237,28 +1541,31 @@ Get an existing SshKeyPairSecret resource's state with the given name, ID, and o
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SshKeyPairSecretState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1266,28 +1573,31 @@ Get an existing SshKeyPairSecret resource's state with the given name, ID, and o
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SshKeyPairSecretState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1307,8 +1617,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1316,8 +1625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Credential creation time in UNIX timestamp format.</p>
-</dd><dt class="property-optional"
+    <dd>Credential creation time in UNIX timestamp format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1325,8 +1633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description, such as what it is used for. It contains up to 2,048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description, such as what it is used for. It contains up to 2,048 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmskeyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
@@ -1334,8 +1641,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1343,8 +1649,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the created SSH key belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the project to which the created SSH key belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resourceid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The resource ID associated with the secret.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -1352,8 +1665,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_secrettype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secrettype_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Type</a>
@@ -1361,8 +1673,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sshkeyid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sshkeyid_csharp" style="color: inherit; text-decoration: inherit;">Ssh<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The key pair ID is the unique identifier of the key pair in the cloud server.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sshkeyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sshkeyname_csharp" style="color: inherit; text-decoration: inherit;">Ssh<wbr>Key<wbr>Name</a>
@@ -1370,8 +1689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1379,17 +1697,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1403,8 +1719,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1412,8 +1727,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Credential creation time in UNIX timestamp format.</p>
-</dd><dt class="property-optional"
+    <dd>Credential creation time in UNIX timestamp format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1421,8 +1735,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description, such as what it is used for. It contains up to 2,048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description, such as what it is used for. It contains up to 2,048 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmskeyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
@@ -1430,8 +1743,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1439,8 +1751,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the created SSH key belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the project to which the created SSH key belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resourceid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The resource ID associated with the secret.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -1448,8 +1767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_secrettype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secrettype_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Type</a>
@@ -1457,8 +1775,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sshkeyid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sshkeyid_go" style="color: inherit; text-decoration: inherit;">Ssh<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The key pair ID is the unique identifier of the key pair in the cloud server.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sshkeyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sshkeyname_go" style="color: inherit; text-decoration: inherit;">Ssh<wbr>Key<wbr>Name</a>
@@ -1466,8 +1791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1475,17 +1799,117 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_clean_ssh_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clean_ssh_key_hcl" style="color: inherit; text-decoration: inherit;">clean_<wbr>ssh_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Credential creation time in UNIX timestamp format.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description, such as what it is used for. It contains up to 2,048 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kms_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kms_key_id_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project to which the created SSH key belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The resource ID associated with the secret.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_secret_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_name_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_secret_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_type_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ssh_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ssh_key_id_hcl" style="color: inherit; text-decoration: inherit;">ssh_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The key pair ID is the unique identifier of the key pair in the cloud server.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ssh_key_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ssh_key_name_hcl" style="color: inherit; text-decoration: inherit;">ssh_<wbr>key_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1499,8 +1923,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1508,8 +1931,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Credential creation time in UNIX timestamp format.</p>
-</dd><dt class="property-optional"
+    <dd>Credential creation time in UNIX timestamp format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1517,8 +1939,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description, such as what it is used for. It contains up to 2,048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description, such as what it is used for. It contains up to 2,048 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmskeyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -1526,8 +1947,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1535,8 +1955,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project to which the created SSH key belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the project to which the created SSH key belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resourceid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The resource ID associated with the secret.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -1544,8 +1971,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_secrettype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secrettype_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -1553,8 +1979,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sshkeyid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sshkeyid_java" style="color: inherit; text-decoration: inherit;">ssh<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The key pair ID is the unique identifier of the key pair in the cloud server.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sshkeyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sshkeyname_java" style="color: inherit; text-decoration: inherit;">ssh<wbr>Key<wbr>Name</a>
@@ -1562,8 +1995,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1571,17 +2003,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1595,8 +2025,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1604,8 +2033,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Credential creation time in UNIX timestamp format.</p>
-</dd><dt class="property-optional"
+    <dd>Credential creation time in UNIX timestamp format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1613,8 +2041,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description, such as what it is used for. It contains up to 2,048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description, such as what it is used for. It contains up to 2,048 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmskeyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -1622,8 +2049,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1631,8 +2057,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project to which the created SSH key belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the project to which the created SSH key belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resourceid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The resource ID associated with the secret.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -1640,8 +2073,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_secrettype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secrettype_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -1649,8 +2081,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sshkeyid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sshkeyid_nodejs" style="color: inherit; text-decoration: inherit;">ssh<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The key pair ID is the unique identifier of the key pair in the cloud server.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sshkeyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sshkeyname_nodejs" style="color: inherit; text-decoration: inherit;">ssh<wbr>Key<wbr>Name</a>
@@ -1658,8 +2097,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1667,17 +2105,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1691,8 +2127,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1700,8 +2135,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Credential creation time in UNIX timestamp format.</p>
-</dd><dt class="property-optional"
+    <dd>Credential creation time in UNIX timestamp format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1709,8 +2143,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description, such as what it is used for. It contains up to 2,048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description, such as what it is used for. It contains up to 2,048 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kms_key_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kms_key_id_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
@@ -1718,8 +2151,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1727,8 +2159,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the created SSH key belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the project to which the created SSH key belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resource_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The resource ID associated with the secret.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secret_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_name_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
@@ -1736,8 +2175,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_secret_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secret_type_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>type</a>
@@ -1745,8 +2183,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ssh_key_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ssh_key_id_python" style="color: inherit; text-decoration: inherit;">ssh_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The key pair ID is the unique identifier of the key pair in the cloud server.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ssh_key_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ssh_key_name_python" style="color: inherit; text-decoration: inherit;">ssh_<wbr>key_<wbr>name</a>
@@ -1754,8 +2199,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1763,17 +2207,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1787,8 +2229,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: <code>True</code>: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.<code>False</code>: only deletes the SSH key information in the secret.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1796,8 +2237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Credential creation time in UNIX timestamp format.</p>
-</dd><dt class="property-optional"
+    <dd>Credential creation time in UNIX timestamp format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1805,8 +2245,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description, such as what it is used for. It contains up to 2,048 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description, such as what it is used for. It contains up to 2,048 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmskeyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeyid_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -1814,8 +2253,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1823,8 +2261,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project to which the created SSH key belongs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the project to which the created SSH key belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resourceid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The resource ID associated with the secret.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_secretname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secretname_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -1832,8 +2277,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_secrettype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_secrettype_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Type</a>
@@ -1841,8 +2285,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd><code>0</code>: user-defined secret. <code>1</code>: Tencent Cloud services secret. <code>2</code>: SSH key secret. <code>3</code>: Tencent Cloud API key secret. Note: this field may return <code>null</code>, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sshkeyid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sshkeyid_yaml" style="color: inherit; text-decoration: inherit;">ssh<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The key pair ID is the unique identifier of the key pair in the cloud server.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sshkeyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sshkeyname_yaml" style="color: inherit; text-decoration: inherit;">ssh<wbr>Key<wbr>Name</a>
@@ -1850,8 +2301,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1859,17 +2309,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Enable or Disable Secret. Valid values is <code>Enabled</code> or <code>Disabled</code>. Default is <code>Enabled</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of secret.</p>
-</dd></dl>
+    <dd>Tags of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1884,12 +2332,15 @@ The following state arguments are supported:
 
 
 
-ssm ssh_key_pair_secret can be imported using the id, e.g.
+ssm sshKeyPairSecret can be imported using the id, e.g.
 
 ```sh
 $ pulumi import tencentcloud:Ssm/sshKeyPairSecret:SshKeyPairSecret ssh_key_pair_secret ssh_key_pair_secret_name
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1901,7 +2352,6 @@ $ pulumi import tencentcloud:Ssm/sshKeyPairSecret:SshKeyPairSecret ssh_key_pair_
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

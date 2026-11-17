@@ -2,9 +2,11 @@
 ---
 title: "getBandwidthLimits"
 title_tag: "tencentcloud.Ccn.getBandwidthLimits"
-meta_desc: "Documentation for the tencentcloud.Ccn.getBandwidthLimits function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of CCN bandwidth limits."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,19 +18,24 @@ Use this data source to query detailed information of CCN bandwidth limits.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const config = new pulumi.Config();
 const otherRegion1 = config.get("otherRegion1") || "ap-shanghai";
 const main = new tencentcloud.ccn.Instance("main", {
+    name: "ci-temp-test-ccn",
     description: "ci-temp-test-ccn-des",
     qos: "AG",
 });
-const limit = tencentcloud.Ccn.getBandwidthLimitsOutput({
+const limit = tencentcloud.ccn.getBandwidthLimitsOutput({
     ccnId: main.id,
 });
 const limit1 = new tencentcloud.ccn.BandwidthLimit("limit1", {
@@ -37,6 +44,11 @@ const limit1 = new tencentcloud.ccn.BandwidthLimit("limit1", {
     bandwidthLimit: 500,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
@@ -47,19 +59,68 @@ other_region1 = config.get("otherRegion1")
 if other_region1 is None:
     other_region1 = "ap-shanghai"
 main = tencentcloud.ccn.Instance("main",
+    name="ci-temp-test-ccn",
     description="ci-temp-test-ccn-des",
     qos="AG")
-limit = tencentcloud.Ccn.get_bandwidth_limits_output(ccn_id=main.id)
+limit = tencentcloud.ccn.get_bandwidth_limits_output(ccn_id=main.id)
 limit1 = tencentcloud.ccn.BandwidthLimit("limit1",
     ccn_id=main.id,
     region=other_region1,
     bandwidth_limit=500)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ccn"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		otherRegion1 := "ap-shanghai"
+		if param := cfg.Get("otherRegion1"); param != "" {
+			otherRegion1 = param
+		}
+		main, err := ccn.NewInstance(ctx, "main", &ccn.InstanceArgs{
+			Name:        pulumi.String("ci-temp-test-ccn"),
+			Description: pulumi.String("ci-temp-test-ccn-des"),
+			Qos:         pulumi.String("AG"),
+		})
+		if err != nil {
+			return err
+		}
+		_ = ccn.GetBandwidthLimitsOutput(ctx, ccn.GetBandwidthLimitsOutputArgs{
+			CcnId: main.ID().ToIDOutput().ToStringOutput(),
+		}, nil)
+		_, err = ccn.NewBandwidthLimit(ctx, "limit1", &ccn.BandwidthLimitArgs{
+			CcnId:          main.ID().ToIDOutput().ToStringOutput(),
+			Region:         pulumi.String(otherRegion1),
+			BandwidthLimit: pulumi.Int(500),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -68,6 +129,7 @@ return await Deployment.RunAsync(() =>
     var otherRegion1 = config.Get("otherRegion1") ?? "ap-shanghai";
     var main = new Tencentcloud.Ccn.Instance("main", new()
     {
+        Name = "ci-temp-test-ccn",
         Description = "ci-temp-test-ccn-des",
         Qos = "AG",
     });
@@ -86,44 +148,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		cfg := config.New(ctx, "")
-		otherRegion1 := "ap-shanghai"
-		if param := cfg.Get("otherRegion1"); param != "" {
-			otherRegion1 = param
-		}
-		main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
-			Description: pulumi.String("ci-temp-test-ccn-des"),
-			Qos:         pulumi.String("AG"),
-		})
-		if err != nil {
-			return err
-		}
-		_ = Ccn.GetBandwidthLimitsOutput(ctx, ccn.GetBandwidthLimitsOutputArgs{
-			CcnId: main.ID(),
-		}, nil)
-		_, err = Ccn.NewBandwidthLimit(ctx, "limit1", &Ccn.BandwidthLimitArgs{
-			CcnId:          main.ID(),
-			Region:         pulumi.String(otherRegion1),
-			BandwidthLimit: pulumi.Int(500),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -136,8 +165,8 @@ import com.pulumi.tencentcloud.Ccn.CcnFunctions;
 import com.pulumi.tencentcloud.Ccn.inputs.GetBandwidthLimitsArgs;
 import com.pulumi.tencentcloud.Ccn.BandwidthLimit;
 import com.pulumi.tencentcloud.Ccn.BandwidthLimitArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -151,7 +180,8 @@ public class App {
     public static void stack(Context ctx) {
         final var config = ctx.config();
         final var otherRegion1 = config.get("otherRegion1").orElse("ap-shanghai");
-        var main = new Instance("main", InstanceArgs.builder()        
+        var main = new Instance("main", InstanceArgs.builder()
+            .name("ci-temp-test-ccn")
             .description("ci-temp-test-ccn-des")
             .qos("AG")
             .build());
@@ -160,7 +190,7 @@ public class App {
             .ccnId(main.id())
             .build());
 
-        var limit1 = new BandwidthLimit("limit1", BandwidthLimitArgs.builder()        
+        var limit1 = new BandwidthLimit("limit1", BandwidthLimitArgs.builder()
             .ccnId(main.id())
             .region(otherRegion1)
             .bandwidthLimit(500)
@@ -169,6 +199,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 configuration:
   otherRegion1:
@@ -178,6 +213,7 @@ resources:
   main:
     type: tencentcloud:Ccn:Instance
     properties:
+      name: ci-temp-test-ccn
       description: ci-temp-test-ccn-des
       qos: AG
   limit1:
@@ -189,12 +225,52 @@ resources:
 variables:
   limit:
     fn::invoke:
-      Function: tencentcloud:Ccn:getBandwidthLimits
-      Arguments:
+      function: tencentcloud:Ccn:getBandwidthLimits
+      arguments:
         ccnId: ${main.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_ccn_getbandwidthlimits" "limit" {
+  ccn_id = tencentcloud_ccn_instance.main.id
+}
+
+resource "tencentcloud_ccn_instance" "main" {
+  name        = "ci-temp-test-ccn"
+  description = "ci-temp-test-ccn-des"
+  qos         = "AG"
+}
+resource "tencentcloud_ccn_bandwidthlimit" "limit1" {
+  ccn_id          = tencentcloud_ccn_instance.main.id
+  region          = var.otherRegion1
+  bandwidth_limit = 500
+}
+variable "otherRegion1" {
+  type    = string
+  default = "ap-shanghai"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [GetCcnRegionBandwidthLimits](https://www.tencentcloud.com/document/api/215/37319)
 
 
 
@@ -206,7 +282,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -214,9 +290,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getBandwidthLimits<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBandwidthLimitsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBandwidthLimitsResult</a></span>></span
+><span class="k">function </span>getBandwidthLimits<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBandwidthLimitsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBandwidthLimitsResult</a></span>></span
 ><span class="k">
-function </span>getBandwidthLimitsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBandwidthLimitsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBandwidthLimitsResult</a></span>></span
+function </span>getBandwidthLimitsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBandwidthLimitsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBandwidthLimitsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -229,9 +305,9 @@ function </span>getBandwidthLimitsOutput<span class="p">(</span><span class="nx"
                          <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetBandwidthLimitsResult</span
 ><span class="k">
-def </span>get_bandwidth_limits_output<span class="p">(</span><span class="nx">ccn_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBandwidthLimitsResult]</span
+def </span>get_bandwidth_limits_output<span class="p">(</span><span class="nx">ccn_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBandwidthLimitsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -256,7 +332,8 @@ func </span>GetBandwidthLimitsOutput<span class="p">(</span><span class="nx">ctx
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetBandwidthLimits </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetBandwidthLimitsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetBandwidthLimitsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetBandwidthLimitsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBandwidthLimitsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBandwidthLimitsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBandwidthLimitsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBandwidthLimitsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBandwidthLimitsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -265,7 +342,8 @@ func </span>GetBandwidthLimitsOutput<span class="p">(</span><span class="nx">ctx
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetBandwidthLimitsResult</a></span>> </span>getBandwidthLimits<span class="p">(</span><span class="nx">GetBandwidthLimitsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBandwidthLimitsResult</a></span>> </span>getBandwidthLimits<span class="p">(</span><span class="nx">GetBandwidthLimitsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBandwidthLimitsResult</a></span>> </span>getBandwidthLimits<span class="p">(</span><span class="nx">GetBandwidthLimitsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -277,6 +355,15 @@ func </span>GetBandwidthLimitsOutput<span class="p">(</span><span class="nx">ctx
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Ccn/getBandwidthLimits:getBandwidthLimits
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_ccn_get_bandwidth_limits&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -295,8 +382,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CCN to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CCN to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -304,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -319,8 +404,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CCN to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CCN to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -328,8 +412,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="ccn_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccn_id_hcl" style="color: inherit; text-decoration: inherit;">ccn_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CCN to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -343,8 +448,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CCN to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CCN to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -352,8 +456,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -367,8 +470,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CCN to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CCN to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -376,8 +478,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -391,8 +492,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CCN to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CCN to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -400,8 +500,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -415,8 +514,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CCN to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CCN to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -424,8 +522,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -456,8 +553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="limits_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limits_csharp" style="color: inherit; text-decoration: inherit;">Limits</a>
@@ -465,8 +561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbandwidthlimitslimit">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ccn.<wbr>Outputs.<wbr>Get<wbr>Bandwidth<wbr>Limits<wbr>Limit&gt;</a></span>
     </dt>
-    <dd><p>The bandwidth limits of regions:</p>
-</dd><dt class="property-"
+    <dd>The bandwidth limits of regions:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -496,8 +591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="limits_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limits_go" style="color: inherit; text-decoration: inherit;">Limits</a>
@@ -505,11 +599,48 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbandwidthlimitslimit">[]Get<wbr>Bandwidth<wbr>Limits<wbr>Limit</a></span>
     </dt>
-    <dd><p>The bandwidth limits of regions:</p>
-</dd><dt class="property-"
+    <dd>The bandwidth limits of regions:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="ccn_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccn_id_hcl" style="color: inherit; text-decoration: inherit;">ccn_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="limits_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limits_hcl" style="color: inherit; text-decoration: inherit;">limits</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbandwidthlimitslimit">list(object)</a></span>
+    </dt>
+    <dd>The bandwidth limits of regions:</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -536,8 +667,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="limits_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limits_java" style="color: inherit; text-decoration: inherit;">limits</a>
@@ -545,8 +675,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbandwidthlimitslimit">List&lt;Get<wbr>Bandwidth<wbr>Limits<wbr>Limit&gt;</a></span>
     </dt>
-    <dd><p>The bandwidth limits of regions:</p>
-</dd><dt class="property-"
+    <dd>The bandwidth limits of regions:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -576,8 +705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="limits_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limits_nodejs" style="color: inherit; text-decoration: inherit;">limits</a>
@@ -585,8 +713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbandwidthlimitslimit">Get<wbr>Bandwidth<wbr>Limits<wbr>Limit[]</a></span>
     </dt>
-    <dd><p>The bandwidth limits of regions:</p>
-</dd><dt class="property-"
+    <dd>The bandwidth limits of regions:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -616,17 +743,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="limits_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limits_python" style="color: inherit; text-decoration: inherit;">limits</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbandwidthlimitslimit">Get<wbr>Bandwidth<wbr>Limits<wbr>Limit]</a></span>
+        <span class="property-type"><a href="#getbandwidthlimitslimit">Sequence[Get<wbr>Bandwidth<wbr>Limits<wbr>Limit]</a></span>
     </dt>
-    <dd><p>The bandwidth limits of regions:</p>
-</dd><dt class="property-"
+    <dd>The bandwidth limits of regions:</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -656,8 +781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="limits_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limits_yaml" style="color: inherit; text-decoration: inherit;">limits</a>
@@ -665,8 +789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbandwidthlimitslimit">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>The bandwidth limits of regions:</p>
-</dd><dt class="property-"
+    <dd>The bandwidth limits of regions:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -698,8 +821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Limitation of bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>Limitation of bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="dstregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstregion_csharp" style="color: inherit; text-decoration: inherit;">Dst<wbr>Region</a>
@@ -707,8 +829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination area restriction.</p>
-</dd><dt class="property-required"
+    <dd>Destination area restriction.</dd><dt class="property-required"
             title="Required">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -716,8 +837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Limitation of region.</p>
-</dd></dl>
+    <dd>Limitation of region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -731,8 +851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Limitation of bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>Limitation of bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="dstregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstregion_go" style="color: inherit; text-decoration: inherit;">Dst<wbr>Region</a>
@@ -740,8 +859,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination area restriction.</p>
-</dd><dt class="property-required"
+    <dd>Destination area restriction.</dd><dt class="property-required"
             title="Required">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -749,8 +867,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Limitation of region.</p>
-</dd></dl>
+    <dd>Limitation of region.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bandwidth_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_limit_hcl" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Limitation of bandwidth.</dd><dt class="property-required"
+            title="Required">
+        <span id="dst_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_region_hcl" style="color: inherit; text-decoration: inherit;">dst_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Destination area restriction.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Limitation of region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -764,8 +911,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Limitation of bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>Limitation of bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="dstregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstregion_java" style="color: inherit; text-decoration: inherit;">dst<wbr>Region</a>
@@ -773,8 +919,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Destination area restriction.</p>
-</dd><dt class="property-required"
+    <dd>Destination area restriction.</dd><dt class="property-required"
             title="Required">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -782,8 +927,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Limitation of region.</p>
-</dd></dl>
+    <dd>Limitation of region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -797,8 +941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Limitation of bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>Limitation of bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="dstregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstregion_nodejs" style="color: inherit; text-decoration: inherit;">dst<wbr>Region</a>
@@ -806,8 +949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination area restriction.</p>
-</dd><dt class="property-required"
+    <dd>Destination area restriction.</dd><dt class="property-required"
             title="Required">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -815,8 +957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Limitation of region.</p>
-</dd></dl>
+    <dd>Limitation of region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -830,8 +971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Limitation of bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>Limitation of bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="dst_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_region_python" style="color: inherit; text-decoration: inherit;">dst_<wbr>region</a>
@@ -839,8 +979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Destination area restriction.</p>
-</dd><dt class="property-required"
+    <dd>Destination area restriction.</dd><dt class="property-required"
             title="Required">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -848,8 +987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Limitation of region.</p>
-</dd></dl>
+    <dd>Limitation of region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -863,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Limitation of bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>Limitation of bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="dstregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstregion_yaml" style="color: inherit; text-decoration: inherit;">dst<wbr>Region</a>
@@ -872,8 +1009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Destination area restriction.</p>
-</dd><dt class="property-required"
+    <dd>Destination area restriction.</dd><dt class="property-required"
             title="Required">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -881,8 +1017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Limitation of region.</p>
-</dd></dl>
+    <dd>Limitation of region.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -897,7 +1032,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

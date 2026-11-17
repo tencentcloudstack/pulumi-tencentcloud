@@ -2,9 +2,11 @@
 ---
 title: "getRocketmqRole"
 title_tag: "tencentcloud.Tdmq.getRocketmqRole"
-meta_desc: "Documentation for the tencentcloud.Tdmq.getRocketmqRole function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of tdmqRocketmq role"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,6 +16,238 @@ no_edit_this_page: true
 
 Use this data source to query detailed information of tdmqRocketmq role
 
+## Example Usage
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const cluster = new tencentcloud.tdmq.RocketmqCluster("cluster", {
+    clusterName: "test_rocketmq_datasource_role",
+    remark: "test recket mq",
+});
+const roleRocketmqRole = new tencentcloud.tdmq.RocketmqRole("role", {
+    roleName: "test_rocketmq_role",
+    remark: "test rocketmq role",
+    clusterId: cluster.clusterId,
+});
+const role = tencentcloud.tdmq.getRocketmqRoleOutput({
+    roleName: roleRocketmqRole.roleName,
+    clusterId: cluster.clusterId,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+cluster = tencentcloud.tdmq.RocketmqCluster("cluster",
+    cluster_name="test_rocketmq_datasource_role",
+    remark="test recket mq")
+role_rocketmq_role = tencentcloud.tdmq.RocketmqRole("role",
+    role_name="test_rocketmq_role",
+    remark="test rocketmq role",
+    cluster_id=cluster.cluster_id)
+role = tencentcloud.tdmq.get_rocketmq_role_output(role_name=role_rocketmq_role.role_name,
+    cluster_id=cluster.cluster_id)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tdmq"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cluster, err := tdmq.NewRocketmqCluster(ctx, "cluster", &tdmq.RocketmqClusterArgs{
+			ClusterName: pulumi.String("test_rocketmq_datasource_role"),
+			Remark:      pulumi.String("test recket mq"),
+		})
+		if err != nil {
+			return err
+		}
+		roleRocketmqRole, err := tdmq.NewRocketmqRole(ctx, "role", &tdmq.RocketmqRoleArgs{
+			RoleName:  pulumi.String("test_rocketmq_role"),
+			Remark:    pulumi.String("test rocketmq role"),
+			ClusterId: cluster.ClusterId,
+		})
+		if err != nil {
+			return err
+		}
+		_ = tdmq.GetRocketmqRoleOutput(ctx, tdmq.GetRocketmqRoleOutputArgs{
+			RoleName:  roleRocketmqRole.RoleName,
+			ClusterId: cluster.ClusterId,
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var cluster = new Tencentcloud.Tdmq.RocketmqCluster("cluster", new()
+    {
+        ClusterName = "test_rocketmq_datasource_role",
+        Remark = "test recket mq",
+    });
+
+    var roleRocketmqRole = new Tencentcloud.Tdmq.RocketmqRole("role", new()
+    {
+        RoleName = "test_rocketmq_role",
+        Remark = "test rocketmq role",
+        ClusterId = cluster.ClusterId,
+    });
+
+    var role = Tencentcloud.Tdmq.GetRocketmqRole.Invoke(new()
+    {
+        RoleName = roleRocketmqRole.RoleName,
+        ClusterId = cluster.ClusterId,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Tdmq.RocketmqCluster;
+import com.pulumi.tencentcloud.Tdmq.RocketmqClusterArgs;
+import com.pulumi.tencentcloud.Tdmq.RocketmqRole;
+import com.pulumi.tencentcloud.Tdmq.RocketmqRoleArgs;
+import com.pulumi.tencentcloud.Tdmq.TdmqFunctions;
+import com.pulumi.tencentcloud.Tdmq.inputs.GetRocketmqRoleArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var cluster = new RocketmqCluster("cluster", RocketmqClusterArgs.builder()
+            .clusterName("test_rocketmq_datasource_role")
+            .remark("test recket mq")
+            .build());
+
+        var roleRocketmqRole = new RocketmqRole("roleRocketmqRole", RocketmqRoleArgs.builder()
+            .roleName("test_rocketmq_role")
+            .remark("test rocketmq role")
+            .clusterId(cluster.clusterId())
+            .build());
+
+        final var role = TdmqFunctions.getRocketmqRole(GetRocketmqRoleArgs.builder()
+            .roleName(roleRocketmqRole.roleName())
+            .clusterId(cluster.clusterId())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  cluster:
+    type: tencentcloud:Tdmq:RocketmqCluster
+    properties:
+      clusterName: test_rocketmq_datasource_role
+      remark: test recket mq
+  roleRocketmqRole:
+    type: tencentcloud:Tdmq:RocketmqRole
+    name: role
+    properties:
+      roleName: test_rocketmq_role
+      remark: test rocketmq role
+      clusterId: ${cluster.clusterId}
+variables:
+  role:
+    fn::invoke:
+      function: tencentcloud:Tdmq:getRocketmqRole
+      arguments:
+        roleName: ${roleRocketmqRole.roleName}
+        clusterId: ${cluster.clusterId}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_tdmq_getrocketmqrole" "role" {
+  role_name  = tencentcloud_tdmq_rocketmqrole.role.role_name
+  cluster_id = tencentcloud_tdmq_rocketmqcluster.cluster.cluster_id
+}
+
+resource "tencentcloud_tdmq_rocketmqcluster" "cluster" {
+  cluster_name = "test_rocketmq_datasource_role"
+  remark       = "test recket mq"
+}
+resource "tencentcloud_tdmq_rocketmqrole" "role" {
+  role_name  = "test_rocketmq_role"
+  remark     = "test rocketmq role"
+  cluster_id = tencentcloud_tdmq_rocketmqcluster.cluster.cluster_id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeRoles](https://www.tencentcloud.com/search/?wd=DescribeRoles&type=document&lang=en)
 
 
 
@@ -25,7 +259,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -33,9 +267,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getRocketmqRole<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRocketmqRoleArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRocketmqRoleResult</a></span>></span
+><span class="k">function </span>getRocketmqRole<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRocketmqRoleArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRocketmqRoleResult</a></span>></span
 ><span class="k">
-function </span>getRocketmqRoleOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRocketmqRoleOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRocketmqRoleResult</a></span>></span
+function </span>getRocketmqRoleOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRocketmqRoleOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRocketmqRoleResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -49,10 +283,10 @@ function </span>getRocketmqRoleOutput<span class="p">(</span><span class="nx">ar
                       <span class="nx">role_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetRocketmqRoleResult</span
 ><span class="k">
-def </span>get_rocketmq_role_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">role_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRocketmqRoleResult]</span
+def </span>get_rocketmq_role_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">role_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRocketmqRoleResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -61,12 +295,12 @@ def </span>get_rocketmq_role_output<span class="p">(</span><span class="nx">clus
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetRocketmqRole<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetRocketmqRoleArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetRocketmqRoleResult</a></span>, error)</span
+><span class="k">func </span>LookupRocketmqRole<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupRocketmqRoleArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupRocketmqRoleResult</a></span>, error)</span
 ><span class="k">
-func </span>GetRocketmqRoleOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetRocketmqRoleOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetRocketmqRoleResultOutput</span
+func </span>LookupRocketmqRoleOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupRocketmqRoleOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupRocketmqRoleResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetRocketmqRole` in the Go SDK.
+&gt; Note: This function is named `LookupRocketmqRole` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -77,7 +311,8 @@ func </span>GetRocketmqRoleOutput<span class="p">(</span><span class="nx">ctx</s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetRocketmqRole </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetRocketmqRoleResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetRocketmqRoleArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetRocketmqRoleResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRocketmqRoleInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRocketmqRoleResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRocketmqRoleInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRocketmqRoleResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRocketmqRoleInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -86,7 +321,8 @@ func </span>GetRocketmqRoleOutput<span class="p">(</span><span class="nx">ctx</s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetRocketmqRoleResult</a></span>> </span>getRocketmqRole<span class="p">(</span><span class="nx">GetRocketmqRoleArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRocketmqRoleResult</a></span>> </span>getRocketmqRole<span class="p">(</span><span class="nx">GetRocketmqRoleArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRocketmqRoleResult</a></span>> </span>getRocketmqRole<span class="p">(</span><span class="nx">GetRocketmqRoleArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -98,6 +334,15 @@ func </span>GetRocketmqRoleOutput<span class="p">(</span><span class="nx">ctx</s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tdmq/getRocketmqRole:getRocketmqRole
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tdmq_get_rocketmq_role&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -116,8 +361,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID (required).</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID (required).</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -125,8 +369,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="rolename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolename_csharp" style="color: inherit; text-decoration: inherit;">Role<wbr>Name</a>
@@ -134,8 +377,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fuzzy query by role name.</p>
-</dd></dl>
+    <dd>Fuzzy query by role name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -149,8 +391,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID (required).</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID (required).</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -158,8 +399,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="rolename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolename_go" style="color: inherit; text-decoration: inherit;">Role<wbr>Name</a>
@@ -167,8 +407,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fuzzy query by role name.</p>
-</dd></dl>
+    <dd>Fuzzy query by role name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID (required).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="role_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_name_hcl" style="color: inherit; text-decoration: inherit;">role_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Fuzzy query by role name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -182,8 +451,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID (required).</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID (required).</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -191,8 +459,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="rolename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolename_java" style="color: inherit; text-decoration: inherit;">role<wbr>Name</a>
@@ -200,8 +467,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fuzzy query by role name.</p>
-</dd></dl>
+    <dd>Fuzzy query by role name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -215,8 +481,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID (required).</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID (required).</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -224,8 +489,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="rolename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolename_nodejs" style="color: inherit; text-decoration: inherit;">role<wbr>Name</a>
@@ -233,8 +497,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fuzzy query by role name.</p>
-</dd></dl>
+    <dd>Fuzzy query by role name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -248,8 +511,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster ID (required).</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID (required).</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -257,8 +519,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="role_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_name_python" style="color: inherit; text-decoration: inherit;">role_<wbr>name</a>
@@ -266,8 +527,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Fuzzy query by role name.</p>
-</dd></dl>
+    <dd>Fuzzy query by role name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -281,8 +541,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID (required).</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID (required).</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -290,8 +549,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="rolename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolename_yaml" style="color: inherit; text-decoration: inherit;">role<wbr>Name</a>
@@ -299,8 +557,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fuzzy query by role name.</p>
-</dd></dl>
+    <dd>Fuzzy query by role name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -331,8 +588,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="rolesets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolesets_csharp" style="color: inherit; text-decoration: inherit;">Role<wbr>Sets</a>
@@ -340,8 +596,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrocketmqroleroleset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tdmq.<wbr>Outputs.<wbr>Get<wbr>Rocketmq<wbr>Role<wbr>Role<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Array of roles.</p>
-</dd><dt class="property-"
+    <dd>Array of roles.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -357,8 +612,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Role name.</p>
-</dd></dl>
+    <dd>Role name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -380,8 +634,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="rolesets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolesets_go" style="color: inherit; text-decoration: inherit;">Role<wbr>Sets</a>
@@ -389,8 +642,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrocketmqroleroleset">[]Get<wbr>Rocketmq<wbr>Role<wbr>Role<wbr>Set</a></span>
     </dt>
-    <dd><p>Array of roles.</p>
-</dd><dt class="property-"
+    <dd>Array of roles.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -406,8 +658,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Role name.</p>
-</dd></dl>
+    <dd>Role name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="role_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_sets_hcl" style="color: inherit; text-decoration: inherit;">role_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getrocketmqroleroleset">list(object)</a></span>
+    </dt>
+    <dd>Array of roles.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="role_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_name_hcl" style="color: inherit; text-decoration: inherit;">role_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Role name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -429,8 +726,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="rolesets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolesets_java" style="color: inherit; text-decoration: inherit;">role<wbr>Sets</a>
@@ -438,8 +734,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrocketmqroleroleset">List&lt;Get<wbr>Rocketmq<wbr>Role<wbr>Role<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Array of roles.</p>
-</dd><dt class="property-"
+    <dd>Array of roles.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -455,8 +750,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Role name.</p>
-</dd></dl>
+    <dd>Role name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -478,8 +772,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="rolesets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolesets_nodejs" style="color: inherit; text-decoration: inherit;">role<wbr>Sets</a>
@@ -487,8 +780,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrocketmqroleroleset">Get<wbr>Rocketmq<wbr>Role<wbr>Role<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Array of roles.</p>
-</dd><dt class="property-"
+    <dd>Array of roles.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -504,8 +796,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Role name.</p>
-</dd></dl>
+    <dd>Role name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -527,17 +818,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="role_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_sets_python" style="color: inherit; text-decoration: inherit;">role_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getrocketmqroleroleset">Get<wbr>Rocketmq<wbr>Role<wbr>Role<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getrocketmqroleroleset">Sequence[Get<wbr>Rocketmq<wbr>Role<wbr>Role<wbr>Set]</a></span>
     </dt>
-    <dd><p>Array of roles.</p>
-</dd><dt class="property-"
+    <dd>Array of roles.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -553,8 +842,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Role name.</p>
-</dd></dl>
+    <dd>Role name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -576,8 +864,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="rolesets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolesets_yaml" style="color: inherit; text-decoration: inherit;">role<wbr>Sets</a>
@@ -585,8 +872,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrocketmqroleroleset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Array of roles.</p>
-</dd><dt class="property-"
+    <dd>Array of roles.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -602,8 +888,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Role name.</p>
-</dd></dl>
+    <dd>Role name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -627,8 +912,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -636,8 +920,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-required"
+    <dd>Remarks.</dd><dt class="property-required"
             title="Required">
         <span id="rolename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolename_csharp" style="color: inherit; text-decoration: inherit;">Role<wbr>Name</a>
@@ -645,8 +928,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fuzzy query by role name.</p>
-</dd><dt class="property-required"
+    <dd>Fuzzy query by role name.</dd><dt class="property-required"
             title="Required">
         <span id="token_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#token_csharp" style="color: inherit; text-decoration: inherit;">Token</a>
@@ -654,8 +936,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the role token.</p>
-</dd><dt class="property-required"
+    <dd>Value of the role token.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -663,8 +944,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -678,8 +958,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -687,8 +966,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-required"
+    <dd>Remarks.</dd><dt class="property-required"
             title="Required">
         <span id="rolename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolename_go" style="color: inherit; text-decoration: inherit;">Role<wbr>Name</a>
@@ -696,8 +974,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fuzzy query by role name.</p>
-</dd><dt class="property-required"
+    <dd>Fuzzy query by role name.</dd><dt class="property-required"
             title="Required">
         <span id="token_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#token_go" style="color: inherit; text-decoration: inherit;">Token</a>
@@ -705,8 +982,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the role token.</p>
-</dd><dt class="property-required"
+    <dd>Value of the role token.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -714,8 +990,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time.</dd><dt class="property-required"
+            title="Required">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remarks.</dd><dt class="property-required"
+            title="Required">
+        <span id="role_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_name_hcl" style="color: inherit; text-decoration: inherit;">role_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Fuzzy query by role name.</dd><dt class="property-required"
+            title="Required">
+        <span id="token_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#token_hcl" style="color: inherit; text-decoration: inherit;">token</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value of the role token.</dd><dt class="property-required"
+            title="Required">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -729,8 +1050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -738,8 +1058,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-required"
+    <dd>Remarks.</dd><dt class="property-required"
             title="Required">
         <span id="rolename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolename_java" style="color: inherit; text-decoration: inherit;">role<wbr>Name</a>
@@ -747,8 +1066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fuzzy query by role name.</p>
-</dd><dt class="property-required"
+    <dd>Fuzzy query by role name.</dd><dt class="property-required"
             title="Required">
         <span id="token_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#token_java" style="color: inherit; text-decoration: inherit;">token</a>
@@ -756,8 +1074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of the role token.</p>
-</dd><dt class="property-required"
+    <dd>Value of the role token.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -765,8 +1082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -780,8 +1096,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -789,8 +1104,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-required"
+    <dd>Remarks.</dd><dt class="property-required"
             title="Required">
         <span id="rolename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolename_nodejs" style="color: inherit; text-decoration: inherit;">role<wbr>Name</a>
@@ -798,8 +1112,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fuzzy query by role name.</p>
-</dd><dt class="property-required"
+    <dd>Fuzzy query by role name.</dd><dt class="property-required"
             title="Required">
         <span id="token_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#token_nodejs" style="color: inherit; text-decoration: inherit;">token</a>
@@ -807,8 +1120,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the role token.</p>
-</dd><dt class="property-required"
+    <dd>Value of the role token.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -816,8 +1128,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -831,8 +1142,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -840,8 +1150,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-required"
+    <dd>Remarks.</dd><dt class="property-required"
             title="Required">
         <span id="role_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_name_python" style="color: inherit; text-decoration: inherit;">role_<wbr>name</a>
@@ -849,8 +1158,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Fuzzy query by role name.</p>
-</dd><dt class="property-required"
+    <dd>Fuzzy query by role name.</dd><dt class="property-required"
             title="Required">
         <span id="token_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#token_python" style="color: inherit; text-decoration: inherit;">token</a>
@@ -858,8 +1166,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Value of the role token.</p>
-</dd><dt class="property-required"
+    <dd>Value of the role token.</dd><dt class="property-required"
             title="Required">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -867,8 +1174,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -882,8 +1188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -891,8 +1196,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-required"
+    <dd>Remarks.</dd><dt class="property-required"
             title="Required">
         <span id="rolename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rolename_yaml" style="color: inherit; text-decoration: inherit;">role<wbr>Name</a>
@@ -900,8 +1204,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fuzzy query by role name.</p>
-</dd><dt class="property-required"
+    <dd>Fuzzy query by role name.</dd><dt class="property-required"
             title="Required">
         <span id="token_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#token_yaml" style="color: inherit; text-decoration: inherit;">token</a>
@@ -909,8 +1212,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of the role token.</p>
-</dd><dt class="property-required"
+    <dd>Value of the role token.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -918,8 +1220,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -934,7 +1235,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

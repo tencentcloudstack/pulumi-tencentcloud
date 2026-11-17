@@ -2,9 +2,11 @@
 ---
 title: "getInstances"
 title_tag: "tencentcloud.As.getInstances"
-meta_desc: "Documentation for the tencentcloud.As.getInstances function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of as instances"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,13 +18,17 @@ Use this data source to query detailed information of as instances
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const scalingGroup = new tencentcloud.as.ScalingGroup("scalingGroup", {
+const scalingGroup = new tencentcloud.as.ScalingGroup("scaling_group", {
     scalingGroupName: "tf-as-group-ds-ins-basic",
     configurationId: "your_launch_configuration_id",
     maxSize: 1,
@@ -33,19 +39,24 @@ const scalingGroup = new tencentcloud.as.ScalingGroup("scalingGroup", {
         test: "test",
     },
 });
-const instances = tencentcloud.As.getInstancesOutput({
+const instances = tencentcloud.as.getInstancesOutput({
     filters: [{
         name: "auto-scaling-group-id",
         values: [scalingGroup.id],
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-scaling_group = tencentcloud.as_.ScalingGroup("scalingGroup",
+scaling_group = tencentcloud.as_.ScalingGroup("scaling_group",
     scaling_group_name="tf-as-group-ds-ins-basic",
     configuration_id="your_launch_configuration_id",
     max_size=1,
@@ -55,21 +66,70 @@ scaling_group = tencentcloud.as_.ScalingGroup("scalingGroup",
     tags={
         "test": "test",
     })
-instances = tencentcloud.As.get_instances_output(filters=[tencentcloud.as_.GetInstancesFilterArgs(
-    name="auto-scaling-group-id",
-    values=[scaling_group.id],
-)])
+instances = tencentcloud.as_.get_instances_output(filters=[{
+    "name": "auto-scaling-group-id",
+    "values": [scaling_group.id],
+}])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		scalingGroup, err := as.NewScalingGroup(ctx, "scaling_group", &as.ScalingGroupArgs{
+			ScalingGroupName: pulumi.String("tf-as-group-ds-ins-basic"),
+			ConfigurationId:  pulumi.String("your_launch_configuration_id"),
+			MaxSize:          pulumi.Int(1),
+			MinSize:          pulumi.Int(1),
+			VpcId:            pulumi.String("your_vpc_id"),
+			SubnetIds: pulumi.StringArray{
+				pulumi.String("your_subnet_id"),
+			},
+			Tags: pulumi.StringMap{
+				"test": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_ = as.GetInstancesOutput(ctx, as.GetInstancesOutputArgs{
+			Filters: as.GetInstancesFilterArray{
+				&as.GetInstancesFilterArgs{
+					Name: pulumi.String("auto-scaling-group-id"),
+					Values: pulumi.StringArray{
+						scalingGroup.ID().ToIDOutput().ToStringOutput(),
+					},
+				},
+			},
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var scalingGroup = new Tencentcloud.As.ScalingGroup("scalingGroup", new()
+    var scalingGroup = new Tencentcloud.As.ScalingGroup("scaling_group", new()
     {
         ScalingGroupName = "tf-as-group-ds-ins-basic",
         ConfigurationId = "your_launch_configuration_id",
@@ -103,46 +163,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		scalingGroup, err := As.NewScalingGroup(ctx, "scalingGroup", &As.ScalingGroupArgs{
-			ScalingGroupName: pulumi.String("tf-as-group-ds-ins-basic"),
-			ConfigurationId:  pulumi.String("your_launch_configuration_id"),
-			MaxSize:          pulumi.Int(1),
-			MinSize:          pulumi.Int(1),
-			VpcId:            pulumi.String("your_vpc_id"),
-			SubnetIds: pulumi.StringArray{
-				pulumi.String("your_subnet_id"),
-			},
-			Tags: pulumi.Map{
-				"test": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_ = As.GetInstancesOutput(ctx, as.GetInstancesOutputArgs{
-			Filters: as.GetInstancesFilterArray{
-				&as.GetInstancesFilterArgs{
-					Name: pulumi.String("auto-scaling-group-id"),
-					Values: pulumi.StringArray{
-						scalingGroup.ID(),
-					},
-				},
-			},
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -153,8 +178,9 @@ import com.pulumi.tencentcloud.As.ScalingGroup;
 import com.pulumi.tencentcloud.As.ScalingGroupArgs;
 import com.pulumi.tencentcloud.As.AsFunctions;
 import com.pulumi.tencentcloud.As.inputs.GetInstancesArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.As.inputs.GetInstancesFilterArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -166,7 +192,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var scalingGroup = new ScalingGroup("scalingGroup", ScalingGroupArgs.builder()        
+        var scalingGroup = new ScalingGroup("scalingGroup", ScalingGroupArgs.builder()
             .scalingGroupName("tf-as-group-ds-ins-basic")
             .configurationId("your_launch_configuration_id")
             .maxSize(1)
@@ -186,10 +212,16 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   scalingGroup:
     type: tencentcloud:As:ScalingGroup
+    name: scaling_group
     properties:
       scalingGroupName: tf-as-group-ds-ins-basic
       configurationId: your_launch_configuration_id
@@ -203,15 +235,55 @@ resources:
 variables:
   instances:
     fn::invoke:
-      Function: tencentcloud:As:getInstances
-      Arguments:
+      function: tencentcloud:As:getInstances
+      arguments:
         filters:
           - name: auto-scaling-group-id
             values:
               - ${scalingGroup.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_as_getinstances" "instances" {
+  filters {
+    name   = "auto-scaling-group-id"
+    values = [tencentcloud_as_scalinggroup.scaling_group.id]
+  }
+}
+
+resource "tencentcloud_as_scalinggroup" "scaling_group" {
+  scaling_group_name = "tf-as-group-ds-ins-basic"
+  configuration_id   = "your_launch_configuration_id"
+  max_size           = 1
+  min_size           = 1
+  vpc_id             = "your_vpc_id"
+  subnet_ids         = ["your_subnet_id"]
+  tags = {
+    "test" = "test"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeAutoScalingInstances](https://www.tencentcloud.com/document/api/377/31012)
 
 
 
@@ -223,7 +295,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -231,9 +303,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ><span class="k">
-function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -242,15 +314,15 @@ function </span>getInstancesOutput<span class="p">(</span><span class="nx">args<
 <div>
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
-><span class="k">def </span>get_instances<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_as_.GetInstancesFilter]]</span> = None<span class="p">,</span>
+><span class="k">def </span>get_instances<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetInstancesFilter]]</span> = None<span class="p">,</span>
                   <span class="nx">instance_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstancesResult</span
 ><span class="k">
-def </span>get_instances_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_as_.GetInstancesFilterArgs]]]]</span> = None<span class="p">,</span>
-                  <span class="nx">instance_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
+def </span>get_instances_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetInstancesFilterArgs]]]]</span> = None<span class="p">,</span>
+                  <span class="nx">instance_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -275,7 +347,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstances </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -284,7 +357,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -296,6 +370,15 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:As/getInstances:getInstances
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_as_get_instances&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -314,8 +397,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Get<wbr>Instances<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filter conditions. If there are multiple Filters, the relationship between Filters is a logical AND (AND) relationship. If there are multiple Values in the same Filter, the relationship between Values under the same Filter is a logical OR (OR) relationship.</p>
-</dd><dt class="property-optional"
+    <dd>Filter conditions. If there are multiple Filters, the relationship between Filters is a logical AND (AND) relationship. If there are multiple Values in the same Filter, the relationship between Values under the same Filter is a logical OR (OR) relationship.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -323,8 +405,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Instance ID of the cloud server (CVM) to be queried. The limit is 100 per request.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID of the cloud server (CVM) to be queried. The limit is 100 per request.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -332,8 +413,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -347,8 +427,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesfilter">[]Get<wbr>Instances<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter conditions. If there are multiple Filters, the relationship between Filters is a logical AND (AND) relationship. If there are multiple Values in the same Filter, the relationship between Values under the same Filter is a logical OR (OR) relationship.</p>
-</dd><dt class="property-optional"
+    <dd>Filter conditions. If there are multiple Filters, the relationship between Filters is a logical AND (AND) relationship. If there are multiple Values in the same Filter, the relationship between Values under the same Filter is a logical OR (OR) relationship.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -356,8 +435,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Instance ID of the cloud server (CVM) to be queried. The limit is 100 per request.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID of the cloud server (CVM) to be queried. The limit is 100 per request.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -365,8 +443,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesfilter">list(object)</a></span>
+    </dt>
+    <dd>Filter conditions. If there are multiple Filters, the relationship between Filters is a logical AND (AND) relationship. If there are multiple Values in the same Filter, the relationship between Values under the same Filter is a logical OR (OR) relationship.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Instance ID of the cloud server (CVM) to be queried. The limit is 100 per request.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -380,8 +487,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesfilter">List&lt;Get<wbr>Instances<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filter conditions. If there are multiple Filters, the relationship between Filters is a logical AND (AND) relationship. If there are multiple Values in the same Filter, the relationship between Values under the same Filter is a logical OR (OR) relationship.</p>
-</dd><dt class="property-optional"
+    <dd>Filter conditions. If there are multiple Filters, the relationship between Filters is a logical AND (AND) relationship. If there are multiple Values in the same Filter, the relationship between Values under the same Filter is a logical OR (OR) relationship.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -389,8 +495,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Instance ID of the cloud server (CVM) to be queried. The limit is 100 per request.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID of the cloud server (CVM) to be queried. The limit is 100 per request.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -398,8 +503,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -413,8 +517,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesfilter">Get<wbr>Instances<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>Filter conditions. If there are multiple Filters, the relationship between Filters is a logical AND (AND) relationship. If there are multiple Values in the same Filter, the relationship between Values under the same Filter is a logical OR (OR) relationship.</p>
-</dd><dt class="property-optional"
+    <dd>Filter conditions. If there are multiple Filters, the relationship between Filters is a logical AND (AND) relationship. If there are multiple Values in the same Filter, the relationship between Values under the same Filter is a logical OR (OR) relationship.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -422,8 +525,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Instance ID of the cloud server (CVM) to be queried. The limit is 100 per request.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID of the cloud server (CVM) to be queried. The limit is 100 per request.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -431,8 +533,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -444,10 +545,9 @@ The following arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesfilter">Get<wbr>Instances<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getinstancesfilter">Sequence[Get<wbr>Instances<wbr>Filter]</a></span>
     </dt>
-    <dd><p>Filter conditions. If there are multiple Filters, the relationship between Filters is a logical AND (AND) relationship. If there are multiple Values in the same Filter, the relationship between Values under the same Filter is a logical OR (OR) relationship.</p>
-</dd><dt class="property-optional"
+    <dd>Filter conditions. If there are multiple Filters, the relationship between Filters is a logical AND (AND) relationship. If there are multiple Values in the same Filter, the relationship between Values under the same Filter is a logical OR (OR) relationship.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
@@ -455,8 +555,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Instance ID of the cloud server (CVM) to be queried. The limit is 100 per request.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID of the cloud server (CVM) to be queried. The limit is 100 per request.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -464,8 +563,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -479,8 +577,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Filter conditions. If there are multiple Filters, the relationship between Filters is a logical AND (AND) relationship. If there are multiple Values in the same Filter, the relationship between Values under the same Filter is a logical OR (OR) relationship.</p>
-</dd><dt class="property-optional"
+    <dd>Filter conditions. If there are multiple Filters, the relationship between Filters is a logical AND (AND) relationship. If there are multiple Values in the same Filter, the relationship between Values under the same Filter is a logical OR (OR) relationship.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -488,8 +585,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Instance ID of the cloud server (CVM) to be queried. The limit is 100 per request.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID of the cloud server (CVM) to be queried. The limit is 100 per request.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -497,8 +593,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -521,8 +616,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -530,8 +624,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Outputs.<wbr>Get<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of instance details.</p>
-</dd><dt class="property-"
+    <dd>List of instance details.</dd><dt class="property-"
             title="">
         <span id="filters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_csharp" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -569,8 +662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -578,8 +670,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">[]Get<wbr>Instances<wbr>Instance<wbr>List</a></span>
     </dt>
-    <dd><p>List of instance details.</p>
-</dd><dt class="property-"
+    <dd>List of instance details.</dd><dt class="property-"
             title="">
         <span id="filters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_go" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -608,6 +699,52 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesinstancelist">list(object)</a></span>
+    </dt>
+    <dd>List of instance details.</dd><dt class="property-"
+            title="">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesfilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -617,8 +754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -626,8 +762,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Get<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of instance details.</p>
-</dd><dt class="property-"
+    <dd>List of instance details.</dd><dt class="property-"
             title="">
         <span id="filters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_java" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -665,8 +800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -674,8 +808,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">Get<wbr>Instances<wbr>Instance<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of instance details.</p>
-</dd><dt class="property-"
+    <dd>List of instance details.</dd><dt class="property-"
             title="">
         <span id="filters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_nodejs" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -713,23 +846,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesinstancelist">Get<wbr>Instances<wbr>Instance<wbr>List]</a></span>
+        <span class="property-type"><a href="#getinstancesinstancelist">Sequence[Get<wbr>Instances<wbr>Instance<wbr>List]</a></span>
     </dt>
-    <dd><p>List of instance details.</p>
-</dd><dt class="property-"
+    <dd>List of instance details.</dd><dt class="property-"
             title="">
         <span id="filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesfilter">Get<wbr>Instances<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getinstancesfilter">Sequence[Get<wbr>Instances<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -761,8 +892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -770,8 +900,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of instance details.</p>
-</dd><dt class="property-"
+    <dd>List of instance details.</dd><dt class="property-"
             title="">
         <span id="filters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_yaml" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -819,8 +948,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fields to be filtered. Valid names: <code>instance-id</code>: Filters by instance ID, <code>auto-scaling-group-id</code>: Filter by scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered. Valid names: <code>instance-id</code>: Filters by instance ID, <code>auto-scaling-group-id</code>: Filter by scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="values_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_csharp" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -828,8 +956,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Value of the field.</p>
-</dd></dl>
+    <dd>Value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -843,8 +970,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fields to be filtered. Valid names: <code>instance-id</code>: Filters by instance ID, <code>auto-scaling-group-id</code>: Filter by scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered. Valid names: <code>instance-id</code>: Filters by instance ID, <code>auto-scaling-group-id</code>: Filter by scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="values_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_go" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -852,8 +978,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Value of the field.</p>
-</dd></dl>
+    <dd>Value of the field.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Fields to be filtered. Valid names: <code>instance-id</code>: Filters by instance ID, <code>auto-scaling-group-id</code>: Filter by scaling group ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_hcl" style="color: inherit; text-decoration: inherit;">values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -867,8 +1014,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fields to be filtered. Valid names: <code>instance-id</code>: Filters by instance ID, <code>auto-scaling-group-id</code>: Filter by scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered. Valid names: <code>instance-id</code>: Filters by instance ID, <code>auto-scaling-group-id</code>: Filter by scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="values_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_java" style="color: inherit; text-decoration: inherit;">values</a>
@@ -876,8 +1022,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Value of the field.</p>
-</dd></dl>
+    <dd>Value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -891,8 +1036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fields to be filtered. Valid names: <code>instance-id</code>: Filters by instance ID, <code>auto-scaling-group-id</code>: Filter by scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered. Valid names: <code>instance-id</code>: Filters by instance ID, <code>auto-scaling-group-id</code>: Filter by scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="values_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_nodejs" style="color: inherit; text-decoration: inherit;">values</a>
@@ -900,8 +1044,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Value of the field.</p>
-</dd></dl>
+    <dd>Value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -915,8 +1058,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Fields to be filtered. Valid names: <code>instance-id</code>: Filters by instance ID, <code>auto-scaling-group-id</code>: Filter by scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered. Valid names: <code>instance-id</code>: Filters by instance ID, <code>auto-scaling-group-id</code>: Filter by scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_python" style="color: inherit; text-decoration: inherit;">values</a>
@@ -924,8 +1066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Value of the field.</p>
-</dd></dl>
+    <dd>Value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -939,8 +1080,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fields to be filtered. Valid names: <code>instance-id</code>: Filters by instance ID, <code>auto-scaling-group-id</code>: Filter by scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered. Valid names: <code>instance-id</code>: Filters by instance ID, <code>auto-scaling-group-id</code>: Filter by scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="values_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_yaml" style="color: inherit; text-decoration: inherit;">values</a>
@@ -948,8 +1088,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Value of the field.</p>
-</dd></dl>
+    <dd>Value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -967,8 +1106,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the instance joined the group.</p>
-</dd><dt class="property-required"
+    <dd>The time when the instance joined the group.</dd><dt class="property-required"
             title="Required">
         <span id="autoscalinggroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupid_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Scaling<wbr>Group<wbr>Id</a>
@@ -976,8 +1114,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Auto scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="autoscalinggroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupname_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Scaling<wbr>Group<wbr>Name</a>
@@ -985,8 +1122,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling group name.</p>
-</dd><dt class="property-required"
+    <dd>Auto scaling group name.</dd><dt class="property-required"
             title="Required">
         <span id="creationtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creationtype_csharp" style="color: inherit; text-decoration: inherit;">Creation<wbr>Type</a>
@@ -994,8 +1130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Valid values: <code>AUTO_CREATION</code>, <code>MANUAL_ATTACHING</code>.</p>
-</dd><dt class="property-required"
+    <dd>Valid values: <code>AUTO_CREATION</code>, <code>MANUAL_ATTACHING</code>.</dd><dt class="property-required"
             title="Required">
         <span id="healthstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthstatus_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Status</a>
@@ -1003,8 +1138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health status, the valid values are HEALTHY and UNHEALTHY.</p>
-</dd><dt class="property-required"
+    <dd>Health status, the valid values are HEALTHY and UNHEALTHY.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1012,8 +1146,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1021,8 +1154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type.</p>
-</dd><dt class="property-required"
+    <dd>Instance type.</dd><dt class="property-required"
             title="Required">
         <span id="launchconfigurationid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launchconfigurationid_csharp" style="color: inherit; text-decoration: inherit;">Launch<wbr>Configuration<wbr>Id</a>
@@ -1030,8 +1162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="launchconfigurationname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launchconfigurationname_csharp" style="color: inherit; text-decoration: inherit;">Launch<wbr>Configuration<wbr>Name</a>
@@ -1039,8 +1170,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration name.</dd><dt class="property-required"
             title="Required">
         <span id="lifecyclestate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclestate_csharp" style="color: inherit; text-decoration: inherit;">Life<wbr>Cycle<wbr>State</a>
@@ -1048,8 +1178,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Life cycle state. Please refer to the link for field value details: https://cloud.tencent.com/document/api/377/20453#Instance.</p>
-</dd><dt class="property-required"
+    <dd>Life cycle state. Please refer to the link for field value details: https://cloud.tencent.com/document/api/377/20453#Instance.</dd><dt class="property-required"
             title="Required">
         <span id="protectedfromscalein_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protectedfromscalein_csharp" style="color: inherit; text-decoration: inherit;">Protected<wbr>From<wbr>Scale<wbr>In</a>
@@ -1057,8 +1186,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable scale in protection.</p>
-</dd><dt class="property-required"
+    <dd>Enable scale in protection.</dd><dt class="property-required"
             title="Required">
         <span id="versionnumber_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionnumber_csharp" style="color: inherit; text-decoration: inherit;">Version<wbr>Number</a>
@@ -1066,8 +1194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Version ID.</p>
-</dd><dt class="property-required"
+    <dd>Version ID.</dd><dt class="property-required"
             title="Required">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1075,8 +1202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone.</p>
-</dd></dl>
+    <dd>Available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1090,8 +1216,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the instance joined the group.</p>
-</dd><dt class="property-required"
+    <dd>The time when the instance joined the group.</dd><dt class="property-required"
             title="Required">
         <span id="autoscalinggroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupid_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Scaling<wbr>Group<wbr>Id</a>
@@ -1099,8 +1224,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Auto scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="autoscalinggroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupname_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Scaling<wbr>Group<wbr>Name</a>
@@ -1108,8 +1232,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling group name.</p>
-</dd><dt class="property-required"
+    <dd>Auto scaling group name.</dd><dt class="property-required"
             title="Required">
         <span id="creationtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creationtype_go" style="color: inherit; text-decoration: inherit;">Creation<wbr>Type</a>
@@ -1117,8 +1240,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Valid values: <code>AUTO_CREATION</code>, <code>MANUAL_ATTACHING</code>.</p>
-</dd><dt class="property-required"
+    <dd>Valid values: <code>AUTO_CREATION</code>, <code>MANUAL_ATTACHING</code>.</dd><dt class="property-required"
             title="Required">
         <span id="healthstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthstatus_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Status</a>
@@ -1126,8 +1248,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health status, the valid values are HEALTHY and UNHEALTHY.</p>
-</dd><dt class="property-required"
+    <dd>Health status, the valid values are HEALTHY and UNHEALTHY.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1135,8 +1256,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1144,8 +1264,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type.</p>
-</dd><dt class="property-required"
+    <dd>Instance type.</dd><dt class="property-required"
             title="Required">
         <span id="launchconfigurationid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launchconfigurationid_go" style="color: inherit; text-decoration: inherit;">Launch<wbr>Configuration<wbr>Id</a>
@@ -1153,8 +1272,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="launchconfigurationname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launchconfigurationname_go" style="color: inherit; text-decoration: inherit;">Launch<wbr>Configuration<wbr>Name</a>
@@ -1162,8 +1280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration name.</dd><dt class="property-required"
             title="Required">
         <span id="lifecyclestate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclestate_go" style="color: inherit; text-decoration: inherit;">Life<wbr>Cycle<wbr>State</a>
@@ -1171,8 +1288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Life cycle state. Please refer to the link for field value details: https://cloud.tencent.com/document/api/377/20453#Instance.</p>
-</dd><dt class="property-required"
+    <dd>Life cycle state. Please refer to the link for field value details: https://cloud.tencent.com/document/api/377/20453#Instance.</dd><dt class="property-required"
             title="Required">
         <span id="protectedfromscalein_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protectedfromscalein_go" style="color: inherit; text-decoration: inherit;">Protected<wbr>From<wbr>Scale<wbr>In</a>
@@ -1180,8 +1296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable scale in protection.</p>
-</dd><dt class="property-required"
+    <dd>Enable scale in protection.</dd><dt class="property-required"
             title="Required">
         <span id="versionnumber_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionnumber_go" style="color: inherit; text-decoration: inherit;">Version<wbr>Number</a>
@@ -1189,8 +1304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Version ID.</p>
-</dd><dt class="property-required"
+    <dd>Version ID.</dd><dt class="property-required"
             title="Required">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1198,8 +1312,117 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone.</p>
-</dd></dl>
+    <dd>Available zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="add_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#add_time_hcl" style="color: inherit; text-decoration: inherit;">add_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time when the instance joined the group.</dd><dt class="property-required"
+            title="Required">
+        <span id="auto_scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Auto scaling group ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="auto_scaling_group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_scaling_group_name_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Auto scaling group name.</dd><dt class="property-required"
+            title="Required">
+        <span id="creation_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creation_type_hcl" style="color: inherit; text-decoration: inherit;">creation_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Valid values: <code>AUTO_CREATION</code>, <code>MANUAL_ATTACHING</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="health_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_status_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health status, the valid values are HEALTHY and UNHEALTHY.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance type.</dd><dt class="property-required"
+            title="Required">
+        <span id="launch_configuration_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launch_configuration_id_hcl" style="color: inherit; text-decoration: inherit;">launch_<wbr>configuration_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Launch configuration ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="launch_configuration_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launch_configuration_name_hcl" style="color: inherit; text-decoration: inherit;">launch_<wbr>configuration_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Launch configuration name.</dd><dt class="property-required"
+            title="Required">
+        <span id="life_cycle_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#life_cycle_state_hcl" style="color: inherit; text-decoration: inherit;">life_<wbr>cycle_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Life cycle state. Please refer to the link for field value details: https://cloud.tencent.com/document/api/377/20453#Instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="protected_from_scale_in_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protected_from_scale_in_hcl" style="color: inherit; text-decoration: inherit;">protected_<wbr>from_<wbr>scale_<wbr>in</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable scale in protection.</dd><dt class="property-required"
+            title="Required">
+        <span id="version_number_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_number_hcl" style="color: inherit; text-decoration: inherit;">version_<wbr>number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Version ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1213,8 +1436,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the instance joined the group.</p>
-</dd><dt class="property-required"
+    <dd>The time when the instance joined the group.</dd><dt class="property-required"
             title="Required">
         <span id="autoscalinggroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupid_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Id</a>
@@ -1222,8 +1444,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Auto scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="autoscalinggroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupname_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Name</a>
@@ -1231,8 +1452,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto scaling group name.</p>
-</dd><dt class="property-required"
+    <dd>Auto scaling group name.</dd><dt class="property-required"
             title="Required">
         <span id="creationtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creationtype_java" style="color: inherit; text-decoration: inherit;">creation<wbr>Type</a>
@@ -1240,8 +1460,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Valid values: <code>AUTO_CREATION</code>, <code>MANUAL_ATTACHING</code>.</p>
-</dd><dt class="property-required"
+    <dd>Valid values: <code>AUTO_CREATION</code>, <code>MANUAL_ATTACHING</code>.</dd><dt class="property-required"
             title="Required">
         <span id="healthstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthstatus_java" style="color: inherit; text-decoration: inherit;">health<wbr>Status</a>
@@ -1249,8 +1468,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Health status, the valid values are HEALTHY and UNHEALTHY.</p>
-</dd><dt class="property-required"
+    <dd>Health status, the valid values are HEALTHY and UNHEALTHY.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1258,8 +1476,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1267,8 +1484,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance type.</p>
-</dd><dt class="property-required"
+    <dd>Instance type.</dd><dt class="property-required"
             title="Required">
         <span id="launchconfigurationid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launchconfigurationid_java" style="color: inherit; text-decoration: inherit;">launch<wbr>Configuration<wbr>Id</a>
@@ -1276,8 +1492,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="launchconfigurationname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launchconfigurationname_java" style="color: inherit; text-decoration: inherit;">launch<wbr>Configuration<wbr>Name</a>
@@ -1285,8 +1500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration name.</dd><dt class="property-required"
             title="Required">
         <span id="lifecyclestate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclestate_java" style="color: inherit; text-decoration: inherit;">life<wbr>Cycle<wbr>State</a>
@@ -1294,8 +1508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Life cycle state. Please refer to the link for field value details: https://cloud.tencent.com/document/api/377/20453#Instance.</p>
-</dd><dt class="property-required"
+    <dd>Life cycle state. Please refer to the link for field value details: https://cloud.tencent.com/document/api/377/20453#Instance.</dd><dt class="property-required"
             title="Required">
         <span id="protectedfromscalein_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protectedfromscalein_java" style="color: inherit; text-decoration: inherit;">protected<wbr>From<wbr>Scale<wbr>In</a>
@@ -1303,8 +1516,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable scale in protection.</p>
-</dd><dt class="property-required"
+    <dd>Enable scale in protection.</dd><dt class="property-required"
             title="Required">
         <span id="versionnumber_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionnumber_java" style="color: inherit; text-decoration: inherit;">version<wbr>Number</a>
@@ -1312,8 +1524,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Version ID.</p>
-</dd><dt class="property-required"
+    <dd>Version ID.</dd><dt class="property-required"
             title="Required">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1321,8 +1532,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available zone.</p>
-</dd></dl>
+    <dd>Available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1336,8 +1546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the instance joined the group.</p>
-</dd><dt class="property-required"
+    <dd>The time when the instance joined the group.</dd><dt class="property-required"
             title="Required">
         <span id="autoscalinggroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupid_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Id</a>
@@ -1345,8 +1554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Auto scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="autoscalinggroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupname_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Name</a>
@@ -1354,8 +1562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling group name.</p>
-</dd><dt class="property-required"
+    <dd>Auto scaling group name.</dd><dt class="property-required"
             title="Required">
         <span id="creationtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creationtype_nodejs" style="color: inherit; text-decoration: inherit;">creation<wbr>Type</a>
@@ -1363,8 +1570,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Valid values: <code>AUTO_CREATION</code>, <code>MANUAL_ATTACHING</code>.</p>
-</dd><dt class="property-required"
+    <dd>Valid values: <code>AUTO_CREATION</code>, <code>MANUAL_ATTACHING</code>.</dd><dt class="property-required"
             title="Required">
         <span id="healthstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthstatus_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Status</a>
@@ -1372,8 +1578,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health status, the valid values are HEALTHY and UNHEALTHY.</p>
-</dd><dt class="property-required"
+    <dd>Health status, the valid values are HEALTHY and UNHEALTHY.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1381,8 +1586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1390,8 +1594,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type.</p>
-</dd><dt class="property-required"
+    <dd>Instance type.</dd><dt class="property-required"
             title="Required">
         <span id="launchconfigurationid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launchconfigurationid_nodejs" style="color: inherit; text-decoration: inherit;">launch<wbr>Configuration<wbr>Id</a>
@@ -1399,8 +1602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="launchconfigurationname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launchconfigurationname_nodejs" style="color: inherit; text-decoration: inherit;">launch<wbr>Configuration<wbr>Name</a>
@@ -1408,8 +1610,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration name.</dd><dt class="property-required"
             title="Required">
         <span id="lifecyclestate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclestate_nodejs" style="color: inherit; text-decoration: inherit;">life<wbr>Cycle<wbr>State</a>
@@ -1417,8 +1618,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Life cycle state. Please refer to the link for field value details: https://cloud.tencent.com/document/api/377/20453#Instance.</p>
-</dd><dt class="property-required"
+    <dd>Life cycle state. Please refer to the link for field value details: https://cloud.tencent.com/document/api/377/20453#Instance.</dd><dt class="property-required"
             title="Required">
         <span id="protectedfromscalein_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protectedfromscalein_nodejs" style="color: inherit; text-decoration: inherit;">protected<wbr>From<wbr>Scale<wbr>In</a>
@@ -1426,8 +1626,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enable scale in protection.</p>
-</dd><dt class="property-required"
+    <dd>Enable scale in protection.</dd><dt class="property-required"
             title="Required">
         <span id="versionnumber_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionnumber_nodejs" style="color: inherit; text-decoration: inherit;">version<wbr>Number</a>
@@ -1435,8 +1634,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Version ID.</p>
-</dd><dt class="property-required"
+    <dd>Version ID.</dd><dt class="property-required"
             title="Required">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1444,8 +1642,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone.</p>
-</dd></dl>
+    <dd>Available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1459,8 +1656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time when the instance joined the group.</p>
-</dd><dt class="property-required"
+    <dd>The time when the instance joined the group.</dd><dt class="property-required"
             title="Required">
         <span id="auto_scaling_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_scaling_group_id_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>group_<wbr>id</a>
@@ -1468,8 +1664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Auto scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Auto scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="auto_scaling_group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_scaling_group_name_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>group_<wbr>name</a>
@@ -1477,8 +1672,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Auto scaling group name.</p>
-</dd><dt class="property-required"
+    <dd>Auto scaling group name.</dd><dt class="property-required"
             title="Required">
         <span id="creation_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creation_type_python" style="color: inherit; text-decoration: inherit;">creation_<wbr>type</a>
@@ -1486,8 +1680,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Valid values: <code>AUTO_CREATION</code>, <code>MANUAL_ATTACHING</code>.</p>
-</dd><dt class="property-required"
+    <dd>Valid values: <code>AUTO_CREATION</code>, <code>MANUAL_ATTACHING</code>.</dd><dt class="property-required"
             title="Required">
         <span id="health_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_status_python" style="color: inherit; text-decoration: inherit;">health_<wbr>status</a>
@@ -1495,8 +1688,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Health status, the valid values are HEALTHY and UNHEALTHY.</p>
-</dd><dt class="property-required"
+    <dd>Health status, the valid values are HEALTHY and UNHEALTHY.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1504,8 +1696,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -1513,8 +1704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance type.</p>
-</dd><dt class="property-required"
+    <dd>Instance type.</dd><dt class="property-required"
             title="Required">
         <span id="launch_configuration_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launch_configuration_id_python" style="color: inherit; text-decoration: inherit;">launch_<wbr>configuration_<wbr>id</a>
@@ -1522,8 +1712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="launch_configuration_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launch_configuration_name_python" style="color: inherit; text-decoration: inherit;">launch_<wbr>configuration_<wbr>name</a>
@@ -1531,8 +1720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration name.</dd><dt class="property-required"
             title="Required">
         <span id="life_cycle_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#life_cycle_state_python" style="color: inherit; text-decoration: inherit;">life_<wbr>cycle_<wbr>state</a>
@@ -1540,8 +1728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Life cycle state. Please refer to the link for field value details: https://cloud.tencent.com/document/api/377/20453#Instance.</p>
-</dd><dt class="property-required"
+    <dd>Life cycle state. Please refer to the link for field value details: https://cloud.tencent.com/document/api/377/20453#Instance.</dd><dt class="property-required"
             title="Required">
         <span id="protected_from_scale_in_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protected_from_scale_in_python" style="color: inherit; text-decoration: inherit;">protected_<wbr>from_<wbr>scale_<wbr>in</a>
@@ -1549,8 +1736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable scale in protection.</p>
-</dd><dt class="property-required"
+    <dd>Enable scale in protection.</dd><dt class="property-required"
             title="Required">
         <span id="version_number_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_number_python" style="color: inherit; text-decoration: inherit;">version_<wbr>number</a>
@@ -1558,8 +1744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Version ID.</p>
-</dd><dt class="property-required"
+    <dd>Version ID.</dd><dt class="property-required"
             title="Required">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1567,8 +1752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Available zone.</p>
-</dd></dl>
+    <dd>Available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1582,8 +1766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the instance joined the group.</p>
-</dd><dt class="property-required"
+    <dd>The time when the instance joined the group.</dd><dt class="property-required"
             title="Required">
         <span id="autoscalinggroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupid_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Id</a>
@@ -1591,8 +1774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Auto scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="autoscalinggroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupname_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Name</a>
@@ -1600,8 +1782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto scaling group name.</p>
-</dd><dt class="property-required"
+    <dd>Auto scaling group name.</dd><dt class="property-required"
             title="Required">
         <span id="creationtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creationtype_yaml" style="color: inherit; text-decoration: inherit;">creation<wbr>Type</a>
@@ -1609,8 +1790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Valid values: <code>AUTO_CREATION</code>, <code>MANUAL_ATTACHING</code>.</p>
-</dd><dt class="property-required"
+    <dd>Valid values: <code>AUTO_CREATION</code>, <code>MANUAL_ATTACHING</code>.</dd><dt class="property-required"
             title="Required">
         <span id="healthstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthstatus_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Status</a>
@@ -1618,8 +1798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Health status, the valid values are HEALTHY and UNHEALTHY.</p>
-</dd><dt class="property-required"
+    <dd>Health status, the valid values are HEALTHY and UNHEALTHY.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1627,8 +1806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1636,8 +1814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance type.</p>
-</dd><dt class="property-required"
+    <dd>Instance type.</dd><dt class="property-required"
             title="Required">
         <span id="launchconfigurationid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launchconfigurationid_yaml" style="color: inherit; text-decoration: inherit;">launch<wbr>Configuration<wbr>Id</a>
@@ -1645,8 +1822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="launchconfigurationname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#launchconfigurationname_yaml" style="color: inherit; text-decoration: inherit;">launch<wbr>Configuration<wbr>Name</a>
@@ -1654,8 +1830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Launch configuration name.</p>
-</dd><dt class="property-required"
+    <dd>Launch configuration name.</dd><dt class="property-required"
             title="Required">
         <span id="lifecyclestate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifecyclestate_yaml" style="color: inherit; text-decoration: inherit;">life<wbr>Cycle<wbr>State</a>
@@ -1663,8 +1838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Life cycle state. Please refer to the link for field value details: https://cloud.tencent.com/document/api/377/20453#Instance.</p>
-</dd><dt class="property-required"
+    <dd>Life cycle state. Please refer to the link for field value details: https://cloud.tencent.com/document/api/377/20453#Instance.</dd><dt class="property-required"
             title="Required">
         <span id="protectedfromscalein_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protectedfromscalein_yaml" style="color: inherit; text-decoration: inherit;">protected<wbr>From<wbr>Scale<wbr>In</a>
@@ -1672,8 +1846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable scale in protection.</p>
-</dd><dt class="property-required"
+    <dd>Enable scale in protection.</dd><dt class="property-required"
             title="Required">
         <span id="versionnumber_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionnumber_yaml" style="color: inherit; text-decoration: inherit;">version<wbr>Number</a>
@@ -1681,8 +1854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Version ID.</p>
-</dd><dt class="property-required"
+    <dd>Version ID.</dd><dt class="property-required"
             title="Required">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1690,8 +1862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available zone.</p>
-</dd></dl>
+    <dd>Available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1706,7 +1877,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

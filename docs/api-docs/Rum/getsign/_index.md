@@ -2,9 +2,11 @@
 ---
 title: "getSign"
 title_tag: "tencentcloud.Rum.getSign"
-meta_desc: "Documentation for the tencentcloud.Rum.getSign function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of rum sign"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,52 +18,51 @@ Use this data source to query detailed information of rum sign
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const sign = tencentcloud.Rum.getSign({
-    fileType: 1,
+const sign = tencentcloud.rum.getSign({
     timeout: 1800,
+    fileType: 1,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-sign = tencentcloud.Rum.get_sign(file_type=1,
-    timeout=1800)
+sign = tencentcloud.rum.get_sign(timeout=1800,
+    file_type=1)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var sign = Tencentcloud.Rum.GetSign.Invoke(new()
-    {
-        FileType = 1,
-        Timeout = 1800,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/rum"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Rum.GetSign(ctx, &rum.GetSignArgs{
-			FileType: pulumi.IntRef(1),
+		_, err := rum.GetSign(ctx, &rum.GetSignArgs{
 			Timeout:  pulumi.IntRef(1800),
+			FileType: pulumi.IntRef(1),
 		}, nil)
 		if err != nil {
 			return err
@@ -70,6 +71,32 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var sign = Tencentcloud.Rum.GetSign.Invoke(new()
+    {
+        Timeout = 1800,
+        FileType = 1,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Rum.RumFunctions;
 import com.pulumi.tencentcloud.Rum.inputs.GetSignArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,24 +119,55 @@ public class App {
 
     public static void stack(Context ctx) {
         final var sign = RumFunctions.getSign(GetSignArgs.builder()
-            .fileType(1)
             .timeout(1800)
+            .fileType(1)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   sign:
     fn::invoke:
-      Function: tencentcloud:Rum:getSign
-      Arguments:
-        fileType: 1
+      function: tencentcloud:Rum:getSign
+      arguments:
         timeout: 1800
+        fileType: 1
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_rum_getsign" "sign" {
+  timeout   = 1800
+  file_type = 1
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeReleaseFileSign](https://www.tencentcloud.com/document/api/1131/45306)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getSign<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSignArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSignResult</a></span>></span
+><span class="k">function </span>getSign<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSignArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSignResult</a></span>></span
 ><span class="k">
-function </span>getSignOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSignOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSignResult</a></span>></span
+function </span>getSignOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSignOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSignResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -145,10 +203,10 @@ function </span>getSignOutput<span class="p">(</span><span class="nx">args</span
              <span class="nx">timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetSignResult</span
 ><span class="k">
-def </span>get_sign_output<span class="p">(</span><span class="nx">file_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">timeout</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSignResult]</span
+def </span>get_sign_output<span class="p">(</span><span class="nx">file_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">timeout</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSignResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,7 +231,8 @@ func </span>GetSignOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetSign </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetSignResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetSignArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetSignResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSignInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSignResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSignInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSignResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSignInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -182,7 +241,8 @@ func </span>GetSignOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetSignResult</a></span>> </span>getSign<span class="p">(</span><span class="nx">GetSignArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSignResult</a></span>> </span>getSign<span class="p">(</span><span class="nx">GetSignArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSignResult</a></span>> </span>getSign<span class="p">(</span><span class="nx">GetSignArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,6 +254,15 @@ func </span>GetSignOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Rum/getSign:getSign
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_rum_get_sign&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -212,8 +281,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bucket type. <code>1</code>:web project; <code>2</code>:app project.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket type. <code>1</code>:web project; <code>2</code>:app project.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -221,8 +289,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_csharp" style="color: inherit; text-decoration: inherit;">Timeout</a>
@@ -230,8 +297,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout duration.</p>
-</dd></dl>
+    <dd>Timeout duration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -245,8 +311,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bucket type. <code>1</code>:web project; <code>2</code>:app project.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket type. <code>1</code>:web project; <code>2</code>:app project.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -254,8 +319,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_go" style="color: inherit; text-decoration: inherit;">Timeout</a>
@@ -263,8 +327,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout duration.</p>
-</dd></dl>
+    <dd>Timeout duration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="file_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_type_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Bucket type. <code>1</code>:web project; <code>2</code>:app project.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_hcl" style="color: inherit; text-decoration: inherit;">timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Timeout duration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -278,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Bucket type. <code>1</code>:web project; <code>2</code>:app project.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket type. <code>1</code>:web project; <code>2</code>:app project.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -287,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_java" style="color: inherit; text-decoration: inherit;">timeout</a>
@@ -296,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Timeout duration.</p>
-</dd></dl>
+    <dd>Timeout duration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -311,8 +401,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Bucket type. <code>1</code>:web project; <code>2</code>:app project.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket type. <code>1</code>:web project; <code>2</code>:app project.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -320,8 +409,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_nodejs" style="color: inherit; text-decoration: inherit;">timeout</a>
@@ -329,8 +417,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Timeout duration.</p>
-</dd></dl>
+    <dd>Timeout duration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -344,8 +431,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bucket type. <code>1</code>:web project; <code>2</code>:app project.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket type. <code>1</code>:web project; <code>2</code>:app project.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -353,8 +439,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_python" style="color: inherit; text-decoration: inherit;">timeout</a>
@@ -362,8 +447,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout duration.</p>
-</dd></dl>
+    <dd>Timeout duration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -377,8 +461,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Bucket type. <code>1</code>:web project; <code>2</code>:app project.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket type. <code>1</code>:web project; <code>2</code>:app project.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -386,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_yaml" style="color: inherit; text-decoration: inherit;">timeout</a>
@@ -395,8 +477,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Timeout duration.</p>
-</dd></dl>
+    <dd>Timeout duration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -419,8 +500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Expiration timestamp.</p>
-</dd><dt class="property-"
+    <dd>Expiration timestamp.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -428,8 +508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="secretid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretid_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Id</a>
@@ -437,8 +516,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Temporary access key ID.</p>
-</dd><dt class="property-"
+    <dd>Temporary access key ID.</dd><dt class="property-"
             title="">
         <span id="secretkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretkey_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Key</a>
@@ -446,8 +524,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Temporary access key.</p>
-</dd><dt class="property-"
+    <dd>Temporary access key.</dd><dt class="property-"
             title="">
         <span id="sessiontoken_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontoken_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Token</a>
@@ -455,8 +532,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Temporary access key token.</p>
-</dd><dt class="property-"
+    <dd>Temporary access key token.</dd><dt class="property-"
             title="">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -464,8 +540,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start timestamp.</p>
-</dd><dt class="property-"
+    <dd>Start timestamp.</dd><dt class="property-"
             title="">
         <span id="filetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filetype_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Type</a>
@@ -503,8 +578,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Expiration timestamp.</p>
-</dd><dt class="property-"
+    <dd>Expiration timestamp.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -512,8 +586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="secretid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretid_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Id</a>
@@ -521,8 +594,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Temporary access key ID.</p>
-</dd><dt class="property-"
+    <dd>Temporary access key ID.</dd><dt class="property-"
             title="">
         <span id="secretkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretkey_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Key</a>
@@ -530,8 +602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Temporary access key.</p>
-</dd><dt class="property-"
+    <dd>Temporary access key.</dd><dt class="property-"
             title="">
         <span id="sessiontoken_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontoken_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Token</a>
@@ -539,8 +610,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Temporary access key token.</p>
-</dd><dt class="property-"
+    <dd>Temporary access key token.</dd><dt class="property-"
             title="">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -548,8 +618,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start timestamp.</p>
-</dd><dt class="property-"
+    <dd>Start timestamp.</dd><dt class="property-"
             title="">
         <span id="filetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filetype_go" style="color: inherit; text-decoration: inherit;">File<wbr>Type</a>
@@ -578,6 +647,84 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="expired_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_time_hcl" style="color: inherit; text-decoration: inherit;">expired_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Expiration timestamp.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="secret_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_id_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Temporary access key ID.</dd><dt class="property-"
+            title="">
+        <span id="secret_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_key_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Temporary access key.</dd><dt class="property-"
+            title="">
+        <span id="session_token_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_token_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>token</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Temporary access key token.</dd><dt class="property-"
+            title="">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start timestamp.</dd><dt class="property-"
+            title="">
+        <span id="file_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_type_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_hcl" style="color: inherit; text-decoration: inherit;">timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -587,8 +734,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Expiration timestamp.</p>
-</dd><dt class="property-"
+    <dd>Expiration timestamp.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -596,8 +742,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="secretid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretid_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Id</a>
@@ -605,8 +750,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Temporary access key ID.</p>
-</dd><dt class="property-"
+    <dd>Temporary access key ID.</dd><dt class="property-"
             title="">
         <span id="secretkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretkey_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Key</a>
@@ -614,8 +758,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Temporary access key.</p>
-</dd><dt class="property-"
+    <dd>Temporary access key.</dd><dt class="property-"
             title="">
         <span id="sessiontoken_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontoken_java" style="color: inherit; text-decoration: inherit;">session<wbr>Token</a>
@@ -623,8 +766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Temporary access key token.</p>
-</dd><dt class="property-"
+    <dd>Temporary access key token.</dd><dt class="property-"
             title="">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -632,8 +774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Start timestamp.</p>
-</dd><dt class="property-"
+    <dd>Start timestamp.</dd><dt class="property-"
             title="">
         <span id="filetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filetype_java" style="color: inherit; text-decoration: inherit;">file<wbr>Type</a>
@@ -671,8 +812,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Expiration timestamp.</p>
-</dd><dt class="property-"
+    <dd>Expiration timestamp.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -680,8 +820,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="secretid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretid_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Id</a>
@@ -689,8 +828,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Temporary access key ID.</p>
-</dd><dt class="property-"
+    <dd>Temporary access key ID.</dd><dt class="property-"
             title="">
         <span id="secretkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretkey_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Key</a>
@@ -698,8 +836,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Temporary access key.</p>
-</dd><dt class="property-"
+    <dd>Temporary access key.</dd><dt class="property-"
             title="">
         <span id="sessiontoken_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontoken_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Token</a>
@@ -707,8 +844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Temporary access key token.</p>
-</dd><dt class="property-"
+    <dd>Temporary access key token.</dd><dt class="property-"
             title="">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -716,8 +852,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Start timestamp.</p>
-</dd><dt class="property-"
+    <dd>Start timestamp.</dd><dt class="property-"
             title="">
         <span id="filetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filetype_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Type</a>
@@ -755,8 +890,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Expiration timestamp.</p>
-</dd><dt class="property-"
+    <dd>Expiration timestamp.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -764,8 +898,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="secret_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_id_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>id</a>
@@ -773,8 +906,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Temporary access key ID.</p>
-</dd><dt class="property-"
+    <dd>Temporary access key ID.</dd><dt class="property-"
             title="">
         <span id="secret_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_key_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>key</a>
@@ -782,8 +914,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Temporary access key.</p>
-</dd><dt class="property-"
+    <dd>Temporary access key.</dd><dt class="property-"
             title="">
         <span id="session_token_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_token_python" style="color: inherit; text-decoration: inherit;">session_<wbr>token</a>
@@ -791,8 +922,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Temporary access key token.</p>
-</dd><dt class="property-"
+    <dd>Temporary access key token.</dd><dt class="property-"
             title="">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -800,8 +930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start timestamp.</p>
-</dd><dt class="property-"
+    <dd>Start timestamp.</dd><dt class="property-"
             title="">
         <span id="file_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_type_python" style="color: inherit; text-decoration: inherit;">file_<wbr>type</a>
@@ -839,8 +968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Expiration timestamp.</p>
-</dd><dt class="property-"
+    <dd>Expiration timestamp.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -848,8 +976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="secretid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretid_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Id</a>
@@ -857,8 +984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Temporary access key ID.</p>
-</dd><dt class="property-"
+    <dd>Temporary access key ID.</dd><dt class="property-"
             title="">
         <span id="secretkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretkey_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Key</a>
@@ -866,8 +992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Temporary access key.</p>
-</dd><dt class="property-"
+    <dd>Temporary access key.</dd><dt class="property-"
             title="">
         <span id="sessiontoken_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontoken_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Token</a>
@@ -875,8 +1000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Temporary access key token.</p>
-</dd><dt class="property-"
+    <dd>Temporary access key token.</dd><dt class="property-"
             title="">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -884,8 +1008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Start timestamp.</p>
-</dd><dt class="property-"
+    <dd>Start timestamp.</dd><dt class="property-"
             title="">
         <span id="filetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filetype_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Type</a>
@@ -924,7 +1047,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

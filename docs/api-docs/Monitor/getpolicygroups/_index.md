@@ -2,9 +2,11 @@
 ---
 title: "getPolicyGroups"
 title_tag: "tencentcloud.Monitor.getPolicyGroups"
-meta_desc: "Documentation for the tencentcloud.Monitor.getPolicyGroups function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query monitor policy groups (There is a lot of data and it is recommended to output to a file)"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,36 +18,85 @@ Use this data source to query monitor policy groups (There is a lot of data and 
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const groups = tencentcloud.Monitor.getPolicyGroups({
+const groups = tencentcloud.monitor.getPolicyGroups({
     policyViewNames: [
         "REDIS-CLUSTER",
         "cvm_device",
     ],
 });
-const name = tencentcloud.Monitor.getPolicyGroups({
+const name = tencentcloud.monitor.getPolicyGroups({
     name: "test",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-groups = tencentcloud.Monitor.get_policy_groups(policy_view_names=[
+groups = tencentcloud.monitor.get_policy_groups(policy_view_names=[
     "REDIS-CLUSTER",
     "cvm_device",
 ])
-name = tencentcloud.Monitor.get_policy_groups(name="test")
+name = tencentcloud.monitor.get_policy_groups(name="test")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := monitor.GetPolicyGroups(ctx, &monitor.GetPolicyGroupsArgs{
+			PolicyViewNames: []string{
+				"REDIS-CLUSTER",
+				"cvm_device",
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		_, err = monitor.GetPolicyGroups(ctx, &monitor.GetPolicyGroupsArgs{
+			Name: pulumi.StringRef("test"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -65,35 +116,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Monitor.GetPolicyGroups(ctx, &monitor.GetPolicyGroupsArgs{
-			PolicyViewNames: []string{
-				"REDIS-CLUSTER",
-				"cvm_device",
-			},
-		}, nil)
-		if err != nil {
-			return err
-		}
-		_, err = Monitor.GetPolicyGroups(ctx, &monitor.GetPolicyGroupsArgs{
-			Name: pulumi.StringRef("test"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -102,8 +129,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Monitor.MonitorFunctions;
 import com.pulumi.tencentcloud.Monitor.inputs.GetPolicyGroupsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -128,23 +155,56 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   groups:
     fn::invoke:
-      Function: tencentcloud:Monitor:getPolicyGroups
-      Arguments:
+      function: tencentcloud:Monitor:getPolicyGroups
+      arguments:
         policyViewNames:
           - REDIS-CLUSTER
           - cvm_device
   name:
     fn::invoke:
-      Function: tencentcloud:Monitor:getPolicyGroups
-      Arguments:
+      function: tencentcloud:Monitor:getPolicyGroups
+      arguments:
         name: test
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_monitor_getpolicygroups" "groups" {
+  policy_view_names = ["REDIS-CLUSTER", "cvm_device"]
+}
+data "tencentcloud_monitor_getpolicygroups" "name" {
+  name = "test"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
 
 
 
@@ -156,7 +216,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -164,9 +224,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getPolicyGroups<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPolicyGroupsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetPolicyGroupsResult</a></span>></span
+><span class="k">function </span>getPolicyGroups<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPolicyGroupsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetPolicyGroupsResult</a></span>></span
 ><span class="k">
-function </span>getPolicyGroupsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPolicyGroupsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetPolicyGroupsResult</a></span>></span
+function </span>getPolicyGroupsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPolicyGroupsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetPolicyGroupsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -180,10 +240,10 @@ function </span>getPolicyGroupsOutput<span class="p">(</span><span class="nx">ar
                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetPolicyGroupsResult</span
 ><span class="k">
-def </span>get_policy_groups_output<span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">policy_view_names</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetPolicyGroupsResult]</span
+def </span>get_policy_groups_output<span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">policy_view_names</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetPolicyGroupsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -208,7 +268,8 @@ func </span>GetPolicyGroupsOutput<span class="p">(</span><span class="nx">ctx</s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetPolicyGroups </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetPolicyGroupsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetPolicyGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetPolicyGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPolicyGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetPolicyGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPolicyGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetPolicyGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPolicyGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -217,7 +278,8 @@ func </span>GetPolicyGroupsOutput<span class="p">(</span><span class="nx">ctx</s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetPolicyGroupsResult</a></span>> </span>getPolicyGroups<span class="p">(</span><span class="nx">GetPolicyGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetPolicyGroupsResult</a></span>> </span>getPolicyGroups<span class="p">(</span><span class="nx">GetPolicyGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetPolicyGroupsResult</a></span>> </span>getPolicyGroups<span class="p">(</span><span class="nx">GetPolicyGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -229,6 +291,15 @@ func </span>GetPolicyGroupsOutput<span class="p">(</span><span class="nx">ctx</s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Monitor/getPolicyGroups:getPolicyGroups
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_monitor_get_policy_groups&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -247,8 +318,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy group name for query.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group name for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyviewnames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyviewnames_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>View<wbr>Names</a>
@@ -256,8 +326,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The policy view for query.</p>
-</dd><dt class="property-optional"
+    <dd>The policy view for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -265,8 +334,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -280,8 +348,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy group name for query.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group name for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyviewnames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyviewnames_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>View<wbr>Names</a>
@@ -289,8 +356,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The policy view for query.</p>
-</dd><dt class="property-optional"
+    <dd>The policy view for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -298,8 +364,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy group name for query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="policy_view_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_view_names_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>view_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The policy view for query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -313,8 +408,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy group name for query.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group name for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyviewnames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyviewnames_java" style="color: inherit; text-decoration: inherit;">policy<wbr>View<wbr>Names</a>
@@ -322,8 +416,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The policy view for query.</p>
-</dd><dt class="property-optional"
+    <dd>The policy view for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -331,8 +424,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -346,8 +438,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy group name for query.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group name for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyviewnames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyviewnames_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>View<wbr>Names</a>
@@ -355,8 +446,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The policy view for query.</p>
-</dd><dt class="property-optional"
+    <dd>The policy view for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -364,8 +454,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -379,8 +468,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy group name for query.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group name for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_view_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_view_names_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>view_<wbr>names</a>
@@ -388,8 +476,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The policy view for query.</p>
-</dd><dt class="property-optional"
+    <dd>The policy view for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -397,8 +484,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -412,8 +498,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy group name for query.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group name for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyviewnames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyviewnames_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>View<wbr>Names</a>
@@ -421,8 +506,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The policy view for query.</p>
-</dd><dt class="property-optional"
+    <dd>The policy view for query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -430,8 +514,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -454,8 +537,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -463,8 +545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Outputs.<wbr>Get<wbr>Policy<wbr>Groups<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list policy groups. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list policy groups. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -502,8 +583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -511,8 +591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslist">[]Get<wbr>Policy<wbr>Groups<wbr>List</a></span>
     </dt>
-    <dd><p>A list policy groups. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list policy groups. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -541,6 +620,52 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getpolicygroupslist">list(object)</a></span>
+    </dt>
+    <dd>A list policy groups. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="policy_view_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_view_names_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>view_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -550,8 +675,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -559,8 +683,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslist">List&lt;Get<wbr>Policy<wbr>Groups<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list policy groups. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list policy groups. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -598,8 +721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -607,8 +729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslist">Get<wbr>Policy<wbr>Groups<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list policy groups. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list policy groups. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -646,17 +767,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getpolicygroupslist">Get<wbr>Policy<wbr>Groups<wbr>List]</a></span>
+        <span class="property-type"><a href="#getpolicygroupslist">Sequence[Get<wbr>Policy<wbr>Groups<wbr>List]</a></span>
     </dt>
-    <dd><p>A list policy groups. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list policy groups. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -694,8 +813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -703,8 +821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list policy groups. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list policy groups. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -752,8 +869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether it can be set as the default policy.</p>
-</dd><dt class="property-required"
+    <dd>Whether it can be set as the default policy.</dd><dt class="property-required"
             title="Required">
         <span id="conditions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_csharp" style="color: inherit; text-decoration: inherit;">Conditions</a>
@@ -761,8 +877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslistcondition">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Get<wbr>Policy<wbr>Groups<wbr>List<wbr>Condition&gt;</a></span>
     </dt>
-    <dd><p>A list of threshold rules. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of threshold rules. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="eventconditions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventconditions_csharp" style="color: inherit; text-decoration: inherit;">Event<wbr>Conditions</a>
@@ -770,8 +885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslisteventcondition">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Get<wbr>Policy<wbr>Groups<wbr>List<wbr>Event<wbr>Condition&gt;</a></span>
     </dt>
-    <dd><p>A list of event rules. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of event rules. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="groupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -779,8 +893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The policy group id.</p>
-</dd><dt class="property-required"
+    <dd>The policy group id.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Name</a>
@@ -788,8 +901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The policy group name.</p>
-</dd><dt class="property-required"
+    <dd>The policy group name.</dd><dt class="property-required"
             title="Required">
         <span id="inserttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inserttime_csharp" style="color: inherit; text-decoration: inherit;">Insert<wbr>Time</a>
@@ -797,8 +909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The policy group create timestamp.</p>
-</dd><dt class="property-required"
+    <dd>The policy group create timestamp.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -806,8 +917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>If is default policy group or not, <code>0</code> represents the non-default policy, and <code>1</code> represents the default policy.</p>
-</dd><dt class="property-required"
+    <dd>If is default policy group or not, <code>0</code> represents the non-default policy, and <code>1</code> represents the default policy.</dd><dt class="property-required"
             title="Required">
         <span id="isopen_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isopen_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Open</a>
@@ -815,8 +925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether open or not.</p>
-</dd><dt class="property-required"
+    <dd>Whether open or not.</dd><dt class="property-required"
             title="Required">
         <span id="lastedituin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastedituin_csharp" style="color: inherit; text-decoration: inherit;">Last<wbr>Edit<wbr>Uin</a>
@@ -824,8 +933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recently edited user uin.</p>
-</dd><dt class="property-required"
+    <dd>Recently edited user uin.</dd><dt class="property-required"
             title="Required">
         <span id="noshieldedsum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noshieldedsum_csharp" style="color: inherit; text-decoration: inherit;">No<wbr>Shielded<wbr>Sum</a>
@@ -833,8 +941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of unmasked instances of policy group bindings.</p>
-</dd><dt class="property-required"
+    <dd>Number of unmasked instances of policy group bindings.</dd><dt class="property-required"
             title="Required">
         <span id="parentgroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parentgroupid_csharp" style="color: inherit; text-decoration: inherit;">Parent<wbr>Group<wbr>Id</a>
@@ -842,8 +949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Parent policy group ID.</p>
-</dd><dt class="property-required"
+    <dd>Parent policy group ID.</dd><dt class="property-required"
             title="Required">
         <span id="policyviewname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyviewname_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>View<wbr>Name</a>
@@ -851,8 +957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The policy group view name.</p>
-</dd><dt class="property-required"
+    <dd>The policy group view name.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -860,8 +965,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project ID to which the policy group belongs.</p>
-</dd><dt class="property-required"
+    <dd>The project ID to which the policy group belongs.</dd><dt class="property-required"
             title="Required">
         <span id="receivers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_csharp" style="color: inherit; text-decoration: inherit;">Receivers</a>
@@ -869,8 +973,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslistreceiver">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Get<wbr>Policy<wbr>Groups<wbr>List<wbr>Receiver&gt;</a></span>
     </dt>
-    <dd><p>A list of receivers. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of receivers. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -878,8 +981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy group remarks.</p>
-</dd><dt class="property-required"
+    <dd>Policy group remarks.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -887,8 +989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The policy group update timestamp.</p>
-</dd><dt class="property-required"
+    <dd>The policy group update timestamp.</dd><dt class="property-required"
             title="Required">
         <span id="usesum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usesum_csharp" style="color: inherit; text-decoration: inherit;">Use<wbr>Sum</a>
@@ -896,8 +997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of instances of policy group bindings.</p>
-</dd></dl>
+    <dd>Number of instances of policy group bindings.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -911,8 +1011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether it can be set as the default policy.</p>
-</dd><dt class="property-required"
+    <dd>Whether it can be set as the default policy.</dd><dt class="property-required"
             title="Required">
         <span id="conditions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_go" style="color: inherit; text-decoration: inherit;">Conditions</a>
@@ -920,8 +1019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslistcondition">[]Get<wbr>Policy<wbr>Groups<wbr>List<wbr>Condition</a></span>
     </dt>
-    <dd><p>A list of threshold rules. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of threshold rules. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="eventconditions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventconditions_go" style="color: inherit; text-decoration: inherit;">Event<wbr>Conditions</a>
@@ -929,8 +1027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslisteventcondition">[]Get<wbr>Policy<wbr>Groups<wbr>List<wbr>Event<wbr>Condition</a></span>
     </dt>
-    <dd><p>A list of event rules. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of event rules. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="groupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -938,8 +1035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The policy group id.</p>
-</dd><dt class="property-required"
+    <dd>The policy group id.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Name</a>
@@ -947,8 +1043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The policy group name.</p>
-</dd><dt class="property-required"
+    <dd>The policy group name.</dd><dt class="property-required"
             title="Required">
         <span id="inserttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inserttime_go" style="color: inherit; text-decoration: inherit;">Insert<wbr>Time</a>
@@ -956,8 +1051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The policy group create timestamp.</p>
-</dd><dt class="property-required"
+    <dd>The policy group create timestamp.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -965,8 +1059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>If is default policy group or not, <code>0</code> represents the non-default policy, and <code>1</code> represents the default policy.</p>
-</dd><dt class="property-required"
+    <dd>If is default policy group or not, <code>0</code> represents the non-default policy, and <code>1</code> represents the default policy.</dd><dt class="property-required"
             title="Required">
         <span id="isopen_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isopen_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Open</a>
@@ -974,8 +1067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether open or not.</p>
-</dd><dt class="property-required"
+    <dd>Whether open or not.</dd><dt class="property-required"
             title="Required">
         <span id="lastedituin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastedituin_go" style="color: inherit; text-decoration: inherit;">Last<wbr>Edit<wbr>Uin</a>
@@ -983,8 +1075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recently edited user uin.</p>
-</dd><dt class="property-required"
+    <dd>Recently edited user uin.</dd><dt class="property-required"
             title="Required">
         <span id="noshieldedsum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noshieldedsum_go" style="color: inherit; text-decoration: inherit;">No<wbr>Shielded<wbr>Sum</a>
@@ -992,8 +1083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of unmasked instances of policy group bindings.</p>
-</dd><dt class="property-required"
+    <dd>Number of unmasked instances of policy group bindings.</dd><dt class="property-required"
             title="Required">
         <span id="parentgroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parentgroupid_go" style="color: inherit; text-decoration: inherit;">Parent<wbr>Group<wbr>Id</a>
@@ -1001,8 +1091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Parent policy group ID.</p>
-</dd><dt class="property-required"
+    <dd>Parent policy group ID.</dd><dt class="property-required"
             title="Required">
         <span id="policyviewname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyviewname_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>View<wbr>Name</a>
@@ -1010,8 +1099,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The policy group view name.</p>
-</dd><dt class="property-required"
+    <dd>The policy group view name.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1019,8 +1107,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project ID to which the policy group belongs.</p>
-</dd><dt class="property-required"
+    <dd>The project ID to which the policy group belongs.</dd><dt class="property-required"
             title="Required">
         <span id="receivers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_go" style="color: inherit; text-decoration: inherit;">Receivers</a>
@@ -1028,8 +1115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslistreceiver">[]Get<wbr>Policy<wbr>Groups<wbr>List<wbr>Receiver</a></span>
     </dt>
-    <dd><p>A list of receivers. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of receivers. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1037,8 +1123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy group remarks.</p>
-</dd><dt class="property-required"
+    <dd>Policy group remarks.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1046,8 +1131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The policy group update timestamp.</p>
-</dd><dt class="property-required"
+    <dd>The policy group update timestamp.</dd><dt class="property-required"
             title="Required">
         <span id="usesum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usesum_go" style="color: inherit; text-decoration: inherit;">Use<wbr>Sum</a>
@@ -1055,8 +1139,149 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of instances of policy group bindings.</p>
-</dd></dl>
+    <dd>Number of instances of policy group bindings.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="can_set_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#can_set_default_hcl" style="color: inherit; text-decoration: inherit;">can_<wbr>set_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether it can be set as the default policy.</dd><dt class="property-required"
+            title="Required">
+        <span id="conditions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_hcl" style="color: inherit; text-decoration: inherit;">conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getpolicygroupslistcondition">list(object)</a></span>
+    </dt>
+    <dd>A list of threshold rules. Each element contains the following attributes:</dd><dt class="property-required"
+            title="Required">
+        <span id="event_conditions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_conditions_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getpolicygroupslisteventcondition">list(object)</a></span>
+    </dt>
+    <dd>A list of event rules. Each element contains the following attributes:</dd><dt class="property-required"
+            title="Required">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The policy group id.</dd><dt class="property-required"
+            title="Required">
+        <span id="group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_name_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The policy group name.</dd><dt class="property-required"
+            title="Required">
+        <span id="insert_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#insert_time_hcl" style="color: inherit; text-decoration: inherit;">insert_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The policy group create timestamp.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>If is default policy group or not, <code>0</code> represents the non-default policy, and <code>1</code> represents the default policy.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_open_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_open_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>open</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether open or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="last_edit_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#last_edit_uin_hcl" style="color: inherit; text-decoration: inherit;">last_<wbr>edit_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Recently edited user uin.</dd><dt class="property-required"
+            title="Required">
+        <span id="no_shielded_sum_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#no_shielded_sum_hcl" style="color: inherit; text-decoration: inherit;">no_<wbr>shielded_<wbr>sum</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of unmasked instances of policy group bindings.</dd><dt class="property-required"
+            title="Required">
+        <span id="parent_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parent_group_id_hcl" style="color: inherit; text-decoration: inherit;">parent_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Parent policy group ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="policy_view_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_view_name_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>view_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The policy group view name.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The project ID to which the policy group belongs.</dd><dt class="property-required"
+            title="Required">
+        <span id="receivers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_hcl" style="color: inherit; text-decoration: inherit;">receivers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getpolicygroupslistreceiver">list(object)</a></span>
+    </dt>
+    <dd>A list of receivers. Each element contains the following attributes:</dd><dt class="property-required"
+            title="Required">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy group remarks.</dd><dt class="property-required"
+            title="Required">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The policy group update timestamp.</dd><dt class="property-required"
+            title="Required">
+        <span id="use_sum_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#use_sum_hcl" style="color: inherit; text-decoration: inherit;">use_<wbr>sum</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of instances of policy group bindings.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1070,8 +1295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether it can be set as the default policy.</p>
-</dd><dt class="property-required"
+    <dd>Whether it can be set as the default policy.</dd><dt class="property-required"
             title="Required">
         <span id="conditions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_java" style="color: inherit; text-decoration: inherit;">conditions</a>
@@ -1079,8 +1303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslistcondition">List&lt;Get<wbr>Policy<wbr>Groups<wbr>List<wbr>Condition&gt;</a></span>
     </dt>
-    <dd><p>A list of threshold rules. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of threshold rules. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="eventconditions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventconditions_java" style="color: inherit; text-decoration: inherit;">event<wbr>Conditions</a>
@@ -1088,8 +1311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslisteventcondition">List&lt;Get<wbr>Policy<wbr>Groups<wbr>List<wbr>Event<wbr>Condition&gt;</a></span>
     </dt>
-    <dd><p>A list of event rules. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of event rules. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="groupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -1097,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The policy group id.</p>
-</dd><dt class="property-required"
+    <dd>The policy group id.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_java" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -1106,8 +1327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The policy group name.</p>
-</dd><dt class="property-required"
+    <dd>The policy group name.</dd><dt class="property-required"
             title="Required">
         <span id="inserttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inserttime_java" style="color: inherit; text-decoration: inherit;">insert<wbr>Time</a>
@@ -1115,8 +1335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The policy group create timestamp.</p>
-</dd><dt class="property-required"
+    <dd>The policy group create timestamp.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_java" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1124,8 +1343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>If is default policy group or not, <code>0</code> represents the non-default policy, and <code>1</code> represents the default policy.</p>
-</dd><dt class="property-required"
+    <dd>If is default policy group or not, <code>0</code> represents the non-default policy, and <code>1</code> represents the default policy.</dd><dt class="property-required"
             title="Required">
         <span id="isopen_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isopen_java" style="color: inherit; text-decoration: inherit;">is<wbr>Open</a>
@@ -1133,8 +1351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether open or not.</p>
-</dd><dt class="property-required"
+    <dd>Whether open or not.</dd><dt class="property-required"
             title="Required">
         <span id="lastedituin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastedituin_java" style="color: inherit; text-decoration: inherit;">last<wbr>Edit<wbr>Uin</a>
@@ -1142,8 +1359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Recently edited user uin.</p>
-</dd><dt class="property-required"
+    <dd>Recently edited user uin.</dd><dt class="property-required"
             title="Required">
         <span id="noshieldedsum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noshieldedsum_java" style="color: inherit; text-decoration: inherit;">no<wbr>Shielded<wbr>Sum</a>
@@ -1151,8 +1367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of unmasked instances of policy group bindings.</p>
-</dd><dt class="property-required"
+    <dd>Number of unmasked instances of policy group bindings.</dd><dt class="property-required"
             title="Required">
         <span id="parentgroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parentgroupid_java" style="color: inherit; text-decoration: inherit;">parent<wbr>Group<wbr>Id</a>
@@ -1160,8 +1375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Parent policy group ID.</p>
-</dd><dt class="property-required"
+    <dd>Parent policy group ID.</dd><dt class="property-required"
             title="Required">
         <span id="policyviewname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyviewname_java" style="color: inherit; text-decoration: inherit;">policy<wbr>View<wbr>Name</a>
@@ -1169,8 +1383,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The policy group view name.</p>
-</dd><dt class="property-required"
+    <dd>The policy group view name.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1178,8 +1391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The project ID to which the policy group belongs.</p>
-</dd><dt class="property-required"
+    <dd>The project ID to which the policy group belongs.</dd><dt class="property-required"
             title="Required">
         <span id="receivers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_java" style="color: inherit; text-decoration: inherit;">receivers</a>
@@ -1187,8 +1399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslistreceiver">List&lt;Get<wbr>Policy<wbr>Groups<wbr>List<wbr>Receiver&gt;</a></span>
     </dt>
-    <dd><p>A list of receivers. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of receivers. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1196,8 +1407,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy group remarks.</p>
-</dd><dt class="property-required"
+    <dd>Policy group remarks.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1205,8 +1415,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The policy group update timestamp.</p>
-</dd><dt class="property-required"
+    <dd>The policy group update timestamp.</dd><dt class="property-required"
             title="Required">
         <span id="usesum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usesum_java" style="color: inherit; text-decoration: inherit;">use<wbr>Sum</a>
@@ -1214,8 +1423,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of instances of policy group bindings.</p>
-</dd></dl>
+    <dd>Number of instances of policy group bindings.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1229,8 +1437,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether it can be set as the default policy.</p>
-</dd><dt class="property-required"
+    <dd>Whether it can be set as the default policy.</dd><dt class="property-required"
             title="Required">
         <span id="conditions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_nodejs" style="color: inherit; text-decoration: inherit;">conditions</a>
@@ -1238,8 +1445,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslistcondition">Get<wbr>Policy<wbr>Groups<wbr>List<wbr>Condition[]</a></span>
     </dt>
-    <dd><p>A list of threshold rules. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of threshold rules. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="eventconditions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventconditions_nodejs" style="color: inherit; text-decoration: inherit;">event<wbr>Conditions</a>
@@ -1247,8 +1453,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslisteventcondition">Get<wbr>Policy<wbr>Groups<wbr>List<wbr>Event<wbr>Condition[]</a></span>
     </dt>
-    <dd><p>A list of event rules. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of event rules. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="groupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -1256,8 +1461,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The policy group id.</p>
-</dd><dt class="property-required"
+    <dd>The policy group id.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -1265,8 +1469,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The policy group name.</p>
-</dd><dt class="property-required"
+    <dd>The policy group name.</dd><dt class="property-required"
             title="Required">
         <span id="inserttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inserttime_nodejs" style="color: inherit; text-decoration: inherit;">insert<wbr>Time</a>
@@ -1274,8 +1477,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The policy group create timestamp.</p>
-</dd><dt class="property-required"
+    <dd>The policy group create timestamp.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1283,8 +1485,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>If is default policy group or not, <code>0</code> represents the non-default policy, and <code>1</code> represents the default policy.</p>
-</dd><dt class="property-required"
+    <dd>If is default policy group or not, <code>0</code> represents the non-default policy, and <code>1</code> represents the default policy.</dd><dt class="property-required"
             title="Required">
         <span id="isopen_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isopen_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Open</a>
@@ -1292,8 +1493,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether open or not.</p>
-</dd><dt class="property-required"
+    <dd>Whether open or not.</dd><dt class="property-required"
             title="Required">
         <span id="lastedituin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastedituin_nodejs" style="color: inherit; text-decoration: inherit;">last<wbr>Edit<wbr>Uin</a>
@@ -1301,8 +1501,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recently edited user uin.</p>
-</dd><dt class="property-required"
+    <dd>Recently edited user uin.</dd><dt class="property-required"
             title="Required">
         <span id="noshieldedsum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noshieldedsum_nodejs" style="color: inherit; text-decoration: inherit;">no<wbr>Shielded<wbr>Sum</a>
@@ -1310,8 +1509,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of unmasked instances of policy group bindings.</p>
-</dd><dt class="property-required"
+    <dd>Number of unmasked instances of policy group bindings.</dd><dt class="property-required"
             title="Required">
         <span id="parentgroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parentgroupid_nodejs" style="color: inherit; text-decoration: inherit;">parent<wbr>Group<wbr>Id</a>
@@ -1319,8 +1517,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Parent policy group ID.</p>
-</dd><dt class="property-required"
+    <dd>Parent policy group ID.</dd><dt class="property-required"
             title="Required">
         <span id="policyviewname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyviewname_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>View<wbr>Name</a>
@@ -1328,8 +1525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The policy group view name.</p>
-</dd><dt class="property-required"
+    <dd>The policy group view name.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1337,8 +1533,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The project ID to which the policy group belongs.</p>
-</dd><dt class="property-required"
+    <dd>The project ID to which the policy group belongs.</dd><dt class="property-required"
             title="Required">
         <span id="receivers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_nodejs" style="color: inherit; text-decoration: inherit;">receivers</a>
@@ -1346,8 +1541,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslistreceiver">Get<wbr>Policy<wbr>Groups<wbr>List<wbr>Receiver[]</a></span>
     </dt>
-    <dd><p>A list of receivers. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of receivers. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1355,8 +1549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy group remarks.</p>
-</dd><dt class="property-required"
+    <dd>Policy group remarks.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1364,8 +1557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The policy group update timestamp.</p>
-</dd><dt class="property-required"
+    <dd>The policy group update timestamp.</dd><dt class="property-required"
             title="Required">
         <span id="usesum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usesum_nodejs" style="color: inherit; text-decoration: inherit;">use<wbr>Sum</a>
@@ -1373,8 +1565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of instances of policy group bindings.</p>
-</dd></dl>
+    <dd>Number of instances of policy group bindings.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1388,26 +1579,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether it can be set as the default policy.</p>
-</dd><dt class="property-required"
+    <dd>Whether it can be set as the default policy.</dd><dt class="property-required"
             title="Required">
         <span id="conditions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_python" style="color: inherit; text-decoration: inherit;">conditions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getpolicygroupslistcondition">Get<wbr>Policy<wbr>Groups<wbr>List<wbr>Condition]</a></span>
+        <span class="property-type"><a href="#getpolicygroupslistcondition">Sequence[Get<wbr>Policy<wbr>Groups<wbr>List<wbr>Condition]</a></span>
     </dt>
-    <dd><p>A list of threshold rules. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of threshold rules. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="event_conditions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_conditions_python" style="color: inherit; text-decoration: inherit;">event_<wbr>conditions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getpolicygroupslisteventcondition">Get<wbr>Policy<wbr>Groups<wbr>List<wbr>Event<wbr>Condition]</a></span>
+        <span class="property-type"><a href="#getpolicygroupslisteventcondition">Sequence[Get<wbr>Policy<wbr>Groups<wbr>List<wbr>Event<wbr>Condition]</a></span>
     </dt>
-    <dd><p>A list of event rules. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of event rules. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
@@ -1415,8 +1603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The policy group id.</p>
-</dd><dt class="property-required"
+    <dd>The policy group id.</dd><dt class="property-required"
             title="Required">
         <span id="group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_name_python" style="color: inherit; text-decoration: inherit;">group_<wbr>name</a>
@@ -1424,8 +1611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The policy group name.</p>
-</dd><dt class="property-required"
+    <dd>The policy group name.</dd><dt class="property-required"
             title="Required">
         <span id="insert_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#insert_time_python" style="color: inherit; text-decoration: inherit;">insert_<wbr>time</a>
@@ -1433,8 +1619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The policy group create timestamp.</p>
-</dd><dt class="property-required"
+    <dd>The policy group create timestamp.</dd><dt class="property-required"
             title="Required">
         <span id="is_default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_python" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
@@ -1442,8 +1627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>If is default policy group or not, <code>0</code> represents the non-default policy, and <code>1</code> represents the default policy.</p>
-</dd><dt class="property-required"
+    <dd>If is default policy group or not, <code>0</code> represents the non-default policy, and <code>1</code> represents the default policy.</dd><dt class="property-required"
             title="Required">
         <span id="is_open_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_open_python" style="color: inherit; text-decoration: inherit;">is_<wbr>open</a>
@@ -1451,8 +1635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether open or not.</p>
-</dd><dt class="property-required"
+    <dd>Whether open or not.</dd><dt class="property-required"
             title="Required">
         <span id="last_edit_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#last_edit_uin_python" style="color: inherit; text-decoration: inherit;">last_<wbr>edit_<wbr>uin</a>
@@ -1460,8 +1643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Recently edited user uin.</p>
-</dd><dt class="property-required"
+    <dd>Recently edited user uin.</dd><dt class="property-required"
             title="Required">
         <span id="no_shielded_sum_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#no_shielded_sum_python" style="color: inherit; text-decoration: inherit;">no_<wbr>shielded_<wbr>sum</a>
@@ -1469,8 +1651,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of unmasked instances of policy group bindings.</p>
-</dd><dt class="property-required"
+    <dd>Number of unmasked instances of policy group bindings.</dd><dt class="property-required"
             title="Required">
         <span id="parent_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parent_group_id_python" style="color: inherit; text-decoration: inherit;">parent_<wbr>group_<wbr>id</a>
@@ -1478,8 +1659,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Parent policy group ID.</p>
-</dd><dt class="property-required"
+    <dd>Parent policy group ID.</dd><dt class="property-required"
             title="Required">
         <span id="policy_view_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_view_name_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>view_<wbr>name</a>
@@ -1487,8 +1667,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The policy group view name.</p>
-</dd><dt class="property-required"
+    <dd>The policy group view name.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1496,17 +1675,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The project ID to which the policy group belongs.</p>
-</dd><dt class="property-required"
+    <dd>The project ID to which the policy group belongs.</dd><dt class="property-required"
             title="Required">
         <span id="receivers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_python" style="color: inherit; text-decoration: inherit;">receivers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getpolicygroupslistreceiver">Get<wbr>Policy<wbr>Groups<wbr>List<wbr>Receiver]</a></span>
+        <span class="property-type"><a href="#getpolicygroupslistreceiver">Sequence[Get<wbr>Policy<wbr>Groups<wbr>List<wbr>Receiver]</a></span>
     </dt>
-    <dd><p>A list of receivers. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of receivers. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1514,8 +1691,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy group remarks.</p>
-</dd><dt class="property-required"
+    <dd>Policy group remarks.</dd><dt class="property-required"
             title="Required">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -1523,8 +1699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The policy group update timestamp.</p>
-</dd><dt class="property-required"
+    <dd>The policy group update timestamp.</dd><dt class="property-required"
             title="Required">
         <span id="use_sum_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#use_sum_python" style="color: inherit; text-decoration: inherit;">use_<wbr>sum</a>
@@ -1532,8 +1707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of instances of policy group bindings.</p>
-</dd></dl>
+    <dd>Number of instances of policy group bindings.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1547,8 +1721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether it can be set as the default policy.</p>
-</dd><dt class="property-required"
+    <dd>Whether it can be set as the default policy.</dd><dt class="property-required"
             title="Required">
         <span id="conditions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_yaml" style="color: inherit; text-decoration: inherit;">conditions</a>
@@ -1556,8 +1729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslistcondition">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of threshold rules. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of threshold rules. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="eventconditions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventconditions_yaml" style="color: inherit; text-decoration: inherit;">event<wbr>Conditions</a>
@@ -1565,8 +1737,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslisteventcondition">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of event rules. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of event rules. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="groupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -1574,8 +1745,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The policy group id.</p>
-</dd><dt class="property-required"
+    <dd>The policy group id.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -1583,8 +1753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The policy group name.</p>
-</dd><dt class="property-required"
+    <dd>The policy group name.</dd><dt class="property-required"
             title="Required">
         <span id="inserttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inserttime_yaml" style="color: inherit; text-decoration: inherit;">insert<wbr>Time</a>
@@ -1592,8 +1761,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The policy group create timestamp.</p>
-</dd><dt class="property-required"
+    <dd>The policy group create timestamp.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1601,8 +1769,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>If is default policy group or not, <code>0</code> represents the non-default policy, and <code>1</code> represents the default policy.</p>
-</dd><dt class="property-required"
+    <dd>If is default policy group or not, <code>0</code> represents the non-default policy, and <code>1</code> represents the default policy.</dd><dt class="property-required"
             title="Required">
         <span id="isopen_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isopen_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Open</a>
@@ -1610,8 +1777,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether open or not.</p>
-</dd><dt class="property-required"
+    <dd>Whether open or not.</dd><dt class="property-required"
             title="Required">
         <span id="lastedituin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lastedituin_yaml" style="color: inherit; text-decoration: inherit;">last<wbr>Edit<wbr>Uin</a>
@@ -1619,8 +1785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Recently edited user uin.</p>
-</dd><dt class="property-required"
+    <dd>Recently edited user uin.</dd><dt class="property-required"
             title="Required">
         <span id="noshieldedsum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noshieldedsum_yaml" style="color: inherit; text-decoration: inherit;">no<wbr>Shielded<wbr>Sum</a>
@@ -1628,8 +1793,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of unmasked instances of policy group bindings.</p>
-</dd><dt class="property-required"
+    <dd>Number of unmasked instances of policy group bindings.</dd><dt class="property-required"
             title="Required">
         <span id="parentgroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parentgroupid_yaml" style="color: inherit; text-decoration: inherit;">parent<wbr>Group<wbr>Id</a>
@@ -1637,8 +1801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Parent policy group ID.</p>
-</dd><dt class="property-required"
+    <dd>Parent policy group ID.</dd><dt class="property-required"
             title="Required">
         <span id="policyviewname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyviewname_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>View<wbr>Name</a>
@@ -1646,8 +1809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The policy group view name.</p>
-</dd><dt class="property-required"
+    <dd>The policy group view name.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1655,8 +1817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The project ID to which the policy group belongs.</p>
-</dd><dt class="property-required"
+    <dd>The project ID to which the policy group belongs.</dd><dt class="property-required"
             title="Required">
         <span id="receivers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_yaml" style="color: inherit; text-decoration: inherit;">receivers</a>
@@ -1664,8 +1825,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicygroupslistreceiver">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of receivers. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of receivers. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1673,8 +1833,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy group remarks.</p>
-</dd><dt class="property-required"
+    <dd>Policy group remarks.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1682,8 +1841,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The policy group update timestamp.</p>
-</dd><dt class="property-required"
+    <dd>The policy group update timestamp.</dd><dt class="property-required"
             title="Required">
         <span id="usesum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usesum_yaml" style="color: inherit; text-decoration: inherit;">use<wbr>Sum</a>
@@ -1691,8 +1849,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of instances of policy group bindings.</p>
-</dd></dl>
+    <dd>Number of instances of policy group bindings.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1710,8 +1867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</dd><dt class="property-required"
             title="Required">
         <span id="alarmnotifytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnotifytype_csharp" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Notify<wbr>Type</a>
@@ -1719,8 +1875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</dd><dt class="property-required"
             title="Required">
         <span id="calctype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calctype_csharp" style="color: inherit; text-decoration: inherit;">Calc<wbr>Type</a>
@@ -1728,8 +1883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Compare type, <code>1</code> means more than, <code>2</code>  means greater than or equal, <code>3</code> means less than, <code>4</code> means less than or equal to, <code>5</code> means equal, <code>6</code> means not equal, <code>7</code> means days rose, <code>8</code> means days fell, <code>9</code> means weeks rose, <code>10</code> means weeks fell, <code>11</code> means period rise, <code>12</code> means period fell.</p>
-</dd><dt class="property-required"
+    <dd>Compare type, <code>1</code> means more than, <code>2</code>  means greater than or equal, <code>3</code> means less than, <code>4</code> means less than or equal to, <code>5</code> means equal, <code>6</code> means not equal, <code>7</code> means days rose, <code>8</code> means days fell, <code>9</code> means weeks rose, <code>10</code> means weeks fell, <code>11</code> means period rise, <code>12</code> means period fell.</dd><dt class="property-required"
             title="Required">
         <span id="calcvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvalue_csharp" style="color: inherit; text-decoration: inherit;">Calc<wbr>Value</a>
@@ -1737,8 +1891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Threshold value.</p>
-</dd><dt class="property-required"
+    <dd>Threshold value.</dd><dt class="property-required"
             title="Required">
         <span id="continuetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetime_csharp" style="color: inherit; text-decoration: inherit;">Continue<wbr>Time</a>
@@ -1746,8 +1899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>How long does the triggering rule last (per second).</p>
-</dd><dt class="property-required"
+    <dd>How long does the triggering rule last (per second).</dd><dt class="property-required"
             title="Required">
         <span id="metricid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricid_csharp" style="color: inherit; text-decoration: inherit;">Metric<wbr>Id</a>
@@ -1755,8 +1907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricshowname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricshowname_csharp" style="color: inherit; text-decoration: inherit;">Metric<wbr>Show<wbr>Name</a>
@@ -1764,8 +1915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricunit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricunit_csharp" style="color: inherit; text-decoration: inherit;">Metric<wbr>Unit</a>
@@ -1773,8 +1923,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The unit of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The unit of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="period_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -1782,8 +1931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Data aggregation cycle (unit second).</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation cycle (unit second).</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -1791,8 +1939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Threshold rule ID.</p>
-</dd></dl>
+    <dd>Threshold rule ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1806,8 +1953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</dd><dt class="property-required"
             title="Required">
         <span id="alarmnotifytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnotifytype_go" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Notify<wbr>Type</a>
@@ -1815,8 +1961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</dd><dt class="property-required"
             title="Required">
         <span id="calctype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calctype_go" style="color: inherit; text-decoration: inherit;">Calc<wbr>Type</a>
@@ -1824,8 +1969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Compare type, <code>1</code> means more than, <code>2</code>  means greater than or equal, <code>3</code> means less than, <code>4</code> means less than or equal to, <code>5</code> means equal, <code>6</code> means not equal, <code>7</code> means days rose, <code>8</code> means days fell, <code>9</code> means weeks rose, <code>10</code> means weeks fell, <code>11</code> means period rise, <code>12</code> means period fell.</p>
-</dd><dt class="property-required"
+    <dd>Compare type, <code>1</code> means more than, <code>2</code>  means greater than or equal, <code>3</code> means less than, <code>4</code> means less than or equal to, <code>5</code> means equal, <code>6</code> means not equal, <code>7</code> means days rose, <code>8</code> means days fell, <code>9</code> means weeks rose, <code>10</code> means weeks fell, <code>11</code> means period rise, <code>12</code> means period fell.</dd><dt class="property-required"
             title="Required">
         <span id="calcvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvalue_go" style="color: inherit; text-decoration: inherit;">Calc<wbr>Value</a>
@@ -1833,8 +1977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Threshold value.</p>
-</dd><dt class="property-required"
+    <dd>Threshold value.</dd><dt class="property-required"
             title="Required">
         <span id="continuetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetime_go" style="color: inherit; text-decoration: inherit;">Continue<wbr>Time</a>
@@ -1842,8 +1985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>How long does the triggering rule last (per second).</p>
-</dd><dt class="property-required"
+    <dd>How long does the triggering rule last (per second).</dd><dt class="property-required"
             title="Required">
         <span id="metricid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricid_go" style="color: inherit; text-decoration: inherit;">Metric<wbr>Id</a>
@@ -1851,8 +1993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricshowname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricshowname_go" style="color: inherit; text-decoration: inherit;">Metric<wbr>Show<wbr>Name</a>
@@ -1860,8 +2001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricunit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricunit_go" style="color: inherit; text-decoration: inherit;">Metric<wbr>Unit</a>
@@ -1869,8 +2009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The unit of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The unit of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="period_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_go" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -1878,8 +2017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Data aggregation cycle (unit second).</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation cycle (unit second).</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -1887,8 +2025,93 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Threshold rule ID.</p>
-</dd></dl>
+    <dd>Threshold rule ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="alarm_notify_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_notify_period_hcl" style="color: inherit; text-decoration: inherit;">alarm_<wbr>notify_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</dd><dt class="property-required"
+            title="Required">
+        <span id="alarm_notify_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_notify_type_hcl" style="color: inherit; text-decoration: inherit;">alarm_<wbr>notify_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</dd><dt class="property-required"
+            title="Required">
+        <span id="calc_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calc_type_hcl" style="color: inherit; text-decoration: inherit;">calc_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Compare type, <code>1</code> means more than, <code>2</code>  means greater than or equal, <code>3</code> means less than, <code>4</code> means less than or equal to, <code>5</code> means equal, <code>6</code> means not equal, <code>7</code> means days rose, <code>8</code> means days fell, <code>9</code> means weeks rose, <code>10</code> means weeks fell, <code>11</code> means period rise, <code>12</code> means period fell.</dd><dt class="property-required"
+            title="Required">
+        <span id="calc_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calc_value_hcl" style="color: inherit; text-decoration: inherit;">calc_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Threshold value.</dd><dt class="property-required"
+            title="Required">
+        <span id="continue_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continue_time_hcl" style="color: inherit; text-decoration: inherit;">continue_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>How long does the triggering rule last (per second).</dd><dt class="property-required"
+            title="Required">
+        <span id="metric_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_id_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The ID of this metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="metric_show_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_show_name_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>show_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of this metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="metric_unit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_unit_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The unit of this metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Data aggregation cycle (unit second).</dd><dt class="property-required"
+            title="Required">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Threshold rule ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1902,8 +2125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</dd><dt class="property-required"
             title="Required">
         <span id="alarmnotifytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnotifytype_java" style="color: inherit; text-decoration: inherit;">alarm<wbr>Notify<wbr>Type</a>
@@ -1911,8 +2133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</dd><dt class="property-required"
             title="Required">
         <span id="calctype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calctype_java" style="color: inherit; text-decoration: inherit;">calc<wbr>Type</a>
@@ -1920,8 +2141,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Compare type, <code>1</code> means more than, <code>2</code>  means greater than or equal, <code>3</code> means less than, <code>4</code> means less than or equal to, <code>5</code> means equal, <code>6</code> means not equal, <code>7</code> means days rose, <code>8</code> means days fell, <code>9</code> means weeks rose, <code>10</code> means weeks fell, <code>11</code> means period rise, <code>12</code> means period fell.</p>
-</dd><dt class="property-required"
+    <dd>Compare type, <code>1</code> means more than, <code>2</code>  means greater than or equal, <code>3</code> means less than, <code>4</code> means less than or equal to, <code>5</code> means equal, <code>6</code> means not equal, <code>7</code> means days rose, <code>8</code> means days fell, <code>9</code> means weeks rose, <code>10</code> means weeks fell, <code>11</code> means period rise, <code>12</code> means period fell.</dd><dt class="property-required"
             title="Required">
         <span id="calcvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvalue_java" style="color: inherit; text-decoration: inherit;">calc<wbr>Value</a>
@@ -1929,8 +2149,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Threshold value.</p>
-</dd><dt class="property-required"
+    <dd>Threshold value.</dd><dt class="property-required"
             title="Required">
         <span id="continuetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetime_java" style="color: inherit; text-decoration: inherit;">continue<wbr>Time</a>
@@ -1938,8 +2157,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>How long does the triggering rule last (per second).</p>
-</dd><dt class="property-required"
+    <dd>How long does the triggering rule last (per second).</dd><dt class="property-required"
             title="Required">
         <span id="metricid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricid_java" style="color: inherit; text-decoration: inherit;">metric<wbr>Id</a>
@@ -1947,8 +2165,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The ID of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricshowname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricshowname_java" style="color: inherit; text-decoration: inherit;">metric<wbr>Show<wbr>Name</a>
@@ -1956,8 +2173,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricunit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricunit_java" style="color: inherit; text-decoration: inherit;">metric<wbr>Unit</a>
@@ -1965,8 +2181,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The unit of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The unit of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="period_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_java" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1974,8 +2189,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Data aggregation cycle (unit second).</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation cycle (unit second).</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1983,8 +2197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Threshold rule ID.</p>
-</dd></dl>
+    <dd>Threshold rule ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1998,8 +2211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</dd><dt class="property-required"
             title="Required">
         <span id="alarmnotifytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnotifytype_nodejs" style="color: inherit; text-decoration: inherit;">alarm<wbr>Notify<wbr>Type</a>
@@ -2007,8 +2219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</dd><dt class="property-required"
             title="Required">
         <span id="calctype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calctype_nodejs" style="color: inherit; text-decoration: inherit;">calc<wbr>Type</a>
@@ -2016,8 +2227,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Compare type, <code>1</code> means more than, <code>2</code>  means greater than or equal, <code>3</code> means less than, <code>4</code> means less than or equal to, <code>5</code> means equal, <code>6</code> means not equal, <code>7</code> means days rose, <code>8</code> means days fell, <code>9</code> means weeks rose, <code>10</code> means weeks fell, <code>11</code> means period rise, <code>12</code> means period fell.</p>
-</dd><dt class="property-required"
+    <dd>Compare type, <code>1</code> means more than, <code>2</code>  means greater than or equal, <code>3</code> means less than, <code>4</code> means less than or equal to, <code>5</code> means equal, <code>6</code> means not equal, <code>7</code> means days rose, <code>8</code> means days fell, <code>9</code> means weeks rose, <code>10</code> means weeks fell, <code>11</code> means period rise, <code>12</code> means period fell.</dd><dt class="property-required"
             title="Required">
         <span id="calcvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvalue_nodejs" style="color: inherit; text-decoration: inherit;">calc<wbr>Value</a>
@@ -2025,8 +2235,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Threshold value.</p>
-</dd><dt class="property-required"
+    <dd>Threshold value.</dd><dt class="property-required"
             title="Required">
         <span id="continuetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetime_nodejs" style="color: inherit; text-decoration: inherit;">continue<wbr>Time</a>
@@ -2034,8 +2243,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>How long does the triggering rule last (per second).</p>
-</dd><dt class="property-required"
+    <dd>How long does the triggering rule last (per second).</dd><dt class="property-required"
             title="Required">
         <span id="metricid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricid_nodejs" style="color: inherit; text-decoration: inherit;">metric<wbr>Id</a>
@@ -2043,8 +2251,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The ID of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricshowname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricshowname_nodejs" style="color: inherit; text-decoration: inherit;">metric<wbr>Show<wbr>Name</a>
@@ -2052,8 +2259,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricunit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricunit_nodejs" style="color: inherit; text-decoration: inherit;">metric<wbr>Unit</a>
@@ -2061,8 +2267,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The unit of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The unit of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="period_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
@@ -2070,8 +2275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Data aggregation cycle (unit second).</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation cycle (unit second).</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -2079,8 +2283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Threshold rule ID.</p>
-</dd></dl>
+    <dd>Threshold rule ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2094,8 +2297,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</dd><dt class="property-required"
             title="Required">
         <span id="alarm_notify_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_notify_type_python" style="color: inherit; text-decoration: inherit;">alarm_<wbr>notify_<wbr>type</a>
@@ -2103,8 +2305,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</dd><dt class="property-required"
             title="Required">
         <span id="calc_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calc_type_python" style="color: inherit; text-decoration: inherit;">calc_<wbr>type</a>
@@ -2112,8 +2313,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Compare type, <code>1</code> means more than, <code>2</code>  means greater than or equal, <code>3</code> means less than, <code>4</code> means less than or equal to, <code>5</code> means equal, <code>6</code> means not equal, <code>7</code> means days rose, <code>8</code> means days fell, <code>9</code> means weeks rose, <code>10</code> means weeks fell, <code>11</code> means period rise, <code>12</code> means period fell.</p>
-</dd><dt class="property-required"
+    <dd>Compare type, <code>1</code> means more than, <code>2</code>  means greater than or equal, <code>3</code> means less than, <code>4</code> means less than or equal to, <code>5</code> means equal, <code>6</code> means not equal, <code>7</code> means days rose, <code>8</code> means days fell, <code>9</code> means weeks rose, <code>10</code> means weeks fell, <code>11</code> means period rise, <code>12</code> means period fell.</dd><dt class="property-required"
             title="Required">
         <span id="calc_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calc_value_python" style="color: inherit; text-decoration: inherit;">calc_<wbr>value</a>
@@ -2121,8 +2321,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Threshold value.</p>
-</dd><dt class="property-required"
+    <dd>Threshold value.</dd><dt class="property-required"
             title="Required">
         <span id="continue_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continue_time_python" style="color: inherit; text-decoration: inherit;">continue_<wbr>time</a>
@@ -2130,8 +2329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>How long does the triggering rule last (per second).</p>
-</dd><dt class="property-required"
+    <dd>How long does the triggering rule last (per second).</dd><dt class="property-required"
             title="Required">
         <span id="metric_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_id_python" style="color: inherit; text-decoration: inherit;">metric_<wbr>id</a>
@@ -2139,8 +2337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metric_show_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_show_name_python" style="color: inherit; text-decoration: inherit;">metric_<wbr>show_<wbr>name</a>
@@ -2148,8 +2345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metric_unit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_unit_python" style="color: inherit; text-decoration: inherit;">metric_<wbr>unit</a>
@@ -2157,8 +2353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The unit of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The unit of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_python" style="color: inherit; text-decoration: inherit;">period</a>
@@ -2166,8 +2361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Data aggregation cycle (unit second).</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation cycle (unit second).</dd><dt class="property-required"
             title="Required">
         <span id="rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
@@ -2175,8 +2369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Threshold rule ID.</p>
-</dd></dl>
+    <dd>Threshold rule ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2190,8 +2383,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</dd><dt class="property-required"
             title="Required">
         <span id="alarmnotifytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnotifytype_yaml" style="color: inherit; text-decoration: inherit;">alarm<wbr>Notify<wbr>Type</a>
@@ -2199,8 +2391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</dd><dt class="property-required"
             title="Required">
         <span id="calctype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calctype_yaml" style="color: inherit; text-decoration: inherit;">calc<wbr>Type</a>
@@ -2208,8 +2399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Compare type, <code>1</code> means more than, <code>2</code>  means greater than or equal, <code>3</code> means less than, <code>4</code> means less than or equal to, <code>5</code> means equal, <code>6</code> means not equal, <code>7</code> means days rose, <code>8</code> means days fell, <code>9</code> means weeks rose, <code>10</code> means weeks fell, <code>11</code> means period rise, <code>12</code> means period fell.</p>
-</dd><dt class="property-required"
+    <dd>Compare type, <code>1</code> means more than, <code>2</code>  means greater than or equal, <code>3</code> means less than, <code>4</code> means less than or equal to, <code>5</code> means equal, <code>6</code> means not equal, <code>7</code> means days rose, <code>8</code> means days fell, <code>9</code> means weeks rose, <code>10</code> means weeks fell, <code>11</code> means period rise, <code>12</code> means period fell.</dd><dt class="property-required"
             title="Required">
         <span id="calcvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvalue_yaml" style="color: inherit; text-decoration: inherit;">calc<wbr>Value</a>
@@ -2217,8 +2407,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Threshold value.</p>
-</dd><dt class="property-required"
+    <dd>Threshold value.</dd><dt class="property-required"
             title="Required">
         <span id="continuetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetime_yaml" style="color: inherit; text-decoration: inherit;">continue<wbr>Time</a>
@@ -2226,8 +2415,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>How long does the triggering rule last (per second).</p>
-</dd><dt class="property-required"
+    <dd>How long does the triggering rule last (per second).</dd><dt class="property-required"
             title="Required">
         <span id="metricid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricid_yaml" style="color: inherit; text-decoration: inherit;">metric<wbr>Id</a>
@@ -2235,8 +2423,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The ID of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricshowname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricshowname_yaml" style="color: inherit; text-decoration: inherit;">metric<wbr>Show<wbr>Name</a>
@@ -2244,8 +2431,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricunit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricunit_yaml" style="color: inherit; text-decoration: inherit;">metric<wbr>Unit</a>
@@ -2253,8 +2439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The unit of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The unit of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="period_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
@@ -2262,8 +2447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Data aggregation cycle (unit second).</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation cycle (unit second).</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -2271,8 +2455,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Threshold rule ID.</p>
-</dd></dl>
+    <dd>Threshold rule ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2290,8 +2473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</dd><dt class="property-required"
             title="Required">
         <span id="alarmnotifytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnotifytype_csharp" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Notify<wbr>Type</a>
@@ -2299,8 +2481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</dd><dt class="property-required"
             title="Required">
         <span id="eventid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventid_csharp" style="color: inherit; text-decoration: inherit;">Event<wbr>Id</a>
@@ -2308,8 +2489,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="eventshowname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventshowname_csharp" style="color: inherit; text-decoration: inherit;">Event<wbr>Show<wbr>Name</a>
@@ -2317,8 +2497,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -2326,8 +2505,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Threshold rule ID.</p>
-</dd></dl>
+    <dd>Threshold rule ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2341,8 +2519,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</dd><dt class="property-required"
             title="Required">
         <span id="alarmnotifytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnotifytype_go" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Notify<wbr>Type</a>
@@ -2350,8 +2527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</dd><dt class="property-required"
             title="Required">
         <span id="eventid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventid_go" style="color: inherit; text-decoration: inherit;">Event<wbr>Id</a>
@@ -2359,8 +2535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="eventshowname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventshowname_go" style="color: inherit; text-decoration: inherit;">Event<wbr>Show<wbr>Name</a>
@@ -2368,8 +2543,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -2377,8 +2551,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Threshold rule ID.</p>
-</dd></dl>
+    <dd>Threshold rule ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="alarm_notify_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_notify_period_hcl" style="color: inherit; text-decoration: inherit;">alarm_<wbr>notify_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</dd><dt class="property-required"
+            title="Required">
+        <span id="alarm_notify_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_notify_type_hcl" style="color: inherit; text-decoration: inherit;">alarm_<wbr>notify_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</dd><dt class="property-required"
+            title="Required">
+        <span id="event_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_id_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The ID of this event metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="event_show_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_show_name_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>show_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of this event metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Threshold rule ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2392,8 +2611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</dd><dt class="property-required"
             title="Required">
         <span id="alarmnotifytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnotifytype_java" style="color: inherit; text-decoration: inherit;">alarm<wbr>Notify<wbr>Type</a>
@@ -2401,8 +2619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</dd><dt class="property-required"
             title="Required">
         <span id="eventid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventid_java" style="color: inherit; text-decoration: inherit;">event<wbr>Id</a>
@@ -2410,8 +2627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The ID of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="eventshowname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventshowname_java" style="color: inherit; text-decoration: inherit;">event<wbr>Show<wbr>Name</a>
@@ -2419,8 +2635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -2428,8 +2643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Threshold rule ID.</p>
-</dd></dl>
+    <dd>Threshold rule ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2443,8 +2657,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</dd><dt class="property-required"
             title="Required">
         <span id="alarmnotifytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnotifytype_nodejs" style="color: inherit; text-decoration: inherit;">alarm<wbr>Notify<wbr>Type</a>
@@ -2452,8 +2665,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</dd><dt class="property-required"
             title="Required">
         <span id="eventid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventid_nodejs" style="color: inherit; text-decoration: inherit;">event<wbr>Id</a>
@@ -2461,8 +2673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The ID of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="eventshowname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventshowname_nodejs" style="color: inherit; text-decoration: inherit;">event<wbr>Show<wbr>Name</a>
@@ -2470,8 +2681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -2479,8 +2689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Threshold rule ID.</p>
-</dd></dl>
+    <dd>Threshold rule ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2494,8 +2703,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</dd><dt class="property-required"
             title="Required">
         <span id="alarm_notify_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_notify_type_python" style="color: inherit; text-decoration: inherit;">alarm_<wbr>notify_<wbr>type</a>
@@ -2503,8 +2711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</dd><dt class="property-required"
             title="Required">
         <span id="event_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_id_python" style="color: inherit; text-decoration: inherit;">event_<wbr>id</a>
@@ -2512,8 +2719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="event_show_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_show_name_python" style="color: inherit; text-decoration: inherit;">event_<wbr>show_<wbr>name</a>
@@ -2521,8 +2727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
@@ -2530,8 +2735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Threshold rule ID.</p>
-</dd></dl>
+    <dd>Threshold rule ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2545,8 +2749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending cycle per second. <code>&lt;0</code> does not fire, <code>0</code> only fires once, and <code>&gt;0</code> fires every triggerTime second.</dd><dt class="property-required"
             title="Required">
         <span id="alarmnotifytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnotifytype_yaml" style="color: inherit; text-decoration: inherit;">alarm<wbr>Notify<wbr>Type</a>
@@ -2554,8 +2757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</p>
-</dd><dt class="property-required"
+    <dd>Alarm sending convergence type. <code>0</code> continuous alarm, <code>1</code> index alarm.</dd><dt class="property-required"
             title="Required">
         <span id="eventid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventid_yaml" style="color: inherit; text-decoration: inherit;">event<wbr>Id</a>
@@ -2563,8 +2765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The ID of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="eventshowname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventshowname_yaml" style="color: inherit; text-decoration: inherit;">event<wbr>Show<wbr>Name</a>
@@ -2572,8 +2773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -2581,8 +2781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Threshold rule ID.</p>
-</dd></dl>
+    <dd>Threshold rule ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2600,8 +2799,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End of alarm period. Meaning with <code>start_time</code>.</p>
-</dd><dt class="property-required"
+    <dd>End of alarm period. Meaning with <code>startTime</code>.</dd><dt class="property-required"
             title="Required">
         <span id="needsendnotice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needsendnotice_csharp" style="color: inherit; text-decoration: inherit;">Need<wbr>Send<wbr>Notice</a>
@@ -2609,8 +2807,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Do need a telephone alarm contact prompt.You don't need 0, you need 1.</p>
-</dd><dt class="property-required"
+    <dd>Do need a telephone alarm contact prompt.You don't need 0, you need 1.</dd><dt class="property-required"
             title="Required">
         <span id="notifyways_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifyways_csharp" style="color: inherit; text-decoration: inherit;">Notify<wbr>Ways</a>
@@ -2618,8 +2815,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</p>
-</dd><dt class="property-required"
+    <dd>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</dd><dt class="property-required"
             title="Required">
         <span id="personinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#personinterval_csharp" style="color: inherit; text-decoration: inherit;">Person<wbr>Interval</a>
@@ -2627,8 +2823,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Telephone warning to individual interval (seconds).</p>
-</dd><dt class="property-required"
+    <dd>Telephone warning to individual interval (seconds).</dd><dt class="property-required"
             title="Required">
         <span id="receivelanguage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivelanguage_csharp" style="color: inherit; text-decoration: inherit;">Receive<wbr>Language</a>
@@ -2636,8 +2831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alert sending language.</p>
-</dd><dt class="property-required"
+    <dd>Alert sending language.</dd><dt class="property-required"
             title="Required">
         <span id="receivergrouplists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivergrouplists_csharp" style="color: inherit; text-decoration: inherit;">Receiver<wbr>Group<wbr>Lists</a>
@@ -2645,8 +2839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Alarm receive group ID list.</p>
-</dd><dt class="property-required"
+    <dd>Alarm receive group ID list.</dd><dt class="property-required"
             title="Required">
         <span id="receivertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivertype_csharp" style="color: inherit; text-decoration: inherit;">Receiver<wbr>Type</a>
@@ -2654,8 +2847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Receive type. Optional 'group' or 'user'.</p>
-</dd><dt class="property-required"
+    <dd>Receive type. Optional 'group' or 'user'.</dd><dt class="property-required"
             title="Required">
         <span id="receiveruserlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiveruserlists_csharp" style="color: inherit; text-decoration: inherit;">Receiver<wbr>User<wbr>Lists</a>
@@ -2663,8 +2855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Alarm receiver ID list.</p>
-</dd><dt class="property-required"
+    <dd>Alarm receiver ID list.</dd><dt class="property-required"
             title="Required">
         <span id="recovernotifies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recovernotifies_csharp" style="color: inherit; text-decoration: inherit;">Recover<wbr>Notifies</a>
@@ -2672,8 +2863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Restore notification mode. Optional &quot;SMS&quot;.</p>
-</dd><dt class="property-required"
+    <dd>Restore notification mode. Optional &quot;SMS&quot;.</dd><dt class="property-required"
             title="Required">
         <span id="roundinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roundinterval_csharp" style="color: inherit; text-decoration: inherit;">Round<wbr>Interval</a>
@@ -2681,8 +2871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Telephone alarm interval per round (seconds).</p>
-</dd><dt class="property-required"
+    <dd>Telephone alarm interval per round (seconds).</dd><dt class="property-required"
             title="Required">
         <span id="roundnumber_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roundnumber_csharp" style="color: inherit; text-decoration: inherit;">Round<wbr>Number</a>
@@ -2690,8 +2879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Telephone alarm number.</p>
-</dd><dt class="property-required"
+    <dd>Telephone alarm number.</dd><dt class="property-required"
             title="Required">
         <span id="sendfors_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sendfors_csharp" style="color: inherit; text-decoration: inherit;">Send<wbr>Fors</a>
@@ -2699,8 +2887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Telephone warning time.Option &quot;OCCUR&quot;, &quot;RECOVER&quot;.</p>
-</dd><dt class="property-required"
+    <dd>Telephone warning time.Option &quot;OCCUR&quot;, &quot;RECOVER&quot;.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -2708,8 +2895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm period start time.Range [0,86399], which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</p>
-</dd><dt class="property-required"
+    <dd>Alarm period start time.Range [0,86399], which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</dd><dt class="property-required"
             title="Required">
         <span id="uidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uidlists_csharp" style="color: inherit; text-decoration: inherit;">Uid<wbr>Lists</a>
@@ -2717,8 +2903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>The phone alerts the receiver uid.</p>
-</dd></dl>
+    <dd>The phone alerts the receiver uid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2732,8 +2917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End of alarm period. Meaning with <code>start_time</code>.</p>
-</dd><dt class="property-required"
+    <dd>End of alarm period. Meaning with <code>startTime</code>.</dd><dt class="property-required"
             title="Required">
         <span id="needsendnotice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needsendnotice_go" style="color: inherit; text-decoration: inherit;">Need<wbr>Send<wbr>Notice</a>
@@ -2741,8 +2925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Do need a telephone alarm contact prompt.You don't need 0, you need 1.</p>
-</dd><dt class="property-required"
+    <dd>Do need a telephone alarm contact prompt.You don't need 0, you need 1.</dd><dt class="property-required"
             title="Required">
         <span id="notifyways_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifyways_go" style="color: inherit; text-decoration: inherit;">Notify<wbr>Ways</a>
@@ -2750,8 +2933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</p>
-</dd><dt class="property-required"
+    <dd>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</dd><dt class="property-required"
             title="Required">
         <span id="personinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#personinterval_go" style="color: inherit; text-decoration: inherit;">Person<wbr>Interval</a>
@@ -2759,8 +2941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Telephone warning to individual interval (seconds).</p>
-</dd><dt class="property-required"
+    <dd>Telephone warning to individual interval (seconds).</dd><dt class="property-required"
             title="Required">
         <span id="receivelanguage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivelanguage_go" style="color: inherit; text-decoration: inherit;">Receive<wbr>Language</a>
@@ -2768,8 +2949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alert sending language.</p>
-</dd><dt class="property-required"
+    <dd>Alert sending language.</dd><dt class="property-required"
             title="Required">
         <span id="receivergrouplists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivergrouplists_go" style="color: inherit; text-decoration: inherit;">Receiver<wbr>Group<wbr>Lists</a>
@@ -2777,8 +2957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Alarm receive group ID list.</p>
-</dd><dt class="property-required"
+    <dd>Alarm receive group ID list.</dd><dt class="property-required"
             title="Required">
         <span id="receivertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivertype_go" style="color: inherit; text-decoration: inherit;">Receiver<wbr>Type</a>
@@ -2786,8 +2965,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Receive type. Optional 'group' or 'user'.</p>
-</dd><dt class="property-required"
+    <dd>Receive type. Optional 'group' or 'user'.</dd><dt class="property-required"
             title="Required">
         <span id="receiveruserlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiveruserlists_go" style="color: inherit; text-decoration: inherit;">Receiver<wbr>User<wbr>Lists</a>
@@ -2795,8 +2973,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Alarm receiver ID list.</p>
-</dd><dt class="property-required"
+    <dd>Alarm receiver ID list.</dd><dt class="property-required"
             title="Required">
         <span id="recovernotifies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recovernotifies_go" style="color: inherit; text-decoration: inherit;">Recover<wbr>Notifies</a>
@@ -2804,8 +2981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Restore notification mode. Optional &quot;SMS&quot;.</p>
-</dd><dt class="property-required"
+    <dd>Restore notification mode. Optional &quot;SMS&quot;.</dd><dt class="property-required"
             title="Required">
         <span id="roundinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roundinterval_go" style="color: inherit; text-decoration: inherit;">Round<wbr>Interval</a>
@@ -2813,8 +2989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Telephone alarm interval per round (seconds).</p>
-</dd><dt class="property-required"
+    <dd>Telephone alarm interval per round (seconds).</dd><dt class="property-required"
             title="Required">
         <span id="roundnumber_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roundnumber_go" style="color: inherit; text-decoration: inherit;">Round<wbr>Number</a>
@@ -2822,8 +2997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Telephone alarm number.</p>
-</dd><dt class="property-required"
+    <dd>Telephone alarm number.</dd><dt class="property-required"
             title="Required">
         <span id="sendfors_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sendfors_go" style="color: inherit; text-decoration: inherit;">Send<wbr>Fors</a>
@@ -2831,8 +3005,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Telephone warning time.Option &quot;OCCUR&quot;, &quot;RECOVER&quot;.</p>
-</dd><dt class="property-required"
+    <dd>Telephone warning time.Option &quot;OCCUR&quot;, &quot;RECOVER&quot;.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -2840,8 +3013,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm period start time.Range [0,86399], which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</p>
-</dd><dt class="property-required"
+    <dd>Alarm period start time.Range [0,86399], which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</dd><dt class="property-required"
             title="Required">
         <span id="uidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uidlists_go" style="color: inherit; text-decoration: inherit;">Uid<wbr>Lists</a>
@@ -2849,8 +3021,125 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>The phone alerts the receiver uid.</p>
-</dd></dl>
+    <dd>The phone alerts the receiver uid.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End of alarm period. Meaning with <code>startTime</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="need_send_notice_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#need_send_notice_hcl" style="color: inherit; text-decoration: inherit;">need_<wbr>send_<wbr>notice</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Do need a telephone alarm contact prompt.You don't need 0, you need 1.</dd><dt class="property-required"
+            title="Required">
+        <span id="notify_ways_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notify_ways_hcl" style="color: inherit; text-decoration: inherit;">notify_<wbr>ways</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="person_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#person_interval_hcl" style="color: inherit; text-decoration: inherit;">person_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Telephone warning to individual interval (seconds).</dd><dt class="property-required"
+            title="Required">
+        <span id="receive_language_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receive_language_hcl" style="color: inherit; text-decoration: inherit;">receive_<wbr>language</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alert sending language.</dd><dt class="property-required"
+            title="Required">
+        <span id="receiver_group_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiver_group_lists_hcl" style="color: inherit; text-decoration: inherit;">receiver_<wbr>group_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Alarm receive group ID list.</dd><dt class="property-required"
+            title="Required">
+        <span id="receiver_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiver_type_hcl" style="color: inherit; text-decoration: inherit;">receiver_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Receive type. Optional 'group' or 'user'.</dd><dt class="property-required"
+            title="Required">
+        <span id="receiver_user_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiver_user_lists_hcl" style="color: inherit; text-decoration: inherit;">receiver_<wbr>user_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Alarm receiver ID list.</dd><dt class="property-required"
+            title="Required">
+        <span id="recover_notifies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recover_notifies_hcl" style="color: inherit; text-decoration: inherit;">recover_<wbr>notifies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Restore notification mode. Optional &quot;SMS&quot;.</dd><dt class="property-required"
+            title="Required">
+        <span id="round_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#round_interval_hcl" style="color: inherit; text-decoration: inherit;">round_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Telephone alarm interval per round (seconds).</dd><dt class="property-required"
+            title="Required">
+        <span id="round_number_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#round_number_hcl" style="color: inherit; text-decoration: inherit;">round_<wbr>number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Telephone alarm number.</dd><dt class="property-required"
+            title="Required">
+        <span id="send_fors_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#send_fors_hcl" style="color: inherit; text-decoration: inherit;">send_<wbr>fors</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Telephone warning time.Option &quot;OCCUR&quot;, &quot;RECOVER&quot;.</dd><dt class="property-required"
+            title="Required">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm period start time.Range [0,86399], which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</dd><dt class="property-required"
+            title="Required">
+        <span id="uid_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_lists_hcl" style="color: inherit; text-decoration: inherit;">uid_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>The phone alerts the receiver uid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2864,8 +3153,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>End of alarm period. Meaning with <code>start_time</code>.</p>
-</dd><dt class="property-required"
+    <dd>End of alarm period. Meaning with <code>startTime</code>.</dd><dt class="property-required"
             title="Required">
         <span id="needsendnotice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needsendnotice_java" style="color: inherit; text-decoration: inherit;">need<wbr>Send<wbr>Notice</a>
@@ -2873,8 +3161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Do need a telephone alarm contact prompt.You don't need 0, you need 1.</p>
-</dd><dt class="property-required"
+    <dd>Do need a telephone alarm contact prompt.You don't need 0, you need 1.</dd><dt class="property-required"
             title="Required">
         <span id="notifyways_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifyways_java" style="color: inherit; text-decoration: inherit;">notify<wbr>Ways</a>
@@ -2882,8 +3169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</p>
-</dd><dt class="property-required"
+    <dd>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</dd><dt class="property-required"
             title="Required">
         <span id="personinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#personinterval_java" style="color: inherit; text-decoration: inherit;">person<wbr>Interval</a>
@@ -2891,8 +3177,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Telephone warning to individual interval (seconds).</p>
-</dd><dt class="property-required"
+    <dd>Telephone warning to individual interval (seconds).</dd><dt class="property-required"
             title="Required">
         <span id="receivelanguage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivelanguage_java" style="color: inherit; text-decoration: inherit;">receive<wbr>Language</a>
@@ -2900,8 +3185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alert sending language.</p>
-</dd><dt class="property-required"
+    <dd>Alert sending language.</dd><dt class="property-required"
             title="Required">
         <span id="receivergrouplists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivergrouplists_java" style="color: inherit; text-decoration: inherit;">receiver<wbr>Group<wbr>Lists</a>
@@ -2909,8 +3193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Alarm receive group ID list.</p>
-</dd><dt class="property-required"
+    <dd>Alarm receive group ID list.</dd><dt class="property-required"
             title="Required">
         <span id="receivertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivertype_java" style="color: inherit; text-decoration: inherit;">receiver<wbr>Type</a>
@@ -2918,8 +3201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Receive type. Optional 'group' or 'user'.</p>
-</dd><dt class="property-required"
+    <dd>Receive type. Optional 'group' or 'user'.</dd><dt class="property-required"
             title="Required">
         <span id="receiveruserlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiveruserlists_java" style="color: inherit; text-decoration: inherit;">receiver<wbr>User<wbr>Lists</a>
@@ -2927,8 +3209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Alarm receiver ID list.</p>
-</dd><dt class="property-required"
+    <dd>Alarm receiver ID list.</dd><dt class="property-required"
             title="Required">
         <span id="recovernotifies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recovernotifies_java" style="color: inherit; text-decoration: inherit;">recover<wbr>Notifies</a>
@@ -2936,8 +3217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Restore notification mode. Optional &quot;SMS&quot;.</p>
-</dd><dt class="property-required"
+    <dd>Restore notification mode. Optional &quot;SMS&quot;.</dd><dt class="property-required"
             title="Required">
         <span id="roundinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roundinterval_java" style="color: inherit; text-decoration: inherit;">round<wbr>Interval</a>
@@ -2945,8 +3225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Telephone alarm interval per round (seconds).</p>
-</dd><dt class="property-required"
+    <dd>Telephone alarm interval per round (seconds).</dd><dt class="property-required"
             title="Required">
         <span id="roundnumber_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roundnumber_java" style="color: inherit; text-decoration: inherit;">round<wbr>Number</a>
@@ -2954,8 +3233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Telephone alarm number.</p>
-</dd><dt class="property-required"
+    <dd>Telephone alarm number.</dd><dt class="property-required"
             title="Required">
         <span id="sendfors_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sendfors_java" style="color: inherit; text-decoration: inherit;">send<wbr>Fors</a>
@@ -2963,8 +3241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Telephone warning time.Option &quot;OCCUR&quot;, &quot;RECOVER&quot;.</p>
-</dd><dt class="property-required"
+    <dd>Telephone warning time.Option &quot;OCCUR&quot;, &quot;RECOVER&quot;.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -2972,8 +3249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Alarm period start time.Range [0,86399], which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</p>
-</dd><dt class="property-required"
+    <dd>Alarm period start time.Range [0,86399], which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</dd><dt class="property-required"
             title="Required">
         <span id="uidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uidlists_java" style="color: inherit; text-decoration: inherit;">uid<wbr>Lists</a>
@@ -2981,8 +3257,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>The phone alerts the receiver uid.</p>
-</dd></dl>
+    <dd>The phone alerts the receiver uid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2996,8 +3271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>End of alarm period. Meaning with <code>start_time</code>.</p>
-</dd><dt class="property-required"
+    <dd>End of alarm period. Meaning with <code>startTime</code>.</dd><dt class="property-required"
             title="Required">
         <span id="needsendnotice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needsendnotice_nodejs" style="color: inherit; text-decoration: inherit;">need<wbr>Send<wbr>Notice</a>
@@ -3005,8 +3279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Do need a telephone alarm contact prompt.You don't need 0, you need 1.</p>
-</dd><dt class="property-required"
+    <dd>Do need a telephone alarm contact prompt.You don't need 0, you need 1.</dd><dt class="property-required"
             title="Required">
         <span id="notifyways_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifyways_nodejs" style="color: inherit; text-decoration: inherit;">notify<wbr>Ways</a>
@@ -3014,8 +3287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</p>
-</dd><dt class="property-required"
+    <dd>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</dd><dt class="property-required"
             title="Required">
         <span id="personinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#personinterval_nodejs" style="color: inherit; text-decoration: inherit;">person<wbr>Interval</a>
@@ -3023,8 +3295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Telephone warning to individual interval (seconds).</p>
-</dd><dt class="property-required"
+    <dd>Telephone warning to individual interval (seconds).</dd><dt class="property-required"
             title="Required">
         <span id="receivelanguage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivelanguage_nodejs" style="color: inherit; text-decoration: inherit;">receive<wbr>Language</a>
@@ -3032,8 +3303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alert sending language.</p>
-</dd><dt class="property-required"
+    <dd>Alert sending language.</dd><dt class="property-required"
             title="Required">
         <span id="receivergrouplists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivergrouplists_nodejs" style="color: inherit; text-decoration: inherit;">receiver<wbr>Group<wbr>Lists</a>
@@ -3041,8 +3311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Alarm receive group ID list.</p>
-</dd><dt class="property-required"
+    <dd>Alarm receive group ID list.</dd><dt class="property-required"
             title="Required">
         <span id="receivertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivertype_nodejs" style="color: inherit; text-decoration: inherit;">receiver<wbr>Type</a>
@@ -3050,8 +3319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Receive type. Optional 'group' or 'user'.</p>
-</dd><dt class="property-required"
+    <dd>Receive type. Optional 'group' or 'user'.</dd><dt class="property-required"
             title="Required">
         <span id="receiveruserlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiveruserlists_nodejs" style="color: inherit; text-decoration: inherit;">receiver<wbr>User<wbr>Lists</a>
@@ -3059,8 +3327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Alarm receiver ID list.</p>
-</dd><dt class="property-required"
+    <dd>Alarm receiver ID list.</dd><dt class="property-required"
             title="Required">
         <span id="recovernotifies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recovernotifies_nodejs" style="color: inherit; text-decoration: inherit;">recover<wbr>Notifies</a>
@@ -3068,8 +3335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Restore notification mode. Optional &quot;SMS&quot;.</p>
-</dd><dt class="property-required"
+    <dd>Restore notification mode. Optional &quot;SMS&quot;.</dd><dt class="property-required"
             title="Required">
         <span id="roundinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roundinterval_nodejs" style="color: inherit; text-decoration: inherit;">round<wbr>Interval</a>
@@ -3077,8 +3343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Telephone alarm interval per round (seconds).</p>
-</dd><dt class="property-required"
+    <dd>Telephone alarm interval per round (seconds).</dd><dt class="property-required"
             title="Required">
         <span id="roundnumber_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roundnumber_nodejs" style="color: inherit; text-decoration: inherit;">round<wbr>Number</a>
@@ -3086,8 +3351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Telephone alarm number.</p>
-</dd><dt class="property-required"
+    <dd>Telephone alarm number.</dd><dt class="property-required"
             title="Required">
         <span id="sendfors_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sendfors_nodejs" style="color: inherit; text-decoration: inherit;">send<wbr>Fors</a>
@@ -3095,8 +3359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Telephone warning time.Option &quot;OCCUR&quot;, &quot;RECOVER&quot;.</p>
-</dd><dt class="property-required"
+    <dd>Telephone warning time.Option &quot;OCCUR&quot;, &quot;RECOVER&quot;.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -3104,8 +3367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Alarm period start time.Range [0,86399], which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</p>
-</dd><dt class="property-required"
+    <dd>Alarm period start time.Range [0,86399], which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</dd><dt class="property-required"
             title="Required">
         <span id="uidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uidlists_nodejs" style="color: inherit; text-decoration: inherit;">uid<wbr>Lists</a>
@@ -3113,8 +3375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>The phone alerts the receiver uid.</p>
-</dd></dl>
+    <dd>The phone alerts the receiver uid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3128,8 +3389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End of alarm period. Meaning with <code>start_time</code>.</p>
-</dd><dt class="property-required"
+    <dd>End of alarm period. Meaning with <code>startTime</code>.</dd><dt class="property-required"
             title="Required">
         <span id="need_send_notice_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#need_send_notice_python" style="color: inherit; text-decoration: inherit;">need_<wbr>send_<wbr>notice</a>
@@ -3137,8 +3397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Do need a telephone alarm contact prompt.You don't need 0, you need 1.</p>
-</dd><dt class="property-required"
+    <dd>Do need a telephone alarm contact prompt.You don't need 0, you need 1.</dd><dt class="property-required"
             title="Required">
         <span id="notify_ways_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notify_ways_python" style="color: inherit; text-decoration: inherit;">notify_<wbr>ways</a>
@@ -3146,8 +3405,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</p>
-</dd><dt class="property-required"
+    <dd>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</dd><dt class="property-required"
             title="Required">
         <span id="person_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#person_interval_python" style="color: inherit; text-decoration: inherit;">person_<wbr>interval</a>
@@ -3155,8 +3413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Telephone warning to individual interval (seconds).</p>
-</dd><dt class="property-required"
+    <dd>Telephone warning to individual interval (seconds).</dd><dt class="property-required"
             title="Required">
         <span id="receive_language_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receive_language_python" style="color: inherit; text-decoration: inherit;">receive_<wbr>language</a>
@@ -3164,8 +3421,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Alert sending language.</p>
-</dd><dt class="property-required"
+    <dd>Alert sending language.</dd><dt class="property-required"
             title="Required">
         <span id="receiver_group_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiver_group_lists_python" style="color: inherit; text-decoration: inherit;">receiver_<wbr>group_<wbr>lists</a>
@@ -3173,8 +3429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Alarm receive group ID list.</p>
-</dd><dt class="property-required"
+    <dd>Alarm receive group ID list.</dd><dt class="property-required"
             title="Required">
         <span id="receiver_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiver_type_python" style="color: inherit; text-decoration: inherit;">receiver_<wbr>type</a>
@@ -3182,8 +3437,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Receive type. Optional 'group' or 'user'.</p>
-</dd><dt class="property-required"
+    <dd>Receive type. Optional 'group' or 'user'.</dd><dt class="property-required"
             title="Required">
         <span id="receiver_user_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiver_user_lists_python" style="color: inherit; text-decoration: inherit;">receiver_<wbr>user_<wbr>lists</a>
@@ -3191,8 +3445,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Alarm receiver ID list.</p>
-</dd><dt class="property-required"
+    <dd>Alarm receiver ID list.</dd><dt class="property-required"
             title="Required">
         <span id="recover_notifies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recover_notifies_python" style="color: inherit; text-decoration: inherit;">recover_<wbr>notifies</a>
@@ -3200,8 +3453,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Restore notification mode. Optional &quot;SMS&quot;.</p>
-</dd><dt class="property-required"
+    <dd>Restore notification mode. Optional &quot;SMS&quot;.</dd><dt class="property-required"
             title="Required">
         <span id="round_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#round_interval_python" style="color: inherit; text-decoration: inherit;">round_<wbr>interval</a>
@@ -3209,8 +3461,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Telephone alarm interval per round (seconds).</p>
-</dd><dt class="property-required"
+    <dd>Telephone alarm interval per round (seconds).</dd><dt class="property-required"
             title="Required">
         <span id="round_number_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#round_number_python" style="color: inherit; text-decoration: inherit;">round_<wbr>number</a>
@@ -3218,8 +3469,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Telephone alarm number.</p>
-</dd><dt class="property-required"
+    <dd>Telephone alarm number.</dd><dt class="property-required"
             title="Required">
         <span id="send_fors_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#send_fors_python" style="color: inherit; text-decoration: inherit;">send_<wbr>fors</a>
@@ -3227,8 +3477,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Telephone warning time.Option &quot;OCCUR&quot;, &quot;RECOVER&quot;.</p>
-</dd><dt class="property-required"
+    <dd>Telephone warning time.Option &quot;OCCUR&quot;, &quot;RECOVER&quot;.</dd><dt class="property-required"
             title="Required">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -3236,8 +3485,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm period start time.Range [0,86399], which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</p>
-</dd><dt class="property-required"
+    <dd>Alarm period start time.Range [0,86399], which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</dd><dt class="property-required"
             title="Required">
         <span id="uid_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_lists_python" style="color: inherit; text-decoration: inherit;">uid_<wbr>lists</a>
@@ -3245,8 +3493,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>The phone alerts the receiver uid.</p>
-</dd></dl>
+    <dd>The phone alerts the receiver uid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3260,8 +3507,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>End of alarm period. Meaning with <code>start_time</code>.</p>
-</dd><dt class="property-required"
+    <dd>End of alarm period. Meaning with <code>startTime</code>.</dd><dt class="property-required"
             title="Required">
         <span id="needsendnotice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needsendnotice_yaml" style="color: inherit; text-decoration: inherit;">need<wbr>Send<wbr>Notice</a>
@@ -3269,8 +3515,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Do need a telephone alarm contact prompt.You don't need 0, you need 1.</p>
-</dd><dt class="property-required"
+    <dd>Do need a telephone alarm contact prompt.You don't need 0, you need 1.</dd><dt class="property-required"
             title="Required">
         <span id="notifyways_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifyways_yaml" style="color: inherit; text-decoration: inherit;">notify<wbr>Ways</a>
@@ -3278,8 +3523,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</p>
-</dd><dt class="property-required"
+    <dd>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</dd><dt class="property-required"
             title="Required">
         <span id="personinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#personinterval_yaml" style="color: inherit; text-decoration: inherit;">person<wbr>Interval</a>
@@ -3287,8 +3531,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Telephone warning to individual interval (seconds).</p>
-</dd><dt class="property-required"
+    <dd>Telephone warning to individual interval (seconds).</dd><dt class="property-required"
             title="Required">
         <span id="receivelanguage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivelanguage_yaml" style="color: inherit; text-decoration: inherit;">receive<wbr>Language</a>
@@ -3296,8 +3539,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alert sending language.</p>
-</dd><dt class="property-required"
+    <dd>Alert sending language.</dd><dt class="property-required"
             title="Required">
         <span id="receivergrouplists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivergrouplists_yaml" style="color: inherit; text-decoration: inherit;">receiver<wbr>Group<wbr>Lists</a>
@@ -3305,8 +3547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Alarm receive group ID list.</p>
-</dd><dt class="property-required"
+    <dd>Alarm receive group ID list.</dd><dt class="property-required"
             title="Required">
         <span id="receivertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivertype_yaml" style="color: inherit; text-decoration: inherit;">receiver<wbr>Type</a>
@@ -3314,8 +3555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Receive type. Optional 'group' or 'user'.</p>
-</dd><dt class="property-required"
+    <dd>Receive type. Optional 'group' or 'user'.</dd><dt class="property-required"
             title="Required">
         <span id="receiveruserlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiveruserlists_yaml" style="color: inherit; text-decoration: inherit;">receiver<wbr>User<wbr>Lists</a>
@@ -3323,8 +3563,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Alarm receiver ID list.</p>
-</dd><dt class="property-required"
+    <dd>Alarm receiver ID list.</dd><dt class="property-required"
             title="Required">
         <span id="recovernotifies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recovernotifies_yaml" style="color: inherit; text-decoration: inherit;">recover<wbr>Notifies</a>
@@ -3332,8 +3571,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Restore notification mode. Optional &quot;SMS&quot;.</p>
-</dd><dt class="property-required"
+    <dd>Restore notification mode. Optional &quot;SMS&quot;.</dd><dt class="property-required"
             title="Required">
         <span id="roundinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roundinterval_yaml" style="color: inherit; text-decoration: inherit;">round<wbr>Interval</a>
@@ -3341,8 +3579,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Telephone alarm interval per round (seconds).</p>
-</dd><dt class="property-required"
+    <dd>Telephone alarm interval per round (seconds).</dd><dt class="property-required"
             title="Required">
         <span id="roundnumber_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roundnumber_yaml" style="color: inherit; text-decoration: inherit;">round<wbr>Number</a>
@@ -3350,8 +3587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Telephone alarm number.</p>
-</dd><dt class="property-required"
+    <dd>Telephone alarm number.</dd><dt class="property-required"
             title="Required">
         <span id="sendfors_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sendfors_yaml" style="color: inherit; text-decoration: inherit;">send<wbr>Fors</a>
@@ -3359,8 +3595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Telephone warning time.Option &quot;OCCUR&quot;, &quot;RECOVER&quot;.</p>
-</dd><dt class="property-required"
+    <dd>Telephone warning time.Option &quot;OCCUR&quot;, &quot;RECOVER&quot;.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -3368,8 +3603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Alarm period start time.Range [0,86399], which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</p>
-</dd><dt class="property-required"
+    <dd>Alarm period start time.Range [0,86399], which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</dd><dt class="property-required"
             title="Required">
         <span id="uidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uidlists_yaml" style="color: inherit; text-decoration: inherit;">uid<wbr>Lists</a>
@@ -3377,8 +3611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>The phone alerts the receiver uid.</p>
-</dd></dl>
+    <dd>The phone alerts the receiver uid.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3393,7 +3626,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

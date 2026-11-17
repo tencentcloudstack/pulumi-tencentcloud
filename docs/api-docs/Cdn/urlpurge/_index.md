@@ -2,9 +2,11 @@
 ---
 title: "UrlPurge"
 title_tag: "tencentcloud.Cdn.UrlPurge"
-meta_desc: "Documentation for the tencentcloud.Cdn.UrlPurge resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to invoke a Url Purge Request."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,19 +18,61 @@ Provide a resource to invoke a Url Purge Request.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const foo = new tencentcloud.cdn.UrlPurge("foo", {urls: ["https://www.example.com/a"]});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 foo = tencentcloud.cdn.UrlPurge("foo", urls=["https://www.example.com/a"])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cdn"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cdn.NewUrlPurge(ctx, "foo", &cdn.UrlPurgeArgs{
+			Urls: pulumi.StringArray{
+				pulumi.String("https://www.example.com/a"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -47,28 +91,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cdn.NewUrlPurge(ctx, "foo", &Cdn.UrlPurgeArgs{
-			Urls: pulumi.StringArray{
-				pulumi.String("https://www.example.com/a"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -77,8 +104,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cdn.UrlPurge;
 import com.pulumi.tencentcloud.Cdn.UrlPurgeArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -90,13 +117,18 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new UrlPurge("foo", UrlPurgeArgs.builder()        
+        var foo = new UrlPurge("foo", UrlPurgeArgs.builder()
             .urls("https://www.example.com/a")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   foo:
@@ -105,28 +137,91 @@ resources:
       urls:
         - https://www.example.com/a
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cdn_urlpurge" "foo" {
+  urls = ["https://www.example.com/a"]
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### argument to request new purge task with same urls
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const foo = new tencentcloud.cdn.UrlPurge("foo", {
-    redo: 1,
     urls: ["https://www.example.com/a"],
+    redo: 1,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 foo = tencentcloud.cdn.UrlPurge("foo",
-    redo=1,
-    urls=["https://www.example.com/a"])
+    urls=["https://www.example.com/a"],
+    redo=1)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cdn"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cdn.NewUrlPurge(ctx, "foo", &cdn.UrlPurgeArgs{
+			Urls: pulumi.StringArray{
+				pulumi.String("https://www.example.com/a"),
+			},
+			Redo: pulumi.Int(1),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -137,38 +232,20 @@ return await Deployment.RunAsync(() =>
 {
     var foo = new Tencentcloud.Cdn.UrlPurge("foo", new()
     {
-        Redo = 1,
         Urls = new[]
         {
             "https://www.example.com/a",
         },
+        Redo = 1,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cdn.NewUrlPurge(ctx, "foo", &Cdn.UrlPurgeArgs{
-			Redo: pulumi.Int(1),
-			Urls: pulumi.StringArray{
-				pulumi.String("https://www.example.com/a"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -177,8 +254,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cdn.UrlPurge;
 import com.pulumi.tencentcloud.Cdn.UrlPurgeArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -190,86 +267,132 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new UrlPurge("foo", UrlPurgeArgs.builder()        
-            .redo(1)
+        var foo = new UrlPurge("foo", UrlPurgeArgs.builder()
             .urls("https://www.example.com/a")
+            .redo(1)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   foo:
     type: tencentcloud:Cdn:UrlPurge
     properties:
-      redo: 1
       urls:
         - https://www.example.com/a
+      redo: 1
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cdn_urlpurge" "foo" {
+  urls = ["https://www.example.com/a"]
+  redo = 1
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Read: [DescribePurgeTasks](https://www.tencentcloud.com/document/api/228/33604)
 
 
 
 ## Create UrlPurge Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">UrlPurge</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UrlPurgeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">UrlPurge</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UrlPurgeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">UrlPurge</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-             <span class="nx">area</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">redo</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">url_encode</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-             <span class="nx">urls</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">UrlPurge</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UrlPurgeArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">UrlPurge</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+             <span class="nx">urls</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+             <span class="nx">area</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">redo</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">url_encode</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewUrlPurge</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">UrlPurgeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">UrlPurge</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewUrlPurge</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">UrlPurgeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">UrlPurge</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">UrlPurge</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UrlPurgeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">UrlPurge</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UrlPurgeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">UrlPurge</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UrlPurgeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">UrlPurge</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UrlPurgeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cdn:UrlPurge</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cdn:UrlPurge</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cdn_url_purge&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -290,7 +413,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -407,11 +530,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## UrlPurge Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -427,8 +558,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="area_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_csharp" style="color: inherit; text-decoration: inherit;">Area</a>
@@ -436,8 +566,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify purge area. NOTE: only purge same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify purge area. NOTE: only purge same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="redo_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redo_csharp" style="color: inherit; text-decoration: inherit;">Redo</a>
@@ -445,8 +574,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="urlencode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urlencode_csharp" style="color: inherit; text-decoration: inherit;">Url<wbr>Encode</a>
@@ -454,8 +582,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</p>
-</dd></dl>
+    <dd>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -469,8 +596,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="area_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_go" style="color: inherit; text-decoration: inherit;">Area</a>
@@ -478,8 +604,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify purge area. NOTE: only purge same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify purge area. NOTE: only purge same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="redo_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redo_go" style="color: inherit; text-decoration: inherit;">Redo</a>
@@ -487,8 +612,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="urlencode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urlencode_go" style="color: inherit; text-decoration: inherit;">Url<wbr>Encode</a>
@@ -496,8 +620,45 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</p>
-</dd></dl>
+    <dd>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="urls_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urls_hcl" style="color: inherit; text-decoration: inherit;">urls</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="area_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_hcl" style="color: inherit; text-decoration: inherit;">area</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify purge area. NOTE: only purge same area cache contents.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redo_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redo_hcl" style="color: inherit; text-decoration: inherit;">redo</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="url_encode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_encode_hcl" style="color: inherit; text-decoration: inherit;">url_<wbr>encode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -511,8 +672,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="area_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_java" style="color: inherit; text-decoration: inherit;">area</a>
@@ -520,8 +680,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify purge area. NOTE: only purge same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify purge area. NOTE: only purge same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="redo_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redo_java" style="color: inherit; text-decoration: inherit;">redo</a>
@@ -529,8 +688,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="urlencode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urlencode_java" style="color: inherit; text-decoration: inherit;">url<wbr>Encode</a>
@@ -538,8 +696,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</p>
-</dd></dl>
+    <dd>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -553,8 +710,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="area_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_nodejs" style="color: inherit; text-decoration: inherit;">area</a>
@@ -562,8 +718,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify purge area. NOTE: only purge same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify purge area. NOTE: only purge same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="redo_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redo_nodejs" style="color: inherit; text-decoration: inherit;">redo</a>
@@ -571,8 +726,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="urlencode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urlencode_nodejs" style="color: inherit; text-decoration: inherit;">url<wbr>Encode</a>
@@ -580,8 +734,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</p>
-</dd></dl>
+    <dd>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -595,8 +748,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="area_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_python" style="color: inherit; text-decoration: inherit;">area</a>
@@ -604,8 +756,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify purge area. NOTE: only purge same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify purge area. NOTE: only purge same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="redo_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redo_python" style="color: inherit; text-decoration: inherit;">redo</a>
@@ -613,8 +764,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_encode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_encode_python" style="color: inherit; text-decoration: inherit;">url_<wbr>encode</a>
@@ -622,8 +772,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</p>
-</dd></dl>
+    <dd>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -637,8 +786,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd><dt class="property-optional"
+    <dd>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="area_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_yaml" style="color: inherit; text-decoration: inherit;">area</a>
@@ -646,8 +794,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify purge area. NOTE: only purge same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify purge area. NOTE: only purge same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="redo_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redo_yaml" style="color: inherit; text-decoration: inherit;">redo</a>
@@ -655,8 +802,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="urlencode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#urlencode_yaml" style="color: inherit; text-decoration: inherit;">url<wbr>Encode</a>
@@ -664,8 +810,7 @@ The UrlPurge resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</p>
-</dd></dl>
+    <dd>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -686,8 +831,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="purgehistories_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#purgehistories_csharp" style="color: inherit; text-decoration: inherit;">Purge<wbr>Histories</a>
@@ -695,8 +839,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#urlpurgepurgehistory">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdn.<wbr>Outputs.<wbr>Url<wbr>Purge<wbr>Purge<wbr>History&gt;</a></span>
     </dt>
-    <dd><p>logs of latest purge task.</p>
-</dd><dt class="property-"
+    <dd>logs of latest purge task.</dd><dt class="property-"
             title="">
         <span id="taskid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Id</a>
@@ -704,8 +847,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task id of last operation.</p>
-</dd></dl>
+    <dd>Task id of last operation.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -719,8 +861,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="purgehistories_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#purgehistories_go" style="color: inherit; text-decoration: inherit;">Purge<wbr>Histories</a>
@@ -728,8 +869,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#urlpurgepurgehistory">[]Url<wbr>Purge<wbr>Purge<wbr>History</a></span>
     </dt>
-    <dd><p>logs of latest purge task.</p>
-</dd><dt class="property-"
+    <dd>logs of latest purge task.</dd><dt class="property-"
             title="">
         <span id="taskid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Id</a>
@@ -737,8 +877,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task id of last operation.</p>
-</dd></dl>
+    <dd>Task id of last operation.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="purge_histories_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#purge_histories_hcl" style="color: inherit; text-decoration: inherit;">purge_<wbr>histories</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#urlpurgepurgehistory">list(object)</a></span>
+    </dt>
+    <dd>logs of latest purge task.</dd><dt class="property-"
+            title="">
+        <span id="task_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_id_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Task id of last operation.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -752,8 +921,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="purgehistories_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#purgehistories_java" style="color: inherit; text-decoration: inherit;">purge<wbr>Histories</a>
@@ -761,8 +929,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#urlpurgepurgehistory">List&lt;Url<wbr>Purge<wbr>Purge<wbr>History&gt;</a></span>
     </dt>
-    <dd><p>logs of latest purge task.</p>
-</dd><dt class="property-"
+    <dd>logs of latest purge task.</dd><dt class="property-"
             title="">
         <span id="taskid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_java" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -770,8 +937,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task id of last operation.</p>
-</dd></dl>
+    <dd>Task id of last operation.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -785,8 +951,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="purgehistories_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#purgehistories_nodejs" style="color: inherit; text-decoration: inherit;">purge<wbr>Histories</a>
@@ -794,8 +959,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#urlpurgepurgehistory">Url<wbr>Purge<wbr>Purge<wbr>History[]</a></span>
     </dt>
-    <dd><p>logs of latest purge task.</p>
-</dd><dt class="property-"
+    <dd>logs of latest purge task.</dd><dt class="property-"
             title="">
         <span id="taskid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -803,8 +967,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task id of last operation.</p>
-</dd></dl>
+    <dd>Task id of last operation.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -818,17 +981,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="purge_histories_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#purge_histories_python" style="color: inherit; text-decoration: inherit;">purge_<wbr>histories</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#urlpurgepurgehistory">Url<wbr>Purge<wbr>Purge<wbr>History]</a></span>
+        <span class="property-type"><a href="#urlpurgepurgehistory">Sequence[Url<wbr>Purge<wbr>Purge<wbr>History]</a></span>
     </dt>
-    <dd><p>logs of latest purge task.</p>
-</dd><dt class="property-"
+    <dd>logs of latest purge task.</dd><dt class="property-"
             title="">
         <span id="task_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_id_python" style="color: inherit; text-decoration: inherit;">task_<wbr>id</a>
@@ -836,8 +997,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Task id of last operation.</p>
-</dd></dl>
+    <dd>Task id of last operation.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -851,8 +1011,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="purgehistories_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#purgehistories_yaml" style="color: inherit; text-decoration: inherit;">purge<wbr>Histories</a>
@@ -860,8 +1019,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#urlpurgepurgehistory">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>logs of latest purge task.</p>
-</dd><dt class="property-"
+    <dd>logs of latest purge task.</dd><dt class="property-"
             title="">
         <span id="taskid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -869,8 +1027,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task id of last operation.</p>
-</dd></dl>
+    <dd>Task id of last operation.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -880,125 +1037,164 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing UrlPurge resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">UrlPurgeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">UrlPurge</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">UrlPurgeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">UrlPurge</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">area</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">purge_histories</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cdn.UrlPurgePurgeHistoryArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">purge_histories</span><span class="p">:</span> <span class="nx">Optional[Sequence[UrlPurgePurgeHistoryArgs]]</span> = None<span class="p">,</span>
         <span class="nx">redo</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">task_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">url_encode</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">urls</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">) -&gt;</span> UrlPurge</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetUrlPurge<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">UrlPurgeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">UrlPurge</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetUrlPurge<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">UrlPurgeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">UrlPurge</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">UrlPurge</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UrlPurgeState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">UrlPurge</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UrlPurgeState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">UrlPurge</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UrlPurgeState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">UrlPurge</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UrlPurgeState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingUrlPurge</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cdn:UrlPurge</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cdn_url_purge</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UrlPurgeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UrlPurgeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1006,28 +1202,31 @@ Get an existing UrlPurge resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UrlPurgeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1035,28 +1234,31 @@ Get an existing UrlPurge resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UrlPurgeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1076,17 +1278,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify purge area. NOTE: only purge same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify purge area. NOTE: only purge same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_purgehistories_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_purgehistories_csharp" style="color: inherit; text-decoration: inherit;">Purge<wbr>Histories</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#urlpurgepurgehistory">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdn.<wbr>Inputs.<wbr>Url<wbr>Purge<wbr>Purge<wbr>History<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#urlpurgepurgehistory">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdn.<wbr>Inputs.<wbr>Url<wbr>Purge<wbr>Purge<wbr>History&gt;</a></span>
     </dt>
-    <dd><p>logs of latest purge task.</p>
-</dd><dt class="property-optional"
+    <dd>logs of latest purge task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redo_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redo_csharp" style="color: inherit; text-decoration: inherit;">Redo</a>
@@ -1094,8 +1294,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskid_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Id</a>
@@ -1103,8 +1302,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task id of last operation.</p>
-</dd><dt class="property-optional"
+    <dd>Task id of last operation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_urlencode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urlencode_csharp" style="color: inherit; text-decoration: inherit;">Url<wbr>Encode</a>
@@ -1112,8 +1310,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_urls_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urls_csharp" style="color: inherit; text-decoration: inherit;">Urls</a>
@@ -1121,8 +1318,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd></dl>
+    <dd>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1136,8 +1332,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify purge area. NOTE: only purge same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify purge area. NOTE: only purge same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_purgehistories_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_purgehistories_go" style="color: inherit; text-decoration: inherit;">Purge<wbr>Histories</a>
@@ -1145,8 +1340,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#urlpurgepurgehistory">[]Url<wbr>Purge<wbr>Purge<wbr>History<wbr>Args</a></span>
     </dt>
-    <dd><p>logs of latest purge task.</p>
-</dd><dt class="property-optional"
+    <dd>logs of latest purge task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redo_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redo_go" style="color: inherit; text-decoration: inherit;">Redo</a>
@@ -1154,8 +1348,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskid_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Id</a>
@@ -1163,8 +1356,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task id of last operation.</p>
-</dd><dt class="property-optional"
+    <dd>Task id of last operation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_urlencode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urlencode_go" style="color: inherit; text-decoration: inherit;">Url<wbr>Encode</a>
@@ -1172,8 +1364,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_urls_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urls_go" style="color: inherit; text-decoration: inherit;">Urls</a>
@@ -1181,8 +1372,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd></dl>
+    <dd>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_area_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_area_hcl" style="color: inherit; text-decoration: inherit;">area</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify purge area. NOTE: only purge same area cache contents.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_purge_histories_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_purge_histories_hcl" style="color: inherit; text-decoration: inherit;">purge_<wbr>histories</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#urlpurgepurgehistory">list(object)</a></span>
+    </dt>
+    <dd>logs of latest purge task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_redo_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redo_hcl" style="color: inherit; text-decoration: inherit;">redo</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_task_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_id_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Task id of last operation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_url_encode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_url_encode_hcl" style="color: inherit; text-decoration: inherit;">url_<wbr>encode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_urls_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urls_hcl" style="color: inherit; text-decoration: inherit;">urls</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1196,17 +1440,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify purge area. NOTE: only purge same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify purge area. NOTE: only purge same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_purgehistories_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_purgehistories_java" style="color: inherit; text-decoration: inherit;">purge<wbr>Histories</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#urlpurgepurgehistory">List&lt;Url<wbr>Purge<wbr>Purge<wbr>History<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#urlpurgepurgehistory">List&lt;Url<wbr>Purge<wbr>Purge<wbr>History&gt;</a></span>
     </dt>
-    <dd><p>logs of latest purge task.</p>
-</dd><dt class="property-optional"
+    <dd>logs of latest purge task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redo_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redo_java" style="color: inherit; text-decoration: inherit;">redo</a>
@@ -1214,8 +1456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskid_java" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -1223,8 +1464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task id of last operation.</p>
-</dd><dt class="property-optional"
+    <dd>Task id of last operation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_urlencode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urlencode_java" style="color: inherit; text-decoration: inherit;">url<wbr>Encode</a>
@@ -1232,8 +1472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_urls_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urls_java" style="color: inherit; text-decoration: inherit;">urls</a>
@@ -1241,8 +1480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd></dl>
+    <dd>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1256,17 +1494,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify purge area. NOTE: only purge same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify purge area. NOTE: only purge same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_purgehistories_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_purgehistories_nodejs" style="color: inherit; text-decoration: inherit;">purge<wbr>Histories</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#urlpurgepurgehistory">Url<wbr>Purge<wbr>Purge<wbr>History<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#urlpurgepurgehistory">Url<wbr>Purge<wbr>Purge<wbr>History[]</a></span>
     </dt>
-    <dd><p>logs of latest purge task.</p>
-</dd><dt class="property-optional"
+    <dd>logs of latest purge task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redo_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redo_nodejs" style="color: inherit; text-decoration: inherit;">redo</a>
@@ -1274,8 +1510,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskid_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -1283,8 +1518,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task id of last operation.</p>
-</dd><dt class="property-optional"
+    <dd>Task id of last operation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_urlencode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urlencode_nodejs" style="color: inherit; text-decoration: inherit;">url<wbr>Encode</a>
@@ -1292,8 +1526,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_urls_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urls_nodejs" style="color: inherit; text-decoration: inherit;">urls</a>
@@ -1301,8 +1534,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd></dl>
+    <dd>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1316,17 +1548,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify purge area. NOTE: only purge same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify purge area. NOTE: only purge same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_purge_histories_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_purge_histories_python" style="color: inherit; text-decoration: inherit;">purge_<wbr>histories</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#urlpurgepurgehistory">Url<wbr>Purge<wbr>Purge<wbr>History<wbr>Args]</a></span>
+        <span class="property-type"><a href="#urlpurgepurgehistory">Sequence[Url<wbr>Purge<wbr>Purge<wbr>History<wbr>Args]</a></span>
     </dt>
-    <dd><p>logs of latest purge task.</p>
-</dd><dt class="property-optional"
+    <dd>logs of latest purge task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redo_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redo_python" style="color: inherit; text-decoration: inherit;">redo</a>
@@ -1334,8 +1564,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_task_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_id_python" style="color: inherit; text-decoration: inherit;">task_<wbr>id</a>
@@ -1343,8 +1572,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Task id of last operation.</p>
-</dd><dt class="property-optional"
+    <dd>Task id of last operation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_url_encode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_url_encode_python" style="color: inherit; text-decoration: inherit;">url_<wbr>encode</a>
@@ -1352,8 +1580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_urls_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urls_python" style="color: inherit; text-decoration: inherit;">urls</a>
@@ -1361,8 +1588,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd></dl>
+    <dd>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1376,8 +1602,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify purge area. NOTE: only purge same area cache contents.</p>
-</dd><dt class="property-optional"
+    <dd>Specify purge area. NOTE: only purge same area cache contents.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_purgehistories_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_purgehistories_yaml" style="color: inherit; text-decoration: inherit;">purge<wbr>Histories</a>
@@ -1385,8 +1610,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#urlpurgepurgehistory">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>logs of latest purge task.</p>
-</dd><dt class="property-optional"
+    <dd>logs of latest purge task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redo_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redo_yaml" style="color: inherit; text-decoration: inherit;">redo</a>
@@ -1394,8 +1618,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</p>
-</dd><dt class="property-optional"
+    <dd>Change to purge again. NOTE: this argument only works while resource update, if set to <code>0</code> or null will not be triggered.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskid_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -1403,8 +1626,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task id of last operation.</p>
-</dd><dt class="property-optional"
+    <dd>Task id of last operation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_urlencode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urlencode_yaml" style="color: inherit; text-decoration: inherit;">url<wbr>Encode</a>
@@ -1412,8 +1634,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to encode urls, if set to <code>true</code> will auto encode instead of manual process.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_urls_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_urls_yaml" style="color: inherit; text-decoration: inherit;">urls</a>
@@ -1421,8 +1642,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</p>
-</dd></dl>
+    <dd>List of url to purge. NOTE: urls need include protocol prefix <code>http://</code> or <code>https://</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1437,7 +1657,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="urlpurgepurgehistory">Url<wbr>Purge<wbr>Purge<wbr>History</h4>
+<h4 id="urlpurgepurgehistory">
+Url<wbr>Purge<wbr>Purge<wbr>History<pulumi-choosable type="language" values="python,go" class="inline">, Url<wbr>Purge<wbr>Purge<wbr>History<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1449,8 +1671,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purge task create time.</p>
-</dd><dt class="property-optional"
+    <dd>Purge task create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="flushtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flushtype_csharp" style="color: inherit; text-decoration: inherit;">Flush<wbr>Type</a>
@@ -1458,8 +1679,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purge flush type of <code>flush</code> or <code>delete</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Purge flush type of <code>flush</code> or <code>delete</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="purgetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#purgetype_csharp" style="color: inherit; text-decoration: inherit;">Purge<wbr>Type</a>
@@ -1467,8 +1687,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purge category in of <code>url</code> or <code>path</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Purge category in of <code>url</code> or <code>path</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1476,8 +1695,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purge status of <code>fail</code>, <code>done</code>, <code>process</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Purge status of <code>fail</code>, <code>done</code>, <code>process</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Id</a>
@@ -1485,8 +1703,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task id of last operation.</p>
-</dd><dt class="property-optional"
+    <dd>Task id of last operation.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_csharp" style="color: inherit; text-decoration: inherit;">Url</a>
@@ -1494,8 +1711,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purge url.</p>
-</dd></dl>
+    <dd>Purge url.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1509,8 +1725,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purge task create time.</p>
-</dd><dt class="property-optional"
+    <dd>Purge task create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="flushtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flushtype_go" style="color: inherit; text-decoration: inherit;">Flush<wbr>Type</a>
@@ -1518,8 +1733,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purge flush type of <code>flush</code> or <code>delete</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Purge flush type of <code>flush</code> or <code>delete</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="purgetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#purgetype_go" style="color: inherit; text-decoration: inherit;">Purge<wbr>Type</a>
@@ -1527,8 +1741,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purge category in of <code>url</code> or <code>path</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Purge category in of <code>url</code> or <code>path</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1536,8 +1749,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purge status of <code>fail</code>, <code>done</code>, <code>process</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Purge status of <code>fail</code>, <code>done</code>, <code>process</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Id</a>
@@ -1545,8 +1757,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task id of last operation.</p>
-</dd><dt class="property-optional"
+    <dd>Task id of last operation.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_go" style="color: inherit; text-decoration: inherit;">Url</a>
@@ -1554,8 +1765,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purge url.</p>
-</dd></dl>
+    <dd>Purge url.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Purge task create time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="flush_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flush_type_hcl" style="color: inherit; text-decoration: inherit;">flush_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Purge flush type of <code>flush</code> or <code>delete</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="purge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#purge_type_hcl" style="color: inherit; text-decoration: inherit;">purge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Purge category in of <code>url</code> or <code>path</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Purge status of <code>fail</code>, <code>done</code>, <code>process</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="task_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_id_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Task id of last operation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_hcl" style="color: inherit; text-decoration: inherit;">url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Purge url.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1569,8 +1833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Purge task create time.</p>
-</dd><dt class="property-optional"
+    <dd>Purge task create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="flushtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flushtype_java" style="color: inherit; text-decoration: inherit;">flush<wbr>Type</a>
@@ -1578,8 +1841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Purge flush type of <code>flush</code> or <code>delete</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Purge flush type of <code>flush</code> or <code>delete</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="purgetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#purgetype_java" style="color: inherit; text-decoration: inherit;">purge<wbr>Type</a>
@@ -1587,8 +1849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Purge category in of <code>url</code> or <code>path</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Purge category in of <code>url</code> or <code>path</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1596,8 +1857,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Purge status of <code>fail</code>, <code>done</code>, <code>process</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Purge status of <code>fail</code>, <code>done</code>, <code>process</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_java" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -1605,8 +1865,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task id of last operation.</p>
-</dd><dt class="property-optional"
+    <dd>Task id of last operation.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_java" style="color: inherit; text-decoration: inherit;">url</a>
@@ -1614,8 +1873,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Purge url.</p>
-</dd></dl>
+    <dd>Purge url.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1629,8 +1887,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purge task create time.</p>
-</dd><dt class="property-optional"
+    <dd>Purge task create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="flushtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flushtype_nodejs" style="color: inherit; text-decoration: inherit;">flush<wbr>Type</a>
@@ -1638,8 +1895,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purge flush type of <code>flush</code> or <code>delete</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Purge flush type of <code>flush</code> or <code>delete</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="purgetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#purgetype_nodejs" style="color: inherit; text-decoration: inherit;">purge<wbr>Type</a>
@@ -1647,8 +1903,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purge category in of <code>url</code> or <code>path</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Purge category in of <code>url</code> or <code>path</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1656,8 +1911,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purge status of <code>fail</code>, <code>done</code>, <code>process</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Purge status of <code>fail</code>, <code>done</code>, <code>process</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -1665,8 +1919,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task id of last operation.</p>
-</dd><dt class="property-optional"
+    <dd>Task id of last operation.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_nodejs" style="color: inherit; text-decoration: inherit;">url</a>
@@ -1674,8 +1927,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purge url.</p>
-</dd></dl>
+    <dd>Purge url.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1689,8 +1941,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Purge task create time.</p>
-</dd><dt class="property-optional"
+    <dd>Purge task create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="flush_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flush_type_python" style="color: inherit; text-decoration: inherit;">flush_<wbr>type</a>
@@ -1698,8 +1949,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Purge flush type of <code>flush</code> or <code>delete</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Purge flush type of <code>flush</code> or <code>delete</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="purge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#purge_type_python" style="color: inherit; text-decoration: inherit;">purge_<wbr>type</a>
@@ -1707,8 +1957,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Purge category in of <code>url</code> or <code>path</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Purge category in of <code>url</code> or <code>path</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1716,8 +1965,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Purge status of <code>fail</code>, <code>done</code>, <code>process</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Purge status of <code>fail</code>, <code>done</code>, <code>process</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="task_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_id_python" style="color: inherit; text-decoration: inherit;">task_<wbr>id</a>
@@ -1725,8 +1973,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Task id of last operation.</p>
-</dd><dt class="property-optional"
+    <dd>Task id of last operation.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_python" style="color: inherit; text-decoration: inherit;">url</a>
@@ -1734,8 +1981,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Purge url.</p>
-</dd></dl>
+    <dd>Purge url.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1749,8 +1995,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Purge task create time.</p>
-</dd><dt class="property-optional"
+    <dd>Purge task create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="flushtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flushtype_yaml" style="color: inherit; text-decoration: inherit;">flush<wbr>Type</a>
@@ -1758,8 +2003,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Purge flush type of <code>flush</code> or <code>delete</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Purge flush type of <code>flush</code> or <code>delete</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="purgetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#purgetype_yaml" style="color: inherit; text-decoration: inherit;">purge<wbr>Type</a>
@@ -1767,8 +2011,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Purge category in of <code>url</code> or <code>path</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Purge category in of <code>url</code> or <code>path</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1776,8 +2019,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Purge status of <code>fail</code>, <code>done</code>, <code>process</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Purge status of <code>fail</code>, <code>done</code>, <code>process</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -1785,8 +2027,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task id of last operation.</p>
-</dd><dt class="property-optional"
+    <dd>Task id of last operation.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_yaml" style="color: inherit; text-decoration: inherit;">url</a>
@@ -1794,8 +2035,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Purge url.</p>
-</dd></dl>
+    <dd>Purge url.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1807,7 +2047,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

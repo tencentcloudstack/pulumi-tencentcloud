@@ -2,9 +2,11 @@
 ---
 title: "getScalingPolicies"
 title_tag: "tencentcloud.As.getScalingPolicies"
-meta_desc: "Documentation for the tencentcloud.As.getScalingPolicies function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of scaling policy."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,52 +18,51 @@ Use this data source to query detailed information of scaling policy.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const asScalingPolicies = tencentcloud.As.getScalingPolicies({
-    resultOutputFile: "mytestpath",
+const asScalingPolicies = tencentcloud.as.getScalingPolicies({
     scalingPolicyId: "asg-mvyghxu7",
+    resultOutputFile: "mytestpath",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-as_scaling_policies = tencentcloud.As.get_scaling_policies(result_output_file="mytestpath",
-    scaling_policy_id="asg-mvyghxu7")
+as_scaling_policies = tencentcloud.as_.get_scaling_policies(scaling_policy_id="asg-mvyghxu7",
+    result_output_file="mytestpath")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var asScalingPolicies = Tencentcloud.As.GetScalingPolicies.Invoke(new()
-    {
-        ResultOutputFile = "mytestpath",
-        ScalingPolicyId = "asg-mvyghxu7",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := As.GetScalingPolicies(ctx, &as.GetScalingPoliciesArgs{
-			ResultOutputFile: pulumi.StringRef("mytestpath"),
+		_, err := as.GetScalingPolicies(ctx, &as.GetScalingPoliciesArgs{
 			ScalingPolicyId:  pulumi.StringRef("asg-mvyghxu7"),
+			ResultOutputFile: pulumi.StringRef("mytestpath"),
 		}, nil)
 		if err != nil {
 			return err
@@ -70,6 +71,32 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var asScalingPolicies = Tencentcloud.As.GetScalingPolicies.Invoke(new()
+    {
+        ScalingPolicyId = "asg-mvyghxu7",
+        ResultOutputFile = "mytestpath",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.As.AsFunctions;
 import com.pulumi.tencentcloud.As.inputs.GetScalingPoliciesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,24 +119,55 @@ public class App {
 
     public static void stack(Context ctx) {
         final var asScalingPolicies = AsFunctions.getScalingPolicies(GetScalingPoliciesArgs.builder()
-            .resultOutputFile("mytestpath")
             .scalingPolicyId("asg-mvyghxu7")
+            .resultOutputFile("mytestpath")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   asScalingPolicies:
     fn::invoke:
-      Function: tencentcloud:As:getScalingPolicies
-      Arguments:
-        resultOutputFile: mytestpath
+      function: tencentcloud:As:getScalingPolicies
+      arguments:
         scalingPolicyId: asg-mvyghxu7
+        resultOutputFile: mytestpath
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_as_getscalingpolicies" "asScalingPolicies" {
+  scaling_policy_id  = "asg-mvyghxu7"
+  result_output_file = "mytestpath"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeScalingPolicies](https://www.tencentcloud.com/document/api/377/33208)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getScalingPolicies<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetScalingPoliciesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetScalingPoliciesResult</a></span>></span
+><span class="k">function </span>getScalingPolicies<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetScalingPoliciesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetScalingPoliciesResult</a></span>></span
 ><span class="k">
-function </span>getScalingPoliciesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetScalingPoliciesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetScalingPoliciesResult</a></span>></span
+function </span>getScalingPoliciesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetScalingPoliciesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetScalingPoliciesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -146,11 +204,11 @@ function </span>getScalingPoliciesOutput<span class="p">(</span><span class="nx"
                          <span class="nx">scaling_policy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetScalingPoliciesResult</span
 ><span class="k">
-def </span>get_scaling_policies_output<span class="p">(</span><span class="nx">policy_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">scaling_group_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">scaling_policy_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetScalingPoliciesResult]</span
+def </span>get_scaling_policies_output<span class="p">(</span><span class="nx">policy_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">scaling_group_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">scaling_policy_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetScalingPoliciesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -175,7 +233,8 @@ func </span>GetScalingPoliciesOutput<span class="p">(</span><span class="nx">ctx
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetScalingPolicies </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetScalingPoliciesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetScalingPoliciesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetScalingPoliciesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetScalingPoliciesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetScalingPoliciesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetScalingPoliciesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetScalingPoliciesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetScalingPoliciesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -184,7 +243,8 @@ func </span>GetScalingPoliciesOutput<span class="p">(</span><span class="nx">ctx
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetScalingPoliciesResult</a></span>> </span>getScalingPolicies<span class="p">(</span><span class="nx">GetScalingPoliciesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetScalingPoliciesResult</a></span>> </span>getScalingPolicies<span class="p">(</span><span class="nx">GetScalingPoliciesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetScalingPoliciesResult</a></span>> </span>getScalingPolicies<span class="p">(</span><span class="nx">GetScalingPoliciesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -196,6 +256,15 @@ func </span>GetScalingPoliciesOutput<span class="p">(</span><span class="nx">ctx
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:As/getScalingPolicies:getScalingPolicies
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_as_get_scaling_policies&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -214,8 +283,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling policy name.</p>
-</dd><dt class="property-optional"
+    <dd>Scaling policy name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -223,8 +291,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -232,8 +299,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Scaling group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalingpolicyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingpolicyid_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Policy<wbr>Id</a>
@@ -241,8 +307,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling policy ID.</p>
-</dd></dl>
+    <dd>Scaling policy ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -256,8 +321,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling policy name.</p>
-</dd><dt class="property-optional"
+    <dd>Scaling policy name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -265,8 +329,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -274,8 +337,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Scaling group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalingpolicyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingpolicyid_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Policy<wbr>Id</a>
@@ -283,8 +345,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling policy ID.</p>
-</dd></dl>
+    <dd>Scaling policy ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="policy_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_name_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scaling policy name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scaling group ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scaling_policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_policy_id_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scaling policy ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -298,8 +397,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scaling policy name.</p>
-</dd><dt class="property-optional"
+    <dd>Scaling policy name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -307,8 +405,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -316,8 +413,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scaling group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Scaling group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalingpolicyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingpolicyid_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Policy<wbr>Id</a>
@@ -325,8 +421,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scaling policy ID.</p>
-</dd></dl>
+    <dd>Scaling policy ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -340,8 +435,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling policy name.</p>
-</dd><dt class="property-optional"
+    <dd>Scaling policy name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -349,8 +443,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -358,8 +451,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Scaling group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalingpolicyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingpolicyid_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Policy<wbr>Id</a>
@@ -367,8 +459,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling policy ID.</p>
-</dd></dl>
+    <dd>Scaling policy ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -382,8 +473,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scaling policy name.</p>
-</dd><dt class="property-optional"
+    <dd>Scaling policy name.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -391,8 +481,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scaling_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_id_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
@@ -400,8 +489,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scaling group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Scaling group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="scaling_policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_policy_id_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>policy_<wbr>id</a>
@@ -409,8 +497,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scaling policy ID.</p>
-</dd></dl>
+    <dd>Scaling policy ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -424,8 +511,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scaling policy name.</p>
-</dd><dt class="property-optional"
+    <dd>Scaling policy name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -433,8 +519,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -442,8 +527,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scaling group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Scaling group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalingpolicyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingpolicyid_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Policy<wbr>Id</a>
@@ -451,8 +535,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scaling policy ID.</p>
-</dd></dl>
+    <dd>Scaling policy ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -475,8 +558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scalingpolicylists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingpolicylists_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Policy<wbr>Lists</a>
@@ -484,8 +566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalingpoliciesscalingpolicylist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Outputs.<wbr>Get<wbr>Scaling<wbr>Policies<wbr>Scaling<wbr>Policy<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of scaling policy. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of scaling policy. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="policyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Name</a>
@@ -493,8 +574,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling policy name.</p>
-</dd><dt class="property-"
+    <dd>Scaling policy name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -510,8 +590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling policy ID.</p>
-</dd><dt class="property-"
+    <dd>Scaling policy ID.</dd><dt class="property-"
             title="">
         <span id="scalingpolicyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingpolicyid_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Policy<wbr>Id</a>
@@ -533,8 +612,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scalingpolicylists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingpolicylists_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Policy<wbr>Lists</a>
@@ -542,8 +620,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalingpoliciesscalingpolicylist">[]Get<wbr>Scaling<wbr>Policies<wbr>Scaling<wbr>Policy<wbr>List</a></span>
     </dt>
-    <dd><p>A list of scaling policy. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of scaling policy. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="policyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Name</a>
@@ -551,8 +628,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling policy name.</p>
-</dd><dt class="property-"
+    <dd>Scaling policy name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -568,11 +644,64 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling policy ID.</p>
-</dd><dt class="property-"
+    <dd>Scaling policy ID.</dd><dt class="property-"
             title="">
         <span id="scalingpolicyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingpolicyid_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Policy<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="scaling_policy_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_policy_lists_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>policy_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getscalingpoliciesscalingpolicylist">list(object)</a></span>
+    </dt>
+    <dd>A list of scaling policy. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="policy_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_name_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scaling policy name.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scaling policy ID.</dd><dt class="property-"
+            title="">
+        <span id="scaling_policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_policy_id_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>policy_<wbr>id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -591,8 +720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scalingpolicylists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingpolicylists_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Policy<wbr>Lists</a>
@@ -600,8 +728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalingpoliciesscalingpolicylist">List&lt;Get<wbr>Scaling<wbr>Policies<wbr>Scaling<wbr>Policy<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of scaling policy. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of scaling policy. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="policyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -609,8 +736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scaling policy name.</p>
-</dd><dt class="property-"
+    <dd>Scaling policy name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -626,8 +752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scaling policy ID.</p>
-</dd><dt class="property-"
+    <dd>Scaling policy ID.</dd><dt class="property-"
             title="">
         <span id="scalingpolicyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingpolicyid_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Policy<wbr>Id</a>
@@ -649,8 +774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scalingpolicylists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingpolicylists_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Policy<wbr>Lists</a>
@@ -658,8 +782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalingpoliciesscalingpolicylist">Get<wbr>Scaling<wbr>Policies<wbr>Scaling<wbr>Policy<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of scaling policy. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of scaling policy. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="policyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -667,8 +790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling policy name.</p>
-</dd><dt class="property-"
+    <dd>Scaling policy name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -684,8 +806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling policy ID.</p>
-</dd><dt class="property-"
+    <dd>Scaling policy ID.</dd><dt class="property-"
             title="">
         <span id="scalingpolicyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingpolicyid_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Policy<wbr>Id</a>
@@ -707,17 +828,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scaling_policy_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_policy_lists_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>policy_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getscalingpoliciesscalingpolicylist">Get<wbr>Scaling<wbr>Policies<wbr>Scaling<wbr>Policy<wbr>List]</a></span>
+        <span class="property-type"><a href="#getscalingpoliciesscalingpolicylist">Sequence[Get<wbr>Scaling<wbr>Policies<wbr>Scaling<wbr>Policy<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of scaling policy. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of scaling policy. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="policy_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_name_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>name</a>
@@ -725,8 +844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scaling policy name.</p>
-</dd><dt class="property-"
+    <dd>Scaling policy name.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -742,8 +860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scaling policy ID.</p>
-</dd><dt class="property-"
+    <dd>Scaling policy ID.</dd><dt class="property-"
             title="">
         <span id="scaling_policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_policy_id_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>policy_<wbr>id</a>
@@ -765,8 +882,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scalingpolicylists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingpolicylists_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Policy<wbr>Lists</a>
@@ -774,8 +890,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalingpoliciesscalingpolicylist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of scaling policy. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of scaling policy. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="policyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -783,8 +898,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scaling policy name.</p>
-</dd><dt class="property-"
+    <dd>Scaling policy name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -800,8 +914,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scaling policy ID.</p>
-</dd><dt class="property-"
+    <dd>Scaling policy ID.</dd><dt class="property-"
             title="">
         <span id="scalingpolicyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingpolicyid_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Policy<wbr>Id</a>
@@ -833,8 +946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Adjustment type of the scaling rule.</p>
-</dd><dt class="property-required"
+    <dd>Adjustment type of the scaling rule.</dd><dt class="property-required"
             title="Required">
         <span id="adjustmentvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmentvalue_csharp" style="color: inherit; text-decoration: inherit;">Adjustment<wbr>Value</a>
@@ -842,8 +954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Adjustment value of the scaling rule.</p>
-</dd><dt class="property-required"
+    <dd>Adjustment value of the scaling rule.</dd><dt class="property-required"
             title="Required">
         <span id="comparisonoperator_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparisonoperator_csharp" style="color: inherit; text-decoration: inherit;">Comparison<wbr>Operator</a>
@@ -851,8 +962,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Comparison operator.</p>
-</dd><dt class="property-required"
+    <dd>Comparison operator.</dd><dt class="property-required"
             title="Required">
         <span id="continuoustime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuoustime_csharp" style="color: inherit; text-decoration: inherit;">Continuous<wbr>Time</a>
@@ -860,8 +970,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retry times.</p>
-</dd><dt class="property-required"
+    <dd>Retry times.</dd><dt class="property-required"
             title="Required">
         <span id="cooldown_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cooldown_csharp" style="color: inherit; text-decoration: inherit;">Cooldown</a>
@@ -869,8 +978,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cool down time of the scaling rule.</p>
-</dd><dt class="property-required"
+    <dd>Cool down time of the scaling rule.</dd><dt class="property-required"
             title="Required">
         <span id="metricname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_csharp" style="color: inherit; text-decoration: inherit;">Metric<wbr>Name</a>
@@ -878,8 +986,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of an indicator.</p>
-</dd><dt class="property-required"
+    <dd>Name of an indicator.</dd><dt class="property-required"
             title="Required">
         <span id="notificationusergroupids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationusergroupids_csharp" style="color: inherit; text-decoration: inherit;">Notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -887,8 +994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Users need to be notified when an alarm is triggered.</p>
-</dd><dt class="property-required"
+    <dd>Users need to be notified when an alarm is triggered.</dd><dt class="property-required"
             title="Required">
         <span id="period_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -896,8 +1002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time period in second.</p>
-</dd><dt class="property-required"
+    <dd>Time period in second.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Name</a>
@@ -905,8 +1010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling policy name.</p>
-</dd><dt class="property-required"
+    <dd>Scaling policy name.</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -914,8 +1018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="statistic_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statistic_csharp" style="color: inherit; text-decoration: inherit;">Statistic</a>
@@ -923,8 +1026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Statistic types.</p>
-</dd><dt class="property-required"
+    <dd>Statistic types.</dd><dt class="property-required"
             title="Required">
         <span id="threshold_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_csharp" style="color: inherit; text-decoration: inherit;">Threshold</a>
@@ -932,8 +1034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm threshold.</p>
-</dd></dl>
+    <dd>Alarm threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -947,8 +1048,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Adjustment type of the scaling rule.</p>
-</dd><dt class="property-required"
+    <dd>Adjustment type of the scaling rule.</dd><dt class="property-required"
             title="Required">
         <span id="adjustmentvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmentvalue_go" style="color: inherit; text-decoration: inherit;">Adjustment<wbr>Value</a>
@@ -956,8 +1056,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Adjustment value of the scaling rule.</p>
-</dd><dt class="property-required"
+    <dd>Adjustment value of the scaling rule.</dd><dt class="property-required"
             title="Required">
         <span id="comparisonoperator_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparisonoperator_go" style="color: inherit; text-decoration: inherit;">Comparison<wbr>Operator</a>
@@ -965,8 +1064,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Comparison operator.</p>
-</dd><dt class="property-required"
+    <dd>Comparison operator.</dd><dt class="property-required"
             title="Required">
         <span id="continuoustime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuoustime_go" style="color: inherit; text-decoration: inherit;">Continuous<wbr>Time</a>
@@ -974,8 +1072,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retry times.</p>
-</dd><dt class="property-required"
+    <dd>Retry times.</dd><dt class="property-required"
             title="Required">
         <span id="cooldown_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cooldown_go" style="color: inherit; text-decoration: inherit;">Cooldown</a>
@@ -983,8 +1080,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cool down time of the scaling rule.</p>
-</dd><dt class="property-required"
+    <dd>Cool down time of the scaling rule.</dd><dt class="property-required"
             title="Required">
         <span id="metricname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_go" style="color: inherit; text-decoration: inherit;">Metric<wbr>Name</a>
@@ -992,8 +1088,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of an indicator.</p>
-</dd><dt class="property-required"
+    <dd>Name of an indicator.</dd><dt class="property-required"
             title="Required">
         <span id="notificationusergroupids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationusergroupids_go" style="color: inherit; text-decoration: inherit;">Notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -1001,8 +1096,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Users need to be notified when an alarm is triggered.</p>
-</dd><dt class="property-required"
+    <dd>Users need to be notified when an alarm is triggered.</dd><dt class="property-required"
             title="Required">
         <span id="period_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_go" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -1010,8 +1104,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time period in second.</p>
-</dd><dt class="property-required"
+    <dd>Time period in second.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Name</a>
@@ -1019,8 +1112,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling policy name.</p>
-</dd><dt class="property-required"
+    <dd>Scaling policy name.</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -1028,8 +1120,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="statistic_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statistic_go" style="color: inherit; text-decoration: inherit;">Statistic</a>
@@ -1037,8 +1128,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Statistic types.</p>
-</dd><dt class="property-required"
+    <dd>Statistic types.</dd><dt class="property-required"
             title="Required">
         <span id="threshold_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_go" style="color: inherit; text-decoration: inherit;">Threshold</a>
@@ -1046,8 +1136,109 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm threshold.</p>
-</dd></dl>
+    <dd>Alarm threshold.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="adjustment_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustment_type_hcl" style="color: inherit; text-decoration: inherit;">adjustment_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Adjustment type of the scaling rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="adjustment_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustment_value_hcl" style="color: inherit; text-decoration: inherit;">adjustment_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Adjustment value of the scaling rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="comparison_operator_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparison_operator_hcl" style="color: inherit; text-decoration: inherit;">comparison_<wbr>operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Comparison operator.</dd><dt class="property-required"
+            title="Required">
+        <span id="continuous_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuous_time_hcl" style="color: inherit; text-decoration: inherit;">continuous_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Retry times.</dd><dt class="property-required"
+            title="Required">
+        <span id="cooldown_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cooldown_hcl" style="color: inherit; text-decoration: inherit;">cooldown</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cool down time of the scaling rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="metric_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_name_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of an indicator.</dd><dt class="property-required"
+            title="Required">
+        <span id="notification_user_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_user_group_ids_hcl" style="color: inherit; text-decoration: inherit;">notification_<wbr>user_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Users need to be notified when an alarm is triggered.</dd><dt class="property-required"
+            title="Required">
+        <span id="period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Time period in second.</dd><dt class="property-required"
+            title="Required">
+        <span id="policy_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_name_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scaling policy name.</dd><dt class="property-required"
+            title="Required">
+        <span id="scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scaling group ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="statistic_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statistic_hcl" style="color: inherit; text-decoration: inherit;">statistic</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Statistic types.</dd><dt class="property-required"
+            title="Required">
+        <span id="threshold_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_hcl" style="color: inherit; text-decoration: inherit;">threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1061,8 +1252,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Adjustment type of the scaling rule.</p>
-</dd><dt class="property-required"
+    <dd>Adjustment type of the scaling rule.</dd><dt class="property-required"
             title="Required">
         <span id="adjustmentvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmentvalue_java" style="color: inherit; text-decoration: inherit;">adjustment<wbr>Value</a>
@@ -1070,8 +1260,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Adjustment value of the scaling rule.</p>
-</dd><dt class="property-required"
+    <dd>Adjustment value of the scaling rule.</dd><dt class="property-required"
             title="Required">
         <span id="comparisonoperator_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparisonoperator_java" style="color: inherit; text-decoration: inherit;">comparison<wbr>Operator</a>
@@ -1079,8 +1268,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Comparison operator.</p>
-</dd><dt class="property-required"
+    <dd>Comparison operator.</dd><dt class="property-required"
             title="Required">
         <span id="continuoustime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuoustime_java" style="color: inherit; text-decoration: inherit;">continuous<wbr>Time</a>
@@ -1088,8 +1276,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Retry times.</p>
-</dd><dt class="property-required"
+    <dd>Retry times.</dd><dt class="property-required"
             title="Required">
         <span id="cooldown_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cooldown_java" style="color: inherit; text-decoration: inherit;">cooldown</a>
@@ -1097,8 +1284,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Cool down time of the scaling rule.</p>
-</dd><dt class="property-required"
+    <dd>Cool down time of the scaling rule.</dd><dt class="property-required"
             title="Required">
         <span id="metricname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_java" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
@@ -1106,8 +1292,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of an indicator.</p>
-</dd><dt class="property-required"
+    <dd>Name of an indicator.</dd><dt class="property-required"
             title="Required">
         <span id="notificationusergroupids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationusergroupids_java" style="color: inherit; text-decoration: inherit;">notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -1115,8 +1300,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Users need to be notified when an alarm is triggered.</p>
-</dd><dt class="property-required"
+    <dd>Users need to be notified when an alarm is triggered.</dd><dt class="property-required"
             title="Required">
         <span id="period_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_java" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1124,8 +1308,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Time period in second.</p>
-</dd><dt class="property-required"
+    <dd>Time period in second.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -1133,8 +1316,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scaling policy name.</p>
-</dd><dt class="property-required"
+    <dd>Scaling policy name.</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1142,8 +1324,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="statistic_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statistic_java" style="color: inherit; text-decoration: inherit;">statistic</a>
@@ -1151,8 +1332,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Statistic types.</p>
-</dd><dt class="property-required"
+    <dd>Statistic types.</dd><dt class="property-required"
             title="Required">
         <span id="threshold_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_java" style="color: inherit; text-decoration: inherit;">threshold</a>
@@ -1160,8 +1340,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Alarm threshold.</p>
-</dd></dl>
+    <dd>Alarm threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1175,8 +1354,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Adjustment type of the scaling rule.</p>
-</dd><dt class="property-required"
+    <dd>Adjustment type of the scaling rule.</dd><dt class="property-required"
             title="Required">
         <span id="adjustmentvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmentvalue_nodejs" style="color: inherit; text-decoration: inherit;">adjustment<wbr>Value</a>
@@ -1184,8 +1362,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Adjustment value of the scaling rule.</p>
-</dd><dt class="property-required"
+    <dd>Adjustment value of the scaling rule.</dd><dt class="property-required"
             title="Required">
         <span id="comparisonoperator_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparisonoperator_nodejs" style="color: inherit; text-decoration: inherit;">comparison<wbr>Operator</a>
@@ -1193,8 +1370,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Comparison operator.</p>
-</dd><dt class="property-required"
+    <dd>Comparison operator.</dd><dt class="property-required"
             title="Required">
         <span id="continuoustime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuoustime_nodejs" style="color: inherit; text-decoration: inherit;">continuous<wbr>Time</a>
@@ -1202,8 +1378,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Retry times.</p>
-</dd><dt class="property-required"
+    <dd>Retry times.</dd><dt class="property-required"
             title="Required">
         <span id="cooldown_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cooldown_nodejs" style="color: inherit; text-decoration: inherit;">cooldown</a>
@@ -1211,8 +1386,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cool down time of the scaling rule.</p>
-</dd><dt class="property-required"
+    <dd>Cool down time of the scaling rule.</dd><dt class="property-required"
             title="Required">
         <span id="metricname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_nodejs" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
@@ -1220,8 +1394,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of an indicator.</p>
-</dd><dt class="property-required"
+    <dd>Name of an indicator.</dd><dt class="property-required"
             title="Required">
         <span id="notificationusergroupids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationusergroupids_nodejs" style="color: inherit; text-decoration: inherit;">notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -1229,8 +1402,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Users need to be notified when an alarm is triggered.</p>
-</dd><dt class="property-required"
+    <dd>Users need to be notified when an alarm is triggered.</dd><dt class="property-required"
             title="Required">
         <span id="period_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1238,8 +1410,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Time period in second.</p>
-</dd><dt class="property-required"
+    <dd>Time period in second.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -1247,8 +1418,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling policy name.</p>
-</dd><dt class="property-required"
+    <dd>Scaling policy name.</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1256,8 +1426,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="statistic_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statistic_nodejs" style="color: inherit; text-decoration: inherit;">statistic</a>
@@ -1265,8 +1434,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Statistic types.</p>
-</dd><dt class="property-required"
+    <dd>Statistic types.</dd><dt class="property-required"
             title="Required">
         <span id="threshold_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_nodejs" style="color: inherit; text-decoration: inherit;">threshold</a>
@@ -1274,8 +1442,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Alarm threshold.</p>
-</dd></dl>
+    <dd>Alarm threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1289,8 +1456,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Adjustment type of the scaling rule.</p>
-</dd><dt class="property-required"
+    <dd>Adjustment type of the scaling rule.</dd><dt class="property-required"
             title="Required">
         <span id="adjustment_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustment_value_python" style="color: inherit; text-decoration: inherit;">adjustment_<wbr>value</a>
@@ -1298,8 +1464,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Adjustment value of the scaling rule.</p>
-</dd><dt class="property-required"
+    <dd>Adjustment value of the scaling rule.</dd><dt class="property-required"
             title="Required">
         <span id="comparison_operator_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparison_operator_python" style="color: inherit; text-decoration: inherit;">comparison_<wbr>operator</a>
@@ -1307,8 +1472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Comparison operator.</p>
-</dd><dt class="property-required"
+    <dd>Comparison operator.</dd><dt class="property-required"
             title="Required">
         <span id="continuous_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuous_time_python" style="color: inherit; text-decoration: inherit;">continuous_<wbr>time</a>
@@ -1316,8 +1480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retry times.</p>
-</dd><dt class="property-required"
+    <dd>Retry times.</dd><dt class="property-required"
             title="Required">
         <span id="cooldown_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cooldown_python" style="color: inherit; text-decoration: inherit;">cooldown</a>
@@ -1325,8 +1488,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cool down time of the scaling rule.</p>
-</dd><dt class="property-required"
+    <dd>Cool down time of the scaling rule.</dd><dt class="property-required"
             title="Required">
         <span id="metric_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_name_python" style="color: inherit; text-decoration: inherit;">metric_<wbr>name</a>
@@ -1334,8 +1496,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of an indicator.</p>
-</dd><dt class="property-required"
+    <dd>Name of an indicator.</dd><dt class="property-required"
             title="Required">
         <span id="notification_user_group_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_user_group_ids_python" style="color: inherit; text-decoration: inherit;">notification_<wbr>user_<wbr>group_<wbr>ids</a>
@@ -1343,8 +1504,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Users need to be notified when an alarm is triggered.</p>
-</dd><dt class="property-required"
+    <dd>Users need to be notified when an alarm is triggered.</dd><dt class="property-required"
             title="Required">
         <span id="period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_python" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1352,8 +1512,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time period in second.</p>
-</dd><dt class="property-required"
+    <dd>Time period in second.</dd><dt class="property-required"
             title="Required">
         <span id="policy_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_name_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>name</a>
@@ -1361,8 +1520,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scaling policy name.</p>
-</dd><dt class="property-required"
+    <dd>Scaling policy name.</dd><dt class="property-required"
             title="Required">
         <span id="scaling_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_id_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
@@ -1370,8 +1528,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="statistic_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statistic_python" style="color: inherit; text-decoration: inherit;">statistic</a>
@@ -1379,8 +1536,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Statistic types.</p>
-</dd><dt class="property-required"
+    <dd>Statistic types.</dd><dt class="property-required"
             title="Required">
         <span id="threshold_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_python" style="color: inherit; text-decoration: inherit;">threshold</a>
@@ -1388,8 +1544,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm threshold.</p>
-</dd></dl>
+    <dd>Alarm threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1403,8 +1558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Adjustment type of the scaling rule.</p>
-</dd><dt class="property-required"
+    <dd>Adjustment type of the scaling rule.</dd><dt class="property-required"
             title="Required">
         <span id="adjustmentvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adjustmentvalue_yaml" style="color: inherit; text-decoration: inherit;">adjustment<wbr>Value</a>
@@ -1412,8 +1566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Adjustment value of the scaling rule.</p>
-</dd><dt class="property-required"
+    <dd>Adjustment value of the scaling rule.</dd><dt class="property-required"
             title="Required">
         <span id="comparisonoperator_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comparisonoperator_yaml" style="color: inherit; text-decoration: inherit;">comparison<wbr>Operator</a>
@@ -1421,8 +1574,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Comparison operator.</p>
-</dd><dt class="property-required"
+    <dd>Comparison operator.</dd><dt class="property-required"
             title="Required">
         <span id="continuoustime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuoustime_yaml" style="color: inherit; text-decoration: inherit;">continuous<wbr>Time</a>
@@ -1430,8 +1582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Retry times.</p>
-</dd><dt class="property-required"
+    <dd>Retry times.</dd><dt class="property-required"
             title="Required">
         <span id="cooldown_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cooldown_yaml" style="color: inherit; text-decoration: inherit;">cooldown</a>
@@ -1439,8 +1590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cool down time of the scaling rule.</p>
-</dd><dt class="property-required"
+    <dd>Cool down time of the scaling rule.</dd><dt class="property-required"
             title="Required">
         <span id="metricname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_yaml" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
@@ -1448,8 +1598,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of an indicator.</p>
-</dd><dt class="property-required"
+    <dd>Name of an indicator.</dd><dt class="property-required"
             title="Required">
         <span id="notificationusergroupids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationusergroupids_yaml" style="color: inherit; text-decoration: inherit;">notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -1457,8 +1606,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Users need to be notified when an alarm is triggered.</p>
-</dd><dt class="property-required"
+    <dd>Users need to be notified when an alarm is triggered.</dd><dt class="property-required"
             title="Required">
         <span id="period_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1466,8 +1614,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Time period in second.</p>
-</dd><dt class="property-required"
+    <dd>Time period in second.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -1475,8 +1622,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scaling policy name.</p>
-</dd><dt class="property-required"
+    <dd>Scaling policy name.</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1484,8 +1630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="statistic_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statistic_yaml" style="color: inherit; text-decoration: inherit;">statistic</a>
@@ -1493,8 +1638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Statistic types.</p>
-</dd><dt class="property-required"
+    <dd>Statistic types.</dd><dt class="property-required"
             title="Required">
         <span id="threshold_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_yaml" style="color: inherit; text-decoration: inherit;">threshold</a>
@@ -1502,8 +1646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Alarm threshold.</p>
-</dd></dl>
+    <dd>Alarm threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1518,7 +1661,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

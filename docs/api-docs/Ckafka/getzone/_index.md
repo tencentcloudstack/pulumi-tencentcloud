@@ -2,9 +2,11 @@
 ---
 title: "getZone"
 title_tag: "tencentcloud.Ckafka.getZone"
-meta_desc: "Documentation for the tencentcloud.Ckafka.getZone function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of ckafka zone"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,42 +18,45 @@ Use this data source to query detailed information of ckafka zone
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const ckafkaZone = tencentcloud.Ckafka.getZone({});
+const ckafkaZone = tencentcloud.ckafka.getZone({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-ckafka_zone = tencentcloud.Ckafka.get_zone()
+ckafka_zone = tencentcloud.ckafka.get_zone()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var ckafkaZone = Tencentcloud.Ckafka.GetZone.Invoke();
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ckafka"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ckafka.GetZone(ctx, nil, nil)
+		_, err := ckafka.GetZone(ctx, &ckafka.GetZoneArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -59,6 +64,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var ckafkaZone = Tencentcloud.Ckafka.GetZone.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -67,8 +94,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ckafka.CkafkaFunctions;
 import com.pulumi.tencentcloud.Ckafka.inputs.GetZoneArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -80,20 +107,50 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var ckafkaZone = CkafkaFunctions.getZone();
+        final var ckafkaZone = CkafkaFunctions.getZone(GetZoneArgs.builder()
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   ckafkaZone:
     fn::invoke:
-      Function: tencentcloud:Ckafka:getZone
-      Arguments: {}
+      function: tencentcloud:Ckafka:getZone
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_ckafka_getzone" "ckafkaZone" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeCkafkaZone](https://www.tencentcloud.com/document/api/597/40318)
 
 
 
@@ -105,7 +162,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -113,9 +170,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getZone<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>></span
+><span class="k">function </span>getZone<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>></span
 ><span class="k">
-function </span>getZoneOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>></span
+function </span>getZoneOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -128,9 +185,9 @@ function </span>getZoneOutput<span class="p">(</span><span class="nx">args</span
              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetZoneResult</span
 ><span class="k">
-def </span>get_zone_output<span class="p">(</span><span class="nx">cdc_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetZoneResult]</span
+def </span>get_zone_output<span class="p">(</span><span class="nx">cdc_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetZoneResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -139,12 +196,12 @@ def </span>get_zone_output<span class="p">(</span><span class="nx">cdc_id</span>
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetZone<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetZoneArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetZoneResult</a></span>, error)</span
+><span class="k">func </span>LookupZone<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupZoneArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupZoneResult</a></span>, error)</span
 ><span class="k">
-func </span>GetZoneOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetZoneOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetZoneResultOutput</span
+func </span>LookupZoneOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupZoneOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupZoneResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetZone` in the Go SDK.
+&gt; Note: This function is named `LookupZone` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -155,7 +212,8 @@ func </span>GetZoneOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetZone </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetZoneArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -164,7 +222,8 @@ func </span>GetZoneOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> </span>getZone<span class="p">(</span><span class="nx">GetZoneArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> </span>getZone<span class="p">(</span><span class="nx">GetZoneArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetZoneResult</a></span>> </span>getZone<span class="p">(</span><span class="nx">GetZoneArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -176,6 +235,15 @@ func </span>GetZoneOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Ckafka/getZone:getZone
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_ckafka_get_zone&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -194,8 +262,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cdc professional cluster business parameters.</p>
-</dd><dt class="property-optional"
+    <dd>cdc professional cluster business parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -203,8 +270,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -218,8 +284,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cdc professional cluster business parameters.</p>
-</dd><dt class="property-optional"
+    <dd>cdc professional cluster business parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -227,8 +292,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="cdc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cdc professional cluster business parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -242,8 +328,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cdc professional cluster business parameters.</p>
-</dd><dt class="property-optional"
+    <dd>cdc professional cluster business parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -251,8 +336,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -266,8 +350,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cdc professional cluster business parameters.</p>
-</dd><dt class="property-optional"
+    <dd>cdc professional cluster business parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -275,8 +358,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -290,8 +372,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cdc professional cluster business parameters.</p>
-</dd><dt class="property-optional"
+    <dd>cdc professional cluster business parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -299,8 +380,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -314,8 +394,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cdc professional cluster business parameters.</p>
-</dd><dt class="property-optional"
+    <dd>cdc professional cluster business parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -323,8 +402,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -347,8 +425,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_csharp" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -356,8 +433,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresult">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Outputs.<wbr>Get<wbr>Zone<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>query result complex object entity.</p>
-</dd><dt class="property-"
+    <dd>query result complex object entity.</dd><dt class="property-"
             title="">
         <span id="cdcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_csharp" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
@@ -387,8 +463,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_go" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -396,8 +471,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresult">[]Get<wbr>Zone<wbr>Result</a></span>
     </dt>
-    <dd><p>query result complex object entity.</p>
-</dd><dt class="property-"
+    <dd>query result complex object entity.</dd><dt class="property-"
             title="">
         <span id="cdcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_go" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
@@ -418,6 +492,44 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="results_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_hcl" style="color: inherit; text-decoration: inherit;">results</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getzoneresult">list(object)</a></span>
+    </dt>
+    <dd>query result complex object entity.</dd><dt class="property-"
+            title="">
+        <span id="cdc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -427,8 +539,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_java" style="color: inherit; text-decoration: inherit;">results</a>
@@ -436,8 +547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresult">List&lt;Get<wbr>Zone<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>query result complex object entity.</p>
-</dd><dt class="property-"
+    <dd>query result complex object entity.</dd><dt class="property-"
             title="">
         <span id="cdcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_java" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
@@ -467,8 +577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_nodejs" style="color: inherit; text-decoration: inherit;">results</a>
@@ -476,8 +585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresult">Get<wbr>Zone<wbr>Result[]</a></span>
     </dt>
-    <dd><p>query result complex object entity.</p>
-</dd><dt class="property-"
+    <dd>query result complex object entity.</dd><dt class="property-"
             title="">
         <span id="cdcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_nodejs" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
@@ -507,17 +615,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_python" style="color: inherit; text-decoration: inherit;">results</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getzoneresult">Get<wbr>Zone<wbr>Result]</a></span>
+        <span class="property-type"><a href="#getzoneresult">Sequence[Get<wbr>Zone<wbr>Result]</a></span>
     </dt>
-    <dd><p>query result complex object entity.</p>
-</dd><dt class="property-"
+    <dd>query result complex object entity.</dd><dt class="property-"
             title="">
         <span id="cdc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_python" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
@@ -547,8 +653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_yaml" style="color: inherit; text-decoration: inherit;">results</a>
@@ -556,8 +661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresult">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>query result complex object entity.</p>
-</dd><dt class="property-"
+    <dd>query result complex object entity.</dd><dt class="property-"
             title="">
         <span id="cdcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_yaml" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
@@ -597,8 +701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultclusterinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Inputs.<wbr>Get<wbr>Zone<wbr>Result<wbr>Cluster<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>User exclusive cluster information.</p>
-</dd><dt class="property-required"
+    <dd>User exclusive cluster information.</dd><dt class="property-required"
             title="Required">
         <span id="maxbandwidth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbandwidth_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Bandwidth</a>
@@ -606,8 +709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum purchased bandwidth in Mbs.</p>
-</dd><dt class="property-required"
+    <dd>Maximum purchased bandwidth in Mbs.</dd><dt class="property-required"
             title="Required">
         <span id="maxbuyinstancenum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbuyinstancenum_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Buy<wbr>Instance<wbr>Num</a>
@@ -615,8 +717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of purchased instances.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of purchased instances.</dd><dt class="property-required"
             title="Required">
         <span id="messageprices_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messageprices_csharp" style="color: inherit; text-decoration: inherit;">Message<wbr>Prices</a>
@@ -624,8 +725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultmessageprice">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Inputs.<wbr>Get<wbr>Zone<wbr>Result<wbr>Message<wbr>Price&gt;</a></span>
     </dt>
-    <dd><p>Postpaid message unit price.</p>
-</dd><dt class="property-required"
+    <dd>Postpaid message unit price.</dd><dt class="property-required"
             title="Required">
         <span id="physical_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#physical_csharp" style="color: inherit; text-decoration: inherit;">Physical</a>
@@ -633,8 +733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Physical Exclusive Edition Configuration.</p>
-</dd><dt class="property-required"
+    <dd>Physical Exclusive Edition Configuration.</dd><dt class="property-required"
             title="Required">
         <span id="profession_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#profession_csharp" style="color: inherit; text-decoration: inherit;">Profession</a>
@@ -642,8 +741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Professional Edition configuration.</p>
-</dd><dt class="property-required"
+    <dd>Professional Edition configuration.</dd><dt class="property-required"
             title="Required">
         <span id="publicnetwork_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetwork_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Network</a>
@@ -651,8 +749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>Public network bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="publicnetworklimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetworklimit_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Network<wbr>Limit</a>
@@ -660,8 +757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network bandwidth configuration.</p>
-</dd><dt class="property-required"
+    <dd>Public network bandwidth configuration.</dd><dt class="property-required"
             title="Required">
         <span id="standard_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#standard_csharp" style="color: inherit; text-decoration: inherit;">Standard</a>
@@ -669,8 +765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purchase Standard Edition Configuration.</p>
-</dd><dt class="property-required"
+    <dd>Purchase Standard Edition Configuration.</dd><dt class="property-required"
             title="Required">
         <span id="standards2_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#standards2_csharp" style="color: inherit; text-decoration: inherit;">Standard<wbr>S2</a>
@@ -678,8 +773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Standard Edition S2 configuration.</p>
-</dd><dt class="property-required"
+    <dd>Standard Edition S2 configuration.</dd><dt class="property-required"
             title="Required">
         <span id="unitprices_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitprices_csharp" style="color: inherit; text-decoration: inherit;">Unit<wbr>Prices</a>
@@ -687,8 +781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultunitprice">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Inputs.<wbr>Get<wbr>Zone<wbr>Result<wbr>Unit<wbr>Price&gt;</a></span>
     </dt>
-    <dd><p>Postpaid unit price.</p>
-</dd><dt class="property-required"
+    <dd>Postpaid unit price.</dd><dt class="property-required"
             title="Required">
         <span id="zonelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonelists_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Lists</a>
@@ -696,8 +789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultzonelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Inputs.<wbr>Get<wbr>Zone<wbr>Result<wbr>Zone<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>zone list.</p>
-</dd></dl>
+    <dd>zone list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -711,8 +803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultclusterinfo">[]Get<wbr>Zone<wbr>Result<wbr>Cluster<wbr>Info</a></span>
     </dt>
-    <dd><p>User exclusive cluster information.</p>
-</dd><dt class="property-required"
+    <dd>User exclusive cluster information.</dd><dt class="property-required"
             title="Required">
         <span id="maxbandwidth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbandwidth_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Bandwidth</a>
@@ -720,8 +811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum purchased bandwidth in Mbs.</p>
-</dd><dt class="property-required"
+    <dd>Maximum purchased bandwidth in Mbs.</dd><dt class="property-required"
             title="Required">
         <span id="maxbuyinstancenum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbuyinstancenum_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Buy<wbr>Instance<wbr>Num</a>
@@ -729,8 +819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of purchased instances.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of purchased instances.</dd><dt class="property-required"
             title="Required">
         <span id="messageprices_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messageprices_go" style="color: inherit; text-decoration: inherit;">Message<wbr>Prices</a>
@@ -738,8 +827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultmessageprice">[]Get<wbr>Zone<wbr>Result<wbr>Message<wbr>Price</a></span>
     </dt>
-    <dd><p>Postpaid message unit price.</p>
-</dd><dt class="property-required"
+    <dd>Postpaid message unit price.</dd><dt class="property-required"
             title="Required">
         <span id="physical_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#physical_go" style="color: inherit; text-decoration: inherit;">Physical</a>
@@ -747,8 +835,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Physical Exclusive Edition Configuration.</p>
-</dd><dt class="property-required"
+    <dd>Physical Exclusive Edition Configuration.</dd><dt class="property-required"
             title="Required">
         <span id="profession_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#profession_go" style="color: inherit; text-decoration: inherit;">Profession</a>
@@ -756,8 +843,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Professional Edition configuration.</p>
-</dd><dt class="property-required"
+    <dd>Professional Edition configuration.</dd><dt class="property-required"
             title="Required">
         <span id="publicnetwork_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetwork_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Network</a>
@@ -765,8 +851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>Public network bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="publicnetworklimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetworklimit_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Network<wbr>Limit</a>
@@ -774,8 +859,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network bandwidth configuration.</p>
-</dd><dt class="property-required"
+    <dd>Public network bandwidth configuration.</dd><dt class="property-required"
             title="Required">
         <span id="standard_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#standard_go" style="color: inherit; text-decoration: inherit;">Standard</a>
@@ -783,8 +867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purchase Standard Edition Configuration.</p>
-</dd><dt class="property-required"
+    <dd>Purchase Standard Edition Configuration.</dd><dt class="property-required"
             title="Required">
         <span id="standards2_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#standards2_go" style="color: inherit; text-decoration: inherit;">Standard<wbr>S2</a>
@@ -792,8 +875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Standard Edition S2 configuration.</p>
-</dd><dt class="property-required"
+    <dd>Standard Edition S2 configuration.</dd><dt class="property-required"
             title="Required">
         <span id="unitprices_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitprices_go" style="color: inherit; text-decoration: inherit;">Unit<wbr>Prices</a>
@@ -801,8 +883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultunitprice">[]Get<wbr>Zone<wbr>Result<wbr>Unit<wbr>Price</a></span>
     </dt>
-    <dd><p>Postpaid unit price.</p>
-</dd><dt class="property-required"
+    <dd>Postpaid unit price.</dd><dt class="property-required"
             title="Required">
         <span id="zonelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonelists_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Lists</a>
@@ -810,8 +891,109 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultzonelist">[]Get<wbr>Zone<wbr>Result<wbr>Zone<wbr>List</a></span>
     </dt>
-    <dd><p>zone list.</p>
-</dd></dl>
+    <dd>zone list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cluster_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_infos_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getzoneresultclusterinfo">list(object)</a></span>
+    </dt>
+    <dd>User exclusive cluster information.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_bandwidth_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum purchased bandwidth in Mbs.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_buy_instance_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_buy_instance_num_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>buy_<wbr>instance_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum number of purchased instances.</dd><dt class="property-required"
+            title="Required">
+        <span id="message_prices_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_prices_hcl" style="color: inherit; text-decoration: inherit;">message_<wbr>prices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getzoneresultmessageprice">list(object)</a></span>
+    </dt>
+    <dd>Postpaid message unit price.</dd><dt class="property-required"
+            title="Required">
+        <span id="physical_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#physical_hcl" style="color: inherit; text-decoration: inherit;">physical</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Physical Exclusive Edition Configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="profession_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#profession_hcl" style="color: inherit; text-decoration: inherit;">profession</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Professional Edition configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="public_network_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_network_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>network</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Public network bandwidth.</dd><dt class="property-required"
+            title="Required">
+        <span id="public_network_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_network_limit_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>network_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Public network bandwidth configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="standard_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#standard_hcl" style="color: inherit; text-decoration: inherit;">standard</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Purchase Standard Edition Configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="standard_s2_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#standard_s2_hcl" style="color: inherit; text-decoration: inherit;">standard_<wbr>s2</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Standard Edition S2 configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="unit_prices_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_prices_hcl" style="color: inherit; text-decoration: inherit;">unit_<wbr>prices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getzoneresultunitprice">list(object)</a></span>
+    </dt>
+    <dd>Postpaid unit price.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_lists_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getzoneresultzonelist">list(object)</a></span>
+    </dt>
+    <dd>zone list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -825,8 +1007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultclusterinfo">List&lt;Get<wbr>Zone<wbr>Result<wbr>Cluster<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>User exclusive cluster information.</p>
-</dd><dt class="property-required"
+    <dd>User exclusive cluster information.</dd><dt class="property-required"
             title="Required">
         <span id="maxbandwidth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbandwidth_java" style="color: inherit; text-decoration: inherit;">max<wbr>Bandwidth</a>
@@ -834,8 +1015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum purchased bandwidth in Mbs.</p>
-</dd><dt class="property-required"
+    <dd>Maximum purchased bandwidth in Mbs.</dd><dt class="property-required"
             title="Required">
         <span id="maxbuyinstancenum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbuyinstancenum_java" style="color: inherit; text-decoration: inherit;">max<wbr>Buy<wbr>Instance<wbr>Num</a>
@@ -843,8 +1023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum number of purchased instances.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of purchased instances.</dd><dt class="property-required"
             title="Required">
         <span id="messageprices_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messageprices_java" style="color: inherit; text-decoration: inherit;">message<wbr>Prices</a>
@@ -852,8 +1031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultmessageprice">List&lt;Get<wbr>Zone<wbr>Result<wbr>Message<wbr>Price&gt;</a></span>
     </dt>
-    <dd><p>Postpaid message unit price.</p>
-</dd><dt class="property-required"
+    <dd>Postpaid message unit price.</dd><dt class="property-required"
             title="Required">
         <span id="physical_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#physical_java" style="color: inherit; text-decoration: inherit;">physical</a>
@@ -861,8 +1039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Physical Exclusive Edition Configuration.</p>
-</dd><dt class="property-required"
+    <dd>Physical Exclusive Edition Configuration.</dd><dt class="property-required"
             title="Required">
         <span id="profession_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#profession_java" style="color: inherit; text-decoration: inherit;">profession</a>
@@ -870,8 +1047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Professional Edition configuration.</p>
-</dd><dt class="property-required"
+    <dd>Professional Edition configuration.</dd><dt class="property-required"
             title="Required">
         <span id="publicnetwork_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetwork_java" style="color: inherit; text-decoration: inherit;">public<wbr>Network</a>
@@ -879,8 +1055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public network bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>Public network bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="publicnetworklimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetworklimit_java" style="color: inherit; text-decoration: inherit;">public<wbr>Network<wbr>Limit</a>
@@ -888,8 +1063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public network bandwidth configuration.</p>
-</dd><dt class="property-required"
+    <dd>Public network bandwidth configuration.</dd><dt class="property-required"
             title="Required">
         <span id="standard_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#standard_java" style="color: inherit; text-decoration: inherit;">standard</a>
@@ -897,8 +1071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Purchase Standard Edition Configuration.</p>
-</dd><dt class="property-required"
+    <dd>Purchase Standard Edition Configuration.</dd><dt class="property-required"
             title="Required">
         <span id="standards2_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#standards2_java" style="color: inherit; text-decoration: inherit;">standard<wbr>S2</a>
@@ -906,8 +1079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Standard Edition S2 configuration.</p>
-</dd><dt class="property-required"
+    <dd>Standard Edition S2 configuration.</dd><dt class="property-required"
             title="Required">
         <span id="unitprices_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitprices_java" style="color: inherit; text-decoration: inherit;">unit<wbr>Prices</a>
@@ -915,8 +1087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultunitprice">List&lt;Get<wbr>Zone<wbr>Result<wbr>Unit<wbr>Price&gt;</a></span>
     </dt>
-    <dd><p>Postpaid unit price.</p>
-</dd><dt class="property-required"
+    <dd>Postpaid unit price.</dd><dt class="property-required"
             title="Required">
         <span id="zonelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonelists_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Lists</a>
@@ -924,8 +1095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultzonelist">List&lt;Get<wbr>Zone<wbr>Result<wbr>Zone<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>zone list.</p>
-</dd></dl>
+    <dd>zone list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -939,8 +1109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultclusterinfo">Get<wbr>Zone<wbr>Result<wbr>Cluster<wbr>Info[]</a></span>
     </dt>
-    <dd><p>User exclusive cluster information.</p>
-</dd><dt class="property-required"
+    <dd>User exclusive cluster information.</dd><dt class="property-required"
             title="Required">
         <span id="maxbandwidth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbandwidth_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Bandwidth</a>
@@ -948,8 +1117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum purchased bandwidth in Mbs.</p>
-</dd><dt class="property-required"
+    <dd>Maximum purchased bandwidth in Mbs.</dd><dt class="property-required"
             title="Required">
         <span id="maxbuyinstancenum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbuyinstancenum_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Buy<wbr>Instance<wbr>Num</a>
@@ -957,8 +1125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum number of purchased instances.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of purchased instances.</dd><dt class="property-required"
             title="Required">
         <span id="messageprices_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messageprices_nodejs" style="color: inherit; text-decoration: inherit;">message<wbr>Prices</a>
@@ -966,8 +1133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultmessageprice">Get<wbr>Zone<wbr>Result<wbr>Message<wbr>Price[]</a></span>
     </dt>
-    <dd><p>Postpaid message unit price.</p>
-</dd><dt class="property-required"
+    <dd>Postpaid message unit price.</dd><dt class="property-required"
             title="Required">
         <span id="physical_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#physical_nodejs" style="color: inherit; text-decoration: inherit;">physical</a>
@@ -975,8 +1141,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Physical Exclusive Edition Configuration.</p>
-</dd><dt class="property-required"
+    <dd>Physical Exclusive Edition Configuration.</dd><dt class="property-required"
             title="Required">
         <span id="profession_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#profession_nodejs" style="color: inherit; text-decoration: inherit;">profession</a>
@@ -984,8 +1149,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Professional Edition configuration.</p>
-</dd><dt class="property-required"
+    <dd>Professional Edition configuration.</dd><dt class="property-required"
             title="Required">
         <span id="publicnetwork_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetwork_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Network</a>
@@ -993,8 +1157,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>Public network bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="publicnetworklimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetworklimit_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Network<wbr>Limit</a>
@@ -1002,8 +1165,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network bandwidth configuration.</p>
-</dd><dt class="property-required"
+    <dd>Public network bandwidth configuration.</dd><dt class="property-required"
             title="Required">
         <span id="standard_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#standard_nodejs" style="color: inherit; text-decoration: inherit;">standard</a>
@@ -1011,8 +1173,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Purchase Standard Edition Configuration.</p>
-</dd><dt class="property-required"
+    <dd>Purchase Standard Edition Configuration.</dd><dt class="property-required"
             title="Required">
         <span id="standards2_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#standards2_nodejs" style="color: inherit; text-decoration: inherit;">standard<wbr>S2</a>
@@ -1020,8 +1181,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Standard Edition S2 configuration.</p>
-</dd><dt class="property-required"
+    <dd>Standard Edition S2 configuration.</dd><dt class="property-required"
             title="Required">
         <span id="unitprices_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitprices_nodejs" style="color: inherit; text-decoration: inherit;">unit<wbr>Prices</a>
@@ -1029,8 +1189,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultunitprice">Get<wbr>Zone<wbr>Result<wbr>Unit<wbr>Price[]</a></span>
     </dt>
-    <dd><p>Postpaid unit price.</p>
-</dd><dt class="property-required"
+    <dd>Postpaid unit price.</dd><dt class="property-required"
             title="Required">
         <span id="zonelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonelists_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Lists</a>
@@ -1038,8 +1197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultzonelist">Get<wbr>Zone<wbr>Result<wbr>Zone<wbr>List[]</a></span>
     </dt>
-    <dd><p>zone list.</p>
-</dd></dl>
+    <dd>zone list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1051,10 +1209,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_infos_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getzoneresultclusterinfo">Get<wbr>Zone<wbr>Result<wbr>Cluster<wbr>Info]</a></span>
+        <span class="property-type"><a href="#getzoneresultclusterinfo">Sequence[Get<wbr>Zone<wbr>Result<wbr>Cluster<wbr>Info]</a></span>
     </dt>
-    <dd><p>User exclusive cluster information.</p>
-</dd><dt class="property-required"
+    <dd>User exclusive cluster information.</dd><dt class="property-required"
             title="Required">
         <span id="max_bandwidth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_bandwidth_python" style="color: inherit; text-decoration: inherit;">max_<wbr>bandwidth</a>
@@ -1062,8 +1219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum purchased bandwidth in Mbs.</p>
-</dd><dt class="property-required"
+    <dd>Maximum purchased bandwidth in Mbs.</dd><dt class="property-required"
             title="Required">
         <span id="max_buy_instance_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_buy_instance_num_python" style="color: inherit; text-decoration: inherit;">max_<wbr>buy_<wbr>instance_<wbr>num</a>
@@ -1071,17 +1227,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of purchased instances.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of purchased instances.</dd><dt class="property-required"
             title="Required">
         <span id="message_prices_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_prices_python" style="color: inherit; text-decoration: inherit;">message_<wbr>prices</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getzoneresultmessageprice">Get<wbr>Zone<wbr>Result<wbr>Message<wbr>Price]</a></span>
+        <span class="property-type"><a href="#getzoneresultmessageprice">Sequence[Get<wbr>Zone<wbr>Result<wbr>Message<wbr>Price]</a></span>
     </dt>
-    <dd><p>Postpaid message unit price.</p>
-</dd><dt class="property-required"
+    <dd>Postpaid message unit price.</dd><dt class="property-required"
             title="Required">
         <span id="physical_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#physical_python" style="color: inherit; text-decoration: inherit;">physical</a>
@@ -1089,8 +1243,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Physical Exclusive Edition Configuration.</p>
-</dd><dt class="property-required"
+    <dd>Physical Exclusive Edition Configuration.</dd><dt class="property-required"
             title="Required">
         <span id="profession_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#profession_python" style="color: inherit; text-decoration: inherit;">profession</a>
@@ -1098,8 +1251,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Professional Edition configuration.</p>
-</dd><dt class="property-required"
+    <dd>Professional Edition configuration.</dd><dt class="property-required"
             title="Required">
         <span id="public_network_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_network_python" style="color: inherit; text-decoration: inherit;">public_<wbr>network</a>
@@ -1107,8 +1259,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Public network bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>Public network bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="public_network_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_network_limit_python" style="color: inherit; text-decoration: inherit;">public_<wbr>network_<wbr>limit</a>
@@ -1116,8 +1267,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Public network bandwidth configuration.</p>
-</dd><dt class="property-required"
+    <dd>Public network bandwidth configuration.</dd><dt class="property-required"
             title="Required">
         <span id="standard_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#standard_python" style="color: inherit; text-decoration: inherit;">standard</a>
@@ -1125,8 +1275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Purchase Standard Edition Configuration.</p>
-</dd><dt class="property-required"
+    <dd>Purchase Standard Edition Configuration.</dd><dt class="property-required"
             title="Required">
         <span id="standard_s2_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#standard_s2_python" style="color: inherit; text-decoration: inherit;">standard_<wbr>s2</a>
@@ -1134,26 +1283,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Standard Edition S2 configuration.</p>
-</dd><dt class="property-required"
+    <dd>Standard Edition S2 configuration.</dd><dt class="property-required"
             title="Required">
         <span id="unit_prices_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_prices_python" style="color: inherit; text-decoration: inherit;">unit_<wbr>prices</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getzoneresultunitprice">Get<wbr>Zone<wbr>Result<wbr>Unit<wbr>Price]</a></span>
+        <span class="property-type"><a href="#getzoneresultunitprice">Sequence[Get<wbr>Zone<wbr>Result<wbr>Unit<wbr>Price]</a></span>
     </dt>
-    <dd><p>Postpaid unit price.</p>
-</dd><dt class="property-required"
+    <dd>Postpaid unit price.</dd><dt class="property-required"
             title="Required">
         <span id="zone_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_lists_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getzoneresultzonelist">Get<wbr>Zone<wbr>Result<wbr>Zone<wbr>List]</a></span>
+        <span class="property-type"><a href="#getzoneresultzonelist">Sequence[Get<wbr>Zone<wbr>Result<wbr>Zone<wbr>List]</a></span>
     </dt>
-    <dd><p>zone list.</p>
-</dd></dl>
+    <dd>zone list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1167,8 +1313,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultclusterinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>User exclusive cluster information.</p>
-</dd><dt class="property-required"
+    <dd>User exclusive cluster information.</dd><dt class="property-required"
             title="Required">
         <span id="maxbandwidth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbandwidth_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Bandwidth</a>
@@ -1176,8 +1321,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum purchased bandwidth in Mbs.</p>
-</dd><dt class="property-required"
+    <dd>Maximum purchased bandwidth in Mbs.</dd><dt class="property-required"
             title="Required">
         <span id="maxbuyinstancenum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbuyinstancenum_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Buy<wbr>Instance<wbr>Num</a>
@@ -1185,8 +1329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum number of purchased instances.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of purchased instances.</dd><dt class="property-required"
             title="Required">
         <span id="messageprices_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messageprices_yaml" style="color: inherit; text-decoration: inherit;">message<wbr>Prices</a>
@@ -1194,8 +1337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultmessageprice">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Postpaid message unit price.</p>
-</dd><dt class="property-required"
+    <dd>Postpaid message unit price.</dd><dt class="property-required"
             title="Required">
         <span id="physical_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#physical_yaml" style="color: inherit; text-decoration: inherit;">physical</a>
@@ -1203,8 +1345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Physical Exclusive Edition Configuration.</p>
-</dd><dt class="property-required"
+    <dd>Physical Exclusive Edition Configuration.</dd><dt class="property-required"
             title="Required">
         <span id="profession_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#profession_yaml" style="color: inherit; text-decoration: inherit;">profession</a>
@@ -1212,8 +1353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Professional Edition configuration.</p>
-</dd><dt class="property-required"
+    <dd>Professional Edition configuration.</dd><dt class="property-required"
             title="Required">
         <span id="publicnetwork_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetwork_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Network</a>
@@ -1221,8 +1361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public network bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>Public network bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="publicnetworklimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetworklimit_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Network<wbr>Limit</a>
@@ -1230,8 +1369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public network bandwidth configuration.</p>
-</dd><dt class="property-required"
+    <dd>Public network bandwidth configuration.</dd><dt class="property-required"
             title="Required">
         <span id="standard_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#standard_yaml" style="color: inherit; text-decoration: inherit;">standard</a>
@@ -1239,8 +1377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Purchase Standard Edition Configuration.</p>
-</dd><dt class="property-required"
+    <dd>Purchase Standard Edition Configuration.</dd><dt class="property-required"
             title="Required">
         <span id="standards2_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#standards2_yaml" style="color: inherit; text-decoration: inherit;">standard<wbr>S2</a>
@@ -1248,8 +1385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Standard Edition S2 configuration.</p>
-</dd><dt class="property-required"
+    <dd>Standard Edition S2 configuration.</dd><dt class="property-required"
             title="Required">
         <span id="unitprices_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unitprices_yaml" style="color: inherit; text-decoration: inherit;">unit<wbr>Prices</a>
@@ -1257,8 +1393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultunitprice">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Postpaid unit price.</p>
-</dd><dt class="property-required"
+    <dd>Postpaid unit price.</dd><dt class="property-required"
             title="Required">
         <span id="zonelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonelists_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Lists</a>
@@ -1266,8 +1401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultzonelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>zone list.</p>
-</dd></dl>
+    <dd>zone list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1285,8 +1419,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The current available bandwidth of the cluster in MBs.</p>
-</dd><dt class="property-required"
+    <dd>The current available bandwidth of the cluster in MBs.</dd><dt class="property-required"
             title="Required">
         <span id="availabledisksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabledisksize_csharp" style="color: inherit; text-decoration: inherit;">Available<wbr>Disk<wbr>Size</a>
@@ -1294,8 +1427,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The current available disk of the cluster, in GB.</p>
-</dd><dt class="property-required"
+    <dd>The current available disk of the cluster, in GB.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1303,8 +1435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ClusterId.</p>
-</dd><dt class="property-required"
+    <dd>ClusterId.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -1312,8 +1443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ClusterName.</p>
-</dd><dt class="property-required"
+    <dd>ClusterName.</dd><dt class="property-required"
             title="Required">
         <span id="maxbandwidth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbandwidth_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Band<wbr>Width</a>
@@ -1321,8 +1451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum cluster bandwidth in MBs.</p>
-</dd><dt class="property-required"
+    <dd>Maximum cluster bandwidth in MBs.</dd><dt class="property-required"
             title="Required">
         <span id="maxdisksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdisksize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Disk<wbr>Size</a>
@@ -1330,8 +1459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The largest disk in the cluster, in GB.</p>
-</dd><dt class="property-required"
+    <dd>The largest disk in the cluster, in GB.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -1339,8 +1467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>zone id.</p>
-</dd><dt class="property-required"
+    <dd>zone id.</dd><dt class="property-required"
             title="Required">
         <span id="zoneids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneids_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Ids</a>
@@ -1348,8 +1475,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>The availability zone where the cluster node is located. If the cluster is a cross-availability zone cluster, it includes multiple availability zones where the cluster node is located.</p>
-</dd></dl>
+    <dd>The availability zone where the cluster node is located. If the cluster is a cross-availability zone cluster, it includes multiple availability zones where the cluster node is located.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1363,8 +1489,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The current available bandwidth of the cluster in MBs.</p>
-</dd><dt class="property-required"
+    <dd>The current available bandwidth of the cluster in MBs.</dd><dt class="property-required"
             title="Required">
         <span id="availabledisksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabledisksize_go" style="color: inherit; text-decoration: inherit;">Available<wbr>Disk<wbr>Size</a>
@@ -1372,8 +1497,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The current available disk of the cluster, in GB.</p>
-</dd><dt class="property-required"
+    <dd>The current available disk of the cluster, in GB.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1381,8 +1505,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ClusterId.</p>
-</dd><dt class="property-required"
+    <dd>ClusterId.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -1390,8 +1513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ClusterName.</p>
-</dd><dt class="property-required"
+    <dd>ClusterName.</dd><dt class="property-required"
             title="Required">
         <span id="maxbandwidth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbandwidth_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Band<wbr>Width</a>
@@ -1399,8 +1521,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum cluster bandwidth in MBs.</p>
-</dd><dt class="property-required"
+    <dd>Maximum cluster bandwidth in MBs.</dd><dt class="property-required"
             title="Required">
         <span id="maxdisksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdisksize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Disk<wbr>Size</a>
@@ -1408,8 +1529,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The largest disk in the cluster, in GB.</p>
-</dd><dt class="property-required"
+    <dd>The largest disk in the cluster, in GB.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -1417,8 +1537,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>zone id.</p>
-</dd><dt class="property-required"
+    <dd>zone id.</dd><dt class="property-required"
             title="Required">
         <span id="zoneids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneids_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Ids</a>
@@ -1426,8 +1545,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>The availability zone where the cluster node is located. If the cluster is a cross-availability zone cluster, it includes multiple availability zones where the cluster node is located.</p>
-</dd></dl>
+    <dd>The availability zone where the cluster node is located. If the cluster is a cross-availability zone cluster, it includes multiple availability zones where the cluster node is located.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="available_band_width_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_band_width_hcl" style="color: inherit; text-decoration: inherit;">available_<wbr>band_<wbr>width</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The current available bandwidth of the cluster in MBs.</dd><dt class="property-required"
+            title="Required">
+        <span id="available_disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_disk_size_hcl" style="color: inherit; text-decoration: inherit;">available_<wbr>disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The current available disk of the cluster, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ClusterId.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ClusterName.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_band_width_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_band_width_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>band_<wbr>width</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum cluster bandwidth in MBs.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_disk_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The largest disk in the cluster, in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>zone id.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_ids_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>The availability zone where the cluster node is located. If the cluster is a cross-availability zone cluster, it includes multiple availability zones where the cluster node is located.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1441,8 +1629,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The current available bandwidth of the cluster in MBs.</p>
-</dd><dt class="property-required"
+    <dd>The current available bandwidth of the cluster in MBs.</dd><dt class="property-required"
             title="Required">
         <span id="availabledisksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabledisksize_java" style="color: inherit; text-decoration: inherit;">available<wbr>Disk<wbr>Size</a>
@@ -1450,8 +1637,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The current available disk of the cluster, in GB.</p>
-</dd><dt class="property-required"
+    <dd>The current available disk of the cluster, in GB.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1459,8 +1645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ClusterId.</p>
-</dd><dt class="property-required"
+    <dd>ClusterId.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -1468,8 +1653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ClusterName.</p>
-</dd><dt class="property-required"
+    <dd>ClusterName.</dd><dt class="property-required"
             title="Required">
         <span id="maxbandwidth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbandwidth_java" style="color: inherit; text-decoration: inherit;">max<wbr>Band<wbr>Width</a>
@@ -1477,8 +1661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum cluster bandwidth in MBs.</p>
-</dd><dt class="property-required"
+    <dd>Maximum cluster bandwidth in MBs.</dd><dt class="property-required"
             title="Required">
         <span id="maxdisksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdisksize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Disk<wbr>Size</a>
@@ -1486,8 +1669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The largest disk in the cluster, in GB.</p>
-</dd><dt class="property-required"
+    <dd>The largest disk in the cluster, in GB.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -1495,8 +1677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>zone id.</p>
-</dd><dt class="property-required"
+    <dd>zone id.</dd><dt class="property-required"
             title="Required">
         <span id="zoneids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneids_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Ids</a>
@@ -1504,8 +1685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>The availability zone where the cluster node is located. If the cluster is a cross-availability zone cluster, it includes multiple availability zones where the cluster node is located.</p>
-</dd></dl>
+    <dd>The availability zone where the cluster node is located. If the cluster is a cross-availability zone cluster, it includes multiple availability zones where the cluster node is located.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1519,8 +1699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The current available bandwidth of the cluster in MBs.</p>
-</dd><dt class="property-required"
+    <dd>The current available bandwidth of the cluster in MBs.</dd><dt class="property-required"
             title="Required">
         <span id="availabledisksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabledisksize_nodejs" style="color: inherit; text-decoration: inherit;">available<wbr>Disk<wbr>Size</a>
@@ -1528,8 +1707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The current available disk of the cluster, in GB.</p>
-</dd><dt class="property-required"
+    <dd>The current available disk of the cluster, in GB.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1537,8 +1715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ClusterId.</p>
-</dd><dt class="property-required"
+    <dd>ClusterId.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -1546,8 +1723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ClusterName.</p>
-</dd><dt class="property-required"
+    <dd>ClusterName.</dd><dt class="property-required"
             title="Required">
         <span id="maxbandwidth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbandwidth_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Band<wbr>Width</a>
@@ -1555,8 +1731,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum cluster bandwidth in MBs.</p>
-</dd><dt class="property-required"
+    <dd>Maximum cluster bandwidth in MBs.</dd><dt class="property-required"
             title="Required">
         <span id="maxdisksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdisksize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Disk<wbr>Size</a>
@@ -1564,8 +1739,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The largest disk in the cluster, in GB.</p>
-</dd><dt class="property-required"
+    <dd>The largest disk in the cluster, in GB.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -1573,8 +1747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>zone id.</p>
-</dd><dt class="property-required"
+    <dd>zone id.</dd><dt class="property-required"
             title="Required">
         <span id="zoneids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneids_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Ids</a>
@@ -1582,8 +1755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>The availability zone where the cluster node is located. If the cluster is a cross-availability zone cluster, it includes multiple availability zones where the cluster node is located.</p>
-</dd></dl>
+    <dd>The availability zone where the cluster node is located. If the cluster is a cross-availability zone cluster, it includes multiple availability zones where the cluster node is located.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1597,8 +1769,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The current available bandwidth of the cluster in MBs.</p>
-</dd><dt class="property-required"
+    <dd>The current available bandwidth of the cluster in MBs.</dd><dt class="property-required"
             title="Required">
         <span id="available_disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_disk_size_python" style="color: inherit; text-decoration: inherit;">available_<wbr>disk_<wbr>size</a>
@@ -1606,8 +1777,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The current available disk of the cluster, in GB.</p>
-</dd><dt class="property-required"
+    <dd>The current available disk of the cluster, in GB.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -1615,8 +1785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ClusterId.</p>
-</dd><dt class="property-required"
+    <dd>ClusterId.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
@@ -1624,8 +1793,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ClusterName.</p>
-</dd><dt class="property-required"
+    <dd>ClusterName.</dd><dt class="property-required"
             title="Required">
         <span id="max_band_width_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_band_width_python" style="color: inherit; text-decoration: inherit;">max_<wbr>band_<wbr>width</a>
@@ -1633,8 +1801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum cluster bandwidth in MBs.</p>
-</dd><dt class="property-required"
+    <dd>Maximum cluster bandwidth in MBs.</dd><dt class="property-required"
             title="Required">
         <span id="max_disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_disk_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>disk_<wbr>size</a>
@@ -1642,8 +1809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The largest disk in the cluster, in GB.</p>
-</dd><dt class="property-required"
+    <dd>The largest disk in the cluster, in GB.</dd><dt class="property-required"
             title="Required">
         <span id="zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
@@ -1651,8 +1817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>zone id.</p>
-</dd><dt class="property-required"
+    <dd>zone id.</dd><dt class="property-required"
             title="Required">
         <span id="zone_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_ids_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>ids</a>
@@ -1660,8 +1825,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>The availability zone where the cluster node is located. If the cluster is a cross-availability zone cluster, it includes multiple availability zones where the cluster node is located.</p>
-</dd></dl>
+    <dd>The availability zone where the cluster node is located. If the cluster is a cross-availability zone cluster, it includes multiple availability zones where the cluster node is located.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1675,8 +1839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The current available bandwidth of the cluster in MBs.</p>
-</dd><dt class="property-required"
+    <dd>The current available bandwidth of the cluster in MBs.</dd><dt class="property-required"
             title="Required">
         <span id="availabledisksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabledisksize_yaml" style="color: inherit; text-decoration: inherit;">available<wbr>Disk<wbr>Size</a>
@@ -1684,8 +1847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The current available disk of the cluster, in GB.</p>
-</dd><dt class="property-required"
+    <dd>The current available disk of the cluster, in GB.</dd><dt class="property-required"
             title="Required">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1693,8 +1855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ClusterId.</p>
-</dd><dt class="property-required"
+    <dd>ClusterId.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -1702,8 +1863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ClusterName.</p>
-</dd><dt class="property-required"
+    <dd>ClusterName.</dd><dt class="property-required"
             title="Required">
         <span id="maxbandwidth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxbandwidth_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Band<wbr>Width</a>
@@ -1711,8 +1871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum cluster bandwidth in MBs.</p>
-</dd><dt class="property-required"
+    <dd>Maximum cluster bandwidth in MBs.</dd><dt class="property-required"
             title="Required">
         <span id="maxdisksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdisksize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Disk<wbr>Size</a>
@@ -1720,8 +1879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The largest disk in the cluster, in GB.</p>
-</dd><dt class="property-required"
+    <dd>The largest disk in the cluster, in GB.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -1729,8 +1887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>zone id.</p>
-</dd><dt class="property-required"
+    <dd>zone id.</dd><dt class="property-required"
             title="Required">
         <span id="zoneids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneids_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Ids</a>
@@ -1738,8 +1895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>The availability zone where the cluster node is located. If the cluster is a cross-availability zone cluster, it includes multiple availability zones where the cluster node is located.</p>
-</dd></dl>
+    <dd>The availability zone where the cluster node is located. If the cluster is a cross-availability zone cluster, it includes multiple availability zones where the cluster node is located.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1757,8 +1913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>discount price.</p>
-</dd><dt class="property-required"
+    <dd>discount price.</dd><dt class="property-required"
             title="Required">
         <span id="totalcost_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcost_csharp" style="color: inherit; text-decoration: inherit;">Total<wbr>Cost</a>
@@ -1766,8 +1921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>original price.</p>
-</dd></dl>
+    <dd>original price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1781,8 +1935,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>discount price.</p>
-</dd><dt class="property-required"
+    <dd>discount price.</dd><dt class="property-required"
             title="Required">
         <span id="totalcost_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcost_go" style="color: inherit; text-decoration: inherit;">Total<wbr>Cost</a>
@@ -1790,8 +1943,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>original price.</p>
-</dd></dl>
+    <dd>original price.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="real_total_cost_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_total_cost_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>total_<wbr>cost</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>discount price.</dd><dt class="property-required"
+            title="Required">
+        <span id="total_cost_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_cost_hcl" style="color: inherit; text-decoration: inherit;">total_<wbr>cost</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>original price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1805,8 +1979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>discount price.</p>
-</dd><dt class="property-required"
+    <dd>discount price.</dd><dt class="property-required"
             title="Required">
         <span id="totalcost_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcost_java" style="color: inherit; text-decoration: inherit;">total<wbr>Cost</a>
@@ -1814,8 +1987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>original price.</p>
-</dd></dl>
+    <dd>original price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1829,8 +2001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>discount price.</p>
-</dd><dt class="property-required"
+    <dd>discount price.</dd><dt class="property-required"
             title="Required">
         <span id="totalcost_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcost_nodejs" style="color: inherit; text-decoration: inherit;">total<wbr>Cost</a>
@@ -1838,8 +2009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>original price.</p>
-</dd></dl>
+    <dd>original price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1853,8 +2023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>discount price.</p>
-</dd><dt class="property-required"
+    <dd>discount price.</dd><dt class="property-required"
             title="Required">
         <span id="total_cost_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_cost_python" style="color: inherit; text-decoration: inherit;">total_<wbr>cost</a>
@@ -1862,8 +2031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>original price.</p>
-</dd></dl>
+    <dd>original price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1877,8 +2045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>discount price.</p>
-</dd><dt class="property-required"
+    <dd>discount price.</dd><dt class="property-required"
             title="Required">
         <span id="totalcost_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcost_yaml" style="color: inherit; text-decoration: inherit;">total<wbr>Cost</a>
@@ -1886,8 +2053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>original price.</p>
-</dd></dl>
+    <dd>original price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1905,8 +2071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>discount price.</p>
-</dd><dt class="property-required"
+    <dd>discount price.</dd><dt class="property-required"
             title="Required">
         <span id="totalcost_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcost_csharp" style="color: inherit; text-decoration: inherit;">Total<wbr>Cost</a>
@@ -1914,8 +2079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>original price.</p>
-</dd></dl>
+    <dd>original price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1929,8 +2093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>discount price.</p>
-</dd><dt class="property-required"
+    <dd>discount price.</dd><dt class="property-required"
             title="Required">
         <span id="totalcost_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcost_go" style="color: inherit; text-decoration: inherit;">Total<wbr>Cost</a>
@@ -1938,8 +2101,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>original price.</p>
-</dd></dl>
+    <dd>original price.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="real_total_cost_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#real_total_cost_hcl" style="color: inherit; text-decoration: inherit;">real_<wbr>total_<wbr>cost</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>discount price.</dd><dt class="property-required"
+            title="Required">
+        <span id="total_cost_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_cost_hcl" style="color: inherit; text-decoration: inherit;">total_<wbr>cost</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>original price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1953,8 +2137,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>discount price.</p>
-</dd><dt class="property-required"
+    <dd>discount price.</dd><dt class="property-required"
             title="Required">
         <span id="totalcost_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcost_java" style="color: inherit; text-decoration: inherit;">total<wbr>Cost</a>
@@ -1962,8 +2145,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>original price.</p>
-</dd></dl>
+    <dd>original price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1977,8 +2159,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>discount price.</p>
-</dd><dt class="property-required"
+    <dd>discount price.</dd><dt class="property-required"
             title="Required">
         <span id="totalcost_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcost_nodejs" style="color: inherit; text-decoration: inherit;">total<wbr>Cost</a>
@@ -1986,8 +2167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>original price.</p>
-</dd></dl>
+    <dd>original price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2001,8 +2181,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>discount price.</p>
-</dd><dt class="property-required"
+    <dd>discount price.</dd><dt class="property-required"
             title="Required">
         <span id="total_cost_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_cost_python" style="color: inherit; text-decoration: inherit;">total_<wbr>cost</a>
@@ -2010,8 +2189,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>original price.</p>
-</dd></dl>
+    <dd>original price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2025,8 +2203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>discount price.</p>
-</dd><dt class="property-required"
+    <dd>discount price.</dd><dt class="property-required"
             title="Required">
         <span id="totalcost_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcost_yaml" style="color: inherit; text-decoration: inherit;">total<wbr>Cost</a>
@@ -2034,8 +2211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>original price.</p>
-</dd></dl>
+    <dd>original price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2053,8 +2229,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>app id.</p>
-</dd><dt class="property-required"
+    <dd>app id.</dd><dt class="property-required"
             title="Required">
         <span id="exflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exflag_csharp" style="color: inherit; text-decoration: inherit;">Exflag</a>
@@ -2062,8 +2237,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>extra flag.</p>
-</dd><dt class="property-required"
+    <dd>extra flag.</dd><dt class="property-required"
             title="Required">
         <span id="flag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flag_csharp" style="color: inherit; text-decoration: inherit;">Flag</a>
@@ -2071,8 +2245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Manually set flags.</p>
-</dd><dt class="property-required"
+    <dd>Manually set flags.</dd><dt class="property-required"
             title="Required">
         <span id="isinternalapp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isinternalapp_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Internal<wbr>App</a>
@@ -2080,8 +2253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>internal APP.</p>
-</dd><dt class="property-required"
+    <dd>internal APP.</dd><dt class="property-required"
             title="Required">
         <span id="salesinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#salesinfos_csharp" style="color: inherit; text-decoration: inherit;">Sales<wbr>Infos</a>
@@ -2089,8 +2261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultzonelistsalesinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Inputs.<wbr>Get<wbr>Zone<wbr>Result<wbr>Zone<wbr>List<wbr>Sales<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Standard Edition Sold Out Information.</p>
-</dd><dt class="property-required"
+    <dd>Standard Edition Sold Out Information.</dd><dt class="property-required"
             title="Required">
         <span id="soldout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#soldout_csharp" style="color: inherit; text-decoration: inherit;">Sold<wbr>Out</a>
@@ -2098,8 +2269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>json object, key is model, value true is sold out, false is not sold out.</p>
-</dd><dt class="property-required"
+    <dd>json object, key is model, value true is sold out, false is not sold out.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -2107,8 +2277,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>zone id.</p>
-</dd><dt class="property-required"
+    <dd>zone id.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Name</a>
@@ -2116,8 +2285,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>zone name.</p>
-</dd><dt class="property-required"
+    <dd>zone name.</dd><dt class="property-required"
             title="Required">
         <span id="zonestatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonestatus_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Status</a>
@@ -2125,8 +2293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>zone status.</p>
-</dd></dl>
+    <dd>zone status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2140,8 +2307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>app id.</p>
-</dd><dt class="property-required"
+    <dd>app id.</dd><dt class="property-required"
             title="Required">
         <span id="exflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exflag_go" style="color: inherit; text-decoration: inherit;">Exflag</a>
@@ -2149,8 +2315,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>extra flag.</p>
-</dd><dt class="property-required"
+    <dd>extra flag.</dd><dt class="property-required"
             title="Required">
         <span id="flag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flag_go" style="color: inherit; text-decoration: inherit;">Flag</a>
@@ -2158,8 +2323,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Manually set flags.</p>
-</dd><dt class="property-required"
+    <dd>Manually set flags.</dd><dt class="property-required"
             title="Required">
         <span id="isinternalapp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isinternalapp_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Internal<wbr>App</a>
@@ -2167,8 +2331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>internal APP.</p>
-</dd><dt class="property-required"
+    <dd>internal APP.</dd><dt class="property-required"
             title="Required">
         <span id="salesinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#salesinfos_go" style="color: inherit; text-decoration: inherit;">Sales<wbr>Infos</a>
@@ -2176,8 +2339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultzonelistsalesinfo">[]Get<wbr>Zone<wbr>Result<wbr>Zone<wbr>List<wbr>Sales<wbr>Info</a></span>
     </dt>
-    <dd><p>Standard Edition Sold Out Information.</p>
-</dd><dt class="property-required"
+    <dd>Standard Edition Sold Out Information.</dd><dt class="property-required"
             title="Required">
         <span id="soldout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#soldout_go" style="color: inherit; text-decoration: inherit;">Sold<wbr>Out</a>
@@ -2185,8 +2347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>json object, key is model, value true is sold out, false is not sold out.</p>
-</dd><dt class="property-required"
+    <dd>json object, key is model, value true is sold out, false is not sold out.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -2194,8 +2355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>zone id.</p>
-</dd><dt class="property-required"
+    <dd>zone id.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Name</a>
@@ -2203,8 +2363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>zone name.</p>
-</dd><dt class="property-required"
+    <dd>zone name.</dd><dt class="property-required"
             title="Required">
         <span id="zonestatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonestatus_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Status</a>
@@ -2212,8 +2371,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>zone status.</p>
-</dd></dl>
+    <dd>zone status.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#app_id_hcl" style="color: inherit; text-decoration: inherit;">app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>app id.</dd><dt class="property-required"
+            title="Required">
+        <span id="exflag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exflag_hcl" style="color: inherit; text-decoration: inherit;">exflag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>extra flag.</dd><dt class="property-required"
+            title="Required">
+        <span id="flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flag_hcl" style="color: inherit; text-decoration: inherit;">flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Manually set flags.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_internal_app_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_internal_app_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>internal_<wbr>app</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>internal APP.</dd><dt class="property-required"
+            title="Required">
+        <span id="sales_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sales_infos_hcl" style="color: inherit; text-decoration: inherit;">sales_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getzoneresultzonelistsalesinfo">list(object)</a></span>
+    </dt>
+    <dd>Standard Edition Sold Out Information.</dd><dt class="property-required"
+            title="Required">
+        <span id="sold_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sold_out_hcl" style="color: inherit; text-decoration: inherit;">sold_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>json object, key is model, value true is sold out, false is not sold out.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>zone id.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_name_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>zone name.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_status_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>zone status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2227,8 +2463,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>app id.</p>
-</dd><dt class="property-required"
+    <dd>app id.</dd><dt class="property-required"
             title="Required">
         <span id="exflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exflag_java" style="color: inherit; text-decoration: inherit;">exflag</a>
@@ -2236,8 +2471,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>extra flag.</p>
-</dd><dt class="property-required"
+    <dd>extra flag.</dd><dt class="property-required"
             title="Required">
         <span id="flag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flag_java" style="color: inherit; text-decoration: inherit;">flag</a>
@@ -2245,8 +2479,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Manually set flags.</p>
-</dd><dt class="property-required"
+    <dd>Manually set flags.</dd><dt class="property-required"
             title="Required">
         <span id="isinternalapp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isinternalapp_java" style="color: inherit; text-decoration: inherit;">is<wbr>Internal<wbr>App</a>
@@ -2254,8 +2487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>internal APP.</p>
-</dd><dt class="property-required"
+    <dd>internal APP.</dd><dt class="property-required"
             title="Required">
         <span id="salesinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#salesinfos_java" style="color: inherit; text-decoration: inherit;">sales<wbr>Infos</a>
@@ -2263,8 +2495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultzonelistsalesinfo">List&lt;Get<wbr>Zone<wbr>Result<wbr>Zone<wbr>List<wbr>Sales<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Standard Edition Sold Out Information.</p>
-</dd><dt class="property-required"
+    <dd>Standard Edition Sold Out Information.</dd><dt class="property-required"
             title="Required">
         <span id="soldout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#soldout_java" style="color: inherit; text-decoration: inherit;">sold<wbr>Out</a>
@@ -2272,8 +2503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>json object, key is model, value true is sold out, false is not sold out.</p>
-</dd><dt class="property-required"
+    <dd>json object, key is model, value true is sold out, false is not sold out.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -2281,8 +2511,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>zone id.</p>
-</dd><dt class="property-required"
+    <dd>zone id.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
@@ -2290,8 +2519,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>zone name.</p>
-</dd><dt class="property-required"
+    <dd>zone name.</dd><dt class="property-required"
             title="Required">
         <span id="zonestatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonestatus_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Status</a>
@@ -2299,8 +2527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>zone status.</p>
-</dd></dl>
+    <dd>zone status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2314,8 +2541,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>app id.</p>
-</dd><dt class="property-required"
+    <dd>app id.</dd><dt class="property-required"
             title="Required">
         <span id="exflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exflag_nodejs" style="color: inherit; text-decoration: inherit;">exflag</a>
@@ -2323,8 +2549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>extra flag.</p>
-</dd><dt class="property-required"
+    <dd>extra flag.</dd><dt class="property-required"
             title="Required">
         <span id="flag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flag_nodejs" style="color: inherit; text-decoration: inherit;">flag</a>
@@ -2332,8 +2557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Manually set flags.</p>
-</dd><dt class="property-required"
+    <dd>Manually set flags.</dd><dt class="property-required"
             title="Required">
         <span id="isinternalapp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isinternalapp_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Internal<wbr>App</a>
@@ -2341,8 +2565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>internal APP.</p>
-</dd><dt class="property-required"
+    <dd>internal APP.</dd><dt class="property-required"
             title="Required">
         <span id="salesinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#salesinfos_nodejs" style="color: inherit; text-decoration: inherit;">sales<wbr>Infos</a>
@@ -2350,8 +2573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultzonelistsalesinfo">Get<wbr>Zone<wbr>Result<wbr>Zone<wbr>List<wbr>Sales<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Standard Edition Sold Out Information.</p>
-</dd><dt class="property-required"
+    <dd>Standard Edition Sold Out Information.</dd><dt class="property-required"
             title="Required">
         <span id="soldout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#soldout_nodejs" style="color: inherit; text-decoration: inherit;">sold<wbr>Out</a>
@@ -2359,8 +2581,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>json object, key is model, value true is sold out, false is not sold out.</p>
-</dd><dt class="property-required"
+    <dd>json object, key is model, value true is sold out, false is not sold out.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -2368,8 +2589,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>zone id.</p>
-</dd><dt class="property-required"
+    <dd>zone id.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
@@ -2377,8 +2597,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>zone name.</p>
-</dd><dt class="property-required"
+    <dd>zone name.</dd><dt class="property-required"
             title="Required">
         <span id="zonestatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonestatus_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Status</a>
@@ -2386,8 +2605,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>zone status.</p>
-</dd></dl>
+    <dd>zone status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2401,8 +2619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>app id.</p>
-</dd><dt class="property-required"
+    <dd>app id.</dd><dt class="property-required"
             title="Required">
         <span id="exflag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exflag_python" style="color: inherit; text-decoration: inherit;">exflag</a>
@@ -2410,8 +2627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>extra flag.</p>
-</dd><dt class="property-required"
+    <dd>extra flag.</dd><dt class="property-required"
             title="Required">
         <span id="flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flag_python" style="color: inherit; text-decoration: inherit;">flag</a>
@@ -2419,8 +2635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Manually set flags.</p>
-</dd><dt class="property-required"
+    <dd>Manually set flags.</dd><dt class="property-required"
             title="Required">
         <span id="is_internal_app_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_internal_app_python" style="color: inherit; text-decoration: inherit;">is_<wbr>internal_<wbr>app</a>
@@ -2428,17 +2643,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>internal APP.</p>
-</dd><dt class="property-required"
+    <dd>internal APP.</dd><dt class="property-required"
             title="Required">
         <span id="sales_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sales_infos_python" style="color: inherit; text-decoration: inherit;">sales_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getzoneresultzonelistsalesinfo">Get<wbr>Zone<wbr>Result<wbr>Zone<wbr>List<wbr>Sales<wbr>Info]</a></span>
+        <span class="property-type"><a href="#getzoneresultzonelistsalesinfo">Sequence[Get<wbr>Zone<wbr>Result<wbr>Zone<wbr>List<wbr>Sales<wbr>Info]</a></span>
     </dt>
-    <dd><p>Standard Edition Sold Out Information.</p>
-</dd><dt class="property-required"
+    <dd>Standard Edition Sold Out Information.</dd><dt class="property-required"
             title="Required">
         <span id="sold_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sold_out_python" style="color: inherit; text-decoration: inherit;">sold_<wbr>out</a>
@@ -2446,8 +2659,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>json object, key is model, value true is sold out, false is not sold out.</p>
-</dd><dt class="property-required"
+    <dd>json object, key is model, value true is sold out, false is not sold out.</dd><dt class="property-required"
             title="Required">
         <span id="zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
@@ -2455,8 +2667,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>zone id.</p>
-</dd><dt class="property-required"
+    <dd>zone id.</dd><dt class="property-required"
             title="Required">
         <span id="zone_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_name_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>name</a>
@@ -2464,8 +2675,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>zone name.</p>
-</dd><dt class="property-required"
+    <dd>zone name.</dd><dt class="property-required"
             title="Required">
         <span id="zone_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_status_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>status</a>
@@ -2473,8 +2683,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>zone status.</p>
-</dd></dl>
+    <dd>zone status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2488,8 +2697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>app id.</p>
-</dd><dt class="property-required"
+    <dd>app id.</dd><dt class="property-required"
             title="Required">
         <span id="exflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exflag_yaml" style="color: inherit; text-decoration: inherit;">exflag</a>
@@ -2497,8 +2705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>extra flag.</p>
-</dd><dt class="property-required"
+    <dd>extra flag.</dd><dt class="property-required"
             title="Required">
         <span id="flag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flag_yaml" style="color: inherit; text-decoration: inherit;">flag</a>
@@ -2506,8 +2713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Manually set flags.</p>
-</dd><dt class="property-required"
+    <dd>Manually set flags.</dd><dt class="property-required"
             title="Required">
         <span id="isinternalapp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isinternalapp_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Internal<wbr>App</a>
@@ -2515,8 +2721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>internal APP.</p>
-</dd><dt class="property-required"
+    <dd>internal APP.</dd><dt class="property-required"
             title="Required">
         <span id="salesinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#salesinfos_yaml" style="color: inherit; text-decoration: inherit;">sales<wbr>Infos</a>
@@ -2524,8 +2729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneresultzonelistsalesinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Standard Edition Sold Out Information.</p>
-</dd><dt class="property-required"
+    <dd>Standard Edition Sold Out Information.</dd><dt class="property-required"
             title="Required">
         <span id="soldout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#soldout_yaml" style="color: inherit; text-decoration: inherit;">sold<wbr>Out</a>
@@ -2533,8 +2737,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>json object, key is model, value true is sold out, false is not sold out.</p>
-</dd><dt class="property-required"
+    <dd>json object, key is model, value true is sold out, false is not sold out.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -2542,8 +2745,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>zone id.</p>
-</dd><dt class="property-required"
+    <dd>zone id.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
@@ -2551,8 +2753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>zone name.</p>
-</dd><dt class="property-required"
+    <dd>zone name.</dd><dt class="property-required"
             title="Required">
         <span id="zonestatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonestatus_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Status</a>
@@ -2560,8 +2761,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>zone status.</p>
-</dd></dl>
+    <dd>zone status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2579,8 +2779,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Manually set flags.</p>
-</dd><dt class="property-required"
+    <dd>Manually set flags.</dd><dt class="property-required"
             title="Required">
         <span id="platform_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platform_csharp" style="color: inherit; text-decoration: inherit;">Platform</a>
@@ -2588,8 +2787,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Professional Edition, Standard Edition flag.</p>
-</dd><dt class="property-required"
+    <dd>Professional Edition, Standard Edition flag.</dd><dt class="property-required"
             title="Required">
         <span id="soldout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#soldout_csharp" style="color: inherit; text-decoration: inherit;">Sold<wbr>Out</a>
@@ -2597,8 +2795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>json object, key is model, value true is sold out, false is not sold out.</p>
-</dd><dt class="property-required"
+    <dd>json object, key is model, value true is sold out, false is not sold out.</dd><dt class="property-required"
             title="Required">
         <span id="version_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_csharp" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -2606,8 +2803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ckakfa version(1.1.1/2.4.2/0.10.2).</p>
-</dd></dl>
+    <dd>ckakfa version(1.1.1/2.4.2/0.10.2).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2621,8 +2817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Manually set flags.</p>
-</dd><dt class="property-required"
+    <dd>Manually set flags.</dd><dt class="property-required"
             title="Required">
         <span id="platform_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platform_go" style="color: inherit; text-decoration: inherit;">Platform</a>
@@ -2630,8 +2825,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Professional Edition, Standard Edition flag.</p>
-</dd><dt class="property-required"
+    <dd>Professional Edition, Standard Edition flag.</dd><dt class="property-required"
             title="Required">
         <span id="soldout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#soldout_go" style="color: inherit; text-decoration: inherit;">Sold<wbr>Out</a>
@@ -2639,8 +2833,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>json object, key is model, value true is sold out, false is not sold out.</p>
-</dd><dt class="property-required"
+    <dd>json object, key is model, value true is sold out, false is not sold out.</dd><dt class="property-required"
             title="Required">
         <span id="version_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_go" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -2648,8 +2841,45 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ckakfa version(1.1.1/2.4.2/0.10.2).</p>
-</dd></dl>
+    <dd>ckakfa version(1.1.1/2.4.2/0.10.2).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flag_hcl" style="color: inherit; text-decoration: inherit;">flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Manually set flags.</dd><dt class="property-required"
+            title="Required">
+        <span id="platform_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platform_hcl" style="color: inherit; text-decoration: inherit;">platform</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Professional Edition, Standard Edition flag.</dd><dt class="property-required"
+            title="Required">
+        <span id="sold_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sold_out_hcl" style="color: inherit; text-decoration: inherit;">sold_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>json object, key is model, value true is sold out, false is not sold out.</dd><dt class="property-required"
+            title="Required">
+        <span id="version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_hcl" style="color: inherit; text-decoration: inherit;">version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ckakfa version(1.1.1/2.4.2/0.10.2).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2663,8 +2893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Manually set flags.</p>
-</dd><dt class="property-required"
+    <dd>Manually set flags.</dd><dt class="property-required"
             title="Required">
         <span id="platform_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platform_java" style="color: inherit; text-decoration: inherit;">platform</a>
@@ -2672,8 +2901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Professional Edition, Standard Edition flag.</p>
-</dd><dt class="property-required"
+    <dd>Professional Edition, Standard Edition flag.</dd><dt class="property-required"
             title="Required">
         <span id="soldout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#soldout_java" style="color: inherit; text-decoration: inherit;">sold<wbr>Out</a>
@@ -2681,8 +2909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>json object, key is model, value true is sold out, false is not sold out.</p>
-</dd><dt class="property-required"
+    <dd>json object, key is model, value true is sold out, false is not sold out.</dd><dt class="property-required"
             title="Required">
         <span id="version_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_java" style="color: inherit; text-decoration: inherit;">version</a>
@@ -2690,8 +2917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ckakfa version(1.1.1/2.4.2/0.10.2).</p>
-</dd></dl>
+    <dd>ckakfa version(1.1.1/2.4.2/0.10.2).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2705,8 +2931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Manually set flags.</p>
-</dd><dt class="property-required"
+    <dd>Manually set flags.</dd><dt class="property-required"
             title="Required">
         <span id="platform_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platform_nodejs" style="color: inherit; text-decoration: inherit;">platform</a>
@@ -2714,8 +2939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Professional Edition, Standard Edition flag.</p>
-</dd><dt class="property-required"
+    <dd>Professional Edition, Standard Edition flag.</dd><dt class="property-required"
             title="Required">
         <span id="soldout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#soldout_nodejs" style="color: inherit; text-decoration: inherit;">sold<wbr>Out</a>
@@ -2723,8 +2947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>json object, key is model, value true is sold out, false is not sold out.</p>
-</dd><dt class="property-required"
+    <dd>json object, key is model, value true is sold out, false is not sold out.</dd><dt class="property-required"
             title="Required">
         <span id="version_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_nodejs" style="color: inherit; text-decoration: inherit;">version</a>
@@ -2732,8 +2955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ckakfa version(1.1.1/2.4.2/0.10.2).</p>
-</dd></dl>
+    <dd>ckakfa version(1.1.1/2.4.2/0.10.2).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2747,8 +2969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Manually set flags.</p>
-</dd><dt class="property-required"
+    <dd>Manually set flags.</dd><dt class="property-required"
             title="Required">
         <span id="platform_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platform_python" style="color: inherit; text-decoration: inherit;">platform</a>
@@ -2756,8 +2977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Professional Edition, Standard Edition flag.</p>
-</dd><dt class="property-required"
+    <dd>Professional Edition, Standard Edition flag.</dd><dt class="property-required"
             title="Required">
         <span id="sold_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sold_out_python" style="color: inherit; text-decoration: inherit;">sold_<wbr>out</a>
@@ -2765,8 +2985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>json object, key is model, value true is sold out, false is not sold out.</p>
-</dd><dt class="property-required"
+    <dd>json object, key is model, value true is sold out, false is not sold out.</dd><dt class="property-required"
             title="Required">
         <span id="version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_python" style="color: inherit; text-decoration: inherit;">version</a>
@@ -2774,8 +2993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ckakfa version(1.1.1/2.4.2/0.10.2).</p>
-</dd></dl>
+    <dd>ckakfa version(1.1.1/2.4.2/0.10.2).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2789,8 +3007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Manually set flags.</p>
-</dd><dt class="property-required"
+    <dd>Manually set flags.</dd><dt class="property-required"
             title="Required">
         <span id="platform_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platform_yaml" style="color: inherit; text-decoration: inherit;">platform</a>
@@ -2798,8 +3015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Professional Edition, Standard Edition flag.</p>
-</dd><dt class="property-required"
+    <dd>Professional Edition, Standard Edition flag.</dd><dt class="property-required"
             title="Required">
         <span id="soldout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#soldout_yaml" style="color: inherit; text-decoration: inherit;">sold<wbr>Out</a>
@@ -2807,8 +3023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>json object, key is model, value true is sold out, false is not sold out.</p>
-</dd><dt class="property-required"
+    <dd>json object, key is model, value true is sold out, false is not sold out.</dd><dt class="property-required"
             title="Required">
         <span id="version_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_yaml" style="color: inherit; text-decoration: inherit;">version</a>
@@ -2816,8 +3031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ckakfa version(1.1.1/2.4.2/0.10.2).</p>
-</dd></dl>
+    <dd>ckakfa version(1.1.1/2.4.2/0.10.2).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2832,7 +3046,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

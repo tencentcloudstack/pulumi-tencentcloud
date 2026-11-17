@@ -2,9 +2,11 @@
 ---
 title: "ReadonlyInstance"
 title_tag: "tencentcloud.Mysql.ReadonlyInstance"
-meta_desc: "Documentation for the tencentcloud.Mysql.ReadonlyInstance resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a mysql instance resource to create read-only database instances. NOTE: Read-only instances can be purchased only for two-node or three-node."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -15,28 +17,39 @@ no_edit_this_page: true
 Provides a mysql instance resource to create read-only database instances.
 
 > **NOTE:** Read-only instances can be purchased only for two-node or three-node source instances on MySQL 5.6 or above with the InnoDB engine at a specification of 1 GB memory and 50 GB disk capacity or above.
-**NOTE:** The terminate operation of read only mysql does NOT take effect immediately, maybe takes for several hours. so during that time, VPCs associated with that mysql instance can't be terminated also.
+> **NOTE:** The terminate operation of read only mysql does NOT take effect immediately, maybe takes for several hours. so during that time, VPCs associated with that mysql instance can't be terminated also.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zones = tencentcloud.Availability.getZonesByProduct({
+const zones = tencentcloud.availability.getZonesByProduct({
     product: "cdb",
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-mysql",
+    cidrBlock: "10.0.0.0/16",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
+    name: "subnet-mysql",
     vpcId: vpc.id,
     cidrBlock: "10.0.0.0/16",
     isMulticast: false,
 });
-const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "mysql test"});
-const exampleInstance = new tencentcloud.mysql.Instance("exampleInstance", {
+const securityGroup = new tencentcloud.security.Group("security_group", {
+    name: "sg-mysql",
+    description: "mysql test",
+});
+const example = new tencentcloud.mysql.Instance("example", {
     internetService: 1,
     engineVersion: "5.7",
     chargeType: "POSTPAID",
@@ -59,8 +72,8 @@ const exampleInstance = new tencentcloud.mysql.Instance("exampleInstance", {
         max_connections: "1000",
     },
 });
-const exampleReadonlyInstance = new tencentcloud.mysql.ReadonlyInstance("exampleReadonlyInstance", {
-    masterInstanceId: exampleInstance.id,
+const exampleReadonlyInstance = new tencentcloud.mysql.ReadonlyInstance("example", {
+    masterInstanceId: example.id,
     instanceName: "tf-example",
     memSize: 128000,
     volumeSize: 255,
@@ -73,20 +86,30 @@ const exampleReadonlyInstance = new tencentcloud.mysql.ReadonlyInstance("example
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zones = tencentcloud.Availability.get_zones_by_product(product="cdb")
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+zones = tencentcloud.availability.get_zones_by_product(product="cdb")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-mysql",
+    cidr_block="10.0.0.0/16")
 subnet = tencentcloud.subnet.Instance("subnet",
     availability_zone=zones.zones[0].name,
+    name="subnet-mysql",
     vpc_id=vpc.id,
     cidr_block="10.0.0.0/16",
     is_multicast=False)
-security_group = tencentcloud.security.Group("securityGroup", description="mysql test")
-example_instance = tencentcloud.mysql.Instance("exampleInstance",
+security_group = tencentcloud.security.Group("security_group",
+    name="sg-mysql",
+    description="mysql test")
+example = tencentcloud.mysql.Instance("example",
     internet_service=1,
     engine_version="5.7",
     charge_type="POSTPAID",
@@ -108,8 +131,8 @@ example_instance = tencentcloud.mysql.Instance("exampleInstance",
         "character_set_server": "UTF8",
         "max_connections": "1000",
     })
-example_readonly_instance = tencentcloud.mysql.ReadonlyInstance("exampleReadonlyInstance",
-    master_instance_id=example_instance.id,
+example_readonly_instance = tencentcloud.mysql.ReadonlyInstance("example",
+    master_instance_id=example.id,
     instance_name="tf-example",
     mem_size=128000,
     volume_size=255,
@@ -121,11 +144,114 @@ example_readonly_instance = tencentcloud.mysql.ReadonlyInstance("exampleReadonly
         "createBy": "terraform",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mysql"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "cdb",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-mysql"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+			Name:             pulumi.String("subnet-mysql"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			CidrBlock:        pulumi.String("10.0.0.0/16"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		securityGroup, err := security.NewGroup(ctx, "security_group", &security.GroupArgs{
+			Name:        pulumi.String("sg-mysql"),
+			Description: pulumi.String("mysql test"),
+		})
+		if err != nil {
+			return err
+		}
+		example, err := mysql.NewInstance(ctx, "example", &mysql.InstanceArgs{
+			InternetService:  pulumi.Int(1),
+			EngineVersion:    pulumi.String("5.7"),
+			ChargeType:       pulumi.String("POSTPAID"),
+			RootPassword:     pulumi.String("PassWord123"),
+			SlaveDeployMode:  pulumi.Int(0),
+			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+			SlaveSyncMode:    pulumi.Int(1),
+			InstanceName:     pulumi.String("tf-example-mysql"),
+			MemSize:          pulumi.Int(4000),
+			VolumeSize:       pulumi.Int(200),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+			IntranetPort:     pulumi.Int(3306),
+			SecurityGroups: pulumi.StringArray{
+				securityGroup.ID().ToIDOutput().ToStringOutput(),
+			},
+			Tags: pulumi.StringMap{
+				"name": pulumi.String("test"),
+			},
+			Parameters: pulumi.StringMap{
+				"character_set_server": pulumi.String("UTF8"),
+				"max_connections":      pulumi.String("1000"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = mysql.NewReadonlyInstance(ctx, "example", &mysql.ReadonlyInstanceArgs{
+			MasterInstanceId: example.ID().ToIDOutput().ToStringOutput(),
+			InstanceName:     pulumi.String("tf-example"),
+			MemSize:          pulumi.Int(128000),
+			VolumeSize:       pulumi.Int(255),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+			IntranetPort:     pulumi.Int(3306),
+			SecurityGroups: pulumi.StringArray{
+				securityGroup.ID().ToIDOutput().ToStringOutput(),
+			},
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -137,23 +263,26 @@ return await Deployment.RunAsync(() =>
 
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc-mysql",
         CidrBlock = "10.0.0.0/16",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
+        Name = "subnet-mysql",
         VpcId = vpc.Id,
         CidrBlock = "10.0.0.0/16",
         IsMulticast = false,
     });
 
-    var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    var securityGroup = new Tencentcloud.Security.Group("security_group", new()
     {
+        Name = "sg-mysql",
         Description = "mysql test",
     });
 
-    var exampleInstance = new Tencentcloud.Mysql.Instance("exampleInstance", new()
+    var example = new Tencentcloud.Mysql.Instance("example", new()
     {
         InternetService = 1,
         EngineVersion = "5.7",
@@ -183,9 +312,9 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleReadonlyInstance = new Tencentcloud.Mysql.ReadonlyInstance("exampleReadonlyInstance", new()
+    var exampleReadonlyInstance = new Tencentcloud.Mysql.ReadonlyInstance("example", new()
     {
-        MasterInstanceId = exampleInstance.Id,
+        MasterInstanceId = example.Id,
         InstanceName = "tf-example",
         MemSize = 128000,
         VolumeSize = 255,
@@ -204,97 +333,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-			Product: "cdb",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-			VpcId:            vpc.ID(),
-			CidrBlock:        pulumi.String("10.0.0.0/16"),
-			IsMulticast:      pulumi.Bool(false),
-		})
-		if err != nil {
-			return err
-		}
-		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-			Description: pulumi.String("mysql test"),
-		})
-		if err != nil {
-			return err
-		}
-		exampleInstance, err := Mysql.NewInstance(ctx, "exampleInstance", &Mysql.InstanceArgs{
-			InternetService:  pulumi.Int(1),
-			EngineVersion:    pulumi.String("5.7"),
-			ChargeType:       pulumi.String("POSTPAID"),
-			RootPassword:     pulumi.String("PassWord123"),
-			SlaveDeployMode:  pulumi.Int(0),
-			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-			SlaveSyncMode:    pulumi.Int(1),
-			InstanceName:     pulumi.String("tf-example-mysql"),
-			MemSize:          pulumi.Int(4000),
-			VolumeSize:       pulumi.Int(200),
-			VpcId:            vpc.ID(),
-			SubnetId:         subnet.ID(),
-			IntranetPort:     pulumi.Int(3306),
-			SecurityGroups: pulumi.StringArray{
-				securityGroup.ID(),
-			},
-			Tags: pulumi.Map{
-				"name": pulumi.Any("test"),
-			},
-			Parameters: pulumi.Map{
-				"character_set_server": pulumi.Any("UTF8"),
-				"max_connections":      pulumi.Any("1000"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Mysql.NewReadonlyInstance(ctx, "exampleReadonlyInstance", &Mysql.ReadonlyInstanceArgs{
-			MasterInstanceId: exampleInstance.ID(),
-			InstanceName:     pulumi.String("tf-example"),
-			MemSize:          pulumi.Int(128000),
-			VolumeSize:       pulumi.Int(255),
-			VpcId:            vpc.ID(),
-			SubnetId:         subnet.ID(),
-			IntranetPort:     pulumi.Int(3306),
-			SecurityGroups: pulumi.StringArray{
-				securityGroup.ID(),
-			},
-			Tags: pulumi.Map{
-				"createBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -303,18 +346,12 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
 import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
 import com.pulumi.tencentcloud.Security.Group;
 import com.pulumi.tencentcloud.Security.GroupArgs;
-import com.pulumi.tencentcloud.Mysql.Instance;
-import com.pulumi.tencentcloud.Mysql.InstanceArgs;
 import com.pulumi.tencentcloud.Mysql.ReadonlyInstance;
 import com.pulumi.tencentcloud.Mysql.ReadonlyInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -330,28 +367,31 @@ public class App {
             .product("cdb")
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc-mysql")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .availabilityZone(zones.zones()[0].name())
+            .name("subnet-mysql")
             .vpcId(vpc.id())
             .cidrBlock("10.0.0.0/16")
             .isMulticast(false)
             .build());
 
-        var securityGroup = new Group("securityGroup", GroupArgs.builder()        
+        var securityGroup = new Group("securityGroup", GroupArgs.builder()
+            .name("sg-mysql")
             .description("mysql test")
             .build());
 
-        var exampleInstance = new Instance("exampleInstance", InstanceArgs.builder()        
+        var example = new com.pulumi.tencentcloud.Mysql.Instance("example", com.pulumi.tencentcloud.Mysql.InstanceArgs.builder()
             .internetService(1)
             .engineVersion("5.7")
             .chargeType("POSTPAID")
             .rootPassword("PassWord123")
             .slaveDeployMode(0)
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
+            .availabilityZone(zones.zones()[0].name())
             .slaveSyncMode(1)
             .instanceName("tf-example-mysql")
             .memSize(4000)
@@ -367,8 +407,8 @@ public class App {
             ))
             .build());
 
-        var exampleReadonlyInstance = new ReadonlyInstance("exampleReadonlyInstance", ReadonlyInstanceArgs.builder()        
-            .masterInstanceId(exampleInstance.id())
+        var exampleReadonlyInstance = new ReadonlyInstance("exampleReadonlyInstance", ReadonlyInstanceArgs.builder()
+            .masterInstanceId(example.id())
             .instanceName("tf-example")
             .memSize(128000)
             .volumeSize(255)
@@ -382,24 +422,33 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-mysql
       cidrBlock: 10.0.0.0/16
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       availabilityZone: ${zones.zones[0].name}
+      name: subnet-mysql
       vpcId: ${vpc.id}
       cidrBlock: 10.0.0.0/16
       isMulticast: false
   securityGroup:
     type: tencentcloud:Security:Group
+    name: security_group
     properties:
+      name: sg-mysql
       description: mysql test
-  exampleInstance:
+  example:
     type: tencentcloud:Mysql:Instance
     properties:
       internetService: 1
@@ -424,8 +473,9 @@ resources:
         max_connections: '1000'
   exampleReadonlyInstance:
     type: tencentcloud:Mysql:ReadonlyInstance
+    name: example
     properties:
-      masterInstanceId: ${exampleInstance.id}
+      masterInstanceId: ${example.id}
       instanceName: tf-example
       memSize: 128000
       volumeSize: 255
@@ -439,91 +489,212 @@ resources:
 variables:
   zones:
     fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
         product: cdb
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "zones" {
+  product = "cdb"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-mysql"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[0].name
+  name              = "subnet-mysql"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.0.0/16"
+  is_multicast      = false
+}
+resource "tencentcloud_security_group" "security_group" {
+  name        = "sg-mysql"
+  description = "mysql test"
+}
+resource "tencentcloud_mysql_instance" "example" {
+  internet_service  = 1
+  engine_version    = "5.7"
+  charge_type       = "POSTPAID"
+  root_password     = "PassWord123"
+  slave_deploy_mode = 0
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[0].name
+  slave_sync_mode   = 1
+  instance_name     = "tf-example-mysql"
+  mem_size          = 4000
+  volume_size       = 200
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  subnet_id         = tencentcloud_subnet_instance.subnet.id
+  intranet_port     = 3306
+  security_groups   = [tencentcloud_security_group.security_group.id]
+  tags = {
+    "name" = "test"
+  }
+  parameters = {
+    "character_set_server" = "UTF8"
+    "max_connections"      = "1000"
+  }
+}
+resource "tencentcloud_mysql_readonlyinstance" "example" {
+  master_instance_id = tencentcloud_mysql_instance.example.id
+  instance_name      = "tf-example"
+  mem_size           = 128000
+  volume_size        = 255
+  vpc_id             = tencentcloud_vpc_instance.vpc.id
+  subnet_id          = tencentcloud_subnet_instance.subnet.id
+  intranet_port      = 3306
+  security_groups    = [tencentcloud_security_group.security_group.id]
+  tags = {
+    "createBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateDBInstance](https://www.tencentcloud.com/document/api/236/15871)
+  - [CreateDBInstanceHour](https://www.tencentcloud.com/document/api/236/15865)
+  - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+  - [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/236/15854)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+  - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+  - [DisassociateSecurityGroups](https://www.tencentcloud.com/document/api/236/15851)
+  - [ModifyAutoRenewFlag](https://www.tencentcloud.com/document/api/236/34479)
+  - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/236/15877)
+  - [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/236/15853)
+  - [ModifyDBInstanceVipVport](https://www.tencentcloud.com/document/api/236/15867)
+  - [ModifyInstanceDestroyProtect](https://www.tencentcloud.com/search/?wd=ModifyInstanceDestroyProtect&type=document&lang=en)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [UpgradeDBInstance](https://www.tencentcloud.com/document/api/236/15876)
+  - [UpgradeDBInstanceEngineVersion](https://www.tencentcloud.com/document/api/236/15870)
+* Delete:
+  - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+  - [IsolateDBInstance](https://www.tencentcloud.com/document/api/236/15869)
+  - [OfflineIsolatedInstances](https://www.tencentcloud.com/document/api/236/34475)
 
 
 ## Create ReadonlyInstance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ReadonlyInstance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ReadonlyInstance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ReadonlyInstance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                     <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p">,</span>
+                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ReadonlyInstance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                     <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                     <span class="nx">volume_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                     <span class="nx">mem_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                     <span class="nx">master_instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                     <span class="nx">disk_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                     <span class="nx">param_template_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                     <span class="nx">disk_encryption</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">auto_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                     <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                     <span class="nx">cpu</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                     <span class="nx">device_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">fast_upgrade</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                      <span class="nx">force_delete</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-                     <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                     <span class="nx">destroy_protect</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">intranet_port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                     <span class="nx">master_instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                     <span class="nx">cpu</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                      <span class="nx">master_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                     <span class="nx">mem_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                     <span class="nx">param_template_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                     <span class="nx">cluster_topology</span><span class="p">:</span> <span class="nx">Optional[ReadonlyInstanceClusterTopologyArgs]</span> = None<span class="p">,</span>
+                     <span class="nx">device_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">pay_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                      <span class="nx">period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                      <span class="nx">prepaid_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                     <span class="nx">ro_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                      <span class="nx">slave_deploy_mode</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                      <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                     <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-                     <span class="nx">volume_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                     <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+                     <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">wait_switch</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                     <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ReadonlyInstance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                     <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p">,</span>
-                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                     <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewReadonlyInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ReadonlyInstance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewReadonlyInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ReadonlyInstance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ReadonlyInstance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ReadonlyInstance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ReadonlyInstance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ReadonlyInstance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ReadonlyInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Mysql:ReadonlyInstance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Mysql:ReadonlyInstance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_mysql_readonly_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -544,7 +715,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -661,11 +832,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## ReadonlyInstance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -681,8 +860,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of a mysql instance.</p>
-</dd><dt class="property-required"
+    <dd>The name of a mysql instance.</dd><dt class="property-required"
             title="Required">
         <span id="masterinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Master<wbr>Instance<wbr>Id</a>
@@ -690,8 +868,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the master instance ID of recovery instances.</p>
-</dd><dt class="property-required"
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-required"
             title="Required">
         <span id="memsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_csharp" style="color: inherit; text-decoration: inherit;">Mem<wbr>Size</a>
@@ -699,8 +876,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size (in MB).</p>
-</dd><dt class="property-required"
+    <dd>Memory size (in MB).</dd><dt class="property-required"
             title="Required">
         <span id="volumesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumesize_csharp" style="color: inherit; text-decoration: inherit;">Volume<wbr>Size</a>
@@ -708,8 +884,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size (in GB).</p>
-</dd><dt class="property-optional"
+    <dd>Disk size (in GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -717,8 +892,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. NOTES: Only supported prepaid instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -726,8 +900,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="clustertopology_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertopology_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Topology</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopology">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Readonly<wbr>Instance<wbr>Cluster<wbr>Topology</a></span>
+    </dt>
+    <dd>Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_csharp" style="color: inherit; text-decoration: inherit;">Cpu</a>
@@ -735,8 +916,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>CPU cores.</p>
-</dd><dt class="property-optional"
+    <dd>CPU cores.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destroyprotect_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroyprotect_csharp" style="color: inherit; text-decoration: inherit;">Destroy<wbr>Protect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance destroy protection status. Valid values: <code>on</code> (enable destroy protection), <code>off</code> (disable destroy protection).</dd><dt class="property-optional"
             title="Optional">
         <span id="devicetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_csharp" style="color: inherit; text-decoration: inherit;">Device<wbr>Type</a>
@@ -744,8 +932,31 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify device type, available values: <code>UNIVERSAL</code> (default), <code>EXCLUSIVE</code>, <code>BASIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify device type, available values:</p>
+<ul>
+<li><code>UNIVERSAL</code> (default): universal instance,</li>
+<li><code>EXCLUSIVE</code>: exclusive instance,</li>
+<li><code>BASIC_V2</code>: ONTKE single-node instance,</li>
+<li><code>CLOUD_NATIVE_CLUSTER</code>: cluster version standard type,</li>
+<li><code>CLOUD_NATIVE_CLUSTER_EXCLUSIVE</code>: cluster version enhanced type.
+If it is not specified, it defaults to a universal instance.</li>
+</ul></dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="diskencryption_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskencryption_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable disk encryption for the CDB instance. Valid value: <code>on</code> (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="disktype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. <code>CLOUD_SSD</code> designates an SSD cloud disk; <code>CLOUD_HSSD</code> designates an Enhanced SSD cloud disk; and <code>CLOUD_PREMIUM</code> designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to <code>Regions and Availability Zones</code> for specific support details.</dd><dt class="property-optional"
             title="Optional">
         <span id="fastupgrade_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fastupgrade_csharp" style="color: inherit; text-decoration: inherit;">Fast<wbr>Upgrade</a>
@@ -753,8 +964,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_csharp" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -762,8 +972,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="intranetport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetport_csharp" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Port</a>
@@ -771,8 +980,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="masterregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterregion_csharp" style="color: inherit; text-decoration: inherit;">Master<wbr>Region</a>
@@ -780,8 +988,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The zone information of the primary instance is required when you purchase a disaster recovery instance.</p>
-</dd><dt class="property-optional"
+    <dd>The region information of the master instance. This field is required when purchasing a cross-region subscription.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramtemplateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramtemplateid_csharp" style="color: inherit; text-decoration: inherit;">Param<wbr>Template<wbr>Id</a>
@@ -789,8 +996,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify parameter template id.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Specify parameter template id.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="paytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_csharp" style="color: inherit; text-decoration: inherit;">Pay<wbr>Type</a>
@@ -798,9 +1004,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-optional property-deprecated"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="period_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -808,9 +1012,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead. Period of instance. NOTES: Only supported prepaid instance.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead. Period of instance. NOTES: Only supported prepaid instance.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -818,8 +1020,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Period of instance. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. NOTES: Only supported prepaid instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rogroupid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupid_csharp" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -827,8 +1036,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Security groups to use.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to use.</dd><dt class="property-optional"
             title="Optional">
         <span id="slavedeploymode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavedeploymode_csharp" style="color: inherit; text-decoration: inherit;">Slave<wbr>Deploy<wbr>Mode</a>
@@ -836,8 +1044,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -845,17 +1052,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private network ID. If <code>vpc_id</code> is set, this value is required.</p>
-</dd><dt class="property-optional"
+    <dd>Private network ID. If <code>vpcId</code> is set, this value is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional"
+    <dd>Instance tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -863,8 +1068,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC, which can be modified once every 24 hours and can't be removed.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC, which can be modified once every 24 hours and can't be removed.</dd><dt class="property-optional"
             title="Optional">
         <span id="waitswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitswitch_csharp" style="color: inherit; text-decoration: inherit;">Wait<wbr>Switch</a>
@@ -872,8 +1076,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</p>
-</dd><dt class="property-optional"
+    <dd>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -881,8 +1084,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</p>
-</dd></dl>
+    <dd>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -896,8 +1098,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of a mysql instance.</p>
-</dd><dt class="property-required"
+    <dd>The name of a mysql instance.</dd><dt class="property-required"
             title="Required">
         <span id="masterinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_go" style="color: inherit; text-decoration: inherit;">Master<wbr>Instance<wbr>Id</a>
@@ -905,8 +1106,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the master instance ID of recovery instances.</p>
-</dd><dt class="property-required"
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-required"
             title="Required">
         <span id="memsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_go" style="color: inherit; text-decoration: inherit;">Mem<wbr>Size</a>
@@ -914,8 +1114,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size (in MB).</p>
-</dd><dt class="property-required"
+    <dd>Memory size (in MB).</dd><dt class="property-required"
             title="Required">
         <span id="volumesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumesize_go" style="color: inherit; text-decoration: inherit;">Volume<wbr>Size</a>
@@ -923,8 +1122,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size (in GB).</p>
-</dd><dt class="property-optional"
+    <dd>Disk size (in GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -932,8 +1130,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. NOTES: Only supported prepaid instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -941,8 +1138,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="clustertopology_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertopology_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Topology</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopology">Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Args</a></span>
+    </dt>
+    <dd>Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_go" style="color: inherit; text-decoration: inherit;">Cpu</a>
@@ -950,8 +1154,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>CPU cores.</p>
-</dd><dt class="property-optional"
+    <dd>CPU cores.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destroyprotect_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroyprotect_go" style="color: inherit; text-decoration: inherit;">Destroy<wbr>Protect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance destroy protection status. Valid values: <code>on</code> (enable destroy protection), <code>off</code> (disable destroy protection).</dd><dt class="property-optional"
             title="Optional">
         <span id="devicetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_go" style="color: inherit; text-decoration: inherit;">Device<wbr>Type</a>
@@ -959,8 +1170,31 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify device type, available values: <code>UNIVERSAL</code> (default), <code>EXCLUSIVE</code>, <code>BASIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify device type, available values:</p>
+<ul>
+<li><code>UNIVERSAL</code> (default): universal instance,</li>
+<li><code>EXCLUSIVE</code>: exclusive instance,</li>
+<li><code>BASIC_V2</code>: ONTKE single-node instance,</li>
+<li><code>CLOUD_NATIVE_CLUSTER</code>: cluster version standard type,</li>
+<li><code>CLOUD_NATIVE_CLUSTER_EXCLUSIVE</code>: cluster version enhanced type.
+If it is not specified, it defaults to a universal instance.</li>
+</ul></dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="diskencryption_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskencryption_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable disk encryption for the CDB instance. Valid value: <code>on</code> (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="disktype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. <code>CLOUD_SSD</code> designates an SSD cloud disk; <code>CLOUD_HSSD</code> designates an Enhanced SSD cloud disk; and <code>CLOUD_PREMIUM</code> designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to <code>Regions and Availability Zones</code> for specific support details.</dd><dt class="property-optional"
             title="Optional">
         <span id="fastupgrade_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fastupgrade_go" style="color: inherit; text-decoration: inherit;">Fast<wbr>Upgrade</a>
@@ -968,8 +1202,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_go" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -977,8 +1210,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="intranetport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetport_go" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Port</a>
@@ -986,8 +1218,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="masterregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterregion_go" style="color: inherit; text-decoration: inherit;">Master<wbr>Region</a>
@@ -995,8 +1226,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The zone information of the primary instance is required when you purchase a disaster recovery instance.</p>
-</dd><dt class="property-optional"
+    <dd>The region information of the master instance. This field is required when purchasing a cross-region subscription.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramtemplateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramtemplateid_go" style="color: inherit; text-decoration: inherit;">Param<wbr>Template<wbr>Id</a>
@@ -1004,8 +1234,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify parameter template id.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Specify parameter template id.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="paytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_go" style="color: inherit; text-decoration: inherit;">Pay<wbr>Type</a>
@@ -1013,9 +1242,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-optional property-deprecated"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="period_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_go" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -1023,9 +1250,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead. Period of instance. NOTES: Only supported prepaid instance.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead. Period of instance. NOTES: Only supported prepaid instance.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -1033,8 +1258,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Period of instance. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. NOTES: Only supported prepaid instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rogroupid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupid_go" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -1042,8 +1274,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Security groups to use.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to use.</dd><dt class="property-optional"
             title="Optional">
         <span id="slavedeploymode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavedeploymode_go" style="color: inherit; text-decoration: inherit;">Slave<wbr>Deploy<wbr>Mode</a>
@@ -1051,8 +1282,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1060,17 +1290,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private network ID. If <code>vpc_id</code> is set, this value is required.</p>
-</dd><dt class="property-optional"
+    <dd>Private network ID. If <code>vpcId</code> is set, this value is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional"
+    <dd>Instance tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1078,8 +1306,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC, which can be modified once every 24 hours and can't be removed.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC, which can be modified once every 24 hours and can't be removed.</dd><dt class="property-optional"
             title="Optional">
         <span id="waitswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitswitch_go" style="color: inherit; text-decoration: inherit;">Wait<wbr>Switch</a>
@@ -1087,8 +1314,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</p>
-</dd><dt class="property-optional"
+    <dd>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1096,8 +1322,245 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</p>
-</dd></dl>
+    <dd>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of a mysql instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="master_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_instance_id_hcl" style="color: inherit; text-decoration: inherit;">master_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-required"
+            title="Required">
+        <span id="mem_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mem_size_hcl" style="color: inherit; text-decoration: inherit;">mem_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory size (in MB).</dd><dt class="property-required"
+            title="Required">
+        <span id="volume_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volume_size_hcl" style="color: inherit; text-decoration: inherit;">volume_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Disk size (in GB).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auto renew flag. NOTES: Only supported prepaid instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_topology_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_topology_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>topology</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopology">object</a></span>
+    </dt>
+    <dd>Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_hcl" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>CPU cores.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destroy_protect_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroy_protect_hcl" style="color: inherit; text-decoration: inherit;">destroy_<wbr>protect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance destroy protection status. Valid values: <code>on</code> (enable destroy protection), <code>off</code> (disable destroy protection).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="device_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_type_hcl" style="color: inherit; text-decoration: inherit;">device_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify device type, available values:</p>
+<ul>
+<li><code>UNIVERSAL</code> (default): universal instance,</li>
+<li><code>EXCLUSIVE</code>: exclusive instance,</li>
+<li><code>BASIC_V2</code>: ONTKE single-node instance,</li>
+<li><code>CLOUD_NATIVE_CLUSTER</code>: cluster version standard type,</li>
+<li><code>CLOUD_NATIVE_CLUSTER_EXCLUSIVE</code>: cluster version enhanced type.
+If it is not specified, it defaults to a universal instance.</li>
+</ul></dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="disk_encryption_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_encryption_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable disk encryption for the CDB instance. Valid value: <code>on</code> (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. <code>CLOUD_SSD</code> designates an SSD cloud disk; <code>CLOUD_HSSD</code> designates an Enhanced SSD cloud disk; and <code>CLOUD_PREMIUM</code> designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to <code>Regions and Availability Zones</code> for specific support details.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="fast_upgrade_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fast_upgrade_hcl" style="color: inherit; text-decoration: inherit;">fast_<wbr>upgrade</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="force_delete_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_delete_hcl" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="intranet_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranet_port_hcl" style="color: inherit; text-decoration: inherit;">intranet_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="master_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_region_hcl" style="color: inherit; text-decoration: inherit;">master_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The region information of the master instance. This field is required when purchasing a cross-region subscription.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="param_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_template_id_hcl" style="color: inherit; text-decoration: inherit;">param_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify parameter template id.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="pay_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_type_hcl" style="color: inherit; text-decoration: inherit;">pay_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead. Period of instance. NOTES: Only supported prepaid instance.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Period of instance. NOTES: Only supported prepaid instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ro_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ro_group_id_hcl" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Security groups to use.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="slave_deploy_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slave_deploy_mode_hcl" style="color: inherit; text-decoration: inherit;">slave_<wbr>deploy_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Private network ID. If <code>vpcId</code> is set, this value is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Instance tags.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of VPC, which can be modified once every 24 hours and can't be removed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="wait_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wait_switch_hcl" style="color: inherit; text-decoration: inherit;">wait_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1111,8 +1574,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of a mysql instance.</p>
-</dd><dt class="property-required"
+    <dd>The name of a mysql instance.</dd><dt class="property-required"
             title="Required">
         <span id="masterinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_java" style="color: inherit; text-decoration: inherit;">master<wbr>Instance<wbr>Id</a>
@@ -1120,8 +1582,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the master instance ID of recovery instances.</p>
-</dd><dt class="property-required"
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-required"
             title="Required">
         <span id="memsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_java" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -1129,8 +1590,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory size (in MB).</p>
-</dd><dt class="property-required"
+    <dd>Memory size (in MB).</dd><dt class="property-required"
             title="Required">
         <span id="volumesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumesize_java" style="color: inherit; text-decoration: inherit;">volume<wbr>Size</a>
@@ -1138,8 +1598,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Disk size (in GB).</p>
-</dd><dt class="property-optional"
+    <dd>Disk size (in GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -1147,8 +1606,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auto renew flag. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. NOTES: Only supported prepaid instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1156,8 +1614,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="clustertopology_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertopology_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Topology</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopology">Readonly<wbr>Instance<wbr>Cluster<wbr>Topology</a></span>
+    </dt>
+    <dd>Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_java" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -1165,8 +1630,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>CPU cores.</p>
-</dd><dt class="property-optional"
+    <dd>CPU cores.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destroyprotect_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroyprotect_java" style="color: inherit; text-decoration: inherit;">destroy<wbr>Protect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance destroy protection status. Valid values: <code>on</code> (enable destroy protection), <code>off</code> (disable destroy protection).</dd><dt class="property-optional"
             title="Optional">
         <span id="devicetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_java" style="color: inherit; text-decoration: inherit;">device<wbr>Type</a>
@@ -1174,8 +1646,31 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify device type, available values: <code>UNIVERSAL</code> (default), <code>EXCLUSIVE</code>, <code>BASIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify device type, available values:</p>
+<ul>
+<li><code>UNIVERSAL</code> (default): universal instance,</li>
+<li><code>EXCLUSIVE</code>: exclusive instance,</li>
+<li><code>BASIC_V2</code>: ONTKE single-node instance,</li>
+<li><code>CLOUD_NATIVE_CLUSTER</code>: cluster version standard type,</li>
+<li><code>CLOUD_NATIVE_CLUSTER_EXCLUSIVE</code>: cluster version enhanced type.
+If it is not specified, it defaults to a universal instance.</li>
+</ul></dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="diskencryption_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskencryption_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Whether to enable disk encryption for the CDB instance. Valid value: <code>on</code> (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="disktype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. <code>CLOUD_SSD</code> designates an SSD cloud disk; <code>CLOUD_HSSD</code> designates an Enhanced SSD cloud disk; and <code>CLOUD_PREMIUM</code> designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to <code>Regions and Availability Zones</code> for specific support details.</dd><dt class="property-optional"
             title="Optional">
         <span id="fastupgrade_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fastupgrade_java" style="color: inherit; text-decoration: inherit;">fast<wbr>Upgrade</a>
@@ -1183,8 +1678,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_java" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -1192,8 +1686,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="intranetport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetport_java" style="color: inherit; text-decoration: inherit;">intranet<wbr>Port</a>
@@ -1201,8 +1694,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="masterregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterregion_java" style="color: inherit; text-decoration: inherit;">master<wbr>Region</a>
@@ -1210,8 +1702,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The zone information of the primary instance is required when you purchase a disaster recovery instance.</p>
-</dd><dt class="property-optional"
+    <dd>The region information of the master instance. This field is required when purchasing a cross-region subscription.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramtemplateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramtemplateid_java" style="color: inherit; text-decoration: inherit;">param<wbr>Template<wbr>Id</a>
@@ -1219,8 +1710,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify parameter template id.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Specify parameter template id.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="paytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_java" style="color: inherit; text-decoration: inherit;">pay<wbr>Type</a>
@@ -1228,9 +1718,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-optional property-deprecated"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="period_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_java" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1238,9 +1726,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead. Period of instance. NOTES: Only supported prepaid instance.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead. Period of instance. NOTES: Only supported prepaid instance.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -1248,8 +1734,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Period of instance. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. NOTES: Only supported prepaid instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rogroupid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupid_java" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1257,8 +1750,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security groups to use.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to use.</dd><dt class="property-optional"
             title="Optional">
         <span id="slavedeploymode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavedeploymode_java" style="color: inherit; text-decoration: inherit;">slave<wbr>Deploy<wbr>Mode</a>
@@ -1266,8 +1758,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1275,17 +1766,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private network ID. If <code>vpc_id</code> is set, this value is required.</p>
-</dd><dt class="property-optional"
+    <dd>Private network ID. If <code>vpcId</code> is set, this value is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional"
+    <dd>Instance tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1293,8 +1782,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC, which can be modified once every 24 hours and can't be removed.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC, which can be modified once every 24 hours and can't be removed.</dd><dt class="property-optional"
             title="Optional">
         <span id="waitswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitswitch_java" style="color: inherit; text-decoration: inherit;">wait<wbr>Switch</a>
@@ -1302,8 +1790,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</p>
-</dd><dt class="property-optional"
+    <dd>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1311,8 +1798,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</p>
-</dd></dl>
+    <dd>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1326,8 +1812,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of a mysql instance.</p>
-</dd><dt class="property-required"
+    <dd>The name of a mysql instance.</dd><dt class="property-required"
             title="Required">
         <span id="masterinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">master<wbr>Instance<wbr>Id</a>
@@ -1335,8 +1820,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the master instance ID of recovery instances.</p>
-</dd><dt class="property-required"
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-required"
             title="Required">
         <span id="memsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_nodejs" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -1344,8 +1828,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory size (in MB).</p>
-</dd><dt class="property-required"
+    <dd>Memory size (in MB).</dd><dt class="property-required"
             title="Required">
         <span id="volumesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumesize_nodejs" style="color: inherit; text-decoration: inherit;">volume<wbr>Size</a>
@@ -1353,8 +1836,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Disk size (in GB).</p>
-</dd><dt class="property-optional"
+    <dd>Disk size (in GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -1362,8 +1844,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auto renew flag. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. NOTES: Only supported prepaid instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1371,8 +1852,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="clustertopology_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertopology_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Topology</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopology">Readonly<wbr>Instance<wbr>Cluster<wbr>Topology</a></span>
+    </dt>
+    <dd>Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_nodejs" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -1380,8 +1868,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>CPU cores.</p>
-</dd><dt class="property-optional"
+    <dd>CPU cores.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destroyprotect_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroyprotect_nodejs" style="color: inherit; text-decoration: inherit;">destroy<wbr>Protect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance destroy protection status. Valid values: <code>on</code> (enable destroy protection), <code>off</code> (disable destroy protection).</dd><dt class="property-optional"
             title="Optional">
         <span id="devicetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_nodejs" style="color: inherit; text-decoration: inherit;">device<wbr>Type</a>
@@ -1389,8 +1884,31 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify device type, available values: <code>UNIVERSAL</code> (default), <code>EXCLUSIVE</code>, <code>BASIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify device type, available values:</p>
+<ul>
+<li><code>UNIVERSAL</code> (default): universal instance,</li>
+<li><code>EXCLUSIVE</code>: exclusive instance,</li>
+<li><code>BASIC_V2</code>: ONTKE single-node instance,</li>
+<li><code>CLOUD_NATIVE_CLUSTER</code>: cluster version standard type,</li>
+<li><code>CLOUD_NATIVE_CLUSTER_EXCLUSIVE</code>: cluster version enhanced type.
+If it is not specified, it defaults to a universal instance.</li>
+</ul></dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="diskencryption_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskencryption_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable disk encryption for the CDB instance. Valid value: <code>on</code> (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="disktype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. <code>CLOUD_SSD</code> designates an SSD cloud disk; <code>CLOUD_HSSD</code> designates an Enhanced SSD cloud disk; and <code>CLOUD_PREMIUM</code> designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to <code>Regions and Availability Zones</code> for specific support details.</dd><dt class="property-optional"
             title="Optional">
         <span id="fastupgrade_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fastupgrade_nodejs" style="color: inherit; text-decoration: inherit;">fast<wbr>Upgrade</a>
@@ -1398,8 +1916,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_nodejs" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -1407,8 +1924,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="intranetport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetport_nodejs" style="color: inherit; text-decoration: inherit;">intranet<wbr>Port</a>
@@ -1416,8 +1932,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="masterregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterregion_nodejs" style="color: inherit; text-decoration: inherit;">master<wbr>Region</a>
@@ -1425,8 +1940,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The zone information of the primary instance is required when you purchase a disaster recovery instance.</p>
-</dd><dt class="property-optional"
+    <dd>The region information of the master instance. This field is required when purchasing a cross-region subscription.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramtemplateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramtemplateid_nodejs" style="color: inherit; text-decoration: inherit;">param<wbr>Template<wbr>Id</a>
@@ -1434,8 +1948,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify parameter template id.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Specify parameter template id.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="paytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_nodejs" style="color: inherit; text-decoration: inherit;">pay<wbr>Type</a>
@@ -1443,9 +1956,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-optional property-deprecated"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="period_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1453,9 +1964,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead. Period of instance. NOTES: Only supported prepaid instance.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead. Period of instance. NOTES: Only supported prepaid instance.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -1463,8 +1972,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Period of instance. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. NOTES: Only supported prepaid instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rogroupid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupid_nodejs" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1472,8 +1988,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Security groups to use.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to use.</dd><dt class="property-optional"
             title="Optional">
         <span id="slavedeploymode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavedeploymode_nodejs" style="color: inherit; text-decoration: inherit;">slave<wbr>Deploy<wbr>Mode</a>
@@ -1481,8 +1996,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1490,17 +2004,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private network ID. If <code>vpc_id</code> is set, this value is required.</p>
-</dd><dt class="property-optional"
+    <dd>Private network ID. If <code>vpcId</code> is set, this value is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional"
+    <dd>Instance tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1508,8 +2020,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC, which can be modified once every 24 hours and can't be removed.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC, which can be modified once every 24 hours and can't be removed.</dd><dt class="property-optional"
             title="Optional">
         <span id="waitswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitswitch_nodejs" style="color: inherit; text-decoration: inherit;">wait<wbr>Switch</a>
@@ -1517,8 +2028,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</p>
-</dd><dt class="property-optional"
+    <dd>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1526,8 +2036,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</p>
-</dd></dl>
+    <dd>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1541,8 +2050,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of a mysql instance.</p>
-</dd><dt class="property-required"
+    <dd>The name of a mysql instance.</dd><dt class="property-required"
             title="Required">
         <span id="master_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_instance_id_python" style="color: inherit; text-decoration: inherit;">master_<wbr>instance_<wbr>id</a>
@@ -1550,8 +2058,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicates the master instance ID of recovery instances.</p>
-</dd><dt class="property-required"
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-required"
             title="Required">
         <span id="mem_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mem_size_python" style="color: inherit; text-decoration: inherit;">mem_<wbr>size</a>
@@ -1559,8 +2066,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size (in MB).</p>
-</dd><dt class="property-required"
+    <dd>Memory size (in MB).</dd><dt class="property-required"
             title="Required">
         <span id="volume_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volume_size_python" style="color: inherit; text-decoration: inherit;">volume_<wbr>size</a>
@@ -1568,8 +2074,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size (in GB).</p>
-</dd><dt class="property-optional"
+    <dd>Disk size (in GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_flag_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
@@ -1577,8 +2082,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. NOTES: Only supported prepaid instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -1586,8 +2090,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_topology_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_topology_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>topology</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopology">Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Args</a></span>
+    </dt>
+    <dd>Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_python" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -1595,8 +2106,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>CPU cores.</p>
-</dd><dt class="property-optional"
+    <dd>CPU cores.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destroy_protect_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroy_protect_python" style="color: inherit; text-decoration: inherit;">destroy_<wbr>protect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Instance destroy protection status. Valid values: <code>on</code> (enable destroy protection), <code>off</code> (disable destroy protection).</dd><dt class="property-optional"
             title="Optional">
         <span id="device_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_type_python" style="color: inherit; text-decoration: inherit;">device_<wbr>type</a>
@@ -1604,8 +2122,31 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify device type, available values: <code>UNIVERSAL</code> (default), <code>EXCLUSIVE</code>, <code>BASIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify device type, available values:</p>
+<ul>
+<li><code>UNIVERSAL</code> (default): universal instance,</li>
+<li><code>EXCLUSIVE</code>: exclusive instance,</li>
+<li><code>BASIC_V2</code>: ONTKE single-node instance,</li>
+<li><code>CLOUD_NATIVE_CLUSTER</code>: cluster version standard type,</li>
+<li><code>CLOUD_NATIVE_CLUSTER_EXCLUSIVE</code>: cluster version enhanced type.
+If it is not specified, it defaults to a universal instance.</li>
+</ul></dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="disk_encryption_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_encryption_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Whether to enable disk encryption for the CDB instance. Valid value: <code>on</code> (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="disk_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. <code>CLOUD_SSD</code> designates an SSD cloud disk; <code>CLOUD_HSSD</code> designates an Enhanced SSD cloud disk; and <code>CLOUD_PREMIUM</code> designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to <code>Regions and Availability Zones</code> for specific support details.</dd><dt class="property-optional"
             title="Optional">
         <span id="fast_upgrade_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fast_upgrade_python" style="color: inherit; text-decoration: inherit;">fast_<wbr>upgrade</a>
@@ -1613,8 +2154,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="force_delete_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_delete_python" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
@@ -1622,8 +2162,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="intranet_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranet_port_python" style="color: inherit; text-decoration: inherit;">intranet_<wbr>port</a>
@@ -1631,8 +2170,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="master_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_region_python" style="color: inherit; text-decoration: inherit;">master_<wbr>region</a>
@@ -1640,8 +2178,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The zone information of the primary instance is required when you purchase a disaster recovery instance.</p>
-</dd><dt class="property-optional"
+    <dd>The region information of the master instance. This field is required when purchasing a cross-region subscription.</dd><dt class="property-optional"
             title="Optional">
         <span id="param_template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_template_id_python" style="color: inherit; text-decoration: inherit;">param_<wbr>template_<wbr>id</a>
@@ -1649,8 +2186,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify parameter template id.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Specify parameter template id.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="pay_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_type_python" style="color: inherit; text-decoration: inherit;">pay_<wbr>type</a>
@@ -1658,9 +2194,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-optional property-deprecated"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_python" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1668,9 +2202,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead. Period of instance. NOTES: Only supported prepaid instance.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead. Period of instance. NOTES: Only supported prepaid instance.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_period_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
@@ -1678,8 +2210,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Period of instance. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. NOTES: Only supported prepaid instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ro_group_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ro_group_id_python" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.</dd><dt class="property-optional"
             title="Optional">
         <span id="security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -1687,8 +2226,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Security groups to use.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to use.</dd><dt class="property-optional"
             title="Optional">
         <span id="slave_deploy_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slave_deploy_mode_python" style="color: inherit; text-decoration: inherit;">slave_<wbr>deploy_<wbr>mode</a>
@@ -1696,8 +2234,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1705,17 +2242,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Private network ID. If <code>vpc_id</code> is set, this value is required.</p>
-</dd><dt class="property-optional"
+    <dd>Private network ID. If <code>vpcId</code> is set, this value is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional"
+    <dd>Instance tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1723,8 +2258,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of VPC, which can be modified once every 24 hours and can't be removed.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC, which can be modified once every 24 hours and can't be removed.</dd><dt class="property-optional"
             title="Optional">
         <span id="wait_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wait_switch_python" style="color: inherit; text-decoration: inherit;">wait_<wbr>switch</a>
@@ -1732,8 +2266,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</p>
-</dd><dt class="property-optional"
+    <dd>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1741,8 +2274,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</p>
-</dd></dl>
+    <dd>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1756,8 +2288,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of a mysql instance.</p>
-</dd><dt class="property-required"
+    <dd>The name of a mysql instance.</dd><dt class="property-required"
             title="Required">
         <span id="masterinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_yaml" style="color: inherit; text-decoration: inherit;">master<wbr>Instance<wbr>Id</a>
@@ -1765,8 +2296,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the master instance ID of recovery instances.</p>
-</dd><dt class="property-required"
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-required"
             title="Required">
         <span id="memsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_yaml" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -1774,8 +2304,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory size (in MB).</p>
-</dd><dt class="property-required"
+    <dd>Memory size (in MB).</dd><dt class="property-required"
             title="Required">
         <span id="volumesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumesize_yaml" style="color: inherit; text-decoration: inherit;">volume<wbr>Size</a>
@@ -1783,8 +2312,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Disk size (in GB).</p>
-</dd><dt class="property-optional"
+    <dd>Disk size (in GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -1792,8 +2320,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auto renew flag. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. NOTES: Only supported prepaid instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1801,8 +2328,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="clustertopology_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertopology_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Topology</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopology">Property Map</a></span>
+    </dt>
+    <dd>Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.</dd><dt class="property-optional"
             title="Optional">
         <span id="cpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_yaml" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -1810,8 +2344,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>CPU cores.</p>
-</dd><dt class="property-optional"
+    <dd>CPU cores.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="destroyprotect_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destroyprotect_yaml" style="color: inherit; text-decoration: inherit;">destroy<wbr>Protect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance destroy protection status. Valid values: <code>on</code> (enable destroy protection), <code>off</code> (disable destroy protection).</dd><dt class="property-optional"
             title="Optional">
         <span id="devicetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_yaml" style="color: inherit; text-decoration: inherit;">device<wbr>Type</a>
@@ -1819,8 +2360,31 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify device type, available values: <code>UNIVERSAL</code> (default), <code>EXCLUSIVE</code>, <code>BASIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify device type, available values:</p>
+<ul>
+<li><code>UNIVERSAL</code> (default): universal instance,</li>
+<li><code>EXCLUSIVE</code>: exclusive instance,</li>
+<li><code>BASIC_V2</code>: ONTKE single-node instance,</li>
+<li><code>CLOUD_NATIVE_CLUSTER</code>: cluster version standard type,</li>
+<li><code>CLOUD_NATIVE_CLUSTER_EXCLUSIVE</code>: cluster version enhanced type.
+If it is not specified, it defaults to a universal instance.</li>
+</ul></dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="diskencryption_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskencryption_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Whether to enable disk encryption for the CDB instance. Valid value: <code>on</code> (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="disktype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. <code>CLOUD_SSD</code> designates an SSD cloud disk; <code>CLOUD_HSSD</code> designates an Enhanced SSD cloud disk; and <code>CLOUD_PREMIUM</code> designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to <code>Regions and Availability Zones</code> for specific support details.</dd><dt class="property-optional"
             title="Optional">
         <span id="fastupgrade_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fastupgrade_yaml" style="color: inherit; text-decoration: inherit;">fast<wbr>Upgrade</a>
@@ -1828,8 +2392,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_yaml" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -1837,8 +2400,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="intranetport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetport_yaml" style="color: inherit; text-decoration: inherit;">intranet<wbr>Port</a>
@@ -1846,8 +2408,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="masterregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterregion_yaml" style="color: inherit; text-decoration: inherit;">master<wbr>Region</a>
@@ -1855,8 +2416,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The zone information of the primary instance is required when you purchase a disaster recovery instance.</p>
-</dd><dt class="property-optional"
+    <dd>The region information of the master instance. This field is required when purchasing a cross-region subscription.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramtemplateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramtemplateid_yaml" style="color: inherit; text-decoration: inherit;">param<wbr>Template<wbr>Id</a>
@@ -1864,8 +2424,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify parameter template id.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Specify parameter template id.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="paytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_yaml" style="color: inherit; text-decoration: inherit;">pay<wbr>Type</a>
@@ -1873,9 +2432,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-optional property-deprecated"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="period_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1883,9 +2440,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead. Period of instance. NOTES: Only supported prepaid instance.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead. Period of instance. NOTES: Only supported prepaid instance.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -1893,8 +2448,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Period of instance. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. NOTES: Only supported prepaid instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rogroupid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupid_yaml" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1902,8 +2464,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security groups to use.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to use.</dd><dt class="property-optional"
             title="Optional">
         <span id="slavedeploymode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavedeploymode_yaml" style="color: inherit; text-decoration: inherit;">slave<wbr>Deploy<wbr>Mode</a>
@@ -1911,8 +2472,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1920,17 +2480,15 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private network ID. If <code>vpc_id</code> is set, this value is required.</p>
-</dd><dt class="property-optional"
+    <dd>Private network ID. If <code>vpcId</code> is set, this value is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional"
+    <dd>Instance tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1938,8 +2496,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC, which can be modified once every 24 hours and can't be removed.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC, which can be modified once every 24 hours and can't be removed.</dd><dt class="property-optional"
             title="Optional">
         <span id="waitswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitswitch_yaml" style="color: inherit; text-decoration: inherit;">wait<wbr>Switch</a>
@@ -1947,8 +2504,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</p>
-</dd><dt class="property-optional"
+    <dd>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1956,8 +2512,7 @@ The ReadonlyInstance resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</p>
-</dd></dl>
+    <dd>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1978,8 +2533,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="intranetip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetip_csharp" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Ip</a>
@@ -1987,8 +2541,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance intranet IP.</p>
-</dd><dt class="property-"
+    <dd>instance intranet IP.</dd><dt class="property-"
             title="">
         <span id="locked_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#locked_csharp" style="color: inherit; text-decoration: inherit;">Locked</a>
@@ -1996,8 +2549,23 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</dd><dt class="property-"
+            title="">
+        <span id="rovip_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rovip_csharp" style="color: inherit; text-decoration: inherit;">Ro<wbr>Vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VIP-only read access.</dd><dt class="property-"
+            title="">
+        <span id="rovport_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rovport_csharp" style="color: inherit; text-decoration: inherit;">Ro<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>VIP port number (read-only).</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2005,8 +2573,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-"
+    <dd>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-"
             title="">
         <span id="taskstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskstatus_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Status</a>
@@ -2014,8 +2581,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates which kind of operations is being executed.</p>
-</dd></dl>
+    <dd>Indicates which kind of operations is being executed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2029,8 +2595,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="intranetip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetip_go" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Ip</a>
@@ -2038,8 +2603,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance intranet IP.</p>
-</dd><dt class="property-"
+    <dd>instance intranet IP.</dd><dt class="property-"
             title="">
         <span id="locked_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#locked_go" style="color: inherit; text-decoration: inherit;">Locked</a>
@@ -2047,8 +2611,23 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</dd><dt class="property-"
+            title="">
+        <span id="rovip_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rovip_go" style="color: inherit; text-decoration: inherit;">Ro<wbr>Vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VIP-only read access.</dd><dt class="property-"
+            title="">
+        <span id="rovport_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rovport_go" style="color: inherit; text-decoration: inherit;">Ro<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>VIP port number (read-only).</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2056,8 +2635,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-"
+    <dd>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-"
             title="">
         <span id="taskstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskstatus_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Status</a>
@@ -2065,8 +2643,69 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates which kind of operations is being executed.</p>
-</dd></dl>
+    <dd>Indicates which kind of operations is being executed.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="intranet_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranet_ip_hcl" style="color: inherit; text-decoration: inherit;">intranet_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance intranet IP.</dd><dt class="property-"
+            title="">
+        <span id="locked_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#locked_hcl" style="color: inherit; text-decoration: inherit;">locked</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</dd><dt class="property-"
+            title="">
+        <span id="ro_vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ro_vip_hcl" style="color: inherit; text-decoration: inherit;">ro_<wbr>vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VIP-only read access.</dd><dt class="property-"
+            title="">
+        <span id="ro_vport_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ro_vport_hcl" style="color: inherit; text-decoration: inherit;">ro_<wbr>vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>VIP port number (read-only).</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-"
+            title="">
+        <span id="task_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_status_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Indicates which kind of operations is being executed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2080,8 +2719,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="intranetip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetip_java" style="color: inherit; text-decoration: inherit;">intranet<wbr>Ip</a>
@@ -2089,8 +2727,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance intranet IP.</p>
-</dd><dt class="property-"
+    <dd>instance intranet IP.</dd><dt class="property-"
             title="">
         <span id="locked_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#locked_java" style="color: inherit; text-decoration: inherit;">locked</a>
@@ -2098,8 +2735,23 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</dd><dt class="property-"
+            title="">
+        <span id="rovip_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rovip_java" style="color: inherit; text-decoration: inherit;">ro<wbr>Vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>VIP-only read access.</dd><dt class="property-"
+            title="">
+        <span id="rovport_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rovport_java" style="color: inherit; text-decoration: inherit;">ro<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>VIP port number (read-only).</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2107,8 +2759,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-"
+    <dd>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-"
             title="">
         <span id="taskstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskstatus_java" style="color: inherit; text-decoration: inherit;">task<wbr>Status</a>
@@ -2116,8 +2767,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Indicates which kind of operations is being executed.</p>
-</dd></dl>
+    <dd>Indicates which kind of operations is being executed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2131,8 +2781,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="intranetip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetip_nodejs" style="color: inherit; text-decoration: inherit;">intranet<wbr>Ip</a>
@@ -2140,8 +2789,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance intranet IP.</p>
-</dd><dt class="property-"
+    <dd>instance intranet IP.</dd><dt class="property-"
             title="">
         <span id="locked_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#locked_nodejs" style="color: inherit; text-decoration: inherit;">locked</a>
@@ -2149,8 +2797,23 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</dd><dt class="property-"
+            title="">
+        <span id="rovip_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rovip_nodejs" style="color: inherit; text-decoration: inherit;">ro<wbr>Vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VIP-only read access.</dd><dt class="property-"
+            title="">
+        <span id="rovport_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rovport_nodejs" style="color: inherit; text-decoration: inherit;">ro<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>VIP port number (read-only).</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2158,8 +2821,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-"
+    <dd>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-"
             title="">
         <span id="taskstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskstatus_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Status</a>
@@ -2167,8 +2829,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Indicates which kind of operations is being executed.</p>
-</dd></dl>
+    <dd>Indicates which kind of operations is being executed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2182,8 +2843,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="intranet_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranet_ip_python" style="color: inherit; text-decoration: inherit;">intranet_<wbr>ip</a>
@@ -2191,8 +2851,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance intranet IP.</p>
-</dd><dt class="property-"
+    <dd>instance intranet IP.</dd><dt class="property-"
             title="">
         <span id="locked_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#locked_python" style="color: inherit; text-decoration: inherit;">locked</a>
@@ -2200,8 +2859,23 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</dd><dt class="property-"
+            title="">
+        <span id="ro_vip_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ro_vip_python" style="color: inherit; text-decoration: inherit;">ro_<wbr>vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>VIP-only read access.</dd><dt class="property-"
+            title="">
+        <span id="ro_vport_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ro_vport_python" style="color: inherit; text-decoration: inherit;">ro_<wbr>vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>VIP port number (read-only).</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2209,8 +2883,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-"
+    <dd>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-"
             title="">
         <span id="task_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_status_python" style="color: inherit; text-decoration: inherit;">task_<wbr>status</a>
@@ -2218,8 +2891,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates which kind of operations is being executed.</p>
-</dd></dl>
+    <dd>Indicates which kind of operations is being executed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2233,8 +2905,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="intranetip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetip_yaml" style="color: inherit; text-decoration: inherit;">intranet<wbr>Ip</a>
@@ -2242,8 +2913,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance intranet IP.</p>
-</dd><dt class="property-"
+    <dd>instance intranet IP.</dd><dt class="property-"
             title="">
         <span id="locked_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#locked_yaml" style="color: inherit; text-decoration: inherit;">locked</a>
@@ -2251,8 +2921,23 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</p>
-</dd><dt class="property-"
+    <dd>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</dd><dt class="property-"
+            title="">
+        <span id="rovip_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rovip_yaml" style="color: inherit; text-decoration: inherit;">ro<wbr>Vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>VIP-only read access.</dd><dt class="property-"
+            title="">
+        <span id="rovport_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rovport_yaml" style="color: inherit; text-decoration: inherit;">ro<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>VIP port number (read-only).</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2260,8 +2945,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-"
+    <dd>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-"
             title="">
         <span id="taskstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskstatus_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Status</a>
@@ -2269,8 +2953,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Indicates which kind of operations is being executed.</p>
-</dd></dl>
+    <dd>Indicates which kind of operations is being executed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2280,25 +2963,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ReadonlyInstance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ReadonlyInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ReadonlyInstance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ReadonlyInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ReadonlyInstance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">auto_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">cluster_topology</span><span class="p">:</span> <span class="nx">Optional[ReadonlyInstanceClusterTopologyArgs]</span> = None<span class="p">,</span>
         <span class="nx">cpu</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">destroy_protect</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">device_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">disk_encryption</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">disk_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">fast_upgrade</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">force_delete</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -2312,114 +2999,156 @@ Get an existing ReadonlyInstance resource's state with the given name, ID, and o
         <span class="nx">pay_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">prepaid_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">ro_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">ro_vip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">ro_vport</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">slave_deploy_mode</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">task_status</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">volume_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">wait_switch</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> ReadonlyInstance</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetReadonlyInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ReadonlyInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ReadonlyInstance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetReadonlyInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ReadonlyInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ReadonlyInstance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ReadonlyInstance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ReadonlyInstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ReadonlyInstance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ReadonlyInstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ReadonlyInstance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ReadonlyInstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ReadonlyInstance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ReadonlyInstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingReadonlyInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Mysql:ReadonlyInstance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_mysql_readonly_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ReadonlyInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ReadonlyInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2427,28 +3156,31 @@ Get an existing ReadonlyInstance resource's state with the given name, ID, and o
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ReadonlyInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2456,28 +3188,31 @@ Get an existing ReadonlyInstance resource's state with the given name, ID, and o
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ReadonlyInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2497,8 +3232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. NOTES: Only supported prepaid instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -2506,8 +3240,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_clustertopology_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertopology_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Topology</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopology">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Readonly<wbr>Instance<wbr>Cluster<wbr>Topology</a></span>
+    </dt>
+    <dd>Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_csharp" style="color: inherit; text-decoration: inherit;">Cpu</a>
@@ -2515,8 +3256,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>CPU cores.</p>
-</dd><dt class="property-optional"
+    <dd>CPU cores.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_destroyprotect_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_destroyprotect_csharp" style="color: inherit; text-decoration: inherit;">Destroy<wbr>Protect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance destroy protection status. Valid values: <code>on</code> (enable destroy protection), <code>off</code> (disable destroy protection).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_devicetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_devicetype_csharp" style="color: inherit; text-decoration: inherit;">Device<wbr>Type</a>
@@ -2524,8 +3272,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify device type, available values: <code>UNIVERSAL</code> (default), <code>EXCLUSIVE</code>, <code>BASIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify device type, available values:</p>
+<ul>
+<li><code>UNIVERSAL</code> (default): universal instance,</li>
+<li><code>EXCLUSIVE</code>: exclusive instance,</li>
+<li><code>BASIC_V2</code>: ONTKE single-node instance,</li>
+<li><code>CLOUD_NATIVE_CLUSTER</code>: cluster version standard type,</li>
+<li><code>CLOUD_NATIVE_CLUSTER_EXCLUSIVE</code>: cluster version enhanced type.
+If it is not specified, it defaults to a universal instance.</li>
+</ul></dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_diskencryption_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskencryption_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable disk encryption for the CDB instance. Valid value: <code>on</code> (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_disktype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. <code>CLOUD_SSD</code> designates an SSD cloud disk; <code>CLOUD_HSSD</code> designates an Enhanced SSD cloud disk; and <code>CLOUD_PREMIUM</code> designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to <code>Regions and Availability Zones</code> for specific support details.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_fastupgrade_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fastupgrade_csharp" style="color: inherit; text-decoration: inherit;">Fast<wbr>Upgrade</a>
@@ -2533,8 +3304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_csharp" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -2542,8 +3312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -2551,8 +3320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of a mysql instance.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a mysql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intranetip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranetip_csharp" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Ip</a>
@@ -2560,8 +3328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance intranet IP.</p>
-</dd><dt class="property-optional"
+    <dd>instance intranet IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intranetport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranetport_csharp" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Port</a>
@@ -2569,8 +3336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_locked_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_locked_csharp" style="color: inherit; text-decoration: inherit;">Locked</a>
@@ -2578,8 +3344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_masterinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Master<wbr>Instance<wbr>Id</a>
@@ -2587,8 +3352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the master instance ID of recovery instances.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_masterregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterregion_csharp" style="color: inherit; text-decoration: inherit;">Master<wbr>Region</a>
@@ -2596,8 +3360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The zone information of the primary instance is required when you purchase a disaster recovery instance.</p>
-</dd><dt class="property-optional"
+    <dd>The region information of the master instance. This field is required when purchasing a cross-region subscription.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memsize_csharp" style="color: inherit; text-decoration: inherit;">Mem<wbr>Size</a>
@@ -2605,8 +3368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size (in MB).</p>
-</dd><dt class="property-optional"
+    <dd>Memory size (in MB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramtemplateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramtemplateid_csharp" style="color: inherit; text-decoration: inherit;">Param<wbr>Template<wbr>Id</a>
@@ -2614,8 +3376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify parameter template id.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Specify parameter template id.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_paytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paytype_csharp" style="color: inherit; text-decoration: inherit;">Pay<wbr>Type</a>
@@ -2623,9 +3384,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-optional property-deprecated"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_period_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -2633,9 +3392,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead. Period of instance. NOTES: Only supported prepaid instance.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead. Period of instance. NOTES: Only supported prepaid instance.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -2643,8 +3400,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Period of instance. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. NOTES: Only supported prepaid instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rogroupid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupid_csharp" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rovip_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rovip_csharp" style="color: inherit; text-decoration: inherit;">Ro<wbr>Vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VIP-only read access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rovport_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rovport_csharp" style="color: inherit; text-decoration: inherit;">Ro<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>VIP port number (read-only).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -2652,8 +3432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Security groups to use.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to use.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_slavedeploymode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slavedeploymode_csharp" style="color: inherit; text-decoration: inherit;">Slave<wbr>Deploy<wbr>Mode</a>
@@ -2661,8 +3440,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2670,8 +3448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-optional"
+    <dd>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2679,17 +3456,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private network ID. If <code>vpc_id</code> is set, this value is required.</p>
-</dd><dt class="property-optional"
+    <dd>Private network ID. If <code>vpcId</code> is set, this value is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional"
+    <dd>Instance tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskstatus_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Status</a>
@@ -2697,8 +3472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates which kind of operations is being executed.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates which kind of operations is being executed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_volumesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_volumesize_csharp" style="color: inherit; text-decoration: inherit;">Volume<wbr>Size</a>
@@ -2706,8 +3480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size (in GB).</p>
-</dd><dt class="property-optional"
+    <dd>Disk size (in GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2715,8 +3488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC, which can be modified once every 24 hours and can't be removed.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC, which can be modified once every 24 hours and can't be removed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_waitswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitswitch_csharp" style="color: inherit; text-decoration: inherit;">Wait<wbr>Switch</a>
@@ -2724,8 +3496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</p>
-</dd><dt class="property-optional"
+    <dd>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -2733,8 +3504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</p>
-</dd></dl>
+    <dd>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2748,8 +3518,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. NOTES: Only supported prepaid instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -2757,8 +3526,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_clustertopology_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertopology_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Topology</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopology">Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Args</a></span>
+    </dt>
+    <dd>Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_go" style="color: inherit; text-decoration: inherit;">Cpu</a>
@@ -2766,8 +3542,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>CPU cores.</p>
-</dd><dt class="property-optional"
+    <dd>CPU cores.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_destroyprotect_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_destroyprotect_go" style="color: inherit; text-decoration: inherit;">Destroy<wbr>Protect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance destroy protection status. Valid values: <code>on</code> (enable destroy protection), <code>off</code> (disable destroy protection).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_devicetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_devicetype_go" style="color: inherit; text-decoration: inherit;">Device<wbr>Type</a>
@@ -2775,8 +3558,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify device type, available values: <code>UNIVERSAL</code> (default), <code>EXCLUSIVE</code>, <code>BASIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify device type, available values:</p>
+<ul>
+<li><code>UNIVERSAL</code> (default): universal instance,</li>
+<li><code>EXCLUSIVE</code>: exclusive instance,</li>
+<li><code>BASIC_V2</code>: ONTKE single-node instance,</li>
+<li><code>CLOUD_NATIVE_CLUSTER</code>: cluster version standard type,</li>
+<li><code>CLOUD_NATIVE_CLUSTER_EXCLUSIVE</code>: cluster version enhanced type.
+If it is not specified, it defaults to a universal instance.</li>
+</ul></dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_diskencryption_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskencryption_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable disk encryption for the CDB instance. Valid value: <code>on</code> (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_disktype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. <code>CLOUD_SSD</code> designates an SSD cloud disk; <code>CLOUD_HSSD</code> designates an Enhanced SSD cloud disk; and <code>CLOUD_PREMIUM</code> designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to <code>Regions and Availability Zones</code> for specific support details.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_fastupgrade_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fastupgrade_go" style="color: inherit; text-decoration: inherit;">Fast<wbr>Upgrade</a>
@@ -2784,8 +3590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_go" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -2793,8 +3598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -2802,8 +3606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of a mysql instance.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a mysql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intranetip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranetip_go" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Ip</a>
@@ -2811,8 +3614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance intranet IP.</p>
-</dd><dt class="property-optional"
+    <dd>instance intranet IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intranetport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranetport_go" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Port</a>
@@ -2820,8 +3622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_locked_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_locked_go" style="color: inherit; text-decoration: inherit;">Locked</a>
@@ -2829,8 +3630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_masterinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterinstanceid_go" style="color: inherit; text-decoration: inherit;">Master<wbr>Instance<wbr>Id</a>
@@ -2838,8 +3638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the master instance ID of recovery instances.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_masterregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterregion_go" style="color: inherit; text-decoration: inherit;">Master<wbr>Region</a>
@@ -2847,8 +3646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The zone information of the primary instance is required when you purchase a disaster recovery instance.</p>
-</dd><dt class="property-optional"
+    <dd>The region information of the master instance. This field is required when purchasing a cross-region subscription.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memsize_go" style="color: inherit; text-decoration: inherit;">Mem<wbr>Size</a>
@@ -2856,8 +3654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size (in MB).</p>
-</dd><dt class="property-optional"
+    <dd>Memory size (in MB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramtemplateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramtemplateid_go" style="color: inherit; text-decoration: inherit;">Param<wbr>Template<wbr>Id</a>
@@ -2865,8 +3662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify parameter template id.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Specify parameter template id.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_paytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paytype_go" style="color: inherit; text-decoration: inherit;">Pay<wbr>Type</a>
@@ -2874,9 +3670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-optional property-deprecated"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_period_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_go" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -2884,9 +3678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead. Period of instance. NOTES: Only supported prepaid instance.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead. Period of instance. NOTES: Only supported prepaid instance.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -2894,8 +3686,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Period of instance. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. NOTES: Only supported prepaid instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rogroupid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupid_go" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rovip_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rovip_go" style="color: inherit; text-decoration: inherit;">Ro<wbr>Vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VIP-only read access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rovport_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rovport_go" style="color: inherit; text-decoration: inherit;">Ro<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>VIP port number (read-only).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -2903,8 +3718,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Security groups to use.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to use.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_slavedeploymode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slavedeploymode_go" style="color: inherit; text-decoration: inherit;">Slave<wbr>Deploy<wbr>Mode</a>
@@ -2912,8 +3726,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2921,8 +3734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-optional"
+    <dd>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2930,17 +3742,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private network ID. If <code>vpc_id</code> is set, this value is required.</p>
-</dd><dt class="property-optional"
+    <dd>Private network ID. If <code>vpcId</code> is set, this value is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional"
+    <dd>Instance tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskstatus_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Status</a>
@@ -2948,8 +3758,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates which kind of operations is being executed.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates which kind of operations is being executed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_volumesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_volumesize_go" style="color: inherit; text-decoration: inherit;">Volume<wbr>Size</a>
@@ -2957,8 +3766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size (in GB).</p>
-</dd><dt class="property-optional"
+    <dd>Disk size (in GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2966,8 +3774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC, which can be modified once every 24 hours and can't be removed.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC, which can be modified once every 24 hours and can't be removed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_waitswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitswitch_go" style="color: inherit; text-decoration: inherit;">Wait<wbr>Switch</a>
@@ -2975,8 +3782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</p>
-</dd><dt class="property-optional"
+    <dd>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -2984,8 +3790,293 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</p>
-</dd></dl>
+    <dd>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auto renew flag. NOTES: Only supported prepaid instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_topology_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_topology_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>topology</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopology">object</a></span>
+    </dt>
+    <dd>Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_hcl" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>CPU cores.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_destroy_protect_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_destroy_protect_hcl" style="color: inherit; text-decoration: inherit;">destroy_<wbr>protect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance destroy protection status. Valid values: <code>on</code> (enable destroy protection), <code>off</code> (disable destroy protection).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_device_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_device_type_hcl" style="color: inherit; text-decoration: inherit;">device_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify device type, available values:</p>
+<ul>
+<li><code>UNIVERSAL</code> (default): universal instance,</li>
+<li><code>EXCLUSIVE</code>: exclusive instance,</li>
+<li><code>BASIC_V2</code>: ONTKE single-node instance,</li>
+<li><code>CLOUD_NATIVE_CLUSTER</code>: cluster version standard type,</li>
+<li><code>CLOUD_NATIVE_CLUSTER_EXCLUSIVE</code>: cluster version enhanced type.
+If it is not specified, it defaults to a universal instance.</li>
+</ul></dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_disk_encryption_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_encryption_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable disk encryption for the CDB instance. Valid value: <code>on</code> (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. <code>CLOUD_SSD</code> designates an SSD cloud disk; <code>CLOUD_HSSD</code> designates an Enhanced SSD cloud disk; and <code>CLOUD_PREMIUM</code> designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to <code>Regions and Availability Zones</code> for specific support details.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_fast_upgrade_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fast_upgrade_hcl" style="color: inherit; text-decoration: inherit;">fast_<wbr>upgrade</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_force_delete_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_delete_hcl" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of a mysql instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_intranet_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranet_ip_hcl" style="color: inherit; text-decoration: inherit;">intranet_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance intranet IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_intranet_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranet_port_hcl" style="color: inherit; text-decoration: inherit;">intranet_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_locked_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_locked_hcl" style="color: inherit; text-decoration: inherit;">locked</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_master_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_master_instance_id_hcl" style="color: inherit; text-decoration: inherit;">master_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_master_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_master_region_hcl" style="color: inherit; text-decoration: inherit;">master_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The region information of the master instance. This field is required when purchasing a cross-region subscription.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_mem_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mem_size_hcl" style="color: inherit; text-decoration: inherit;">mem_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory size (in MB).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_param_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_param_template_id_hcl" style="color: inherit; text-decoration: inherit;">param_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify parameter template id.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="state_pay_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pay_type_hcl" style="color: inherit; text-decoration: inherit;">pay_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="state_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead. Period of instance. NOTES: Only supported prepaid instance.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Period of instance. NOTES: Only supported prepaid instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ro_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ro_group_id_hcl" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ro_vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ro_vip_hcl" style="color: inherit; text-decoration: inherit;">ro_<wbr>vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VIP-only read access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ro_vport_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ro_vport_hcl" style="color: inherit; text-decoration: inherit;">ro_<wbr>vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>VIP port number (read-only).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Security groups to use.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_slave_deploy_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slave_deploy_mode_hcl" style="color: inherit; text-decoration: inherit;">slave_<wbr>deploy_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Private network ID. If <code>vpcId</code> is set, this value is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Instance tags.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_task_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_status_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Indicates which kind of operations is being executed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_volume_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_volume_size_hcl" style="color: inherit; text-decoration: inherit;">volume_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Disk size (in GB).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of VPC, which can be modified once every 24 hours and can't be removed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wait_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wait_switch_hcl" style="color: inherit; text-decoration: inherit;">wait_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2999,8 +4090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auto renew flag. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. NOTES: Only supported prepaid instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -3008,8 +4098,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_clustertopology_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertopology_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Topology</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopology">Readonly<wbr>Instance<wbr>Cluster<wbr>Topology</a></span>
+    </dt>
+    <dd>Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_java" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -3017,8 +4114,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>CPU cores.</p>
-</dd><dt class="property-optional"
+    <dd>CPU cores.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_destroyprotect_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_destroyprotect_java" style="color: inherit; text-decoration: inherit;">destroy<wbr>Protect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance destroy protection status. Valid values: <code>on</code> (enable destroy protection), <code>off</code> (disable destroy protection).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_devicetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_devicetype_java" style="color: inherit; text-decoration: inherit;">device<wbr>Type</a>
@@ -3026,8 +4130,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify device type, available values: <code>UNIVERSAL</code> (default), <code>EXCLUSIVE</code>, <code>BASIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify device type, available values:</p>
+<ul>
+<li><code>UNIVERSAL</code> (default): universal instance,</li>
+<li><code>EXCLUSIVE</code>: exclusive instance,</li>
+<li><code>BASIC_V2</code>: ONTKE single-node instance,</li>
+<li><code>CLOUD_NATIVE_CLUSTER</code>: cluster version standard type,</li>
+<li><code>CLOUD_NATIVE_CLUSTER_EXCLUSIVE</code>: cluster version enhanced type.
+If it is not specified, it defaults to a universal instance.</li>
+</ul></dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_diskencryption_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskencryption_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Whether to enable disk encryption for the CDB instance. Valid value: <code>on</code> (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_disktype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. <code>CLOUD_SSD</code> designates an SSD cloud disk; <code>CLOUD_HSSD</code> designates an Enhanced SSD cloud disk; and <code>CLOUD_PREMIUM</code> designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to <code>Regions and Availability Zones</code> for specific support details.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_fastupgrade_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fastupgrade_java" style="color: inherit; text-decoration: inherit;">fast<wbr>Upgrade</a>
@@ -3035,8 +4162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_java" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -3044,8 +4170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -3053,8 +4178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of a mysql instance.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a mysql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intranetip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranetip_java" style="color: inherit; text-decoration: inherit;">intranet<wbr>Ip</a>
@@ -3062,8 +4186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance intranet IP.</p>
-</dd><dt class="property-optional"
+    <dd>instance intranet IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intranetport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranetport_java" style="color: inherit; text-decoration: inherit;">intranet<wbr>Port</a>
@@ -3071,8 +4194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_locked_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_locked_java" style="color: inherit; text-decoration: inherit;">locked</a>
@@ -3080,8 +4202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_masterinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterinstanceid_java" style="color: inherit; text-decoration: inherit;">master<wbr>Instance<wbr>Id</a>
@@ -3089,8 +4210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the master instance ID of recovery instances.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_masterregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterregion_java" style="color: inherit; text-decoration: inherit;">master<wbr>Region</a>
@@ -3098,8 +4218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The zone information of the primary instance is required when you purchase a disaster recovery instance.</p>
-</dd><dt class="property-optional"
+    <dd>The region information of the master instance. This field is required when purchasing a cross-region subscription.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memsize_java" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -3107,8 +4226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory size (in MB).</p>
-</dd><dt class="property-optional"
+    <dd>Memory size (in MB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramtemplateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramtemplateid_java" style="color: inherit; text-decoration: inherit;">param<wbr>Template<wbr>Id</a>
@@ -3116,8 +4234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify parameter template id.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Specify parameter template id.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_paytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paytype_java" style="color: inherit; text-decoration: inherit;">pay<wbr>Type</a>
@@ -3125,9 +4242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-optional property-deprecated"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_period_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_java" style="color: inherit; text-decoration: inherit;">period</a>
@@ -3135,9 +4250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead. Period of instance. NOTES: Only supported prepaid instance.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead. Period of instance. NOTES: Only supported prepaid instance.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -3145,8 +4258,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Period of instance. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. NOTES: Only supported prepaid instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rogroupid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupid_java" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rovip_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rovip_java" style="color: inherit; text-decoration: inherit;">ro<wbr>Vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>VIP-only read access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rovport_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rovport_java" style="color: inherit; text-decoration: inherit;">ro<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>VIP port number (read-only).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -3154,8 +4290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security groups to use.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to use.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_slavedeploymode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slavedeploymode_java" style="color: inherit; text-decoration: inherit;">slave<wbr>Deploy<wbr>Mode</a>
@@ -3163,8 +4298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3172,8 +4306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-optional"
+    <dd>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3181,17 +4314,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private network ID. If <code>vpc_id</code> is set, this value is required.</p>
-</dd><dt class="property-optional"
+    <dd>Private network ID. If <code>vpcId</code> is set, this value is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional"
+    <dd>Instance tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskstatus_java" style="color: inherit; text-decoration: inherit;">task<wbr>Status</a>
@@ -3199,8 +4330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Indicates which kind of operations is being executed.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates which kind of operations is being executed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_volumesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_volumesize_java" style="color: inherit; text-decoration: inherit;">volume<wbr>Size</a>
@@ -3208,8 +4338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Disk size (in GB).</p>
-</dd><dt class="property-optional"
+    <dd>Disk size (in GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3217,8 +4346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC, which can be modified once every 24 hours and can't be removed.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC, which can be modified once every 24 hours and can't be removed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_waitswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitswitch_java" style="color: inherit; text-decoration: inherit;">wait<wbr>Switch</a>
@@ -3226,8 +4354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</p>
-</dd><dt class="property-optional"
+    <dd>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -3235,8 +4362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</p>
-</dd></dl>
+    <dd>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3250,8 +4376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auto renew flag. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. NOTES: Only supported prepaid instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -3259,8 +4384,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_clustertopology_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertopology_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Topology</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopology">Readonly<wbr>Instance<wbr>Cluster<wbr>Topology</a></span>
+    </dt>
+    <dd>Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_nodejs" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -3268,8 +4400,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>CPU cores.</p>
-</dd><dt class="property-optional"
+    <dd>CPU cores.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_destroyprotect_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_destroyprotect_nodejs" style="color: inherit; text-decoration: inherit;">destroy<wbr>Protect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance destroy protection status. Valid values: <code>on</code> (enable destroy protection), <code>off</code> (disable destroy protection).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_devicetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_devicetype_nodejs" style="color: inherit; text-decoration: inherit;">device<wbr>Type</a>
@@ -3277,8 +4416,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify device type, available values: <code>UNIVERSAL</code> (default), <code>EXCLUSIVE</code>, <code>BASIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify device type, available values:</p>
+<ul>
+<li><code>UNIVERSAL</code> (default): universal instance,</li>
+<li><code>EXCLUSIVE</code>: exclusive instance,</li>
+<li><code>BASIC_V2</code>: ONTKE single-node instance,</li>
+<li><code>CLOUD_NATIVE_CLUSTER</code>: cluster version standard type,</li>
+<li><code>CLOUD_NATIVE_CLUSTER_EXCLUSIVE</code>: cluster version enhanced type.
+If it is not specified, it defaults to a universal instance.</li>
+</ul></dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_diskencryption_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskencryption_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable disk encryption for the CDB instance. Valid value: <code>on</code> (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_disktype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. <code>CLOUD_SSD</code> designates an SSD cloud disk; <code>CLOUD_HSSD</code> designates an Enhanced SSD cloud disk; and <code>CLOUD_PREMIUM</code> designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to <code>Regions and Availability Zones</code> for specific support details.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_fastupgrade_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fastupgrade_nodejs" style="color: inherit; text-decoration: inherit;">fast<wbr>Upgrade</a>
@@ -3286,8 +4448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_nodejs" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -3295,8 +4456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -3304,8 +4464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of a mysql instance.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a mysql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intranetip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranetip_nodejs" style="color: inherit; text-decoration: inherit;">intranet<wbr>Ip</a>
@@ -3313,8 +4472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance intranet IP.</p>
-</dd><dt class="property-optional"
+    <dd>instance intranet IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intranetport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranetport_nodejs" style="color: inherit; text-decoration: inherit;">intranet<wbr>Port</a>
@@ -3322,8 +4480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_locked_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_locked_nodejs" style="color: inherit; text-decoration: inherit;">locked</a>
@@ -3331,8 +4488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_masterinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">master<wbr>Instance<wbr>Id</a>
@@ -3340,8 +4496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the master instance ID of recovery instances.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_masterregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterregion_nodejs" style="color: inherit; text-decoration: inherit;">master<wbr>Region</a>
@@ -3349,8 +4504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The zone information of the primary instance is required when you purchase a disaster recovery instance.</p>
-</dd><dt class="property-optional"
+    <dd>The region information of the master instance. This field is required when purchasing a cross-region subscription.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memsize_nodejs" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -3358,8 +4512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory size (in MB).</p>
-</dd><dt class="property-optional"
+    <dd>Memory size (in MB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramtemplateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramtemplateid_nodejs" style="color: inherit; text-decoration: inherit;">param<wbr>Template<wbr>Id</a>
@@ -3367,8 +4520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify parameter template id.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Specify parameter template id.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_paytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paytype_nodejs" style="color: inherit; text-decoration: inherit;">pay<wbr>Type</a>
@@ -3376,9 +4528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-optional property-deprecated"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_period_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
@@ -3386,9 +4536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead. Period of instance. NOTES: Only supported prepaid instance.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead. Period of instance. NOTES: Only supported prepaid instance.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -3396,8 +4544,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Period of instance. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. NOTES: Only supported prepaid instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rogroupid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupid_nodejs" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rovip_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rovip_nodejs" style="color: inherit; text-decoration: inherit;">ro<wbr>Vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VIP-only read access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rovport_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rovport_nodejs" style="color: inherit; text-decoration: inherit;">ro<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>VIP port number (read-only).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -3405,8 +4576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Security groups to use.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to use.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_slavedeploymode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slavedeploymode_nodejs" style="color: inherit; text-decoration: inherit;">slave<wbr>Deploy<wbr>Mode</a>
@@ -3414,8 +4584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3423,8 +4592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-optional"
+    <dd>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3432,17 +4600,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private network ID. If <code>vpc_id</code> is set, this value is required.</p>
-</dd><dt class="property-optional"
+    <dd>Private network ID. If <code>vpcId</code> is set, this value is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional"
+    <dd>Instance tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskstatus_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Status</a>
@@ -3450,8 +4616,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Indicates which kind of operations is being executed.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates which kind of operations is being executed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_volumesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_volumesize_nodejs" style="color: inherit; text-decoration: inherit;">volume<wbr>Size</a>
@@ -3459,8 +4624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Disk size (in GB).</p>
-</dd><dt class="property-optional"
+    <dd>Disk size (in GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3468,8 +4632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC, which can be modified once every 24 hours and can't be removed.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC, which can be modified once every 24 hours and can't be removed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_waitswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitswitch_nodejs" style="color: inherit; text-decoration: inherit;">wait<wbr>Switch</a>
@@ -3477,8 +4640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</p>
-</dd><dt class="property-optional"
+    <dd>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -3486,8 +4648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</p>
-</dd></dl>
+    <dd>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3501,8 +4662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. NOTES: Only supported prepaid instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -3510,8 +4670,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_topology_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_topology_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>topology</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopology">Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Args</a></span>
+    </dt>
+    <dd>Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_python" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -3519,8 +4686,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>CPU cores.</p>
-</dd><dt class="property-optional"
+    <dd>CPU cores.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_destroy_protect_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_destroy_protect_python" style="color: inherit; text-decoration: inherit;">destroy_<wbr>protect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Instance destroy protection status. Valid values: <code>on</code> (enable destroy protection), <code>off</code> (disable destroy protection).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_device_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_device_type_python" style="color: inherit; text-decoration: inherit;">device_<wbr>type</a>
@@ -3528,8 +4702,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify device type, available values: <code>UNIVERSAL</code> (default), <code>EXCLUSIVE</code>, <code>BASIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify device type, available values:</p>
+<ul>
+<li><code>UNIVERSAL</code> (default): universal instance,</li>
+<li><code>EXCLUSIVE</code>: exclusive instance,</li>
+<li><code>BASIC_V2</code>: ONTKE single-node instance,</li>
+<li><code>CLOUD_NATIVE_CLUSTER</code>: cluster version standard type,</li>
+<li><code>CLOUD_NATIVE_CLUSTER_EXCLUSIVE</code>: cluster version enhanced type.
+If it is not specified, it defaults to a universal instance.</li>
+</ul></dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_disk_encryption_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_encryption_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Whether to enable disk encryption for the CDB instance. Valid value: <code>on</code> (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_disk_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. <code>CLOUD_SSD</code> designates an SSD cloud disk; <code>CLOUD_HSSD</code> designates an Enhanced SSD cloud disk; and <code>CLOUD_PREMIUM</code> designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to <code>Regions and Availability Zones</code> for specific support details.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_fast_upgrade_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fast_upgrade_python" style="color: inherit; text-decoration: inherit;">fast_<wbr>upgrade</a>
@@ -3537,8 +4734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_force_delete_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_delete_python" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
@@ -3546,8 +4742,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -3555,8 +4750,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of a mysql instance.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a mysql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intranet_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranet_ip_python" style="color: inherit; text-decoration: inherit;">intranet_<wbr>ip</a>
@@ -3564,8 +4758,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance intranet IP.</p>
-</dd><dt class="property-optional"
+    <dd>instance intranet IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intranet_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranet_port_python" style="color: inherit; text-decoration: inherit;">intranet_<wbr>port</a>
@@ -3573,8 +4766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_locked_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_locked_python" style="color: inherit; text-decoration: inherit;">locked</a>
@@ -3582,8 +4774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_master_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_master_instance_id_python" style="color: inherit; text-decoration: inherit;">master_<wbr>instance_<wbr>id</a>
@@ -3591,8 +4782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicates the master instance ID of recovery instances.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_master_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_master_region_python" style="color: inherit; text-decoration: inherit;">master_<wbr>region</a>
@@ -3600,8 +4790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The zone information of the primary instance is required when you purchase a disaster recovery instance.</p>
-</dd><dt class="property-optional"
+    <dd>The region information of the master instance. This field is required when purchasing a cross-region subscription.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mem_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mem_size_python" style="color: inherit; text-decoration: inherit;">mem_<wbr>size</a>
@@ -3609,8 +4798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size (in MB).</p>
-</dd><dt class="property-optional"
+    <dd>Memory size (in MB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_param_template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_param_template_id_python" style="color: inherit; text-decoration: inherit;">param_<wbr>template_<wbr>id</a>
@@ -3618,8 +4806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify parameter template id.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Specify parameter template id.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_pay_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pay_type_python" style="color: inherit; text-decoration: inherit;">pay_<wbr>type</a>
@@ -3627,9 +4814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-optional property-deprecated"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_python" style="color: inherit; text-decoration: inherit;">period</a>
@@ -3637,9 +4822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead. Period of instance. NOTES: Only supported prepaid instance.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead. Period of instance. NOTES: Only supported prepaid instance.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaid_period_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
@@ -3647,8 +4830,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Period of instance. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. NOTES: Only supported prepaid instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ro_group_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ro_group_id_python" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ro_vip_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ro_vip_python" style="color: inherit; text-decoration: inherit;">ro_<wbr>vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>VIP-only read access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ro_vport_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ro_vport_python" style="color: inherit; text-decoration: inherit;">ro_<wbr>vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>VIP port number (read-only).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -3656,8 +4862,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Security groups to use.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to use.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_slave_deploy_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slave_deploy_mode_python" style="color: inherit; text-decoration: inherit;">slave_<wbr>deploy_<wbr>mode</a>
@@ -3665,8 +4870,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3674,8 +4878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-optional"
+    <dd>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -3683,17 +4886,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Private network ID. If <code>vpc_id</code> is set, this value is required.</p>
-</dd><dt class="property-optional"
+    <dd>Private network ID. If <code>vpcId</code> is set, this value is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional"
+    <dd>Instance tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_task_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_status_python" style="color: inherit; text-decoration: inherit;">task_<wbr>status</a>
@@ -3701,8 +4902,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates which kind of operations is being executed.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates which kind of operations is being executed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_volume_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_volume_size_python" style="color: inherit; text-decoration: inherit;">volume_<wbr>size</a>
@@ -3710,8 +4910,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size (in GB).</p>
-</dd><dt class="property-optional"
+    <dd>Disk size (in GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -3719,8 +4918,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of VPC, which can be modified once every 24 hours and can't be removed.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC, which can be modified once every 24 hours and can't be removed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wait_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wait_switch_python" style="color: inherit; text-decoration: inherit;">wait_<wbr>switch</a>
@@ -3728,8 +4926,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</p>
-</dd><dt class="property-optional"
+    <dd>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -3737,8 +4934,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</p>
-</dd></dl>
+    <dd>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3752,8 +4948,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auto renew flag. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. NOTES: Only supported prepaid instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -3761,8 +4956,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of instance. Valid values:<code>PREPAID</code>, <code>POSTPAID</code>. Default is <code>POSTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_clustertopology_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertopology_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Topology</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopology">Property Map</a></span>
+    </dt>
+    <dd>Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_yaml" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -3770,8 +4972,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>CPU cores.</p>
-</dd><dt class="property-optional"
+    <dd>CPU cores.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_destroyprotect_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_destroyprotect_yaml" style="color: inherit; text-decoration: inherit;">destroy<wbr>Protect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance destroy protection status. Valid values: <code>on</code> (enable destroy protection), <code>off</code> (disable destroy protection).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_devicetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_devicetype_yaml" style="color: inherit; text-decoration: inherit;">device<wbr>Type</a>
@@ -3779,8 +4988,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify device type, available values: <code>UNIVERSAL</code> (default), <code>EXCLUSIVE</code>, <code>BASIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify device type, available values:</p>
+<ul>
+<li><code>UNIVERSAL</code> (default): universal instance,</li>
+<li><code>EXCLUSIVE</code>: exclusive instance,</li>
+<li><code>BASIC_V2</code>: ONTKE single-node instance,</li>
+<li><code>CLOUD_NATIVE_CLUSTER</code>: cluster version standard type,</li>
+<li><code>CLOUD_NATIVE_CLUSTER_EXCLUSIVE</code>: cluster version enhanced type.
+If it is not specified, it defaults to a universal instance.</li>
+</ul></dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_diskencryption_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskencryption_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Whether to enable disk encryption for the CDB instance. Valid value: <code>on</code> (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_disktype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. <code>CLOUD_SSD</code> designates an SSD cloud disk; <code>CLOUD_HSSD</code> designates an Enhanced SSD cloud disk; and <code>CLOUD_PREMIUM</code> designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to <code>Regions and Availability Zones</code> for specific support details.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_fastupgrade_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fastupgrade_yaml" style="color: inherit; text-decoration: inherit;">fast<wbr>Upgrade</a>
@@ -3788,8 +5020,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable fast upgrade when upgrade instance spec, available value: <code>1</code> - enabled, <code>0</code> - disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_yaml" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -3797,8 +5028,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete instance directly or not. Default is <code>false</code>. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -3806,8 +5036,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of a mysql instance.</p>
-</dd><dt class="property-optional"
+    <dd>The name of a mysql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intranetip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranetip_yaml" style="color: inherit; text-decoration: inherit;">intranet<wbr>Ip</a>
@@ -3815,8 +5044,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance intranet IP.</p>
-</dd><dt class="property-optional"
+    <dd>instance intranet IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_intranetport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_intranetport_yaml" style="color: inherit; text-decoration: inherit;">intranet<wbr>Port</a>
@@ -3824,8 +5052,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Public access port. Valid value ranges: [1024~65535]. The default value is <code>3306</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_locked_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_locked_yaml" style="color: inherit; text-decoration: inherit;">locked</a>
@@ -3833,8 +5060,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the instance is locked. Valid values: <code>0</code>, <code>1</code>. <code>0</code> - No; <code>1</code> - Yes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_masterinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterinstanceid_yaml" style="color: inherit; text-decoration: inherit;">master<wbr>Instance<wbr>Id</a>
@@ -3842,8 +5068,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the master instance ID of recovery instances.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_masterregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_masterregion_yaml" style="color: inherit; text-decoration: inherit;">master<wbr>Region</a>
@@ -3851,8 +5076,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The zone information of the primary instance is required when you purchase a disaster recovery instance.</p>
-</dd><dt class="property-optional"
+    <dd>The region information of the master instance. This field is required when purchasing a cross-region subscription.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memsize_yaml" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -3860,8 +5084,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory size (in MB).</p>
-</dd><dt class="property-optional"
+    <dd>Memory size (in MB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramtemplateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramtemplateid_yaml" style="color: inherit; text-decoration: inherit;">param<wbr>Template<wbr>Id</a>
@@ -3869,8 +5092,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify parameter template id.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Specify parameter template id.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_paytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paytype_yaml" style="color: inherit; text-decoration: inherit;">pay<wbr>Type</a>
@@ -3878,9 +5100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-optional property-deprecated"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance. Valid values: <code>0</code>, <code>1</code>. <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_period_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
@@ -3888,9 +5108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead. Period of instance. NOTES: Only supported prepaid instance.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>prepaid_period</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead. Period of instance. NOTES: Only supported prepaid instance.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>prepaidPeriod</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -3898,8 +5116,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Period of instance. NOTES: Only supported prepaid instance.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. NOTES: Only supported prepaid instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rogroupid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupid_yaml" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rovip_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rovip_yaml" style="color: inherit; text-decoration: inherit;">ro<wbr>Vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>VIP-only read access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rovport_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rovport_yaml" style="color: inherit; text-decoration: inherit;">ro<wbr>Vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>VIP port number (read-only).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -3907,8 +5148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security groups to use.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to use.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_slavedeploymode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slavedeploymode_yaml" style="color: inherit; text-decoration: inherit;">slave<wbr>Deploy<wbr>Mode</a>
@@ -3916,8 +5156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3925,8 +5164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-optional"
+    <dd>Instance status. Valid values: <code>0</code>, <code>1</code>, <code>4</code>, <code>5</code>. <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3934,17 +5172,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private network ID. If <code>vpc_id</code> is set, this value is required.</p>
-</dd><dt class="property-optional"
+    <dd>Private network ID. If <code>vpcId</code> is set, this value is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional"
+    <dd>Instance tags.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskstatus_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Status</a>
@@ -3952,8 +5188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Indicates which kind of operations is being executed.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates which kind of operations is being executed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_volumesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_volumesize_yaml" style="color: inherit; text-decoration: inherit;">volume<wbr>Size</a>
@@ -3961,8 +5196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Disk size (in GB).</p>
-</dd><dt class="property-optional"
+    <dd>Disk size (in GB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3970,8 +5204,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC, which can be modified once every 24 hours and can't be removed.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC, which can be modified once every 24 hours and can't be removed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_waitswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitswitch_yaml" style="color: inherit; text-decoration: inherit;">wait<wbr>Switch</a>
@@ -3979,8 +5212,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</p>
-</dd><dt class="property-optional"
+    <dd>Switch the method of accessing new instances, default is <code>0</code>. Supported values include: <code>0</code> - switch immediately, <code>1</code> - switch in time window.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -3988,8 +5220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</p>
-</dd></dl>
+    <dd>Zone information, this parameter defaults to, the system automatically selects an Availability Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -3999,17 +5230,553 @@ The following state arguments are supported:
 
 
 
+
+## Supporting Types
+
+
+
+<h4 id="readonlyinstanceclustertopology">
+Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<pulumi-choosable type="language" values="python,go" class="inline">, Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="readonlynodes_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonlynodes_csharp" style="color: inherit; text-decoration: inherit;">Read<wbr>Only<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopologyreadonlynode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Read<wbr>Only<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>RO Node Topology.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="readwritenode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readwritenode_csharp" style="color: inherit; text-decoration: inherit;">Read<wbr>Write<wbr>Node</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopologyreadwritenode">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Read<wbr>Write<wbr>Node</a></span>
+    </dt>
+    <dd>RW Node Topology.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="readonlynodes_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonlynodes_go" style="color: inherit; text-decoration: inherit;">Read<wbr>Only<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopologyreadonlynode">[]Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Read<wbr>Only<wbr>Node</a></span>
+    </dt>
+    <dd>RO Node Topology.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="readwritenode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readwritenode_go" style="color: inherit; text-decoration: inherit;">Read<wbr>Write<wbr>Node</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopologyreadwritenode">Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Read<wbr>Write<wbr>Node</a></span>
+    </dt>
+    <dd>RW Node Topology.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="read_only_nodes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#read_only_nodes_hcl" style="color: inherit; text-decoration: inherit;">read_<wbr>only_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopologyreadonlynode">list(object)</a></span>
+    </dt>
+    <dd>RO Node Topology.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="read_write_node_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#read_write_node_hcl" style="color: inherit; text-decoration: inherit;">read_<wbr>write_<wbr>node</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopologyreadwritenode">object</a></span>
+    </dt>
+    <dd>RW Node Topology.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="readonlynodes_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonlynodes_java" style="color: inherit; text-decoration: inherit;">read<wbr>Only<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopologyreadonlynode">List&lt;Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Read<wbr>Only<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>RO Node Topology.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="readwritenode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readwritenode_java" style="color: inherit; text-decoration: inherit;">read<wbr>Write<wbr>Node</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopologyreadwritenode">Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Read<wbr>Write<wbr>Node</a></span>
+    </dt>
+    <dd>RW Node Topology.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="readonlynodes_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonlynodes_nodejs" style="color: inherit; text-decoration: inherit;">read<wbr>Only<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopologyreadonlynode">Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Read<wbr>Only<wbr>Node[]</a></span>
+    </dt>
+    <dd>RO Node Topology.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="readwritenode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readwritenode_nodejs" style="color: inherit; text-decoration: inherit;">read<wbr>Write<wbr>Node</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopologyreadwritenode">Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Read<wbr>Write<wbr>Node</a></span>
+    </dt>
+    <dd>RW Node Topology.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="read_only_nodes_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#read_only_nodes_python" style="color: inherit; text-decoration: inherit;">read_<wbr>only_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopologyreadonlynode">Sequence[Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Read<wbr>Only<wbr>Node]</a></span>
+    </dt>
+    <dd>RO Node Topology.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="read_write_node_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#read_write_node_python" style="color: inherit; text-decoration: inherit;">read_<wbr>write_<wbr>node</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopologyreadwritenode">Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Read<wbr>Write<wbr>Node</a></span>
+    </dt>
+    <dd>RW Node Topology.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="readonlynodes_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonlynodes_yaml" style="color: inherit; text-decoration: inherit;">read<wbr>Only<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopologyreadonlynode">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>RO Node Topology.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="readwritenode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readwritenode_yaml" style="color: inherit; text-decoration: inherit;">read<wbr>Write<wbr>Node</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#readonlyinstanceclustertopologyreadwritenode">Property Map</a></span>
+    </dt>
+    <dd>RW Node Topology.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="readonlyinstanceclustertopologyreadonlynode">
+Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Read<wbr>Only<wbr>Node<pulumi-choosable type="language" values="python,go" class="inline">, Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Read<wbr>Only<wbr>Node<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="israndomzone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#israndomzone_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Random<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to distribute in random availability zones. Enter <code>true</code> to specify a random availability zone. Otherwise, use the availability zone specified by Zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="nodeid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeid_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When upgrading a cluster instance, if you want to adjust the availability zone of a read-only node, you need to specify the node ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the availability zone where the node is distributed.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="israndomzone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#israndomzone_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Random<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to distribute in random availability zones. Enter <code>true</code> to specify a random availability zone. Otherwise, use the availability zone specified by Zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="nodeid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeid_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When upgrading a cluster instance, if you want to adjust the availability zone of a read-only node, you need to specify the node ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the availability zone where the node is distributed.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="is_random_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_random_zone_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>random_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to distribute in random availability zones. Enter <code>true</code> to specify a random availability zone. Otherwise, use the availability zone specified by Zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="node_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_id_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When upgrading a cluster instance, if you want to adjust the availability zone of a read-only node, you need to specify the node ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the availability zone where the node is distributed.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="israndomzone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#israndomzone_java" style="color: inherit; text-decoration: inherit;">is<wbr>Random<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to distribute in random availability zones. Enter <code>true</code> to specify a random availability zone. Otherwise, use the availability zone specified by Zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="nodeid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeid_java" style="color: inherit; text-decoration: inherit;">node<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>When upgrading a cluster instance, if you want to adjust the availability zone of a read-only node, you need to specify the node ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specifies the availability zone where the node is distributed.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="israndomzone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#israndomzone_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Random<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to distribute in random availability zones. Enter <code>true</code> to specify a random availability zone. Otherwise, use the availability zone specified by Zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="nodeid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeid_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When upgrading a cluster instance, if you want to adjust the availability zone of a read-only node, you need to specify the node ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies the availability zone where the node is distributed.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="is_random_zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_random_zone_python" style="color: inherit; text-decoration: inherit;">is_<wbr>random_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to distribute in random availability zones. Enter <code>true</code> to specify a random availability zone. Otherwise, use the availability zone specified by Zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="node_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_id_python" style="color: inherit; text-decoration: inherit;">node_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>When upgrading a cluster instance, if you want to adjust the availability zone of a read-only node, you need to specify the node ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Specifies the availability zone where the node is distributed.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="israndomzone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#israndomzone_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Random<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to distribute in random availability zones. Enter <code>true</code> to specify a random availability zone. Otherwise, use the availability zone specified by Zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="nodeid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeid_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>When upgrading a cluster instance, if you want to adjust the availability zone of a read-only node, you need to specify the node ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specifies the availability zone where the node is distributed.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="readonlyinstanceclustertopologyreadwritenode">
+Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Read<wbr>Write<wbr>Node<pulumi-choosable type="language" values="python,go" class="inline">, Readonly<wbr>Instance<wbr>Cluster<wbr>Topology<wbr>Read<wbr>Write<wbr>Node<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="zone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The availability zone where the RW node is located.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="nodeid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeid_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When upgrading a cluster instance, if you want to adjust the availability zone of a read-only node, you need to specify the node ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="zone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The availability zone where the RW node is located.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="nodeid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeid_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When upgrading a cluster instance, if you want to adjust the availability zone of a read-only node, you need to specify the node ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The availability zone where the RW node is located.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="node_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_id_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When upgrading a cluster instance, if you want to adjust the availability zone of a read-only node, you need to specify the node ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="zone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The availability zone where the RW node is located.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="nodeid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeid_java" style="color: inherit; text-decoration: inherit;">node<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>When upgrading a cluster instance, if you want to adjust the availability zone of a read-only node, you need to specify the node ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="zone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The availability zone where the RW node is located.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="nodeid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeid_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When upgrading a cluster instance, if you want to adjust the availability zone of a read-only node, you need to specify the node ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The availability zone where the RW node is located.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="node_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_id_python" style="color: inherit; text-decoration: inherit;">node_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>When upgrading a cluster instance, if you want to adjust the availability zone of a read-only node, you need to specify the node ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="zone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The availability zone where the RW node is located.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="nodeid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeid_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>When upgrading a cluster instance, if you want to adjust the availability zone of a read-only node, you need to specify the node ID.</dd></dl>
+</pulumi-choosable>
+</div>
 
 ## Import
 
 
 
 mysql read-only database instances can be imported using the id, e.g.
-
 ```sh
 $ pulumi import tencentcloud:Mysql/readonlyInstance:ReadonlyInstance default cdb-dnqksd9f
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -4021,7 +5788,6 @@ $ pulumi import tencentcloud:Mysql/readonlyInstance:ReadonlyInstance default cdb
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

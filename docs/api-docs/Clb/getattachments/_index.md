@@ -2,9 +2,11 @@
 ---
 title: "getAttachments"
 title_tag: "tencentcloud.Clb.getAttachments"
-meta_desc: "Documentation for the tencentcloud.Clb.getAttachments function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of CLB attachments"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,55 +18,53 @@ Use this data source to query detailed information of CLB attachments
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const clblab = tencentcloud.Clb.getAttachments({
-    clbId: "lb-k2zjp9lv",
+const clblab = tencentcloud.clb.getAttachments({
     listenerId: "lbl-hh141sn9",
+    clbId: "lb-k2zjp9lv",
     ruleId: "loc-4xxr2cy7",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-clblab = tencentcloud.Clb.get_attachments(clb_id="lb-k2zjp9lv",
-    listener_id="lbl-hh141sn9",
+clblab = tencentcloud.clb.get_attachments(listener_id="lbl-hh141sn9",
+    clb_id="lb-k2zjp9lv",
     rule_id="loc-4xxr2cy7")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var clblab = Tencentcloud.Clb.GetAttachments.Invoke(new()
-    {
-        ClbId = "lb-k2zjp9lv",
-        ListenerId = "lbl-hh141sn9",
-        RuleId = "loc-4xxr2cy7",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.GetAttachments(ctx, &clb.GetAttachmentsArgs{
-			ClbId:      "lb-k2zjp9lv",
+		_, err := clb.GetAttachments(ctx, &clb.GetAttachmentsArgs{
 			ListenerId: "lbl-hh141sn9",
+			ClbId:      "lb-k2zjp9lv",
 			RuleId:     pulumi.StringRef("loc-4xxr2cy7"),
 		}, nil)
 		if err != nil {
@@ -74,6 +74,33 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var clblab = Tencentcloud.Clb.GetAttachments.Invoke(new()
+    {
+        ListenerId = "lbl-hh141sn9",
+        ClbId = "lb-k2zjp9lv",
+        RuleId = "loc-4xxr2cy7",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -82,8 +109,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Clb.ClbFunctions;
 import com.pulumi.tencentcloud.Clb.inputs.GetAttachmentsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -96,26 +123,60 @@ public class App {
 
     public static void stack(Context ctx) {
         final var clblab = ClbFunctions.getAttachments(GetAttachmentsArgs.builder()
-            .clbId("lb-k2zjp9lv")
             .listenerId("lbl-hh141sn9")
+            .clbId("lb-k2zjp9lv")
             .ruleId("loc-4xxr2cy7")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   clblab:
     fn::invoke:
-      Function: tencentcloud:Clb:getAttachments
-      Arguments:
-        clbId: lb-k2zjp9lv
+      function: tencentcloud:Clb:getAttachments
+      arguments:
         listenerId: lbl-hh141sn9
+        clbId: lb-k2zjp9lv
         ruleId: loc-4xxr2cy7
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_clb_getattachments" "clblab" {
+  listener_id = "lbl-hh141sn9"
+  clb_id      = "lb-k2zjp9lv"
+  rule_id     = "loc-4xxr2cy7"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+  - [DescribeTargets](https://www.tencentcloud.com/document/api/214/33824)
 
 
 
@@ -127,7 +188,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -135,9 +196,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getAttachments<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAttachmentsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetAttachmentsResult</a></span>></span
+><span class="k">function </span>getAttachments<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAttachmentsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetAttachmentsResult</a></span>></span
 ><span class="k">
-function </span>getAttachmentsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAttachmentsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetAttachmentsResult</a></span>></span
+function </span>getAttachmentsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAttachmentsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetAttachmentsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -152,11 +213,11 @@ function </span>getAttachmentsOutput<span class="p">(</span><span class="nx">arg
                     <span class="nx">rule_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetAttachmentsResult</span
 ><span class="k">
-def </span>get_attachments_output<span class="p">(</span><span class="nx">clb_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">rule_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetAttachmentsResult]</span
+def </span>get_attachments_output<span class="p">(</span><span class="nx">clb_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">rule_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetAttachmentsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -181,7 +242,8 @@ func </span>GetAttachmentsOutput<span class="p">(</span><span class="nx">ctx</sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetAttachments </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetAttachmentsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetAttachmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetAttachmentsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAttachmentsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetAttachmentsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAttachmentsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetAttachmentsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAttachmentsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -190,7 +252,8 @@ func </span>GetAttachmentsOutput<span class="p">(</span><span class="nx">ctx</sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetAttachmentsResult</a></span>> </span>getAttachments<span class="p">(</span><span class="nx">GetAttachmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetAttachmentsResult</a></span>> </span>getAttachments<span class="p">(</span><span class="nx">GetAttachmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetAttachmentsResult</a></span>> </span>getAttachments<span class="p">(</span><span class="nx">GetAttachmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -202,6 +265,15 @@ func </span>GetAttachmentsOutput<span class="p">(</span><span class="nx">ctx</sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Clb/getAttachments:getAttachments
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_clb_get_attachments&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -220,8 +292,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -229,8 +300,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -238,8 +308,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -247,8 +316,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</p>
-</dd></dl>
+    <dd>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -262,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -271,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -280,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -289,8 +354,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</p>
-</dd></dl>
+    <dd>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -304,8 +406,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -313,8 +414,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -322,8 +422,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -331,8 +430,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</p>
-</dd></dl>
+    <dd>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -346,8 +444,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -355,8 +452,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -364,8 +460,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -373,8 +468,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</p>
-</dd></dl>
+    <dd>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -388,8 +482,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -397,8 +490,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -406,8 +498,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
@@ -415,8 +506,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</p>
-</dd></dl>
+    <dd>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -430,8 +520,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -439,8 +528,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -448,8 +536,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -457,8 +544,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</p>
-</dd></dl>
+    <dd>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -481,8 +567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getattachmentsattachmentlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Outputs.<wbr>Get<wbr>Attachments<wbr>Attachment<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of cloud load balancer attachment configurations. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of cloud load balancer attachment configurations. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="clbid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_csharp" style="color: inherit; text-decoration: inherit;">Clb<wbr>Id</a>
@@ -490,8 +575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-"
+    <dd>ID of the CLB.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -499,8 +583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -508,8 +591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the CLB listener.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -525,8 +607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule.</p>
-</dd></dl>
+    <dd>ID of the CLB listener rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -540,8 +621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getattachmentsattachmentlist">[]Get<wbr>Attachments<wbr>Attachment<wbr>List</a></span>
     </dt>
-    <dd><p>A list of cloud load balancer attachment configurations. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of cloud load balancer attachment configurations. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="clbid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_go" style="color: inherit; text-decoration: inherit;">Clb<wbr>Id</a>
@@ -549,8 +629,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-"
+    <dd>ID of the CLB.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -558,8 +637,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -567,8 +645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the CLB listener.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -584,8 +661,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule.</p>
-</dd></dl>
+    <dd>ID of the CLB listener rule.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="attachment_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attachment_lists_hcl" style="color: inherit; text-decoration: inherit;">attachment_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getattachmentsattachmentlist">list(object)</a></span>
+    </dt>
+    <dd>A list of cloud load balancer attachment configurations. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB listener.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB listener rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -599,8 +729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getattachmentsattachmentlist">List&lt;Get<wbr>Attachments<wbr>Attachment<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of cloud load balancer attachment configurations. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of cloud load balancer attachment configurations. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="clbid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_java" style="color: inherit; text-decoration: inherit;">clb<wbr>Id</a>
@@ -608,8 +737,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-"
+    <dd>ID of the CLB.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -617,8 +745,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -626,8 +753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the CLB listener.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -643,8 +769,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener rule.</p>
-</dd></dl>
+    <dd>ID of the CLB listener rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -658,8 +783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getattachmentsattachmentlist">Get<wbr>Attachments<wbr>Attachment<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of cloud load balancer attachment configurations. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of cloud load balancer attachment configurations. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="clbid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_nodejs" style="color: inherit; text-decoration: inherit;">clb<wbr>Id</a>
@@ -667,8 +791,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-"
+    <dd>ID of the CLB.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -676,8 +799,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -685,8 +807,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the CLB listener.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -702,8 +823,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule.</p>
-</dd></dl>
+    <dd>ID of the CLB listener rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -715,10 +835,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attachment_lists_python" style="color: inherit; text-decoration: inherit;">attachment_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getattachmentsattachmentlist">Get<wbr>Attachments<wbr>Attachment<wbr>List]</a></span>
+        <span class="property-type"><a href="#getattachmentsattachmentlist">Sequence[Get<wbr>Attachments<wbr>Attachment<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of cloud load balancer attachment configurations. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of cloud load balancer attachment configurations. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="clb_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_python" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
@@ -726,8 +845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-"
+    <dd>ID of the CLB.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -735,8 +853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -744,8 +861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the CLB listener.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -761,8 +877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB listener rule.</p>
-</dd></dl>
+    <dd>ID of the CLB listener rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -776,8 +891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getattachmentsattachmentlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of cloud load balancer attachment configurations. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of cloud load balancer attachment configurations. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="clbid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_yaml" style="color: inherit; text-decoration: inherit;">clb<wbr>Id</a>
@@ -785,8 +899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-"
+    <dd>ID of the CLB.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -794,8 +907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -803,8 +915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the CLB listener.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -820,8 +931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener rule.</p>
-</dd></dl>
+    <dd>ID of the CLB listener rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -845,8 +955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -854,8 +963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocoltype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocoltype_csharp" style="color: inherit; text-decoration: inherit;">Protocol<wbr>Type</a>
@@ -863,8 +971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of protocol within the listener, and available values include <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code> and <code>TCP_SSL</code>. NOTES: <code>TCP_SSL</code> is testing internally, please apply if you need to use.</p>
-</dd><dt class="property-required"
+    <dd>Type of protocol within the listener, and available values include <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code> and <code>TCP_SSL</code>. NOTES: <code>TCP_SSL</code> is testing internally, please apply if you need to use.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -872,8 +979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</dd><dt class="property-required"
             title="Required">
         <span id="targets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targets_csharp" style="color: inherit; text-decoration: inherit;">Targets</a>
@@ -881,8 +987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getattachmentsattachmentlisttarget">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Get<wbr>Attachments<wbr>Attachment<wbr>List<wbr>Target&gt;</a></span>
     </dt>
-    <dd><p>Information of the backends to be attached.</p>
-</dd></dl>
+    <dd>Information of the backends to be attached.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -896,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -905,8 +1009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocoltype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocoltype_go" style="color: inherit; text-decoration: inherit;">Protocol<wbr>Type</a>
@@ -914,8 +1017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of protocol within the listener, and available values include <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code> and <code>TCP_SSL</code>. NOTES: <code>TCP_SSL</code> is testing internally, please apply if you need to use.</p>
-</dd><dt class="property-required"
+    <dd>Type of protocol within the listener, and available values include <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code> and <code>TCP_SSL</code>. NOTES: <code>TCP_SSL</code> is testing internally, please apply if you need to use.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -923,8 +1025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</dd><dt class="property-required"
             title="Required">
         <span id="targets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targets_go" style="color: inherit; text-decoration: inherit;">Targets</a>
@@ -932,8 +1033,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getattachmentsattachmentlisttarget">[]Get<wbr>Attachments<wbr>Attachment<wbr>List<wbr>Target</a></span>
     </dt>
-    <dd><p>Information of the backends to be attached.</p>
-</dd></dl>
+    <dd>Information of the backends to be attached.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_type_hcl" style="color: inherit; text-decoration: inherit;">protocol_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of protocol within the listener, and available values include <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code> and <code>TCP_SSL</code>. NOTES: <code>TCP_SSL</code> is testing internally, please apply if you need to use.</dd><dt class="property-required"
+            title="Required">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</dd><dt class="property-required"
+            title="Required">
+        <span id="targets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targets_hcl" style="color: inherit; text-decoration: inherit;">targets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getattachmentsattachmentlisttarget">list(object)</a></span>
+    </dt>
+    <dd>Information of the backends to be attached.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -947,8 +1093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -956,8 +1101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocoltype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocoltype_java" style="color: inherit; text-decoration: inherit;">protocol<wbr>Type</a>
@@ -965,8 +1109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of protocol within the listener, and available values include <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code> and <code>TCP_SSL</code>. NOTES: <code>TCP_SSL</code> is testing internally, please apply if you need to use.</p>
-</dd><dt class="property-required"
+    <dd>Type of protocol within the listener, and available values include <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code> and <code>TCP_SSL</code>. NOTES: <code>TCP_SSL</code> is testing internally, please apply if you need to use.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -974,8 +1117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</dd><dt class="property-required"
             title="Required">
         <span id="targets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targets_java" style="color: inherit; text-decoration: inherit;">targets</a>
@@ -983,8 +1125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getattachmentsattachmentlisttarget">List&lt;Get<wbr>Attachments<wbr>Attachment<wbr>List<wbr>Target&gt;</a></span>
     </dt>
-    <dd><p>Information of the backends to be attached.</p>
-</dd></dl>
+    <dd>Information of the backends to be attached.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -998,8 +1139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1007,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocoltype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocoltype_nodejs" style="color: inherit; text-decoration: inherit;">protocol<wbr>Type</a>
@@ -1016,8 +1155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of protocol within the listener, and available values include <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code> and <code>TCP_SSL</code>. NOTES: <code>TCP_SSL</code> is testing internally, please apply if you need to use.</p>
-</dd><dt class="property-required"
+    <dd>Type of protocol within the listener, and available values include <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code> and <code>TCP_SSL</code>. NOTES: <code>TCP_SSL</code> is testing internally, please apply if you need to use.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1025,8 +1163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</dd><dt class="property-required"
             title="Required">
         <span id="targets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targets_nodejs" style="color: inherit; text-decoration: inherit;">targets</a>
@@ -1034,8 +1171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getattachmentsattachmentlisttarget">Get<wbr>Attachments<wbr>Attachment<wbr>List<wbr>Target[]</a></span>
     </dt>
-    <dd><p>Information of the backends to be attached.</p>
-</dd></dl>
+    <dd>Information of the backends to be attached.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1049,8 +1185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -1058,8 +1193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_type_python" style="color: inherit; text-decoration: inherit;">protocol_<wbr>type</a>
@@ -1067,8 +1201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of protocol within the listener, and available values include <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code> and <code>TCP_SSL</code>. NOTES: <code>TCP_SSL</code> is testing internally, please apply if you need to use.</p>
-</dd><dt class="property-required"
+    <dd>Type of protocol within the listener, and available values include <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code> and <code>TCP_SSL</code>. NOTES: <code>TCP_SSL</code> is testing internally, please apply if you need to use.</dd><dt class="property-required"
             title="Required">
         <span id="rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
@@ -1076,17 +1209,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</dd><dt class="property-required"
             title="Required">
         <span id="targets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targets_python" style="color: inherit; text-decoration: inherit;">targets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getattachmentsattachmentlisttarget">Get<wbr>Attachments<wbr>Attachment<wbr>List<wbr>Target]</a></span>
+        <span class="property-type"><a href="#getattachmentsattachmentlisttarget">Sequence[Get<wbr>Attachments<wbr>Attachment<wbr>List<wbr>Target]</a></span>
     </dt>
-    <dd><p>Information of the backends to be attached.</p>
-</dd></dl>
+    <dd>Information of the backends to be attached.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1100,8 +1231,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1109,8 +1239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocoltype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocoltype_yaml" style="color: inherit; text-decoration: inherit;">protocol<wbr>Type</a>
@@ -1118,8 +1247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of protocol within the listener, and available values include <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code> and <code>TCP_SSL</code>. NOTES: <code>TCP_SSL</code> is testing internally, please apply if you need to use.</p>
-</dd><dt class="property-required"
+    <dd>Type of protocol within the listener, and available values include <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code> and <code>TCP_SSL</code>. NOTES: <code>TCP_SSL</code> is testing internally, please apply if you need to use.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1127,8 +1255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener rule. If the protocol of listener is <code>HTTP</code>/<code>HTTPS</code>, this para is required.</dd><dt class="property-required"
             title="Required">
         <span id="targets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targets_yaml" style="color: inherit; text-decoration: inherit;">targets</a>
@@ -1136,8 +1263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getattachmentsattachmentlisttarget">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information of the backends to be attached.</p>
-</dd></dl>
+    <dd>Information of the backends to be attached.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1155,8 +1281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Elastic network card unique ID.</p>
-</dd><dt class="property-required"
+    <dd>Elastic network card unique ID.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1164,8 +1289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the backend server.</p>
-</dd><dt class="property-required"
+    <dd>Id of the backend server.</dd><dt class="property-required"
             title="Required">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1173,8 +1297,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the backend server.</p>
-</dd><dt class="property-required"
+    <dd>Port of the backend server.</dd><dt class="property-required"
             title="Required">
         <span id="weight_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_csharp" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -1182,8 +1305,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Forwarding weight of the backend service, the range of [0, 100], defaults to <code>10</code>.</p>
-</dd></dl>
+    <dd>Forwarding weight of the backend service, the range of [0, 100], defaults to <code>10</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1197,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Elastic network card unique ID.</p>
-</dd><dt class="property-required"
+    <dd>Elastic network card unique ID.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1206,8 +1327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the backend server.</p>
-</dd><dt class="property-required"
+    <dd>Id of the backend server.</dd><dt class="property-required"
             title="Required">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1215,8 +1335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the backend server.</p>
-</dd><dt class="property-required"
+    <dd>Port of the backend server.</dd><dt class="property-required"
             title="Required">
         <span id="weight_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_go" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -1224,8 +1343,45 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Forwarding weight of the backend service, the range of [0, 100], defaults to <code>10</code>.</p>
-</dd></dl>
+    <dd>Forwarding weight of the backend service, the range of [0, 100], defaults to <code>10</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="eni_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eni_ip_hcl" style="color: inherit; text-decoration: inherit;">eni_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Elastic network card unique ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of the backend server.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of the backend server.</dd><dt class="property-required"
+            title="Required">
+        <span id="weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_hcl" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Forwarding weight of the backend service, the range of [0, 100], defaults to <code>10</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1239,8 +1395,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Elastic network card unique ID.</p>
-</dd><dt class="property-required"
+    <dd>Elastic network card unique ID.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1248,8 +1403,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the backend server.</p>
-</dd><dt class="property-required"
+    <dd>Id of the backend server.</dd><dt class="property-required"
             title="Required">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1257,8 +1411,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of the backend server.</p>
-</dd><dt class="property-required"
+    <dd>Port of the backend server.</dd><dt class="property-required"
             title="Required">
         <span id="weight_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_java" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1266,8 +1419,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Forwarding weight of the backend service, the range of [0, 100], defaults to <code>10</code>.</p>
-</dd></dl>
+    <dd>Forwarding weight of the backend service, the range of [0, 100], defaults to <code>10</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1281,8 +1433,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Elastic network card unique ID.</p>
-</dd><dt class="property-required"
+    <dd>Elastic network card unique ID.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1290,8 +1441,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the backend server.</p>
-</dd><dt class="property-required"
+    <dd>Id of the backend server.</dd><dt class="property-required"
             title="Required">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1299,8 +1449,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of the backend server.</p>
-</dd><dt class="property-required"
+    <dd>Port of the backend server.</dd><dt class="property-required"
             title="Required">
         <span id="weight_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_nodejs" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1308,8 +1457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Forwarding weight of the backend service, the range of [0, 100], defaults to <code>10</code>.</p>
-</dd></dl>
+    <dd>Forwarding weight of the backend service, the range of [0, 100], defaults to <code>10</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1323,8 +1471,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Elastic network card unique ID.</p>
-</dd><dt class="property-required"
+    <dd>Elastic network card unique ID.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1332,8 +1479,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of the backend server.</p>
-</dd><dt class="property-required"
+    <dd>Id of the backend server.</dd><dt class="property-required"
             title="Required">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1341,8 +1487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the backend server.</p>
-</dd><dt class="property-required"
+    <dd>Port of the backend server.</dd><dt class="property-required"
             title="Required">
         <span id="weight_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_python" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1350,8 +1495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Forwarding weight of the backend service, the range of [0, 100], defaults to <code>10</code>.</p>
-</dd></dl>
+    <dd>Forwarding weight of the backend service, the range of [0, 100], defaults to <code>10</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1365,8 +1509,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Elastic network card unique ID.</p>
-</dd><dt class="property-required"
+    <dd>Elastic network card unique ID.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1374,8 +1517,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the backend server.</p>
-</dd><dt class="property-required"
+    <dd>Id of the backend server.</dd><dt class="property-required"
             title="Required">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1383,8 +1525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of the backend server.</p>
-</dd><dt class="property-required"
+    <dd>Port of the backend server.</dd><dt class="property-required"
             title="Required">
         <span id="weight_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_yaml" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1392,8 +1533,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Forwarding weight of the backend service, the range of [0, 100], defaults to <code>10</code>.</p>
-</dd></dl>
+    <dd>Forwarding weight of the backend service, the range of [0, 100], defaults to <code>10</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1408,7 +1548,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "SslServer"
 title_tag: "tencentcloud.Vpn.SslServer"
-meta_desc: "Documentation for the tencentcloud.Vpn.SslServer resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a VPN SSL Server."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,86 +18,62 @@ Provide a resource to create a VPN SSL Server.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Basic Configuration
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const server = new tencentcloud.vpn.SslServer("server", {
-    compress: true,
-    encryptAlgorithm: "AES-128-CBC",
-    integrityAlgorithm: "MD5",
-    localAddresses: ["10.0.0.0/17"],
-    remoteAddress: "11.0.0.0/16",
-    sslVpnPort: 1194,
-    sslVpnProtocol: "UDP",
+const example = new tencentcloud.vpn.SslServer("example", {
+    localAddresses: ["10.0.200.0/24"],
+    remoteAddress: "192.168.100.0/24",
     sslVpnServerName: "helloworld",
-    vpnGatewayId: "vpngw-335lwf7d",
+    vpnGatewayId: "vpngw-6lq9ayur",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-server = tencentcloud.vpn.SslServer("server",
-    compress=True,
-    encrypt_algorithm="AES-128-CBC",
-    integrity_algorithm="MD5",
-    local_addresses=["10.0.0.0/17"],
-    remote_address="11.0.0.0/16",
-    ssl_vpn_port=1194,
-    ssl_vpn_protocol="UDP",
+example = tencentcloud.vpn.SslServer("example",
+    local_addresses=["10.0.200.0/24"],
+    remote_address="192.168.100.0/24",
     ssl_vpn_server_name="helloworld",
-    vpn_gateway_id="vpngw-335lwf7d")
+    vpn_gateway_id="vpngw-6lq9ayur")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var server = new Tencentcloud.Vpn.SslServer("server", new()
-    {
-        Compress = true,
-        EncryptAlgorithm = "AES-128-CBC",
-        IntegrityAlgorithm = "MD5",
-        LocalAddresses = new[]
-        {
-            "10.0.0.0/17",
-        },
-        RemoteAddress = "11.0.0.0/16",
-        SslVpnPort = 1194,
-        SslVpnProtocol = "UDP",
-        SslVpnServerName = "helloworld",
-        VpnGatewayId = "vpngw-335lwf7d",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpn"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Vpn.NewSslServer(ctx, "server", &Vpn.SslServerArgs{
-			Compress:           pulumi.Bool(true),
-			EncryptAlgorithm:   pulumi.String("AES-128-CBC"),
-			IntegrityAlgorithm: pulumi.String("MD5"),
+		_, err := vpn.NewSslServer(ctx, "example", &vpn.SslServerArgs{
 			LocalAddresses: pulumi.StringArray{
-				pulumi.String("10.0.0.0/17"),
+				pulumi.String("10.0.200.0/24"),
 			},
-			RemoteAddress:    pulumi.String("11.0.0.0/16"),
-			SslVpnPort:       pulumi.Int(1194),
-			SslVpnProtocol:   pulumi.String("UDP"),
+			RemoteAddress:    pulumi.String("192.168.100.0/24"),
 			SslVpnServerName: pulumi.String("helloworld"),
-			VpnGatewayId:     pulumi.String("vpngw-335lwf7d"),
+			VpnGatewayId:     pulumi.String("vpngw-6lq9ayur"),
 		})
 		if err != nil {
 			return err
@@ -104,6 +82,37 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Vpn.SslServer("example", new()
+    {
+        LocalAddresses = new[]
+        {
+            "10.0.200.0/24",
+        },
+        RemoteAddress = "192.168.100.0/24",
+        SslVpnServerName = "helloworld",
+        VpnGatewayId = "vpngw-6lq9ayur",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -112,8 +121,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Vpn.SslServer;
 import com.pulumi.tencentcloud.Vpn.SslServerArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -125,104 +134,741 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var server = new SslServer("server", SslServerArgs.builder()        
-            .compress(true)
-            .encryptAlgorithm("AES-128-CBC")
-            .integrityAlgorithm("MD5")
-            .localAddresses("10.0.0.0/17")
-            .remoteAddress("11.0.0.0/16")
-            .sslVpnPort(1194)
-            .sslVpnProtocol("UDP")
+        var example = new SslServer("example", SslServerArgs.builder()
+            .localAddresses("10.0.200.0/24")
+            .remoteAddress("192.168.100.0/24")
             .sslVpnServerName("helloworld")
-            .vpnGatewayId("vpngw-335lwf7d")
+            .vpnGatewayId("vpngw-6lq9ayur")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  server:
+  example:
     type: tencentcloud:Vpn:SslServer
     properties:
-      compress: true
-      encryptAlgorithm: AES-128-CBC
-      integrityAlgorithm: MD5
       localAddresses:
-        - 10.0.0.0/17
-      remoteAddress: 11.0.0.0/16
-      sslVpnPort: 1194
-      sslVpnProtocol: UDP
+        - 10.0.200.0/24
+      remoteAddress: 192.168.100.0/24
       sslVpnServerName: helloworld
-      vpnGatewayId: vpngw-335lwf7d
+      vpnGatewayId: vpngw-6lq9ayur
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpn_sslserver" "example" {
+  local_addresses     = ["10.0.200.0/24"]
+  remote_address      = "192.168.100.0/24"
+  ssl_vpn_server_name = "helloworld"
+  vpn_gateway_id      = "vpngw-6lq9ayur"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### With Tags and DNS Configuration
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.vpn.SslServer("example", {
+    localAddresses: ["10.0.200.0/24"],
+    remoteAddress: "192.168.100.0/24",
+    sslVpnServerName: "helloworld",
+    vpnGatewayId: "vpngw-6lq9ayur",
+    tags: {
+        Environment: "production",
+        Owner: "team-a",
+    },
+    dnsServers: {
+        primaryDns: "8.8.8.8",
+        secondaryDns: "8.8.4.4",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.vpn.SslServer("example",
+    local_addresses=["10.0.200.0/24"],
+    remote_address="192.168.100.0/24",
+    ssl_vpn_server_name="helloworld",
+    vpn_gateway_id="vpngw-6lq9ayur",
+    tags={
+        "Environment": "production",
+        "Owner": "team-a",
+    },
+    dns_servers={
+        "primary_dns": "8.8.8.8",
+        "secondary_dns": "8.8.4.4",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpn"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := vpn.NewSslServer(ctx, "example", &vpn.SslServerArgs{
+			LocalAddresses: pulumi.StringArray{
+				pulumi.String("10.0.200.0/24"),
+			},
+			RemoteAddress:    pulumi.String("192.168.100.0/24"),
+			SslVpnServerName: pulumi.String("helloworld"),
+			VpnGatewayId:     pulumi.String("vpngw-6lq9ayur"),
+			Tags: pulumi.StringMap{
+				"Environment": pulumi.String("production"),
+				"Owner":       pulumi.String("team-a"),
+			},
+			DnsServers: &vpn.SslServerDnsServersArgs{
+				PrimaryDns:   pulumi.String("8.8.8.8"),
+				SecondaryDns: pulumi.String("8.8.4.4"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Vpn.SslServer("example", new()
+    {
+        LocalAddresses = new[]
+        {
+            "10.0.200.0/24",
+        },
+        RemoteAddress = "192.168.100.0/24",
+        SslVpnServerName = "helloworld",
+        VpnGatewayId = "vpngw-6lq9ayur",
+        Tags = 
+        {
+            { "Environment", "production" },
+            { "Owner", "team-a" },
+        },
+        DnsServers = new Tencentcloud.Vpn.Inputs.SslServerDnsServersArgs
+        {
+            PrimaryDns = "8.8.8.8",
+            SecondaryDns = "8.8.4.4",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Vpn.SslServer;
+import com.pulumi.tencentcloud.Vpn.SslServerArgs;
+import com.pulumi.tencentcloud.Vpn.inputs.SslServerDnsServersArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new SslServer("example", SslServerArgs.builder()
+            .localAddresses("10.0.200.0/24")
+            .remoteAddress("192.168.100.0/24")
+            .sslVpnServerName("helloworld")
+            .vpnGatewayId("vpngw-6lq9ayur")
+            .tags(Map.ofEntries(
+                Map.entry("Environment", "production"),
+                Map.entry("Owner", "team-a")
+            ))
+            .dnsServers(SslServerDnsServersArgs.builder()
+                .primaryDns("8.8.8.8")
+                .secondaryDns("8.8.4.4")
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Vpn:SslServer
+    properties:
+      localAddresses:
+        - 10.0.200.0/24
+      remoteAddress: 192.168.100.0/24
+      sslVpnServerName: helloworld
+      vpnGatewayId: vpngw-6lq9ayur
+      tags:
+        Environment: production
+        Owner: team-a
+      dnsServers:
+        primaryDns: 8.8.8.8
+        secondaryDns: 8.8.4.4
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpn_sslserver" "example" {
+  local_addresses     = ["10.0.200.0/24"]
+  remote_address      = "192.168.100.0/24"
+  ssl_vpn_server_name = "helloworld"
+  vpn_gateway_id      = "vpngw-6lq9ayur"
+  tags = {
+    "Environment" = "production"
+    "Owner"       = "team-a"
+  }
+  dns_servers = {
+    primary_dns   = "8.8.8.8"
+    secondary_dns = "8.8.4.4"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### With SSO Authentication (Requires Whitelist)
+
+**Note:** SSO authentication feature requires whitelist approval from TencentCloud. Please contact TencentCloud support to apply for whitelist access before enabling this feature.
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.vpn.SslServer("example", {
+    localAddresses: ["10.0.200.0/24"],
+    remoteAddress: "192.168.100.0/24",
+    sslVpnServerName: "helloworld",
+    vpnGatewayId: "vpngw-6lq9ayur",
+    ssoEnabled: true,
+    samlData: "<SAML configuration data>",
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.vpn.SslServer("example",
+    local_addresses=["10.0.200.0/24"],
+    remote_address="192.168.100.0/24",
+    ssl_vpn_server_name="helloworld",
+    vpn_gateway_id="vpngw-6lq9ayur",
+    sso_enabled=True,
+    saml_data="<SAML configuration data>")
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpn"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := vpn.NewSslServer(ctx, "example", &vpn.SslServerArgs{
+			LocalAddresses: pulumi.StringArray{
+				pulumi.String("10.0.200.0/24"),
+			},
+			RemoteAddress:    pulumi.String("192.168.100.0/24"),
+			SslVpnServerName: pulumi.String("helloworld"),
+			VpnGatewayId:     pulumi.String("vpngw-6lq9ayur"),
+			SsoEnabled:       pulumi.Bool(true),
+			SamlData:         pulumi.String("<SAML configuration data>"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Vpn.SslServer("example", new()
+    {
+        LocalAddresses = new[]
+        {
+            "10.0.200.0/24",
+        },
+        RemoteAddress = "192.168.100.0/24",
+        SslVpnServerName = "helloworld",
+        VpnGatewayId = "vpngw-6lq9ayur",
+        SsoEnabled = true,
+        SamlData = "<SAML configuration data>",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Vpn.SslServer;
+import com.pulumi.tencentcloud.Vpn.SslServerArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new SslServer("example", SslServerArgs.builder()
+            .localAddresses("10.0.200.0/24")
+            .remoteAddress("192.168.100.0/24")
+            .sslVpnServerName("helloworld")
+            .vpnGatewayId("vpngw-6lq9ayur")
+            .ssoEnabled(true)
+            .samlData("<SAML configuration data>")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Vpn:SslServer
+    properties:
+      localAddresses:
+        - 10.0.200.0/24
+      remoteAddress: 192.168.100.0/24
+      sslVpnServerName: helloworld
+      vpnGatewayId: vpngw-6lq9ayur
+      ssoEnabled: true
+      samlData: <SAML configuration data>
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpn_sslserver" "example" {
+  local_addresses     = ["10.0.200.0/24"]
+  remote_address      = "192.168.100.0/24"
+  ssl_vpn_server_name = "helloworld"
+  vpn_gateway_id      = "vpngw-6lq9ayur"
+  sso_enabled         = true
+  saml_data           = "<SAML configuration data>"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### parameter only controls the feature switch. Detailed access policies must be configured through the TencentCloud console or other resources.
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.vpn.SslServer("example", {
+    localAddresses: ["10.0.200.0/24"],
+    remoteAddress: "192.168.100.0/24",
+    sslVpnServerName: "helloworld",
+    vpnGatewayId: "vpngw-6lq9ayur",
+    accessPolicyEnabled: true,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.vpn.SslServer("example",
+    local_addresses=["10.0.200.0/24"],
+    remote_address="192.168.100.0/24",
+    ssl_vpn_server_name="helloworld",
+    vpn_gateway_id="vpngw-6lq9ayur",
+    access_policy_enabled=True)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpn"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := vpn.NewSslServer(ctx, "example", &vpn.SslServerArgs{
+			LocalAddresses: pulumi.StringArray{
+				pulumi.String("10.0.200.0/24"),
+			},
+			RemoteAddress:       pulumi.String("192.168.100.0/24"),
+			SslVpnServerName:    pulumi.String("helloworld"),
+			VpnGatewayId:        pulumi.String("vpngw-6lq9ayur"),
+			AccessPolicyEnabled: pulumi.Bool(true),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Vpn.SslServer("example", new()
+    {
+        LocalAddresses = new[]
+        {
+            "10.0.200.0/24",
+        },
+        RemoteAddress = "192.168.100.0/24",
+        SslVpnServerName = "helloworld",
+        VpnGatewayId = "vpngw-6lq9ayur",
+        AccessPolicyEnabled = true,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Vpn.SslServer;
+import com.pulumi.tencentcloud.Vpn.SslServerArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new SslServer("example", SslServerArgs.builder()
+            .localAddresses("10.0.200.0/24")
+            .remoteAddress("192.168.100.0/24")
+            .sslVpnServerName("helloworld")
+            .vpnGatewayId("vpngw-6lq9ayur")
+            .accessPolicyEnabled(true)
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Vpn:SslServer
+    properties:
+      localAddresses:
+        - 10.0.200.0/24
+      remoteAddress: 192.168.100.0/24
+      sslVpnServerName: helloworld
+      vpnGatewayId: vpngw-6lq9ayur
+      accessPolicyEnabled: true
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpn_sslserver" "example" {
+  local_addresses       = ["10.0.200.0/24"]
+  remote_address        = "192.168.100.0/24"
+  ssl_vpn_server_name   = "helloworld"
+  vpn_gateway_id        = "vpngw-6lq9ayur"
+  access_policy_enabled = true
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateVpnGatewaySslServer](https://www.tencentcloud.com/search/?wd=CreateVpnGatewaySslServer&type=document&lang=en)
+  - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [DescribeVpnGatewaySslServers](https://www.tencentcloud.com/search/?wd=DescribeVpnGatewaySslServers&type=document&lang=en)
+* Update:
+  - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [ModifyVpnGatewaySslServer](https://www.tencentcloud.com/search/?wd=ModifyVpnGatewaySslServer&type=document&lang=en)
+* Delete:
+  - [DeleteVpnGatewaySslServer](https://www.tencentcloud.com/search/?wd=DeleteVpnGatewaySslServer&type=document&lang=en)
+  - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
 
 
 ## Create SslServer Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">SslServer</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SslServerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">SslServer</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SslServerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">SslServer</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-              <span class="nx">compress</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-              <span class="nx">encrypt_algorithm</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">integrity_algorithm</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">local_addresses</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-              <span class="nx">remote_address</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">ssl_vpn_port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-              <span class="nx">ssl_vpn_protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">ssl_vpn_server_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">vpn_gateway_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">SslServer</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SslServerArgs</a></span><span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">SslServer</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+              <span class="nx">local_addresses</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+              <span class="nx">vpn_gateway_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">ssl_vpn_server_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">remote_address</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">encrypt_algorithm</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">integrity_algorithm</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">access_policy_enabled</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+              <span class="nx">saml_data</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">ssl_vpn_port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+              <span class="nx">ssl_vpn_protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">dns_servers</span><span class="p">:</span> <span class="nx">Optional[SslServerDnsServersArgs]</span> = None<span class="p">,</span>
+              <span class="nx">sso_enabled</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+              <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+              <span class="nx">compress</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSslServer</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SslServerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SslServer</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSslServer</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SslServerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SslServer</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">SslServer</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SslServerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">SslServer</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SslServerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">SslServer</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SslServerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">SslServer</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SslServerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vpn:SslServer</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vpn:SslServer</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_vpn_ssl_server&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -243,7 +889,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -360,11 +1006,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## SslServer Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The SslServer resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -380,8 +1034,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of local CIDR.</p>
-</dd><dt class="property-required"
+    <dd>List of local CIDR.</dd><dt class="property-required"
             title="Required">
         <span id="remoteaddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remoteaddress_csharp" style="color: inherit; text-decoration: inherit;">Remote<wbr>Address</a>
@@ -389,8 +1042,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote CIDR for client.</p>
-</dd><dt class="property-required"
+    <dd>Remote CIDR for client.</dd><dt class="property-required"
             title="Required">
         <span id="sslvpnservername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslvpnservername_csharp" style="color: inherit; text-decoration: inherit;">Ssl<wbr>Vpn<wbr>Server<wbr>Name</a>
@@ -398,8 +1050,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of ssl vpn server to be created.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The name of ssl vpn server to be created.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpngatewayid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_csharp" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Gateway<wbr>Id</a>
@@ -407,8 +1058,15 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPN gateway ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPN gateway ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="accesspolicyenabled_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesspolicyenabled_csharp" style="color: inherit; text-decoration: inherit;">Access<wbr>Policy<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable access policy control. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="compress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_csharp" style="color: inherit; text-decoration: inherit;">Compress</a>
@@ -416,8 +1074,15 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>need compressed. Default value: False.</p>
-</dd><dt class="property-optional"
+    <dd>Need compressed. Currently is not supports compress. Default value: False.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dnsservers_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsservers_csharp" style="color: inherit; text-decoration: inherit;">Dns<wbr>Servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#sslserverdnsservers">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpn.<wbr>Inputs.<wbr>Ssl<wbr>Server<wbr>Dns<wbr>Servers</a></span>
+    </dt>
+    <dd>DNS server configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="encryptalgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptalgorithm_csharp" style="color: inherit; text-decoration: inherit;">Encrypt<wbr>Algorithm</a>
@@ -425,8 +1090,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC, NONE.Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.</dd><dt class="property-optional"
             title="Optional">
         <span id="integrityalgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#integrityalgorithm_csharp" style="color: inherit; text-decoration: inherit;">Integrity<wbr>Algorithm</a>
@@ -434,8 +1098,15 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The integrity algorithm. Valid values: SHA1, MD5 and NONE. Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The integrity algorithm. Valid values: SHA1. Default value: SHA1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="samldata_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samldata_csharp" style="color: inherit; text-decoration: inherit;">Saml<wbr>Data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SAML-DATA. Required when ssoEnabled is true.</dd><dt class="property-optional"
             title="Optional">
         <span id="sslvpnport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslvpnport_csharp" style="color: inherit; text-decoration: inherit;">Ssl<wbr>Vpn<wbr>Port</a>
@@ -443,8 +1114,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port of ssl vpn. Default value: 1194.</p>
-</dd><dt class="property-optional"
+    <dd>The port of ssl vpn. Currently only supports UDP. Default value: 1194.</dd><dt class="property-optional"
             title="Optional">
         <span id="sslvpnprotocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslvpnprotocol_csharp" style="color: inherit; text-decoration: inherit;">Ssl<wbr>Vpn<wbr>Protocol</a>
@@ -452,8 +1122,23 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The protocol of ssl vpn. Default value: UDP.</p>
-</dd></dl>
+    <dd>The protocol of ssl vpn. Default value: UDP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ssoenabled_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssoenabled_csharp" style="color: inherit; text-decoration: inherit;">Sso<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable SSO authentication. Default: false. This feature requires whitelist approval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
+    </dt>
+    <dd>Tags for resource management.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -467,8 +1152,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of local CIDR.</p>
-</dd><dt class="property-required"
+    <dd>List of local CIDR.</dd><dt class="property-required"
             title="Required">
         <span id="remoteaddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remoteaddress_go" style="color: inherit; text-decoration: inherit;">Remote<wbr>Address</a>
@@ -476,8 +1160,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote CIDR for client.</p>
-</dd><dt class="property-required"
+    <dd>Remote CIDR for client.</dd><dt class="property-required"
             title="Required">
         <span id="sslvpnservername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslvpnservername_go" style="color: inherit; text-decoration: inherit;">Ssl<wbr>Vpn<wbr>Server<wbr>Name</a>
@@ -485,8 +1168,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of ssl vpn server to be created.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The name of ssl vpn server to be created.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpngatewayid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_go" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Gateway<wbr>Id</a>
@@ -494,8 +1176,15 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPN gateway ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPN gateway ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="accesspolicyenabled_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesspolicyenabled_go" style="color: inherit; text-decoration: inherit;">Access<wbr>Policy<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable access policy control. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="compress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_go" style="color: inherit; text-decoration: inherit;">Compress</a>
@@ -503,8 +1192,15 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>need compressed. Default value: False.</p>
-</dd><dt class="property-optional"
+    <dd>Need compressed. Currently is not supports compress. Default value: False.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dnsservers_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsservers_go" style="color: inherit; text-decoration: inherit;">Dns<wbr>Servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#sslserverdnsservers">Ssl<wbr>Server<wbr>Dns<wbr>Servers<wbr>Args</a></span>
+    </dt>
+    <dd>DNS server configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="encryptalgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptalgorithm_go" style="color: inherit; text-decoration: inherit;">Encrypt<wbr>Algorithm</a>
@@ -512,8 +1208,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC, NONE.Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.</dd><dt class="property-optional"
             title="Optional">
         <span id="integrityalgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#integrityalgorithm_go" style="color: inherit; text-decoration: inherit;">Integrity<wbr>Algorithm</a>
@@ -521,8 +1216,15 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The integrity algorithm. Valid values: SHA1, MD5 and NONE. Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The integrity algorithm. Valid values: SHA1. Default value: SHA1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="samldata_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samldata_go" style="color: inherit; text-decoration: inherit;">Saml<wbr>Data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SAML-DATA. Required when ssoEnabled is true.</dd><dt class="property-optional"
             title="Optional">
         <span id="sslvpnport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslvpnport_go" style="color: inherit; text-decoration: inherit;">Ssl<wbr>Vpn<wbr>Port</a>
@@ -530,8 +1232,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port of ssl vpn. Default value: 1194.</p>
-</dd><dt class="property-optional"
+    <dd>The port of ssl vpn. Currently only supports UDP. Default value: 1194.</dd><dt class="property-optional"
             title="Optional">
         <span id="sslvpnprotocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslvpnprotocol_go" style="color: inherit; text-decoration: inherit;">Ssl<wbr>Vpn<wbr>Protocol</a>
@@ -539,8 +1240,141 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The protocol of ssl vpn. Default value: UDP.</p>
-</dd></dl>
+    <dd>The protocol of ssl vpn. Default value: UDP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ssoenabled_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssoenabled_go" style="color: inherit; text-decoration: inherit;">Sso<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable SSO authentication. Default: false. This feature requires whitelist approval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map[string]string</span>
+    </dt>
+    <dd>Tags for resource management.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="local_addresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#local_addresses_hcl" style="color: inherit; text-decoration: inherit;">local_<wbr>addresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of local CIDR.</dd><dt class="property-required"
+            title="Required">
+        <span id="remote_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remote_address_hcl" style="color: inherit; text-decoration: inherit;">remote_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remote CIDR for client.</dd><dt class="property-required"
+            title="Required">
+        <span id="ssl_vpn_server_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssl_vpn_server_name_hcl" style="color: inherit; text-decoration: inherit;">ssl_<wbr>vpn_<wbr>server_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of ssl vpn server to be created.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="vpn_gateway_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpn_gateway_id_hcl" style="color: inherit; text-decoration: inherit;">vpn_<wbr>gateway_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPN gateway ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="access_policy_enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_policy_enabled_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>policy_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable access policy control. Default: false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="compress_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_hcl" style="color: inherit; text-decoration: inherit;">compress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Need compressed. Currently is not supports compress. Default value: False.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dns_servers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dns_servers_hcl" style="color: inherit; text-decoration: inherit;">dns_<wbr>servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#sslserverdnsservers">object</a></span>
+    </dt>
+    <dd>DNS server configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encrypt_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_algorithm_hcl" style="color: inherit; text-decoration: inherit;">encrypt_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="integrity_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#integrity_algorithm_hcl" style="color: inherit; text-decoration: inherit;">integrity_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The integrity algorithm. Valid values: SHA1. Default value: SHA1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="saml_data_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#saml_data_hcl" style="color: inherit; text-decoration: inherit;">saml_<wbr>data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SAML-DATA. Required when ssoEnabled is true.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ssl_vpn_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssl_vpn_port_hcl" style="color: inherit; text-decoration: inherit;">ssl_<wbr>vpn_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The port of ssl vpn. Currently only supports UDP. Default value: 1194.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ssl_vpn_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssl_vpn_protocol_hcl" style="color: inherit; text-decoration: inherit;">ssl_<wbr>vpn_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The protocol of ssl vpn. Default value: UDP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sso_enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sso_enabled_hcl" style="color: inherit; text-decoration: inherit;">sso_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable SSO authentication. Default: false. This feature requires whitelist approval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags for resource management.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -554,8 +1388,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of local CIDR.</p>
-</dd><dt class="property-required"
+    <dd>List of local CIDR.</dd><dt class="property-required"
             title="Required">
         <span id="remoteaddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remoteaddress_java" style="color: inherit; text-decoration: inherit;">remote<wbr>Address</a>
@@ -563,8 +1396,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote CIDR for client.</p>
-</dd><dt class="property-required"
+    <dd>Remote CIDR for client.</dd><dt class="property-required"
             title="Required">
         <span id="sslvpnservername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslvpnservername_java" style="color: inherit; text-decoration: inherit;">ssl<wbr>Vpn<wbr>Server<wbr>Name</a>
@@ -572,8 +1404,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of ssl vpn server to be created.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The name of ssl vpn server to be created.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpngatewayid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_java" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -581,8 +1412,15 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPN gateway ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPN gateway ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="accesspolicyenabled_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesspolicyenabled_java" style="color: inherit; text-decoration: inherit;">access<wbr>Policy<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Enable access policy control. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="compress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_java" style="color: inherit; text-decoration: inherit;">compress</a>
@@ -590,8 +1428,15 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>need compressed. Default value: False.</p>
-</dd><dt class="property-optional"
+    <dd>Need compressed. Currently is not supports compress. Default value: False.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dnsservers_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsservers_java" style="color: inherit; text-decoration: inherit;">dns<wbr>Servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#sslserverdnsservers">Ssl<wbr>Server<wbr>Dns<wbr>Servers</a></span>
+    </dt>
+    <dd>DNS server configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="encryptalgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptalgorithm_java" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Algorithm</a>
@@ -599,8 +1444,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC, NONE.Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.</dd><dt class="property-optional"
             title="Optional">
         <span id="integrityalgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#integrityalgorithm_java" style="color: inherit; text-decoration: inherit;">integrity<wbr>Algorithm</a>
@@ -608,8 +1452,15 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The integrity algorithm. Valid values: SHA1, MD5 and NONE. Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The integrity algorithm. Valid values: SHA1. Default value: SHA1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="samldata_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samldata_java" style="color: inherit; text-decoration: inherit;">saml<wbr>Data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>SAML-DATA. Required when ssoEnabled is true.</dd><dt class="property-optional"
             title="Optional">
         <span id="sslvpnport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslvpnport_java" style="color: inherit; text-decoration: inherit;">ssl<wbr>Vpn<wbr>Port</a>
@@ -617,8 +1468,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The port of ssl vpn. Default value: 1194.</p>
-</dd><dt class="property-optional"
+    <dd>The port of ssl vpn. Currently only supports UDP. Default value: 1194.</dd><dt class="property-optional"
             title="Optional">
         <span id="sslvpnprotocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslvpnprotocol_java" style="color: inherit; text-decoration: inherit;">ssl<wbr>Vpn<wbr>Protocol</a>
@@ -626,8 +1476,23 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The protocol of ssl vpn. Default value: UDP.</p>
-</dd></dl>
+    <dd>The protocol of ssl vpn. Default value: UDP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ssoenabled_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssoenabled_java" style="color: inherit; text-decoration: inherit;">sso<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Enable SSO authentication. Default: false. This feature requires whitelist approval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
+    </dt>
+    <dd>Tags for resource management.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -641,8 +1506,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of local CIDR.</p>
-</dd><dt class="property-required"
+    <dd>List of local CIDR.</dd><dt class="property-required"
             title="Required">
         <span id="remoteaddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remoteaddress_nodejs" style="color: inherit; text-decoration: inherit;">remote<wbr>Address</a>
@@ -650,8 +1514,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote CIDR for client.</p>
-</dd><dt class="property-required"
+    <dd>Remote CIDR for client.</dd><dt class="property-required"
             title="Required">
         <span id="sslvpnservername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslvpnservername_nodejs" style="color: inherit; text-decoration: inherit;">ssl<wbr>Vpn<wbr>Server<wbr>Name</a>
@@ -659,8 +1522,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of ssl vpn server to be created.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The name of ssl vpn server to be created.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpngatewayid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_nodejs" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -668,8 +1530,15 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPN gateway ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPN gateway ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="accesspolicyenabled_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesspolicyenabled_nodejs" style="color: inherit; text-decoration: inherit;">access<wbr>Policy<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Enable access policy control. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="compress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_nodejs" style="color: inherit; text-decoration: inherit;">compress</a>
@@ -677,8 +1546,15 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>need compressed. Default value: False.</p>
-</dd><dt class="property-optional"
+    <dd>Need compressed. Currently is not supports compress. Default value: False.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dnsservers_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsservers_nodejs" style="color: inherit; text-decoration: inherit;">dns<wbr>Servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#sslserverdnsservers">Ssl<wbr>Server<wbr>Dns<wbr>Servers</a></span>
+    </dt>
+    <dd>DNS server configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="encryptalgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptalgorithm_nodejs" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Algorithm</a>
@@ -686,8 +1562,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC, NONE.Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.</dd><dt class="property-optional"
             title="Optional">
         <span id="integrityalgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#integrityalgorithm_nodejs" style="color: inherit; text-decoration: inherit;">integrity<wbr>Algorithm</a>
@@ -695,8 +1570,15 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The integrity algorithm. Valid values: SHA1, MD5 and NONE. Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The integrity algorithm. Valid values: SHA1. Default value: SHA1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="samldata_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samldata_nodejs" style="color: inherit; text-decoration: inherit;">saml<wbr>Data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SAML-DATA. Required when ssoEnabled is true.</dd><dt class="property-optional"
             title="Optional">
         <span id="sslvpnport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslvpnport_nodejs" style="color: inherit; text-decoration: inherit;">ssl<wbr>Vpn<wbr>Port</a>
@@ -704,8 +1586,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The port of ssl vpn. Default value: 1194.</p>
-</dd><dt class="property-optional"
+    <dd>The port of ssl vpn. Currently only supports UDP. Default value: 1194.</dd><dt class="property-optional"
             title="Optional">
         <span id="sslvpnprotocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslvpnprotocol_nodejs" style="color: inherit; text-decoration: inherit;">ssl<wbr>Vpn<wbr>Protocol</a>
@@ -713,8 +1594,23 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The protocol of ssl vpn. Default value: UDP.</p>
-</dd></dl>
+    <dd>The protocol of ssl vpn. Default value: UDP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ssoenabled_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssoenabled_nodejs" style="color: inherit; text-decoration: inherit;">sso<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Enable SSO authentication. Default: false. This feature requires whitelist approval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">{[key: string]: string}</span>
+    </dt>
+    <dd>Tags for resource management.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -728,8 +1624,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of local CIDR.</p>
-</dd><dt class="property-required"
+    <dd>List of local CIDR.</dd><dt class="property-required"
             title="Required">
         <span id="remote_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remote_address_python" style="color: inherit; text-decoration: inherit;">remote_<wbr>address</a>
@@ -737,8 +1632,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remote CIDR for client.</p>
-</dd><dt class="property-required"
+    <dd>Remote CIDR for client.</dd><dt class="property-required"
             title="Required">
         <span id="ssl_vpn_server_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssl_vpn_server_name_python" style="color: inherit; text-decoration: inherit;">ssl_<wbr>vpn_<wbr>server_<wbr>name</a>
@@ -746,8 +1640,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of ssl vpn server to be created.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The name of ssl vpn server to be created.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpn_gateway_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpn_gateway_id_python" style="color: inherit; text-decoration: inherit;">vpn_<wbr>gateway_<wbr>id</a>
@@ -755,8 +1648,15 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPN gateway ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPN gateway ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="access_policy_enabled_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_policy_enabled_python" style="color: inherit; text-decoration: inherit;">access_<wbr>policy_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable access policy control. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="compress_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_python" style="color: inherit; text-decoration: inherit;">compress</a>
@@ -764,8 +1664,15 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>need compressed. Default value: False.</p>
-</dd><dt class="property-optional"
+    <dd>Need compressed. Currently is not supports compress. Default value: False.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dns_servers_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dns_servers_python" style="color: inherit; text-decoration: inherit;">dns_<wbr>servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#sslserverdnsservers">Ssl<wbr>Server<wbr>Dns<wbr>Servers<wbr>Args</a></span>
+    </dt>
+    <dd>DNS server configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_algorithm_python" style="color: inherit; text-decoration: inherit;">encrypt_<wbr>algorithm</a>
@@ -773,8 +1680,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC, NONE.Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.</dd><dt class="property-optional"
             title="Optional">
         <span id="integrity_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#integrity_algorithm_python" style="color: inherit; text-decoration: inherit;">integrity_<wbr>algorithm</a>
@@ -782,8 +1688,15 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The integrity algorithm. Valid values: SHA1, MD5 and NONE. Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The integrity algorithm. Valid values: SHA1. Default value: SHA1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="saml_data_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#saml_data_python" style="color: inherit; text-decoration: inherit;">saml_<wbr>data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>SAML-DATA. Required when ssoEnabled is true.</dd><dt class="property-optional"
             title="Optional">
         <span id="ssl_vpn_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssl_vpn_port_python" style="color: inherit; text-decoration: inherit;">ssl_<wbr>vpn_<wbr>port</a>
@@ -791,8 +1704,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port of ssl vpn. Default value: 1194.</p>
-</dd><dt class="property-optional"
+    <dd>The port of ssl vpn. Currently only supports UDP. Default value: 1194.</dd><dt class="property-optional"
             title="Optional">
         <span id="ssl_vpn_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssl_vpn_protocol_python" style="color: inherit; text-decoration: inherit;">ssl_<wbr>vpn_<wbr>protocol</a>
@@ -800,8 +1712,23 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The protocol of ssl vpn. Default value: UDP.</p>
-</dd></dl>
+    <dd>The protocol of ssl vpn. Default value: UDP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sso_enabled_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sso_enabled_python" style="color: inherit; text-decoration: inherit;">sso_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable SSO authentication. Default: false. This feature requires whitelist approval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Mapping[str, str]</span>
+    </dt>
+    <dd>Tags for resource management.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -815,8 +1742,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of local CIDR.</p>
-</dd><dt class="property-required"
+    <dd>List of local CIDR.</dd><dt class="property-required"
             title="Required">
         <span id="remoteaddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remoteaddress_yaml" style="color: inherit; text-decoration: inherit;">remote<wbr>Address</a>
@@ -824,8 +1750,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote CIDR for client.</p>
-</dd><dt class="property-required"
+    <dd>Remote CIDR for client.</dd><dt class="property-required"
             title="Required">
         <span id="sslvpnservername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslvpnservername_yaml" style="color: inherit; text-decoration: inherit;">ssl<wbr>Vpn<wbr>Server<wbr>Name</a>
@@ -833,8 +1758,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of ssl vpn server to be created.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The name of ssl vpn server to be created.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpngatewayid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpngatewayid_yaml" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -842,8 +1766,15 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPN gateway ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPN gateway ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="accesspolicyenabled_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesspolicyenabled_yaml" style="color: inherit; text-decoration: inherit;">access<wbr>Policy<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Enable access policy control. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="compress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_yaml" style="color: inherit; text-decoration: inherit;">compress</a>
@@ -851,8 +1782,15 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>need compressed. Default value: False.</p>
-</dd><dt class="property-optional"
+    <dd>Need compressed. Currently is not supports compress. Default value: False.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dnsservers_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnsservers_yaml" style="color: inherit; text-decoration: inherit;">dns<wbr>Servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#sslserverdnsservers">Property Map</a></span>
+    </dt>
+    <dd>DNS server configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="encryptalgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptalgorithm_yaml" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Algorithm</a>
@@ -860,8 +1798,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC, NONE.Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.</dd><dt class="property-optional"
             title="Optional">
         <span id="integrityalgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#integrityalgorithm_yaml" style="color: inherit; text-decoration: inherit;">integrity<wbr>Algorithm</a>
@@ -869,8 +1806,15 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The integrity algorithm. Valid values: SHA1, MD5 and NONE. Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The integrity algorithm. Valid values: SHA1. Default value: SHA1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="samldata_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samldata_yaml" style="color: inherit; text-decoration: inherit;">saml<wbr>Data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>SAML-DATA. Required when ssoEnabled is true.</dd><dt class="property-optional"
             title="Optional">
         <span id="sslvpnport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslvpnport_yaml" style="color: inherit; text-decoration: inherit;">ssl<wbr>Vpn<wbr>Port</a>
@@ -878,8 +1822,7 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The port of ssl vpn. Default value: 1194.</p>
-</dd><dt class="property-optional"
+    <dd>The port of ssl vpn. Currently only supports UDP. Default value: 1194.</dd><dt class="property-optional"
             title="Optional">
         <span id="sslvpnprotocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslvpnprotocol_yaml" style="color: inherit; text-decoration: inherit;">ssl<wbr>Vpn<wbr>Protocol</a>
@@ -887,8 +1830,23 @@ The SslServer resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The protocol of ssl vpn. Default value: UDP.</p>
-</dd></dl>
+    <dd>The protocol of ssl vpn. Default value: UDP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ssoenabled_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssoenabled_yaml" style="color: inherit; text-decoration: inherit;">sso<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Enable SSO authentication. Default: false. This feature requires whitelist approval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String&gt;</span>
+    </dt>
+    <dd>Tags for resource management.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -909,8 +1867,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -924,8 +1881,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -939,8 +1909,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -954,8 +1923,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -969,8 +1937,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -984,8 +1951,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -995,128 +1961,172 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing SslServer resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SslServerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">SslServer</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SslServerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">SslServer</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+        <span class="nx">access_policy_enabled</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">compress</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">dns_servers</span><span class="p">:</span> <span class="nx">Optional[SslServerDnsServersArgs]</span> = None<span class="p">,</span>
         <span class="nx">encrypt_algorithm</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">integrity_algorithm</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">local_addresses</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">remote_address</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">saml_data</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">ssl_vpn_port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">ssl_vpn_protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">ssl_vpn_server_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">sso_enabled</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">vpn_gateway_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> SslServer</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSslServer<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SslServerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SslServer</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSslServer<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SslServerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">SslServer</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">SslServer</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SslServerState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">SslServer</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SslServerState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">SslServer</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SslServerState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">SslServer</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SslServerState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingSslServer</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Vpn:SslServer</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_vpn_ssl_server</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SslServerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SslServerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1124,28 +2134,31 @@ Get an existing SslServer resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SslServerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1153,28 +2166,31 @@ Get an existing SslServer resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SslServerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1186,7 +2202,15 @@ The following state arguments are supported:
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<dl class="resources-properties"><dt class="property-optional"
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_accesspolicyenabled_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accesspolicyenabled_csharp" style="color: inherit; text-decoration: inherit;">Access<wbr>Policy<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable access policy control. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_compress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_compress_csharp" style="color: inherit; text-decoration: inherit;">Compress</a>
@@ -1194,8 +2218,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>need compressed. Default value: False.</p>
-</dd><dt class="property-optional"
+    <dd>Need compressed. Currently is not supports compress. Default value: False.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dnsservers_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnsservers_csharp" style="color: inherit; text-decoration: inherit;">Dns<wbr>Servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#sslserverdnsservers">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vpn.<wbr>Inputs.<wbr>Ssl<wbr>Server<wbr>Dns<wbr>Servers</a></span>
+    </dt>
+    <dd>DNS server configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_encryptalgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptalgorithm_csharp" style="color: inherit; text-decoration: inherit;">Encrypt<wbr>Algorithm</a>
@@ -1203,8 +2234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC, NONE.Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_integrityalgorithm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_integrityalgorithm_csharp" style="color: inherit; text-decoration: inherit;">Integrity<wbr>Algorithm</a>
@@ -1212,8 +2242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The integrity algorithm. Valid values: SHA1, MD5 and NONE. Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The integrity algorithm. Valid values: SHA1. Default value: SHA1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_localaddresses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_localaddresses_csharp" style="color: inherit; text-decoration: inherit;">Local<wbr>Addresses</a>
@@ -1221,8 +2250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of local CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>List of local CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remoteaddress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remoteaddress_csharp" style="color: inherit; text-decoration: inherit;">Remote<wbr>Address</a>
@@ -1230,8 +2258,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote CIDR for client.</p>
-</dd><dt class="property-optional"
+    <dd>Remote CIDR for client.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_samldata_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_samldata_csharp" style="color: inherit; text-decoration: inherit;">Saml<wbr>Data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SAML-DATA. Required when ssoEnabled is true.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sslvpnport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sslvpnport_csharp" style="color: inherit; text-decoration: inherit;">Ssl<wbr>Vpn<wbr>Port</a>
@@ -1239,8 +2274,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port of ssl vpn. Default value: 1194.</p>
-</dd><dt class="property-optional"
+    <dd>The port of ssl vpn. Currently only supports UDP. Default value: 1194.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sslvpnprotocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sslvpnprotocol_csharp" style="color: inherit; text-decoration: inherit;">Ssl<wbr>Vpn<wbr>Protocol</a>
@@ -1248,8 +2282,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The protocol of ssl vpn. Default value: UDP.</p>
-</dd><dt class="property-optional"
+    <dd>The protocol of ssl vpn. Default value: UDP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sslvpnservername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sslvpnservername_csharp" style="color: inherit; text-decoration: inherit;">Ssl<wbr>Vpn<wbr>Server<wbr>Name</a>
@@ -1257,8 +2290,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of ssl vpn server to be created.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of ssl vpn server to be created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ssoenabled_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ssoenabled_csharp" style="color: inherit; text-decoration: inherit;">Sso<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable SSO authentication. Default: false. This feature requires whitelist approval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
+    </dt>
+    <dd>Tags for resource management.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpngatewayid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpngatewayid_csharp" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Gateway<wbr>Id</a>
@@ -1266,14 +2314,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPN gateway ID.</p>
-</dd></dl>
+    <dd>VPN gateway ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<dl class="resources-properties"><dt class="property-optional"
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_accesspolicyenabled_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accesspolicyenabled_go" style="color: inherit; text-decoration: inherit;">Access<wbr>Policy<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable access policy control. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_compress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_compress_go" style="color: inherit; text-decoration: inherit;">Compress</a>
@@ -1281,8 +2336,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>need compressed. Default value: False.</p>
-</dd><dt class="property-optional"
+    <dd>Need compressed. Currently is not supports compress. Default value: False.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dnsservers_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnsservers_go" style="color: inherit; text-decoration: inherit;">Dns<wbr>Servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#sslserverdnsservers">Ssl<wbr>Server<wbr>Dns<wbr>Servers<wbr>Args</a></span>
+    </dt>
+    <dd>DNS server configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_encryptalgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptalgorithm_go" style="color: inherit; text-decoration: inherit;">Encrypt<wbr>Algorithm</a>
@@ -1290,8 +2352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC, NONE.Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_integrityalgorithm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_integrityalgorithm_go" style="color: inherit; text-decoration: inherit;">Integrity<wbr>Algorithm</a>
@@ -1299,8 +2360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The integrity algorithm. Valid values: SHA1, MD5 and NONE. Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The integrity algorithm. Valid values: SHA1. Default value: SHA1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_localaddresses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_localaddresses_go" style="color: inherit; text-decoration: inherit;">Local<wbr>Addresses</a>
@@ -1308,8 +2368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of local CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>List of local CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remoteaddress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remoteaddress_go" style="color: inherit; text-decoration: inherit;">Remote<wbr>Address</a>
@@ -1317,8 +2376,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote CIDR for client.</p>
-</dd><dt class="property-optional"
+    <dd>Remote CIDR for client.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_samldata_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_samldata_go" style="color: inherit; text-decoration: inherit;">Saml<wbr>Data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SAML-DATA. Required when ssoEnabled is true.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sslvpnport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sslvpnport_go" style="color: inherit; text-decoration: inherit;">Ssl<wbr>Vpn<wbr>Port</a>
@@ -1326,8 +2392,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port of ssl vpn. Default value: 1194.</p>
-</dd><dt class="property-optional"
+    <dd>The port of ssl vpn. Currently only supports UDP. Default value: 1194.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sslvpnprotocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sslvpnprotocol_go" style="color: inherit; text-decoration: inherit;">Ssl<wbr>Vpn<wbr>Protocol</a>
@@ -1335,8 +2400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The protocol of ssl vpn. Default value: UDP.</p>
-</dd><dt class="property-optional"
+    <dd>The protocol of ssl vpn. Default value: UDP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sslvpnservername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sslvpnservername_go" style="color: inherit; text-decoration: inherit;">Ssl<wbr>Vpn<wbr>Server<wbr>Name</a>
@@ -1344,8 +2408,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of ssl vpn server to be created.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of ssl vpn server to be created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ssoenabled_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ssoenabled_go" style="color: inherit; text-decoration: inherit;">Sso<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable SSO authentication. Default: false. This feature requires whitelist approval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map[string]string</span>
+    </dt>
+    <dd>Tags for resource management.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpngatewayid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpngatewayid_go" style="color: inherit; text-decoration: inherit;">Vpn<wbr>Gateway<wbr>Id</a>
@@ -1353,14 +2432,139 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPN gateway ID.</p>
-</dd></dl>
+    <dd>VPN gateway ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_access_policy_enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_access_policy_enabled_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>policy_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable access policy control. Default: false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_compress_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_compress_hcl" style="color: inherit; text-decoration: inherit;">compress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Need compressed. Currently is not supports compress. Default value: False.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dns_servers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dns_servers_hcl" style="color: inherit; text-decoration: inherit;">dns_<wbr>servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#sslserverdnsservers">object</a></span>
+    </dt>
+    <dd>DNS server configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encrypt_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encrypt_algorithm_hcl" style="color: inherit; text-decoration: inherit;">encrypt_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_integrity_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_integrity_algorithm_hcl" style="color: inherit; text-decoration: inherit;">integrity_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The integrity algorithm. Valid values: SHA1. Default value: SHA1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_local_addresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_local_addresses_hcl" style="color: inherit; text-decoration: inherit;">local_<wbr>addresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of local CIDR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_remote_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remote_address_hcl" style="color: inherit; text-decoration: inherit;">remote_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remote CIDR for client.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_saml_data_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_saml_data_hcl" style="color: inherit; text-decoration: inherit;">saml_<wbr>data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SAML-DATA. Required when ssoEnabled is true.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ssl_vpn_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ssl_vpn_port_hcl" style="color: inherit; text-decoration: inherit;">ssl_<wbr>vpn_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The port of ssl vpn. Currently only supports UDP. Default value: 1194.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ssl_vpn_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ssl_vpn_protocol_hcl" style="color: inherit; text-decoration: inherit;">ssl_<wbr>vpn_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The protocol of ssl vpn. Default value: UDP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ssl_vpn_server_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ssl_vpn_server_name_hcl" style="color: inherit; text-decoration: inherit;">ssl_<wbr>vpn_<wbr>server_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of ssl vpn server to be created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sso_enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sso_enabled_hcl" style="color: inherit; text-decoration: inherit;">sso_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable SSO authentication. Default: false. This feature requires whitelist approval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags for resource management.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_vpn_gateway_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpn_gateway_id_hcl" style="color: inherit; text-decoration: inherit;">vpn_<wbr>gateway_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPN gateway ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<dl class="resources-properties"><dt class="property-optional"
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_accesspolicyenabled_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accesspolicyenabled_java" style="color: inherit; text-decoration: inherit;">access<wbr>Policy<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Enable access policy control. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_compress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_compress_java" style="color: inherit; text-decoration: inherit;">compress</a>
@@ -1368,8 +2572,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>need compressed. Default value: False.</p>
-</dd><dt class="property-optional"
+    <dd>Need compressed. Currently is not supports compress. Default value: False.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dnsservers_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnsservers_java" style="color: inherit; text-decoration: inherit;">dns<wbr>Servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#sslserverdnsservers">Ssl<wbr>Server<wbr>Dns<wbr>Servers</a></span>
+    </dt>
+    <dd>DNS server configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_encryptalgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptalgorithm_java" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Algorithm</a>
@@ -1377,8 +2588,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC, NONE.Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_integrityalgorithm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_integrityalgorithm_java" style="color: inherit; text-decoration: inherit;">integrity<wbr>Algorithm</a>
@@ -1386,8 +2596,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The integrity algorithm. Valid values: SHA1, MD5 and NONE. Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The integrity algorithm. Valid values: SHA1. Default value: SHA1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_localaddresses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_localaddresses_java" style="color: inherit; text-decoration: inherit;">local<wbr>Addresses</a>
@@ -1395,8 +2604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of local CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>List of local CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remoteaddress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remoteaddress_java" style="color: inherit; text-decoration: inherit;">remote<wbr>Address</a>
@@ -1404,8 +2612,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote CIDR for client.</p>
-</dd><dt class="property-optional"
+    <dd>Remote CIDR for client.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_samldata_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_samldata_java" style="color: inherit; text-decoration: inherit;">saml<wbr>Data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>SAML-DATA. Required when ssoEnabled is true.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sslvpnport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sslvpnport_java" style="color: inherit; text-decoration: inherit;">ssl<wbr>Vpn<wbr>Port</a>
@@ -1413,8 +2628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The port of ssl vpn. Default value: 1194.</p>
-</dd><dt class="property-optional"
+    <dd>The port of ssl vpn. Currently only supports UDP. Default value: 1194.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sslvpnprotocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sslvpnprotocol_java" style="color: inherit; text-decoration: inherit;">ssl<wbr>Vpn<wbr>Protocol</a>
@@ -1422,8 +2636,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The protocol of ssl vpn. Default value: UDP.</p>
-</dd><dt class="property-optional"
+    <dd>The protocol of ssl vpn. Default value: UDP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sslvpnservername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sslvpnservername_java" style="color: inherit; text-decoration: inherit;">ssl<wbr>Vpn<wbr>Server<wbr>Name</a>
@@ -1431,8 +2644,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of ssl vpn server to be created.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of ssl vpn server to be created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ssoenabled_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ssoenabled_java" style="color: inherit; text-decoration: inherit;">sso<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Enable SSO authentication. Default: false. This feature requires whitelist approval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
+    </dt>
+    <dd>Tags for resource management.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpngatewayid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpngatewayid_java" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -1440,14 +2668,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPN gateway ID.</p>
-</dd></dl>
+    <dd>VPN gateway ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<dl class="resources-properties"><dt class="property-optional"
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_accesspolicyenabled_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accesspolicyenabled_nodejs" style="color: inherit; text-decoration: inherit;">access<wbr>Policy<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Enable access policy control. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_compress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_compress_nodejs" style="color: inherit; text-decoration: inherit;">compress</a>
@@ -1455,8 +2690,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>need compressed. Default value: False.</p>
-</dd><dt class="property-optional"
+    <dd>Need compressed. Currently is not supports compress. Default value: False.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dnsservers_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnsservers_nodejs" style="color: inherit; text-decoration: inherit;">dns<wbr>Servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#sslserverdnsservers">Ssl<wbr>Server<wbr>Dns<wbr>Servers</a></span>
+    </dt>
+    <dd>DNS server configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_encryptalgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptalgorithm_nodejs" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Algorithm</a>
@@ -1464,8 +2706,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC, NONE.Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_integrityalgorithm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_integrityalgorithm_nodejs" style="color: inherit; text-decoration: inherit;">integrity<wbr>Algorithm</a>
@@ -1473,8 +2714,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The integrity algorithm. Valid values: SHA1, MD5 and NONE. Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The integrity algorithm. Valid values: SHA1. Default value: SHA1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_localaddresses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_localaddresses_nodejs" style="color: inherit; text-decoration: inherit;">local<wbr>Addresses</a>
@@ -1482,8 +2722,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of local CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>List of local CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remoteaddress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remoteaddress_nodejs" style="color: inherit; text-decoration: inherit;">remote<wbr>Address</a>
@@ -1491,8 +2730,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remote CIDR for client.</p>
-</dd><dt class="property-optional"
+    <dd>Remote CIDR for client.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_samldata_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_samldata_nodejs" style="color: inherit; text-decoration: inherit;">saml<wbr>Data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SAML-DATA. Required when ssoEnabled is true.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sslvpnport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sslvpnport_nodejs" style="color: inherit; text-decoration: inherit;">ssl<wbr>Vpn<wbr>Port</a>
@@ -1500,8 +2746,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The port of ssl vpn. Default value: 1194.</p>
-</dd><dt class="property-optional"
+    <dd>The port of ssl vpn. Currently only supports UDP. Default value: 1194.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sslvpnprotocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sslvpnprotocol_nodejs" style="color: inherit; text-decoration: inherit;">ssl<wbr>Vpn<wbr>Protocol</a>
@@ -1509,8 +2754,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The protocol of ssl vpn. Default value: UDP.</p>
-</dd><dt class="property-optional"
+    <dd>The protocol of ssl vpn. Default value: UDP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sslvpnservername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sslvpnservername_nodejs" style="color: inherit; text-decoration: inherit;">ssl<wbr>Vpn<wbr>Server<wbr>Name</a>
@@ -1518,8 +2762,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of ssl vpn server to be created.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of ssl vpn server to be created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ssoenabled_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ssoenabled_nodejs" style="color: inherit; text-decoration: inherit;">sso<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Enable SSO authentication. Default: false. This feature requires whitelist approval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">{[key: string]: string}</span>
+    </dt>
+    <dd>Tags for resource management.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpngatewayid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpngatewayid_nodejs" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -1527,14 +2786,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPN gateway ID.</p>
-</dd></dl>
+    <dd>VPN gateway ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties"><dt class="property-optional"
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_access_policy_enabled_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_access_policy_enabled_python" style="color: inherit; text-decoration: inherit;">access_<wbr>policy_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable access policy control. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_compress_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_compress_python" style="color: inherit; text-decoration: inherit;">compress</a>
@@ -1542,8 +2808,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>need compressed. Default value: False.</p>
-</dd><dt class="property-optional"
+    <dd>Need compressed. Currently is not supports compress. Default value: False.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dns_servers_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dns_servers_python" style="color: inherit; text-decoration: inherit;">dns_<wbr>servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#sslserverdnsservers">Ssl<wbr>Server<wbr>Dns<wbr>Servers<wbr>Args</a></span>
+    </dt>
+    <dd>DNS server configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_encrypt_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encrypt_algorithm_python" style="color: inherit; text-decoration: inherit;">encrypt_<wbr>algorithm</a>
@@ -1551,8 +2824,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC, NONE.Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_integrity_algorithm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_integrity_algorithm_python" style="color: inherit; text-decoration: inherit;">integrity_<wbr>algorithm</a>
@@ -1560,8 +2832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The integrity algorithm. Valid values: SHA1, MD5 and NONE. Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The integrity algorithm. Valid values: SHA1. Default value: SHA1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_local_addresses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_local_addresses_python" style="color: inherit; text-decoration: inherit;">local_<wbr>addresses</a>
@@ -1569,8 +2840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of local CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>List of local CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remote_address_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remote_address_python" style="color: inherit; text-decoration: inherit;">remote_<wbr>address</a>
@@ -1578,8 +2848,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remote CIDR for client.</p>
-</dd><dt class="property-optional"
+    <dd>Remote CIDR for client.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_saml_data_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_saml_data_python" style="color: inherit; text-decoration: inherit;">saml_<wbr>data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>SAML-DATA. Required when ssoEnabled is true.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ssl_vpn_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ssl_vpn_port_python" style="color: inherit; text-decoration: inherit;">ssl_<wbr>vpn_<wbr>port</a>
@@ -1587,8 +2864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port of ssl vpn. Default value: 1194.</p>
-</dd><dt class="property-optional"
+    <dd>The port of ssl vpn. Currently only supports UDP. Default value: 1194.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ssl_vpn_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ssl_vpn_protocol_python" style="color: inherit; text-decoration: inherit;">ssl_<wbr>vpn_<wbr>protocol</a>
@@ -1596,8 +2872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The protocol of ssl vpn. Default value: UDP.</p>
-</dd><dt class="property-optional"
+    <dd>The protocol of ssl vpn. Default value: UDP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ssl_vpn_server_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ssl_vpn_server_name_python" style="color: inherit; text-decoration: inherit;">ssl_<wbr>vpn_<wbr>server_<wbr>name</a>
@@ -1605,8 +2880,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of ssl vpn server to be created.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of ssl vpn server to be created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sso_enabled_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sso_enabled_python" style="color: inherit; text-decoration: inherit;">sso_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable SSO authentication. Default: false. This feature requires whitelist approval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Mapping[str, str]</span>
+    </dt>
+    <dd>Tags for resource management.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpn_gateway_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpn_gateway_id_python" style="color: inherit; text-decoration: inherit;">vpn_<wbr>gateway_<wbr>id</a>
@@ -1614,14 +2904,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPN gateway ID.</p>
-</dd></dl>
+    <dd>VPN gateway ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<dl class="resources-properties"><dt class="property-optional"
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_accesspolicyenabled_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accesspolicyenabled_yaml" style="color: inherit; text-decoration: inherit;">access<wbr>Policy<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Enable access policy control. Default: false.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_compress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_compress_yaml" style="color: inherit; text-decoration: inherit;">compress</a>
@@ -1629,8 +2926,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>need compressed. Default value: False.</p>
-</dd><dt class="property-optional"
+    <dd>Need compressed. Currently is not supports compress. Default value: False.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dnsservers_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dnsservers_yaml" style="color: inherit; text-decoration: inherit;">dns<wbr>Servers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#sslserverdnsservers">Property Map</a></span>
+    </dt>
+    <dd>DNS server configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_encryptalgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptalgorithm_yaml" style="color: inherit; text-decoration: inherit;">encrypt<wbr>Algorithm</a>
@@ -1638,8 +2942,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC, NONE.Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_integrityalgorithm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_integrityalgorithm_yaml" style="color: inherit; text-decoration: inherit;">integrity<wbr>Algorithm</a>
@@ -1647,8 +2950,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The integrity algorithm. Valid values: SHA1, MD5 and NONE. Default value: NONE.</p>
-</dd><dt class="property-optional"
+    <dd>The integrity algorithm. Valid values: SHA1. Default value: SHA1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_localaddresses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_localaddresses_yaml" style="color: inherit; text-decoration: inherit;">local<wbr>Addresses</a>
@@ -1656,8 +2958,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of local CIDR.</p>
-</dd><dt class="property-optional"
+    <dd>List of local CIDR.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remoteaddress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remoteaddress_yaml" style="color: inherit; text-decoration: inherit;">remote<wbr>Address</a>
@@ -1665,8 +2966,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remote CIDR for client.</p>
-</dd><dt class="property-optional"
+    <dd>Remote CIDR for client.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_samldata_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_samldata_yaml" style="color: inherit; text-decoration: inherit;">saml<wbr>Data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>SAML-DATA. Required when ssoEnabled is true.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sslvpnport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sslvpnport_yaml" style="color: inherit; text-decoration: inherit;">ssl<wbr>Vpn<wbr>Port</a>
@@ -1674,8 +2982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The port of ssl vpn. Default value: 1194.</p>
-</dd><dt class="property-optional"
+    <dd>The port of ssl vpn. Currently only supports UDP. Default value: 1194.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sslvpnprotocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sslvpnprotocol_yaml" style="color: inherit; text-decoration: inherit;">ssl<wbr>Vpn<wbr>Protocol</a>
@@ -1683,8 +2990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The protocol of ssl vpn. Default value: UDP.</p>
-</dd><dt class="property-optional"
+    <dd>The protocol of ssl vpn. Default value: UDP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sslvpnservername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sslvpnservername_yaml" style="color: inherit; text-decoration: inherit;">ssl<wbr>Vpn<wbr>Server<wbr>Name</a>
@@ -1692,8 +2998,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of ssl vpn server to be created.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of ssl vpn server to be created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ssoenabled_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ssoenabled_yaml" style="color: inherit; text-decoration: inherit;">sso<wbr>Enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Enable SSO authentication. Default: false. This feature requires whitelist approval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String&gt;</span>
+    </dt>
+    <dd>Tags for resource management.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpngatewayid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpngatewayid_yaml" style="color: inherit; text-decoration: inherit;">vpn<wbr>Gateway<wbr>Id</a>
@@ -1701,8 +3022,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPN gateway ID.</p>
-</dd></dl>
+    <dd>VPN gateway ID.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1712,6 +3032,168 @@ The following state arguments are supported:
 
 
 
+
+## Supporting Types
+
+
+
+<h4 id="sslserverdnsservers">
+Ssl<wbr>Server<wbr>Dns<wbr>Servers<pulumi-choosable type="language" values="python,go" class="inline">, Ssl<wbr>Server<wbr>Dns<wbr>Servers<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="primarydns_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primarydns_csharp" style="color: inherit; text-decoration: inherit;">Primary<wbr>Dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Primary DNS server address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="secondarydns_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secondarydns_csharp" style="color: inherit; text-decoration: inherit;">Secondary<wbr>Dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Secondary DNS server address.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="primarydns_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primarydns_go" style="color: inherit; text-decoration: inherit;">Primary<wbr>Dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Primary DNS server address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="secondarydns_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secondarydns_go" style="color: inherit; text-decoration: inherit;">Secondary<wbr>Dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Secondary DNS server address.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="primary_dns_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_dns_hcl" style="color: inherit; text-decoration: inherit;">primary_<wbr>dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Primary DNS server address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="secondary_dns_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secondary_dns_hcl" style="color: inherit; text-decoration: inherit;">secondary_<wbr>dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Secondary DNS server address.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="primarydns_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primarydns_java" style="color: inherit; text-decoration: inherit;">primary<wbr>Dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Primary DNS server address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="secondarydns_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secondarydns_java" style="color: inherit; text-decoration: inherit;">secondary<wbr>Dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Secondary DNS server address.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="primarydns_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primarydns_nodejs" style="color: inherit; text-decoration: inherit;">primary<wbr>Dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Primary DNS server address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="secondarydns_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secondarydns_nodejs" style="color: inherit; text-decoration: inherit;">secondary<wbr>Dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Secondary DNS server address.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="primary_dns_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primary_dns_python" style="color: inherit; text-decoration: inherit;">primary_<wbr>dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Primary DNS server address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="secondary_dns_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secondary_dns_python" style="color: inherit; text-decoration: inherit;">secondary_<wbr>dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Secondary DNS server address.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="primarydns_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#primarydns_yaml" style="color: inherit; text-decoration: inherit;">primary<wbr>Dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Primary DNS server address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="secondarydns_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secondarydns_yaml" style="color: inherit; text-decoration: inherit;">secondary<wbr>Dns</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Secondary DNS server address.</dd></dl>
+</pulumi-choosable>
+</div>
 
 ## Import
 
@@ -1720,9 +3202,12 @@ The following state arguments are supported:
 VPN SSL Server can be imported, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Vpn/sslServer:SslServer server vpn-server-id
+$ pulumi import tencentcloud:Vpn/sslServer:SslServer example vpns-cik6bjct
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1734,7 +3219,6 @@ $ pulumi import tencentcloud:Vpn/sslServer:SslServer server vpn-server-id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

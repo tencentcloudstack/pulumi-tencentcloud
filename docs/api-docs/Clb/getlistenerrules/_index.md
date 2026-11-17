@@ -2,9 +2,11 @@
 ---
 title: "getListenerRules"
 title_tag: "tencentcloud.Clb.getListenerRules"
-meta_desc: "Documentation for the tencentcloud.Clb.getListenerRules function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of CLB listener rule"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,68 +18,63 @@ Use this data source to query detailed information of CLB listener rule
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Clb.getListenerRules({
+const foo = tencentcloud.clb.getListenerRules({
     clbId: "lb-k2zjp9lv",
-    domain: "abc.com",
     listenerId: "lbl-mwr6vbtv",
     ruleId: "loc-inem40hz",
-    scheduler: "WRR",
+    domain: "abc.com",
     url: "/",
+    scheduler: "WRR",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Clb.get_listener_rules(clb_id="lb-k2zjp9lv",
-    domain="abc.com",
+foo = tencentcloud.clb.get_listener_rules(clb_id="lb-k2zjp9lv",
     listener_id="lbl-mwr6vbtv",
     rule_id="loc-inem40hz",
-    scheduler="WRR",
-    url="/")
+    domain="abc.com",
+    url="/",
+    scheduler="WRR")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Clb.GetListenerRules.Invoke(new()
-    {
-        ClbId = "lb-k2zjp9lv",
-        Domain = "abc.com",
-        ListenerId = "lbl-mwr6vbtv",
-        RuleId = "loc-inem40hz",
-        Scheduler = "WRR",
-        Url = "/",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.GetListenerRules(ctx, &clb.GetListenerRulesArgs{
+		_, err := clb.GetListenerRules(ctx, &clb.GetListenerRulesArgs{
 			ClbId:      "lb-k2zjp9lv",
-			Domain:     pulumi.StringRef("abc.com"),
 			ListenerId: "lbl-mwr6vbtv",
 			RuleId:     pulumi.StringRef("loc-inem40hz"),
-			Scheduler:  pulumi.StringRef("WRR"),
+			Domain:     pulumi.StringRef("abc.com"),
 			Url:        pulumi.StringRef("/"),
+			Scheduler:  pulumi.StringRef("WRR"),
 		}, nil)
 		if err != nil {
 			return err
@@ -86,6 +83,36 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = Tencentcloud.Clb.GetListenerRules.Invoke(new()
+    {
+        ClbId = "lb-k2zjp9lv",
+        ListenerId = "lbl-mwr6vbtv",
+        RuleId = "loc-inem40hz",
+        Domain = "abc.com",
+        Url = "/",
+        Scheduler = "WRR",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -94,8 +121,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Clb.ClbFunctions;
 import com.pulumi.tencentcloud.Clb.inputs.GetListenerRulesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -109,31 +136,66 @@ public class App {
     public static void stack(Context ctx) {
         final var foo = ClbFunctions.getListenerRules(GetListenerRulesArgs.builder()
             .clbId("lb-k2zjp9lv")
-            .domain("abc.com")
             .listenerId("lbl-mwr6vbtv")
             .ruleId("loc-inem40hz")
-            .scheduler("WRR")
+            .domain("abc.com")
             .url("/")
+            .scheduler("WRR")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   foo:
     fn::invoke:
-      Function: tencentcloud:Clb:getListenerRules
-      Arguments:
+      function: tencentcloud:Clb:getListenerRules
+      arguments:
         clbId: lb-k2zjp9lv
-        domain: abc.com
         listenerId: lbl-mwr6vbtv
         ruleId: loc-inem40hz
-        scheduler: WRR
+        domain: abc.com
         url: /
+        scheduler: WRR
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_clb_getlistenerrules" "foo" {
+  clb_id      = "lb-k2zjp9lv"
+  listener_id = "lbl-mwr6vbtv"
+  rule_id     = "loc-inem40hz"
+  domain      = "abc.com"
+  url         = "/"
+  scheduler   = "WRR"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
 
 
 
@@ -145,7 +207,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -153,9 +215,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getListenerRules<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetListenerRulesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetListenerRulesResult</a></span>></span
+><span class="k">function </span>getListenerRules<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetListenerRulesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetListenerRulesResult</a></span>></span
 ><span class="k">
-function </span>getListenerRulesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetListenerRulesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetListenerRulesResult</a></span>></span
+function </span>getListenerRulesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetListenerRulesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetListenerRulesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,14 +235,14 @@ function </span>getListenerRulesOutput<span class="p">(</span><span class="nx">a
                        <span class="nx">url</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetListenerRulesResult</span
 ><span class="k">
-def </span>get_listener_rules_output<span class="p">(</span><span class="nx">clb_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">rule_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">scheduler</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">url</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetListenerRulesResult]</span
+def </span>get_listener_rules_output<span class="p">(</span><span class="nx">clb_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">domain</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">rule_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">scheduler</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">url</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetListenerRulesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -205,7 +267,8 @@ func </span>GetListenerRulesOutput<span class="p">(</span><span class="nx">ctx</
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetListenerRules </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetListenerRulesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetListenerRulesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetListenerRulesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetListenerRulesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetListenerRulesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetListenerRulesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetListenerRulesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetListenerRulesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -214,7 +277,8 @@ func </span>GetListenerRulesOutput<span class="p">(</span><span class="nx">ctx</
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetListenerRulesResult</a></span>> </span>getListenerRules<span class="p">(</span><span class="nx">GetListenerRulesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetListenerRulesResult</a></span>> </span>getListenerRules<span class="p">(</span><span class="nx">GetListenerRulesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetListenerRulesResult</a></span>> </span>getListenerRules<span class="p">(</span><span class="nx">GetListenerRulesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -226,6 +290,15 @@ func </span>GetListenerRulesOutput<span class="p">(</span><span class="nx">ctx</
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Clb/getListenerRules:getListenerRules
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_clb_get_listener_rules&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -244,8 +317,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -253,8 +325,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -262,8 +333,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name of the forwarding rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name of the forwarding rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -271,8 +341,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -280,8 +349,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the forwarding rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the forwarding rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="scheduler_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_csharp" style="color: inherit; text-decoration: inherit;">Scheduler</a>
@@ -289,8 +357,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_csharp" style="color: inherit; text-decoration: inherit;">Url</a>
@@ -298,8 +365,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Url of the forwarding rule to be queried.</p>
-</dd></dl>
+    <dd>Url of the forwarding rule to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -313,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -322,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -331,8 +395,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name of the forwarding rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name of the forwarding rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -340,8 +403,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -349,8 +411,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the forwarding rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the forwarding rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="scheduler_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_go" style="color: inherit; text-decoration: inherit;">Scheduler</a>
@@ -358,8 +419,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_go" style="color: inherit; text-decoration: inherit;">Url</a>
@@ -367,8 +427,69 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Url of the forwarding rule to be queried.</p>
-</dd></dl>
+    <dd>Url of the forwarding rule to be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name of the forwarding rule to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the forwarding rule to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scheduler_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_hcl" style="color: inherit; text-decoration: inherit;">scheduler</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_hcl" style="color: inherit; text-decoration: inherit;">url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Url of the forwarding rule to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -382,8 +503,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -391,8 +511,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -400,8 +519,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name of the forwarding rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name of the forwarding rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -409,8 +527,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -418,8 +535,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the forwarding rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the forwarding rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="scheduler_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_java" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -427,8 +543,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_java" style="color: inherit; text-decoration: inherit;">url</a>
@@ -436,8 +551,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Url of the forwarding rule to be queried.</p>
-</dd></dl>
+    <dd>Url of the forwarding rule to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -451,8 +565,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -460,8 +573,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -469,8 +581,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name of the forwarding rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name of the forwarding rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -478,8 +589,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -487,8 +597,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the forwarding rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the forwarding rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="scheduler_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_nodejs" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -496,8 +605,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_nodejs" style="color: inherit; text-decoration: inherit;">url</a>
@@ -505,8 +613,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Url of the forwarding rule to be queried.</p>
-</dd></dl>
+    <dd>Url of the forwarding rule to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -520,8 +627,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -529,8 +635,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -538,8 +643,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name of the forwarding rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name of the forwarding rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -547,8 +651,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
@@ -556,8 +659,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the forwarding rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the forwarding rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="scheduler_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_python" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -565,8 +667,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_python" style="color: inherit; text-decoration: inherit;">url</a>
@@ -574,8 +675,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Url of the forwarding rule to be queried.</p>
-</dd></dl>
+    <dd>Url of the forwarding rule to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -589,8 +689,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -598,8 +697,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -607,8 +705,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name of the forwarding rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name of the forwarding rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -616,8 +713,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -625,8 +721,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the forwarding rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the forwarding rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="scheduler_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_yaml" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -634,8 +729,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_yaml" style="color: inherit; text-decoration: inherit;">url</a>
@@ -643,8 +737,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Url of the forwarding rule to be queried.</p>
-</dd></dl>
+    <dd>Url of the forwarding rule to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -667,8 +760,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-"
+    <dd>ID of the CLB.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -676,8 +768,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -685,8 +776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the listener.</dd><dt class="property-"
             title="">
         <span id="rulelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Lists</a>
@@ -694,8 +784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlistenerrulesrulelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Outputs.<wbr>Get<wbr>Listener<wbr>Rules<wbr>Rule<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of forward rules of listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of forward rules of listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -719,8 +808,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the rule.</p>
-</dd><dt class="property-"
+    <dd>ID of the rule.</dd><dt class="property-"
             title="">
         <span id="scheduler_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_csharp" style="color: inherit; text-decoration: inherit;">Scheduler</a>
@@ -728,8 +816,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling method of the CLB listener, and available values include 'WRR', 'IP_HASH' and 'LEAST_CONN'. The default is 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-"
+    <dd>Scheduling method of the CLB listener, and available values include 'WRR', 'IP_HASH' and 'LEAST_CONN'. The default is 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-"
             title="">
         <span id="url_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_csharp" style="color: inherit; text-decoration: inherit;">Url</a>
@@ -751,8 +838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-"
+    <dd>ID of the CLB.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -760,8 +846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -769,8 +854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the listener.</dd><dt class="property-"
             title="">
         <span id="rulelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Lists</a>
@@ -778,8 +862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlistenerrulesrulelist">[]Get<wbr>Listener<wbr>Rules<wbr>Rule<wbr>List</a></span>
     </dt>
-    <dd><p>A list of forward rules of listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of forward rules of listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -803,8 +886,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the rule.</p>
-</dd><dt class="property-"
+    <dd>ID of the rule.</dd><dt class="property-"
             title="">
         <span id="scheduler_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_go" style="color: inherit; text-decoration: inherit;">Scheduler</a>
@@ -812,11 +894,88 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling method of the CLB listener, and available values include 'WRR', 'IP_HASH' and 'LEAST_CONN'. The default is 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-"
+    <dd>Scheduling method of the CLB listener, and available values include 'WRR', 'IP_HASH' and 'LEAST_CONN'. The default is 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-"
             title="">
         <span id="url_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_go" style="color: inherit; text-decoration: inherit;">Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the listener.</dd><dt class="property-"
+            title="">
+        <span id="rule_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_lists_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getlistenerrulesrulelist">list(object)</a></span>
+    </dt>
+    <dd>A list of forward rules of listeners. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the rule.</dd><dt class="property-"
+            title="">
+        <span id="scheduler_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_hcl" style="color: inherit; text-decoration: inherit;">scheduler</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling method of the CLB listener, and available values include 'WRR', 'IP_HASH' and 'LEAST_CONN'. The default is 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-"
+            title="">
+        <span id="url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_hcl" style="color: inherit; text-decoration: inherit;">url</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -835,8 +994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-"
+    <dd>ID of the CLB.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -844,8 +1002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -853,8 +1010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the listener.</dd><dt class="property-"
             title="">
         <span id="rulelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Lists</a>
@@ -862,8 +1018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlistenerrulesrulelist">List&lt;Get<wbr>Listener<wbr>Rules<wbr>Rule<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of forward rules of listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of forward rules of listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -887,8 +1042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the rule.</p>
-</dd><dt class="property-"
+    <dd>ID of the rule.</dd><dt class="property-"
             title="">
         <span id="scheduler_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_java" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -896,8 +1050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling method of the CLB listener, and available values include 'WRR', 'IP_HASH' and 'LEAST_CONN'. The default is 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-"
+    <dd>Scheduling method of the CLB listener, and available values include 'WRR', 'IP_HASH' and 'LEAST_CONN'. The default is 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-"
             title="">
         <span id="url_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_java" style="color: inherit; text-decoration: inherit;">url</a>
@@ -919,8 +1072,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-"
+    <dd>ID of the CLB.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -928,8 +1080,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -937,8 +1088,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the listener.</dd><dt class="property-"
             title="">
         <span id="rulelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Lists</a>
@@ -946,8 +1096,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlistenerrulesrulelist">Get<wbr>Listener<wbr>Rules<wbr>Rule<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of forward rules of listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of forward rules of listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -971,8 +1120,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the rule.</p>
-</dd><dt class="property-"
+    <dd>ID of the rule.</dd><dt class="property-"
             title="">
         <span id="scheduler_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_nodejs" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -980,8 +1128,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling method of the CLB listener, and available values include 'WRR', 'IP_HASH' and 'LEAST_CONN'. The default is 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-"
+    <dd>Scheduling method of the CLB listener, and available values include 'WRR', 'IP_HASH' and 'LEAST_CONN'. The default is 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-"
             title="">
         <span id="url_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_nodejs" style="color: inherit; text-decoration: inherit;">url</a>
@@ -1003,8 +1150,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-"
+    <dd>ID of the CLB.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1012,8 +1158,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -1021,17 +1166,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the listener.</dd><dt class="property-"
             title="">
         <span id="rule_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_lists_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getlistenerrulesrulelist">Get<wbr>Listener<wbr>Rules<wbr>Rule<wbr>List]</a></span>
+        <span class="property-type"><a href="#getlistenerrulesrulelist">Sequence[Get<wbr>Listener<wbr>Rules<wbr>Rule<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of forward rules of listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of forward rules of listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1055,8 +1198,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the rule.</p>
-</dd><dt class="property-"
+    <dd>ID of the rule.</dd><dt class="property-"
             title="">
         <span id="scheduler_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_python" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -1064,8 +1206,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scheduling method of the CLB listener, and available values include 'WRR', 'IP_HASH' and 'LEAST_CONN'. The default is 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-"
+    <dd>Scheduling method of the CLB listener, and available values include 'WRR', 'IP_HASH' and 'LEAST_CONN'. The default is 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-"
             title="">
         <span id="url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_python" style="color: inherit; text-decoration: inherit;">url</a>
@@ -1087,8 +1228,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-"
+    <dd>ID of the CLB.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1096,8 +1236,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1105,8 +1244,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the listener.</dd><dt class="property-"
             title="">
         <span id="rulelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulelists_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Lists</a>
@@ -1114,8 +1252,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlistenerrulesrulelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of forward rules of listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of forward rules of listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1139,8 +1276,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the rule.</p>
-</dd><dt class="property-"
+    <dd>ID of the rule.</dd><dt class="property-"
             title="">
         <span id="scheduler_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_yaml" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -1148,8 +1284,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling method of the CLB listener, and available values include 'WRR', 'IP_HASH' and 'LEAST_CONN'. The default is 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-"
+    <dd>Scheduling method of the CLB listener, and available values include 'WRR', 'IP_HASH' and 'LEAST_CONN'. The default is 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-"
             title="">
         <span id="url_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_yaml" style="color: inherit; text-decoration: inherit;">url</a>
@@ -1181,8 +1316,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the client certificate. NOTES: Only supports listeners of 'HTTPS' and 'TCP_SSL' protocol.</p>
-</dd><dt class="property-required"
+    <dd>ID of the client certificate. NOTES: Only supports listeners of 'HTTPS' and 'TCP_SSL' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="certificateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Id</a>
@@ -1190,8 +1324,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the server certificate. NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</p>
-</dd><dt class="property-required"
+    <dd>ID of the server certificate. NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="certificatesslmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatesslmode_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Ssl<wbr>Mode</a>
@@ -1199,8 +1332,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of SSL Mode, and available values inclue 'UNIDIRECTIONAL', 'MUTUAL'.NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</p>
-</dd><dt class="property-required"
+    <dd>Type of SSL Mode, and available values inclue 'UNIDIRECTIONAL', 'MUTUAL'.NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="clbid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_csharp" style="color: inherit; text-decoration: inherit;">Clb<wbr>Id</a>
@@ -1208,8 +1340,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhealthnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhealthnum_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -1217,8 +1348,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-required"
+    <dd>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttpcode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpcode_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Code</a>
@@ -1226,8 +1356,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTP Status Code. The default is 31 and value range is 1-31. 1 means the return value '1xx' is health. 2 means the return value '2xx' is health. 4 means the return value '3xx' is health. 8 means the return value 4xx is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.</p>
-</dd><dt class="property-required"
+    <dd>HTTP Status Code. The default is 31 and value range is 1-31. 1 means the return value '1xx' is health. 2 means the return value '2xx' is health. 4 means the return value '3xx' is health. 8 means the return value 4xx is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttpdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpdomain_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Domain</a>
@@ -1235,8 +1364,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</p>
-</dd><dt class="property-required"
+    <dd>Domain name of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttpmethod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpmethod_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Method</a>
@@ -1244,8 +1372,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Methods of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol. The default is 'HEAD', the available value include 'HEAD' and 'GET'.</p>
-</dd><dt class="property-required"
+    <dd>Methods of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol. The default is 'HEAD', the available value include 'HEAD' and 'GET'.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttppath_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttppath_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Path</a>
@@ -1253,8 +1380,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Path of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</p>
-</dd><dt class="property-required"
+    <dd>Path of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckintervaltime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckintervaltime_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Interval<wbr>Time</a>
@@ -1262,8 +1388,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval time of health check. The value range is 2-300 sec, and the default is <code>5</code> sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-required"
+    <dd>Interval time of health check. The value range is 2-300 sec, and the default is <code>5</code> sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckswitch_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Switch</a>
@@ -1271,8 +1396,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckunhealthnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckunhealthnum_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -1280,8 +1404,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Unhealth threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as unhealthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-required"
+    <dd>Unhealth threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as unhealthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
             title="Required">
         <span id="http2switch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http2switch_csharp" style="color: inherit; text-decoration: inherit;">Http2Switch</a>
@@ -1289,8 +1412,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to set HTTP2 protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate to set HTTP2 protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -1298,8 +1420,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -1307,8 +1428,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the forwarding rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the forwarding rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="scheduler_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_csharp" style="color: inherit; text-decoration: inherit;">Scheduler</a>
@@ -1316,8 +1436,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sessionexpiretime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionexpiretime_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Expire<wbr>Time</a>
@@ -1325,8 +1444,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-optional"
+    <dd>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1334,8 +1452,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name of the forwarding rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name of the forwarding rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_csharp" style="color: inherit; text-decoration: inherit;">Url</a>
@@ -1343,8 +1460,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Url of the forwarding rule to be queried.</p>
-</dd></dl>
+    <dd>Url of the forwarding rule to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1358,8 +1474,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the client certificate. NOTES: Only supports listeners of 'HTTPS' and 'TCP_SSL' protocol.</p>
-</dd><dt class="property-required"
+    <dd>ID of the client certificate. NOTES: Only supports listeners of 'HTTPS' and 'TCP_SSL' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="certificateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Id</a>
@@ -1367,8 +1482,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the server certificate. NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</p>
-</dd><dt class="property-required"
+    <dd>ID of the server certificate. NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="certificatesslmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatesslmode_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Ssl<wbr>Mode</a>
@@ -1376,8 +1490,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of SSL Mode, and available values inclue 'UNIDIRECTIONAL', 'MUTUAL'.NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</p>
-</dd><dt class="property-required"
+    <dd>Type of SSL Mode, and available values inclue 'UNIDIRECTIONAL', 'MUTUAL'.NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="clbid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_go" style="color: inherit; text-decoration: inherit;">Clb<wbr>Id</a>
@@ -1385,8 +1498,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhealthnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhealthnum_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -1394,8 +1506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-required"
+    <dd>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttpcode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpcode_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Code</a>
@@ -1403,8 +1514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTP Status Code. The default is 31 and value range is 1-31. 1 means the return value '1xx' is health. 2 means the return value '2xx' is health. 4 means the return value '3xx' is health. 8 means the return value 4xx is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.</p>
-</dd><dt class="property-required"
+    <dd>HTTP Status Code. The default is 31 and value range is 1-31. 1 means the return value '1xx' is health. 2 means the return value '2xx' is health. 4 means the return value '3xx' is health. 8 means the return value 4xx is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttpdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpdomain_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Domain</a>
@@ -1412,8 +1522,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</p>
-</dd><dt class="property-required"
+    <dd>Domain name of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttpmethod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpmethod_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Method</a>
@@ -1421,8 +1530,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Methods of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol. The default is 'HEAD', the available value include 'HEAD' and 'GET'.</p>
-</dd><dt class="property-required"
+    <dd>Methods of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol. The default is 'HEAD', the available value include 'HEAD' and 'GET'.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttppath_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttppath_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Path</a>
@@ -1430,8 +1538,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Path of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</p>
-</dd><dt class="property-required"
+    <dd>Path of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckintervaltime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckintervaltime_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Interval<wbr>Time</a>
@@ -1439,8 +1546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval time of health check. The value range is 2-300 sec, and the default is <code>5</code> sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-required"
+    <dd>Interval time of health check. The value range is 2-300 sec, and the default is <code>5</code> sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckswitch_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Switch</a>
@@ -1448,8 +1554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckunhealthnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckunhealthnum_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -1457,8 +1562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Unhealth threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as unhealthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-required"
+    <dd>Unhealth threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as unhealthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
             title="Required">
         <span id="http2switch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http2switch_go" style="color: inherit; text-decoration: inherit;">Http2Switch</a>
@@ -1466,8 +1570,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to set HTTP2 protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate to set HTTP2 protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -1475,8 +1578,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -1484,8 +1586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the forwarding rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the forwarding rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="scheduler_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_go" style="color: inherit; text-decoration: inherit;">Scheduler</a>
@@ -1493,8 +1594,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sessionexpiretime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionexpiretime_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Expire<wbr>Time</a>
@@ -1502,8 +1602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-optional"
+    <dd>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1511,8 +1610,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name of the forwarding rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name of the forwarding rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_go" style="color: inherit; text-decoration: inherit;">Url</a>
@@ -1520,8 +1618,165 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Url of the forwarding rule to be queried.</p>
-</dd></dl>
+    <dd>Url of the forwarding rule to be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="certificate_ca_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_ca_id_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>ca_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the client certificate. NOTES: Only supports listeners of 'HTTPS' and 'TCP_SSL' protocol.</dd><dt class="property-required"
+            title="Required">
+        <span id="certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_id_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the server certificate. NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</dd><dt class="property-required"
+            title="Required">
+        <span id="certificate_ssl_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_ssl_mode_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>ssl_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of SSL Mode, and available values inclue 'UNIDIRECTIONAL', 'MUTUAL'.NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</dd><dt class="property-required"
+            title="Required">
+        <span id="clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="health_check_health_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_health_num_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>health_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="health_check_http_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_http_code_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>HTTP Status Code. The default is 31 and value range is 1-31. 1 means the return value '1xx' is health. 2 means the return value '2xx' is health. 4 means the return value '3xx' is health. 8 means the return value 4xx is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.</dd><dt class="property-required"
+            title="Required">
+        <span id="health_check_http_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_http_domain_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</dd><dt class="property-required"
+            title="Required">
+        <span id="health_check_http_method_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_http_method_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Methods of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol. The default is 'HEAD', the available value include 'HEAD' and 'GET'.</dd><dt class="property-required"
+            title="Required">
+        <span id="health_check_http_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_http_path_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Path of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</dd><dt class="property-required"
+            title="Required">
+        <span id="health_check_interval_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_interval_time_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>interval_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Interval time of health check. The value range is 2-300 sec, and the default is <code>5</code> sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="health_check_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_switch_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="health_check_unhealth_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_unhealth_num_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>unhealth_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Unhealth threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as unhealthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="http2_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http2_switch_hcl" style="color: inherit; text-decoration: inherit;">http2_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate to set HTTP2 protocol or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the forwarding rule to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="scheduler_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_hcl" style="color: inherit; text-decoration: inherit;">scheduler</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="session_expire_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_expire_time_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>expire_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name of the forwarding rule to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_hcl" style="color: inherit; text-decoration: inherit;">url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Url of the forwarding rule to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1535,8 +1790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the client certificate. NOTES: Only supports listeners of 'HTTPS' and 'TCP_SSL' protocol.</p>
-</dd><dt class="property-required"
+    <dd>ID of the client certificate. NOTES: Only supports listeners of 'HTTPS' and 'TCP_SSL' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="certificateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -1544,8 +1798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the server certificate. NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</p>
-</dd><dt class="property-required"
+    <dd>ID of the server certificate. NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="certificatesslmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatesslmode_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Ssl<wbr>Mode</a>
@@ -1553,8 +1806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of SSL Mode, and available values inclue 'UNIDIRECTIONAL', 'MUTUAL'.NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</p>
-</dd><dt class="property-required"
+    <dd>Type of SSL Mode, and available values inclue 'UNIDIRECTIONAL', 'MUTUAL'.NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="clbid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_java" style="color: inherit; text-decoration: inherit;">clb<wbr>Id</a>
@@ -1562,8 +1814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhealthnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhealthnum_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -1571,8 +1822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-required"
+    <dd>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttpcode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpcode_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Code</a>
@@ -1580,8 +1830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>HTTP Status Code. The default is 31 and value range is 1-31. 1 means the return value '1xx' is health. 2 means the return value '2xx' is health. 4 means the return value '3xx' is health. 8 means the return value 4xx is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.</p>
-</dd><dt class="property-required"
+    <dd>HTTP Status Code. The default is 31 and value range is 1-31. 1 means the return value '1xx' is health. 2 means the return value '2xx' is health. 4 means the return value '3xx' is health. 8 means the return value 4xx is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttpdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpdomain_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Domain</a>
@@ -1589,8 +1838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</p>
-</dd><dt class="property-required"
+    <dd>Domain name of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttpmethod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpmethod_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Method</a>
@@ -1598,8 +1846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Methods of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol. The default is 'HEAD', the available value include 'HEAD' and 'GET'.</p>
-</dd><dt class="property-required"
+    <dd>Methods of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol. The default is 'HEAD', the available value include 'HEAD' and 'GET'.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttppath_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttppath_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Path</a>
@@ -1607,8 +1854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Path of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</p>
-</dd><dt class="property-required"
+    <dd>Path of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckintervaltime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckintervaltime_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Interval<wbr>Time</a>
@@ -1616,8 +1862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Interval time of health check. The value range is 2-300 sec, and the default is <code>5</code> sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-required"
+    <dd>Interval time of health check. The value range is 2-300 sec, and the default is <code>5</code> sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckswitch_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Switch</a>
@@ -1625,8 +1870,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckunhealthnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckunhealthnum_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -1634,8 +1878,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Unhealth threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as unhealthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-required"
+    <dd>Unhealth threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as unhealthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
             title="Required">
         <span id="http2switch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http2switch_java" style="color: inherit; text-decoration: inherit;">http2Switch</a>
@@ -1643,8 +1886,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate to set HTTP2 protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate to set HTTP2 protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1652,8 +1894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1661,8 +1902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the forwarding rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the forwarding rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="scheduler_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_java" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -1670,8 +1910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sessionexpiretime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionexpiretime_java" style="color: inherit; text-decoration: inherit;">session<wbr>Expire<wbr>Time</a>
@@ -1679,8 +1918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-optional"
+    <dd>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1688,8 +1926,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name of the forwarding rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name of the forwarding rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_java" style="color: inherit; text-decoration: inherit;">url</a>
@@ -1697,8 +1934,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Url of the forwarding rule to be queried.</p>
-</dd></dl>
+    <dd>Url of the forwarding rule to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1712,8 +1948,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the client certificate. NOTES: Only supports listeners of 'HTTPS' and 'TCP_SSL' protocol.</p>
-</dd><dt class="property-required"
+    <dd>ID of the client certificate. NOTES: Only supports listeners of 'HTTPS' and 'TCP_SSL' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="certificateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -1721,8 +1956,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the server certificate. NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</p>
-</dd><dt class="property-required"
+    <dd>ID of the server certificate. NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="certificatesslmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatesslmode_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Ssl<wbr>Mode</a>
@@ -1730,8 +1964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of SSL Mode, and available values inclue 'UNIDIRECTIONAL', 'MUTUAL'.NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</p>
-</dd><dt class="property-required"
+    <dd>Type of SSL Mode, and available values inclue 'UNIDIRECTIONAL', 'MUTUAL'.NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="clbid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_nodejs" style="color: inherit; text-decoration: inherit;">clb<wbr>Id</a>
@@ -1739,8 +1972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhealthnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhealthnum_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -1748,8 +1980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-required"
+    <dd>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttpcode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpcode_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Code</a>
@@ -1757,8 +1988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>HTTP Status Code. The default is 31 and value range is 1-31. 1 means the return value '1xx' is health. 2 means the return value '2xx' is health. 4 means the return value '3xx' is health. 8 means the return value 4xx is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.</p>
-</dd><dt class="property-required"
+    <dd>HTTP Status Code. The default is 31 and value range is 1-31. 1 means the return value '1xx' is health. 2 means the return value '2xx' is health. 4 means the return value '3xx' is health. 8 means the return value 4xx is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttpdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpdomain_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Domain</a>
@@ -1766,8 +1996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</p>
-</dd><dt class="property-required"
+    <dd>Domain name of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttpmethod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpmethod_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Method</a>
@@ -1775,8 +2004,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Methods of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol. The default is 'HEAD', the available value include 'HEAD' and 'GET'.</p>
-</dd><dt class="property-required"
+    <dd>Methods of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol. The default is 'HEAD', the available value include 'HEAD' and 'GET'.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttppath_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttppath_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Path</a>
@@ -1784,8 +2012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Path of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</p>
-</dd><dt class="property-required"
+    <dd>Path of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckintervaltime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckintervaltime_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Interval<wbr>Time</a>
@@ -1793,8 +2020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Interval time of health check. The value range is 2-300 sec, and the default is <code>5</code> sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-required"
+    <dd>Interval time of health check. The value range is 2-300 sec, and the default is <code>5</code> sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckswitch_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Switch</a>
@@ -1802,8 +2028,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckunhealthnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckunhealthnum_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -1811,8 +2036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Unhealth threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as unhealthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-required"
+    <dd>Unhealth threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as unhealthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
             title="Required">
         <span id="http2switch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http2switch_nodejs" style="color: inherit; text-decoration: inherit;">http2Switch</a>
@@ -1820,8 +2044,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate to set HTTP2 protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate to set HTTP2 protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1829,8 +2052,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1838,8 +2060,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the forwarding rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the forwarding rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="scheduler_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_nodejs" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -1847,8 +2068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sessionexpiretime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionexpiretime_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Expire<wbr>Time</a>
@@ -1856,8 +2076,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-optional"
+    <dd>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1865,8 +2084,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name of the forwarding rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name of the forwarding rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_nodejs" style="color: inherit; text-decoration: inherit;">url</a>
@@ -1874,8 +2092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Url of the forwarding rule to be queried.</p>
-</dd></dl>
+    <dd>Url of the forwarding rule to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1889,8 +2106,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the client certificate. NOTES: Only supports listeners of 'HTTPS' and 'TCP_SSL' protocol.</p>
-</dd><dt class="property-required"
+    <dd>ID of the client certificate. NOTES: Only supports listeners of 'HTTPS' and 'TCP_SSL' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="certificate_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_id_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
@@ -1898,8 +2114,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the server certificate. NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</p>
-</dd><dt class="property-required"
+    <dd>ID of the server certificate. NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="certificate_ssl_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_ssl_mode_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>ssl_<wbr>mode</a>
@@ -1907,8 +2122,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of SSL Mode, and available values inclue 'UNIDIRECTIONAL', 'MUTUAL'.NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</p>
-</dd><dt class="property-required"
+    <dd>Type of SSL Mode, and available values inclue 'UNIDIRECTIONAL', 'MUTUAL'.NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="clb_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_python" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
@@ -1916,8 +2130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="health_check_health_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_health_num_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>health_<wbr>num</a>
@@ -1925,8 +2138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-required"
+    <dd>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
             title="Required">
         <span id="health_check_http_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_http_code_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>code</a>
@@ -1934,8 +2146,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTP Status Code. The default is 31 and value range is 1-31. 1 means the return value '1xx' is health. 2 means the return value '2xx' is health. 4 means the return value '3xx' is health. 8 means the return value 4xx is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.</p>
-</dd><dt class="property-required"
+    <dd>HTTP Status Code. The default is 31 and value range is 1-31. 1 means the return value '1xx' is health. 2 means the return value '2xx' is health. 4 means the return value '3xx' is health. 8 means the return value 4xx is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="health_check_http_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_http_domain_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>domain</a>
@@ -1943,8 +2154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</p>
-</dd><dt class="property-required"
+    <dd>Domain name of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="health_check_http_method_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_http_method_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>method</a>
@@ -1952,8 +2162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Methods of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol. The default is 'HEAD', the available value include 'HEAD' and 'GET'.</p>
-</dd><dt class="property-required"
+    <dd>Methods of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol. The default is 'HEAD', the available value include 'HEAD' and 'GET'.</dd><dt class="property-required"
             title="Required">
         <span id="health_check_http_path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_http_path_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>path</a>
@@ -1961,8 +2170,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Path of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</p>
-</dd><dt class="property-required"
+    <dd>Path of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="health_check_interval_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_interval_time_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>interval_<wbr>time</a>
@@ -1970,8 +2178,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval time of health check. The value range is 2-300 sec, and the default is <code>5</code> sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-required"
+    <dd>Interval time of health check. The value range is 2-300 sec, and the default is <code>5</code> sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
             title="Required">
         <span id="health_check_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_switch_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>switch</a>
@@ -1979,8 +2186,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="health_check_unhealth_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_unhealth_num_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>unhealth_<wbr>num</a>
@@ -1988,8 +2194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Unhealth threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as unhealthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-required"
+    <dd>Unhealth threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as unhealthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
             title="Required">
         <span id="http2_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http2_switch_python" style="color: inherit; text-decoration: inherit;">http2_<wbr>switch</a>
@@ -1997,8 +2202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to set HTTP2 protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate to set HTTP2 protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -2006,8 +2210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
@@ -2015,8 +2218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the forwarding rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the forwarding rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="scheduler_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_python" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -2024,8 +2226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</dd><dt class="property-required"
             title="Required">
         <span id="session_expire_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_expire_time_python" style="color: inherit; text-decoration: inherit;">session_<wbr>expire_<wbr>time</a>
@@ -2033,8 +2234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-optional"
+    <dd>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2042,8 +2242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name of the forwarding rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name of the forwarding rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_python" style="color: inherit; text-decoration: inherit;">url</a>
@@ -2051,8 +2250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Url of the forwarding rule to be queried.</p>
-</dd></dl>
+    <dd>Url of the forwarding rule to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2066,8 +2264,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the client certificate. NOTES: Only supports listeners of 'HTTPS' and 'TCP_SSL' protocol.</p>
-</dd><dt class="property-required"
+    <dd>ID of the client certificate. NOTES: Only supports listeners of 'HTTPS' and 'TCP_SSL' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="certificateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -2075,8 +2272,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the server certificate. NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</p>
-</dd><dt class="property-required"
+    <dd>ID of the server certificate. NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="certificatesslmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatesslmode_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Ssl<wbr>Mode</a>
@@ -2084,8 +2280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of SSL Mode, and available values inclue 'UNIDIRECTIONAL', 'MUTUAL'.NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</p>
-</dd><dt class="property-required"
+    <dd>Type of SSL Mode, and available values inclue 'UNIDIRECTIONAL', 'MUTUAL'.NOTES: Only supports listeners of 'HTTPS'  and 'TCP_SSL' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="clbid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_yaml" style="color: inherit; text-decoration: inherit;">clb<wbr>Id</a>
@@ -2093,8 +2288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhealthnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhealthnum_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -2102,8 +2296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-required"
+    <dd>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttpcode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpcode_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Code</a>
@@ -2111,8 +2304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>HTTP Status Code. The default is 31 and value range is 1-31. 1 means the return value '1xx' is health. 2 means the return value '2xx' is health. 4 means the return value '3xx' is health. 8 means the return value 4xx is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.</p>
-</dd><dt class="property-required"
+    <dd>HTTP Status Code. The default is 31 and value range is 1-31. 1 means the return value '1xx' is health. 2 means the return value '2xx' is health. 4 means the return value '3xx' is health. 8 means the return value 4xx is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttpdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpdomain_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Domain</a>
@@ -2120,8 +2312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</p>
-</dd><dt class="property-required"
+    <dd>Domain name of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttpmethod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpmethod_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Method</a>
@@ -2129,8 +2320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Methods of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol. The default is 'HEAD', the available value include 'HEAD' and 'GET'.</p>
-</dd><dt class="property-required"
+    <dd>Methods of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol. The default is 'HEAD', the available value include 'HEAD' and 'GET'.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckhttppath_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttppath_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Path</a>
@@ -2138,8 +2328,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Path of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</p>
-</dd><dt class="property-required"
+    <dd>Path of health check. NOTES: Only supports listeners of 'HTTPS' and 'HTTP' protocol.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckintervaltime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckintervaltime_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Interval<wbr>Time</a>
@@ -2147,8 +2336,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Interval time of health check. The value range is 2-300 sec, and the default is <code>5</code> sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-required"
+    <dd>Interval time of health check. The value range is 2-300 sec, and the default is <code>5</code> sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckswitch_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Switch</a>
@@ -2156,8 +2344,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckunhealthnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckunhealthnum_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -2165,8 +2352,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Unhealth threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as unhealthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-required"
+    <dd>Unhealth threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check three consecutive times, the CVM is identified as unhealthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-required"
             title="Required">
         <span id="http2switch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http2switch_yaml" style="color: inherit; text-decoration: inherit;">http2Switch</a>
@@ -2174,8 +2360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate to set HTTP2 protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate to set HTTP2 protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -2183,8 +2368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="ruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -2192,8 +2376,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the forwarding rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the forwarding rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="scheduler_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_yaml" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -2201,8 +2384,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling method of the forwarding rule of thr CLB listener, and available values include <code>WRR</code>, <code>IP HASH</code> and <code>LEAST_CONN</code>. The default is <code>WRR</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sessionexpiretime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionexpiretime_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Expire<wbr>Time</a>
@@ -2210,8 +2392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-optional"
+    <dd>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as 'WRR'. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2219,8 +2400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name of the forwarding rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name of the forwarding rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="url_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_yaml" style="color: inherit; text-decoration: inherit;">url</a>
@@ -2228,8 +2408,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Url of the forwarding rule to be queried.</p>
-</dd></dl>
+    <dd>Url of the forwarding rule to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2244,7 +2423,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

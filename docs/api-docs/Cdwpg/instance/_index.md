@@ -2,9 +2,11 @@
 ---
 title: "Instance"
 title_tag: "tencentcloud.Cdwpg.Instance"
-meta_desc: "Documentation for the tencentcloud.Cdwpg.Instance resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a cdwpg instance"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,92 +18,167 @@ Provides a resource to create a cdwpg instance
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const instance = new tencentcloud.cdwpg.Instance("instance", {
-    adminPassword: "xxxxxx",
+    instanceName: "test_cdwpg",
+    zone: "ap-guangzhou-6",
+    userVpcId: "vpc-xxxxxx",
+    userSubnetId: "subnet-xxxxxx",
     chargeProperties: {
-        chargeType: "POSTPAID_BY_HOUR",
         renewFlag: 0,
         timeSpan: 1,
         timeUnit: "h",
+        chargeType: "POSTPAID_BY_HOUR",
     },
-    instanceName: "test_cdwpg",
+    adminPassword: "xxxxxx",
     resources: [
         {
+            specName: "S_4_16_H_CN",
             count: 2,
             diskSpec: {
-                diskCount: 1,
-                diskSize: 200,
                 diskType: "CLOUD_HSSD",
+                diskSize: 200,
+                diskCount: 1,
             },
-            specName: "S_4_16_H_CN",
             type: "cn",
         },
         {
+            specName: "S_4_16_H_CN",
             count: 2,
             diskSpec: {
-                diskCount: 10,
-                diskSize: 20,
                 diskType: "CLOUD_HSSD",
+                diskSize: 20,
+                diskCount: 10,
             },
-            specName: "S_4_16_H_CN",
             type: "dn",
         },
     ],
     tags: {
         tagKey: "tagValue",
     },
-    userSubnetId: "subnet-xxxxxx",
-    userVpcId: "vpc-xxxxxx",
-    zone: "ap-guangzhou-6",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 instance = tencentcloud.cdwpg.Instance("instance",
-    admin_password="xxxxxx",
-    charge_properties=tencentcloud.cdwpg.InstanceChargePropertiesArgs(
-        charge_type="POSTPAID_BY_HOUR",
-        renew_flag=0,
-        time_span=1,
-        time_unit="h",
-    ),
     instance_name="test_cdwpg",
+    zone="ap-guangzhou-6",
+    user_vpc_id="vpc-xxxxxx",
+    user_subnet_id="subnet-xxxxxx",
+    charge_properties={
+        "renew_flag": 0,
+        "time_span": 1,
+        "time_unit": "h",
+        "charge_type": "POSTPAID_BY_HOUR",
+    },
+    admin_password="xxxxxx",
     resources=[
-        tencentcloud.cdwpg.InstanceResourceArgs(
-            count=2,
-            disk_spec=tencentcloud.cdwpg.InstanceResourceDiskSpecArgs(
-                disk_count=1,
-                disk_size=200,
-                disk_type="CLOUD_HSSD",
-            ),
-            spec_name="S_4_16_H_CN",
-            type="cn",
-        ),
-        tencentcloud.cdwpg.InstanceResourceArgs(
-            count=2,
-            disk_spec=tencentcloud.cdwpg.InstanceResourceDiskSpecArgs(
-                disk_count=10,
-                disk_size=20,
-                disk_type="CLOUD_HSSD",
-            ),
-            spec_name="S_4_16_H_CN",
-            type="dn",
-        ),
+        {
+            "spec_name": "S_4_16_H_CN",
+            "count": 2,
+            "disk_spec": {
+                "disk_type": "CLOUD_HSSD",
+                "disk_size": 200,
+                "disk_count": 1,
+            },
+            "type": "cn",
+        },
+        {
+            "spec_name": "S_4_16_H_CN",
+            "count": 2,
+            "disk_spec": {
+                "disk_type": "CLOUD_HSSD",
+                "disk_size": 20,
+                "disk_count": 10,
+            },
+            "type": "dn",
+        },
     ],
     tags={
         "tagKey": "tagValue",
-    },
-    user_subnet_id="subnet-xxxxxx",
-    user_vpc_id="vpc-xxxxxx",
-    zone="ap-guangzhou-6")
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cdwpg"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cdwpg.NewInstance(ctx, "instance", &cdwpg.InstanceArgs{
+			InstanceName: pulumi.String("test_cdwpg"),
+			Zone:         pulumi.String("ap-guangzhou-6"),
+			UserVpcId:    pulumi.String("vpc-xxxxxx"),
+			UserSubnetId: pulumi.String("subnet-xxxxxx"),
+			ChargeProperties: &cdwpg.InstanceChargePropertiesArgs{
+				RenewFlag:  pulumi.Int(0),
+				TimeSpan:   pulumi.Int(1),
+				TimeUnit:   pulumi.String("h"),
+				ChargeType: pulumi.String("POSTPAID_BY_HOUR"),
+			},
+			AdminPassword: pulumi.String("xxxxxx"),
+			Resources: cdwpg.InstanceResourceArray{
+				&cdwpg.InstanceResourceArgs{
+					SpecName: pulumi.String("S_4_16_H_CN"),
+					Count:    pulumi.Int(2),
+					DiskSpec: &cdwpg.InstanceResourceDiskSpecArgs{
+						DiskType:  pulumi.String("CLOUD_HSSD"),
+						DiskSize:  pulumi.Int(200),
+						DiskCount: pulumi.Int(1),
+					},
+					Type: pulumi.String("cn"),
+				},
+				&cdwpg.InstanceResourceArgs{
+					SpecName: pulumi.String("S_4_16_H_CN"),
+					Count:    pulumi.Int(2),
+					DiskSpec: &cdwpg.InstanceResourceDiskSpecArgs{
+						DiskType:  pulumi.String("CLOUD_HSSD"),
+						DiskSize:  pulumi.Int(20),
+						DiskCount: pulumi.Int(10),
+					},
+					Type: pulumi.String("dn"),
+				},
+			},
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -112,39 +189,42 @@ return await Deployment.RunAsync(() =>
 {
     var instance = new Tencentcloud.Cdwpg.Instance("instance", new()
     {
-        AdminPassword = "xxxxxx",
+        InstanceName = "test_cdwpg",
+        Zone = "ap-guangzhou-6",
+        UserVpcId = "vpc-xxxxxx",
+        UserSubnetId = "subnet-xxxxxx",
         ChargeProperties = new Tencentcloud.Cdwpg.Inputs.InstanceChargePropertiesArgs
         {
-            ChargeType = "POSTPAID_BY_HOUR",
             RenewFlag = 0,
             TimeSpan = 1,
             TimeUnit = "h",
+            ChargeType = "POSTPAID_BY_HOUR",
         },
-        InstanceName = "test_cdwpg",
+        AdminPassword = "xxxxxx",
         Resources = new[]
         {
             new Tencentcloud.Cdwpg.Inputs.InstanceResourceArgs
             {
+                SpecName = "S_4_16_H_CN",
                 Count = 2,
                 DiskSpec = new Tencentcloud.Cdwpg.Inputs.InstanceResourceDiskSpecArgs
                 {
-                    DiskCount = 1,
-                    DiskSize = 200,
                     DiskType = "CLOUD_HSSD",
+                    DiskSize = 200,
+                    DiskCount = 1,
                 },
-                SpecName = "S_4_16_H_CN",
                 Type = "cn",
             },
             new Tencentcloud.Cdwpg.Inputs.InstanceResourceArgs
             {
+                SpecName = "S_4_16_H_CN",
                 Count = 2,
                 DiskSpec = new Tencentcloud.Cdwpg.Inputs.InstanceResourceDiskSpecArgs
                 {
-                    DiskCount = 10,
-                    DiskSize = 20,
                     DiskType = "CLOUD_HSSD",
+                    DiskSize = 20,
+                    DiskCount = 10,
                 },
-                SpecName = "S_4_16_H_CN",
                 Type = "dn",
             },
         },
@@ -152,68 +232,15 @@ return await Deployment.RunAsync(() =>
         {
             { "tagKey", "tagValue" },
         },
-        UserSubnetId = "subnet-xxxxxx",
-        UserVpcId = "vpc-xxxxxx",
-        Zone = "ap-guangzhou-6",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdwpg"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cdwpg.NewInstance(ctx, "instance", &Cdwpg.InstanceArgs{
-			AdminPassword: pulumi.String("xxxxxx"),
-			ChargeProperties: &cdwpg.InstanceChargePropertiesArgs{
-				ChargeType: pulumi.String("POSTPAID_BY_HOUR"),
-				RenewFlag:  pulumi.Int(0),
-				TimeSpan:   pulumi.Int(1),
-				TimeUnit:   pulumi.String("h"),
-			},
-			InstanceName: pulumi.String("test_cdwpg"),
-			Resources: cdwpg.InstanceResourceArray{
-				&cdwpg.InstanceResourceArgs{
-					Count: pulumi.Int(2),
-					DiskSpec: &cdwpg.InstanceResourceDiskSpecArgs{
-						DiskCount: pulumi.Int(1),
-						DiskSize:  pulumi.Int(200),
-						DiskType:  pulumi.String("CLOUD_HSSD"),
-					},
-					SpecName: pulumi.String("S_4_16_H_CN"),
-					Type:     pulumi.String("cn"),
-				},
-				&cdwpg.InstanceResourceArgs{
-					Count: pulumi.Int(2),
-					DiskSpec: &cdwpg.InstanceResourceDiskSpecArgs{
-						DiskCount: pulumi.Int(10),
-						DiskSize:  pulumi.Int(20),
-						DiskType:  pulumi.String("CLOUD_HSSD"),
-					},
-					SpecName: pulumi.String("S_4_16_H_CN"),
-					Type:     pulumi.String("dn"),
-				},
-			},
-			Tags: pulumi.Map{
-				"tagKey": pulumi.Any("tagValue"),
-			},
-			UserSubnetId: pulumi.String("subnet-xxxxxx"),
-			UserVpcId:    pulumi.String("vpc-xxxxxx"),
-			Zone:         pulumi.String("ap-guangzhou-6"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -225,8 +252,8 @@ import com.pulumi.tencentcloud.Cdwpg.InstanceArgs;
 import com.pulumi.tencentcloud.Cdwpg.inputs.InstanceChargePropertiesArgs;
 import com.pulumi.tencentcloud.Cdwpg.inputs.InstanceResourceArgs;
 import com.pulumi.tencentcloud.Cdwpg.inputs.InstanceResourceDiskSpecArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -238,144 +265,238 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var instance = new Instance("instance", InstanceArgs.builder()        
-            .adminPassword("xxxxxx")
+        var instance = new Instance("instance", InstanceArgs.builder()
+            .instanceName("test_cdwpg")
+            .zone("ap-guangzhou-6")
+            .userVpcId("vpc-xxxxxx")
+            .userSubnetId("subnet-xxxxxx")
             .chargeProperties(InstanceChargePropertiesArgs.builder()
-                .chargeType("POSTPAID_BY_HOUR")
                 .renewFlag(0)
                 .timeSpan(1)
                 .timeUnit("h")
+                .chargeType("POSTPAID_BY_HOUR")
                 .build())
-            .instanceName("test_cdwpg")
+            .adminPassword("xxxxxx")
             .resources(            
                 InstanceResourceArgs.builder()
+                    .specName("S_4_16_H_CN")
                     .count(2)
                     .diskSpec(InstanceResourceDiskSpecArgs.builder()
-                        .diskCount(1)
-                        .diskSize(200)
                         .diskType("CLOUD_HSSD")
+                        .diskSize(200)
+                        .diskCount(1)
                         .build())
-                    .specName("S_4_16_H_CN")
                     .type("cn")
                     .build(),
                 InstanceResourceArgs.builder()
+                    .specName("S_4_16_H_CN")
                     .count(2)
                     .diskSpec(InstanceResourceDiskSpecArgs.builder()
-                        .diskCount(10)
-                        .diskSize(20)
                         .diskType("CLOUD_HSSD")
+                        .diskSize(20)
+                        .diskCount(10)
                         .build())
-                    .specName("S_4_16_H_CN")
                     .type("dn")
                     .build())
             .tags(Map.of("tagKey", "tagValue"))
-            .userSubnetId("subnet-xxxxxx")
-            .userVpcId("vpc-xxxxxx")
-            .zone("ap-guangzhou-6")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   instance:
     type: tencentcloud:Cdwpg:Instance
     properties:
-      adminPassword: xxxxxx
+      instanceName: test_cdwpg
+      zone: ap-guangzhou-6
+      userVpcId: vpc-xxxxxx
+      userSubnetId: subnet-xxxxxx
       chargeProperties:
-        chargeType: POSTPAID_BY_HOUR
         renewFlag: 0
         timeSpan: 1
         timeUnit: h
-      instanceName: test_cdwpg
+        chargeType: POSTPAID_BY_HOUR
+      adminPassword: xxxxxx
       resources:
-        - count: 2
+        - specName: S_4_16_H_CN
+          count: 2
           diskSpec:
-            diskCount: 1
+            diskType: CLOUD_HSSD
             diskSize: 200
-            diskType: CLOUD_HSSD
-          specName: S_4_16_H_CN
+            diskCount: 1
           type: cn
-        - count: 2
+        - specName: S_4_16_H_CN
+          count: 2
           diskSpec:
-            diskCount: 10
-            diskSize: 20
             diskType: CLOUD_HSSD
-          specName: S_4_16_H_CN
+            diskSize: 20
+            diskCount: 10
           type: dn
       tags:
         tagKey: tagValue
-      userSubnetId: subnet-xxxxxx
-      userVpcId: vpc-xxxxxx
-      zone: ap-guangzhou-6
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cdwpg_instance" "instance" {
+  instance_name  = "test_cdwpg"
+  zone           = "ap-guangzhou-6"
+  user_vpc_id    = "vpc-xxxxxx"
+  user_subnet_id = "subnet-xxxxxx"
+  charge_properties = {
+    renew_flag  = 0
+    time_span   = 1
+    time_unit   = "h"
+    charge_type = "POSTPAID_BY_HOUR"
+  }
+  admin_password = "xxxxxx"
+  resources {
+    spec_name = "S_4_16_H_CN"
+    count     = 2
+    disk_spec = {
+      disk_type  = "CLOUD_HSSD"
+      disk_size  = 200
+      disk_count = 1
+    }
+    type = "cn"
+  }
+  resources {
+    spec_name = "S_4_16_H_CN"
+    count     = 2
+    disk_spec = {
+      disk_type  = "CLOUD_HSSD"
+      disk_size  = 20
+      disk_count = 10
+    }
+    type = "dn"
+  }
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateInstanceByApi](https://www.tencentcloud.com/document/api/1138/68298)
+  - [DescribeInstanceState](https://www.tencentcloud.com/document/api/1138/68302)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeInstanceInfo](https://www.tencentcloud.com/document/api/1138/68303)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [DescribeInstanceState](https://www.tencentcloud.com/document/api/1138/68302)
+  - [ModifyInstance](https://www.tencentcloud.com/document/api/1138/68296)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [ScaleOutInstance](https://www.tencentcloud.com/document/api/1138/69332)
+  - [UpgradeInstance](https://www.tencentcloud.com/document/api/1138/69327)
+* Delete:
+  - [DescribeInstanceState](https://www.tencentcloud.com/document/api/1138/68302)
+  - [DestroyInstanceByApi](https://www.tencentcloud.com/document/api/1138/68297)
 
 
 ## Create Instance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
              <span class="nx">admin_password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">charge_properties</span><span class="p">:</span> <span class="nx">Optional[_cdwpg.InstanceChargePropertiesArgs]</span> = None<span class="p">,</span>
+             <span class="nx">charge_properties</span><span class="p">:</span> <span class="nx">Optional[InstanceChargePropertiesArgs]</span> = None<span class="p">,</span>
              <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">resources</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cdwpg.InstanceResourceArgs]]</span> = None<span class="p">,</span>
-             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+             <span class="nx">resources</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceResourceArgs]]</span> = None<span class="p">,</span>
              <span class="nx">user_subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">user_vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">product_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cdwpg:Instance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cdwpg:Instance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cdwpg_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -396,7 +517,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -513,11 +634,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Instance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Instance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -525,7 +654,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-secret"
             title="Required">
         <span id="adminpassword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminpassword_csharp" style="color: inherit; text-decoration: inherit;">Admin<wbr>Password</a>
@@ -533,17 +662,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster password.</p>
-</dd><dt class="property-required"
+    <dd>cluster password.</dd><dt class="property-required"
             title="Required">
         <span id="chargeproperties_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeproperties_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Properties</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancechargeproperties">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdwpg.<wbr>Inputs.<wbr>Instance<wbr>Charge<wbr>Properties<wbr>Args</a></span>
+        <span class="property-type"><a href="#instancechargeproperties">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdwpg.<wbr>Inputs.<wbr>Instance<wbr>Charge<wbr>Properties</a></span>
     </dt>
-    <dd><p>instance billing mode.</p>
-</dd><dt class="property-required"
+    <dd>instance billing mode.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -551,17 +678,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance name.</p>
-</dd><dt class="property-required"
+    <dd>instance name.</dd><dt class="property-required"
             title="Required">
         <span id="resources_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resources_csharp" style="color: inherit; text-decoration: inherit;">Resources</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceresource">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdwpg.<wbr>Inputs.<wbr>Instance<wbr>Resource<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instanceresource">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdwpg.<wbr>Inputs.<wbr>Instance<wbr>Resource&gt;</a></span>
     </dt>
-    <dd><p>resource information.</p>
-</dd><dt class="property-required"
+    <dd>resource information.</dd><dt class="property-required"
             title="Required">
         <span id="usersubnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usersubnetid_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Subnet<wbr>Id</a>
@@ -569,8 +694,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet.</p>
-</dd><dt class="property-required"
+    <dd>subnet.</dd><dt class="property-required"
             title="Required">
         <span id="uservpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uservpcid_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Vpc<wbr>Id</a>
@@ -578,8 +702,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>private network.</p>
-</dd><dt class="property-required"
+    <dd>private network.</dd><dt class="property-required"
             title="Required">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -587,23 +710,29 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability Zone.</p>
-</dd><dt class="property-optional"
+    <dd>Availability Zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="productversion_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productversion_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-secret"
             title="Required">
         <span id="adminpassword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminpassword_go" style="color: inherit; text-decoration: inherit;">Admin<wbr>Password</a>
@@ -611,8 +740,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster password.</p>
-</dd><dt class="property-required"
+    <dd>cluster password.</dd><dt class="property-required"
             title="Required">
         <span id="chargeproperties_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeproperties_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Properties</a>
@@ -620,8 +748,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancechargeproperties">Instance<wbr>Charge<wbr>Properties<wbr>Args</a></span>
     </dt>
-    <dd><p>instance billing mode.</p>
-</dd><dt class="property-required"
+    <dd>instance billing mode.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -629,8 +756,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance name.</p>
-</dd><dt class="property-required"
+    <dd>instance name.</dd><dt class="property-required"
             title="Required">
         <span id="resources_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resources_go" style="color: inherit; text-decoration: inherit;">Resources</a>
@@ -638,8 +764,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceresource">[]Instance<wbr>Resource<wbr>Args</a></span>
     </dt>
-    <dd><p>resource information.</p>
-</dd><dt class="property-required"
+    <dd>resource information.</dd><dt class="property-required"
             title="Required">
         <span id="usersubnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usersubnetid_go" style="color: inherit; text-decoration: inherit;">User<wbr>Subnet<wbr>Id</a>
@@ -647,8 +772,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet.</p>
-</dd><dt class="property-required"
+    <dd>subnet.</dd><dt class="property-required"
             title="Required">
         <span id="uservpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uservpcid_go" style="color: inherit; text-decoration: inherit;">User<wbr>Vpc<wbr>Id</a>
@@ -656,8 +780,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>private network.</p>
-</dd><dt class="property-required"
+    <dd>private network.</dd><dt class="property-required"
             title="Required">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -665,23 +788,107 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability Zone.</p>
-</dd><dt class="property-optional"
+    <dd>Availability Zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="productversion_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productversion_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-secret"
+            title="Required">
+        <span id="admin_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#admin_password_hcl" style="color: inherit; text-decoration: inherit;">admin_<wbr>password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cluster password.</dd><dt class="property-required"
+            title="Required">
+        <span id="charge_properties_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_properties_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>properties</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancechargeproperties">object</a></span>
+    </dt>
+    <dd>instance billing mode.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance name.</dd><dt class="property-required"
+            title="Required">
+        <span id="resources_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resources_hcl" style="color: inherit; text-decoration: inherit;">resources</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceresource">list(object)</a></span>
+    </dt>
+    <dd>resource information.</dd><dt class="property-required"
+            title="Required">
+        <span id="user_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>subnet.</dd><dt class="property-required"
+            title="Required">
+        <span id="user_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>private network.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability Zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="product_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_version_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-secret"
             title="Required">
         <span id="adminpassword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminpassword_java" style="color: inherit; text-decoration: inherit;">admin<wbr>Password</a>
@@ -689,17 +896,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster password.</p>
-</dd><dt class="property-required"
+    <dd>cluster password.</dd><dt class="property-required"
             title="Required">
         <span id="chargeproperties_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeproperties_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Properties</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancechargeproperties">Instance<wbr>Charge<wbr>Properties<wbr>Args</a></span>
+        <span class="property-type"><a href="#instancechargeproperties">Instance<wbr>Charge<wbr>Properties</a></span>
     </dt>
-    <dd><p>instance billing mode.</p>
-</dd><dt class="property-required"
+    <dd>instance billing mode.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -707,17 +912,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance name.</p>
-</dd><dt class="property-required"
+    <dd>instance name.</dd><dt class="property-required"
             title="Required">
         <span id="resources_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resources_java" style="color: inherit; text-decoration: inherit;">resources</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceresource">List&lt;Instance<wbr>Resource<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instanceresource">List&lt;Instance<wbr>Resource&gt;</a></span>
     </dt>
-    <dd><p>resource information.</p>
-</dd><dt class="property-required"
+    <dd>resource information.</dd><dt class="property-required"
             title="Required">
         <span id="usersubnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usersubnetid_java" style="color: inherit; text-decoration: inherit;">user<wbr>Subnet<wbr>Id</a>
@@ -725,8 +928,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet.</p>
-</dd><dt class="property-required"
+    <dd>subnet.</dd><dt class="property-required"
             title="Required">
         <span id="uservpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uservpcid_java" style="color: inherit; text-decoration: inherit;">user<wbr>Vpc<wbr>Id</a>
@@ -734,8 +936,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>private network.</p>
-</dd><dt class="property-required"
+    <dd>private network.</dd><dt class="property-required"
             title="Required">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -743,23 +944,29 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability Zone.</p>
-</dd><dt class="property-optional"
+    <dd>Availability Zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="productversion_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productversion_java" style="color: inherit; text-decoration: inherit;">product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Version.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-secret"
             title="Required">
         <span id="adminpassword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminpassword_nodejs" style="color: inherit; text-decoration: inherit;">admin<wbr>Password</a>
@@ -767,17 +974,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster password.</p>
-</dd><dt class="property-required"
+    <dd>cluster password.</dd><dt class="property-required"
             title="Required">
         <span id="chargeproperties_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeproperties_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Properties</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancechargeproperties">Instance<wbr>Charge<wbr>Properties<wbr>Args</a></span>
+        <span class="property-type"><a href="#instancechargeproperties">Instance<wbr>Charge<wbr>Properties</a></span>
     </dt>
-    <dd><p>instance billing mode.</p>
-</dd><dt class="property-required"
+    <dd>instance billing mode.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -785,17 +990,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance name.</p>
-</dd><dt class="property-required"
+    <dd>instance name.</dd><dt class="property-required"
             title="Required">
         <span id="resources_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resources_nodejs" style="color: inherit; text-decoration: inherit;">resources</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceresource">Instance<wbr>Resource<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instanceresource">Instance<wbr>Resource[]</a></span>
     </dt>
-    <dd><p>resource information.</p>
-</dd><dt class="property-required"
+    <dd>resource information.</dd><dt class="property-required"
             title="Required">
         <span id="usersubnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usersubnetid_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Subnet<wbr>Id</a>
@@ -803,8 +1006,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet.</p>
-</dd><dt class="property-required"
+    <dd>subnet.</dd><dt class="property-required"
             title="Required">
         <span id="uservpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uservpcid_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Vpc<wbr>Id</a>
@@ -812,8 +1014,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>private network.</p>
-</dd><dt class="property-required"
+    <dd>private network.</dd><dt class="property-required"
             title="Required">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -821,23 +1022,29 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability Zone.</p>
-</dd><dt class="property-optional"
+    <dd>Availability Zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="productversion_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productversion_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-secret"
             title="Required">
         <span id="admin_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#admin_password_python" style="color: inherit; text-decoration: inherit;">admin_<wbr>password</a>
@@ -845,8 +1052,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cluster password.</p>
-</dd><dt class="property-required"
+    <dd>cluster password.</dd><dt class="property-required"
             title="Required">
         <span id="charge_properties_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_properties_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>properties</a>
@@ -854,8 +1060,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancechargeproperties">Instance<wbr>Charge<wbr>Properties<wbr>Args</a></span>
     </dt>
-    <dd><p>instance billing mode.</p>
-</dd><dt class="property-required"
+    <dd>instance billing mode.</dd><dt class="property-required"
             title="Required">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -863,17 +1068,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance name.</p>
-</dd><dt class="property-required"
+    <dd>instance name.</dd><dt class="property-required"
             title="Required">
         <span id="resources_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resources_python" style="color: inherit; text-decoration: inherit;">resources</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceresource">Instance<wbr>Resource<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instanceresource">Sequence[Instance<wbr>Resource<wbr>Args]</a></span>
     </dt>
-    <dd><p>resource information.</p>
-</dd><dt class="property-required"
+    <dd>resource information.</dd><dt class="property-required"
             title="Required">
         <span id="user_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_subnet_id_python" style="color: inherit; text-decoration: inherit;">user_<wbr>subnet_<wbr>id</a>
@@ -881,8 +1084,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>subnet.</p>
-</dd><dt class="property-required"
+    <dd>subnet.</dd><dt class="property-required"
             title="Required">
         <span id="user_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_vpc_id_python" style="color: inherit; text-decoration: inherit;">user_<wbr>vpc_<wbr>id</a>
@@ -890,8 +1092,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>private network.</p>
-</dd><dt class="property-required"
+    <dd>private network.</dd><dt class="property-required"
             title="Required">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -899,23 +1100,29 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Availability Zone.</p>
-</dd><dt class="property-optional"
+    <dd>Availability Zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="product_version_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_version_python" style="color: inherit; text-decoration: inherit;">product_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Version.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-secret"
             title="Required">
         <span id="adminpassword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adminpassword_yaml" style="color: inherit; text-decoration: inherit;">admin<wbr>Password</a>
@@ -923,8 +1130,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster password.</p>
-</dd><dt class="property-required"
+    <dd>cluster password.</dd><dt class="property-required"
             title="Required">
         <span id="chargeproperties_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargeproperties_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Properties</a>
@@ -932,8 +1138,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancechargeproperties">Property Map</a></span>
     </dt>
-    <dd><p>instance billing mode.</p>
-</dd><dt class="property-required"
+    <dd>instance billing mode.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -941,8 +1146,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance name.</p>
-</dd><dt class="property-required"
+    <dd>instance name.</dd><dt class="property-required"
             title="Required">
         <span id="resources_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resources_yaml" style="color: inherit; text-decoration: inherit;">resources</a>
@@ -950,8 +1154,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceresource">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>resource information.</p>
-</dd><dt class="property-required"
+    <dd>resource information.</dd><dt class="property-required"
             title="Required">
         <span id="usersubnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usersubnetid_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Subnet<wbr>Id</a>
@@ -959,8 +1162,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet.</p>
-</dd><dt class="property-required"
+    <dd>subnet.</dd><dt class="property-required"
             title="Required">
         <span id="uservpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uservpcid_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Vpc<wbr>Id</a>
@@ -968,8 +1170,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>private network.</p>
-</dd><dt class="property-required"
+    <dd>private network.</dd><dt class="property-required"
             title="Required">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -977,17 +1178,23 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability Zone.</p>
-</dd><dt class="property-optional"
+    <dd>Availability Zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="productversion_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productversion_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Version.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1008,8 +1215,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1023,8 +1229,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1038,8 +1257,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1053,8 +1271,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1068,8 +1285,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1083,8 +1299,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1094,127 +1309,167 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Instance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">admin_password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">charge_properties</span><span class="p">:</span> <span class="nx">Optional[_cdwpg.InstanceChargePropertiesArgs]</span> = None<span class="p">,</span>
+        <span class="nx">charge_properties</span><span class="p">:</span> <span class="nx">Optional[InstanceChargePropertiesArgs]</span> = None<span class="p">,</span>
         <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">resources</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cdwpg.InstanceResourceArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">product_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">resources</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceResourceArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">user_subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">user_vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cdwpg:Instance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cdwpg_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1222,28 +1477,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1251,28 +1509,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1284,7 +1545,7 @@ The following state arguments are supported:
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<dl class="resources-properties"><dt class="property-optional"
+<dl class="resources-properties"><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_adminpassword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_adminpassword_csharp" style="color: inherit; text-decoration: inherit;">Admin<wbr>Password</a>
@@ -1292,17 +1553,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster password.</p>
-</dd><dt class="property-optional"
+    <dd>cluster password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargeproperties_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargeproperties_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Properties</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancechargeproperties">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdwpg.<wbr>Inputs.<wbr>Instance<wbr>Charge<wbr>Properties<wbr>Args</a></span>
+        <span class="property-type"><a href="#instancechargeproperties">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdwpg.<wbr>Inputs.<wbr>Instance<wbr>Charge<wbr>Properties</a></span>
     </dt>
-    <dd><p>instance billing mode.</p>
-</dd><dt class="property-optional"
+    <dd>instance billing mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1310,26 +1569,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance name.</p>
-</dd><dt class="property-optional"
+    <dd>instance name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_productversion_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productversion_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resources_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resources_csharp" style="color: inherit; text-decoration: inherit;">Resources</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceresource">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdwpg.<wbr>Inputs.<wbr>Instance<wbr>Resource<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instanceresource">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdwpg.<wbr>Inputs.<wbr>Instance<wbr>Resource&gt;</a></span>
     </dt>
-    <dd><p>resource information.</p>
-</dd><dt class="property-optional"
+    <dd>resource information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usersubnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usersubnetid_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Subnet<wbr>Id</a>
@@ -1337,8 +1601,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet.</p>
-</dd><dt class="property-optional"
+    <dd>subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uservpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uservpcid_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Vpc<wbr>Id</a>
@@ -1346,8 +1609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>private network.</p>
-</dd><dt class="property-optional"
+    <dd>private network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1355,14 +1617,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability Zone.</p>
-</dd></dl>
+    <dd>Availability Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<dl class="resources-properties"><dt class="property-optional"
+<dl class="resources-properties"><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_adminpassword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_adminpassword_go" style="color: inherit; text-decoration: inherit;">Admin<wbr>Password</a>
@@ -1370,8 +1631,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster password.</p>
-</dd><dt class="property-optional"
+    <dd>cluster password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargeproperties_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargeproperties_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Properties</a>
@@ -1379,8 +1639,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancechargeproperties">Instance<wbr>Charge<wbr>Properties<wbr>Args</a></span>
     </dt>
-    <dd><p>instance billing mode.</p>
-</dd><dt class="property-optional"
+    <dd>instance billing mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1388,8 +1647,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance name.</p>
-</dd><dt class="property-optional"
+    <dd>instance name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_productversion_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productversion_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resources_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resources_go" style="color: inherit; text-decoration: inherit;">Resources</a>
@@ -1397,17 +1663,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceresource">[]Instance<wbr>Resource<wbr>Args</a></span>
     </dt>
-    <dd><p>resource information.</p>
-</dd><dt class="property-optional"
+    <dd>resource information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usersubnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usersubnetid_go" style="color: inherit; text-decoration: inherit;">User<wbr>Subnet<wbr>Id</a>
@@ -1415,8 +1679,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet.</p>
-</dd><dt class="property-optional"
+    <dd>subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uservpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uservpcid_go" style="color: inherit; text-decoration: inherit;">User<wbr>Vpc<wbr>Id</a>
@@ -1424,8 +1687,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>private network.</p>
-</dd><dt class="property-optional"
+    <dd>private network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1433,14 +1695,91 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability Zone.</p>
-</dd></dl>
+    <dd>Availability Zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="state_admin_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_admin_password_hcl" style="color: inherit; text-decoration: inherit;">admin_<wbr>password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cluster password.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_charge_properties_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_properties_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>properties</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancechargeproperties">object</a></span>
+    </dt>
+    <dd>instance billing mode.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_product_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_version_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resources_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resources_hcl" style="color: inherit; text-decoration: inherit;">resources</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceresource">list(object)</a></span>
+    </dt>
+    <dd>resource information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_user_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>subnet.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_user_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>private network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<dl class="resources-properties"><dt class="property-optional"
+<dl class="resources-properties"><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_adminpassword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_adminpassword_java" style="color: inherit; text-decoration: inherit;">admin<wbr>Password</a>
@@ -1448,17 +1787,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster password.</p>
-</dd><dt class="property-optional"
+    <dd>cluster password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargeproperties_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargeproperties_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Properties</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancechargeproperties">Instance<wbr>Charge<wbr>Properties<wbr>Args</a></span>
+        <span class="property-type"><a href="#instancechargeproperties">Instance<wbr>Charge<wbr>Properties</a></span>
     </dt>
-    <dd><p>instance billing mode.</p>
-</dd><dt class="property-optional"
+    <dd>instance billing mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1466,26 +1803,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance name.</p>
-</dd><dt class="property-optional"
+    <dd>instance name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_productversion_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productversion_java" style="color: inherit; text-decoration: inherit;">product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resources_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resources_java" style="color: inherit; text-decoration: inherit;">resources</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceresource">List&lt;Instance<wbr>Resource<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instanceresource">List&lt;Instance<wbr>Resource&gt;</a></span>
     </dt>
-    <dd><p>resource information.</p>
-</dd><dt class="property-optional"
+    <dd>resource information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usersubnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usersubnetid_java" style="color: inherit; text-decoration: inherit;">user<wbr>Subnet<wbr>Id</a>
@@ -1493,8 +1835,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet.</p>
-</dd><dt class="property-optional"
+    <dd>subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uservpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uservpcid_java" style="color: inherit; text-decoration: inherit;">user<wbr>Vpc<wbr>Id</a>
@@ -1502,8 +1843,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>private network.</p>
-</dd><dt class="property-optional"
+    <dd>private network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1511,14 +1851,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability Zone.</p>
-</dd></dl>
+    <dd>Availability Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<dl class="resources-properties"><dt class="property-optional"
+<dl class="resources-properties"><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_adminpassword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_adminpassword_nodejs" style="color: inherit; text-decoration: inherit;">admin<wbr>Password</a>
@@ -1526,17 +1865,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster password.</p>
-</dd><dt class="property-optional"
+    <dd>cluster password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargeproperties_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargeproperties_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Properties</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancechargeproperties">Instance<wbr>Charge<wbr>Properties<wbr>Args</a></span>
+        <span class="property-type"><a href="#instancechargeproperties">Instance<wbr>Charge<wbr>Properties</a></span>
     </dt>
-    <dd><p>instance billing mode.</p>
-</dd><dt class="property-optional"
+    <dd>instance billing mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1544,26 +1881,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance name.</p>
-</dd><dt class="property-optional"
+    <dd>instance name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_productversion_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productversion_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resources_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resources_nodejs" style="color: inherit; text-decoration: inherit;">resources</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceresource">Instance<wbr>Resource<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instanceresource">Instance<wbr>Resource[]</a></span>
     </dt>
-    <dd><p>resource information.</p>
-</dd><dt class="property-optional"
+    <dd>resource information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usersubnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usersubnetid_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Subnet<wbr>Id</a>
@@ -1571,8 +1913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet.</p>
-</dd><dt class="property-optional"
+    <dd>subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uservpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uservpcid_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Vpc<wbr>Id</a>
@@ -1580,8 +1921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>private network.</p>
-</dd><dt class="property-optional"
+    <dd>private network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1589,14 +1929,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability Zone.</p>
-</dd></dl>
+    <dd>Availability Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties"><dt class="property-optional"
+<dl class="resources-properties"><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_admin_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_admin_password_python" style="color: inherit; text-decoration: inherit;">admin_<wbr>password</a>
@@ -1604,8 +1943,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cluster password.</p>
-</dd><dt class="property-optional"
+    <dd>cluster password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_charge_properties_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_properties_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>properties</a>
@@ -1613,8 +1951,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancechargeproperties">Instance<wbr>Charge<wbr>Properties<wbr>Args</a></span>
     </dt>
-    <dd><p>instance billing mode.</p>
-</dd><dt class="property-optional"
+    <dd>instance billing mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -1622,26 +1959,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance name.</p>
-</dd><dt class="property-optional"
+    <dd>instance name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_product_version_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_version_python" style="color: inherit; text-decoration: inherit;">product_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resources_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resources_python" style="color: inherit; text-decoration: inherit;">resources</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instanceresource">Instance<wbr>Resource<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instanceresource">Sequence[Instance<wbr>Resource<wbr>Args]</a></span>
     </dt>
-    <dd><p>resource information.</p>
-</dd><dt class="property-optional"
+    <dd>resource information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_user_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_subnet_id_python" style="color: inherit; text-decoration: inherit;">user_<wbr>subnet_<wbr>id</a>
@@ -1649,8 +1991,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>subnet.</p>
-</dd><dt class="property-optional"
+    <dd>subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_user_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_vpc_id_python" style="color: inherit; text-decoration: inherit;">user_<wbr>vpc_<wbr>id</a>
@@ -1658,8 +1999,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>private network.</p>
-</dd><dt class="property-optional"
+    <dd>private network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1667,14 +2007,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Availability Zone.</p>
-</dd></dl>
+    <dd>Availability Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<dl class="resources-properties"><dt class="property-optional"
+<dl class="resources-properties"><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_adminpassword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_adminpassword_yaml" style="color: inherit; text-decoration: inherit;">admin<wbr>Password</a>
@@ -1682,8 +2021,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster password.</p>
-</dd><dt class="property-optional"
+    <dd>cluster password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargeproperties_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargeproperties_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Properties</a>
@@ -1691,8 +2029,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancechargeproperties">Property Map</a></span>
     </dt>
-    <dd><p>instance billing mode.</p>
-</dd><dt class="property-optional"
+    <dd>instance billing mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1700,8 +2037,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance name.</p>
-</dd><dt class="property-optional"
+    <dd>instance name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_productversion_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productversion_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resources_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resources_yaml" style="color: inherit; text-decoration: inherit;">resources</a>
@@ -1709,17 +2053,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceresource">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>resource information.</p>
-</dd><dt class="property-optional"
+    <dd>resource information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usersubnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usersubnetid_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Subnet<wbr>Id</a>
@@ -1727,8 +2069,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet.</p>
-</dd><dt class="property-optional"
+    <dd>subnet.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uservpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uservpcid_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Vpc<wbr>Id</a>
@@ -1736,8 +2077,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>private network.</p>
-</dd><dt class="property-optional"
+    <dd>private network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1745,8 +2085,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability Zone.</p>
-</dd></dl>
+    <dd>Availability Zone.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1761,7 +2100,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="instancechargeproperties">Instance<wbr>Charge<wbr>Properties</h4>
+<h4 id="instancechargeproperties">
+Instance<wbr>Charge<wbr>Properties<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Charge<wbr>Properties<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1773,8 +2114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0-no automatic renewal,1-automatic renewalNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>0-no automatic renewal,1-automatic renewalNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="timespan_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Span</a>
@@ -1782,8 +2122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time RangeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Time RangeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="timeunit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Unit</a>
@@ -1791,8 +2130,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time Unit,Generally h and mNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Time Unit,Generally h and mNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1800,8 +2138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type, vaild values: PREPAID, POSTPAID_BY_HOUR.</p>
-</dd></dl>
+    <dd>Charge type, vaild values: PREPAID, POSTPAID_BY_HOUR.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1815,8 +2152,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0-no automatic renewal,1-automatic renewalNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>0-no automatic renewal,1-automatic renewalNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="timespan_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Span</a>
@@ -1824,8 +2160,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time RangeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Time RangeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="timeunit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Unit</a>
@@ -1833,8 +2168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time Unit,Generally h and mNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Time Unit,Generally h and mNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1842,8 +2176,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type, vaild values: PREPAID, POSTPAID_BY_HOUR.</p>
-</dd></dl>
+    <dd>Charge type, vaild values: PREPAID, POSTPAID_BY_HOUR.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renew_flag_hcl" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>0-no automatic renewal,1-automatic renewalNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="time_span_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_span_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>span</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Time RangeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="time_unit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_unit_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Time Unit,Generally h and mNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Charge type, vaild values: PREPAID, POSTPAID_BY_HOUR.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1857,8 +2228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>0-no automatic renewal,1-automatic renewalNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>0-no automatic renewal,1-automatic renewalNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="timespan_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_java" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -1866,8 +2236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Time RangeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Time RangeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="timeunit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_java" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -1875,8 +2244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time Unit,Generally h and mNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Time Unit,Generally h and mNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1884,8 +2252,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge type, vaild values: PREPAID, POSTPAID_BY_HOUR.</p>
-</dd></dl>
+    <dd>Charge type, vaild values: PREPAID, POSTPAID_BY_HOUR.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1899,8 +2266,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>0-no automatic renewal,1-automatic renewalNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>0-no automatic renewal,1-automatic renewalNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="timespan_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -1908,8 +2274,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Time RangeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Time RangeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="timeunit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -1917,8 +2282,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time Unit,Generally h and mNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Time Unit,Generally h and mNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1926,8 +2290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type, vaild values: PREPAID, POSTPAID_BY_HOUR.</p>
-</dd></dl>
+    <dd>Charge type, vaild values: PREPAID, POSTPAID_BY_HOUR.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1941,8 +2304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0-no automatic renewal,1-automatic renewalNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>0-no automatic renewal,1-automatic renewalNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="time_span_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_span_python" style="color: inherit; text-decoration: inherit;">time_<wbr>span</a>
@@ -1950,8 +2312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time RangeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Time RangeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="time_unit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_unit_python" style="color: inherit; text-decoration: inherit;">time_<wbr>unit</a>
@@ -1959,8 +2320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Time Unit,Generally h and mNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Time Unit,Generally h and mNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -1968,8 +2328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Charge type, vaild values: PREPAID, POSTPAID_BY_HOUR.</p>
-</dd></dl>
+    <dd>Charge type, vaild values: PREPAID, POSTPAID_BY_HOUR.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1983,8 +2342,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>0-no automatic renewal,1-automatic renewalNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>0-no automatic renewal,1-automatic renewalNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="timespan_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -1992,8 +2350,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Time RangeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Time RangeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="timeunit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -2001,8 +2358,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time Unit,Generally h and mNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Time Unit,Generally h and mNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2010,12 +2366,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge type, vaild values: PREPAID, POSTPAID_BY_HOUR.</p>
-</dd></dl>
+    <dd>Charge type, vaild values: PREPAID, POSTPAID_BY_HOUR.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="instanceresource">Instance<wbr>Resource</h4>
+<h4 id="instanceresource">
+Instance<wbr>Resource<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Resource<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2027,8 +2384,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>resource count.</p>
-</dd><dt class="property-required"
+    <dd>resource count.</dd><dt class="property-required"
             title="Required">
         <span id="diskspec_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskspec_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Spec</a>
@@ -2036,8 +2392,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceresourcediskspec">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cdwpg.<wbr>Inputs.<wbr>Instance<wbr>Resource<wbr>Disk<wbr>Spec</a></span>
     </dt>
-    <dd><p>disk Information.</p>
-</dd><dt class="property-required"
+    <dd>disk Information.</dd><dt class="property-required"
             title="Required">
         <span id="specname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specname_csharp" style="color: inherit; text-decoration: inherit;">Spec<wbr>Name</a>
@@ -2045,8 +2400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>resource name.</p>
-</dd><dt class="property-required"
+    <dd>resource name.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2054,8 +2408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>resource type.</p>
-</dd></dl>
+    <dd>resource type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2069,8 +2422,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>resource count.</p>
-</dd><dt class="property-required"
+    <dd>resource count.</dd><dt class="property-required"
             title="Required">
         <span id="diskspec_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskspec_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Spec</a>
@@ -2078,8 +2430,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceresourcediskspec">Instance<wbr>Resource<wbr>Disk<wbr>Spec</a></span>
     </dt>
-    <dd><p>disk Information.</p>
-</dd><dt class="property-required"
+    <dd>disk Information.</dd><dt class="property-required"
             title="Required">
         <span id="specname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specname_go" style="color: inherit; text-decoration: inherit;">Spec<wbr>Name</a>
@@ -2087,8 +2438,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>resource name.</p>
-</dd><dt class="property-required"
+    <dd>resource name.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2096,8 +2446,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>resource type.</p>
-</dd></dl>
+    <dd>resource type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#count_hcl" style="color: inherit; text-decoration: inherit;">count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>resource count.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_spec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_spec_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>spec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instanceresourcediskspec">object</a></span>
+    </dt>
+    <dd>disk Information.</dd><dt class="property-required"
+            title="Required">
+        <span id="spec_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spec_name_hcl" style="color: inherit; text-decoration: inherit;">spec_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>resource name.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>resource type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2111,8 +2498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>resource count.</p>
-</dd><dt class="property-required"
+    <dd>resource count.</dd><dt class="property-required"
             title="Required">
         <span id="diskspec_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskspec_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Spec</a>
@@ -2120,8 +2506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceresourcediskspec">Instance<wbr>Resource<wbr>Disk<wbr>Spec</a></span>
     </dt>
-    <dd><p>disk Information.</p>
-</dd><dt class="property-required"
+    <dd>disk Information.</dd><dt class="property-required"
             title="Required">
         <span id="specname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specname_java" style="color: inherit; text-decoration: inherit;">spec<wbr>Name</a>
@@ -2129,8 +2514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>resource name.</p>
-</dd><dt class="property-required"
+    <dd>resource name.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2138,8 +2522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>resource type.</p>
-</dd></dl>
+    <dd>resource type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2153,8 +2536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>resource count.</p>
-</dd><dt class="property-required"
+    <dd>resource count.</dd><dt class="property-required"
             title="Required">
         <span id="diskspec_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskspec_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Spec</a>
@@ -2162,8 +2544,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceresourcediskspec">Instance<wbr>Resource<wbr>Disk<wbr>Spec</a></span>
     </dt>
-    <dd><p>disk Information.</p>
-</dd><dt class="property-required"
+    <dd>disk Information.</dd><dt class="property-required"
             title="Required">
         <span id="specname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specname_nodejs" style="color: inherit; text-decoration: inherit;">spec<wbr>Name</a>
@@ -2171,8 +2552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>resource name.</p>
-</dd><dt class="property-required"
+    <dd>resource name.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2180,8 +2560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>resource type.</p>
-</dd></dl>
+    <dd>resource type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2195,8 +2574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>resource count.</p>
-</dd><dt class="property-required"
+    <dd>resource count.</dd><dt class="property-required"
             title="Required">
         <span id="disk_spec_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_spec_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>spec</a>
@@ -2204,8 +2582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceresourcediskspec">Instance<wbr>Resource<wbr>Disk<wbr>Spec</a></span>
     </dt>
-    <dd><p>disk Information.</p>
-</dd><dt class="property-required"
+    <dd>disk Information.</dd><dt class="property-required"
             title="Required">
         <span id="spec_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spec_name_python" style="color: inherit; text-decoration: inherit;">spec_<wbr>name</a>
@@ -2213,8 +2590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>resource name.</p>
-</dd><dt class="property-required"
+    <dd>resource name.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2222,8 +2598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>resource type.</p>
-</dd></dl>
+    <dd>resource type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2237,8 +2612,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>resource count.</p>
-</dd><dt class="property-required"
+    <dd>resource count.</dd><dt class="property-required"
             title="Required">
         <span id="diskspec_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskspec_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Spec</a>
@@ -2246,8 +2620,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instanceresourcediskspec">Property Map</a></span>
     </dt>
-    <dd><p>disk Information.</p>
-</dd><dt class="property-required"
+    <dd>disk Information.</dd><dt class="property-required"
             title="Required">
         <span id="specname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specname_yaml" style="color: inherit; text-decoration: inherit;">spec<wbr>Name</a>
@@ -2255,8 +2628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>resource name.</p>
-</dd><dt class="property-required"
+    <dd>resource name.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2264,12 +2636,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>resource type.</p>
-</dd></dl>
+    <dd>resource type.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="instanceresourcediskspec">Instance<wbr>Resource<wbr>Disk<wbr>Spec</h4>
+<h4 id="instanceresourcediskspec">
+Instance<wbr>Resource<wbr>Disk<wbr>Spec<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Resource<wbr>Disk<wbr>Spec<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2281,8 +2654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>disk count.</p>
-</dd><dt class="property-required"
+    <dd>disk count.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -2290,8 +2662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>disk size.</p>
-</dd><dt class="property-required"
+    <dd>disk size.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -2299,8 +2670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>disk type.</p>
-</dd></dl>
+    <dd>disk type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2314,8 +2684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>disk count.</p>
-</dd><dt class="property-required"
+    <dd>disk count.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -2323,8 +2692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>disk size.</p>
-</dd><dt class="property-required"
+    <dd>disk size.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -2332,8 +2700,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>disk type.</p>
-</dd></dl>
+    <dd>disk type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="disk_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_count_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>disk count.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>disk size.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>disk type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2347,8 +2744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>disk count.</p>
-</dd><dt class="property-required"
+    <dd>disk count.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -2356,8 +2752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>disk size.</p>
-</dd><dt class="property-required"
+    <dd>disk size.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -2365,8 +2760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>disk type.</p>
-</dd></dl>
+    <dd>disk type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2380,8 +2774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>disk count.</p>
-</dd><dt class="property-required"
+    <dd>disk count.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -2389,8 +2782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>disk size.</p>
-</dd><dt class="property-required"
+    <dd>disk size.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -2398,8 +2790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>disk type.</p>
-</dd></dl>
+    <dd>disk type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2413,8 +2804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>disk count.</p>
-</dd><dt class="property-required"
+    <dd>disk count.</dd><dt class="property-required"
             title="Required">
         <span id="disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
@@ -2422,8 +2812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>disk size.</p>
-</dd><dt class="property-required"
+    <dd>disk size.</dd><dt class="property-required"
             title="Required">
         <span id="disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
@@ -2431,8 +2820,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>disk type.</p>
-</dd></dl>
+    <dd>disk type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2446,8 +2834,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>disk count.</p>
-</dd><dt class="property-required"
+    <dd>disk count.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -2455,8 +2842,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>disk size.</p>
-</dd><dt class="property-required"
+    <dd>disk size.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -2464,8 +2850,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>disk type.</p>
-</dd></dl>
+    <dd>disk type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2481,6 +2866,9 @@ $ pulumi import tencentcloud:Cdwpg/instance:Instance instance instance_id
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -2490,7 +2878,6 @@ $ pulumi import tencentcloud:Cdwpg/instance:Instance instance instance_id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

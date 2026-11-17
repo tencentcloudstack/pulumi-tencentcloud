@@ -2,9 +2,11 @@
 ---
 title: "getRecords"
 title_tag: "tencentcloud.Dnspod.getRecords"
-meta_desc: "Documentation for the tencentcloud.Dnspod.getRecords function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query dnspod record list."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,30 +18,72 @@ Use this data source to query dnspod record list.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const record = tencentcloud.Dnspod.getRecords({
+const record = tencentcloud.dnspod.getRecords({
     domain: "example.com",
     subdomain: "www",
 });
 export const result = record.then(record => record.results);
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-record = tencentcloud.Dnspod.get_records(domain="example.com",
+record = tencentcloud.dnspod.get_records(domain="example.com",
     subdomain="www")
 pulumi.export("result", record.results)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dnspod"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		record, err := dnspod.GetRecords(ctx, &dnspod.GetRecordsArgs{
+			Domain:    pulumi.StringRef("example.com"),
+			Subdomain: pulumi.StringRef("www"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		ctx.Export("result", record.Results)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -55,28 +99,11 @@ return await Deployment.RunAsync(() =>
     };
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		record, err := Dnspod.GetRecords(ctx, &dnspod.GetRecordsArgs{
-			Domain:    pulumi.StringRef("example.com"),
-			Subdomain: pulumi.StringRef("www"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		ctx.Export("result", record.Results)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -85,8 +112,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dnspod.DnspodFunctions;
 import com.pulumi.tencentcloud.Dnspod.inputs.GetRecordsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -103,31 +130,66 @@ public class App {
             .subdomain("www")
             .build());
 
-        ctx.export("result", record.applyValue(getRecordsResult -> getRecordsResult.results()));
+        ctx.export("result", record.results());
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   record:
     fn::invoke:
-      Function: tencentcloud:Dnspod:getRecords
-      Arguments:
+      function: tencentcloud:Dnspod:getRecords
+      arguments:
         domain: example.com
         subdomain: www
 outputs:
   result: ${record.results}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dnspod_getrecords" "record" {
+  domain    = "example.com"
+  subdomain = "www"
+}
+
+output "result" {
+  value = data.tencentcloud_dnspod_getrecords.record.results
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Use verbose filter
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const record = tencentcloud.Dnspod.getRecords({
+const record = tencentcloud.dnspod.getRecords({
     domain: "example.com",
     subdomain: "www",
     limit: 100,
@@ -137,11 +199,16 @@ const record = tencentcloud.Dnspod.getRecords({
 });
 export const result = record.then(record => record.results);
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-record = tencentcloud.Dnspod.get_records(domain="example.com",
+record = tencentcloud.dnspod.get_records(domain="example.com",
     subdomain="www",
     limit=100,
     record_type="TXT",
@@ -149,11 +216,47 @@ record = tencentcloud.Dnspod.get_records(domain="example.com",
     sort_type="DESC")
 pulumi.export("result", record.results)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dnspod"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		record, err := dnspod.GetRecords(ctx, &dnspod.GetRecordsArgs{
+			Domain:     pulumi.StringRef("example.com"),
+			Subdomain:  pulumi.StringRef("www"),
+			Limit:      pulumi.IntRef(100),
+			RecordType: pulumi.StringRef("TXT"),
+			SortField:  pulumi.StringRef("updated_on"),
+			SortType:   pulumi.StringRef("DESC"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		ctx.Export("result", record.Results)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -173,32 +276,11 @@ return await Deployment.RunAsync(() =>
     };
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		record, err := Dnspod.GetRecords(ctx, &dnspod.GetRecordsArgs{
-			Domain:     pulumi.StringRef("example.com"),
-			Subdomain:  pulumi.StringRef("www"),
-			Limit:      pulumi.IntRef(100),
-			RecordType: pulumi.StringRef("TXT"),
-			SortField:  pulumi.StringRef("updated_on"),
-			SortType:   pulumi.StringRef("DESC"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		ctx.Export("result", record.Results)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -207,8 +289,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dnspod.DnspodFunctions;
 import com.pulumi.tencentcloud.Dnspod.inputs.GetRecordsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -229,16 +311,21 @@ public class App {
             .sortType("DESC")
             .build());
 
-        ctx.export("result", record.applyValue(getRecordsResult -> getRecordsResult.results()));
+        ctx.export("result", record.results());
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   record:
     fn::invoke:
-      Function: tencentcloud:Dnspod:getRecords
-      Arguments:
+      function: tencentcloud:Dnspod:getRecords
+      arguments:
         domain: example.com
         subdomain: www
         limit: 100
@@ -248,8 +335,42 @@ variables:
 outputs:
   result: ${record.results}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dnspod_getrecords" "record" {
+  domain      = "example.com"
+  subdomain   = "www"
+  limit       = 100
+  record_type = "TXT"
+  sort_field  = "updated_on"
+  sort_type   = "DESC"
+}
+
+output "result" {
+  value = data.tencentcloud_dnspod_getrecords.record.results
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeRecordList](https://www.tencentcloud.com/document/api/1157/51290)
 
 
 
@@ -261,7 +382,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -269,9 +390,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getRecords<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRecordsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRecordsResult</a></span>></span
+><span class="k">function </span>getRecords<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRecordsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRecordsResult</a></span>></span
 ><span class="k">
-function </span>getRecordsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRecordsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRecordsResult</a></span>></span
+function </span>getRecordsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRecordsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRecordsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -295,20 +416,20 @@ function </span>getRecordsOutput<span class="p">(</span><span class="nx">args</s
                 <span class="nx">subdomain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetRecordsResult</span
 ><span class="k">
-def </span>get_records_output<span class="p">(</span><span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">domain_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">group_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">keyword</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                <span class="nx">offset</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                <span class="nx">record_line</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">record_line_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">record_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">sort_field</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">sort_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">subdomain</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRecordsResult]</span
+def </span>get_records_output<span class="p">(</span><span class="nx">domain</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">domain_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">group_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">keyword</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">limit</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                <span class="nx">offset</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                <span class="nx">record_line</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">record_line_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">record_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">sort_field</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">sort_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">subdomain</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRecordsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -317,12 +438,12 @@ def </span>get_records_output<span class="p">(</span><span class="nx">domain</sp
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetRecords<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetRecordsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetRecordsResult</a></span>, error)</span
+><span class="k">func </span>LookupRecords<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupRecordsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupRecordsResult</a></span>, error)</span
 ><span class="k">
-func </span>GetRecordsOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetRecordsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetRecordsResultOutput</span
+func </span>LookupRecordsOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupRecordsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupRecordsResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetRecords` in the Go SDK.
+&gt; Note: This function is named `LookupRecords` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -333,7 +454,8 @@ func </span>GetRecordsOutput<span class="p">(</span><span class="nx">ctx</span><
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetRecords </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetRecordsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetRecordsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetRecordsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRecordsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRecordsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRecordsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRecordsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRecordsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -342,7 +464,8 @@ func </span>GetRecordsOutput<span class="p">(</span><span class="nx">ctx</span><
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetRecordsResult</a></span>> </span>getRecords<span class="p">(</span><span class="nx">GetRecordsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRecordsResult</a></span>> </span>getRecords<span class="p">(</span><span class="nx">GetRecordsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRecordsResult</a></span>> </span>getRecords<span class="p">(</span><span class="nx">GetRecordsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -354,6 +477,15 @@ func </span>GetRecordsOutput<span class="p">(</span><span class="nx">ctx</span><
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dnspod/getRecords:getRecords
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dnspod_get_records&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -372,8 +504,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The domain for which DNS records are to be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>The domain for which DNS records are to be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="domainid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainid_csharp" style="color: inherit; text-decoration: inherit;">Domain<wbr>Id</a>
@@ -381,8 +512,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the domain for which DNS records are to be obtained. If DomainId is passed in, the system will omit the parameter domain.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the domain for which DNS records are to be obtained. If DomainId is passed in, the system will omit the parameter domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -390,8 +520,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The group ID.</p>
-</dd><dt class="property-optional"
+    <dd>The group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_csharp" style="color: inherit; text-decoration: inherit;">Keyword</a>
@@ -399,8 +528,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The keyword for searching for DNS records. Host headers and record values are supported.</p>
-</dd><dt class="property-optional"
+    <dd>The keyword for searching for DNS records. Host headers and record values are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -408,8 +536,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit. It defaults to 100 and can be up to 3,000.</p>
-</dd><dt class="property-optional"
+    <dd>The limit. It defaults to 100 and can be up to 3,000.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -417,8 +544,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The offset. Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>The offset. Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordline_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordline_csharp" style="color: inherit; text-decoration: inherit;">Record<wbr>Line</a>
@@ -426,8 +552,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The split zone name.</p>
-</dd><dt class="property-optional"
+    <dd>The split zone name.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordlineid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordlineid_csharp" style="color: inherit; text-decoration: inherit;">Record<wbr>Line<wbr>Id</a>
@@ -435,8 +560,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The split zone ID. If <code>record_line_id</code> is passed in, the system will omit the parameter <code>record_line</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The split zone ID. If <code>recordLineId</code> is passed in, the system will omit the parameter <code>recordLine</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordtype_csharp" style="color: inherit; text-decoration: inherit;">Record<wbr>Type</a>
@@ -444,8 +568,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.</p>
-</dd><dt class="property-optional"
+    <dd>The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -453,8 +576,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for store query result as JSON.</p>
-</dd><dt class="property-optional"
+    <dd>Used for store query result as JSON.</dd><dt class="property-optional"
             title="Optional">
         <span id="sortfield_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sortfield_csharp" style="color: inherit; text-decoration: inherit;">Sort<wbr>Field</a>
@@ -462,8 +584,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The sorting field. Available values: name, line, type, value, weight, mx, and ttl,updated_on.</p>
-</dd><dt class="property-optional"
+    <dd>The sorting field. Available values: name, line, type, value, weight, mx, and ttl,updated_on.</dd><dt class="property-optional"
             title="Optional">
         <span id="sorttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sorttype_csharp" style="color: inherit; text-decoration: inherit;">Sort<wbr>Type</a>
@@ -471,8 +592,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The sorting type. Valid values: ASC (ascending, default), DESC (descending).</p>
-</dd><dt class="property-optional"
+    <dd>The sorting type. Valid values: ASC (ascending, default), DESC (descending).</dd><dt class="property-optional"
             title="Optional">
         <span id="subdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_csharp" style="color: inherit; text-decoration: inherit;">Subdomain</a>
@@ -480,8 +600,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.</p>
-</dd></dl>
+    <dd>The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -495,8 +614,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The domain for which DNS records are to be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>The domain for which DNS records are to be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="domainid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainid_go" style="color: inherit; text-decoration: inherit;">Domain<wbr>Id</a>
@@ -504,8 +622,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the domain for which DNS records are to be obtained. If DomainId is passed in, the system will omit the parameter domain.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the domain for which DNS records are to be obtained. If DomainId is passed in, the system will omit the parameter domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -513,8 +630,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The group ID.</p>
-</dd><dt class="property-optional"
+    <dd>The group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_go" style="color: inherit; text-decoration: inherit;">Keyword</a>
@@ -522,8 +638,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The keyword for searching for DNS records. Host headers and record values are supported.</p>
-</dd><dt class="property-optional"
+    <dd>The keyword for searching for DNS records. Host headers and record values are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -531,8 +646,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit. It defaults to 100 and can be up to 3,000.</p>
-</dd><dt class="property-optional"
+    <dd>The limit. It defaults to 100 and can be up to 3,000.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -540,8 +654,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The offset. Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>The offset. Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordline_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordline_go" style="color: inherit; text-decoration: inherit;">Record<wbr>Line</a>
@@ -549,8 +662,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The split zone name.</p>
-</dd><dt class="property-optional"
+    <dd>The split zone name.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordlineid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordlineid_go" style="color: inherit; text-decoration: inherit;">Record<wbr>Line<wbr>Id</a>
@@ -558,8 +670,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The split zone ID. If <code>record_line_id</code> is passed in, the system will omit the parameter <code>record_line</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The split zone ID. If <code>recordLineId</code> is passed in, the system will omit the parameter <code>recordLine</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordtype_go" style="color: inherit; text-decoration: inherit;">Record<wbr>Type</a>
@@ -567,8 +678,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.</p>
-</dd><dt class="property-optional"
+    <dd>The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -576,8 +686,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for store query result as JSON.</p>
-</dd><dt class="property-optional"
+    <dd>Used for store query result as JSON.</dd><dt class="property-optional"
             title="Optional">
         <span id="sortfield_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sortfield_go" style="color: inherit; text-decoration: inherit;">Sort<wbr>Field</a>
@@ -585,8 +694,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The sorting field. Available values: name, line, type, value, weight, mx, and ttl,updated_on.</p>
-</dd><dt class="property-optional"
+    <dd>The sorting field. Available values: name, line, type, value, weight, mx, and ttl,updated_on.</dd><dt class="property-optional"
             title="Optional">
         <span id="sorttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sorttype_go" style="color: inherit; text-decoration: inherit;">Sort<wbr>Type</a>
@@ -594,8 +702,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The sorting type. Valid values: ASC (ascending, default), DESC (descending).</p>
-</dd><dt class="property-optional"
+    <dd>The sorting type. Valid values: ASC (ascending, default), DESC (descending).</dd><dt class="property-optional"
             title="Optional">
         <span id="subdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_go" style="color: inherit; text-decoration: inherit;">Subdomain</a>
@@ -603,8 +710,117 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.</p>
-</dd></dl>
+    <dd>The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The domain for which DNS records are to be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="domain_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_id_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the domain for which DNS records are to be obtained. If DomainId is passed in, the system will omit the parameter domain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The group ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keyword_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_hcl" style="color: inherit; text-decoration: inherit;">keyword</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The keyword for searching for DNS records. Host headers and record values are supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The limit. It defaults to 100 and can be up to 3,000.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The offset. Default value: 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="record_line_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_line_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>line</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The split zone name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="record_line_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_line_id_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>line_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The split zone ID. If <code>recordLineId</code> is passed in, the system will omit the parameter <code>recordLine</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="record_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_type_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used for store query result as JSON.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sort_field_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_field_hcl" style="color: inherit; text-decoration: inherit;">sort_<wbr>field</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The sorting field. Available values: name, line, type, value, weight, mx, and ttl,updated_on.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sort_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_type_hcl" style="color: inherit; text-decoration: inherit;">sort_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The sorting type. Valid values: ASC (ascending, default), DESC (descending).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subdomain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_hcl" style="color: inherit; text-decoration: inherit;">subdomain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -618,8 +834,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The domain for which DNS records are to be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>The domain for which DNS records are to be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="domainid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainid_java" style="color: inherit; text-decoration: inherit;">domain<wbr>Id</a>
@@ -627,8 +842,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the domain for which DNS records are to be obtained. If DomainId is passed in, the system will omit the parameter domain.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the domain for which DNS records are to be obtained. If DomainId is passed in, the system will omit the parameter domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -636,8 +850,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The group ID.</p>
-</dd><dt class="property-optional"
+    <dd>The group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_java" style="color: inherit; text-decoration: inherit;">keyword</a>
@@ -645,8 +858,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The keyword for searching for DNS records. Host headers and record values are supported.</p>
-</dd><dt class="property-optional"
+    <dd>The keyword for searching for DNS records. Host headers and record values are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -654,8 +866,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The limit. It defaults to 100 and can be up to 3,000.</p>
-</dd><dt class="property-optional"
+    <dd>The limit. It defaults to 100 and can be up to 3,000.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -663,8 +874,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The offset. Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>The offset. Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordline_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordline_java" style="color: inherit; text-decoration: inherit;">record<wbr>Line</a>
@@ -672,8 +882,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The split zone name.</p>
-</dd><dt class="property-optional"
+    <dd>The split zone name.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordlineid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordlineid_java" style="color: inherit; text-decoration: inherit;">record<wbr>Line<wbr>Id</a>
@@ -681,8 +890,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The split zone ID. If <code>record_line_id</code> is passed in, the system will omit the parameter <code>record_line</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The split zone ID. If <code>recordLineId</code> is passed in, the system will omit the parameter <code>recordLine</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordtype_java" style="color: inherit; text-decoration: inherit;">record<wbr>Type</a>
@@ -690,8 +898,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.</p>
-</dd><dt class="property-optional"
+    <dd>The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -699,8 +906,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used for store query result as JSON.</p>
-</dd><dt class="property-optional"
+    <dd>Used for store query result as JSON.</dd><dt class="property-optional"
             title="Optional">
         <span id="sortfield_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sortfield_java" style="color: inherit; text-decoration: inherit;">sort<wbr>Field</a>
@@ -708,8 +914,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The sorting field. Available values: name, line, type, value, weight, mx, and ttl,updated_on.</p>
-</dd><dt class="property-optional"
+    <dd>The sorting field. Available values: name, line, type, value, weight, mx, and ttl,updated_on.</dd><dt class="property-optional"
             title="Optional">
         <span id="sorttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sorttype_java" style="color: inherit; text-decoration: inherit;">sort<wbr>Type</a>
@@ -717,8 +922,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The sorting type. Valid values: ASC (ascending, default), DESC (descending).</p>
-</dd><dt class="property-optional"
+    <dd>The sorting type. Valid values: ASC (ascending, default), DESC (descending).</dd><dt class="property-optional"
             title="Optional">
         <span id="subdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_java" style="color: inherit; text-decoration: inherit;">subdomain</a>
@@ -726,8 +930,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.</p>
-</dd></dl>
+    <dd>The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -741,8 +944,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The domain for which DNS records are to be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>The domain for which DNS records are to be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="domainid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainid_nodejs" style="color: inherit; text-decoration: inherit;">domain<wbr>Id</a>
@@ -750,8 +952,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the domain for which DNS records are to be obtained. If DomainId is passed in, the system will omit the parameter domain.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the domain for which DNS records are to be obtained. If DomainId is passed in, the system will omit the parameter domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -759,8 +960,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The group ID.</p>
-</dd><dt class="property-optional"
+    <dd>The group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_nodejs" style="color: inherit; text-decoration: inherit;">keyword</a>
@@ -768,8 +968,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The keyword for searching for DNS records. Host headers and record values are supported.</p>
-</dd><dt class="property-optional"
+    <dd>The keyword for searching for DNS records. Host headers and record values are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -777,8 +976,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The limit. It defaults to 100 and can be up to 3,000.</p>
-</dd><dt class="property-optional"
+    <dd>The limit. It defaults to 100 and can be up to 3,000.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -786,8 +984,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The offset. Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>The offset. Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordline_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordline_nodejs" style="color: inherit; text-decoration: inherit;">record<wbr>Line</a>
@@ -795,8 +992,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The split zone name.</p>
-</dd><dt class="property-optional"
+    <dd>The split zone name.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordlineid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordlineid_nodejs" style="color: inherit; text-decoration: inherit;">record<wbr>Line<wbr>Id</a>
@@ -804,8 +1000,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The split zone ID. If <code>record_line_id</code> is passed in, the system will omit the parameter <code>record_line</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The split zone ID. If <code>recordLineId</code> is passed in, the system will omit the parameter <code>recordLine</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordtype_nodejs" style="color: inherit; text-decoration: inherit;">record<wbr>Type</a>
@@ -813,8 +1008,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.</p>
-</dd><dt class="property-optional"
+    <dd>The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -822,8 +1016,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for store query result as JSON.</p>
-</dd><dt class="property-optional"
+    <dd>Used for store query result as JSON.</dd><dt class="property-optional"
             title="Optional">
         <span id="sortfield_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sortfield_nodejs" style="color: inherit; text-decoration: inherit;">sort<wbr>Field</a>
@@ -831,8 +1024,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The sorting field. Available values: name, line, type, value, weight, mx, and ttl,updated_on.</p>
-</dd><dt class="property-optional"
+    <dd>The sorting field. Available values: name, line, type, value, weight, mx, and ttl,updated_on.</dd><dt class="property-optional"
             title="Optional">
         <span id="sorttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sorttype_nodejs" style="color: inherit; text-decoration: inherit;">sort<wbr>Type</a>
@@ -840,8 +1032,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The sorting type. Valid values: ASC (ascending, default), DESC (descending).</p>
-</dd><dt class="property-optional"
+    <dd>The sorting type. Valid values: ASC (ascending, default), DESC (descending).</dd><dt class="property-optional"
             title="Optional">
         <span id="subdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_nodejs" style="color: inherit; text-decoration: inherit;">subdomain</a>
@@ -849,8 +1040,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.</p>
-</dd></dl>
+    <dd>The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -864,8 +1054,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The domain for which DNS records are to be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>The domain for which DNS records are to be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_id_python" style="color: inherit; text-decoration: inherit;">domain_<wbr>id</a>
@@ -873,8 +1062,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of the domain for which DNS records are to be obtained. If DomainId is passed in, the system will omit the parameter domain.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the domain for which DNS records are to be obtained. If DomainId is passed in, the system will omit the parameter domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
@@ -882,8 +1070,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The group ID.</p>
-</dd><dt class="property-optional"
+    <dd>The group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyword_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_python" style="color: inherit; text-decoration: inherit;">keyword</a>
@@ -891,8 +1078,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The keyword for searching for DNS records. Host headers and record values are supported.</p>
-</dd><dt class="property-optional"
+    <dd>The keyword for searching for DNS records. Host headers and record values are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -900,8 +1086,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit. It defaults to 100 and can be up to 3,000.</p>
-</dd><dt class="property-optional"
+    <dd>The limit. It defaults to 100 and can be up to 3,000.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -909,8 +1094,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The offset. Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>The offset. Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="record_line_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_line_python" style="color: inherit; text-decoration: inherit;">record_<wbr>line</a>
@@ -918,8 +1102,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The split zone name.</p>
-</dd><dt class="property-optional"
+    <dd>The split zone name.</dd><dt class="property-optional"
             title="Optional">
         <span id="record_line_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_line_id_python" style="color: inherit; text-decoration: inherit;">record_<wbr>line_<wbr>id</a>
@@ -927,8 +1110,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The split zone ID. If <code>record_line_id</code> is passed in, the system will omit the parameter <code>record_line</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The split zone ID. If <code>recordLineId</code> is passed in, the system will omit the parameter <code>recordLine</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="record_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_type_python" style="color: inherit; text-decoration: inherit;">record_<wbr>type</a>
@@ -936,8 +1118,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.</p>
-</dd><dt class="property-optional"
+    <dd>The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -945,8 +1126,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used for store query result as JSON.</p>
-</dd><dt class="property-optional"
+    <dd>Used for store query result as JSON.</dd><dt class="property-optional"
             title="Optional">
         <span id="sort_field_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_field_python" style="color: inherit; text-decoration: inherit;">sort_<wbr>field</a>
@@ -954,8 +1134,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The sorting field. Available values: name, line, type, value, weight, mx, and ttl,updated_on.</p>
-</dd><dt class="property-optional"
+    <dd>The sorting field. Available values: name, line, type, value, weight, mx, and ttl,updated_on.</dd><dt class="property-optional"
             title="Optional">
         <span id="sort_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_type_python" style="color: inherit; text-decoration: inherit;">sort_<wbr>type</a>
@@ -963,8 +1142,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The sorting type. Valid values: ASC (ascending, default), DESC (descending).</p>
-</dd><dt class="property-optional"
+    <dd>The sorting type. Valid values: ASC (ascending, default), DESC (descending).</dd><dt class="property-optional"
             title="Optional">
         <span id="subdomain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_python" style="color: inherit; text-decoration: inherit;">subdomain</a>
@@ -972,8 +1150,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.</p>
-</dd></dl>
+    <dd>The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -987,8 +1164,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The domain for which DNS records are to be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>The domain for which DNS records are to be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="domainid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainid_yaml" style="color: inherit; text-decoration: inherit;">domain<wbr>Id</a>
@@ -996,8 +1172,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the domain for which DNS records are to be obtained. If DomainId is passed in, the system will omit the parameter domain.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the domain for which DNS records are to be obtained. If DomainId is passed in, the system will omit the parameter domain.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -1005,8 +1180,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The group ID.</p>
-</dd><dt class="property-optional"
+    <dd>The group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_yaml" style="color: inherit; text-decoration: inherit;">keyword</a>
@@ -1014,8 +1188,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The keyword for searching for DNS records. Host headers and record values are supported.</p>
-</dd><dt class="property-optional"
+    <dd>The keyword for searching for DNS records. Host headers and record values are supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -1023,8 +1196,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The limit. It defaults to 100 and can be up to 3,000.</p>
-</dd><dt class="property-optional"
+    <dd>The limit. It defaults to 100 and can be up to 3,000.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -1032,8 +1204,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The offset. Default value: 0.</p>
-</dd><dt class="property-optional"
+    <dd>The offset. Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordline_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordline_yaml" style="color: inherit; text-decoration: inherit;">record<wbr>Line</a>
@@ -1041,8 +1212,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The split zone name.</p>
-</dd><dt class="property-optional"
+    <dd>The split zone name.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordlineid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordlineid_yaml" style="color: inherit; text-decoration: inherit;">record<wbr>Line<wbr>Id</a>
@@ -1050,8 +1220,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The split zone ID. If <code>record_line_id</code> is passed in, the system will omit the parameter <code>record_line</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The split zone ID. If <code>recordLineId</code> is passed in, the system will omit the parameter <code>recordLine</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="recordtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordtype_yaml" style="color: inherit; text-decoration: inherit;">record<wbr>Type</a>
@@ -1059,8 +1228,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.</p>
-</dd><dt class="property-optional"
+    <dd>The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1068,8 +1236,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used for store query result as JSON.</p>
-</dd><dt class="property-optional"
+    <dd>Used for store query result as JSON.</dd><dt class="property-optional"
             title="Optional">
         <span id="sortfield_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sortfield_yaml" style="color: inherit; text-decoration: inherit;">sort<wbr>Field</a>
@@ -1077,8 +1244,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The sorting field. Available values: name, line, type, value, weight, mx, and ttl,updated_on.</p>
-</dd><dt class="property-optional"
+    <dd>The sorting field. Available values: name, line, type, value, weight, mx, and ttl,updated_on.</dd><dt class="property-optional"
             title="Optional">
         <span id="sorttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sorttype_yaml" style="color: inherit; text-decoration: inherit;">sort<wbr>Type</a>
@@ -1086,8 +1252,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The sorting type. Valid values: ASC (ascending, default), DESC (descending).</p>
-</dd><dt class="property-optional"
+    <dd>The sorting type. Valid values: ASC (ascending, default), DESC (descending).</dd><dt class="property-optional"
             title="Optional">
         <span id="subdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_yaml" style="color: inherit; text-decoration: inherit;">subdomain</a>
@@ -1095,8 +1260,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.</p>
-</dd></dl>
+    <dd>The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1119,8 +1283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="recordcountinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordcountinfos_csharp" style="color: inherit; text-decoration: inherit;">Record<wbr>Count<wbr>Infos</a>
@@ -1128,8 +1291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrecordsrecordcountinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dnspod.<wbr>Outputs.<wbr>Get<wbr>Records<wbr>Record<wbr>Count<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Count info of the queried record list.</p>
-</dd><dt class="property-"
+    <dd>Count info of the queried record list.</dd><dt class="property-"
             title="">
         <span id="results_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_csharp" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -1137,8 +1299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrecordsresult">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dnspod.<wbr>Outputs.<wbr>Get<wbr>Records<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>The record list result.</p>
-</dd><dt class="property-"
+    <dd>The record list result.</dd><dt class="property-"
             title="">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1256,8 +1417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="recordcountinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordcountinfos_go" style="color: inherit; text-decoration: inherit;">Record<wbr>Count<wbr>Infos</a>
@@ -1265,8 +1425,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrecordsrecordcountinfo">[]Get<wbr>Records<wbr>Record<wbr>Count<wbr>Info</a></span>
     </dt>
-    <dd><p>Count info of the queried record list.</p>
-</dd><dt class="property-"
+    <dd>Count info of the queried record list.</dd><dt class="property-"
             title="">
         <span id="results_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_go" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -1274,8 +1433,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrecordsresult">[]Get<wbr>Records<wbr>Result</a></span>
     </dt>
-    <dd><p>The record list result.</p>
-</dd><dt class="property-"
+    <dd>The record list result.</dd><dt class="property-"
             title="">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1384,6 +1542,140 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="record_count_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_count_infos_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>count_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getrecordsrecordcountinfo">list(object)</a></span>
+    </dt>
+    <dd>Count info of the queried record list.</dd><dt class="property-"
+            title="">
+        <span id="results_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_hcl" style="color: inherit; text-decoration: inherit;">results</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getrecordsresult">list(object)</a></span>
+    </dt>
+    <dd>The record list result.</dd><dt class="property-"
+            title="">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="domain_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_id_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="keyword_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_hcl" style="color: inherit; text-decoration: inherit;">keyword</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="record_line_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_line_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>line</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="record_line_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_line_id_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>line_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="record_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_type_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="sort_field_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_field_hcl" style="color: inherit; text-decoration: inherit;">sort_<wbr>field</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="sort_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_type_hcl" style="color: inherit; text-decoration: inherit;">sort_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="subdomain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_hcl" style="color: inherit; text-decoration: inherit;">subdomain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -1393,8 +1685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="recordcountinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordcountinfos_java" style="color: inherit; text-decoration: inherit;">record<wbr>Count<wbr>Infos</a>
@@ -1402,8 +1693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrecordsrecordcountinfo">List&lt;Get<wbr>Records<wbr>Record<wbr>Count<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Count info of the queried record list.</p>
-</dd><dt class="property-"
+    <dd>Count info of the queried record list.</dd><dt class="property-"
             title="">
         <span id="results_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_java" style="color: inherit; text-decoration: inherit;">results</a>
@@ -1411,8 +1701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrecordsresult">List&lt;Get<wbr>Records<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>The record list result.</p>
-</dd><dt class="property-"
+    <dd>The record list result.</dd><dt class="property-"
             title="">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1530,8 +1819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="recordcountinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordcountinfos_nodejs" style="color: inherit; text-decoration: inherit;">record<wbr>Count<wbr>Infos</a>
@@ -1539,8 +1827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrecordsrecordcountinfo">Get<wbr>Records<wbr>Record<wbr>Count<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Count info of the queried record list.</p>
-</dd><dt class="property-"
+    <dd>Count info of the queried record list.</dd><dt class="property-"
             title="">
         <span id="results_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_nodejs" style="color: inherit; text-decoration: inherit;">results</a>
@@ -1548,8 +1835,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrecordsresult">Get<wbr>Records<wbr>Result[]</a></span>
     </dt>
-    <dd><p>The record list result.</p>
-</dd><dt class="property-"
+    <dd>The record list result.</dd><dt class="property-"
             title="">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1667,26 +1953,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="record_count_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_count_infos_python" style="color: inherit; text-decoration: inherit;">record_<wbr>count_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getrecordsrecordcountinfo">Get<wbr>Records<wbr>Record<wbr>Count<wbr>Info]</a></span>
+        <span class="property-type"><a href="#getrecordsrecordcountinfo">Sequence[Get<wbr>Records<wbr>Record<wbr>Count<wbr>Info]</a></span>
     </dt>
-    <dd><p>Count info of the queried record list.</p>
-</dd><dt class="property-"
+    <dd>Count info of the queried record list.</dd><dt class="property-"
             title="">
         <span id="results_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_python" style="color: inherit; text-decoration: inherit;">results</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getrecordsresult">Get<wbr>Records<wbr>Result]</a></span>
+        <span class="property-type"><a href="#getrecordsresult">Sequence[Get<wbr>Records<wbr>Result]</a></span>
     </dt>
-    <dd><p>The record list result.</p>
-</dd><dt class="property-"
+    <dd>The record list result.</dd><dt class="property-"
             title="">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1804,8 +2087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="recordcountinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordcountinfos_yaml" style="color: inherit; text-decoration: inherit;">record<wbr>Count<wbr>Infos</a>
@@ -1813,8 +2095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrecordsrecordcountinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Count info of the queried record list.</p>
-</dd><dt class="property-"
+    <dd>Count info of the queried record list.</dd><dt class="property-"
             title="">
         <span id="results_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_yaml" style="color: inherit; text-decoration: inherit;">results</a>
@@ -1822,8 +2103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrecordsresult">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>The record list result.</p>
-</dd><dt class="property-"
+    <dd>The record list result.</dd><dt class="property-"
             title="">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1951,8 +2231,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The count of records returned in the list.</p>
-</dd><dt class="property-required"
+    <dd>The count of records returned in the list.</dd><dt class="property-required"
             title="Required">
         <span id="subdomaincount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomaincount_csharp" style="color: inherit; text-decoration: inherit;">Subdomain<wbr>Count</a>
@@ -1960,8 +2239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The subdomain count.</p>
-</dd><dt class="property-required"
+    <dd>The subdomain count.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_csharp" style="color: inherit; text-decoration: inherit;">Total<wbr>Count</a>
@@ -1969,8 +2247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total record count.</p>
-</dd></dl>
+    <dd>The total record count.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1984,8 +2261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The count of records returned in the list.</p>
-</dd><dt class="property-required"
+    <dd>The count of records returned in the list.</dd><dt class="property-required"
             title="Required">
         <span id="subdomaincount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomaincount_go" style="color: inherit; text-decoration: inherit;">Subdomain<wbr>Count</a>
@@ -1993,8 +2269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The subdomain count.</p>
-</dd><dt class="property-required"
+    <dd>The subdomain count.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_go" style="color: inherit; text-decoration: inherit;">Total<wbr>Count</a>
@@ -2002,8 +2277,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total record count.</p>
-</dd></dl>
+    <dd>The total record count.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="list_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#list_count_hcl" style="color: inherit; text-decoration: inherit;">list_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The count of records returned in the list.</dd><dt class="property-required"
+            title="Required">
+        <span id="subdomain_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_count_hcl" style="color: inherit; text-decoration: inherit;">subdomain_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The subdomain count.</dd><dt class="property-required"
+            title="Required">
+        <span id="total_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_count_hcl" style="color: inherit; text-decoration: inherit;">total_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The total record count.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2017,8 +2321,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The count of records returned in the list.</p>
-</dd><dt class="property-required"
+    <dd>The count of records returned in the list.</dd><dt class="property-required"
             title="Required">
         <span id="subdomaincount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomaincount_java" style="color: inherit; text-decoration: inherit;">subdomain<wbr>Count</a>
@@ -2026,8 +2329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The subdomain count.</p>
-</dd><dt class="property-required"
+    <dd>The subdomain count.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_java" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -2035,8 +2337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The total record count.</p>
-</dd></dl>
+    <dd>The total record count.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2050,8 +2351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The count of records returned in the list.</p>
-</dd><dt class="property-required"
+    <dd>The count of records returned in the list.</dd><dt class="property-required"
             title="Required">
         <span id="subdomaincount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomaincount_nodejs" style="color: inherit; text-decoration: inherit;">subdomain<wbr>Count</a>
@@ -2059,8 +2359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The subdomain count.</p>
-</dd><dt class="property-required"
+    <dd>The subdomain count.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_nodejs" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -2068,8 +2367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The total record count.</p>
-</dd></dl>
+    <dd>The total record count.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2083,8 +2381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The count of records returned in the list.</p>
-</dd><dt class="property-required"
+    <dd>The count of records returned in the list.</dd><dt class="property-required"
             title="Required">
         <span id="subdomain_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomain_count_python" style="color: inherit; text-decoration: inherit;">subdomain_<wbr>count</a>
@@ -2092,8 +2389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The subdomain count.</p>
-</dd><dt class="property-required"
+    <dd>The subdomain count.</dd><dt class="property-required"
             title="Required">
         <span id="total_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_count_python" style="color: inherit; text-decoration: inherit;">total_<wbr>count</a>
@@ -2101,8 +2397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The total record count.</p>
-</dd></dl>
+    <dd>The total record count.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2116,8 +2411,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The count of records returned in the list.</p>
-</dd><dt class="property-required"
+    <dd>The count of records returned in the list.</dd><dt class="property-required"
             title="Required">
         <span id="subdomaincount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subdomaincount_yaml" style="color: inherit; text-decoration: inherit;">subdomain<wbr>Count</a>
@@ -2125,8 +2419,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The subdomain count.</p>
-</dd><dt class="property-required"
+    <dd>The subdomain count.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_yaml" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -2134,8 +2427,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The total record count.</p>
-</dd></dl>
+    <dd>The total record count.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2153,8 +2445,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The record split zone.</p>
-</dd><dt class="property-required"
+    <dd>The record split zone.</dd><dt class="property-required"
             title="Required">
         <span id="lineid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lineid_csharp" style="color: inherit; text-decoration: inherit;">Line<wbr>Id</a>
@@ -2162,8 +2453,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The split zone ID.</p>
-</dd><dt class="property-required"
+    <dd>The split zone ID.</dd><dt class="property-required"
             title="Required">
         <span id="monitorstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitorstatus_csharp" style="color: inherit; text-decoration: inherit;">Monitor<wbr>Status</a>
@@ -2171,8 +2461,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The monitoring status of the record. Valid values: OK (normal), WARN (warning), and DOWN (downtime). It is empty if no monitoring is set or the monitoring is suspended.</p>
-</dd><dt class="property-required"
+    <dd>The monitoring status of the record. Valid values: OK (normal), WARN (warning), and DOWN (downtime). It is empty if no monitoring is set or the monitoring is suspended.</dd><dt class="property-required"
             title="Required">
         <span id="mx_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mx_csharp" style="color: inherit; text-decoration: inherit;">Mx</a>
@@ -2180,9 +2469,8 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The MX value, applicable to the MX record only.
-Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The MX value, applicable to the MX record only.
+Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2190,8 +2478,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The host name.</p>
-</dd><dt class="property-required"
+    <dd>The host name.</dd><dt class="property-required"
             title="Required">
         <span id="recordid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordid_csharp" style="color: inherit; text-decoration: inherit;">Record<wbr>Id</a>
@@ -2199,8 +2486,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Record ID.</p>
-</dd><dt class="property-required"
+    <dd>Record ID.</dd><dt class="property-required"
             title="Required">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -2208,8 +2494,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The record remarks.</p>
-</dd><dt class="property-required"
+    <dd>The record remarks.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2217,8 +2502,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The record status. Valid values: ENABLE (enabled), DISABLE (disabled).</p>
-</dd><dt class="property-required"
+    <dd>The record status. Valid values: ENABLE (enabled), DISABLE (disabled).</dd><dt class="property-required"
             title="Required">
         <span id="ttl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_csharp" style="color: inherit; text-decoration: inherit;">Ttl</a>
@@ -2226,8 +2510,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The record cache time.</p>
-</dd><dt class="property-required"
+    <dd>The record cache time.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2235,8 +2518,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The record type.</p>
-</dd><dt class="property-required"
+    <dd>The record type.</dd><dt class="property-required"
             title="Required">
         <span id="updatedon_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedon_csharp" style="color: inherit; text-decoration: inherit;">Updated<wbr>On</a>
@@ -2244,8 +2526,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The update time.</p>
-</dd><dt class="property-required"
+    <dd>The update time.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2253,8 +2534,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The record value.</p>
-</dd><dt class="property-required"
+    <dd>The record value.</dd><dt class="property-required"
             title="Required">
         <span id="weight_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_csharp" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -2262,8 +2542,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The record weight, which is required for round-robin DNS records.</p>
-</dd></dl>
+    <dd>The record weight, which is required for round-robin DNS records.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2277,8 +2556,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The record split zone.</p>
-</dd><dt class="property-required"
+    <dd>The record split zone.</dd><dt class="property-required"
             title="Required">
         <span id="lineid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lineid_go" style="color: inherit; text-decoration: inherit;">Line<wbr>Id</a>
@@ -2286,8 +2564,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The split zone ID.</p>
-</dd><dt class="property-required"
+    <dd>The split zone ID.</dd><dt class="property-required"
             title="Required">
         <span id="monitorstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitorstatus_go" style="color: inherit; text-decoration: inherit;">Monitor<wbr>Status</a>
@@ -2295,8 +2572,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The monitoring status of the record. Valid values: OK (normal), WARN (warning), and DOWN (downtime). It is empty if no monitoring is set or the monitoring is suspended.</p>
-</dd><dt class="property-required"
+    <dd>The monitoring status of the record. Valid values: OK (normal), WARN (warning), and DOWN (downtime). It is empty if no monitoring is set or the monitoring is suspended.</dd><dt class="property-required"
             title="Required">
         <span id="mx_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mx_go" style="color: inherit; text-decoration: inherit;">Mx</a>
@@ -2304,9 +2580,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The MX value, applicable to the MX record only.
-Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The MX value, applicable to the MX record only.
+Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2314,8 +2589,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The host name.</p>
-</dd><dt class="property-required"
+    <dd>The host name.</dd><dt class="property-required"
             title="Required">
         <span id="recordid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordid_go" style="color: inherit; text-decoration: inherit;">Record<wbr>Id</a>
@@ -2323,8 +2597,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Record ID.</p>
-</dd><dt class="property-required"
+    <dd>Record ID.</dd><dt class="property-required"
             title="Required">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -2332,8 +2605,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The record remarks.</p>
-</dd><dt class="property-required"
+    <dd>The record remarks.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2341,8 +2613,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The record status. Valid values: ENABLE (enabled), DISABLE (disabled).</p>
-</dd><dt class="property-required"
+    <dd>The record status. Valid values: ENABLE (enabled), DISABLE (disabled).</dd><dt class="property-required"
             title="Required">
         <span id="ttl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_go" style="color: inherit; text-decoration: inherit;">Ttl</a>
@@ -2350,8 +2621,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The record cache time.</p>
-</dd><dt class="property-required"
+    <dd>The record cache time.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2359,8 +2629,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The record type.</p>
-</dd><dt class="property-required"
+    <dd>The record type.</dd><dt class="property-required"
             title="Required">
         <span id="updatedon_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedon_go" style="color: inherit; text-decoration: inherit;">Updated<wbr>On</a>
@@ -2368,8 +2637,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The update time.</p>
-</dd><dt class="property-required"
+    <dd>The update time.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2377,8 +2645,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The record value.</p>
-</dd><dt class="property-required"
+    <dd>The record value.</dd><dt class="property-required"
             title="Required">
         <span id="weight_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_go" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -2386,8 +2653,118 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The record weight, which is required for round-robin DNS records.</p>
-</dd></dl>
+    <dd>The record weight, which is required for round-robin DNS records.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="line_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#line_hcl" style="color: inherit; text-decoration: inherit;">line</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The record split zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="line_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#line_id_hcl" style="color: inherit; text-decoration: inherit;">line_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The split zone ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="monitor_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitor_status_hcl" style="color: inherit; text-decoration: inherit;">monitor_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The monitoring status of the record. Valid values: OK (normal), WARN (warning), and DOWN (downtime). It is empty if no monitoring is set or the monitoring is suspended.</dd><dt class="property-required"
+            title="Required">
+        <span id="mx_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mx_hcl" style="color: inherit; text-decoration: inherit;">mx</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The MX value, applicable to the MX record only.
+Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The host name.</dd><dt class="property-required"
+            title="Required">
+        <span id="record_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_id_hcl" style="color: inherit; text-decoration: inherit;">record_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Record ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The record remarks.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The record status. Valid values: ENABLE (enabled), DISABLE (disabled).</dd><dt class="property-required"
+            title="Required">
+        <span id="ttl_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_hcl" style="color: inherit; text-decoration: inherit;">ttl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The record cache time.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The record type.</dd><dt class="property-required"
+            title="Required">
+        <span id="updated_on_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_on_hcl" style="color: inherit; text-decoration: inherit;">updated_<wbr>on</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The update time.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The record value.</dd><dt class="property-required"
+            title="Required">
+        <span id="weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_hcl" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The record weight, which is required for round-robin DNS records.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2401,8 +2778,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The record split zone.</p>
-</dd><dt class="property-required"
+    <dd>The record split zone.</dd><dt class="property-required"
             title="Required">
         <span id="lineid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lineid_java" style="color: inherit; text-decoration: inherit;">line<wbr>Id</a>
@@ -2410,8 +2786,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The split zone ID.</p>
-</dd><dt class="property-required"
+    <dd>The split zone ID.</dd><dt class="property-required"
             title="Required">
         <span id="monitorstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitorstatus_java" style="color: inherit; text-decoration: inherit;">monitor<wbr>Status</a>
@@ -2419,8 +2794,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The monitoring status of the record. Valid values: OK (normal), WARN (warning), and DOWN (downtime). It is empty if no monitoring is set or the monitoring is suspended.</p>
-</dd><dt class="property-required"
+    <dd>The monitoring status of the record. Valid values: OK (normal), WARN (warning), and DOWN (downtime). It is empty if no monitoring is set or the monitoring is suspended.</dd><dt class="property-required"
             title="Required">
         <span id="mx_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mx_java" style="color: inherit; text-decoration: inherit;">mx</a>
@@ -2428,9 +2802,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The MX value, applicable to the MX record only.
-Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The MX value, applicable to the MX record only.
+Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2438,8 +2811,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The host name.</p>
-</dd><dt class="property-required"
+    <dd>The host name.</dd><dt class="property-required"
             title="Required">
         <span id="recordid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordid_java" style="color: inherit; text-decoration: inherit;">record<wbr>Id</a>
@@ -2447,8 +2819,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Record ID.</p>
-</dd><dt class="property-required"
+    <dd>Record ID.</dd><dt class="property-required"
             title="Required">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -2456,8 +2827,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The record remarks.</p>
-</dd><dt class="property-required"
+    <dd>The record remarks.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2465,8 +2835,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The record status. Valid values: ENABLE (enabled), DISABLE (disabled).</p>
-</dd><dt class="property-required"
+    <dd>The record status. Valid values: ENABLE (enabled), DISABLE (disabled).</dd><dt class="property-required"
             title="Required">
         <span id="ttl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_java" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -2474,8 +2843,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The record cache time.</p>
-</dd><dt class="property-required"
+    <dd>The record cache time.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2483,8 +2851,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The record type.</p>
-</dd><dt class="property-required"
+    <dd>The record type.</dd><dt class="property-required"
             title="Required">
         <span id="updatedon_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedon_java" style="color: inherit; text-decoration: inherit;">updated<wbr>On</a>
@@ -2492,8 +2859,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The update time.</p>
-</dd><dt class="property-required"
+    <dd>The update time.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2501,8 +2867,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The record value.</p>
-</dd><dt class="property-required"
+    <dd>The record value.</dd><dt class="property-required"
             title="Required">
         <span id="weight_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_java" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2510,8 +2875,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The record weight, which is required for round-robin DNS records.</p>
-</dd></dl>
+    <dd>The record weight, which is required for round-robin DNS records.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2525,8 +2889,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The record split zone.</p>
-</dd><dt class="property-required"
+    <dd>The record split zone.</dd><dt class="property-required"
             title="Required">
         <span id="lineid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lineid_nodejs" style="color: inherit; text-decoration: inherit;">line<wbr>Id</a>
@@ -2534,8 +2897,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The split zone ID.</p>
-</dd><dt class="property-required"
+    <dd>The split zone ID.</dd><dt class="property-required"
             title="Required">
         <span id="monitorstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitorstatus_nodejs" style="color: inherit; text-decoration: inherit;">monitor<wbr>Status</a>
@@ -2543,8 +2905,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The monitoring status of the record. Valid values: OK (normal), WARN (warning), and DOWN (downtime). It is empty if no monitoring is set or the monitoring is suspended.</p>
-</dd><dt class="property-required"
+    <dd>The monitoring status of the record. Valid values: OK (normal), WARN (warning), and DOWN (downtime). It is empty if no monitoring is set or the monitoring is suspended.</dd><dt class="property-required"
             title="Required">
         <span id="mx_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mx_nodejs" style="color: inherit; text-decoration: inherit;">mx</a>
@@ -2552,9 +2913,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The MX value, applicable to the MX record only.
-Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The MX value, applicable to the MX record only.
+Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2562,8 +2922,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The host name.</p>
-</dd><dt class="property-required"
+    <dd>The host name.</dd><dt class="property-required"
             title="Required">
         <span id="recordid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordid_nodejs" style="color: inherit; text-decoration: inherit;">record<wbr>Id</a>
@@ -2571,8 +2930,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Record ID.</p>
-</dd><dt class="property-required"
+    <dd>Record ID.</dd><dt class="property-required"
             title="Required">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -2580,8 +2938,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The record remarks.</p>
-</dd><dt class="property-required"
+    <dd>The record remarks.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2589,8 +2946,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The record status. Valid values: ENABLE (enabled), DISABLE (disabled).</p>
-</dd><dt class="property-required"
+    <dd>The record status. Valid values: ENABLE (enabled), DISABLE (disabled).</dd><dt class="property-required"
             title="Required">
         <span id="ttl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_nodejs" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -2598,8 +2954,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The record cache time.</p>
-</dd><dt class="property-required"
+    <dd>The record cache time.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2607,8 +2962,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The record type.</p>
-</dd><dt class="property-required"
+    <dd>The record type.</dd><dt class="property-required"
             title="Required">
         <span id="updatedon_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedon_nodejs" style="color: inherit; text-decoration: inherit;">updated<wbr>On</a>
@@ -2616,8 +2970,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The update time.</p>
-</dd><dt class="property-required"
+    <dd>The update time.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2625,8 +2978,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The record value.</p>
-</dd><dt class="property-required"
+    <dd>The record value.</dd><dt class="property-required"
             title="Required">
         <span id="weight_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_nodejs" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2634,8 +2986,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The record weight, which is required for round-robin DNS records.</p>
-</dd></dl>
+    <dd>The record weight, which is required for round-robin DNS records.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2649,8 +3000,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The record split zone.</p>
-</dd><dt class="property-required"
+    <dd>The record split zone.</dd><dt class="property-required"
             title="Required">
         <span id="line_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#line_id_python" style="color: inherit; text-decoration: inherit;">line_<wbr>id</a>
@@ -2658,8 +3008,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The split zone ID.</p>
-</dd><dt class="property-required"
+    <dd>The split zone ID.</dd><dt class="property-required"
             title="Required">
         <span id="monitor_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitor_status_python" style="color: inherit; text-decoration: inherit;">monitor_<wbr>status</a>
@@ -2667,8 +3016,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The monitoring status of the record. Valid values: OK (normal), WARN (warning), and DOWN (downtime). It is empty if no monitoring is set or the monitoring is suspended.</p>
-</dd><dt class="property-required"
+    <dd>The monitoring status of the record. Valid values: OK (normal), WARN (warning), and DOWN (downtime). It is empty if no monitoring is set or the monitoring is suspended.</dd><dt class="property-required"
             title="Required">
         <span id="mx_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mx_python" style="color: inherit; text-decoration: inherit;">mx</a>
@@ -2676,9 +3024,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The MX value, applicable to the MX record only.
-Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The MX value, applicable to the MX record only.
+Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2686,8 +3033,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The host name.</p>
-</dd><dt class="property-required"
+    <dd>The host name.</dd><dt class="property-required"
             title="Required">
         <span id="record_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#record_id_python" style="color: inherit; text-decoration: inherit;">record_<wbr>id</a>
@@ -2695,8 +3041,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Record ID.</p>
-</dd><dt class="property-required"
+    <dd>Record ID.</dd><dt class="property-required"
             title="Required">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -2704,8 +3049,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The record remarks.</p>
-</dd><dt class="property-required"
+    <dd>The record remarks.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2713,8 +3057,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The record status. Valid values: ENABLE (enabled), DISABLE (disabled).</p>
-</dd><dt class="property-required"
+    <dd>The record status. Valid values: ENABLE (enabled), DISABLE (disabled).</dd><dt class="property-required"
             title="Required">
         <span id="ttl_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_python" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -2722,8 +3065,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The record cache time.</p>
-</dd><dt class="property-required"
+    <dd>The record cache time.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2731,8 +3073,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The record type.</p>
-</dd><dt class="property-required"
+    <dd>The record type.</dd><dt class="property-required"
             title="Required">
         <span id="updated_on_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_on_python" style="color: inherit; text-decoration: inherit;">updated_<wbr>on</a>
@@ -2740,8 +3081,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The update time.</p>
-</dd><dt class="property-required"
+    <dd>The update time.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2749,8 +3089,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The record value.</p>
-</dd><dt class="property-required"
+    <dd>The record value.</dd><dt class="property-required"
             title="Required">
         <span id="weight_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_python" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2758,8 +3097,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The record weight, which is required for round-robin DNS records.</p>
-</dd></dl>
+    <dd>The record weight, which is required for round-robin DNS records.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2773,8 +3111,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The record split zone.</p>
-</dd><dt class="property-required"
+    <dd>The record split zone.</dd><dt class="property-required"
             title="Required">
         <span id="lineid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lineid_yaml" style="color: inherit; text-decoration: inherit;">line<wbr>Id</a>
@@ -2782,8 +3119,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The split zone ID.</p>
-</dd><dt class="property-required"
+    <dd>The split zone ID.</dd><dt class="property-required"
             title="Required">
         <span id="monitorstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitorstatus_yaml" style="color: inherit; text-decoration: inherit;">monitor<wbr>Status</a>
@@ -2791,8 +3127,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The monitoring status of the record. Valid values: OK (normal), WARN (warning), and DOWN (downtime). It is empty if no monitoring is set or the monitoring is suspended.</p>
-</dd><dt class="property-required"
+    <dd>The monitoring status of the record. Valid values: OK (normal), WARN (warning), and DOWN (downtime). It is empty if no monitoring is set or the monitoring is suspended.</dd><dt class="property-required"
             title="Required">
         <span id="mx_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mx_yaml" style="color: inherit; text-decoration: inherit;">mx</a>
@@ -2800,9 +3135,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The MX value, applicable to the MX record only.
-Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The MX value, applicable to the MX record only.
+Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2810,8 +3144,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The host name.</p>
-</dd><dt class="property-required"
+    <dd>The host name.</dd><dt class="property-required"
             title="Required">
         <span id="recordid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recordid_yaml" style="color: inherit; text-decoration: inherit;">record<wbr>Id</a>
@@ -2819,8 +3152,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Record ID.</p>
-</dd><dt class="property-required"
+    <dd>Record ID.</dd><dt class="property-required"
             title="Required">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -2828,8 +3160,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The record remarks.</p>
-</dd><dt class="property-required"
+    <dd>The record remarks.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2837,8 +3168,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The record status. Valid values: ENABLE (enabled), DISABLE (disabled).</p>
-</dd><dt class="property-required"
+    <dd>The record status. Valid values: ENABLE (enabled), DISABLE (disabled).</dd><dt class="property-required"
             title="Required">
         <span id="ttl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_yaml" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -2846,8 +3176,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The record cache time.</p>
-</dd><dt class="property-required"
+    <dd>The record cache time.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2855,8 +3184,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The record type.</p>
-</dd><dt class="property-required"
+    <dd>The record type.</dd><dt class="property-required"
             title="Required">
         <span id="updatedon_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedon_yaml" style="color: inherit; text-decoration: inherit;">updated<wbr>On</a>
@@ -2864,8 +3192,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The update time.</p>
-</dd><dt class="property-required"
+    <dd>The update time.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2873,8 +3200,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The record value.</p>
-</dd><dt class="property-required"
+    <dd>The record value.</dd><dt class="property-required"
             title="Required">
         <span id="weight_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_yaml" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2882,8 +3208,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The record weight, which is required for round-robin DNS records.</p>
-</dd></dl>
+    <dd>The record weight, which is required for round-robin DNS records.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2898,7 +3223,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

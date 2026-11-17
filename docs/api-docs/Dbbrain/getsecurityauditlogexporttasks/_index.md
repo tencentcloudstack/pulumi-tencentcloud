@@ -2,9 +2,11 @@
 ---
 title: "getSecurityAuditLogExportTasks"
 title_tag: "tencentcloud.Dbbrain.getSecurityAuditLogExportTasks"
-meta_desc: "Documentation for the tencentcloud.Dbbrain.getSecurityAuditLogExportTasks function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of dbbrain securityAuditLogExportTasks"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,10 +18,14 @@ Use this data source to query detailed information of dbbrain securityAuditLogEx
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const task = new tencentcloud.dbbrain.SecurityAuditLogExportTask("task", {
@@ -33,12 +39,17 @@ const task = new tencentcloud.dbbrain.SecurityAuditLogExportTask("task", {
         2,
     ],
 });
-const tasks = tencentcloud.Dbbrain.getSecurityAuditLogExportTasksOutput({
+const tasks = tencentcloud.dbbrain.getSecurityAuditLogExportTasksOutput({
     secAuditGroupId: "sec_audit_group_id",
     product: "mysql",
     asyncRequestIds: [task.asyncRequestId],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
@@ -54,15 +65,59 @@ task = tencentcloud.dbbrain.SecurityAuditLogExportTask("task",
         1,
         2,
     ])
-tasks = tencentcloud.Dbbrain.get_security_audit_log_export_tasks_output(sec_audit_group_id="sec_audit_group_id",
+tasks = tencentcloud.dbbrain.get_security_audit_log_export_tasks_output(sec_audit_group_id="sec_audit_group_id",
     product="mysql",
     async_request_ids=[task.async_request_id])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dbbrain"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		task, err := dbbrain.NewSecurityAuditLogExportTask(ctx, "task", &dbbrain.SecurityAuditLogExportTaskArgs{
+			SecAuditGroupId: pulumi.String("sec_audit_group_id"),
+			StartTime:       pulumi.String("start_time"),
+			EndTime:         pulumi.String("end_time"),
+			Product:         pulumi.String("mysql"),
+			DangerLevels: pulumi.IntArray{
+				pulumi.Int(0),
+				pulumi.Int(1),
+				pulumi.Int(2),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_ = dbbrain.GetSecurityAuditLogExportTasksOutput(ctx, dbbrain.GetSecurityAuditLogExportTasksOutputArgs{
+			SecAuditGroupId: pulumi.String("sec_audit_group_id"),
+			Product:         pulumi.String("mysql"),
+			AsyncRequestIds: pulumi.IntArray{
+				task.AsyncRequestId,
+			},
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -93,41 +148,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		task, err := Dbbrain.NewSecurityAuditLogExportTask(ctx, "task", &Dbbrain.SecurityAuditLogExportTaskArgs{
-			SecAuditGroupId: pulumi.String("sec_audit_group_id"),
-			StartTime:       pulumi.String("start_time"),
-			EndTime:         pulumi.String("end_time"),
-			Product:         pulumi.String("mysql"),
-			DangerLevels: pulumi.IntArray{
-				pulumi.Int(0),
-				pulumi.Int(1),
-				pulumi.Int(2),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_ = Dbbrain.GetSecurityAuditLogExportTasksOutput(ctx, dbbrain.GetSecurityAuditLogExportTasksOutputArgs{
-			SecAuditGroupId: pulumi.String("sec_audit_group_id"),
-			Product:         pulumi.String("mysql"),
-			AsyncRequestIds: pulumi.IntArray{
-				task.AsyncRequestId,
-			},
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -138,8 +163,8 @@ import com.pulumi.tencentcloud.Dbbrain.SecurityAuditLogExportTask;
 import com.pulumi.tencentcloud.Dbbrain.SecurityAuditLogExportTaskArgs;
 import com.pulumi.tencentcloud.Dbbrain.DbbrainFunctions;
 import com.pulumi.tencentcloud.Dbbrain.inputs.GetSecurityAuditLogExportTasksArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -151,7 +176,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var task = new SecurityAuditLogExportTask("task", SecurityAuditLogExportTaskArgs.builder()        
+        var task = new SecurityAuditLogExportTask("task", SecurityAuditLogExportTaskArgs.builder()
             .secAuditGroupId("sec_audit_group_id")
             .startTime("start_time")
             .endTime("end_time")
@@ -171,6 +196,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   task:
@@ -187,15 +217,50 @@ resources:
 variables:
   tasks:
     fn::invoke:
-      Function: tencentcloud:Dbbrain:getSecurityAuditLogExportTasks
-      Arguments:
+      function: tencentcloud:Dbbrain:getSecurityAuditLogExportTasks
+      arguments:
         secAuditGroupId: sec_audit_group_id
         product: mysql
         asyncRequestIds:
           - ${task.asyncRequestId}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dbbrain_getsecurityauditlogexporttasks" "tasks" {
+  sec_audit_group_id = "sec_audit_group_id"
+  product            = "mysql"
+  async_request_ids  = [tencentcloud_dbbrain_securityauditlogexporttask.task.async_request_id]
+}
+
+resource "tencentcloud_dbbrain_securityauditlogexporttask" "task" {
+  sec_audit_group_id = "sec_audit_group_id"
+  start_time         = "start_time"
+  end_time           = "end_time"
+  product            = "mysql"
+  danger_levels      = [0, 1, 2]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeSecurityAuditLogExportTasks](https://www.tencentcloud.com/document/api/1035/41191)
 
 
 
@@ -207,7 +272,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -215,9 +280,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getSecurityAuditLogExportTasks<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecurityAuditLogExportTasksArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSecurityAuditLogExportTasksResult</a></span>></span
+><span class="k">function </span>getSecurityAuditLogExportTasks<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecurityAuditLogExportTasksArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSecurityAuditLogExportTasksResult</a></span>></span
 ><span class="k">
-function </span>getSecurityAuditLogExportTasksOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecurityAuditLogExportTasksOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSecurityAuditLogExportTasksResult</a></span>></span
+function </span>getSecurityAuditLogExportTasksOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecurityAuditLogExportTasksOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSecurityAuditLogExportTasksResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -232,11 +297,11 @@ function </span>getSecurityAuditLogExportTasksOutput<span class="p">(</span><spa
                                         <span class="nx">sec_audit_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetSecurityAuditLogExportTasksResult</span
 ><span class="k">
-def </span>get_security_audit_log_export_tasks_output<span class="p">(</span><span class="nx">async_request_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]</span> = None<span class="p">,</span>
-                                        <span class="nx">product</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                        <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                        <span class="nx">sec_audit_group_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSecurityAuditLogExportTasksResult]</span
+def </span>get_security_audit_log_export_tasks_output<span class="p">(</span><span class="nx">async_request_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[int]]]]</span> = None<span class="p">,</span>
+                                        <span class="nx">product</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                        <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                        <span class="nx">sec_audit_group_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSecurityAuditLogExportTasksResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -261,7 +326,8 @@ func </span>GetSecurityAuditLogExportTasksOutput<span class="p">(</span><span cl
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetSecurityAuditLogExportTasks </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetSecurityAuditLogExportTasksResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetSecurityAuditLogExportTasksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetSecurityAuditLogExportTasksResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSecurityAuditLogExportTasksInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSecurityAuditLogExportTasksResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSecurityAuditLogExportTasksInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSecurityAuditLogExportTasksResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSecurityAuditLogExportTasksInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -270,7 +336,8 @@ func </span>GetSecurityAuditLogExportTasksOutput<span class="p">(</span><span cl
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetSecurityAuditLogExportTasksResult</a></span>> </span>getSecurityAuditLogExportTasks<span class="p">(</span><span class="nx">GetSecurityAuditLogExportTasksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSecurityAuditLogExportTasksResult</a></span>> </span>getSecurityAuditLogExportTasks<span class="p">(</span><span class="nx">GetSecurityAuditLogExportTasksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSecurityAuditLogExportTasksResult</a></span>> </span>getSecurityAuditLogExportTasks<span class="p">(</span><span class="nx">GetSecurityAuditLogExportTasksArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -282,6 +349,15 @@ func </span>GetSecurityAuditLogExportTasksOutput<span class="p">(</span><span cl
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dbbrain/getSecurityAuditLogExportTasks:getSecurityAuditLogExportTasks
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dbbrain_get_security_audit_log_export_tasks&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -300,8 +376,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>product, optional value is mysql.</p>
-</dd><dt class="property-required"
+    <dd>product, optional value is mysql.</dd><dt class="property-required"
             title="Required">
         <span id="secauditgroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secauditgroupid_csharp" style="color: inherit; text-decoration: inherit;">Sec<wbr>Audit<wbr>Group<wbr>Id</a>
@@ -309,8 +384,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>security audit group id.</p>
-</dd><dt class="property-optional"
+    <dd>security audit group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="asyncrequestids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#asyncrequestids_csharp" style="color: inherit; text-decoration: inherit;">Async<wbr>Request<wbr>Ids</a>
@@ -318,8 +392,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>async request id list.</p>
-</dd><dt class="property-optional"
+    <dd>async request id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -327,8 +400,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -342,8 +414,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>product, optional value is mysql.</p>
-</dd><dt class="property-required"
+    <dd>product, optional value is mysql.</dd><dt class="property-required"
             title="Required">
         <span id="secauditgroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secauditgroupid_go" style="color: inherit; text-decoration: inherit;">Sec<wbr>Audit<wbr>Group<wbr>Id</a>
@@ -351,8 +422,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>security audit group id.</p>
-</dd><dt class="property-optional"
+    <dd>security audit group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="asyncrequestids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#asyncrequestids_go" style="color: inherit; text-decoration: inherit;">Async<wbr>Request<wbr>Ids</a>
@@ -360,8 +430,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>async request id list.</p>
-</dd><dt class="property-optional"
+    <dd>async request id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -369,8 +438,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="product_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_hcl" style="color: inherit; text-decoration: inherit;">product</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>product, optional value is mysql.</dd><dt class="property-required"
+            title="Required">
+        <span id="sec_audit_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sec_audit_group_id_hcl" style="color: inherit; text-decoration: inherit;">sec_<wbr>audit_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>security audit group id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="async_request_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#async_request_ids_hcl" style="color: inherit; text-decoration: inherit;">async_<wbr>request_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>async request id list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -384,8 +490,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>product, optional value is mysql.</p>
-</dd><dt class="property-required"
+    <dd>product, optional value is mysql.</dd><dt class="property-required"
             title="Required">
         <span id="secauditgroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secauditgroupid_java" style="color: inherit; text-decoration: inherit;">sec<wbr>Audit<wbr>Group<wbr>Id</a>
@@ -393,8 +498,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>security audit group id.</p>
-</dd><dt class="property-optional"
+    <dd>security audit group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="asyncrequestids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#asyncrequestids_java" style="color: inherit; text-decoration: inherit;">async<wbr>Request<wbr>Ids</a>
@@ -402,8 +506,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>async request id list.</p>
-</dd><dt class="property-optional"
+    <dd>async request id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -411,8 +514,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -426,8 +528,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>product, optional value is mysql.</p>
-</dd><dt class="property-required"
+    <dd>product, optional value is mysql.</dd><dt class="property-required"
             title="Required">
         <span id="secauditgroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secauditgroupid_nodejs" style="color: inherit; text-decoration: inherit;">sec<wbr>Audit<wbr>Group<wbr>Id</a>
@@ -435,8 +536,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>security audit group id.</p>
-</dd><dt class="property-optional"
+    <dd>security audit group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="asyncrequestids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#asyncrequestids_nodejs" style="color: inherit; text-decoration: inherit;">async<wbr>Request<wbr>Ids</a>
@@ -444,8 +544,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>async request id list.</p>
-</dd><dt class="property-optional"
+    <dd>async request id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -453,8 +552,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -468,8 +566,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>product, optional value is mysql.</p>
-</dd><dt class="property-required"
+    <dd>product, optional value is mysql.</dd><dt class="property-required"
             title="Required">
         <span id="sec_audit_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sec_audit_group_id_python" style="color: inherit; text-decoration: inherit;">sec_<wbr>audit_<wbr>group_<wbr>id</a>
@@ -477,8 +574,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>security audit group id.</p>
-</dd><dt class="property-optional"
+    <dd>security audit group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="async_request_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#async_request_ids_python" style="color: inherit; text-decoration: inherit;">async_<wbr>request_<wbr>ids</a>
@@ -486,8 +582,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>async request id list.</p>
-</dd><dt class="property-optional"
+    <dd>async request id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -495,8 +590,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -510,8 +604,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>product, optional value is mysql.</p>
-</dd><dt class="property-required"
+    <dd>product, optional value is mysql.</dd><dt class="property-required"
             title="Required">
         <span id="secauditgroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secauditgroupid_yaml" style="color: inherit; text-decoration: inherit;">sec<wbr>Audit<wbr>Group<wbr>Id</a>
@@ -519,8 +612,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>security audit group id.</p>
-</dd><dt class="property-optional"
+    <dd>security audit group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="asyncrequestids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#asyncrequestids_yaml" style="color: inherit; text-decoration: inherit;">async<wbr>Request<wbr>Ids</a>
@@ -528,8 +620,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>async request id list.</p>
-</dd><dt class="property-optional"
+    <dd>async request id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -537,8 +628,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -561,8 +651,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -570,8 +659,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecurityauditlogexporttaskslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dbbrain.<wbr>Outputs.<wbr>Get<wbr>Security<wbr>Audit<wbr>Log<wbr>Export<wbr>Tasks<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>security audit log export task list.</p>
-</dd><dt class="property-"
+    <dd>security audit log export task list.</dd><dt class="property-"
             title="">
         <span id="product_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_csharp" style="color: inherit; text-decoration: inherit;">Product</a>
@@ -617,8 +705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -626,8 +713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecurityauditlogexporttaskslist">[]Get<wbr>Security<wbr>Audit<wbr>Log<wbr>Export<wbr>Tasks<wbr>List</a></span>
     </dt>
-    <dd><p>security audit log export task list.</p>
-</dd><dt class="property-"
+    <dd>security audit log export task list.</dd><dt class="property-"
             title="">
         <span id="product_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_go" style="color: inherit; text-decoration: inherit;">Product</a>
@@ -664,6 +750,60 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsecurityauditlogexporttaskslist">list(object)</a></span>
+    </dt>
+    <dd>security audit log export task list.</dd><dt class="property-"
+            title="">
+        <span id="product_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_hcl" style="color: inherit; text-decoration: inherit;">product</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="sec_audit_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sec_audit_group_id_hcl" style="color: inherit; text-decoration: inherit;">sec_<wbr>audit_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="async_request_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#async_request_ids_hcl" style="color: inherit; text-decoration: inherit;">async_<wbr>request_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -673,8 +813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -682,8 +821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecurityauditlogexporttaskslist">List&lt;Get<wbr>Security<wbr>Audit<wbr>Log<wbr>Export<wbr>Tasks<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>security audit log export task list.</p>
-</dd><dt class="property-"
+    <dd>security audit log export task list.</dd><dt class="property-"
             title="">
         <span id="product_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_java" style="color: inherit; text-decoration: inherit;">product</a>
@@ -729,8 +867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -738,8 +875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecurityauditlogexporttaskslist">Get<wbr>Security<wbr>Audit<wbr>Log<wbr>Export<wbr>Tasks<wbr>List[]</a></span>
     </dt>
-    <dd><p>security audit log export task list.</p>
-</dd><dt class="property-"
+    <dd>security audit log export task list.</dd><dt class="property-"
             title="">
         <span id="product_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_nodejs" style="color: inherit; text-decoration: inherit;">product</a>
@@ -785,17 +921,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsecurityauditlogexporttaskslist">Get<wbr>Security<wbr>Audit<wbr>Log<wbr>Export<wbr>Tasks<wbr>List]</a></span>
+        <span class="property-type"><a href="#getsecurityauditlogexporttaskslist">Sequence[Get<wbr>Security<wbr>Audit<wbr>Log<wbr>Export<wbr>Tasks<wbr>List]</a></span>
     </dt>
-    <dd><p>security audit log export task list.</p>
-</dd><dt class="property-"
+    <dd>security audit log export task list.</dd><dt class="property-"
             title="">
         <span id="product_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_python" style="color: inherit; text-decoration: inherit;">product</a>
@@ -841,8 +975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -850,8 +983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecurityauditlogexporttaskslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>security audit log export task list.</p>
-</dd><dt class="property-"
+    <dd>security audit log export task list.</dd><dt class="property-"
             title="">
         <span id="product_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_yaml" style="color: inherit; text-decoration: inherit;">product</a>
@@ -907,8 +1039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>async request id.</p>
-</dd><dt class="property-required"
+    <dd>async request id.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -916,8 +1047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="dangerlevels_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dangerlevels_csharp" style="color: inherit; text-decoration: inherit;">Danger<wbr>Levels</a>
@@ -925,8 +1055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>danger level list.</p>
-</dd><dt class="property-required"
+    <dd>danger level list.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -934,8 +1063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>end time.</p>
-</dd><dt class="property-required"
+    <dd>end time.</dd><dt class="property-required"
             title="Required">
         <span id="logendtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logendtime_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>End<wbr>Time</a>
@@ -943,8 +1071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>log end time.</p>
-</dd><dt class="property-required"
+    <dd>log end time.</dd><dt class="property-required"
             title="Required">
         <span id="logstarttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logstarttime_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Start<wbr>Time</a>
@@ -952,8 +1079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>log start time.</p>
-</dd><dt class="property-required"
+    <dd>log start time.</dd><dt class="property-required"
             title="Required">
         <span id="progress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#progress_csharp" style="color: inherit; text-decoration: inherit;">Progress</a>
@@ -961,8 +1087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>task progress.</p>
-</dd><dt class="property-required"
+    <dd>task progress.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -970,8 +1095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -979,8 +1103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>status.</p>
-</dd><dt class="property-required"
+    <dd>status.</dd><dt class="property-required"
             title="Required">
         <span id="totalsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalsize_csharp" style="color: inherit; text-decoration: inherit;">Total<wbr>Size</a>
@@ -988,8 +1111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>the total size of log.</p>
-</dd></dl>
+    <dd>the total size of log.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1003,8 +1125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>async request id.</p>
-</dd><dt class="property-required"
+    <dd>async request id.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1012,8 +1133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="dangerlevels_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dangerlevels_go" style="color: inherit; text-decoration: inherit;">Danger<wbr>Levels</a>
@@ -1021,8 +1141,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>danger level list.</p>
-</dd><dt class="property-required"
+    <dd>danger level list.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -1030,8 +1149,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>end time.</p>
-</dd><dt class="property-required"
+    <dd>end time.</dd><dt class="property-required"
             title="Required">
         <span id="logendtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logendtime_go" style="color: inherit; text-decoration: inherit;">Log<wbr>End<wbr>Time</a>
@@ -1039,8 +1157,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>log end time.</p>
-</dd><dt class="property-required"
+    <dd>log end time.</dd><dt class="property-required"
             title="Required">
         <span id="logstarttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logstarttime_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Start<wbr>Time</a>
@@ -1048,8 +1165,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>log start time.</p>
-</dd><dt class="property-required"
+    <dd>log start time.</dd><dt class="property-required"
             title="Required">
         <span id="progress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#progress_go" style="color: inherit; text-decoration: inherit;">Progress</a>
@@ -1057,8 +1173,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>task progress.</p>
-</dd><dt class="property-required"
+    <dd>task progress.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -1066,8 +1181,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1075,8 +1189,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>status.</p>
-</dd><dt class="property-required"
+    <dd>status.</dd><dt class="property-required"
             title="Required">
         <span id="totalsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalsize_go" style="color: inherit; text-decoration: inherit;">Total<wbr>Size</a>
@@ -1084,8 +1197,93 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>the total size of log.</p>
-</dd></dl>
+    <dd>the total size of log.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="async_request_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#async_request_id_hcl" style="color: inherit; text-decoration: inherit;">async_<wbr>request_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>async request id.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>create time.</dd><dt class="property-required"
+            title="Required">
+        <span id="danger_levels_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#danger_levels_hcl" style="color: inherit; text-decoration: inherit;">danger_<wbr>levels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>danger level list.</dd><dt class="property-required"
+            title="Required">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>end time.</dd><dt class="property-required"
+            title="Required">
+        <span id="log_end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_end_time_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>log end time.</dd><dt class="property-required"
+            title="Required">
+        <span id="log_start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_start_time_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>log start time.</dd><dt class="property-required"
+            title="Required">
+        <span id="progress_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#progress_hcl" style="color: inherit; text-decoration: inherit;">progress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>task progress.</dd><dt class="property-required"
+            title="Required">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>start time.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>status.</dd><dt class="property-required"
+            title="Required">
+        <span id="total_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_size_hcl" style="color: inherit; text-decoration: inherit;">total_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>the total size of log.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1099,8 +1297,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>async request id.</p>
-</dd><dt class="property-required"
+    <dd>async request id.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1108,8 +1305,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="dangerlevels_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dangerlevels_java" style="color: inherit; text-decoration: inherit;">danger<wbr>Levels</a>
@@ -1117,8 +1313,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>danger level list.</p>
-</dd><dt class="property-required"
+    <dd>danger level list.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1126,8 +1321,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>end time.</p>
-</dd><dt class="property-required"
+    <dd>end time.</dd><dt class="property-required"
             title="Required">
         <span id="logendtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logendtime_java" style="color: inherit; text-decoration: inherit;">log<wbr>End<wbr>Time</a>
@@ -1135,8 +1329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>log end time.</p>
-</dd><dt class="property-required"
+    <dd>log end time.</dd><dt class="property-required"
             title="Required">
         <span id="logstarttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logstarttime_java" style="color: inherit; text-decoration: inherit;">log<wbr>Start<wbr>Time</a>
@@ -1144,8 +1337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>log start time.</p>
-</dd><dt class="property-required"
+    <dd>log start time.</dd><dt class="property-required"
             title="Required">
         <span id="progress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#progress_java" style="color: inherit; text-decoration: inherit;">progress</a>
@@ -1153,8 +1345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>task progress.</p>
-</dd><dt class="property-required"
+    <dd>task progress.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1162,8 +1353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1171,8 +1361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>status.</p>
-</dd><dt class="property-required"
+    <dd>status.</dd><dt class="property-required"
             title="Required">
         <span id="totalsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalsize_java" style="color: inherit; text-decoration: inherit;">total<wbr>Size</a>
@@ -1180,8 +1369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>the total size of log.</p>
-</dd></dl>
+    <dd>the total size of log.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1195,8 +1383,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>async request id.</p>
-</dd><dt class="property-required"
+    <dd>async request id.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1204,8 +1391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="dangerlevels_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dangerlevels_nodejs" style="color: inherit; text-decoration: inherit;">danger<wbr>Levels</a>
@@ -1213,8 +1399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>danger level list.</p>
-</dd><dt class="property-required"
+    <dd>danger level list.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1222,8 +1407,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>end time.</p>
-</dd><dt class="property-required"
+    <dd>end time.</dd><dt class="property-required"
             title="Required">
         <span id="logendtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logendtime_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>End<wbr>Time</a>
@@ -1231,8 +1415,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>log end time.</p>
-</dd><dt class="property-required"
+    <dd>log end time.</dd><dt class="property-required"
             title="Required">
         <span id="logstarttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logstarttime_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Start<wbr>Time</a>
@@ -1240,8 +1423,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>log start time.</p>
-</dd><dt class="property-required"
+    <dd>log start time.</dd><dt class="property-required"
             title="Required">
         <span id="progress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#progress_nodejs" style="color: inherit; text-decoration: inherit;">progress</a>
@@ -1249,8 +1431,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>task progress.</p>
-</dd><dt class="property-required"
+    <dd>task progress.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1258,8 +1439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1267,8 +1447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>status.</p>
-</dd><dt class="property-required"
+    <dd>status.</dd><dt class="property-required"
             title="Required">
         <span id="totalsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalsize_nodejs" style="color: inherit; text-decoration: inherit;">total<wbr>Size</a>
@@ -1276,8 +1455,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>the total size of log.</p>
-</dd></dl>
+    <dd>the total size of log.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1291,8 +1469,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>async request id.</p>
-</dd><dt class="property-required"
+    <dd>async request id.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1300,8 +1477,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="danger_levels_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#danger_levels_python" style="color: inherit; text-decoration: inherit;">danger_<wbr>levels</a>
@@ -1309,8 +1485,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>danger level list.</p>
-</dd><dt class="property-required"
+    <dd>danger level list.</dd><dt class="property-required"
             title="Required">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -1318,8 +1493,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>end time.</p>
-</dd><dt class="property-required"
+    <dd>end time.</dd><dt class="property-required"
             title="Required">
         <span id="log_end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_end_time_python" style="color: inherit; text-decoration: inherit;">log_<wbr>end_<wbr>time</a>
@@ -1327,8 +1501,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>log end time.</p>
-</dd><dt class="property-required"
+    <dd>log end time.</dd><dt class="property-required"
             title="Required">
         <span id="log_start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_start_time_python" style="color: inherit; text-decoration: inherit;">log_<wbr>start_<wbr>time</a>
@@ -1336,8 +1509,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>log start time.</p>
-</dd><dt class="property-required"
+    <dd>log start time.</dd><dt class="property-required"
             title="Required">
         <span id="progress_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#progress_python" style="color: inherit; text-decoration: inherit;">progress</a>
@@ -1345,8 +1517,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>task progress.</p>
-</dd><dt class="property-required"
+    <dd>task progress.</dd><dt class="property-required"
             title="Required">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -1354,8 +1525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1363,8 +1533,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>status.</p>
-</dd><dt class="property-required"
+    <dd>status.</dd><dt class="property-required"
             title="Required">
         <span id="total_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_size_python" style="color: inherit; text-decoration: inherit;">total_<wbr>size</a>
@@ -1372,8 +1541,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>the total size of log.</p>
-</dd></dl>
+    <dd>the total size of log.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1387,8 +1555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>async request id.</p>
-</dd><dt class="property-required"
+    <dd>async request id.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1396,8 +1563,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="dangerlevels_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dangerlevels_yaml" style="color: inherit; text-decoration: inherit;">danger<wbr>Levels</a>
@@ -1405,8 +1571,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>danger level list.</p>
-</dd><dt class="property-required"
+    <dd>danger level list.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1414,8 +1579,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>end time.</p>
-</dd><dt class="property-required"
+    <dd>end time.</dd><dt class="property-required"
             title="Required">
         <span id="logendtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logendtime_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>End<wbr>Time</a>
@@ -1423,8 +1587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>log end time.</p>
-</dd><dt class="property-required"
+    <dd>log end time.</dd><dt class="property-required"
             title="Required">
         <span id="logstarttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logstarttime_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Start<wbr>Time</a>
@@ -1432,8 +1595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>log start time.</p>
-</dd><dt class="property-required"
+    <dd>log start time.</dd><dt class="property-required"
             title="Required">
         <span id="progress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#progress_yaml" style="color: inherit; text-decoration: inherit;">progress</a>
@@ -1441,8 +1603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>task progress.</p>
-</dd><dt class="property-required"
+    <dd>task progress.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1450,8 +1611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>start time.</p>
-</dd><dt class="property-required"
+    <dd>start time.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1459,8 +1619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>status.</p>
-</dd><dt class="property-required"
+    <dd>status.</dd><dt class="property-required"
             title="Required">
         <span id="totalsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalsize_yaml" style="color: inherit; text-decoration: inherit;">total<wbr>Size</a>
@@ -1468,8 +1627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>the total size of log.</p>
-</dd></dl>
+    <dd>the total size of log.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1484,7 +1642,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 
